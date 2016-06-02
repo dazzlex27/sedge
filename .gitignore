@@ -154,3 +154,10 @@ $RECYCLE.BIN/
 
 # Mac desktop service store files
 .DS_Store
+/!bin
+/S3DGE.VC.VC.opendb
+/.vs/S3DGE/v14/.suo
+/.vs/S3DGE/v14/.suo
+/S3DGE.VC.db
+/.vs/S3DGE/v14/.suo
+.vs
