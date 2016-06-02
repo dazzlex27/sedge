@@ -1,0 +1,35 @@
+/*
+===========================================================================
+GraphicsAPIEnumParser.h
+
+Declares parsers to convert s3dge graphics enums to API-dependent ones.
+===========================================================================
+*/
+
+#pragma once
+
+#include "Graphics/Buffers/BufferEnums.h"
+#include "Graphics/Textures/TextureEnums.h"
+#include "DrawingEnums.h"
+
+namespace s3dge
+{
+	class GraphicsAPIEnumConverter
+	{
+	public:
+		static const int GetDrawingModeValue(const DrawingMode drawingMode);
+		static const int GetBufferTarget(const BufferTarget target);
+
+		static const int GetTextureTarget(const TextureTarget target);
+		static const int GetTextureWrap(const TextureWrap wrap);
+		static const int GetTextureWrapMode(const TextureWrapMode mode);
+		static const int GetTextureFilter(const TextureFilter filter);
+		static const int GetTextureFilterMode(const TextureFilterMode filterMode);
+		static const int GetColorCode(const ColorCode code);
+
+		static const int GetPrimitiveType(const PrimitiveType type);
+		static const int GetValueType(const ValueType type);
+
+		static const int GetWindingOrder(const WindingOrder order);
+	};
+}
