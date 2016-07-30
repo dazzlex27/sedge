@@ -5,8 +5,8 @@ namespace S3DGE
 {
 	namespace Graphics
 	{
-		Window::Window(const char* title, uint width, uint height, bool fullscreen)
-			: m_Title(title), m_Width(width), m_Height(height), m_FullScreen(fullscreen)
+		Window::Window(const char* title, uint width, uint height, bool fullscreen, bool vsync)
+			: m_Title(title), m_Width(width), m_Height(height), m_FullScreen(fullscreen), m_VSync(vsync)
 		{
 			if (!InitializeWindow())
 			{

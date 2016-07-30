@@ -1,13 +1,16 @@
-#include <iostream>
 #include "Source/S3DGECommon.h"
+
 #include "Utilities/Log.h"
+#include "Utilities/Timer.h"
 
 int main()
 {
 	using namespace S3DGE;
+	Graphics::Window* window = new S3DGE::Graphics::Window("S3DGE Test", 1280, 720, MODE_WINDOWED);
+	window->SetVSync(false);
 
-	Graphics::Window* window = new S3DGE::Graphics::Window("S3DGE Test", 1280, 720, false);
-
+	int frames = 0;
+	Timer t;
 	while (!window->IsClosed())
 	{
 		window->Clear();
@@ -20,6 +23,14 @@ int main()
 		glEnd();
 
 		window->Update();
+
+		if (t.ElapsedMS() > 1000.0f)
+		{
+			t.Start();
+			std::cout << frames << " fps" << std::endl;
+			frames = 0;
+		}
+		++frames;
 	}
 
 	delete window;

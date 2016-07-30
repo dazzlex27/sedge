@@ -95,6 +95,8 @@ namespace S3DGE
 			if (!SetupGLContext())
 				return false;
 
+			SetVSync(m_VSync); // VSYNC enabled by default	
+
 			ShowWindow(window, SW_SHOW);
 			SetFocus(window);
 
@@ -114,6 +116,32 @@ namespace S3DGE
 			}
 
 			SwapBuffers(deviceContext);
+		}
+
+		void Window::SetFullScreen(bool fullscreen)
+		{
+			// TODO: fullscreen
+		}
+
+		void Window::SetVSync(bool vsync)
+		{
+			// Function pointer for the wgl extention function we need to enable/disable vsync
+			typedef BOOL(APIENTRY *PFNWGLSWAPINTERVALPROC)(int);
+			PFNWGLSWAPINTERVALPROC wglSwapIntervalEXT = 0;
+
+			const char *extensions = (char*)glGetString(GL_EXTENSIONS);
+
+			if (strstr(extensions, "WGL_EXT_swap_control") == 0)
+			{
+				return;
+			}
+			else
+			{
+				wglSwapIntervalEXT = (PFNWGLSWAPINTERVALPROC)wglGetProcAddress("wglSwapIntervalEXT");
+
+				if (wglSwapIntervalEXT)
+					wglSwapIntervalEXT(vsync);
+			}
 		}
 
 		LRESULT CALLBACK WindowProcedure(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
