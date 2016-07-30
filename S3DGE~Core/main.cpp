@@ -1,8 +1,5 @@
 #include "Source/S3DGECommon.h"
 
-#include "Utilities/Log.h"
-#include "Utilities/Timer.h"
-
 int main()
 {
 	using namespace S3DGE;
@@ -16,6 +13,7 @@ int main()
 		window->Clear();
 
 		glBegin(GL_QUADS);
+		glColor4f(0.8f, 0.1f, 0.2f, 1.0f);
 		glVertex2d(-0.5f, -0.7f);
 		glVertex2d(-0.4f, 0.5f);
 		glVertex2d(0.5f, 0.2f);

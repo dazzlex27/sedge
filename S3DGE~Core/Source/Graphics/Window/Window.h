@@ -11,7 +11,7 @@ namespace S3DGE
 	{
 		class Window
 		{
-			#define MODE_FULLSCREEEN 1
+			#define MODE_FULLSCREEN 1
 			#define MODE_WINDOWED 0
 
 		private:

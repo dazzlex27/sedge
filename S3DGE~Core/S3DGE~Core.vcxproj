@@ -93,6 +93,10 @@
     <ClCompile Include="Source\Graphics\Window\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Maths\MathsHeader.h" />
+    <ClInclude Include="Source\Maths\vec2.h" />
+    <ClInclude Include="Source\Maths\vec3.h" />
+    <ClInclude Include="Source\Maths\vec4.h" />
     <ClInclude Include="Source\S3DGECommon.h" />
     <ClInclude Include="Source\Graphics\Window\Window.h" />
     <ClInclude Include="Source\S3DGETypes.h" />
