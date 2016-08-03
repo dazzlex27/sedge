@@ -4,7 +4,7 @@ int main()
 {
 	using namespace S3DGE;
 	Graphics::Window* window = new S3DGE::Graphics::Window("S3DGE Test", 1280, 720, MODE_WINDOWED);
-	window->SetVSync(false);
+	//window->SetVSync(false);
 
 	int frames = 0;
 	Timer t;
@@ -13,12 +13,25 @@ int main()
 		window->Clear();
 
 		glBegin(GL_QUADS);
-		glColor4f(0.8f, 0.1f, 0.2f, 1.0f);
+		glColor4f(1.0f, 0.0f, 0.0f, 1.0f);
 		glVertex2d(-0.5f, -0.7f);
+		glColor4f(0.0f, 1.0f, 0.0f, 0.7f);
 		glVertex2d(-0.4f, 0.5f);
+		glColor4f(0.0f, 0.0f, 1.0f, 1.0f);
 		glVertex2d(0.5f, 0.2f);
+		glColor4f(1.0f, 1.0f, 0.0f, 1.0f);
 		glVertex2d(0.5f, -0.5f);
 		glEnd();
+		glFlush();
+
+		if (window->KeyPressed(VK_0))
+			std::cout << "0 pressed" << std::endl;
+
+		if (window->MouseButtonPressed(VK_LMB))
+			std::cout << "LMB pressed" << std::endl;
+
+		if (window->MouseButtonPressed(VK_MWDOWN))
+			std::cout << "WDMB pressed" << std::endl;
 
 		window->Update();
 

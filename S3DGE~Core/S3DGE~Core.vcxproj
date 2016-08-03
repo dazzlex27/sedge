@@ -93,6 +93,8 @@
     <ClCompile Include="Source\Graphics\Window\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Input\WindowsKeys.h" />
+    <ClInclude Include="Source\Maths\mat4.h" />
     <ClInclude Include="Source\Maths\MathsHeader.h" />
     <ClInclude Include="Source\Maths\vec2.h" />
     <ClInclude Include="Source\Maths\vec3.h" />

@@ -95,6 +95,8 @@ namespace S3DGE
 			if (!SetupGLContext())
 				return false;
 
+			Window::SetHandle(window, this);
+
 			SetVSync(m_VSync); // VSYNC enabled by default	
 
 			ShowWindow(window, SW_SHOW);
@@ -106,14 +108,20 @@ namespace S3DGE
 		void Window::UpdateWindow()
 		{
 			MSG messages;
-			while (PeekMessage(&messages, NULL, 0, 0, PM_REMOVE) > 0)
+			while (PeekMessage(&messages, NULL, 0, 0, PM_REMOVE))
 			{
 				if (messages.message == WM_QUIT)
 					m_IsClosed = true;
-				
+
 				TranslateMessage(&messages);
 				DispatchMessage(&messages);
 			}
+
+			POINT mousePosition;
+			GetCursorPos(&mousePosition);
+			ScreenToClient(window, &mousePosition);
+			m_Mouse.x = (float)mousePosition.x;
+			m_Mouse.y = (float)mousePosition.y;
 
 			SwapBuffers(deviceContext);
 		}
@@ -125,16 +133,14 @@ namespace S3DGE
 
 		void Window::SetVSync(bool vsync)
 		{
-			// Function pointer for the wgl extention function we need to enable/disable vsync
 			typedef BOOL(APIENTRY *PFNWGLSWAPINTERVALPROC)(int);
 			PFNWGLSWAPINTERVALPROC wglSwapIntervalEXT = 0;
 
 			const char *extensions = (char*)glGetString(GL_EXTENSIONS);
 
 			if (strstr(extensions, "WGL_EXT_swap_control") == 0)
-			{
 				return;
-			}
+			
 			else
 			{
 				wglSwapIntervalEXT = (PFNWGLSWAPINTERVALPROC)wglGetProcAddress("wglSwapIntervalEXT");
@@ -142,47 +148,6 @@ namespace S3DGE
 				if (wglSwapIntervalEXT)
 					wglSwapIntervalEXT(vsync);
 			}
-		}
-
-		LRESULT CALLBACK WindowProcedure(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
-		{
-			switch (message)
-			{
-				case WM_CREATE:
-				{
-					CREATESTRUCT* pcs = (CREATESTRUCT*)lParam;
-					SetWindowLongPtr(hwnd, GWLP_USERDATA, (LONG)pcs->lpCreateParams);
-					
-					break;
-				}
-				case WM_DESTROY:
-				{
-					wglMakeCurrent(deviceContext, NULL);	// Deselect rendering context.
-					wglDeleteContext(renderingContext);		// Delete rendering context.
-					PostQuitMessage(0);
-					break;
-				}
-				case WM_SIZE:
-				{
-					unsigned int height = HIWORD(lParam);
-					unsigned int width = LOWORD(lParam);
-
-					if (height == 0)
-						height = 1;
-
-					glViewport(0, 0, width, height);
-
-					///*      Set current Matrix to projection*/
-					//glMatrixMode(GL_PROJECTION);
-					//glLoadIdentity(); //reset projection matrix
-
-					//glMatrixMode(GL_MODELVIEW); //set modelview matrix
-					//glLoadIdentity(); //reset modelview matrix
-					break;
-				}
-			}
-
-			return DefWindowProc(hwnd, message, wParam, lParam);
 		}
 
 		bool SetupGLContext()
@@ -231,6 +196,10 @@ namespace S3DGE
 				return false;
 			}
 
+			glEnable(GL_DEPTH_TEST);
+			glEnable(GL_BLEND);
+			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
 			return true;
 		}
 
@@ -246,6 +215,113 @@ namespace S3DGE
 			pfd.cDepthBits = 24;
 			//result.cStencilBits = 8;
 			return pfd;
+		}
+
+		LRESULT CALLBACK WindowProcedure(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
+		{
+			Window* winClassInstance = Window::GetWindowClassInstance(window);
+
+			switch (message)
+			{
+			case WM_CREATE:
+				break;
+			case WM_DESTROY:
+				wglMakeCurrent(deviceContext, NULL);	// Deselect rendering context.
+				wglDeleteContext(renderingContext);		// Delete rendering context.
+				PostQuitMessage(0);
+				break;
+			case WM_KEYDOWN:
+			case WM_KEYUP:
+			case WM_SYSKEYDOWN:
+			case WM_SYSKEYUP:
+				key_callback(winClassInstance, wParam, message);
+				break;
+			case WM_SIZE:
+				resize_callback(winClassInstance, LOWORD(lParam), HIWORD(lParam));
+				break;
+			default:
+				if (message > 512 && message < 527)
+					mousebutton_callback(winClassInstance, wParam, message);
+				break;
+			}
+
+			return DefWindowProc(hwnd, message, wParam, lParam);
+		}
+
+		void resize_callback(Window* window, uint width, uint height)
+		{
+			if (height == 0)
+				height = 1;
+
+			window->m_Width = width;
+			window->m_Height = height;
+
+			glViewport(0, 0, width, height);
+			glMatrixMode(GL_PROJECTION);	//  Set current Matrix to projection
+			glLoadIdentity();				//reset projection matrix
+			glMatrixMode(GL_MODELVIEW);		//set modelview matrix
+			glLoadIdentity();				//reset modelview matrix
+		}
+
+		void mousebutton_callback(Window* window, int key, int command)
+		{
+			switch (command)
+			{
+			case WM_LBUTTONDOWN:
+				window->m_Buttons[VK_LMB] = true;
+				break;
+			case WM_LBUTTONUP:
+				window->m_Buttons[VK_LMB] = false;
+				break;
+			case WM_RBUTTONDOWN:
+				window->m_Buttons[VK_LMB] = false;
+				break;
+			case WM_RBUTTONUP:
+				window->m_Buttons[VK_RMB] = false;
+				break;
+			case WM_MBUTTONDOWN:
+				window->m_Buttons[VK_MMB] = true;
+				break;
+			case WM_MBUTTONUP:
+				window->m_Buttons[VK_MMB] = false;
+				break;
+			/*case WM_MOUSEWHEEL:
+			{
+				short zDelta = (short)GET_WHEEL_DELTA_WPARAM(key);
+				if (zDelta > 0)
+					window->m_Buttons[VK_MWUP] = true;
+				if (zDelta < 0)
+					window->m_Buttons[VK_MWDOWN] = true;
+				zDelta = 0;
+				break;
+			}*/
+			case WM_XBUTTONDOWN:
+				window->m_Buttons[VK_XBUTTON1] = true;
+				break;
+			case WM_XBUTTONUP:
+				window->m_Buttons[VK_XBUTTON1] = false;
+				break;
+			}
+		}
+
+		void key_callback(Window* window, int key, int command)
+		{
+			switch (command)
+			{
+			case WM_KEYDOWN:
+				window->m_Keys[key] = true;
+				break;
+
+			case WM_KEYUP:
+				window->m_Keys[key] = false;
+				break;
+
+			case WM_SYSKEYDOWN:
+				// Use for alt + ...
+				break;
+			case WM_SYSKEYUP:
+				break;
+			}
 		}
 	}
 }

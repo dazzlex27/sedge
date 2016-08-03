@@ -1,9 +1,12 @@
 #pragma once
 
 #include <vector>
-#include "..\..\S3DGETypes.h"
-#include <GL\glew.h>
+#include "../../S3DGETypes.h"
+#include <GL/glew.h>
 #include "Utilities/Log.h"
+#include "Maths/vec2.h"
+#include <map>
+#include "Input/WindowsKeys.h"
 
 namespace S3DGE
 {
@@ -13,6 +16,8 @@ namespace S3DGE
 		{
 			#define MODE_FULLSCREEN 1
 			#define MODE_WINDOWED 0
+			#define MAX_KEYS 256
+			#define MAX_BUTTONS 16
 
 		private:
 			const char* m_Title;
@@ -21,6 +26,11 @@ namespace S3DGE
 			bool m_IsClosed;
 			bool m_FullScreen;
 			bool m_VSync;
+			Maths::vec2f m_Mouse;
+			bool m_Keys[MAX_KEYS];
+			bool m_Buttons[MAX_BUTTONS];
+
+			static std::map<void*, Window*> m_WindowInstances;
 
 		public:
 			Window(const char* title,  uint width, uint height, bool fullscreen = false, bool vsync = true);
@@ -28,20 +38,35 @@ namespace S3DGE
 
 			void Clear();
 			void Update();
-
+			bool KeyPressed(uint key) const;
+			bool KeyClicked(uint key) const;
+			bool MouseButtonPressed(uint button) const;
+			bool MouseButtonClicked(uint button) const;
+			
+			static void SetHandle(void* handle, Window* window);
 			void SetVSync(bool vsync);
 			void SetFullScreen(bool fullscreen);
 
+			static Window* GetWindowClassInstance(void* windowInstance);
 			inline const char* GetTitle() const { return m_Title; }
 			inline uint GetWidth() const { return m_Width; }
 			inline uint GetHeight() const { return m_Height; }
 			inline bool IsClosed() const { return m_IsClosed; }
 			inline bool IsVSync() const { return m_VSync; }
 			inline bool IsFullScreen() const { return m_FullScreen; }
+			inline Maths::vec2f GetMousePosition() const { return m_Mouse; }
 
 		private:
 			bool InitializeWindow();
 			void UpdateWindow();
+
+			friend void resize_callback(Window* window, uint width, uint height);
+			friend void key_callback(Window* window, int key, int command);
+			friend void mousebutton_callback(Window* window, int key, int command);
+
+			Window(void);
+			Window(const Window& tRef) = delete;				// Disable copy constructor.
+			Window& operator = (const Window& tRef) = delete;	// Disable assignment operator.
 		};
 	}
 }
