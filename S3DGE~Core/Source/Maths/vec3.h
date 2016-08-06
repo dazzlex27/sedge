@@ -92,6 +92,11 @@ namespace S3DGE
 			{
 				return this->Divide(v2);
 			}
+
+			float Magnitude() const
+			{
+				return x* x + y * y + z * z;
+			}
 		};
 
 		typedef vec3<float> vec3f;

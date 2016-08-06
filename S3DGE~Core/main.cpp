@@ -1,9 +1,14 @@
+
 #include "Source/S3DGECommon.h"
+#include "Maths\mat4.h"
 
 int main()
 {
 	using namespace S3DGE;
-	Graphics::Window* window = new S3DGE::Graphics::Window("S3DGE Test", 1280, 720, MODE_WINDOWED);
+	using namespace Maths;
+	using namespace Graphics;
+
+	Window* window = new Window("S3DGE Test", 1280, 720, MODE_WINDOWED);
 	//window->SetVSync(false);
 
 	int frames = 0;
