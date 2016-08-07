@@ -4,10 +4,10 @@
 
 namespace S3DGE
 {
-#define LOG_WARNING(x) Logger::LogEvent(EVENT_TYPE::LOG_WARNING, x)
-#define LOG_INFO(x) Logger::LogEvent(EVENT_TYPE::LOG_INFO, x)
-#define LOG_ERROR(x) Logger::LogEvent(EVENT_TYPE::LOG_ERROR, x)
-#define LOG_FATAL(x) Logger::LogEvent(EVENT_TYPE::LOG_FATAL, x)
+#define LOG_WARNING(...) Logger::LogEvent(EVENT_TYPE::LOG_WARNING, __VA_ARGS__)
+#define LOG_INFO(...) Logger::LogEvent(EVENT_TYPE::LOG_INFO, __VA_ARGS__)
+#define LOG_ERROR(...) Logger::LogEvent(EVENT_TYPE::LOG_ERROR, __VA_ARGS__)
+#define LOG_FATAL(...) Logger::LogEvent(EVENT_TYPE::LOG_FATAL, __VA_ARGS__)
 
 	enum EVENT_TYPE
 	{
@@ -19,24 +19,32 @@ namespace S3DGE
 
 	class Logger
 	{
+		static void Print(int i) { printf("%d", i); }
+		static void Print(double d) { printf("%.3f", d); }
+		static void Print(const char* s) { printf("%s", s); }
+
 	public:
-		static void LogEvent(EVENT_TYPE type, const char* message)
+		template<typename... Arguments> 
+		static void LogEvent(EVENT_TYPE type, Arguments... args)
 		{
 			switch (type)
 			{
 			case LOG_WARNING:
-				printf("WARNING: %s\n", message);
+				printf("WARNING: ");
 				break;
 			case LOG_INFO:
-				printf("INFO: %s\n", message);
+				printf("INFO: ");
 				break;
 			case LOG_ERROR:
-				printf("ERROR: %s\n", message);
+				printf("ERROR: ");
 				break;
 			case LOG_FATAL:
-				printf("FATAL ERROR: %s\n", message);
+				printf("FATAL ERROR: ");
 				break;
 			}
+
+			std::initializer_list<int> { ((Print(std::forward<Arguments>(args))), 0)... };
+			printf("\n");
 		}
 
 		private:

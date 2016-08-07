@@ -1,6 +1,5 @@
-
 #include "Source/S3DGECommon.h"
-#include "Maths\mat4.h"
+#include "Utilities\FileIO.h"
 
 int main()
 {
@@ -16,7 +15,6 @@ int main()
 	while (!window->IsClosed())
 	{
 		window->Clear();
-
 		glBegin(GL_QUADS);
 		glColor4f(1.0f, 0.0f, 0.0f, 1.0f);
 		glVertex2d(-0.5f, -0.7f);
@@ -30,23 +28,23 @@ int main()
 		glFlush();
 
 		if (window->KeyPressed(VK_0))
-			std::cout << "0 pressed" << std::endl;
+			printf("0 was pressed\n");
 
 		if (window->MouseButtonPressed(VK_LMB))
-			std::cout << "LMB pressed" << std::endl;
+			printf("LMB was pressed\n");
 
 		if (window->MouseButtonPressed(VK_MWDOWN))
-			std::cout << "WDMB pressed" << std::endl;
+			printf("WMB was pressed\n");
 
+		++frames;
 		window->Update();
 
 		if (t.ElapsedMS() > 1000.0f)
 		{
 			t.Start();
-			std::cout << frames << " fps" << std::endl;
+			printf("%d fps\n", frames);
 			frames = 0;
 		}
-		++frames;
 	}
 
 	delete window;

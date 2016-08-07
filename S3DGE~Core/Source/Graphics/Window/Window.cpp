@@ -20,7 +20,8 @@ namespace S3DGE
 				for (int i = 0; i < MAX_BUTTONS; ++i)
 					m_Buttons[i] = false;
 
-				LOG_INFO((char*)glGetString(GL_VERSION));
+				LOG_INFO("OpenGL v. ", (char*)glGetString(GL_VERSION));
+				LOG_INFO("Renderer: ", (char*)glGetString(GL_RENDERER));
 			}
 		}
 
