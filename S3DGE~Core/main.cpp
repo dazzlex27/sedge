@@ -8,9 +8,10 @@ int main()
 
 	Window* window = new Window("S3DGE Test", 1280, 720, MODE_WINDOWED);
 	//window->SetVSync(false);
-
+	ShaderProgram p("Resources/basic.vs", "Resources/basic.fs");
 	int frames = 0;
 	Timer t;
+
 	while (!window->IsClosed())
 	{
 		window->Clear();
