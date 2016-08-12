@@ -4,3 +4,4 @@
 #include "Maths/MathsHeader.h"
 #include "Utilities/Timer.h"
 #include "Graphics/Shaders/ShaderProgram.h"
+#include "Graphics/Renderer.h"

@@ -15,7 +15,7 @@ namespace S3DGE
 			vec4()
 				: x(0), y(0), z(0), w(0) {}
 
-			vec4(T x, T y, T z)
+			vec4(T x, T y, T z, T w)
 				: x(x), y(y), z(z), w(w) {}
 
 			vec4& Add(const vec4& vector)

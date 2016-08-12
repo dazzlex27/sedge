@@ -18,6 +18,7 @@ namespace S3DGE
 
 		uint ShaderProgram::Load()
 		{
+			// Create and compile vertex shader.
 			int vertexShader = glCreateShader(GL_VERTEX_SHADER);
 			std::string vertexSource = FileIO::ReadFromFile(m_Vertex).c_str();
 			if (vertexSource == "")
@@ -30,6 +31,7 @@ namespace S3DGE
 			if (!Compile(vertexShader))
 				return -1;
 
+			// Create and compile fragment shader.
 			int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
 			std::string fragmentSource = FileIO::ReadFromFile(m_Fragment).c_str();
 			if (fragmentSource == "")
@@ -42,6 +44,7 @@ namespace S3DGE
 			if (!Compile(fragmentShader))
 				return -1;
 
+			// Create a shader program and attach compiled shaders to it.
 			int program = glCreateProgram();
 
 			glAttachShader(program, vertexShader);
@@ -52,18 +55,6 @@ namespace S3DGE
 
 			glDeleteShader(vertexShader);
 			glDeleteShader(fragmentShader);
-
-			//// Perform the linking process
-			//glLinkProgram(program);
-
-			//// Check the status
-			//int linkStatus;
-			//glGetProgramiv(program, GL_LINK_STATUS, &linkStatus);
-			//if (linkStatus == GL_FALSE)
-			//{
-			//	LOG_ERROR("Shader program linking failed.");
-			//	return -1;
-			//}
 
 			return program;
 		}
