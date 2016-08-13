@@ -20,7 +20,8 @@ namespace S3DGE
 	class Logger
 	{
 		static void Print(int i) { printf("%d", i); }
-		static void Print(double d) { printf("%.3f", d); }
+		static void Print(float f) { printf("%.3f", f); }
+		static void Print(double d) { printf("%.6f", d); }
 		static void Print(const char* s) { printf("%s", s); }
 
 	public:

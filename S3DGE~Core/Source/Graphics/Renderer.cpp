@@ -26,7 +26,7 @@ namespace S3DGE
 			Maths::vec4f color((float)(rand() / (float)((unsigned)RAND_MAX + 1)), 
 				(float)(rand() / (float)((unsigned)RAND_MAX + 1)), 
 				(float)(rand() / (float)((unsigned)RAND_MAX + 1)), 
-				(float)(rand() / (float)((unsigned)RAND_MAX + 1)));
+				1.0f);// (float)(rand() / (float)((unsigned)RAND_MAX + 1)));
 
 			float attrib[] = { (float)sin(rand()) * 0.5f,(float)cos(rand()) * 0.6f, 0.0f, 0.0f };
 			glVertexAttrib4fv(0, attrib);
