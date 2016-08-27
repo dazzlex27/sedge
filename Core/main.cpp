@@ -6,7 +6,7 @@ int main()
 	using namespace Maths;
 	using namespace Graphics;
 	Window window("S3DGE Test", 1280, 720, MODE_WINDOWED);
-	//window->SetVSync(false);
+	//window.SetVSync(false);
 
 	ShaderProgram p("Resources/basic.vs", "Resources/basic.fs");
 	Renderer renderer(&p);

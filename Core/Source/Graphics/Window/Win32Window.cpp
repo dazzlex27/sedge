@@ -42,7 +42,7 @@ namespace S3DGE
 					key_callback(winInstance, wParam, message);
 				break;
 			case WM_SIZE:
-				if (winInstance)
+				//if (winInstance)
 					resize_callback(winInstance, LOWORD(lParam), HIWORD(lParam));
 				break;
 			default:
@@ -97,8 +97,9 @@ namespace S3DGE
 			SetFullScreen(m_FullScreen);
 			SetVSync(m_VSync);
 
-			ShowWindow(window, SW_SHOW);
-			SetFocus(window);
+			RECT client;
+			GetClientRect(window, &client);
+			resize_callback(this, client.right, client.bottom);
 
 			return true;
 		}
@@ -137,6 +138,7 @@ namespace S3DGE
 				SetWindowLongPtr(window, GWL_STYLE, WS_POPUP);
 				SetWindowLong(window, GWL_EXSTYLE, WS_EX_TOPMOST);
 				ShowWindow(window, SW_SHOWMAXIMIZED);
+				SetFocus(window);
 			}
 			else
 			{
@@ -144,8 +146,10 @@ namespace S3DGE
 				SetWindowLong(window, GWL_EXSTYLE, WS_EX_CLIENTEDGE);
 				SetWindowPlacement(window, &wpc);
 				ShowWindow(window, SW_SHOWDEFAULT);
+
 			}
 
+			SetFocus(window);
 			m_FullScreen = fullscreen;
 		}
 
