@@ -96,6 +96,11 @@ namespace S3DGE
 			glUseProgram(0);
 		}
 
+		void ShaderProgram::SetUniformMat4fv(const char * name, const Maths::mat4& matrix)
+		{
+			glUniformMatrix4fv(glGetUniformLocation(m_ProgramID, name), 1,GL_FALSE, matrix.elements);
+		}
+
 		void ShaderProgram::SetUniform1f(const char* name, float value)
 		{
 			glUniform1f(glGetUniformLocation(m_ProgramID, name), value);

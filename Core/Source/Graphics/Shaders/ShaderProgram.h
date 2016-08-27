@@ -1,6 +1,7 @@
 #pragma once
 
 #include <GL/glew.h>
+#include "Maths/mat4.h"
 #include "S3DGETypes.h"
 #include "Utilities/FileIO.h"
 #include "Maths/MathsHeader.h"
@@ -23,11 +24,12 @@ namespace S3DGE
 			void Enable();
 			void Disable();
 
-			void ShaderProgram::SetUniform1f(const char* name, float value);
-			void ShaderProgram::SetUniform2f(const char* name, Maths::vec2f value);
-			void ShaderProgram::SetUniform3f(const char* name, Maths::vec3f value);
-			void ShaderProgram::SetUniform4f(const char* name, Maths::vec4f value);
-			void ShaderProgram::SetUniform1i(const char* name, int value);
+			void SetUniformMat4fv(const char* name, const Maths::mat4& matrix);
+			void SetUniform1f(const char* name, float value);
+			void SetUniform2f(const char* name, Maths::vec2f value);
+			void SetUniform3f(const char* name, Maths::vec3f value);
+			void SetUniform4f(const char* name, Maths::vec4f value);
+			void SetUniform1i(const char* name, int value);
 
 		private:
 			uint Load();

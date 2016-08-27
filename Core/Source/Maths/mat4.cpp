@@ -21,7 +21,7 @@ namespace S3DGE
 			elements[4 * 3 + 3] = value;
 		}
 
-		mat4& mat4::Multiply(const mat4& other)
+		mat4 mat4::Multiply(const mat4& other)
 		{
 			mat4 result;
 
@@ -35,9 +35,7 @@ namespace S3DGE
 					result.elements[row + column * 4] = sum;
 				}
 			}
-			*this = result;
-
-			return *this;
+			return result;
 		}
 
 		mat4 mat4::operator*(const mat4& matrix)
@@ -47,7 +45,8 @@ namespace S3DGE
 
 		mat4& mat4::operator*=(const mat4& other)
 		{
-			return this->Multiply(other);
+			*this = this->Multiply(other);
+			return *this;
 		}
 
 		mat4 mat4::GetIdentity()
@@ -66,12 +65,14 @@ namespace S3DGE
 			return result;
 		}
 
-		mat4 mat4::Rotate(const vec3f& vector, double angle)
+		mat4 mat4::Rotate(const vec3f& vector, float angle)
 		{
 			mat4 result = mat4::GetIdentity();
 
 			float L = vector.Magnitude();
-			float angleR = (float)(angle * M_PI / 180.0); //converting to radian value
+			float angleR = -(float)(angle * M_PI / 180.0);
+			float c = (float)cos(angleR);
+			float s = (float)sin(angleR);
 			float u = vector.x;
 			float v = vector.y;
 			float w = vector.z;
@@ -79,17 +80,17 @@ namespace S3DGE
 			float v2 = vector.y * vector.y;
 			float w2 = vector.z * vector.z;
 
-			result.elements[4 * 0 + 0] = (float)((u2 + (v2 + w2) * cos(angleR)) / L);
-			result.elements[4 * 0 + 1] = (float)((u * v * (1 - cos(angleR)) - w * sqrt(L) * sin(angleR)) / L);
-			result.elements[4 * 0 + 2] = (float)((u * w * (1 - cos(angleR)) + v * sqrt(L) * sin(angleR)) / L);
+			result.elements[4 * 0 + 0] = (float)((u2 + (v2 + w2) * c) / L);
+			result.elements[4 * 0 + 1] = (float)((u * v * (1 - c) - w * sqrt(L) * s) / L);
+			result.elements[4 * 0 + 2] = (float)((u * w * (1 - c) + v * sqrt(L) * s) / L);
 
-			result.elements[4 * 1 + 0] = (float)((u * v * (1 - cos(angleR)) + w * sqrt(L) * sin(angleR)) / L);
-			result.elements[4 * 1 + 1] = (float)((v2 + (u2 + w2) * cos(angleR)) / L);
-			result.elements[4 * 1 + 2] = (float)((v * w * (1 - cos(angleR)) - u * sqrt(L) * sin(angleR)) / L);
+			result.elements[4 * 1 + 0] = (float)((u * v * (1 - c) + w * sqrt(L) * s) / L);
+			result.elements[4 * 1 + 1] = (float)((v2 + (u2 + w2) * c) / L);
+			result.elements[4 * 1 + 2] = (float)((v * w * (1 - c) - u * sqrt(L) * s) / L);
 
-			result.elements[4 * 2 + 0] = (float)((u * w * (1 - cos(angleR)) - v * sqrt(L) * sin(angleR)) / L);
-			result.elements[4 * 2 + 1] = (float)((v * w * (1 - cos(angleR)) + u * sqrt(L) * sin(angleR)) / L);
-			result.elements[4 * 2 + 2] = (float)((w2 + (u2 + v2) * cos(angleR)) / L);
+			result.elements[4 * 2 + 0] = (float)((u * w * (1 - c) - v * sqrt(L) * s) / L);
+			result.elements[4 * 2 + 1] = (float)((v * w * (1 - c) + u * sqrt(L) * s) / L);
+			result.elements[4 * 2 + 2] = (float)((w2 + (u2 + v2) * c) / L);
 
 			return result;
 		}
@@ -105,7 +106,7 @@ namespace S3DGE
 			return result;
 		}
 
-		mat4 mat4::GetOrthographic(float left, float right, float top, float bottom, float near, float far)
+		mat4 mat4::GetOrthographic(float left, float right, float bottom, float top, float near, float far)
 		{
 			mat4 result = mat4::GetIdentity();
 

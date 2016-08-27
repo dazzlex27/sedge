@@ -4,7 +4,7 @@
 #include "S3DGETypes.h"
 #include "Shaders/ShaderProgram.h"
 #include <time.h>
-#include "Maths/vec4.h"
+#include "Maths/MathsHeader.h"
 
 namespace S3DGE
 {
@@ -14,6 +14,7 @@ namespace S3DGE
 		{
 		private:
 			uint m_VAO; // Vertex array object.
+			uint m_VBO;
 			ShaderProgram* m_ShaderProgram;
 
 		public:

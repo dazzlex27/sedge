@@ -15,9 +15,6 @@ namespace S3DGE
 		WNDCLASSEX windowClass = {};
 		HGLRC renderingContext;
 		PIXELFORMATDESCRIPTOR pixelFormatDescriptor;
-		DWORD dwExStyle;
-		DWORD dwStyle;
-		RECT windowRect;
 		WINDOWPLACEMENT wpc;
 
 		LRESULT CALLBACK WindowProcedure(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
@@ -63,19 +60,13 @@ namespace S3DGE
 			windowClass.lpfnWndProc = WindowProcedure;
 			windowClass.style = CS_DBLCLKS;
 			windowClass.cbSize = sizeof(WNDCLASSEX);
-
-			//wincl.hIconSm = LoadIcon(NULL, IDI_APPLICATION);
+			windowClass.hIconSm = LoadIcon(NULL, IDI_APPLICATION);
 			windowClass.hIcon = LoadIcon(NULL, IDI_APPLICATION);
 			windowClass.hCursor = LoadCursor(NULL, IDC_ARROW);
-			//wincl.lpszMenuName = NULL;
-			//wincl.cbClsExtra = 0;
-			//wincl.cbWndExtra = 0;
 			windowClass.hbrBackground = (HBRUSH)COLOR_BACKGROUND;
 
 			if (!RegisterClassEx(&windowClass))
 				return false;
-
-			windowRect = { 0, 0, (LONG)m_Width, (LONG)m_Height };
 
 			window = CreateWindowEx(
 				WS_EX_CLIENTEDGE,
@@ -84,8 +75,8 @@ namespace S3DGE
 				WS_OVERLAPPEDWINDOW,
 				CW_USEDEFAULT,
 				CW_USEDEFAULT,
-				windowRect.right,
-				windowRect.bottom,
+				m_Width,
+				m_Height,
 				HWND_DESKTOP,
 				NULL,
 				instance,
@@ -146,7 +137,6 @@ namespace S3DGE
 				SetWindowLongPtr(window, GWL_STYLE, WS_POPUP);
 				SetWindowLong(window, GWL_EXSTYLE, WS_EX_TOPMOST);
 				ShowWindow(window, SW_SHOWMAXIMIZED);
-				m_FullScreen = true;
 			}
 			else
 			{
@@ -154,7 +144,6 @@ namespace S3DGE
 				SetWindowLong(window, GWL_EXSTYLE, WS_EX_CLIENTEDGE);
 				SetWindowPlacement(window, &wpc);
 				ShowWindow(window, SW_SHOWDEFAULT);
-				m_FullScreen = false;
 			}
 
 			m_FullScreen = fullscreen;

@@ -48,6 +48,21 @@ namespace S3DGE
 				return *this;
 			}
 
+			/*vec4& Multiply(const mat4& matrix)
+			{
+				vec4 result;
+				for (int i = 0; i < 4; i++)
+					result.x = matrix[0 + 4 * i];
+				for (int i = 0; i < 4; i++)
+					result.y = matrix[1 + 4 * i];
+				for (int i = 0; i < 4; i++)
+					result.z = matrix[2 + 4 * i];
+				for (int i = 0; i < 4; i++)
+					result.w = matrix[3 + 4 * i];
+
+				return result;
+			}*/
+
 			vec4& Divide(const vec4& vector)
 			{
 				this->x /= vector.x;
