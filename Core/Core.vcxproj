@@ -111,6 +111,7 @@
     <ClInclude Include="Source\Graphics\Window\Window.h" />
     <ClInclude Include="Source\S3DGETypes.h" />
     <ClInclude Include="Source\Utilities\FileIO.h" />
+    <ClInclude Include="Source\Utilities\ImageLoad.h" />
     <ClInclude Include="Source\Utilities\Log.h" />
     <ClInclude Include="Source\Utilities\Timer.h" />
   </ItemGroup>
