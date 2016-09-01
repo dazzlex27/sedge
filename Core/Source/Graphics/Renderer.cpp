@@ -109,7 +109,6 @@ namespace S3DGE
 			};
 
 			using namespace Maths;
-			
 
 			glGenBuffers(1, &m_VBO);
 			glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
@@ -146,7 +145,7 @@ namespace S3DGE
 			m_ShaderProgram->SetUniform2f("light_pos", vec2f(2, 1.5));
 		}
 
-		void Renderer::Draw()
+		void Renderer::Flush()
 		{
 			glDrawArrays(GL_TRIANGLES, 0, 12 * 3);
 		}

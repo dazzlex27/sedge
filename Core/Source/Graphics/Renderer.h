@@ -21,7 +21,7 @@ namespace S3DGE
 			Renderer(ShaderProgram* shaderProgram);
 			~Renderer();
 
-			void Draw();
+			void Flush();
 
 		private:
 			void Initialize();

@@ -6,7 +6,7 @@ int main()
 	using namespace Maths;
 	using namespace Graphics;
 	Window window("S3DGE Test", 1280, 720, MODE_WINDOWED);
-	//window.SetVSync(false);
+	window.SetVSync(false);
 
 	ShaderProgram p("Resources/basic.vs", "Resources/basic.fs");
 	Renderer renderer(&p);
@@ -21,7 +21,7 @@ int main()
 		vec2f mouse = window.GetMousePosition();
 		p.SetUniform2f("light_pos", vec2f((float)(mouse.x * 16.0f / window.GetWidth()), (float)(9.0f - mouse.y * 9.0f / window.GetHeight())));
 
-		renderer.Draw();
+		renderer.Flush();
 			
 		++frames;
 
@@ -41,7 +41,6 @@ int main()
 			t.Start();
 			printf("%d fps\n", frames);
 			frames = 0;
-			
 		}
 	}
 
