@@ -1,32 +1,21 @@
-#include "Renderer.h"
+#include "Renderer2D.h"
 
 namespace S3DGE
 {
 	namespace Graphics
 	{
-		struct Vertex
-		{
-			float x;
-			float y;
-			float z;
-
-			float r;
-			float g;
-			float b;
-		};
-
-		Renderer::Renderer(ShaderProgram* shaderProgram)
+		Renderer2D::Renderer2D(ShaderProgram* shaderProgram)
 			: m_ShaderProgram(shaderProgram)
 		{			
 			Initialize();
 		}
 
-		Renderer::~Renderer()
+		Renderer2D::~Renderer2D()
 		{
 			glDeleteVertexArrays(1, &m_VAO);
 		}
 
-		void Renderer::Initialize()
+		void Renderer2D::Initialize()
 		{
 			// Our vertices. Three consecutive floats give a 3D vertex; Three consecutive vertices give a triangle.
 			// A cube has 6 faces with 2 triangles each, so this makes 6*2=12 triangles, and 12*3 vertices
@@ -67,6 +56,26 @@ namespace S3DGE
 				1.0f, 1.0f, 1.0f,
 				-1.0f, 1.0f, 1.0f,
 				1.0f,-1.0f, 1.0f
+			};
+
+			GLfloat vertices[] =
+			{
+				0, 0, 0,
+				8, 0, 0,
+				0, 3, 0,
+				0, 3, 0,
+				8, 3, 0,
+				8, 0, 0
+			};
+
+			GLfloat colors[] =
+			{
+				1.0f, 0.0f, 0.0f, 
+				0.0f, 1.0f, 0.0f, 
+				0.0f, 0.0f, 1.0f, 
+				1.0f, 1.0f, 0.0f, 
+				1.0f, 0.0f, 1.0f, 
+				0.0f, 1.0f, 1.0f 
 			};
 
 			static const GLfloat g_color_buffer_data[] = {
@@ -112,18 +121,26 @@ namespace S3DGE
 
 			glGenBuffers(1, &m_VBO);
 			glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
-			glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
-			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+			//glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
+			glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 			glEnableVertexAttribArray(0);
+			glVertexAttribPointer(
+				0, 
+				3, 
+				GL_FLOAT,
+				GL_FALSE,
+				0, 
+				0
+				);
 
 			GLuint colorbuffer;
 			glGenBuffers(1, &colorbuffer);
 			glBindBuffer(GL_ARRAY_BUFFER, colorbuffer);
-			glBufferData(GL_ARRAY_BUFFER, sizeof(g_color_buffer_data), g_color_buffer_data, GL_STATIC_DRAW);
-
+			//glBufferData(GL_ARRAY_BUFFER, sizeof(g_color_buffer_data), g_color_buffer_data, GL_STATIC_DRAW);
 			// 2nd attribute buffer : colors
 			glEnableVertexAttribArray(1);
 			glBindBuffer(GL_ARRAY_BUFFER, colorbuffer);
+			glBufferData(GL_ARRAY_BUFFER, sizeof(colors), colors, GL_STATIC_DRAW);
 			glVertexAttribPointer(
 				1,                                // attribute. No particular reason for 1, but must match the layout in the shader.
 				3,                                // size
@@ -134,18 +151,22 @@ namespace S3DGE
 				);
 
 			m_ShaderProgram->Enable();
-			m_ShaderProgram->SetUniform4f("cl", vec4f(0.2f, 0.3f, 0.8f, 1.0f));
 			mat4 ortho = mat4::GetOrthographic(0.0f, 16.0f, 0.0f, 9.0f, -3.0f, 3.0f);
 			mat4 rotate = mat4::Rotate(vec3f(1, 1, 1), 30.0f);
-			mat4 translate = mat4::Translate(vec3f(10, 5, 0));
-			mat4 scale = mat4::Scale(vec3f(2, 2, 2));
-			mat4 modelMatrix = translate *rotate * scale;
+			mat4 translate = mat4::Translate(vec3f(4, 3, 0));
+			mat4 scale = mat4::Scale(vec3f(2, 2, 0));
+			mat4 modelMatrix = translate;// *rotate * scale;
 			m_ShaderProgram->SetUniformMat4fv("pr_matrix", ortho);
 			m_ShaderProgram->SetUniformMat4fv("ml_matrix", modelMatrix);
 			m_ShaderProgram->SetUniform2f("light_pos", vec2f(2, 1.5));
 		}
 
-		void Renderer::Flush()
+		void Renderer2D::Submit(Renderable2D* renderable)
+		{
+
+		}
+
+		void Renderer2D::Flush()
 		{
 			glDrawArrays(GL_TRIANGLES, 0, 12 * 3);
 		}

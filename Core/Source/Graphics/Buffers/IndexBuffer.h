@@ -7,17 +7,17 @@ namespace S3DGE
 {
 	namespace Graphics
 	{
-		class Buffer
+		class IndexBuffer
 		{
 		private:
 			uint m_BufferID;
-			uint m_ComponentCount;
+			uint m_Count;
 
 		public:
-			Buffer(float* data, int count, uint componentCount);
-			~Buffer();
+			IndexBuffer(ushort* data, uint count);
+			~IndexBuffer();
 
-			inline const uint GetComponentCount() const { return m_ComponentCount; }
+			inline const uint GetCount() const { return m_Count; }
 
 			void Bind();
 			void Unbind();

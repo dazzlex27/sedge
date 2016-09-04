@@ -3,3 +3,4 @@
 typedef unsigned int uint;
 typedef unsigned char byte;
 typedef const char* cstring;
+typedef unsigned short ushort;

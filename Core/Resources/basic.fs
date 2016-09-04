@@ -1,16 +1,19 @@
-#version 450 core
+#version 330 core
 
 layout (location = 0) out vec4 color;
-in vec3 fragmentColor;
 
-in vec4 pos;
+uniform vec2 light_pos;
+
+in DATA
+{
+	vec4 position;
+	vec4 color;
+} fs_in;
 
 uniform vec4 cl;
-uniform vec2 light_pos;
 
 void main()
 {
-	color = vec4(fragmentColor.x,fragmentColor.y,fragmentColor.z,1);
-	//float intensity = 1.0f / length(pos.xy - light_pos);
-	//color = cl;// * intensity;
+	float intensity = 1.0f / length(fs_in.position.xy - light_pos);
+	color = fs_in.color;// * intensity;
 }

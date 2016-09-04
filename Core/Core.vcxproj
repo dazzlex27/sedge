@@ -91,7 +91,10 @@
     <ClCompile Include="Externals\GL\glew.c" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Source\Graphics\Buffers\Buffer.cpp" />
-    <ClCompile Include="Source\Graphics\Renderer.cpp" />
+    <ClCompile Include="Source\Graphics\Buffers\IndexBuffer.cpp" />
+    <ClCompile Include="Source\Graphics\Buffers\VertexArray.cpp" />
+    <ClCompile Include="Source\Graphics\Renderables\Sprite.cpp" />
+    <ClCompile Include="Source\Graphics\Renderer2D.cpp" />
     <ClCompile Include="Source\Graphics\Shaders\ShaderProgram.cpp" />
     <ClCompile Include="Source\Graphics\Texture.cpp" />
     <ClCompile Include="Source\Graphics\Window\Win32Window.cpp" />
@@ -100,7 +103,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Graphics\Buffers\Buffer.h" />
-    <ClInclude Include="Source\Graphics\Renderer.h" />
+    <ClInclude Include="Source\Graphics\Buffers\IndexBuffer.h" />
+    <ClInclude Include="Source\Graphics\Buffers\VertexArray.h" />
+    <ClInclude Include="Source\Graphics\Renderables\Renderable2D.h" />
+    <ClInclude Include="Source\Graphics\Renderables\Sprite.h" />
+    <ClInclude Include="Source\Graphics\Renderer2D.h" />
     <ClInclude Include="Source\Graphics\Shaders\ShaderProgram.h" />
     <ClInclude Include="Source\Graphics\Texture.h" />
     <ClInclude Include="Source\Input\WindowsKeys.h" />

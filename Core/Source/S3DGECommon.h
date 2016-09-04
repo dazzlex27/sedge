@@ -5,6 +5,6 @@
 #include "Maths/MathsHeader.h"
 #include "Utilities/Timer.h"
 #include "Graphics/Shaders/ShaderProgram.h"
-#include "Graphics/Renderer.h"
+#include "Graphics/Renderer2D.h"
 #include "Graphics/Texture.h"
 #include "Utilities/DeleteMacros.h"
