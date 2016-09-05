@@ -1,5 +1,6 @@
 #pragma once
 
+#include<deque>
 #include <GL/glew.h>
 #include "S3DGETypes.h"
 #include "Shaders/ShaderProgram.h"
@@ -8,6 +9,7 @@
 #include "Buffers/Buffer.h"
 #include "Buffers/IndexBuffer.h"
 #include "Buffers/Buffer.h"
+#include "Graphics/Renderables/Renderable2D.h"
 
 namespace S3DGE
 {
@@ -21,15 +23,14 @@ namespace S3DGE
 			uint m_VAO; // Vertex array object.
 			uint m_VBO; // Vertex buffer object.
 			ShaderProgram* m_ShaderProgram; // Shader set.
+			std::deque<const Renderable2D*> m_Renderables;
 
 		public:
 			Renderer2D(ShaderProgram* shaderProgram);
 			~Renderer2D();
 
-			void Begin();
 			void Submit(Renderable2D* renderable);
 			void Flush();
-			void End();
 
 		private:
 			void Initialize();

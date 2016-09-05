@@ -1,12 +1,12 @@
 #pragma once
 
 #include <vector>
-#include "../../S3DGETypes.h"
+#include <map>
 #include <GL/glew.h>
+#include "S3DGETypes.h"
 #include "Utilities/Log.h"
 #include "Maths/vec2.h"
-#include <map>
-#include "Input/WindowsKeys.h"
+#include "Platforms/Windows/WindowsKeys.h"
 
 namespace S3DGE
 {

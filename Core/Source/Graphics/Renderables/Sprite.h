@@ -10,7 +10,7 @@ namespace S3DGE
 		class Sprite : public Renderable2D
 		{
 		public:
-			Sprite(int x, int y, int width, int height, uint color);
+			Sprite(int x, int y, int width, int height, Maths::vec4f color);
 			Sprite(int x, int y, int width, int height, Texture* texture);
 		};
 	}

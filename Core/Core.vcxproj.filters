@@ -21,9 +21,6 @@
     <ClCompile Include="Source\Graphics\Window\Window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Graphics\Window\Win32Window.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Maths\mat4.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -49,6 +46,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Graphics\Buffers\VertexArray.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Platforms\Windows\Win32Window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -83,9 +83,6 @@
     <ClInclude Include="Source\Maths\mat4.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Input\WindowsKeys.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Utilities\FileIO.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -117,6 +114,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Graphics\Buffers\VertexArray.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Platforms\Windows\WindowsKeys.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -17,14 +17,14 @@ namespace S3DGE
 
 		void VertexArray::AddBuffer(Buffer* buffer, uint index)
 		{
-			Bind();
+			glBindVertexArray(m_VertexArrayID);
 
 			buffer->Bind();
 			glEnableVertexAttribArray(index);
 			glVertexAttribPointer(index, buffer->GetComponentCount(), GL_FLOAT, GL_FALSE, 0, 0);
 			buffer->Unbind();
 
-			Unbind();
+			glBindVertexArray(0);
 		}
 
 		void VertexArray::Bind() const

@@ -3,7 +3,7 @@
 namespace S3DGE
 {
 	template<typename T>
-	inline void SafeDelete(T* a)
+	inline void SafeDelete(T*& a)
 	{
 		delete a;
 		a = 0;

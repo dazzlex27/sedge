@@ -97,7 +97,7 @@
     <ClCompile Include="Source\Graphics\Renderer2D.cpp" />
     <ClCompile Include="Source\Graphics\Shaders\ShaderProgram.cpp" />
     <ClCompile Include="Source\Graphics\Texture.cpp" />
-    <ClCompile Include="Source\Graphics\Window\Win32Window.cpp" />
+    <ClCompile Include="Source\Platforms\Windows\Win32Window.cpp" />
     <ClCompile Include="Source\Graphics\Window\Window.cpp" />
     <ClCompile Include="Source\Maths\mat4.cpp" />
   </ItemGroup>
@@ -110,7 +110,7 @@
     <ClInclude Include="Source\Graphics\Renderer2D.h" />
     <ClInclude Include="Source\Graphics\Shaders\ShaderProgram.h" />
     <ClInclude Include="Source\Graphics\Texture.h" />
-    <ClInclude Include="Source\Input\WindowsKeys.h" />
+    <ClInclude Include="Source\Platforms\Windows\WindowsKeys.h" />
     <ClInclude Include="Source\Maths\mat4.h" />
     <ClInclude Include="Source\Maths\MathsHeader.h" />
     <ClInclude Include="Source\Maths\vec2.h" />
