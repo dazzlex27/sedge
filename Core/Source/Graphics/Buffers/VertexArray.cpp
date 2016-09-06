@@ -13,6 +13,8 @@ namespace S3DGE
 		{
 			for (Buffer* item : m_Bufers)
 				SafeDelete(item);
+
+			glDeleteVertexArrays(1, &m_VertexArrayID);
 		}
 
 		void VertexArray::AddBuffer(Buffer* buffer, uint index)
