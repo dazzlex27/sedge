@@ -33,17 +33,17 @@ namespace S3DGE
 		private:
 			uint m_VAO; // Vertex array object.
 			uint m_VBO; // Vertex buffer object.
-			IndexBuffer* m_IBO;
-			int m_IndexCount;
-			VertexData* m_Buffer;
+			IndexBuffer* m_IBO; // Index buffer object.
+			int m_IndexCount; 
+			VertexData* m_Buffer; // Renderables container.
 
 		public:
 			Renderer2D();
 			~Renderer2D();
 
 			void Begin();
-			void Submit(const Renderable2D* renderable);
-			void Flush();
+			void Submit(const Renderable2D* renderable); // Load the renderables.
+			void Flush(); // OpenGL drawcall. 
 			void End();
 
 		private:
