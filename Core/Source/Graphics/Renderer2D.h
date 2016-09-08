@@ -16,7 +16,7 @@ namespace S3DGE
 		struct VertexData
 		{
 			Maths::vec3f vertex;
-			Maths::vec4f color;
+			unsigned int color;
 		};
 		
 		#define RENDERER_MAX_SPRITES	60000
@@ -42,7 +42,7 @@ namespace S3DGE
 			~Renderer2D();
 
 			void Begin();
-			void Submit(const Renderable2D* renderable); // Load the renderables.
+			void SubmitRenderable(const Renderable2D* renderable); // Load the renderables.
 			void Flush(); // OpenGL drawcall. 
 			void End();
 

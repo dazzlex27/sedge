@@ -21,7 +21,16 @@ int main()
 
 	for (float y = 0; y < 9.0f; y += 0.5f)
 		for (float x = 0; x < 16.0f; x += 0.5f)
-			sprites.push_back(new Sprite(x, y, 0.4f, 0.4f, Maths::vec4f(rand() % 1000 / 1000.0f, rand() % 1000 / 1000.0f, rand() % 1000 / 1000.0f, 1)));
+		{
+			int a = 255;
+			int r = (int)(rand() % 1000 / 1000.0f * 255);
+			int g = (int)(rand() % 1000 / 1000.0f * 255);
+			int b = (int)(rand() % 1000 / 1000.0f * 255);
+
+			uint color = a << 24 | b << 16 | g << 8 | r;
+
+			sprites.push_back(new Sprite(x, y, 0.4f, 0.4f, color));
+		}
 
 	int frames = 0;
 	Timer t;
@@ -36,7 +45,7 @@ int main()
 		
 		renderer.Begin();
 		for (uint i = 0; i < sprites.size(); i++)
-			renderer.Submit(sprites[i]);
+			renderer.SubmitRenderable(sprites[i]);
 		renderer.End();
 		renderer.Flush();
 

@@ -28,7 +28,7 @@ namespace S3DGE
 			glEnableVertexAttribArray(0);
 			glEnableVertexAttribArray(1);
 			glVertexAttribPointer(SHADER_VERTEX_INDEX, 3, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (const GLvoid*)0);
-			glVertexAttribPointer(SHADER_COLOR_INDEX, 4, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (const GLvoid*)(3 * sizeof(GLfloat)));
+			glVertexAttribPointer(SHADER_COLOR_INDEX, 4, GL_UNSIGNED_BYTE, GL_TRUE, RENDERER_VERTEX_SIZE, (const GLvoid*)(offsetof(VertexData, VertexData::color)));
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 			uint* indices = new uint[RENDERER_INDICES_SIZE];
@@ -59,11 +59,11 @@ namespace S3DGE
 			m_Buffer = (VertexData*)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
 		}
 
-		void Renderer2D::Submit(const Renderable2D* renderable)
+		void Renderer2D::SubmitRenderable(const Renderable2D* renderable)
 		{
 			const Maths::vec3f& position = renderable->GetPosition();
 			const Maths::vec2f& size = renderable->GetSize();
-			const Maths::vec4f& color = renderable->GetColor();
+			const uint color = renderable->GetColor();
 
 			m_Buffer->vertex = position;
 			m_Buffer->color = color;

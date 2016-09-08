@@ -15,11 +15,11 @@ namespace S3DGE
 		protected:
 			Maths::vec3f m_Position;
 			Maths::vec2f m_Size;
-			Maths::vec4f m_Color;
+			uint m_Color;
 			Texture* m_Texture;
 
-		public:
-			Renderable2D(const Maths::vec3f& position, const Maths::vec2f& size, Maths::vec4f color)
+		protected:
+			Renderable2D(const Maths::vec3f& position, const Maths::vec2f& size, uint color)
 				: m_Position(position), m_Size(size), m_Color(color) 
 			{
 			}
@@ -27,10 +27,11 @@ namespace S3DGE
 			virtual ~Renderable2D() 
 			{
 			}
-			
+
+		public:
 			inline const Maths::vec3f GetPosition() const { return m_Position; }
 			inline const Maths::vec2f GetSize() const { return m_Size; }
-			inline Maths::vec4f GetColor() const { return m_Color; }
+			inline uint GetColor() const { return m_Color; }
 		};
 	}
 }
