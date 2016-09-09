@@ -9,3 +9,4 @@
 #include "Graphics/Renderables/Sprite.h"
 #include "Graphics/Texture.h"
 #include "Utilities/DeleteMacros.h"
+#include "Utilities/Converters.h"

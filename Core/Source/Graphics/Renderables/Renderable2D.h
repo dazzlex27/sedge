@@ -22,7 +22,7 @@ namespace S3DGE
 
 		protected:
 			Renderable2D(const Maths::vec3f& position, const Maths::vec2f& size, uint color)
-				: m_Position(position), m_Size(size), m_Color(color) 
+				: m_Position(position), m_Size(size), m_Color(color), m_Texture(nullptr)
 			{
 				m_UV.push_back(Maths::vec2f(0, 0));
 				m_UV.push_back(Maths::vec2f(0, 1));
@@ -39,6 +39,7 @@ namespace S3DGE
 			inline const Maths::vec2f GetSize() const { return m_Size; }
 			inline uint GetColor() const { return m_Color; }
 			inline std::vector<Maths::vec2f> GetUV() const { return m_UV; }
+			inline uint GetTextureID() const { return m_Texture ? m_Texture->GetTextureID() : 0; }
 		};
 	}
 }

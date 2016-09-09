@@ -29,10 +29,12 @@ namespace S3DGE
 			glEnableVertexAttribArray(0);
 			glEnableVertexAttribArray(1);
 			glEnableVertexAttribArray(2);
+			glEnableVertexAttribArray(3);
 
 			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (const void*)(offsetof(VertexData, VertexData::vertex)));
 			glVertexAttribPointer(1, 4, GL_UNSIGNED_BYTE, GL_TRUE, RENDERER_VERTEX_SIZE, (const void*)(offsetof(VertexData, VertexData::color)));
 			glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (const void*)(offsetof(VertexData, VertexData::uv)));
+			glVertexAttribPointer(3, 1, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (const void*)(offsetof(VertexData, VertexData::textureID)));
 
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
 
@@ -70,25 +72,59 @@ namespace S3DGE
 			const Maths::vec2f& size = renderable->GetSize();
 			const uint color = renderable->GetColor();
 			const std::vector<Maths::vec2f> uv = renderable->GetUV();
+			const uint textureID = renderable->GetTextureID();
+
+			float textureSlot = 0.0f;
+
+			if (textureID > 0)
+			{
+				bool ok = false;
+				for (int i = 0; i < m_Textures.size(); ++i)
+				{
+					if (m_Textures[i] = textureID)
+					{
+						textureSlot = (float)(i + 1);
+						ok = true;
+						break;
+					}
+				}
+
+				if (!ok)
+				{
+					if (m_Textures.size() >= 32)
+					{
+						End();
+						Flush();
+						Begin();
+					}
+
+					m_Textures.push_back(textureID);
+					textureSlot = (float)(m_Textures.size());
+				}
+			}
 
 			m_Buffer->vertex = position;
 			m_Buffer->color = color;
 			m_Buffer->uv = uv[0];
+			m_Buffer->textureID = textureSlot;
 			m_Buffer++;
 
 			m_Buffer->vertex = Maths::vec3f(position.x, position.y + size.y, position.z);
 			m_Buffer->color = color;
 			m_Buffer->uv = uv[1];
+			m_Buffer->textureID = textureSlot;
 			m_Buffer++;
 
 			m_Buffer->vertex = Maths::vec3f(position.x + size.x, position.y + size.y, position.z);
 			m_Buffer->color = color;
 			m_Buffer->uv = uv[2];
+			m_Buffer->textureID = textureSlot;
 			m_Buffer++;
 
 			m_Buffer->vertex = Maths::vec3f(position.x + size.x, position.y, position.z);
 			m_Buffer->color = color;
 			m_Buffer->uv = uv[3];
+			m_Buffer->textureID = textureSlot;
 			m_Buffer++;
 
 			m_IndexCount += 6;
@@ -96,6 +132,12 @@ namespace S3DGE
 
 		void Renderer2D::Flush()
 		{
+			for (int i = 0; i < m_Textures.size(); ++i)
+			{
+				glActiveTexture(GL_TEXTURE0 + i);
+				glBindTexture(GL_TEXTURE_2D,m_Textures[i]);
+			}
+
 			glBindVertexArray(m_VAO);
 			m_IBO->Bind();
 

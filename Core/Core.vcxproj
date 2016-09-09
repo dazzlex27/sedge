@@ -119,6 +119,7 @@
     <ClInclude Include="Source\S3DGECommon.h" />
     <ClInclude Include="Source\Graphics\Window\Window.h" />
     <ClInclude Include="Source\S3DGETypes.h" />
+    <ClInclude Include="Source\Utilities\Converters.h" />
     <ClInclude Include="Source\Utilities\DeleteMacros.h" />
     <ClInclude Include="Source\Utilities\FileIO.h" />
     <ClInclude Include="Source\Utilities\ImageLoad.h" />

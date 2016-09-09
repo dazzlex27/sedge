@@ -125,5 +125,10 @@ namespace S3DGE
 		{
 			glUniform1i(glGetUniformLocation(m_ProgramID, name), value);
 		}
+
+		void ShaderProgram::SetUniform1iv(const char* name, int count, int* value)
+		{
+			glUniform1iv(glGetUniformLocation(m_ProgramID, name), count, value);
+		}
 	}
 }

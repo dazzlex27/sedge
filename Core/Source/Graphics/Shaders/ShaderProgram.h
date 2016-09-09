@@ -30,6 +30,7 @@ namespace S3DGE
 			void SetUniform3f(const char* name, Maths::vec3f value);
 			void SetUniform4f(const char* name, Maths::vec4f value);
 			void SetUniform1i(const char* name, int value);
+			void SetUniform1iv(const char* name, int count, int* value);
 
 		private:
 			uint Load();

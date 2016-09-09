@@ -18,6 +18,7 @@ namespace S3DGE
 			Maths::vec3f vertex;
 			uint color;
 			Maths::vec2f uv;
+			float textureID;
 		};
 		
 		#define RENDERER_MAX_SPRITES	60000
@@ -25,10 +26,6 @@ namespace S3DGE
 		#define RENDERER_SPRITE_SIZE	RENDERER_VERTEX_SIZE * 4
 		#define RENDERER_BUFFER_SIZE	RENDERER_SPRITE_SIZE * RENDERER_MAX_SPRITES
 		#define RENDERER_INDICES_SIZE	RENDERER_MAX_SPRITES * 6
-			
-		#define SHADER_VERTEX_INDEX 0
-		#define SHADER_COLOR_INDEX	1
-		#define SHADER_UV_INDEX		2
 
 		class Renderer2D
 		{
@@ -38,6 +35,7 @@ namespace S3DGE
 			IndexBuffer* m_IBO; // Index buffer object.
 			int m_IndexCount; 
 			VertexData* m_Buffer; // Renderables container.
+			std::vector<uint> m_Textures;
 
 		public:
 			Renderer2D();
