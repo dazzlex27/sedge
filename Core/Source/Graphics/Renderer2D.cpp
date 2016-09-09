@@ -23,12 +23,17 @@ namespace S3DGE
 
 			glGenBuffers(1, &m_VBO);
 			glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
+
 			glBufferData(GL_ARRAY_BUFFER, RENDERER_BUFFER_SIZE, NULL, GL_DYNAMIC_DRAW);
 
 			glEnableVertexAttribArray(0);
 			glEnableVertexAttribArray(1);
-			glVertexAttribPointer(SHADER_VERTEX_INDEX, 3, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (const GLvoid*)0);
-			glVertexAttribPointer(SHADER_COLOR_INDEX, 4, GL_UNSIGNED_BYTE, GL_TRUE, RENDERER_VERTEX_SIZE, (const GLvoid*)(offsetof(VertexData, VertexData::color)));
+			glEnableVertexAttribArray(2);
+
+			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (const void*)(offsetof(VertexData, VertexData::vertex)));
+			glVertexAttribPointer(1, 4, GL_UNSIGNED_BYTE, GL_TRUE, RENDERER_VERTEX_SIZE, (const void*)(offsetof(VertexData, VertexData::color)));
+			glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (const void*)(offsetof(VertexData, VertexData::uv)));
+
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 			uint* indices = new uint[RENDERER_INDICES_SIZE];
@@ -64,21 +69,26 @@ namespace S3DGE
 			const Maths::vec3f& position = renderable->GetPosition();
 			const Maths::vec2f& size = renderable->GetSize();
 			const uint color = renderable->GetColor();
+			const std::vector<Maths::vec2f> uv = renderable->GetUV();
 
 			m_Buffer->vertex = position;
 			m_Buffer->color = color;
+			m_Buffer->uv = uv[0];
 			m_Buffer++;
 
 			m_Buffer->vertex = Maths::vec3f(position.x, position.y + size.y, position.z);
 			m_Buffer->color = color;
+			m_Buffer->uv = uv[1];
 			m_Buffer++;
 
 			m_Buffer->vertex = Maths::vec3f(position.x + size.x, position.y + size.y, position.z);
 			m_Buffer->color = color;
+			m_Buffer->uv = uv[2];
 			m_Buffer++;
 
 			m_Buffer->vertex = Maths::vec3f(position.x + size.x, position.y, position.z);
 			m_Buffer->color = color;
+			m_Buffer->uv = uv[3];
 			m_Buffer++;
 
 			m_IndexCount += 6;

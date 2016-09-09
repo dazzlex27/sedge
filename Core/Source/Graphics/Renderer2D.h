@@ -16,7 +16,8 @@ namespace S3DGE
 		struct VertexData
 		{
 			Maths::vec3f vertex;
-			unsigned int color;
+			uint color;
+			Maths::vec2f uv;
 		};
 		
 		#define RENDERER_MAX_SPRITES	60000
@@ -27,6 +28,7 @@ namespace S3DGE
 			
 		#define SHADER_VERTEX_INDEX 0
 		#define SHADER_COLOR_INDEX	1
+		#define SHADER_UV_INDEX		2
 
 		class Renderer2D
 		{

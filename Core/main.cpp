@@ -13,8 +13,14 @@ int main()
 
 	Renderer2D renderer;
 	mat4 ortho = mat4::GetOrthographic(0.0f, 16.0f, 0.0f, 9.0f, -1.0f, 1.0f);
+
+	Texture texture("Test", "Resources\\box.jpg");
+	texture.Bind();
+	glActiveTexture(GL_TEXTURE0);
+
 	ShaderProgram shaderProgram("Resources/basic.vs", "Resources/basic.fs");
 	shaderProgram.Enable();
+	shaderProgram.SetUniform1i("tex", 0);
 	shaderProgram.SetUniformMat4fv("pr_matrix", ortho);
 
 	std::vector<Renderable2D*> sprites;

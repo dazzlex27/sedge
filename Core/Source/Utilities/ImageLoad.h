@@ -1,5 +1,6 @@
 #pragma once
 
+#include <string.h>
 #include "S3DGETypes.h"
 #include <STB/stb_image.h>
 
