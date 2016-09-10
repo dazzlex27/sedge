@@ -7,6 +7,7 @@
 #include "Utilities/Log.h"
 #include "Maths/vec2.h"
 #include "Platforms/Windows/WindowsKeys.h"
+#include "Graphics/Textures/TextureManager.h"
 
 namespace S3DGE
 {
@@ -20,7 +21,7 @@ namespace S3DGE
 			#define MAX_BUTTONS 16
 
 		private:
-			const char* m_Title;
+			cstring m_Title;
 			uint m_Width;
 			uint m_Height;
 			bool m_IsClosed;
@@ -33,7 +34,7 @@ namespace S3DGE
 			static std::map<void*, Window*> m_WindowInstances;
 
 		public:
-			Window(const char* title,  uint width, uint height, bool fullscreen = false, bool vsync = true);
+			Window(cstring title,  uint width, uint height, bool fullscreen = false, bool vsync = true);
 			~Window();
 
 			void Clear();
@@ -48,7 +49,7 @@ namespace S3DGE
 			void SetFullScreen(bool fullscreen);
 
 			static Window* GetWindowClassInstance(void* windowInstance);
-			inline const char* GetTitle() const { return m_Title; }
+			inline cstring GetTitle() const { return m_Title; }
 			inline uint GetWidth() const { return m_Width; }
 			inline uint GetHeight() const { return m_Height; }
 			inline bool IsClosed() const { return m_IsClosed; }

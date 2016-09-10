@@ -11,24 +11,18 @@ int main()
 	Window window("S3DGE Test", 1280, 720, MODE_WINDOWED);
 	window.SetVSync(false);
 
-	Renderer2D renderer;
-	mat4 ortho = mat4::GetOrthographic(0.0f, 16.0f, 0.0f, 9.0f, -1.0f, 1.0f);
-
-	Texture* textures[] =
-	{
-		new Texture("Box", "Resources\\box.jpg"),
-		new Texture("Gradient","Resources\\gradient.bmp"),
-		new Texture("Brick","Resources\\brick.jpg"),
-	};
+	TextureManager::AddTexture(new Texture("Box", "Resources\\box.jpg"));
+	TextureManager::AddTexture(new Texture("Gradient", "Resources\\gradient.bmp"));
+	TextureManager::AddTexture(new Texture("Brick", "Resources\\brick.jpg"));
 
 	std::vector<Renderable2D*> sprites;
 
 	for (float y = 0; y < 9.0f; y += 0.5f)
+	{
 		for (float x = 0; x < 16.0f; x += 0.5f)
 		{
 			if (rand() % 4 == 0)
 			{
-
 				int a = 255;
 				int r = (int)(rand() % 1000 / 1000.0f * 255);
 				int g = (int)(rand() % 1000 / 1000.0f * 255);
@@ -40,19 +34,31 @@ int main()
 			}
 			else
 			{
-				sprites.push_back(new Sprite(x, y, 0.4f, 0.4f, textures[rand() % 3]));
+				switch (rand() % 3)
+				{
+				case 0:
+					sprites.push_back(new Sprite(x, y, 0.4f, 0.4f, TextureManager::GetTexture("Gradient")));
+				case 1:
+					sprites.push_back(new Sprite(x, y, 0.4f, 0.4f, TextureManager::GetTexture("Box")));
+				default:
+					sprites.push_back(new Sprite(x, y, 0.4f, 0.4f, TextureManager::GetTexture("Brick")));
+				}
 			}
 		}
+	}
 
 	int textureIDs[] = 
 	{
 		0,1,2,3,4,5,6,7,8,9
 	};
 
+	mat4 ortho = mat4::GetOrthographic(0.0f, 16.0f, 0.0f, 9.0f, -1.0f, 1.0f);
 	ShaderProgram shaderProgram("Resources\\basic.vs", "Resources\\basic.fs");
 	shaderProgram.Enable();
 	shaderProgram.SetUniform1iv("textureArray", 10, textureIDs);
 	shaderProgram.SetUniformMat4fv("pr_matrix", ortho);
+
+	Renderer2D renderer;
 
 	int frames = 0;
 	Timer t;
@@ -81,9 +87,6 @@ int main()
 			frames = 0;
 		}
 	}
-
-	delete textures[0];
-	delete textures[1];
 
 	return 0;
 }

@@ -7,6 +7,6 @@
 #include "Graphics/Shaders/ShaderProgram.h"
 #include "Graphics/Renderer2D.h"
 #include "Graphics/Renderables/Sprite.h"
-#include "Graphics/Texture.h"
+#include "Graphics/Textures/Texture.h"
 #include "Utilities/DeleteMacros.h"
 #include "Utilities/Converters.h"

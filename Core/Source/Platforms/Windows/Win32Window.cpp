@@ -158,7 +158,7 @@ namespace S3DGE
 			typedef BOOL(APIENTRY *PFNWGLSWAPINTERVALPROC)(int);
 			PFNWGLSWAPINTERVALPROC wglSwapIntervalEXT = 0;
 
-			const char *extensions = (char*)glGetString(GL_EXTENSIONS);
+			cstring extensions = (char*)glGetString(GL_EXTENSIONS);
 
 			if (strstr(extensions, "WGL_EXT_swap_control") == 0)
 				return;

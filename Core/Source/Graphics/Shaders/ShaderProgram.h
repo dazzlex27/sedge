@@ -14,23 +14,23 @@ namespace S3DGE
 		{
 		private:
 			uint m_ProgramID;
-			const char* m_Vertex;
-			const char* m_Fragment;
+			cstring m_Vertex;
+			cstring m_Fragment;
 
 		public:
-			ShaderProgram(const char* vertex, const char* fragment);
+			ShaderProgram(cstring vertex, cstring fragment);
 			~ShaderProgram();
 
 			void Enable();
 			void Disable();
 
-			void SetUniformMat4fv(const char* name, const Maths::mat4& matrix);
-			void SetUniform1f(const char* name, float value);
-			void SetUniform2f(const char* name, Maths::vec2f value);
-			void SetUniform3f(const char* name, Maths::vec3f value);
-			void SetUniform4f(const char* name, Maths::vec4f value);
-			void SetUniform1i(const char* name, int value);
-			void SetUniform1iv(const char* name, int count, int* value);
+			void SetUniformMat4fv(cstring name, const Maths::mat4& matrix);
+			void SetUniform1f(cstring name, float value);
+			void SetUniform2f(cstring name, Maths::vec2f value);
+			void SetUniform3f(cstring name, Maths::vec3f value);
+			void SetUniform4f(cstring name, Maths::vec4f value);
+			void SetUniform1i(cstring name, int value);
+			void SetUniform1iv(cstring name, int count, int* value);
 
 		private:
 			uint Load();

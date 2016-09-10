@@ -24,6 +24,8 @@ namespace S3DGE
 			Texture(cstring name, cstring filename);
 			~Texture();
 
+		public:
+			inline cstring GetName() const { return m_Name; }
 			inline uint GetTextureID() const { return m_TextureID; }
 			inline int GetWidth() const { return m_Width; }
 			inline int GetHeight() const { return m_Height; }

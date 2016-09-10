@@ -8,7 +8,7 @@ namespace S3DGE
 	class FileIO
 	{
 	public:
-		static std::string ReadFromFile(const char* filepath)
+		static std::string ReadFromFile(cstring filepath)
 		{
 			std::ifstream ifs(filepath);
 			std::string content(std::istreambuf_iterator<char>(ifs.rdbuf()), std::istreambuf_iterator<char>());

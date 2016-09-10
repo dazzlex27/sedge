@@ -5,7 +5,7 @@ namespace S3DGE
 {
 	namespace Graphics
 	{
-		ShaderProgram::ShaderProgram(const char* vertex, const char* fragment)
+		ShaderProgram::ShaderProgram(cstring vertex, cstring fragment)
 			: m_Vertex(vertex), m_Fragment(fragment)
 		{
 			m_ProgramID = Load();
@@ -26,7 +26,7 @@ namespace S3DGE
 				LOG_ERROR("Cannot find vertex shader source");
 				return -1;
 			}
-			const char* vSource = vertexSource.c_str();
+			cstring vSource = vertexSource.c_str();
 			glShaderSource(vertexShader, 1, &vSource, NULL);
 			if (!Compile(vertexShader))
 				return -1;
@@ -39,7 +39,7 @@ namespace S3DGE
 				LOG_ERROR("Cannot find fragment shader source");
 				return -1;
 			}
-			const char* fSource = fragmentSource.c_str();
+			cstring fSource = fragmentSource.c_str();
 			glShaderSource(fragmentShader, 1, &fSource, NULL);
 			if (!Compile(fragmentShader))
 				return -1;
@@ -96,37 +96,37 @@ namespace S3DGE
 			glUseProgram(0);
 		}
 
-		void ShaderProgram::SetUniformMat4fv(const char * name, const Maths::mat4& matrix)
+		void ShaderProgram::SetUniformMat4fv(cstring name, const Maths::mat4& matrix)
 		{
 			glUniformMatrix4fv(glGetUniformLocation(m_ProgramID, name), 1,GL_FALSE, matrix.elements);
 		}
 
-		void ShaderProgram::SetUniform1f(const char* name, float value)
+		void ShaderProgram::SetUniform1f(cstring name, float value)
 		{
 			glUniform1f(glGetUniformLocation(m_ProgramID, name), value);
 		}
 
-		void ShaderProgram::SetUniform2f(const char* name, Maths::vec2f value)
+		void ShaderProgram::SetUniform2f(cstring name, Maths::vec2f value)
 		{
 			glUniform2f(glGetUniformLocation(m_ProgramID, name), value.x, value.y);
 		}
 
-		void ShaderProgram::SetUniform3f(const char* name, Maths::vec3f value)
+		void ShaderProgram::SetUniform3f(cstring name, Maths::vec3f value)
 		{
 			glUniform3f(glGetUniformLocation(m_ProgramID, name), value.x, value.y, value.z);
 		}
 
-		void ShaderProgram::SetUniform4f(const char* name, Maths::vec4f value)
+		void ShaderProgram::SetUniform4f(cstring name, Maths::vec4f value)
 		{
 			glUniform4f(glGetUniformLocation(m_ProgramID, name), value.x, value.y, value.z, value.w);
 		}
 
-		void ShaderProgram::SetUniform1i(const char* name, int value)
+		void ShaderProgram::SetUniform1i(cstring name, int value)
 		{
 			glUniform1i(glGetUniformLocation(m_ProgramID, name), value);
 		}
 
-		void ShaderProgram::SetUniform1iv(const char* name, int count, int* value)
+		void ShaderProgram::SetUniform1iv(cstring name, int count, int* value)
 		{
 			glUniform1iv(glGetUniformLocation(m_ProgramID, name), count, value);
 		}

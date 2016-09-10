@@ -7,7 +7,7 @@ namespace S3DGE
 	{
 		std::map<void*, Window*> Window::m_WindowInstances;
 
-		Window::Window(const char* title, uint width, uint height, bool fullscreen, bool vsync)
+		Window::Window(cstring title, uint width, uint height, bool fullscreen, bool vsync)
 			: m_Title(title), m_Width(width), m_Height(height), m_FullScreen(fullscreen), m_VSync(vsync)
 		{
 			if (!InitializeWindow())
@@ -27,6 +27,7 @@ namespace S3DGE
 
 		Window::~Window()
 		{
+			TextureManager::Dispose();
 		}
 
 		void Window::Update()

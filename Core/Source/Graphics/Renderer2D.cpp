@@ -79,9 +79,9 @@ namespace S3DGE
 			if (textureID > 0)
 			{
 				bool ok = false;
-				for (int i = 0; i < m_Textures.size(); ++i)
+				for (uint i = 0; i < m_Textures.size(); ++i)
 				{
-					if (m_Textures[i] = textureID)
+					if (m_Textures[i] == textureID)
 					{
 						textureSlot = (float)(i + 1);
 						ok = true;
@@ -132,7 +132,7 @@ namespace S3DGE
 
 		void Renderer2D::Flush()
 		{
-			for (int i = 0; i < m_Textures.size(); ++i)
+			for (uint i = 0; i < m_Textures.size(); ++i)
 			{
 				glActiveTexture(GL_TEXTURE0 + i);
 				glBindTexture(GL_TEXTURE_2D,m_Textures[i]);
