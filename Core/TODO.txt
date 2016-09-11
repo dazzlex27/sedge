@@ -1,0 +1,4 @@
+- proper renderer
+- sprites
+- textures support
+- audio support
