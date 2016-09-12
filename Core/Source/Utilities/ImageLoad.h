@@ -2,7 +2,7 @@
 
 #include <string.h>
 #include "S3DGETypes.h"
-#include <STB/stb_image.h>
+#include <stb_image.h>
 
 static byte* LoadImage(cstring path, int* width, int* height, int* components)
 {

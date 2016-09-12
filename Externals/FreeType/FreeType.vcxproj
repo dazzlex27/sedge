@@ -123,7 +123,6 @@
     <TargetName>FreeType27D</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(IncludePath)</IncludePath>
     <OutDir>$(SolutionDir)\!Binaries\$(Configuration)\</OutDir>
     <TargetName>FreeType27</TargetName>
     <IntDir>$(SolutionDir)\!Binaries\$(Configuration)\Intermediates\$(ProjectName)\</IntDir>

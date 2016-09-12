@@ -43,13 +43,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)\!Binaries\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)\!Binaries\$(Configuration)\Intermediates\$(ProjectName)\</IntDir>
-    <IncludePath>$(ProjectDir)\Externals\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)\Externals\GLEW\;$(ProjectDir)\Externals\FreeType\;$(ProjectDir)\Externals\STB\;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)\!Binaries\$(Configuration)\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IntDir>$(SolutionDir)\!Binaries\$(Configuration)\Intermediates\$(ProjectName)\</IntDir>
     <OutDir>$(SolutionDir)\!Binaries\$(Configuration)\</OutDir>
-    <IncludePath>$(ProjectDir)\Externals\;$(ProjectDir)\Externals\FreeType\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)\Externals\GLEW\;$(ProjectDir)\Externals\FreeType\;$(ProjectDir)\Externals\STB\;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)\!Binaries\$(Configuration)\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -61,6 +61,7 @@
       <PreprocessorDefinitions>FT2_BUILD_LIBRARY;GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <DisableSpecificWarnings>4996;4047</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -92,7 +93,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Externals\GL\glew.c" />
+    <ClCompile Include="Externals\GLEW\GL\glew.c" />
     <ClCompile Include="Externals\FreeTypeGL\platform.c" />
     <ClCompile Include="Externals\FreeTypeGL\texture-atlas.c" />
     <ClCompile Include="Externals\FreeTypeGL\texture-font.c" />

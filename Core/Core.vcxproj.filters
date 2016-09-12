@@ -30,9 +30,6 @@
     <ClCompile Include="Source\Graphics\Buffers\Buffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Externals\GL\glew.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Graphics\Renderer2D.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -67,6 +64,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Externals\FreeTypeGL\vector.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Externals\GLEW\GL\glew.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
