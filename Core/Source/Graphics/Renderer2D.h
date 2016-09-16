@@ -1,13 +1,14 @@
 #pragma once
 
 #include <GL/glew.h>
+#include <freetype-gl.h>
 #include "S3DGETypes.h"
 #include "Shaders/ShaderProgram.h"
 #include "Maths/MathsHeader.h"
 #include "Buffers/Buffer.h"
 #include "Buffers/IndexBuffer.h"
 #include "Buffers/VertexArray.h"
-#include "Graphics/Renderables/Renderable2D.h"
+#include "Renderables/Label.h"
 
 namespace S3DGE
 {
@@ -35,7 +36,9 @@ namespace S3DGE
 			IndexBuffer* m_IBO; // Index buffer object.
 			int m_IndexCount; 
 			VertexData* m_Buffer; // Renderables container.
-			std::vector<uint> m_Textures;
+			std::vector<uint> m_Textures; // Texture array.
+			ftgl::texture_atlas_t* m_Atlas; // label atlas.
+			ftgl::texture_font_t* m_Font; // label font.
 
 		public:
 			Renderer2D();
@@ -43,6 +46,7 @@ namespace S3DGE
 
 			void Begin();
 			void SubmitRenderable(const Renderable2D* renderable); // Load the renderables.
+			void SubmitLabel(const Label* label);
 			void Flush(); // OpenGL drawcall. 
 			void End();
 

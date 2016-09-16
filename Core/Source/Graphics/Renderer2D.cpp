@@ -58,6 +58,9 @@ namespace S3DGE
 			m_IBO = new IndexBuffer(indices, RENDERER_INDICES_SIZE);
 
 			glBindVertexArray(0);
+
+			m_Atlas = ftgl::texture_atlas_new(512, 512, 2);
+			m_Font = ftgl::texture_font_new_from_file(m_Atlas, 32, "Resources\\Font.ttf");
 		}
 
 		void Renderer2D::Begin()
@@ -128,6 +131,96 @@ namespace S3DGE
 			m_Buffer++;
 
 			m_IndexCount += 6;
+		}
+
+		void Renderer2D::SubmitLabel(const Label* label)
+		{
+			std::string text = label->text;
+			uint color = label->GetColor();
+			Maths::vec3f position = label->GetPosition();
+			float x = position.x;
+
+			float textureSlot = 0.0f;
+
+			bool ok = false;
+			for (uint i = 0; i < m_Textures.size(); ++i)
+			{
+				if (m_Textures[i] == m_Atlas->id)
+				{
+					textureSlot = (float)(i + 1);
+					ok = true;
+					break;
+				}
+			}
+
+			if (!ok)
+			{
+				if (m_Textures.size() >= 32)
+				{
+					End();
+					Flush();
+					Begin();
+				}
+
+				m_Textures.push_back(m_Atlas->id);
+				textureSlot = (float)(m_Textures.size());
+			}
+
+			float scaleX = 1280.0f / 32.0f;
+			float scaleY = 720.0f / 18.0f;
+
+			for (uint i = 0; i < text.length(); i++)
+			{
+				texture_glyph_t* glyph = texture_font_get_glyph(m_Font, (const char*)text[i]);
+				if (glyph != NULL)
+				{
+
+					if (i > 0)
+					{
+						float kerning = texture_glyph_get_kerning(glyph, (const char*)text[i - 1]);
+						x += kerning / scaleX;
+					}
+
+					float x0 = x + glyph->offset_x / scaleX;
+					float y0 = position.y + glyph->offset_y / scaleY;
+					float x1 = x0 + glyph->width / scaleX;
+					float y1 = y0 - glyph->height / scaleY;
+
+					float u0 = glyph->s0;
+					float v0 = glyph->t0;
+					float u1 = glyph->s1;
+					float v1 = glyph->t1;
+
+					m_Buffer->vertex = Maths::vec3f(x0, y0, 0);
+					m_Buffer->uv = Maths::vec2f(u0, v0);
+					m_Buffer->textureID = textureSlot;
+					m_Buffer->color = color;
+					m_Buffer++;
+
+					m_Buffer->vertex = Maths::vec3f(x0, y1, 0);
+					m_Buffer->uv = Maths::vec2f(u0, v1);
+					m_Buffer->textureID = textureSlot;
+					m_Buffer->color = color;
+					m_Buffer++;
+
+					m_Buffer->vertex = Maths::vec3f(x1, y1, 0);
+					m_Buffer->uv = Maths::vec2f(u1, v1);
+					m_Buffer->textureID = textureSlot;
+					m_Buffer->color = color;
+					m_Buffer++;
+
+					m_Buffer->vertex = Maths::vec3f(x1, y0, 0);
+					m_Buffer->uv = Maths::vec2f(u1, v0);
+					m_Buffer->textureID = textureSlot;
+					m_Buffer->color = color;
+					m_Buffer++;
+
+					m_IndexCount += 6;
+
+					x += glyph->advance_x / scaleX;
+				}
+
+			}
 		}
 
 		void Renderer2D::Flush()

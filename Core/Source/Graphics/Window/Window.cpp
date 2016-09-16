@@ -20,6 +20,13 @@ namespace S3DGE
 				for (int i = 0; i < MAX_BUTTONS; ++i)
 					m_Buttons[i] = false;
 
+
+				glEnable(GL_DEPTH_TEST);
+				glEnable(GL_BLEND);
+				//glEnable(GL_CULL_FACE);
+				glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+				glDepthFunc(GL_LESS);
+
 				LOG_INFO("OpenGL v. ", (char*)glGetString(GL_VERSION));
 				LOG_INFO("Renderer: ", (char*)glGetString(GL_RENDERER));
 			}

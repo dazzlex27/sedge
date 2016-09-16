@@ -21,8 +21,7 @@ void main()
 	if (fs_in.textureID > 0.0)
 	{
 		int textureID = int(fs_in.textureID - 0.5);
-		textureColor = texture(textureArray[textureID], fs_in.uv); 
-
+		textureColor = fs_in.color * texture(textureArray[textureID], fs_in.uv); 
 	}
-	color = textureColor * intensity;
+	color = textureColor;// * intensity;
 }

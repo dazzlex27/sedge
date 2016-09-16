@@ -11,7 +11,7 @@ namespace S3DGE
 		}
 
 		Sprite::Sprite(float x, float y, float width, float height, Texture* texture)
-			: Renderable2D(Maths::vec3f(x, y, 0), Maths::vec2f(width, height), 255)
+			: Renderable2D(Maths::vec3f(x, y, 0), Maths::vec2f(width, height), 0xffffffff)
 		{
 			this->position = m_Position;
 			m_Texture = texture;

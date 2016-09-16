@@ -43,13 +43,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)\!Binaries\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)\!Binaries\$(Configuration)\Intermediates\$(ProjectName)\</IntDir>
-    <IncludePath>$(ProjectDir)\Externals\GLEW\;$(ProjectDir)\Externals\FreeType\;$(ProjectDir)\Externals\STB\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)\Externals\GLEW\;$(ProjectDir)\Externals\FreeType\;$(ProjectDir)\Externals\STB\;$(ProjectDir)\Externals\FreeTypeGL\;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)\!Binaries\$(Configuration)\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IntDir>$(SolutionDir)\!Binaries\$(Configuration)\Intermediates\$(ProjectName)\</IntDir>
     <OutDir>$(SolutionDir)\!Binaries\$(Configuration)\</OutDir>
-    <IncludePath>$(ProjectDir)\Externals\GLEW\;$(ProjectDir)\Externals\FreeType\;$(ProjectDir)\Externals\STB\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)\Externals\GLEW\;$(ProjectDir)\Externals\FreeType\;$(ProjectDir)\Externals\STB\;$(ProjectDir)\Externals\FreeTypeGL\;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)\!Binaries\$(Configuration)\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -103,6 +103,7 @@
     <ClCompile Include="Source\Graphics\Buffers\Buffer.cpp" />
     <ClCompile Include="Source\Graphics\Buffers\IndexBuffer.cpp" />
     <ClCompile Include="Source\Graphics\Buffers\VertexArray.cpp" />
+    <ClCompile Include="Source\Graphics\Renderables\Label.cpp" />
     <ClCompile Include="Source\Graphics\Renderables\Sprite.cpp" />
     <ClCompile Include="Source\Graphics\Renderer2D.cpp" />
     <ClCompile Include="Source\Graphics\Shaders\ShaderProgram.cpp" />
@@ -124,6 +125,7 @@
     <ClInclude Include="Source\Graphics\Buffers\Buffer.h" />
     <ClInclude Include="Source\Graphics\Buffers\IndexBuffer.h" />
     <ClInclude Include="Source\Graphics\Buffers\VertexArray.h" />
+    <ClInclude Include="Source\Graphics\Renderables\Label.h" />
     <ClInclude Include="Source\Graphics\Renderables\Renderable2D.h" />
     <ClInclude Include="Source\Graphics\Renderables\Sprite.h" />
     <ClInclude Include="Source\Graphics\Renderer2D.h" />
@@ -144,6 +146,7 @@
     <ClInclude Include="Source\Utilities\FileIO.h" />
     <ClInclude Include="Source\Utilities\ImageLoad.h" />
     <ClInclude Include="Source\Utilities\Log.h" />
+    <ClInclude Include="Source\Utilities\RGN.h" />
     <ClInclude Include="Source\Utilities\Timer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

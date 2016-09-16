@@ -17,6 +17,8 @@ int main()
 
 	std::vector<Renderable2D*> sprites;
 
+	Label* fps = new Label("Test", 0.4f, 0.4f, 2, 2, 0xffffffff);
+
 	for (float y = 0; y < 9.0f; y += 0.5f)
 	{
 		for (float x = 0; x < 16.0f; x += 0.5f)
@@ -74,6 +76,7 @@ int main()
 		renderer.Begin();
 		for (uint i = 0; i < sprites.size(); i++)
 			renderer.SubmitRenderable(sprites[i]);
+		renderer.SubmitLabel(fps);
 		renderer.End();
 		renderer.Flush();
 
