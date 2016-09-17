@@ -8,7 +8,7 @@ namespace S3DGE
 		std::map<void*, Window*> Window::m_WindowInstances;
 
 		Window::Window(cstring title, uint width, uint height, bool fullscreen, bool vsync)
-			: m_Title(title), m_Width(width), m_Height(height), m_FullScreen(fullscreen), m_VSync(vsync)
+			: m_Title(title), m_Width(width), m_Height(height), m_FullScreen(fullscreen), m_VSync(vsync),m_IsClosed(false)
 		{
 			if (!InitializeWindow())
 				LOG_FATAL("Could not initialize window!");

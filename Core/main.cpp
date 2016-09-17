@@ -17,7 +17,7 @@ int main()
 
 	std::vector<Renderable2D*> sprites;
 
-	Label* fps = new Label("Test", 0.4f, 0.4f, 2, 2, 0xffffffff);
+	Label* fps = new Label("Test", 0.4f, 8.2f, 2, 2, 0xffffffff);
 
 	for (float y = 0; y < 9.0f; y += 0.5f)
 	{
@@ -74,8 +74,8 @@ int main()
 		shaderProgram.SetUniform2f("light_pos", vec2f((float)(mouse.x * 16.0f / window.GetWidth()), (float)(9.0f - mouse.y * 9.0f / window.GetHeight())));
 		
 		renderer.Begin();
-		for (uint i = 0; i < sprites.size(); i++)
-			renderer.SubmitRenderable(sprites[i]);
+		//for (uint i = 0; i < sprites.size(); i++)
+		//	renderer.SubmitRenderable(sprites[i]);
 		renderer.SubmitLabel(fps);
 		renderer.End();
 		renderer.Flush();

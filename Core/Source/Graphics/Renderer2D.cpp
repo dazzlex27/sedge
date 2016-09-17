@@ -60,7 +60,7 @@ namespace S3DGE
 			glBindVertexArray(0);
 
 			m_Atlas = ftgl::texture_atlas_new(512, 512, 2);
-			m_Font = ftgl::texture_font_new_from_file(m_Atlas, 32, "Resources\\Font.ttf");
+			m_Font = ftgl::texture_font_new_from_file(m_Atlas, 32, "Resources\\SourceSansPro-Light.ttf");
 		}
 
 		void Renderer2D::Begin()
@@ -135,6 +135,8 @@ namespace S3DGE
 
 		void Renderer2D::SubmitLabel(const Label* label)
 		{
+
+			using namespace ftgl;
 			std::string text = label->text;
 			uint color = label->GetColor();
 			Maths::vec3f position = label->GetPosition();
@@ -171,13 +173,13 @@ namespace S3DGE
 
 			for (uint i = 0; i < text.length(); i++)
 			{
-				texture_glyph_t* glyph = texture_font_get_glyph(m_Font, (const char*)text[i]);
+				texture_glyph_t* glyph = texture_font_get_glyph(m_Font, text[i]);
 				if (glyph != NULL)
 				{
 
 					if (i > 0)
 					{
-						float kerning = texture_glyph_get_kerning(glyph, (const char*)text[i - 1]);
+						float kerning = texture_glyph_get_kerning(glyph, text[i - 1]);
 						x += kerning / scaleX;
 					}
 

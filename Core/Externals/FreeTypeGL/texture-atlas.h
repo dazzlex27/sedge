@@ -1,7 +1,7 @@
 /* ============================================================================
  * Freetype GL - A C OpenGL Freetype engine
  * Platform:    Any
- * WWW:         https://github.com/rougier/freetype-gl
+ * WWW:         http://code.google.com/p/freetype-gl/
  * ----------------------------------------------------------------------------
  * Copyright 2011,2012 Nicolas P. Rougier. All rights reserved.
  *
@@ -163,6 +163,16 @@ typedef struct texture_atlas_t
  */
   void
   texture_atlas_delete( texture_atlas_t * self );
+
+
+/**
+ *  Upload atlas to video memory.
+ *
+ *  @param self a texture atlas structure
+ *
+ */
+  void
+  texture_atlas_upload( texture_atlas_t * self );
 
 
 /**
