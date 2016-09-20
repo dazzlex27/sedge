@@ -69,6 +69,12 @@
     <ClCompile Include="Externals\GLEW\GL\glew.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Graphics\Layer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Graphics\Renderables\Group.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\S3DGECommon.h">
@@ -441,6 +447,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Externals\STB\stb_image.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Graphics\Layer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Graphics\Renderables\Group.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

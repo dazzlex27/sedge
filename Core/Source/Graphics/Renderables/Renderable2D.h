@@ -21,6 +21,14 @@ namespace S3DGE
 
 
 		protected:
+			Renderable2D()
+			{
+				m_UV.push_back(Maths::vec2f(0, 0));
+				m_UV.push_back(Maths::vec2f(0, 1));
+				m_UV.push_back(Maths::vec2f(1, 1));
+				m_UV.push_back(Maths::vec2f(1, 0));
+			}
+
 			Renderable2D(const Maths::vec3f& position, const Maths::vec2f& size, uint color)
 				: m_Position(position), m_Size(size), m_Color(color), m_Texture(nullptr)
 			{
@@ -30,6 +38,7 @@ namespace S3DGE
 				m_UV.push_back(Maths::vec2f(1, 0));
 			}
 
+		public:
 			virtual ~Renderable2D() 
 			{
 			}

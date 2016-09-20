@@ -34,7 +34,7 @@ namespace S3DGE
 			uint m_VAO; // Vertex array object.
 			uint m_VBO; // Vertex buffer object.
 			IndexBuffer* m_IBO; // Index buffer object.
-			int m_IndexCount; 
+			int m_IndexCount; // The number of indices.
 			VertexData* m_Buffer; // Renderables container.
 			std::vector<uint> m_Textures; // Texture array.
 			ftgl::texture_atlas_t* m_Atlas; // label atlas.
@@ -46,7 +46,7 @@ namespace S3DGE
 
 			void Begin();
 			void SubmitRenderable(const Renderable2D* renderable); // Load the renderables.
-			void SubmitLabel(const Label* label);
+			void SubmitLabel(const Label* label); // Submit text.
 			void Flush(); // OpenGL drawcall. 
 			void End();
 

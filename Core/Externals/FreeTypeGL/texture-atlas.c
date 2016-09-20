@@ -129,7 +129,7 @@ texture_atlas_set_region( texture_atlas_t * self,
 		if (depth == 2)
 		{
 			row = self->data + ((y + i) * self->width + x) * charsize * depth;
-			src = data + (i * stride) * charsize;
+			src = (unsigned char*)data + (i * (size_t)stride) * charsize;
 			for (j = 0; j < width; j++)
 			{
 				row[j * 2 + 0] = 0xff;
@@ -233,7 +233,7 @@ texture_atlas_get_region( texture_atlas_t * self,
 		if( y >= 0 )
 		{
             node = (ivec3 *) vector_get( self->nodes, i );
-			if( ( (y + height) < best_height ) ||
+			if( ( (y + (int)height) < best_height ) ||
                 ( ((y + height) == best_height) && (node->z < best_width)) )
 			{
 				best_height = y + height;

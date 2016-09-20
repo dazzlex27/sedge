@@ -11,3 +11,5 @@
 #include "Utilities/DeleteMacros.h"
 #include "Utilities/Converters.h"
 #include "Graphics/Renderables/Label.h"
+#include "Graphics/Layer.h"
+#include "Graphics/Renderables/Group.h"
