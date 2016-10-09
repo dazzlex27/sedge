@@ -5,7 +5,7 @@
 #include "Graphics/Renderer2D.h"
 #include "Graphics/Shaders/ShaderProgram.h"
 
-namespace S3DGE
+namespace s3dge
 {
 	namespace Graphics
 	{

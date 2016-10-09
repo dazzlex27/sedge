@@ -3,7 +3,7 @@
 #include "Renderable2D.h"
 #include "Graphics/Renderer2D.h"
 
-namespace S3DGE
+namespace s3dge
 {
 	namespace Graphics
 	{

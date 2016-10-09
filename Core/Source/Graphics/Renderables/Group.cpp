@@ -1,6 +1,6 @@
 #include "Group.h"
 
-namespace S3DGE
+namespace s3dge
 {
 	namespace Graphics
 	{
