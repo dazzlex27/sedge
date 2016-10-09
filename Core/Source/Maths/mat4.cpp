@@ -1,6 +1,6 @@
 #include "mat4.h"
 
-namespace S3DGE
+namespace s3dge
 {
 	namespace Maths
 	{

@@ -18,72 +18,23 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Include\freetype\config\ftconfig.h" />
-    <ClInclude Include="Include\freetype\config\ftheader.h" />
-    <ClInclude Include="Include\freetype\config\ftmodule.h" />
-    <ClInclude Include="Include\freetype\config\ftoption.h" />
-    <ClInclude Include="Include\freetype\config\ftstdlib.h" />
-    <ClInclude Include="Include\ft2build.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Source\autofit\autofit.c" />
-    <ClCompile Include="Source\base\ftbase.c" />
-    <ClCompile Include="Source\base\ftbbox.c" />
-    <ClCompile Include="Source\base\ftbitmap.c" />
-    <ClCompile Include="Source\base\ftdebug.c" />
-    <ClCompile Include="Source\base\ftfntfmt.c" />
-    <ClCompile Include="Source\base\ftfstype.c" />
-    <ClCompile Include="Source\base\ftgasp.c" />
-    <ClCompile Include="Source\base\ftglyph.c" />
-    <ClCompile Include="Source\base\ftgxval.c" />
-    <ClCompile Include="Source\base\ftinit.c" />
-    <ClCompile Include="Source\base\ftlcdfil.c" />
-    <ClCompile Include="Source\base\ftmm.c" />
-    <ClCompile Include="Source\base\ftotval.c" />
-    <ClCompile Include="Source\base\ftpatent.c" />
-    <ClCompile Include="Source\base\ftpfr.c" />
-    <ClCompile Include="Source\base\ftstroke.c" />
-    <ClCompile Include="Source\base\ftsynth.c" />
-    <ClCompile Include="Source\base\ftsystem.c" />
-    <ClCompile Include="Source\base\fttype1.c" />
-    <ClCompile Include="Source\base\ftwinfnt.c" />
-    <ClCompile Include="Source\bdf\bdf.c" />
-    <ClCompile Include="Source\cache\ftcache.c" />
-    <ClCompile Include="Source\cff\cff.c" />
-    <ClCompile Include="Source\cid\type1cid.c" />
-    <ClCompile Include="Source\gzip\ftgzip.c" />
-    <ClCompile Include="Source\lzw\ftlzw.c" />
-    <ClCompile Include="Source\pcf\pcf.c" />
-    <ClCompile Include="Source\pfr\pfr.c" />
-    <ClCompile Include="Source\psaux\psaux.c" />
-    <ClCompile Include="Source\pshinter\pshinter.c" />
-    <ClCompile Include="Source\psnames\psmodule.c" />
-    <ClCompile Include="Source\raster\raster.c" />
-    <ClCompile Include="Source\sfnt\sfnt.c" />
-    <ClCompile Include="Source\smooth\smooth.c" />
-    <ClCompile Include="Source\truetype\truetype.c" />
-    <ClCompile Include="Source\type1\type1.c" />
-    <ClCompile Include="Source\type42\type42.c" />
-    <ClCompile Include="Source\winfonts\winfnt.c" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{8EAD06C7-03E0-40AD-A969-CEEE5F30BF76}</ProjectGuid>
-    <RootNamespace>FreeType</RootNamespace>
+    <ProjectGuid>{C6E5297A-2486-4A0B-B4A6-A8F386B63BD2}</ProjectGuid>
+    <RootNamespace>Application</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
-    <WholeProgramOptimization>false</WholeProgramOptimization>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -120,34 +71,27 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)\!Binaries\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)\!Binaries\$(Configuration)\Intermediates\$(ProjectName)\</IntDir>
-    <TargetName>FreeType27</TargetName>
+    <IncludePath>$(SolutionDir)\Externals\GLEW;$(SolutionDir)\Externals\STB;$(SolutionDir)\Externals\FreeType-GL;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\!Binaries\$(Configuration)\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)\!Binaries\$(Configuration)\</OutDir>
-    <TargetName>FreeType27</TargetName>
     <IntDir>$(SolutionDir)\!Binaries\$(Configuration)\Intermediates\$(ProjectName)\</IntDir>
+    <IncludePath>$(SolutionDir)\Externals\GLEW;$(SolutionDir)\Externals\STB;$(SolutionDir)\Externals\FreeType-GL;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\!Binaries\$(Configuration)\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <WarningLevel>Level4</WarningLevel>
+      <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <SDLCheck>
-      </SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <CompileAsManaged>false</CompileAsManaged>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <PreprocessorDefinitions>_DEBUG;WIN32;_LIB;_CRT_SECURE_NO_WARNINGS;FT_DEBUG_LEVEL_ERROR;FT_DEBUG_LEVEL_TRACE;FT2_BUILD_LIBRARY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <MinimalRebuild>false</MinimalRebuild>
-      <DisableLanguageExtensions>true</DisableLanguageExtensions>
-      <DisableSpecificWarnings>4001; 4702</DisableSpecificWarnings>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Core\</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>GLEW_STATIC;FT2_BUILD_LIBRARY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>opengl32.lib;FreeType27.lib;GLEW.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-    <Lib>
-      <TargetMachine>MachineX86</TargetMachine>
-    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -161,41 +105,21 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <WarningLevel>Level4</WarningLevel>
-      <Optimization>Full</Optimization>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>
-      </SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)\Include\</AdditionalIncludeDirectories>
-      <CompileAsManaged>false</CompileAsManaged>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <DebugInformationFormat />
-      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
-      <OmitFramePointers>true</OmitFramePointers>
-      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
-      <WholeProgramOptimization>false</WholeProgramOptimization>
-      <PreprocessorDefinitions>NDEBUG;WIN32;_LIB;_CRT_SECURE_NO_WARNINGS;FT2_BUILD_LIBRARY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <StringPooling>true</StringPooling>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Core\</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>GLEW_STATIC;FT2_BUILD_LIBRARY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
-      <FloatingPointExceptions>false</FloatingPointExceptions>
-      <CreateHotpatchableImage>false</CreateHotpatchableImage>
-      <DisableLanguageExtensions>true</DisableLanguageExtensions>
-      <RuntimeTypeInfo>false</RuntimeTypeInfo>
-      <DisableSpecificWarnings>4001; 4702</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>opengl32.lib;FreeType27.lib;GLEW.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-    <Lib>
-      <TargetMachine>MachineX86</TargetMachine>
-    </Lib>
-    <Lib>
-      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
-    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -211,6 +135,14 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core\Core.vcxproj">
+      <Project>{d30527c0-c751-4191-a562-15717b53c0ce}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\Application.cpp" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

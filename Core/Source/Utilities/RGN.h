@@ -2,7 +2,7 @@
 
 #include <random>
 
-namespace S3DGE
+namespace s3dge
 {
 	class RNG
 	{
@@ -26,7 +26,7 @@ namespace S3DGE
 
 		~RNG() { }
 		
-		inline float Next() { return dis(gen);	}
+		inline double Next() { return dis(gen);	}
 
 	private:
 		RNG(const RNG& tRef) = delete;				// Disable copy constructor.

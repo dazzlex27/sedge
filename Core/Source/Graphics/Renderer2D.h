@@ -10,7 +10,7 @@
 #include "Buffers/VertexArray.h"
 #include "Renderables/Label.h"
 
-namespace S3DGE
+namespace s3dge
 {
 	namespace Graphics
 	{

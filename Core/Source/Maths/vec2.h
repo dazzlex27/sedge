@@ -1,6 +1,6 @@
 #pragma once
 
-namespace S3DGE
+namespace s3dge
 {
 	namespace Maths
 	{

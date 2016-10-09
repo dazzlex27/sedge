@@ -9,7 +9,7 @@
 #include "Platforms/Windows/WindowsKeys.h"
 #include "Graphics/Textures/TextureManager.h"
 
-namespace S3DGE
+namespace s3dge
 {
 	namespace Graphics
 	{
@@ -39,6 +39,7 @@ namespace S3DGE
 
 			void Clear();
 			void Update();
+			void UpdateInput();
 			bool KeyPressed(uint key) const;
 			bool KeyClicked(uint key) const;
 			bool MouseButtonPressed(uint button) const;

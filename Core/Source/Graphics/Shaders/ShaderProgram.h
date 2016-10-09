@@ -6,7 +6,7 @@
 #include "Utilities/FileIO.h"
 #include "Maths/MathsHeader.h"
 
-namespace S3DGE
+namespace s3dge
 {
 	namespace Graphics
 	{

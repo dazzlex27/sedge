@@ -1,7 +1,7 @@
 #include "ShaderProgram.h"
 #include "Utilities/Log.h"
 
-namespace S3DGE
+namespace s3dge
 {
 	namespace Graphics
 	{

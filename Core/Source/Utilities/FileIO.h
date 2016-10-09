@@ -3,7 +3,7 @@
 #include <fstream>
 #include "Log.h"
 
-namespace S3DGE
+namespace s3dge
 {
 	class FileIO
 	{

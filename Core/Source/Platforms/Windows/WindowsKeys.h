@@ -1,6 +1,6 @@
 #pragma once
 
-namespace S3DGE
+namespace s3dge
 {
 	#define VK_LMB				0x00
 	#define VK_RMB				0x01

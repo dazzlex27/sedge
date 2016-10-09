@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-namespace S3DGE
+namespace s3dge
 {
 #define LOG_WARNING(...) Logger::LogEvent(EVENT_TYPE::LOG_WARNING, __VA_ARGS__)
 #define LOG_INFO(...) Logger::LogEvent(EVENT_TYPE::LOG_INFO, __VA_ARGS__)

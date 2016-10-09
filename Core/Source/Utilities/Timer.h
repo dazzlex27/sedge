@@ -2,7 +2,7 @@
 
 #include <chrono>
 
-namespace S3DGE
+namespace s3dge
 {
 	class Timer
 	{
@@ -22,6 +22,11 @@ namespace S3DGE
 		void Start()
 		{
 			m_Start = clock::now();
+		}
+
+		float ElapsedS()
+		{
+			return std::chrono::duration_cast<ms>(clock::now() - m_Start).count() / 1000;
 		}
 
 		float ElapsedNS()

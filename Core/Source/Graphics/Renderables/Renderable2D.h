@@ -6,7 +6,7 @@
 #include "Graphics/Buffers/IndexBuffer.h"
 #include "Utilities/DeleteMacros.h"
 
-namespace S3DGE
+namespace s3dge
 {
 	namespace Graphics
 	{

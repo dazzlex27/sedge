@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Graphics\Window\Window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -64,15 +61,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Externals\FreeTypeGL\texture-font.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Externals\GLEW\GL\glew.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Graphics\Layer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Graphics\Renderables\Group.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -446,13 +434,7 @@
     <ClInclude Include="Externals\FreeTypeGL\texture-font.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Externals\STB\stb_image.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Graphics\Layer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Graphics\Renderables\Group.h">
+    <ClInclude Include="S3DGE.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

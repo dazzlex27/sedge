@@ -1,7 +1,7 @@
 #include "Window.h"
 #include "Utilities/Log.h"
 
-namespace S3DGE
+namespace s3dge
 {
 	namespace Graphics
 	{
@@ -40,6 +40,11 @@ namespace S3DGE
 		void Window::Update()
 		{
 			UpdateWindow();
+		}
+
+		void Window::UpdateInput()
+		{
+
 		}
 
 		bool Window::KeyPressed(uint key) const

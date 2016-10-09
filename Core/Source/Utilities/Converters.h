@@ -3,7 +3,7 @@
 #include "S3DGETypes.h"
 #include "Maths/vec4.h"
 
-namespace S3DGE
+namespace s3dge
 {
 	inline uint ConvertColorToUint(const Maths::vec4f& color)
 	{

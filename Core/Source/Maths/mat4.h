@@ -6,7 +6,7 @@
 #endif
 #include <math.h>
 
-namespace S3DGE
+namespace s3dge
 {
 	namespace Maths
 	{

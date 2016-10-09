@@ -3,7 +3,7 @@
 #include <GL/glew.h>
 #include "S3DGETypes.h"
 
-namespace S3DGE
+namespace s3dge
 {
 	namespace Graphics
 	{
