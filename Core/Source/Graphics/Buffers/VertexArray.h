@@ -4,7 +4,7 @@
 #include <GL/glew.h>
 #include "S3DGETypes.h"
 #include "Buffer.h"
-#include "Utilities/DeleteMacros.h"
+#include "../../Internal/DeleteMacros.h"
 
 namespace s3dge
 {

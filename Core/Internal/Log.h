@@ -53,6 +53,6 @@ namespace s3dge
 			Logger(void);
 			Logger(const Logger& tRef) = delete;				// Disable copy constructor.
 			Logger& operator = (const Logger& tRef) = delete;	// Disable assignment operator.
-			~Logger(void) {}
+			~Logger(void) = delete;
 	};
 }

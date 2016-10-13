@@ -1,5 +1,5 @@
 #include "Window.h"
-#include "Utilities/Log.h"
+#include "../../Internal/Log.h"
 
 namespace s3dge
 {

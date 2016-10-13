@@ -4,7 +4,7 @@
 #include "Graphics/Textures/Texture.h"
 #include "Graphics/Buffers/VertexArray.h"
 #include "Graphics/Buffers/IndexBuffer.h"
-#include "Utilities/DeleteMacros.h"
+#include "../../Internal/DeleteMacros.h"
 
 namespace s3dge
 {

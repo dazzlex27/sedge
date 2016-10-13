@@ -63,6 +63,15 @@
     <ClCompile Include="Externals\FreeTypeGL\texture-font.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Graphics\Renderables\Group.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Graphics\Layer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Internal\MemoryManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\S3DGECommon.h">
@@ -72,9 +81,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Graphics\Window\Window.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Utilities\Log.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Utilities\Timer.h">
@@ -105,9 +111,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Utilities\ImageLoad.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Utilities\DeleteMacros.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Graphics\Renderer2D.h">
@@ -435,6 +438,21 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="S3DGE.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Graphics\Renderables\Group.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Graphics\Layer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Internal\MemoryManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Internal\DeleteMacros.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Internal\Log.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

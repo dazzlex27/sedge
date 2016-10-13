@@ -3,8 +3,8 @@
 #include <GL/glew.h>
 #include "Utilities/ImageLoad.h"
 #include "S3DGETypes.h"
-#include "Utilities/DeleteMacros.h"
-#include "Utilities/Log.h"
+#include "../Internal/DeleteMacros.h"
+#include "../Internal/Log.h"
 
 namespace s3dge
 {
