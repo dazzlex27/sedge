@@ -69,7 +69,10 @@
     <ClCompile Include="Source\Graphics\Layer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Internal\MemoryManager.cpp">
+    <ClCompile Include="Source\Internal\MemoryManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Graphics\Font.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -446,13 +449,22 @@
     <ClInclude Include="Source\Graphics\Layer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Internal\MemoryManager.h">
+    <ClInclude Include="Source\Internal\DeleteMacros.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Internal\DeleteMacros.h">
+    <ClInclude Include="Source\Internal\Log.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Internal\Log.h">
+    <ClInclude Include="Source\Internal\MemoryManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Graphics\Renderer2DBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Graphics\Font.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Graphics\GraphicsStructures.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

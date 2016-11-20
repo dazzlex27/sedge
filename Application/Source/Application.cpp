@@ -1,5 +1,4 @@
 #include <S3DGE.h>
-#include <string>
 
 using namespace s3dge;
 using namespace Graphics;

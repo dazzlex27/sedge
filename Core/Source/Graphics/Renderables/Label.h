@@ -10,11 +10,14 @@ namespace s3dge
 		class Label : public Renderable2D
 		{
 		public:
-			cstring text;
+			std::string text;
 			Maths::vec2f position;
+			uint color;
 
-			Label(cstring text, float x, float y, float width, float height, uint color);
+			Label(const std::string& text, float x, float y, float width, float height, uint color);
 			~Label();
+
+			void Submit(Renderer2DBase* renderer) const override;
 		};
 	}
 }

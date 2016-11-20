@@ -11,18 +11,18 @@ namespace s3dge
 
 		Renderer2D::~Renderer2D()
 		{
-			SafeDelete(m_IBO);
-			glDeleteBuffers(1, &m_VBO);
-			glDeleteVertexArrays(1, &m_VAO);
+			SafeDelete(_ibo);
+			glDeleteBuffers(1, &_vbo);
+			glDeleteVertexArrays(1, &_vao);
 		}
 
 		void Renderer2D::Initialize()
 		{
-			glGenVertexArrays(1, &m_VAO);
-			glBindVertexArray(m_VAO);
+			glGenVertexArrays(1, &_vao);
+			glBindVertexArray(_vao);
 
-			glGenBuffers(1, &m_VBO);
-			glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
+			glGenBuffers(1, &_vbo);
+			glBindBuffer(GL_ARRAY_BUFFER, _vbo);
 
 			glBufferData(GL_ARRAY_BUFFER, RENDERER_BUFFER_SIZE, NULL, GL_DYNAMIC_DRAW);
 
@@ -31,10 +31,10 @@ namespace s3dge
 			glEnableVertexAttribArray(2);
 			glEnableVertexAttribArray(3);
 
-			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (const void*)(offsetof(VertexData, VertexData::vertex)));
-			glVertexAttribPointer(1, 4, GL_UNSIGNED_BYTE, GL_TRUE, RENDERER_VERTEX_SIZE, (const void*)(offsetof(VertexData, VertexData::color)));
-			glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (const void*)(offsetof(VertexData, VertexData::uv)));
-			glVertexAttribPointer(3, 1, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (const void*)(offsetof(VertexData, VertexData::textureID)));
+			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (const void*)(offsetof(VertexData, VertexData::Vertex)));
+			glVertexAttribPointer(1, 4, GL_UNSIGNED_BYTE, GL_TRUE, RENDERER_VERTEX_SIZE, (const void*)(offsetof(VertexData, VertexData::Color)));
+			glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (const void*)(offsetof(VertexData, VertexData::UV)));
+			glVertexAttribPointer(3, 1, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (const void*)(offsetof(VertexData, VertexData::TextureID)));
 
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
 
@@ -55,21 +55,21 @@ namespace s3dge
 				offset += 4;
 			}
 
-			m_IBO = new IndexBuffer(indices, RENDERER_INDICES_SIZE);
+			_ibo = new IndexBuffer(indices, RENDERER_INDICES_SIZE);
 
 			glBindVertexArray(0);
 
-			m_Atlas = ftgl::texture_atlas_new(512, 512, 2);
-			m_Font = ftgl::texture_font_new_from_file(m_Atlas, 32, "Resources\\SourceSansPro-Light.ttf");
+			_atlas = ftgl::texture_atlas_new(512, 512, 2);
+			_font = ftgl::texture_font_new_from_file(_atlas, 32, "Resources\\SourceSansPro-Light.ttf");
 		}
 
 		void Renderer2D::Begin()
 		{
-			glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
-			m_Buffer = (VertexData*)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
+			glBindBuffer(GL_ARRAY_BUFFER, _vbo);
+			_buffer = (VertexData*)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
 		}
 
-		void Renderer2D::SubmitRenderable(const Renderable2D* renderable)
+		void Renderer2D::Submit(const Renderable2D* renderable)
 		{
 			const Maths::vec3f& position = renderable->GetPosition();
 			const Maths::vec2f& size = renderable->GetSize();
@@ -82,9 +82,9 @@ namespace s3dge
 			if (textureID > 0)
 			{
 				bool ok = false;
-				for (uint i = 0; i < m_Textures.size(); ++i)
+				for (uint i = 0; i < _textures.size(); ++i)
 				{
-					if (m_Textures[i] == textureID)
+					if (_textures[i] == textureID)
 					{
 						textureSlot = (float)(i + 1);
 						ok = true;
@@ -94,60 +94,56 @@ namespace s3dge
 
 				if (!ok)
 				{
-					if (m_Textures.size() >= 32)
+					if (_textures.size() >= 32)
 					{
 						End();
 						Flush();
 						Begin();
 					}
 
-					m_Textures.push_back(textureID);
-					textureSlot = (float)(m_Textures.size());
+					_textures.push_back(textureID);
+					textureSlot = (float)(_textures.size());
 				}
 			}
 
-			m_Buffer->vertex = position;
-			m_Buffer->color = color;
-			m_Buffer->uv = uv[0];
-			m_Buffer->textureID = textureSlot;
-			m_Buffer++;
+			_buffer->Vertex = position;
+			_buffer->Color = color;
+			_buffer->UV = uv[0];
+			_buffer->TextureID = textureSlot;
+			_buffer++;
 
-			m_Buffer->vertex = Maths::vec3f(position.x, position.y + size.y, position.z);
-			m_Buffer->color = color;
-			m_Buffer->uv = uv[1];
-			m_Buffer->textureID = textureSlot;
-			m_Buffer++;
+			_buffer->Vertex = Maths::vec3f(position.x, position.y + size.y, position.z);
+			_buffer->Color = color;
+			_buffer->UV = uv[1];
+			_buffer->TextureID = textureSlot;
+			_buffer++;
 
-			m_Buffer->vertex = Maths::vec3f(position.x + size.x, position.y + size.y, position.z);
-			m_Buffer->color = color;
-			m_Buffer->uv = uv[2];
-			m_Buffer->textureID = textureSlot;
-			m_Buffer++;
+			_buffer->Vertex = Maths::vec3f(position.x + size.x, position.y + size.y, position.z);
+			_buffer->Color = color;
+			_buffer->UV = uv[2];
+			_buffer->TextureID = textureSlot;
+			_buffer++;
 
-			m_Buffer->vertex = Maths::vec3f(position.x + size.x, position.y, position.z);
-			m_Buffer->color = color;
-			m_Buffer->uv = uv[3];
-			m_Buffer->textureID = textureSlot;
-			m_Buffer++;
+			_buffer->Vertex = Maths::vec3f(position.x + size.x, position.y, position.z);
+			_buffer->Color = color;
+			_buffer->UV = uv[3];
+			_buffer->TextureID = textureSlot;
+			_buffer++;
 
-			m_IndexCount += 6;
+			_indexCount += 6;
 		}
-
-		void Renderer2D::SubmitLabel(const Label* label)
+		
+		void Renderer2D::DrawString(const std::string& text, const Maths::vec3f& position, uint color)
 		{
-
 			using namespace ftgl;
-			std::string text = label->text;
-			uint color = label->GetColor();
-			Maths::vec3f position = label->GetPosition();
+
 			float x = position.x;
-
 			float textureSlot = 0.0f;
-
 			bool ok = false;
-			for (uint i = 0; i < m_Textures.size(); ++i)
+
+			for (uint i = 0; i < _textures.size(); i++)
 			{
-				if (m_Textures[i] == m_Atlas->id)
+				if (_textures[i] == _atlas->id)
 				{
 					textureSlot = (float)(i + 1);
 					ok = true;
@@ -157,15 +153,15 @@ namespace s3dge
 
 			if (!ok)
 			{
-				if (m_Textures.size() >= 32)
+				if (_textures.size() >= 32)
 				{
 					End();
 					Flush();
 					Begin();
 				}
 
-				m_Textures.push_back(m_Atlas->id);
-				textureSlot = (float)(m_Textures.size());
+				_textures.push_back(_atlas->id);
+				textureSlot = (float)(_textures.size());
 			}
 
 			float scaleX = 1280.0f / 32.0f;
@@ -173,7 +169,7 @@ namespace s3dge
 
 			for (uint i = 0; i < text.length(); i++)
 			{
-				texture_glyph_t* glyph = texture_font_get_glyph(m_Font, text[i]);
+				texture_glyph_t* glyph = texture_font_get_glyph(_font, text[i]);
 				if (glyph != NULL)
 				{
 
@@ -193,31 +189,31 @@ namespace s3dge
 					float u1 = glyph->s1;
 					float v1 = glyph->t1;
 
-					m_Buffer->vertex = Maths::vec3f(x0, y0, 0);
-					m_Buffer->uv = Maths::vec2f(u0, v0);
-					m_Buffer->textureID = textureSlot;
-					m_Buffer->color = color;
-					m_Buffer++;
+					_buffer->Vertex = Maths::vec3f(x0, y0, 0);
+					_buffer->UV = Maths::vec2f(u0, v0);
+					_buffer->TextureID = textureSlot;
+					_buffer->Color = color;
+					_buffer++;
 
-					m_Buffer->vertex = Maths::vec3f(x0, y1, 0);
-					m_Buffer->uv = Maths::vec2f(u0, v1);
-					m_Buffer->textureID = textureSlot;
-					m_Buffer->color = color;
-					m_Buffer++;
+					_buffer->Vertex = Maths::vec3f(x0, y1, 0);
+					_buffer->UV = Maths::vec2f(u0, v1);
+					_buffer->TextureID = textureSlot;
+					_buffer->Color = color;
+					_buffer++;
 
-					m_Buffer->vertex = Maths::vec3f(x1, y1, 0);
-					m_Buffer->uv = Maths::vec2f(u1, v1);
-					m_Buffer->textureID = textureSlot;
-					m_Buffer->color = color;
-					m_Buffer++;
+					_buffer->Vertex = Maths::vec3f(x1, y1, 0);
+					_buffer->UV = Maths::vec2f(u1, v1);
+					_buffer->TextureID = textureSlot;
+					_buffer->Color = color;
+					_buffer++;
 
-					m_Buffer->vertex = Maths::vec3f(x1, y0, 0);
-					m_Buffer->uv = Maths::vec2f(u1, v0);
-					m_Buffer->textureID = textureSlot;
-					m_Buffer->color = color;
-					m_Buffer++;
+					_buffer->Vertex = Maths::vec3f(x1, y0, 0);
+					_buffer->UV = Maths::vec2f(u1, v0);
+					_buffer->TextureID = textureSlot;
+					_buffer->Color = color;
+					_buffer++;
 
-					m_IndexCount += 6;
+					_indexCount += 6;
 
 					x += glyph->advance_x / scaleX;
 				}
@@ -225,23 +221,115 @@ namespace s3dge
 			}
 		}
 
-		void Renderer2D::Flush()
+		/*void Renderer2D::SubmitLabel(const Label* label)
 		{
-			for (uint i = 0; i < m_Textures.size(); ++i)
+
+			using namespace ftgl;
+			std::string text = label->text;
+			uint color = label->GetColor();
+			Maths::vec3f position = label->GetPosition();
+			float x = position.x;
+
+			float textureSlot = 0.0f;
+
+			bool ok = false;
+			for (uint i = 0; i < _textures.size(); ++i)
 			{
-				glActiveTexture(GL_TEXTURE0 + i);
-				glBindTexture(GL_TEXTURE_2D,m_Textures[i]);
+				if (_textures[i] == _atlas->id)
+				{
+					textureSlot = (float)(i + 1);
+					ok = true;
+					break;
+				}
 			}
 
-			glBindVertexArray(m_VAO);
-			m_IBO->Bind();
+			if (!ok)
+			{
+				if (_textures.size() >= 32)
+				{
+					End();
+					Flush();
+					Begin();
+				}
 
-			glDrawElements(GL_TRIANGLES, m_IndexCount, GL_UNSIGNED_INT, NULL);
+				_textures.push_back(_atlas->id);
+				textureSlot = (float)(_textures.size());
+			}
 
-			m_IBO->Unbind();
+			float scaleX = 1280.0f / 32.0f;
+			float scaleY = 720.0f / 18.0f;
+
+			for (uint i = 0; i < text.length(); i++)
+			{
+				texture_glyph_t* glyph = texture_font_get_glyph(_font, text[i]);
+				if (glyph != NULL)
+				{
+
+					if (i > 0)
+					{
+						float kerning = texture_glyph_get_kerning(glyph, text[i - 1]);
+						x += kerning / scaleX;
+					}
+
+					float x0 = x + glyph->offset_x / scaleX;
+					float y0 = position.y + glyph->offset_y / scaleY;
+					float x1 = x0 + glyph->width / scaleX;
+					float y1 = y0 - glyph->height / scaleY;
+
+					float u0 = glyph->s0;
+					float v0 = glyph->t0;
+					float u1 = glyph->s1;
+					float v1 = glyph->t1;
+
+					_buffer->Vertex = Maths::vec3f(x0, y0, 0);
+					_buffer->UV = Maths::vec2f(u0, v0);
+					_buffer->TextureID = textureSlot;
+					_buffer->Color = color;
+					_buffer++;
+
+					_buffer->Vertex = Maths::vec3f(x0, y1, 0);
+					_buffer->UV = Maths::vec2f(u0, v1);
+					_buffer->TextureID = textureSlot;
+					_buffer->Color = color;
+					_buffer++;
+
+					_buffer->Vertex = Maths::vec3f(x1, y1, 0);
+					_buffer->UV = Maths::vec2f(u1, v1);
+					_buffer->TextureID = textureSlot;
+					_buffer->Color = color;
+					_buffer++;
+
+					_buffer->Vertex = Maths::vec3f(x1, y0, 0);
+					_buffer->UV = Maths::vec2f(u1, v0);
+					_buffer->TextureID = textureSlot;
+					_buffer->Color = color;
+					_buffer++;
+
+					_indexCount += 6;
+
+					x += glyph->advance_x / scaleX;
+				}
+
+			}
+		}*/
+
+		void Renderer2D::Flush()
+		{
+			for (uint i = 0; i < _textures.size(); ++i)
+			{
+				glActiveTexture(GL_TEXTURE0 + i);
+				glBindTexture(GL_TEXTURE_2D, _textures[i]);
+			}
+
+			glBindVertexArray(_vao);
+			_ibo->Bind();
+
+			glDrawElements(GL_TRIANGLES, _indexCount, GL_UNSIGNED_INT, NULL);
+
+			_ibo->Unbind();
 			glBindVertexArray(0);
 
-			m_IndexCount = 0;
+			_indexCount = 0;
 		}
 
 		void Renderer2D::End()

@@ -47,8 +47,8 @@ namespace s3dge
 			_shaderProgram->Enable();
 			_renderer->Begin();
 
-			for (uint i = 0; i < _renderables.size(); ++i)
-				_renderer->SubmitRenderable(_renderables[i]);
+			for (const Renderable2D* renderable : _renderables)
+				renderable->Submit(_renderer);
 			
 			_renderer->End();
 			_renderer->Flush();

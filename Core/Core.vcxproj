@@ -99,7 +99,8 @@
     <ClCompile Include="Externals\FreeTypeGL\texture-atlas.c" />
     <ClCompile Include="Externals\FreeTypeGL\texture-font.c" />
     <ClCompile Include="Externals\FreeTypeGL\vector.c" />
-    <ClCompile Include="Internal\MemoryManager.cpp" />
+    <ClCompile Include="Source\Graphics\Font.cpp" />
+    <ClCompile Include="Source\Internal\MemoryManager.cpp" />
     <ClCompile Include="Source\Graphics\Buffers\Buffer.cpp" />
     <ClCompile Include="Source\Graphics\Buffers\IndexBuffer.cpp" />
     <ClCompile Include="Source\Graphics\Buffers\VertexArray.cpp" />
@@ -213,7 +214,10 @@
     <ClInclude Include="Externals\FreeType\freetype\tttags.h" />
     <ClInclude Include="Externals\FreeType\freetype\ttunpat.h" />
     <ClInclude Include="Externals\FreeType\ft2build.h" />
-    <ClInclude Include="Internal\MemoryManager.h" />
+    <ClInclude Include="Source\Graphics\Font.h" />
+    <ClInclude Include="Source\Graphics\GraphicsStructures.h" />
+    <ClInclude Include="Source\Graphics\Renderer2DBase.h" />
+    <ClInclude Include="Source\Internal\MemoryManager.h" />
     <ClInclude Include="S3DGE.h" />
     <ClInclude Include="Source\Graphics\Buffers\Buffer.h" />
     <ClInclude Include="Source\Graphics\Buffers\IndexBuffer.h" />
@@ -237,10 +241,10 @@
     <ClInclude Include="Source\Graphics\Window\Window.h" />
     <ClInclude Include="Source\S3DGETypes.h" />
     <ClInclude Include="Source\Utilities\Converters.h" />
-    <ClInclude Include="Internal\DeleteMacros.h" />
+    <ClInclude Include="Source\Internal\DeleteMacros.h" />
     <ClInclude Include="Source\Utilities\FileIO.h" />
     <ClInclude Include="Source\Utilities\ImageLoad.h" />
-    <ClInclude Include="Internal\Log.h" />
+    <ClInclude Include="Source\Internal\Log.h" />
     <ClInclude Include="Source\Utilities\RGN.h" />
     <ClInclude Include="Source\Utilities\Timer.h" />
   </ItemGroup>

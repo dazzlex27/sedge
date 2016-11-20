@@ -4,7 +4,10 @@
 #include "Graphics/Textures/Texture.h"
 #include "Graphics/Buffers/VertexArray.h"
 #include "Graphics/Buffers/IndexBuffer.h"
-#include "../../Internal/DeleteMacros.h"
+#include "Internal/DeleteMacros.h"
+#include "Utilities/Converters.h"
+#include "Graphics/Renderer2DBase.h"
+#include "Graphics/GraphicsStructures.h"
 
 namespace s3dge
 {
@@ -13,29 +16,23 @@ namespace s3dge
 		class Renderable2D
 		{
 		protected:
-			Maths::vec3f m_Position;
-			Maths::vec2f m_Size;
-			uint m_Color;
-			std::vector<Maths::vec2f> m_UV;
-			Texture* m_Texture;
-
+			Maths::vec3f _position;
+			Maths::vec2f _size;
+			uint _color;
+			std::vector<Maths::vec2f> _uv;
+			Texture* _texture;
 
 		protected:
 			Renderable2D()
+				: _texture(nullptr)
 			{
-				m_UV.push_back(Maths::vec2f(0, 0));
-				m_UV.push_back(Maths::vec2f(0, 1));
-				m_UV.push_back(Maths::vec2f(1, 1));
-				m_UV.push_back(Maths::vec2f(1, 0));
+				SetDefaultUVConfiguration();
 			}
 
 			Renderable2D(const Maths::vec3f& position, const Maths::vec2f& size, uint color)
-				: m_Position(position), m_Size(size), m_Color(color), m_Texture(nullptr)
+				: _position(position), _size(size), _color(color), _texture(nullptr)
 			{
-				m_UV.push_back(Maths::vec2f(0, 0));
-				m_UV.push_back(Maths::vec2f(0, 1));
-				m_UV.push_back(Maths::vec2f(1, 1));
-				m_UV.push_back(Maths::vec2f(1, 0));
+				SetDefaultUVConfiguration();
 			}
 
 		public:
@@ -43,12 +40,29 @@ namespace s3dge
 			{
 			}
 
+			virtual void Submit(Renderer2DBase* renderer) const
+			{
+				renderer->Submit(this);
+			}
+
 		public:
-			inline const Maths::vec3f GetPosition() const { return m_Position; }
-			inline const Maths::vec2f GetSize() const { return m_Size; }
-			inline uint GetColor() const { return m_Color; }
-			inline std::vector<Maths::vec2f> GetUV() const { return m_UV; }
-			inline uint GetTextureID() const { return m_Texture ? m_Texture->GetTextureID() : 0; }
+			inline const Maths::vec3f GetPosition() const { return _position; }
+			inline const Maths::vec2f GetSize() const { return _size; }
+			inline uint GetColor() const { return _color; }
+			inline std::vector<Maths::vec2f> GetUV() const { return _uv; }
+			inline uint GetTextureID() const { return _texture ? _texture->GetTextureID() : 0; }
+
+			inline void SetColor(uint color) { _color = color; }
+			inline void SetColor(const Maths::vec4f& color) { _color = ConvertColorToUint(color); }
+
+		private:
+			void SetDefaultUVConfiguration()
+			{
+				_uv.push_back(Maths::vec2f(0, 0));
+				_uv.push_back(Maths::vec2f(0, 1));
+				_uv.push_back(Maths::vec2f(1, 1));
+				_uv.push_back(Maths::vec2f(1, 0));
+			}
 		};
 	}
 }

@@ -4,7 +4,7 @@
 #include <map>
 #include <GL/glew.h>
 #include "S3DGETypes.h"
-#include "../Internal/Log.h"
+#include "Internal/Log.h"
 #include "Maths/vec2.h"
 #include "Platforms/Windows/WindowsKeys.h"
 #include "Graphics/Textures/TextureManager.h"

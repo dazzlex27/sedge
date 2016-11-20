@@ -22,7 +22,7 @@ namespace s3dge
 		void Group::Submit(Renderer2D* renderer)
 		{
 			for (auto item : _renderables)
-				renderer->SubmitRenderable(item);
+				renderer->Submit(item);
 		}
 	}
 }
