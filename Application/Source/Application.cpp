@@ -44,7 +44,8 @@ public:
 		TextureManager::AddTexture(new Texture("Gradient", "Resources\\gradient.bmp"));
 		TextureManager::AddTexture(new Texture("Brick", "Resources\\brick.jpg"));
 
-		_fps = new Label("Test", 0.4f, 8.2f, 2, 2, 0xffffffff);
+		Font* font = new Font("test_font", "Resources\\SourceSansPro-Light.ttf", 32);
+		_fps = new Label("Test", font, 0.4f, 8.2f, 2, 2, 0xffffffff);
 
 		for (float y = 0; y < 9.0f; y += 0.5f)
 		{

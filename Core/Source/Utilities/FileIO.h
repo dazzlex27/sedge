@@ -24,6 +24,17 @@ namespace s3dge
 			return content;
 		}
 
+		static bool CheckFileExists(cstring name) 
+		{
+			if (FILE *file = fopen(name, "r")) 
+			{
+				fclose(file);
+				return true;
+			}
+			else 
+				return false;
+		}
+
 	private:
 		FileIO(void);
 		FileIO(const FileIO& tRef) = delete;				// Disable copy constructor.

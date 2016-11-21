@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include "S3DGETypes.h"
 
 namespace s3dge
 {

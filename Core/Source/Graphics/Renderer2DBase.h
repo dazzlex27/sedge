@@ -3,6 +3,7 @@
 #include <string>
 #include "S3DGETypes.h"
 #include "Maths/MathsHeader.h"
+#include "Font.h"
 
 namespace s3dge
 {
@@ -20,7 +21,7 @@ namespace s3dge
 
 			virtual void DrawRectangle(const Maths::vec3f& position, const Maths::vec2f& size, uint color) {}
 			virtual void DrawOval(const Maths::vec3f& position, int radiusX, int radiusY, uint color) {}
-			virtual void DrawString(const std::string& text, const Maths::vec3f& position, uint color) {}
+			virtual void DrawString(const std::string& text, Font* font, const Maths::vec3f& position, uint color) {}
 		};
 	}
 }

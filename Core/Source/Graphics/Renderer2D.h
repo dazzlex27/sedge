@@ -30,8 +30,6 @@ namespace s3dge
 			int _indexCount; // The number of indices.
 			VertexData* _buffer; // Renderables container.
 			std::vector<uint> _textures; // Texture array.
-			ftgl::texture_atlas_t* _atlas; // label atlas.
-			ftgl::texture_font_t* _font; // label font.
 
 		public:
 			Renderer2D();	
@@ -42,7 +40,7 @@ namespace s3dge
 			void Flush() override; // OpenGL drawcall. 
 			void End() override;
 
-			void DrawString(const std::string& text, const Maths::vec3f& position, uint color) override;
+			void DrawString(const std::string& text, Font* font, const Maths::vec3f& position, uint color) override;
 
 		private:
 			void Initialize();
