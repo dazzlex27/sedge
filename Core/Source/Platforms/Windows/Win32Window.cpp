@@ -71,12 +71,12 @@ namespace s3dge
 			window = CreateWindowEx(
 				WS_EX_CLIENTEDGE,
 				windowClass.lpszClassName,
-				m_Title,
+				_title,
 				WS_OVERLAPPEDWINDOW,
 				CW_USEDEFAULT,
 				CW_USEDEFAULT,
-				m_Width,
-				m_Height,
+				_width,
+				_height,
 				HWND_DESKTOP,
 				NULL,
 				instance,
@@ -94,8 +94,8 @@ namespace s3dge
 
 			Window::SetHandle(window, this);
 
-			SetFullScreen(m_FullScreen);
-			SetVSync(m_VSync);
+			SetFullScreen(_fullScreen);
+			SetVSync(_vSync);
 
 			RECT client;
 			GetClientRect(window, &client);
@@ -106,22 +106,22 @@ namespace s3dge
 
 		void Window::UpdateWindow()
 		{
-			if (m_Buttons[VK_MWUP])
-				m_Buttons[VK_MWUP] = false;
-			if (m_Buttons[VK_MWDOWN])
-				m_Buttons[VK_MWDOWN] = false;
+			if (_buttons[VK_MWUP])
+				_buttons[VK_MWUP] = false;
+			if (_buttons[VK_MWDOWN])
+				_buttons[VK_MWDOWN] = false;
 
 			POINT mousePosition;
 			GetCursorPos(&mousePosition);
 			ScreenToClient(window, &mousePosition);
-			m_Mouse.x = (float)mousePosition.x;
-			m_Mouse.y = (float)mousePosition.y;
+			_mousePosition.x = (float)mousePosition.x;
+			_mousePosition.y = (float)mousePosition.y;
 
 			MSG messages;
 			while (PeekMessage(&messages, NULL, 0, 0, PM_REMOVE))
 			{
 				if (messages.message == WM_QUIT)
-					m_IsClosed = true;
+					_isClosed = true;
 
 				TranslateMessage(&messages);
 				DispatchMessage(&messages);				
@@ -150,7 +150,7 @@ namespace s3dge
 			}
 
 			SetFocus(window);
-			m_FullScreen = fullscreen;
+			_fullScreen = fullscreen;
 		}
 
 		void Window::SetVSync(bool vsync)
@@ -226,8 +226,8 @@ namespace s3dge
 			if (height == 0)
 				height = 1;
 
-			window->m_Width = width;
-			window->m_Height = height;
+			window->_width = width;
+			window->_height = height;
 
 			glViewport(0, 0, width, height);
 			glMatrixMode(GL_PROJECTION);	//  Set current Matrix to projection
@@ -241,41 +241,41 @@ namespace s3dge
 			switch (command)
 			{
 			case WM_LBUTTONDOWN:
-				window->m_Buttons[VK_LMB] = true;
+				window->_buttons[VK_LMB] = true;
 				break;
 			case WM_LBUTTONUP:
-				window->m_Buttons[VK_LMB] = false;
+				window->_buttons[VK_LMB] = false;
 				break;
 			case WM_RBUTTONDOWN:
-				window->m_Buttons[VK_LMB] = false;
+				window->_buttons[VK_LMB] = false;
 				break;
 			case WM_RBUTTONUP:
-				window->m_Buttons[VK_RMB] = false;
+				window->_buttons[VK_RMB] = false;
 				break;
 			case WM_MBUTTONDOWN:
-				window->m_Buttons[VK_MMB] = true;
+				window->_buttons[VK_MMB] = true;
 				break;
 			case WM_MBUTTONUP:
-				window->m_Buttons[VK_MMB] = false;
+				window->_buttons[VK_MMB] = false;
 				break;
 			case WM_XBUTTONDOWN:
 				if (GET_XBUTTON_WPARAM(key) == XBUTTON1)
-					window->m_Buttons[VK_XBUTTON1] = true;
+					window->_buttons[VK_XBUTTON1] = true;
 				else
-					window->m_Buttons[VK_XBUTTON2] = true;
+					window->_buttons[VK_XBUTTON2] = true;
 				break;
 			case WM_XBUTTONUP:
 				if (GET_XBUTTON_WPARAM(key) == XBUTTON1)
-					window->m_Buttons[VK_XBUTTON1] = false;
+					window->_buttons[VK_XBUTTON1] = false;
 				else
-					window->m_Buttons[VK_XBUTTON2] = false;
+					window->_buttons[VK_XBUTTON2] = false;
 				break;
 			case WM_MOUSEWHEEL:
 				short zDelta = (short)GET_WHEEL_DELTA_WPARAM(key);
 				if (zDelta > 0)
-					window->m_Buttons[VK_MWUP] = true;
+					window->_buttons[VK_MWUP] = true;
 				if (zDelta < 0)
-					window->m_Buttons[VK_MWDOWN] = true;
+					window->_buttons[VK_MWDOWN] = true;
 				break;
 			}
 		}
@@ -285,10 +285,10 @@ namespace s3dge
 			switch (command)
 			{
 			case WM_KEYDOWN:
-				window->m_Keys[key] = true;
+				window->_keys[key] = true;
 				break;
 			case WM_KEYUP:
-				window->m_Keys[key] = false;
+				window->_keys[key] = false;
 				break;
 			case WM_SYSKEYDOWN:
 				if (key == VK_RETURN)

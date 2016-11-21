@@ -5,20 +5,20 @@ namespace s3dge
 {
 	namespace Graphics
 	{
-		std::map<void*, Window*> Window::m_WindowInstances;
+		std::map<void*, Window*> Window::_windowInstances;
 
 		Window::Window(cstring title, uint width, uint height, bool fullscreen, bool vsync)
-			: m_Title(title), m_Width(width), m_Height(height), m_FullScreen(fullscreen), m_VSync(vsync),m_IsClosed(false)
+			: _title(title), _width(width), _height(height), _fullScreen(fullscreen), _vSync(vsync), _isClosed(false)
 		{
 			if (!InitializeWindow())
 				LOG_FATAL("Could not initialize window!");
 			else
 			{
 				for (int i = 0; i < MAX_KEYS; ++i)
-					m_Keys[i] = false;
+					_keys[i] = false;
 
 				for (int i = 0; i < MAX_BUTTONS; ++i)
-					m_Buttons[i] = false;
+					_buttons[i] = false;
 
 				//glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 				glEnable(GL_BLEND);
@@ -49,7 +49,7 @@ namespace s3dge
 
 		bool Window::KeyPressed(uint key) const
 		{
-			return m_Keys[key];
+			return _keys[key];
 		}
 
 		bool Window::KeyClicked(uint key) const
@@ -59,7 +59,7 @@ namespace s3dge
 
 		bool Window::MouseButtonPressed(uint button) const
 		{
-			return m_Buttons[button];
+			return _buttons[button];
 		}
 
 		bool Window::MouseButtonClicked(uint button) const
@@ -74,12 +74,12 @@ namespace s3dge
 
 		void Window::SetHandle(void* instance, Window* window)
 		{
-			m_WindowInstances[instance] = window;
+			_windowInstances[instance] = window;
 		}
 
 		Window* Window::GetWindowClassInstance(void* windowInstance)
 		{
-			return m_WindowInstances[windowInstance];
+			return _windowInstances[windowInstance];
 		}
 	}
 }

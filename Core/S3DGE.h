@@ -96,6 +96,9 @@ namespace s3dge
 			}
 
 			Dispose();
+
+			LOG_INFO("Application exited");
+			getchar();
 		}
 	};
 }

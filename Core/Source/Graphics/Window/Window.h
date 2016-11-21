@@ -21,17 +21,17 @@ namespace s3dge
 			#define MAX_BUTTONS 16
 
 		private:
-			cstring m_Title;
-			uint m_Width;
-			uint m_Height;
-			bool m_IsClosed;
-			bool m_FullScreen;
-			bool m_VSync;
-			Maths::vec2f m_Mouse;
-			bool m_Keys[MAX_KEYS];
-			bool m_Buttons[MAX_BUTTONS];
+			cstring _title;
+			uint _width;
+			uint _height;
+			bool _isClosed;
+			bool _fullScreen;
+			bool _vSync;
+			Maths::vec2f _mousePosition;
+			bool _keys[MAX_KEYS];
+			bool _buttons[MAX_BUTTONS];
 
-			static std::map<void*, Window*> m_WindowInstances;
+			static std::map<void*, Window*> _windowInstances;
 
 		public:
 			Window(cstring title,  uint width, uint height, bool fullscreen = false, bool vsync = true);
@@ -50,13 +50,13 @@ namespace s3dge
 			void SetFullScreen(bool fullscreen);
 
 			static Window* GetWindowClassInstance(void* windowInstance);
-			inline cstring GetTitle() const { return m_Title; }
-			inline uint GetWidth() const { return m_Width; }
-			inline uint GetHeight() const { return m_Height; }
-			inline bool IsClosed() const { return m_IsClosed; }
-			inline bool IsVSync() const { return m_VSync; }
-			inline bool IsFullScreen() const { return m_FullScreen; }
-			inline Maths::vec2f GetMousePosition() const { return m_Mouse; }
+			inline cstring GetTitle() const { return _title; }
+			inline uint GetWidth() const { return _width; }
+			inline uint GetHeight() const { return _height; }
+			inline bool IsClosed() const { return _isClosed; }
+			inline bool IsVSync() const { return _vSync; }
+			inline bool IsFullScreen() const { return _fullScreen; }
+			inline Maths::vec2f GetMousePosition() const { return _mousePosition; }
 
 		private:
 			bool InitializeWindow();

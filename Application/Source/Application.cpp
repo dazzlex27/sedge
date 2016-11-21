@@ -20,8 +20,6 @@ public:
 
 	~Application()
 	{
-		delete _fps;
-		delete _shaderProgram;
 	}
 
 	void Initialize() override
@@ -96,7 +94,8 @@ public:
 
 	void Dispose() override
 	{
-
+		SafeDelete(_layer);
+		SafeDelete(_shaderProgram);
 	}
 };
 
