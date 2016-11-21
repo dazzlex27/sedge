@@ -96,9 +96,17 @@ namespace s3dge
 			}
 
 			Dispose();
+			DisposeInternalResources();
 
 			LOG_INFO("Application exited");
 			getchar();
+		}
+
+		void DisposeInternalResources()
+		{
+			SafeDelete(_rng);
+			SafeDelete(_timer);
+			SafeDelete(_window);
 		}
 	};
 }

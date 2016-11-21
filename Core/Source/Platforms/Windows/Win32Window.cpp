@@ -17,6 +17,7 @@ namespace s3dge
 		PIXELFORMATDESCRIPTOR pixelFormatDescriptor;
 		WINDOWPLACEMENT wpc;
 
+		// Main message pump handler method
 		LRESULT CALLBACK WindowProcedure(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 		{
 			Window* winInstance = Window::GetWindowClassInstance(window);
@@ -53,6 +54,7 @@ namespace s3dge
 			return DefWindowProc(hwnd, message, wParam, lParam);
 		}
 
+		// Window initialization implementation
 		bool Window::InitializeWindow()
 		{
 			windowClass.hInstance = instance;
@@ -69,12 +71,12 @@ namespace s3dge
 				return false;
 
 			window = CreateWindowEx(
-				WS_EX_CLIENTEDGE,
+				WS_EX_OVERLAPPEDWINDOW,
 				windowClass.lpszClassName,
 				_title,
 				WS_OVERLAPPEDWINDOW,
-				CW_USEDEFAULT,
-				CW_USEDEFAULT,
+				0,
+				0,
 				_width,
 				_height,
 				HWND_DESKTOP,
@@ -169,6 +171,8 @@ namespace s3dge
 
 				if (wglSwapIntervalEXT)
 					wglSwapIntervalEXT(vsync);
+
+				this->_vSync = vsync;
 			}
 		}
 

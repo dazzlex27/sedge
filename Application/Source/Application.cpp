@@ -85,6 +85,11 @@ public:
 		_shaderProgram->SetUniform2f("light_pos", vec2f((float)(mouse.x * 16.0f / _window->GetWidth()), (float)(9.0f - mouse.y * 9.0f / _window->GetHeight())));
 		std::string text = std::to_string(GetFPS()) + " fps";
 		_fps->text = text.c_str();
+
+		if (_window->MouseButtonPressed(VK_LMB))
+		{
+			_window->SetVSync(!_window->IsVSync());
+		}
 	}
 
 	void Render() override
