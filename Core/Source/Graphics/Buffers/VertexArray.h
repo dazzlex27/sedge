@@ -2,7 +2,7 @@
 
 #include <vector>
 #include <GL/glew.h>
-#include "S3DGETypes.h"
+#include "CustomTypes.h"
 #include "Buffer.h"
 #include "../../Internal/DeleteMacros.h"
 

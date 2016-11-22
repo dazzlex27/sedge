@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string.h>
-#include "S3DGETypes.h"
+#include "CustomTypes.h"
 #include <stb_image.h>
 
 static byte* LoadImage(cstring path, int* width, int* height, int* components)

@@ -4,16 +4,21 @@ namespace s3dge
 {
 	namespace Graphics
 	{
-		std::vector<Texture*> TextureManager::m_Textures;
+		std::vector<Texture*> TextureManager::_textures;
 
-		void TextureManager::AddTexture(Texture* texture)
+		void TextureManager::Add(Texture* texture)
 		{
-			m_Textures.push_back(texture);
+			_textures.push_back(texture);
 		}
 
-		Texture* TextureManager::GetTexture(cstring name)
+		void TextureManager::Add(cstring name, cstring path)
 		{
-			for (auto item : m_Textures)
+			_textures.push_back(new Texture(name, path));
+		}
+
+		Texture* TextureManager::Get(cstring name)
+		{
+			for (auto item : _textures)
 				if (item->GetName() == name)
 					return item;
 
@@ -22,7 +27,7 @@ namespace s3dge
 
 		void TextureManager::Dispose()
 		{
-			for (auto item : m_Textures)
+			for (auto item : _textures)
 				SafeDelete(item);
 		}
 	}

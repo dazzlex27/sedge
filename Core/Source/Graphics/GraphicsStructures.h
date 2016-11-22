@@ -1,6 +1,6 @@
 #pragma once
 
-#include "S3DGETypes.h"
+#include "CustomTypes.h"
 #include "Maths/MathsHeader.h"
 
 namespace s3dge

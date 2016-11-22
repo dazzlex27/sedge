@@ -4,7 +4,7 @@
 #include <freetype-gl.h>
 #include "Internal/DeleteMacros.h"
 #include "Internal/Log.h"
-#include "S3DGETypes.h"
+#include "CustomTypes.h"
 #include "Utilities/FileIO.h"
 
 namespace s3dge
@@ -26,6 +26,7 @@ namespace s3dge
 
 			inline uint GetAtlasID() const { return _atlas->id; }
 			inline ftgl::texture_font_t* GetFontFace() const { return _font; }
+			inline cstring GetName() const { return _name; }
 
 		private:
 			bool Initialize();

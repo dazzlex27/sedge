@@ -1,9 +1,9 @@
 #pragma once
 
 #include <string>
-#include "S3DGETypes.h"
+#include "CustomTypes.h"
 #include "Maths/MathsHeader.h"
-#include "Font.h"
+#include "Fonts/Font.h"
 
 namespace s3dge
 {

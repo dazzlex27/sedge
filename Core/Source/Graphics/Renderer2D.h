@@ -4,7 +4,7 @@
 #include "Graphics/Renderables/Renderable2D.h"
 #include <GL/glew.h>
 #include <freetype-gl.h>
-#include "S3DGETypes.h"
+#include "CustomTypes.h"
 #include "Graphics/Shaders/ShaderProgram.h"
 #include "Maths/MathsHeader.h"
 #include "Graphics/Buffers/Buffer.h"

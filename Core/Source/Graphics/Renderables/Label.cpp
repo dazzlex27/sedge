@@ -15,7 +15,7 @@ namespace s3dge
 
 		Label::~Label()
 		{
-			SafeDelete(font);
+			
 		}
 
 		void Label::Submit(Renderer2DBase* renderer) const

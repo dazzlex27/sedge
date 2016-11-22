@@ -3,11 +3,12 @@
 #include <vector>
 #include <map>
 #include <GL/glew.h>
-#include "S3DGETypes.h"
+#include "CustomTypes.h"
 #include "Internal/Log.h"
 #include "Maths/vec2.h"
 #include "Platforms/Windows/WindowsKeys.h"
 #include "Graphics/Textures/TextureManager.h"
+#include "Graphics/Fonts/FontManager.h"
 
 namespace s3dge
 {
@@ -66,7 +67,6 @@ namespace s3dge
 			friend void key_callback(Window* window, int key, int command);
 			friend void mousebutton_callback(Window* window, int key, int command);
 
-			Window(void);
 			Window(const Window& tRef) = delete;				// Disable copy constructor.
 			Window& operator = (const Window& tRef) = delete;	// Disable assignment operator.
 		};

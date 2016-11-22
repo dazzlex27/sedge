@@ -38,12 +38,12 @@ public:
 
 		_layer = new Layer(_shaderProgram, new Renderer2D());
 
-		TextureManager::AddTexture(new Texture("Box", "Resources\\box.jpg"));
-		TextureManager::AddTexture(new Texture("Gradient", "Resources\\gradient.bmp"));
-		TextureManager::AddTexture(new Texture("Brick", "Resources\\brick.jpg"));
+		TextureManager::Add(new Texture("Box", "Resources\\box.jpg"));
+		TextureManager::Add(new Texture("Gradient", "Resources\\gradient.bmp"));
+		TextureManager::Add(new Texture("Brick", "Resources\\brick.jpg"));
 
-		Font* font = new Font("test_font", "Resources\\SourceSansPro-Light.ttf", 32);
-		_fps = new Label("Test", font, 0.4f, 8.2f, 2, 2, 0xffffffff);
+		FontManager::Add("test_font", "Resources\\SourceSansPro-Light.ttf", 32);
+		_fps = new Label("Test", FontManager::Get("test_font"), 0.4f, 8.2f, 2, 2, 0xffffffff);
 
 		for (float y = 0; y < 9.0f; y += 0.5f)
 		{
@@ -65,11 +65,11 @@ public:
 					switch (rand() % 3)
 					{
 					case 0:
-						_layer->Add(new Sprite(x, y, 0.4f, 0.4f, TextureManager::GetTexture("Gradient")));
+						_layer->Add(new Sprite(x, y, 0.4f, 0.4f, TextureManager::Get("Gradient")));
 					case 1:
-						_layer->Add(new Sprite(x, y, 0.4f, 0.4f, TextureManager::GetTexture("Box")));
+						_layer->Add(new Sprite(x, y, 0.4f, 0.4f, TextureManager::Get("Box")));
 					default:
-						_layer->Add(new Sprite(x, y, 0.4f, 0.4f, TextureManager::GetTexture("Brick")));
+						_layer->Add(new Sprite(x, y, 0.4f, 0.4f, TextureManager::Get("Brick")));
 					}
 				}
 			}

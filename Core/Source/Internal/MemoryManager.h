@@ -2,7 +2,7 @@
 
 #include <vector>
 #include <assert.h>
-#include "s3dgeTypes.h"
+#include "CustomTypes.h"
 #include "DeleteMacros.h"
 
 namespace s3dge

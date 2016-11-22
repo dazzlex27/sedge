@@ -1,8 +1,8 @@
 #pragma once
 
-#include "S3DGETypes.h"
+#include "CustomTypes.h"
 #include "Renderable2D.h"
-#include "../Font.h"
+#include "../Fonts/Font.h"
 
 namespace s3dge
 {

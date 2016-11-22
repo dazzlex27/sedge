@@ -33,6 +33,7 @@ namespace s3dge
 		Window::~Window()
 		{
 			TextureManager::Dispose();
+			FontManager::Dispose();
 		}
 
 		void Window::Update()

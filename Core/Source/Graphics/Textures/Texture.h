@@ -1,7 +1,7 @@
 #pragma once
 
 #include <GL/glew.h>
-#include "S3DGETypes.h"
+#include "CustomTypes.h"
 #include "Utilities/ImageLoad.h"
 #include "Internal/DeleteMacros.h"
 #include "Internal/Log.h"
@@ -13,23 +13,23 @@ namespace s3dge
 		class Texture
 		{
 		private:
-			cstring m_Name;
-			cstring m_Filename;
-			uint m_TextureID;
-			int m_Width;
-			int m_Height;
-			int m_Components;
+			cstring _name;
+			cstring _path;
+			uint _textureID;
+			int _width;
+			int _height;
+			int _components;
 
 		public:
-			Texture(cstring name, cstring filename);
+			Texture(cstring name, cstring path);
 			~Texture();
 
 		public:
-			inline cstring GetName() const { return m_Name; }
-			inline uint GetTextureID() const { return m_TextureID; }
-			inline int GetWidth() const { return m_Width; }
-			inline int GetHeight() const { return m_Height; }
-			inline int GetComponentsCount() const { return m_Components; }
+			inline cstring GetName() const { return _name; }
+			inline uint GetTextureID() const { return _textureID; }
+			inline int GetWidth() const { return _width; }
+			inline int GetHeight() const { return _height; }
+			inline int GetComponentsCount() const { return _components; }
 
 			void Bind() const;
 			void Unbind() const;
