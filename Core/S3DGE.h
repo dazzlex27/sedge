@@ -72,8 +72,8 @@ namespace s3dge
 				// Update input.
 				if (_timer->ElapsedS() - updateTime > (1.0f / 60.0f))
 				{
-					_window->UpdateInput();
 					UpdateInput();
+					_window->UpdateInputState();
 					++updates;
 					updateTime += 1.0f / 60.0f;
 				}

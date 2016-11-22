@@ -15,10 +15,16 @@ namespace s3dge
 			else
 			{
 				for (int i = 0; i < MAX_KEYS; ++i)
-					_keys[i] = false;
+					_keysDown[i] = false;
+
+				for (int i = 0; i < MAX_KEYS; ++i)
+					_keysClicked[i] = false;
 
 				for (int i = 0; i < MAX_BUTTONS; ++i)
-					_buttons[i] = false;
+					_buttonsDown[i] = false;
+
+				for (int i = 0; i < MAX_BUTTONS; ++i)
+					_buttonsClicked[i] = false;
 
 				glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 				glEnable(GL_BLEND);
@@ -41,29 +47,39 @@ namespace s3dge
 			UpdateWindow();
 		}
 
-		void Window::UpdateInput()
+		void Window::UpdateInputState()
 		{
+			for (int i = 0; i < MAX_KEYS; ++i)
+				_keysClicked[i] = false;
 
+			for (int i = 0; i < MAX_BUTTONS; ++i)
+				_buttonsClicked[i] = false;
 		}
 
-		bool Window::KeyPressed(uint key) const
+		bool Window::KeyDown(uint key) const
 		{
-			return _keys[key];
+			return _keysDown[key];
 		}
 
 		bool Window::KeyClicked(uint key) const
 		{
+			return _keysClicked[key];
+		}
+
+		bool Window::KeyDoubleClicked(uint key) const
+		{
+			// TODO
 			return false;
 		}
 
-		bool Window::MouseButtonPressed(uint button) const
+		bool Window::MouseButtonDown(uint button) const
 		{
-			return _buttons[button];
+			return _buttonsDown[button];
 		}
 
 		bool Window::MouseButtonClicked(uint button) const
 		{
-			return false;
+			return _buttonsClicked[button];
 		}
 
 		void Window::Clear()

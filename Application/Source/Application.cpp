@@ -86,7 +86,7 @@ public:
 		std::string text = std::to_string(GetFPS()) + " fps";
 		_fps->text = text.c_str();
 
-		if (_window->MouseButtonPressed(VK_LMB))
+		if (_window->MouseButtonClicked(VK_LMB))
 		{
 			_window->SetVSync(!_window->IsVSync());
 		}

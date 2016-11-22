@@ -29,8 +29,10 @@ namespace s3dge
 			bool _fullScreen;
 			bool _vSync;
 			Maths::vec2f _mousePosition;
-			bool _keys[MAX_KEYS];
-			bool _buttons[MAX_BUTTONS];
+			bool _keysDown[MAX_KEYS];
+			bool _buttonsDown[MAX_BUTTONS];
+			bool _keysClicked[MAX_KEYS];
+			bool _buttonsClicked[MAX_BUTTONS];
 
 			static std::map<void*, Window*> _windowInstances;
 
@@ -40,10 +42,11 @@ namespace s3dge
 
 			void Clear();
 			void Update();
-			void UpdateInput();
-			bool KeyPressed(uint key) const;
+			void UpdateInputState();
+			bool KeyDown(uint key) const;
 			bool KeyClicked(uint key) const;
-			bool MouseButtonPressed(uint button) const;
+			bool KeyDoubleClicked(uint key) const;
+			bool MouseButtonDown(uint button) const;
 			bool MouseButtonClicked(uint button) const;
 			
 			static void SetHandle(void* handle, Window* window);

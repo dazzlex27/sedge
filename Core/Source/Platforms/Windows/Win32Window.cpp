@@ -108,10 +108,10 @@ namespace s3dge
 
 		void Window::UpdateWindow()
 		{
-			if (_buttons[VK_MWUP])
-				_buttons[VK_MWUP] = false;
-			if (_buttons[VK_MWDOWN])
-				_buttons[VK_MWDOWN] = false;
+			if (_buttonsDown[VK_MWUP])
+				_buttonsDown[VK_MWUP] = false;
+			if (_buttonsDown[VK_MWDOWN])
+				_buttonsDown[VK_MWDOWN] = false;
 
 			POINT mousePosition;
 			GetCursorPos(&mousePosition);
@@ -245,41 +245,56 @@ namespace s3dge
 			switch (command)
 			{
 			case WM_LBUTTONDOWN:
-				window->_buttons[VK_LMB] = true;
+				window->_buttonsDown[VK_LMB] = true;
+				window->_buttonsClicked[VK_LMB] = true;
 				break;
 			case WM_LBUTTONUP:
-				window->_buttons[VK_LMB] = false;
+				window->_buttonsDown[VK_LMB] = false;
 				break;
 			case WM_RBUTTONDOWN:
-				window->_buttons[VK_LMB] = false;
+				window->_buttonsDown[VK_RMB] = true;
+				window->_buttonsClicked[VK_RMB] = true;
 				break;
 			case WM_RBUTTONUP:
-				window->_buttons[VK_RMB] = false;
+				window->_buttonsDown[VK_RMB] = false;
 				break;
 			case WM_MBUTTONDOWN:
-				window->_buttons[VK_MMB] = true;
+				window->_buttonsDown[VK_MMB] = true;
+				window->_buttonsClicked[VK_MMB] = true;
 				break;
 			case WM_MBUTTONUP:
-				window->_buttons[VK_MMB] = false;
+				window->_buttonsDown[VK_MMB] = false;
 				break;
 			case WM_XBUTTONDOWN:
 				if (GET_XBUTTON_WPARAM(key) == XBUTTON1)
-					window->_buttons[VK_XBUTTON1] = true;
+				{
+					window->_buttonsDown[VK_XBUTTON1] = true;
+					window->_buttonsClicked[VK_XBUTTON1] = true;
+				}
 				else
-					window->_buttons[VK_XBUTTON2] = true;
+				{
+					window->_buttonsDown[VK_XBUTTON2] = true;
+					window->_buttonsClicked[VK_XBUTTON2] = true;
+				}
 				break;
 			case WM_XBUTTONUP:
 				if (GET_XBUTTON_WPARAM(key) == XBUTTON1)
-					window->_buttons[VK_XBUTTON1] = false;
+					window->_buttonsDown[VK_XBUTTON1] = false;
 				else
-					window->_buttons[VK_XBUTTON2] = false;
+					window->_buttonsDown[VK_XBUTTON2] = false;
 				break;
 			case WM_MOUSEWHEEL:
 				short zDelta = (short)GET_WHEEL_DELTA_WPARAM(key);
 				if (zDelta > 0)
-					window->_buttons[VK_MWUP] = true;
+				{
+					window->_buttonsDown[VK_MWUP] = true;
+					window->_buttonsClicked[VK_MWUP] = true;
+				}
 				if (zDelta < 0)
-					window->_buttons[VK_MWDOWN] = true;
+				{
+					window->_buttonsDown[VK_MWDOWN] = true;
+					window->_buttonsClicked[VK_MWDOWN] = true;
+				}
 				break;
 			}
 		}
@@ -289,10 +304,11 @@ namespace s3dge
 			switch (command)
 			{
 			case WM_KEYDOWN:
-				window->_keys[key] = true;
+				window->_keysDown[key] = true;
+				window->_keysClicked[key] = true;
 				break;
 			case WM_KEYUP:
-				window->_keys[key] = false;
+				window->_keysDown[key] = false;
 				break;
 			case WM_SYSKEYDOWN:
 				if (key == VK_RETURN)
