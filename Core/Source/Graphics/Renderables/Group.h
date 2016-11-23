@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Renderable2D.h"
-#include "Graphics/Renderer2D.h"
+#include "Graphics/Renderers/Renderer2D.h"
 
 namespace s3dge
 {

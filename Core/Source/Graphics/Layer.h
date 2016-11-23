@@ -2,7 +2,7 @@
 
 #include <vector>
 #include "Graphics/Renderables/Renderable2D.h"
-#include "Graphics/Renderer2D.h"
+#include "Graphics/Renderers/Renderer2D.h"
 #include "Graphics/Shaders/ShaderProgram.h"
 
 namespace s3dge

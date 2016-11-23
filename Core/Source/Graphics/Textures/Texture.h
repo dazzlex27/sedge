@@ -2,7 +2,7 @@
 
 #include <GL/glew.h>
 #include "CustomTypes.h"
-#include "Utilities/ImageLoad.h"
+#include "Utilities/ImageUtils.h"
 #include "Internal/DeleteMacros.h"
 #include "Internal/Log.h"
 

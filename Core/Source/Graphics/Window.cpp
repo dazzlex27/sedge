@@ -1,5 +1,5 @@
 #include "Window.h"
-#include "../../Internal/Log.h"
+#include "../Internal/Log.h"
 
 namespace s3dge
 {
@@ -14,17 +14,10 @@ namespace s3dge
 				LOG_FATAL("Could not initialize window!");
 			else
 			{
-				for (int i = 0; i < MAX_KEYS; ++i)
-					_keysDown[i] = false;
-
-				for (int i = 0; i < MAX_KEYS; ++i)
-					_keysClicked[i] = false;
-
-				for (int i = 0; i < MAX_BUTTONS; ++i)
-					_buttonsDown[i] = false;
-
-				for (int i = 0; i < MAX_BUTTONS; ++i)
-					_buttonsClicked[i] = false;
+				memset(&_keysDown, 0, sizeof(_keysDown));
+				memset(&_keysClicked, 0, sizeof(_keysClicked));
+				memset(&_buttonsDown, 0, sizeof(_buttonsDown));
+				memset(&_buttonsClicked, 0, sizeof(_buttonsClicked));
 
 				glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 				glEnable(GL_BLEND);
@@ -49,11 +42,8 @@ namespace s3dge
 
 		void Window::UpdateInputState()
 		{
-			for (int i = 0; i < MAX_KEYS; ++i)
-				_keysClicked[i] = false;
-
-			for (int i = 0; i < MAX_BUTTONS; ++i)
-				_buttonsClicked[i] = false;
+			memset(&_keysClicked, 0, sizeof(_keysClicked));
+			memset(&_buttonsClicked, 0, sizeof(_buttonsClicked));
 		}
 
 		bool Window::KeyDown(uint key) const

@@ -19,7 +19,7 @@ namespace s3dge
 
 		uint Texture::Load()
 		{
-			uint textureID;
+			uint id;
 
 			byte* imagePixels = LoadImage(_path, &_width, &_height, &_components);
 
@@ -27,8 +27,8 @@ namespace s3dge
 
 				return -1;
 
-			glGenTextures(1, &textureID);
-			glBindTexture(GL_TEXTURE_2D, textureID);
+			glGenTextures(1, &id);
+			glBindTexture(GL_TEXTURE_2D, id);
 
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -38,7 +38,7 @@ namespace s3dge
 
 			SafeDeleteArray(imagePixels);
 
-			return textureID;
+			return id;
 		}
 
 		void Texture::Bind() const

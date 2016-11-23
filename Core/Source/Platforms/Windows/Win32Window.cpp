@@ -1,5 +1,5 @@
 #include <Windows.h>
-#include "Graphics/Window/Window.h"
+#include "Graphics/Window.h"
 
 namespace s3dge
 {

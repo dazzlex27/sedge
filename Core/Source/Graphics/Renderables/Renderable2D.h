@@ -6,7 +6,7 @@
 #include "Graphics/Buffers/IndexBuffer.h"
 #include "Internal/DeleteMacros.h"
 #include "Utilities/Converters.h"
-#include "Graphics/Renderer2DBase.h"
+#include "Graphics/Renderers/Renderer2DBase.h"
 #include "Graphics/GraphicsStructures.h"
 
 namespace s3dge

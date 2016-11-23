@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Graphics/Renderer2DBase.h"
+#include "Graphics/Renderers/Renderer2DBase.h"
 #include "Graphics/Renderables/Renderable2D.h"
 #include <GL/glew.h>
 #include <freetype-gl.h>

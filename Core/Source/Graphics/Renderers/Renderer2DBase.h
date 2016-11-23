@@ -3,7 +3,7 @@
 #include <string>
 #include "CustomTypes.h"
 #include "Maths/MathsHeader.h"
-#include "Fonts/Font.h"
+#include "Graphics/Fonts/Font.h"
 
 namespace s3dge
 {

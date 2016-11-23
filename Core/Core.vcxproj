@@ -109,13 +109,14 @@
     <ClCompile Include="Source\Graphics\Renderables\Label.cpp" />
     <ClCompile Include="Source\Graphics\Layer.cpp" />
     <ClCompile Include="Source\Graphics\Renderables\Sprite.cpp" />
-    <ClCompile Include="Source\Graphics\Renderer2D.cpp" />
+    <ClCompile Include="Source\Graphics\Renderers\Renderer2D.cpp" />
     <ClCompile Include="Source\Graphics\Shaders\ShaderProgram.cpp" />
     <ClCompile Include="Source\Graphics\Textures\Texture.cpp" />
     <ClCompile Include="Source\Graphics\Textures\TextureManager.cpp" />
     <ClCompile Include="Source\Platforms\Windows\Win32Window.cpp" />
-    <ClCompile Include="Source\Graphics\Window\Window.cpp" />
+    <ClCompile Include="Source\Graphics\Window.cpp" />
     <ClCompile Include="Source\Maths\mat4.cpp" />
+    <ClCompile Include="Source\Utilities\ImageUtils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Externals\FreeTypeGL\freetype-gl.h" />
@@ -218,7 +219,7 @@
     <ClInclude Include="Source\Graphics\Fonts\Font.h" />
     <ClInclude Include="Source\Graphics\Fonts\FontManager.h" />
     <ClInclude Include="Source\Graphics\GraphicsStructures.h" />
-    <ClInclude Include="Source\Graphics\Renderer2DBase.h" />
+    <ClInclude Include="Source\Graphics\Renderers\Renderer2DBase.h" />
     <ClInclude Include="Source\Internal\MemoryManager.h" />
     <ClInclude Include="S3DGE.h" />
     <ClInclude Include="Source\Graphics\Buffers\Buffer.h" />
@@ -229,7 +230,7 @@
     <ClInclude Include="Source\Graphics\Layer.h" />
     <ClInclude Include="Source\Graphics\Renderables\Renderable2D.h" />
     <ClInclude Include="Source\Graphics\Renderables\Sprite.h" />
-    <ClInclude Include="Source\Graphics\Renderer2D.h" />
+    <ClInclude Include="Source\Graphics\Renderers\Renderer2D.h" />
     <ClInclude Include="Source\Graphics\Shaders\ShaderProgram.h" />
     <ClInclude Include="Source\Graphics\Textures\Texture.h" />
     <ClInclude Include="Source\Graphics\Textures\TextureManager.h" />
@@ -240,12 +241,12 @@
     <ClInclude Include="Source\Maths\vec3.h" />
     <ClInclude Include="Source\Maths\vec4.h" />
     <ClInclude Include="Source\S3DGECommon.h" />
-    <ClInclude Include="Source\Graphics\Window\Window.h" />
+    <ClInclude Include="Source\Graphics\Window.h" />
     <ClInclude Include="Source\CustomTypes.h" />
     <ClInclude Include="Source\Utilities\Converters.h" />
     <ClInclude Include="Source\Internal\DeleteMacros.h" />
     <ClInclude Include="Source\Utilities\FileIO.h" />
-    <ClInclude Include="Source\Utilities\ImageLoad.h" />
+    <ClInclude Include="Source\Utilities\ImageUtils.h" />
     <ClInclude Include="Source\Internal\Log.h" />
     <ClInclude Include="Source\Utilities\RGN.h" />
     <ClInclude Include="Source\Utilities\Timer.h" />
