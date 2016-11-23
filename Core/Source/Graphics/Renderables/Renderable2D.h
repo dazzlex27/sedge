@@ -50,7 +50,7 @@ namespace s3dge
 			inline const Maths::vec2f GetSize() const { return _size; }
 			inline uint GetColor() const { return _color; }
 			inline std::vector<Maths::vec2f> GetUV() const { return _uv; }
-			inline uint GetTextureID() const { return _texture ? _texture->GetTextureID() : 0; }
+			inline uint GetTextureID() const { return _texture ? _texture->GetID() : 0; }
 
 			inline void SetColor(uint color) { _color = color; }
 			inline void SetColor(const Maths::vec4f& color) { _color = ConvertColorToUint(color); }

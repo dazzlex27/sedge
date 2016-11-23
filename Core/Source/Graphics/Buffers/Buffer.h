@@ -10,14 +10,14 @@ namespace s3dge
 		class Buffer
 		{
 		private:
-			uint m_BufferID;
-			uint m_ComponentCount;
+			uint _bufferID;
+			uint _componentCount;
 
 		public:
 			Buffer(float* data, int count, uint componentCount);
 			~Buffer();
 
-			inline const uint GetComponentCount() const { return m_ComponentCount; }
+			inline const uint GetComponentCount() const { return _componentCount; }
 
 			void Bind();
 			void Unbind();

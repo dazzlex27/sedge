@@ -5,22 +5,22 @@ namespace s3dge
 	namespace Graphics
 	{
 		Buffer::Buffer(float* data, int count, uint componentCount)
-			: m_ComponentCount(componentCount)
+			: _componentCount(componentCount)
 		{
-			glGenBuffers(1, &m_BufferID);
-			glBindBuffer(GL_ARRAY_BUFFER, m_BufferID);
+			glGenBuffers(1, &_bufferID);
+			glBindBuffer(GL_ARRAY_BUFFER, _bufferID);
 			glBufferData(GL_ARRAY_BUFFER, count * sizeof(float), data, GL_STATIC_DRAW);
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
 		}
 
 		Buffer::~Buffer()
 		{
-			glDeleteBuffers(1, &m_BufferID);
+			glDeleteBuffers(1, &_bufferID);
 		}
 
 		void Buffer::Bind()
 		{
-			glBindBuffer(GL_ARRAY_BUFFER, m_BufferID);
+			glBindBuffer(GL_ARRAY_BUFFER, _bufferID);
 		}
 
 		void Buffer::Unbind()

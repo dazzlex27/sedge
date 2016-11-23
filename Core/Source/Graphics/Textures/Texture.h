@@ -15,7 +15,7 @@ namespace s3dge
 		private:
 			cstring _name;
 			cstring _path;
-			uint _textureID;
+			uint _id;
 			int _width;
 			int _height;
 			int _components;
@@ -26,7 +26,7 @@ namespace s3dge
 
 		public:
 			inline cstring GetName() const { return _name; }
-			inline uint GetTextureID() const { return _textureID; }
+			inline uint GetID() const { return _id; }
 			inline int GetWidth() const { return _width; }
 			inline int GetHeight() const { return _height; }
 			inline int GetComponentsCount() const { return _components; }

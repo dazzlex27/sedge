@@ -13,9 +13,9 @@ namespace s3dge
 		class ShaderProgram
 		{
 		private:
-			uint m_ProgramID;
-			cstring m_Vertex;
-			cstring m_Fragment;
+			uint _programID;
+			cstring _vertex;
+			cstring _fragment;
 
 		public:
 			ShaderProgram(cstring vertex, cstring fragment);

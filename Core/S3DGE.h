@@ -32,10 +32,21 @@ namespace s3dge
 		}
 
 	public:
-		void StartUp()
+		void Run()
 		{
+			LOG_INFO("Application started...");
+
+			LOG_INFO("Initializing components...");
+			InitializeInternalSystems();
 			Initialize();
+			LOG_INFO("Running main loop...");
 			RunGameLoop();
+
+			LOG_INFO("Shutdown initiated...");
+			Dispose();
+			ShutdownInternalSystems();
+
+			LOG_INFO("Application exited...");
 		}
 
 		uint GetFPS() const { return _fps; }
@@ -44,6 +55,11 @@ namespace s3dge
 		double GetNextRNG()
 		{
 			_rng->Next();
+		}
+
+		float GetElapsedMS()
+		{
+			return _timer->ElapsedMS();
 		}
 
 		// Runs upon startup.
@@ -58,10 +74,9 @@ namespace s3dge
 	private:
 		void RunGameLoop()
 		{
-			uint frames = 0;
 			uint updates = 0;
-			_timer = new Timer();
 			float updateTime = 0.0f;
+			uint frames = 0;
 			float renderTime = 0.0f;
 
 			// The actual game loop.
@@ -94,15 +109,15 @@ namespace s3dge
 					updates = 0;
 				}
 			}
-
-			Dispose();
-			DisposeInternalResources();
-
-			LOG_INFO("Application exited");
-			getchar();
 		}
 
-		void DisposeInternalResources()
+		void InitializeInternalSystems()
+		{
+			_rng = new RNG();
+			_timer = new Timer();
+		}
+
+		void ShutdownInternalSystems()
 		{
 			SafeDelete(_rng);
 			SafeDelete(_timer);

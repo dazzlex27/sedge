@@ -10,14 +10,14 @@ namespace s3dge
 		class IndexBuffer
 		{
 		private:
-			uint m_BufferID;
-			uint m_Count;
+			uint _bufferID;
+			uint _count;
 
 		public:
 			IndexBuffer(uint* data, uint count);
 			~IndexBuffer();
 
-			inline const uint GetCount() const { return m_Count; }
+			inline const uint GetCount() const { return _count; }
 
 			void Bind();
 			void Unbind();

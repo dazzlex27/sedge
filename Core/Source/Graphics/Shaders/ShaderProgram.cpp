@@ -6,21 +6,21 @@ namespace s3dge
 	namespace Graphics
 	{
 		ShaderProgram::ShaderProgram(cstring vertex, cstring fragment)
-			: m_Vertex(vertex), m_Fragment(fragment)
+			: _vertex(vertex), _fragment(fragment)
 		{
-			m_ProgramID = Load();
+			_programID = Load();
 		}
 
 		ShaderProgram::~ShaderProgram()
 		{
-			glDeleteProgram(m_ProgramID);
+			glDeleteProgram(_programID);
 		}
 
 		uint ShaderProgram::Load()
 		{
 			// Create and compile vertex shader.
 			int vertexShader = glCreateShader(GL_VERTEX_SHADER);
-			std::string vertexSource = FileIO::ReadFromFile(m_Vertex).c_str();
+			std::string vertexSource = FileIO::ReadFromFile(_vertex).c_str();
 			if (vertexSource == "")
 			{
 				LOG_ERROR("Cannot find vertex shader source");
@@ -33,7 +33,7 @@ namespace s3dge
 
 			// Create and compile fragment shader.
 			int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-			std::string fragmentSource = FileIO::ReadFromFile(m_Fragment).c_str();
+			std::string fragmentSource = FileIO::ReadFromFile(_fragment).c_str();
 			if (fragmentSource == "")
 			{
 				LOG_ERROR("Cannot find fragment shader source");
@@ -88,7 +88,7 @@ namespace s3dge
 
 		void ShaderProgram::Enable()
 		{
-			glUseProgram(m_ProgramID);
+			glUseProgram(_programID);
 		}
 
 		void ShaderProgram::Disable()
@@ -98,37 +98,37 @@ namespace s3dge
 
 		void ShaderProgram::SetUniformMat4fv(cstring name, const Maths::mat4& matrix)
 		{
-			glUniformMatrix4fv(glGetUniformLocation(m_ProgramID, name), 1,GL_FALSE, matrix.elements);
+			glUniformMatrix4fv(glGetUniformLocation(_programID, name), 1, GL_FALSE, matrix.elements);
 		}
 
 		void ShaderProgram::SetUniform1f(cstring name, float value)
 		{
-			glUniform1f(glGetUniformLocation(m_ProgramID, name), value);
+			glUniform1f(glGetUniformLocation(_programID, name), value);
 		}
 
 		void ShaderProgram::SetUniform2f(cstring name, Maths::vec2f value)
 		{
-			glUniform2f(glGetUniformLocation(m_ProgramID, name), value.x, value.y);
+			glUniform2f(glGetUniformLocation(_programID, name), value.x, value.y);
 		}
 
 		void ShaderProgram::SetUniform3f(cstring name, Maths::vec3f value)
 		{
-			glUniform3f(glGetUniformLocation(m_ProgramID, name), value.x, value.y, value.z);
+			glUniform3f(glGetUniformLocation(_programID, name), value.x, value.y, value.z);
 		}
 
 		void ShaderProgram::SetUniform4f(cstring name, Maths::vec4f value)
 		{
-			glUniform4f(glGetUniformLocation(m_ProgramID, name), value.x, value.y, value.z, value.w);
+			glUniform4f(glGetUniformLocation(_programID, name), value.x, value.y, value.z, value.w);
 		}
 
 		void ShaderProgram::SetUniform1i(cstring name, int value)
 		{
-			glUniform1i(glGetUniformLocation(m_ProgramID, name), value);
+			glUniform1i(glGetUniformLocation(_programID, name), value);
 		}
 
 		void ShaderProgram::SetUniform1iv(cstring name, int count, int* value)
 		{
-			glUniform1iv(glGetUniformLocation(m_ProgramID, name), count, value);
+			glUniform1iv(glGetUniformLocation(_programID, name), count, value);
 		}
 	}
 }

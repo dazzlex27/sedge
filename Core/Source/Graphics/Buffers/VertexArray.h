@@ -13,8 +13,8 @@ namespace s3dge
 		class VertexArray
 		{
 		private:
-			uint m_VertexArrayID;
-			std::vector<Buffer*> m_Bufers;
+			uint _vertexArrayID;
+			std::vector<Buffer*> _buffers;
 
 		public:
 			VertexArray();

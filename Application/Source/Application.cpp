@@ -107,7 +107,8 @@ public:
 int main()
 {
 	Application app;
-	app.StartUp();
+	app.Run();
+	getchar();
 
 	return 0;
 }

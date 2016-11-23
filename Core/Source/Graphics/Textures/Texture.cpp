@@ -7,9 +7,9 @@ namespace s3dge
 		Texture::Texture(cstring name, cstring path)
 			: _name(name), _path(path)
 		{
-			_textureID = Load();
+			_id = Load();
 
-			if (_textureID == -1)
+			if (_id == -1)
 				LOG_ERROR("Failed to load texture");
 		}
 
@@ -43,7 +43,7 @@ namespace s3dge
 
 		void Texture::Bind() const
 		{
-			glBindTexture(GL_TEXTURE_2D, _textureID);
+			glBindTexture(GL_TEXTURE_2D, _id);
 		}
 
 		void Texture::Unbind() const

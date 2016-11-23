@@ -11,7 +11,7 @@ namespace s3dge
 		typedef std::chrono::duration<float, std::milli> ms;
 		typedef std::chrono::duration<float, std::nano> ns;
 
-		std::chrono::time_point<clock> m_Start;
+		std::chrono::time_point<clock> _start;
 
 	public:
 		Timer()
@@ -21,22 +21,22 @@ namespace s3dge
 
 		void Start()
 		{
-			m_Start = clock::now();
+			_start = clock::now();
 		}
 
 		float ElapsedS()
 		{
-			return std::chrono::duration_cast<ms>(clock::now() - m_Start).count() / 1000;
+			return std::chrono::duration_cast<ms>(clock::now() - _start).count() / 1000;
 		}
 
 		float ElapsedNS()
 		{
-			return std::chrono::duration_cast<ns>(clock::now() - m_Start).count();
+			return std::chrono::duration_cast<ns>(clock::now() - _start).count();
 		}
 
 		float ElapsedMS()
 		{
-			return std::chrono::duration_cast<ms>(clock::now() - m_Start).count();
+			return std::chrono::duration_cast<ms>(clock::now() - _start).count();
 		}
 	};
 }

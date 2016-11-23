@@ -6,20 +6,20 @@ namespace s3dge
 	{
 		VertexArray::VertexArray()
 		{
-			glGenVertexArrays(1, &m_VertexArrayID);
+			glGenVertexArrays(1, &_vertexArrayID);
 		}
 
 		VertexArray::~VertexArray()
 		{
-			for (Buffer* item : m_Bufers)
+			for (Buffer* item : _buffers)
 				SafeDelete(item);
 
-			glDeleteVertexArrays(1, &m_VertexArrayID);
+			glDeleteVertexArrays(1, &_vertexArrayID);
 		}
 
 		void VertexArray::AddBuffer(Buffer* buffer, uint index)
 		{
-			glBindVertexArray(m_VertexArrayID);
+			glBindVertexArray(_vertexArrayID);
 
 			buffer->Bind();
 			glEnableVertexAttribArray(index);
@@ -31,7 +31,7 @@ namespace s3dge
 
 		void VertexArray::Bind() const
 		{
-			glBindVertexArray(m_VertexArrayID);
+			glBindVertexArray(_vertexArrayID);
 		}
 
 		void VertexArray::Unbind() const
