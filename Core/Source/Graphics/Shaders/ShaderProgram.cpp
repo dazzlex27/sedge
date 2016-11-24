@@ -9,6 +9,8 @@ namespace s3dge
 			: _vertex(vertex), _fragment(fragment)
 		{
 			_programID = Load();
+			this->Enable();
+			this->SetUniform1iv("textureArray", 16, _textureIDs);
 		}
 
 		ShaderProgram::~ShaderProgram()
@@ -84,6 +86,12 @@ namespace s3dge
 			}
 
 			return true;
+		}
+
+		void ShaderProgram::SetProjection(Maths::mat4 ortho)
+		{
+			this->Enable();
+			this->SetUniformMat4fv("pr_matrix", ortho);
 		}
 
 		void ShaderProgram::Enable()

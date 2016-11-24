@@ -17,6 +17,12 @@ namespace s3dge
 			cstring _vertex;
 			cstring _fragment;
 
+			int _textureIDs[32]
+			{
+				0,1,2,3,4,5,6,7,8,9,
+				10,11,12,13,14,15,
+			};
+
 		public:
 			ShaderProgram(cstring vertex, cstring fragment);
 			~ShaderProgram();
@@ -31,6 +37,8 @@ namespace s3dge
 			void SetUniform4f(cstring name, Maths::vec4f value);
 			void SetUniform1i(cstring name, int value);
 			void SetUniform1iv(cstring name, int count, int* value);
+
+			void SetProjection(Maths::mat4 ortho);
 
 		private:
 			uint Load();

@@ -6,25 +6,18 @@ using namespace Graphics;
 
 void Application::Initialize()
 {
+
 	_window = CreateGameWindow("S3DGE Application", 1280, 720, false, false);
 	_shaderProgram = new ShaderProgram("Resources\\basic.vs", "Resources\\basic.fs");
-	mat4 ortho = mat4::GetOrthographic(0.0f, 16.0f, 0.0f, 9.0f, -1.0f, 1.0f);
-	int textureIDs[] =
-	{
-		0,1,2,3,4,5,6,7,8,9
-	};
-
-	_shaderProgram->Enable();
-	_shaderProgram->SetUniform1iv("textureArray", 10, textureIDs);
-	_shaderProgram->SetUniformMat4fv("pr_matrix", ortho);
-
-	_layer = new Layer(_shaderProgram, new Renderer2D());
-
+	_shaderProgram->SetProjection(mat4::GetOrthographic(0.0f, 16.0f, 0.0f, 9.0f, -1.0f, 1.0f));
+	
 	TextureManager::Add(new Texture("Box", "Resources\\box.jpg"));
 	TextureManager::Add(new Texture("Gradient", "Resources\\gradient.bmp"));
 	TextureManager::Add(new Texture("Brick", "Resources\\brick.jpg"));
-
 	FontManager::Add("test_font", "Resources\\SourceSansPro-Light.ttf", 32);
+
+	_layer = new Layer(_shaderProgram, new Renderer2D());
+
 	_fps = new Label("Test", FontManager::Get("test_font"), 0.4f, 8.2f, 2, 2, 0xffffffff);
 
 	for (float y = 0; y < 9.0f; y += 0.5f)
