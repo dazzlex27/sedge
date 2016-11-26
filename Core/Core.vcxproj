@@ -216,6 +216,7 @@
     <ClInclude Include="Externals\FreeType\freetype\tttags.h" />
     <ClInclude Include="Externals\FreeType\freetype\ttunpat.h" />
     <ClInclude Include="Externals\FreeType\ft2build.h" />
+    <ClInclude Include="Source\Common.h" />
     <ClInclude Include="Source\Graphics\Fonts\Font.h" />
     <ClInclude Include="Source\Graphics\Fonts\FontManager.h" />
     <ClInclude Include="Source\Graphics\GraphicsStructures.h" />

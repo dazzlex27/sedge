@@ -10,7 +10,7 @@ namespace s3dge
 			_id = Load();
 
 			if (_id == -1)
-				LOG_ERROR("Failed to load texture");
+				LOG_ERROR("Failed to load texture: ", name);
 		}
 
 		Texture::~Texture()
