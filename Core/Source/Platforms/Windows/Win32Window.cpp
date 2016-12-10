@@ -1,5 +1,5 @@
 #include <Windows.h>
-#include "Graphics/Window.h"
+#include "Platforms/Window.h"
 
 namespace s3dge
 {
@@ -43,7 +43,7 @@ namespace s3dge
 					key_callback(winInstance, wParam, message);
 				break;
 			case WM_SIZE:
-				//if (winInstance)
+				if (winInstance)
 					resize_callback(winInstance, LOWORD(lParam), HIWORD(lParam));
 				break;
 			default:
@@ -57,24 +57,19 @@ namespace s3dge
 		// Window initialization implementation
 		bool Window::InitializeWindow()
 		{
-			windowClass.hInstance = instance;
-			windowClass.lpszClassName = "S3DGE_Win32WindowClass";
-			windowClass.lpfnWndProc = WindowProcedure;
-			windowClass.style = CS_DBLCLKS;
-			windowClass.cbSize = sizeof(WNDCLASSEX);
-			windowClass.hIconSm = LoadIcon(NULL, IDI_APPLICATION);
-			windowClass.hIcon = LoadIcon(NULL, IDI_APPLICATION);
-			windowClass.hCursor = LoadCursor(NULL, IDC_ARROW);
-			windowClass.hbrBackground = (HBRUSH)COLOR_BACKGROUND;
-
-			if (!RegisterClassEx(&windowClass))
-				return false;
+			WNDCLASS wc = { 0 };
+			wc.lpfnWndProc = WindowProcedure;
+			wc.hInstance = instance;
+			wc.hbrBackground = (HBRUSH)(COLOR_BACKGROUND);
+			wc.lpszClassName = "S3DGE_Win32WindowClass";
+			if (!RegisterClass(&wc))
+				return 1;
 
 			window = CreateWindowEx(
-				WS_EX_OVERLAPPEDWINDOW,
-				windowClass.lpszClassName,
+				WS_EX_APPWINDOW,
+				wc.lpszClassName,
 				_title,
-				WS_OVERLAPPEDWINDOW,
+				WS_OVERLAPPEDWINDOW | WS_VISIBLE,
 				0,
 				0,
 				_width,
@@ -82,8 +77,7 @@ namespace s3dge
 				HWND_DESKTOP,
 				NULL,
 				instance,
-				NULL
-				);
+				NULL);
 
 			if (!window)
 			{
@@ -99,20 +93,11 @@ namespace s3dge
 			SetFullScreen(_fullScreen);
 			SetVSync(_vSync);
 
-			RECT client;
-			GetClientRect(window, &client);
-			resize_callback(this, client.right, client.bottom);
-
 			return true;
 		}
 
-		void Window::UpdateWindow()
+		void Window::Update()
 		{
-			if (_buttonsDown[VK_MWUP])
-				_buttonsDown[VK_MWUP] = false;
-			if (_buttonsDown[VK_MWDOWN])
-				_buttonsDown[VK_MWDOWN] = false;
-
 			POINT mousePosition;
 			GetCursorPos(&mousePosition);
 			ScreenToClient(window, &mousePosition);
@@ -126,10 +111,15 @@ namespace s3dge
 					_isClosed = true;
 
 				TranslateMessage(&messages);
-				DispatchMessage(&messages);				
+				DispatchMessage(&messages);
 			}
 
 			SwapBuffers(deviceContext);
+		}
+
+		void Window::Clear()
+		{
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		}
 
 		void Window::SetFullScreen(bool fullscreen)
@@ -145,7 +135,7 @@ namespace s3dge
 			else
 			{
 				SetWindowLongPtr(window, GWL_STYLE, WS_OVERLAPPEDWINDOW | WS_VISIBLE);
-				SetWindowLong(window, GWL_EXSTYLE, WS_EX_CLIENTEDGE);
+				SetWindowLong(window, GWL_EXSTYLE, WS_EX_APPWINDOW);
 				SetWindowPlacement(window, &wpc);
 				ShowWindow(window, SW_SHOWDEFAULT);
 
@@ -164,7 +154,7 @@ namespace s3dge
 
 			if (strstr(extensions, "WGL_EXT_swap_control") == 0)
 				return;
-			
+
 			else
 			{
 				wglSwapIntervalEXT = (PFNWGLSWAPINTERVALPROC)wglGetProcAddress("wglSwapIntervalEXT");
@@ -223,7 +213,7 @@ namespace s3dge
 			}
 
 			return true;
-		}		
+		}
 
 		void resize_callback(Window* window, uint width, uint height)
 		{
@@ -245,27 +235,40 @@ namespace s3dge
 			switch (command)
 			{
 			case WM_LBUTTONDOWN:
+			{
 				window->_buttonsDown[VK_LMB] = true;
 				window->_buttonsClicked[VK_LMB] = true;
-				break;
+				return;
+			}
 			case WM_LBUTTONUP:
+			{
 				window->_buttonsDown[VK_LMB] = false;
-				break;
+				return;
+			}
 			case WM_RBUTTONDOWN:
+			{
 				window->_buttonsDown[VK_RMB] = true;
 				window->_buttonsClicked[VK_RMB] = true;
-				break;
+				return;
+			}
 			case WM_RBUTTONUP:
+			{
 				window->_buttonsDown[VK_RMB] = false;
-				break;
+				return;
+			}
 			case WM_MBUTTONDOWN:
+			{
 				window->_buttonsDown[VK_MMB] = true;
 				window->_buttonsClicked[VK_MMB] = true;
-				break;
+				return;
+			}
 			case WM_MBUTTONUP:
+			{
 				window->_buttonsDown[VK_MMB] = false;
-				break;
+				return;
+			}
 			case WM_XBUTTONDOWN:
+			{
 				if (GET_XBUTTON_WPARAM(key) == XBUTTON1)
 				{
 					window->_buttonsDown[VK_XBUTTON1] = true;
@@ -276,14 +279,18 @@ namespace s3dge
 					window->_buttonsDown[VK_XBUTTON2] = true;
 					window->_buttonsClicked[VK_XBUTTON2] = true;
 				}
-				break;
+				return;
+			}
 			case WM_XBUTTONUP:
+			{
 				if (GET_XBUTTON_WPARAM(key) == XBUTTON1)
 					window->_buttonsDown[VK_XBUTTON1] = false;
 				else
 					window->_buttonsDown[VK_XBUTTON2] = false;
-				break;
+				return;
+			}
 			case WM_MOUSEWHEEL:
+			{
 				short zDelta = (short)GET_WHEEL_DELTA_WPARAM(key);
 				if (zDelta > 0)
 				{
@@ -295,7 +302,8 @@ namespace s3dge
 					window->_buttonsDown[VK_MWDOWN] = true;
 					window->_buttonsClicked[VK_MWDOWN] = true;
 				}
-				break;
+				return;
+			}
 			}
 		}
 

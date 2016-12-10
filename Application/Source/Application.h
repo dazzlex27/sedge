@@ -15,5 +15,4 @@ public:
 	void UpdateInput() override;
 	void Render() override;
 	void Dispose() override;
-
 };

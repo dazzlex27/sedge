@@ -9,6 +9,7 @@
 #include "Platforms/Windows/WindowsKeys.h"
 #include "Graphics/Textures/TextureManager.h"
 #include "Graphics/Fonts/FontManager.h"
+#include "Utilities/Timers/Timer.h"
 
 namespace s3dge
 {
@@ -16,10 +17,12 @@ namespace s3dge
 	{
 		class Window
 		{
-			#define MODE_FULLSCREEN 1
-			#define MODE_WINDOWED 0
-			#define MAX_KEYS 256
-			#define MAX_BUTTONS 16
+#define MODE_FULLSCREEN 1
+#define MODE_WINDOWED 0
+#define VSYNC_ON 1
+#define VSYNC_OFF 0
+#define MAX_KEYS 256
+#define MAX_BUTTONS 16
 
 		private:
 			cstring _title;
@@ -33,11 +36,15 @@ namespace s3dge
 			bool _buttonsDown[MAX_BUTTONS];
 			bool _keysClicked[MAX_KEYS];
 			bool _buttonsClicked[MAX_BUTTONS];
+			bool _buttonsDoubleClicked[MAX_BUTTONS];
+			Timer* _doubleClickTimers[MAX_BUTTONS];
+			float _elapsedDoubleClickThreshold;
+			int clicks;
 
 			static std::map<void*, Window*> _windowInstances;
 
 		public:
-			Window(cstring title,  uint width, uint height, bool fullscreen = false, bool vsync = true);
+			Window(cstring title, uint width, uint height, bool fullscreen = false, bool vsync = true);
 			~Window();
 
 			void Clear();
@@ -45,10 +52,10 @@ namespace s3dge
 			void UpdateInputState();
 			bool KeyDown(uint key) const;
 			bool KeyClicked(uint key) const;
-			bool KeyDoubleClicked(uint key) const;
 			bool MouseButtonDown(uint button) const;
 			bool MouseButtonClicked(uint button) const;
-			
+			bool MouseButtonDoubleClicked(uint key) const;
+
 			static void SetHandle(void* handle, Window* window);
 			void SetVSync(bool vsync);
 			void SetFullScreen(bool fullscreen);
@@ -64,7 +71,6 @@ namespace s3dge
 
 		private:
 			bool InitializeWindow();
-			void UpdateWindow();
 
 			friend void resize_callback(Window* window, uint width, uint height);
 			friend void key_callback(Window* window, int key, int command);

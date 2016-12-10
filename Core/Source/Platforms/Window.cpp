@@ -1,5 +1,4 @@
 #include "Window.h"
-#include "../Internal/Log.h"
 
 namespace s3dge
 {
@@ -18,6 +17,12 @@ namespace s3dge
 				memset(&_keysClicked, 0, sizeof(_keysClicked));
 				memset(&_buttonsDown, 0, sizeof(_buttonsDown));
 				memset(&_buttonsClicked, 0, sizeof(_buttonsClicked));
+				memset(&_buttonsDoubleClicked, 0, sizeof(_buttonsDoubleClicked));
+				for (int i = 0; i < MAX_BUTTONS; ++i)
+					_doubleClickTimers[i] = new Timer();
+
+				_elapsedDoubleClickThreshold = 1.0f;
+				clicks = 0;
 
 				glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 				glEnable(GL_BLEND);
@@ -31,19 +36,28 @@ namespace s3dge
 
 		Window::~Window()
 		{
-			TextureManager::Dispose();
-			FontManager::Dispose();
-		}
-
-		void Window::Update()
-		{
-			UpdateWindow();
+			for (int i = 0; i < MAX_BUTTONS; ++i)
+				SafeDelete(_doubleClickTimers[i]);
 		}
 
 		void Window::UpdateInputState()
 		{
+			if (_buttonsDown[VK_MWUP])
+				_buttonsDown[VK_MWUP] = false;
+			if (_buttonsDown[VK_MWDOWN])
+				_buttonsDown[VK_MWDOWN] = false;
+
 			memset(&_keysClicked, 0, sizeof(_keysClicked));
 			memset(&_buttonsClicked, 0, sizeof(_buttonsClicked));
+			for (int i = 0; i < MAX_BUTTONS; ++i)
+				if (_doubleClickTimers[i]->IsRunning())
+					if (_doubleClickTimers[i]->ElapsedS() > _elapsedDoubleClickThreshold)
+					{
+						LOG_WARNING("double click timer reset");
+						_doubleClickTimers[i]->Stop();
+					}
+
+			memset(&_buttonsDoubleClicked, 0, sizeof(_buttonsDoubleClicked));
 		}
 
 		bool Window::KeyDown(uint key) const
@@ -56,10 +70,9 @@ namespace s3dge
 			return _keysClicked[key];
 		}
 
-		bool Window::KeyDoubleClicked(uint key) const
+		bool Window::MouseButtonDoubleClicked(uint key) const
 		{
-			// TODO
-			return false;
+			return _buttonsDoubleClicked[key];
 		}
 
 		bool Window::MouseButtonDown(uint button) const
@@ -70,11 +83,6 @@ namespace s3dge
 		bool Window::MouseButtonClicked(uint button) const
 		{
 			return _buttonsClicked[button];
-		}
-
-		void Window::Clear()
-		{
-			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		}
 
 		void Window::SetHandle(void* instance, Window* window)

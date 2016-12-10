@@ -114,9 +114,10 @@
     <ClCompile Include="Source\Graphics\Textures\Texture.cpp" />
     <ClCompile Include="Source\Graphics\Textures\TextureManager.cpp" />
     <ClCompile Include="Source\Platforms\Windows\Win32Window.cpp" />
-    <ClCompile Include="Source\Graphics\Window.cpp" />
+    <ClCompile Include="Source\Platforms\Window.cpp" />
     <ClCompile Include="Source\Maths\mat4.cpp" />
     <ClCompile Include="Source\Utilities\ImageUtils.cpp" />
+    <ClCompile Include="Source\Utilities\Timers\Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Externals\FreeTypeGL\freetype-gl.h" />
@@ -242,7 +243,7 @@
     <ClInclude Include="Source\Maths\vec3.h" />
     <ClInclude Include="Source\Maths\vec4.h" />
     <ClInclude Include="Source\S3DGECommon.h" />
-    <ClInclude Include="Source\Graphics\Window.h" />
+    <ClInclude Include="Source\Platforms\Window.h" />
     <ClInclude Include="Source\CustomTypes.h" />
     <ClInclude Include="Source\Utilities\Converters.h" />
     <ClInclude Include="Source\Internal\DeleteMacros.h" />
@@ -250,7 +251,7 @@
     <ClInclude Include="Source\Utilities\ImageUtils.h" />
     <ClInclude Include="Source\Internal\Log.h" />
     <ClInclude Include="Source\Utilities\RGN.h" />
-    <ClInclude Include="Source\Utilities\Timer.h" />
+    <ClInclude Include="Source\Utilities\Timers\Timer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

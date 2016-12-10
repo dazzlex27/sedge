@@ -13,6 +13,7 @@ namespace s3dge
 			static std::vector<Texture*> _textures;
 
 		public:
+			static void Initialize();
 			static void Add(Texture* texture);
 			static void Add(cstring name, cstring path);
 			static Texture* Get(cstring name);

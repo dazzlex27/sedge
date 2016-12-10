@@ -6,6 +6,11 @@ namespace s3dge
 	{
 		std::vector<Texture*> TextureManager::_textures;
 
+		void TextureManager::Initialize()
+		{
+
+		}
+
 		void TextureManager::Add(Texture* texture)
 		{
 			_textures.push_back(texture);

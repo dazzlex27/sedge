@@ -20,9 +20,6 @@ namespace s3dge
 
 		virtual ~S3DGE()
 		{
-			SafeDelete(_window);
-			SafeDelete(_timer);
-			SafeDelete(_rng);
 		}
 
 		Graphics::Window* CreateGameWindow(cstring name, uint width, uint height, bool fullscreen = false, bool vsync = true)
@@ -38,13 +35,14 @@ namespace s3dge
 
 			LOG_INFO("Initializing components...");
 			InitializeInternalSystems();
+			InitializeResourceManagers();
 			Initialize();
 			LOG_INFO("Running main loop...");
 			RunGameLoop();
-
 			LOG_INFO("Shutdown initiated...");
 			Dispose();
-			ShutdownInternalSystems();
+			DisposeResourceManagers();
+			DisposeInternalSystems();
 
 			LOG_INFO("Application exited...");
 		}
@@ -78,6 +76,7 @@ namespace s3dge
 			float updateTime = 0.0f;
 			uint frames = 0;
 			float renderTime = 0.0f;
+			_timer->Start();
 
 			// The actual game loop.
 			while (!_window->IsClosed())
@@ -85,12 +84,12 @@ namespace s3dge
 				_window->Clear();
 
 				// Update input.
-				if (_timer->ElapsedS() - updateTime > (1.0f / 60.0f))
+				if (_timer->ElapsedS() - updateTime > (1.0f / 6000.0f))
 				{
 					UpdateInput();
 					_window->UpdateInputState();
 					++updates;
-					updateTime += 1.0f / 60.0f;
+					updateTime += 1.0f / 6000.0f;
 				}
 
 				Render();
@@ -113,11 +112,23 @@ namespace s3dge
 
 		void InitializeInternalSystems()
 		{
-			_rng = new RNG();
 			_timer = new Timer();
+			_rng = new RNG();
 		}
 
-		void ShutdownInternalSystems()
+		void InitializeResourceManagers()
+		{
+			Graphics::FontManager::Initialize();
+			Graphics::TextureManager::Initialize();
+		}
+
+		void DisposeResourceManagers()
+		{
+			Graphics::FontManager::Dispose();
+			Graphics::TextureManager::Dispose();
+		}
+
+		void DisposeInternalSystems()
 		{
 			SafeDelete(_rng);
 			SafeDelete(_timer);

@@ -6,6 +6,11 @@ namespace s3dge
 	{
 		std::vector<Font*> FontManager::_fonts;
 
+		void FontManager::Initialize()
+		{
+
+		}
+
 		void FontManager::Add(Font* font)
 		{
 			_fonts.push_back(font);

@@ -6,7 +6,6 @@ using namespace Graphics;
 
 void Application::Initialize()
 {
-
 	_window = CreateGameWindow("S3DGE Application", 1280, 720, false, false);
 	_shaderProgram = new ShaderProgram("Resources\\basic.vs", "Resources\\basic.fs");
 	_shaderProgram->SetProjection(mat4::GetOrthographic(0.0f, 16.0f, 0.0f, 9.0f, -1.0f, 1.0f));
@@ -41,10 +40,13 @@ void Application::Initialize()
 				{
 				case 0:
 					_layer->Add(new Sprite(x, y, 0.4f, 0.4f, TextureManager::Get("Gradient")));
+					break;
 				case 1:
 					_layer->Add(new Sprite(x, y, 0.4f, 0.4f, TextureManager::Get("Box")));
+					break;
 				default:
 					_layer->Add(new Sprite(x, y, 0.4f, 0.4f, TextureManager::Get("Brick")));
+					break;
 				}
 			}
 		}
@@ -61,11 +63,6 @@ void Application::UpdateInput()
 		(float)(9.0f - mouse.y * 9.0f / _window->GetHeight())));
 	std::string text = std::to_string(GetFPS()) + " fps";
 	_fps->text = text.c_str();
-
-	if (_window->MouseButtonClicked(VK_LMB))
-	{
-		_window->SetVSync(!_window->IsVSync());
-	}
 }
 
 void Application::Render()

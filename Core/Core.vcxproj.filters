@@ -75,18 +75,18 @@
     <ClCompile Include="Source\Graphics\Renderers\Renderer2D.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Graphics\Window.cpp">
+    <ClCompile Include="Source\Utilities\ImageUtils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Utilities\ImageUtils.cpp">
+    <ClCompile Include="Source\Utilities\Timers\Timer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Platforms\Window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\S3DGECommon.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Utilities\Timer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Maths\vec2.h">
@@ -470,13 +470,16 @@
     <ClInclude Include="Source\Graphics\Renderers\Renderer2D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Graphics\Window.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Utilities\ImageUtils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Common.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Utilities\Timers\Timer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Platforms\Window.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

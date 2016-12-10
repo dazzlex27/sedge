@@ -14,6 +14,7 @@ namespace s3dge
 			static std::vector<Font*> _fonts;
 
 		public:
+			static void Initialize();
 			static void Add(cstring name, cstring path, float size);
 			static void Add(Font* font);
 			static Font* Get(cstring name);
