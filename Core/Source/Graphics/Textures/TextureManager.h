@@ -23,8 +23,8 @@ namespace s3dge
 
 		private:
 			TextureManager();
-			TextureManager(const TextureManager& tRef) = delete;				// Disable copy constructor.
-			TextureManager& operator = (const TextureManager& tRef) = delete;	// Disable assignment operator.
+			TextureManager(const TextureManager& tRef) = delete;
+			TextureManager& operator = (const TextureManager& tRef) = delete;
 			~TextureManager(void) {}
 		};
 	}

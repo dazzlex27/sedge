@@ -99,6 +99,8 @@
     <ClCompile Include="Externals\FreeTypeGL\texture-atlas.c" />
     <ClCompile Include="Externals\FreeTypeGL\texture-font.c" />
     <ClCompile Include="Externals\FreeTypeGL\vector.c" />
+    <ClCompile Include="Source\Audio\Sound.cpp" />
+    <ClCompile Include="Source\Audio\SoundManager.cpp" />
     <ClCompile Include="Source\Graphics\Fonts\Font.cpp" />
     <ClCompile Include="Source\Graphics\Fonts\FontManager.cpp" />
     <ClCompile Include="Source\Internal\MemoryManager.cpp" />
@@ -217,6 +219,8 @@
     <ClInclude Include="Externals\FreeType\freetype\tttags.h" />
     <ClInclude Include="Externals\FreeType\freetype\ttunpat.h" />
     <ClInclude Include="Externals\FreeType\ft2build.h" />
+    <ClInclude Include="Source\Audio\Sound.h" />
+    <ClInclude Include="Source\Audio\SoundManager.h" />
     <ClInclude Include="Source\Common.h" />
     <ClInclude Include="Source\Graphics\Fonts\Font.h" />
     <ClInclude Include="Source\Graphics\Fonts\FontManager.h" />

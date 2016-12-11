@@ -7,8 +7,6 @@
 #include "Internal/Log.h"
 #include "Maths/vec2.h"
 #include "Platforms/Windows/WindowsKeys.h"
-#include "Graphics/Textures/TextureManager.h"
-#include "Graphics/Fonts/FontManager.h"
 #include "Utilities/Timers/Timer.h"
 
 namespace s3dge
@@ -17,12 +15,12 @@ namespace s3dge
 	{
 		class Window
 		{
-#define MODE_FULLSCREEN 1
-#define MODE_WINDOWED 0
-#define VSYNC_ON 1
-#define VSYNC_OFF 0
-#define MAX_KEYS 256
-#define MAX_BUTTONS 16
+			#define MODE_FULLSCREEN 1
+			#define MODE_WINDOWED 0
+			#define VSYNC_ON 1
+			#define VSYNC_OFF 0
+			#define MAX_KEYS 256
+			#define MAX_BUTTONS 16
 
 		private:
 			cstring _title;

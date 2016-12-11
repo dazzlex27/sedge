@@ -120,12 +120,14 @@ namespace s3dge
 		{
 			Graphics::FontManager::Initialize();
 			Graphics::TextureManager::Initialize();
+			Audio::SoundManager::Initialize();
 		}
 
 		void DisposeResourceManagers()
 		{
 			Graphics::FontManager::Dispose();
 			Graphics::TextureManager::Dispose();
+			Audio::SoundManager::Dispose();
 		}
 
 		void DisposeInternalSystems()
