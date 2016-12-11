@@ -10,6 +10,5 @@
 #include "Graphics/Textures/TextureManager.h"
 #include "Graphics/Fonts/FontManager.h"
 #include "Audio/SoundManager.h"
-#include "Utilities/Timers/Timer.h"
 #include "Utilities/Converters.h"
 #include "Utilities/RGN.h"
