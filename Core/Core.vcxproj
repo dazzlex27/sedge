@@ -43,14 +43,14 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)\!Binaries\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)\!Binaries\$(Configuration)\Intermediates\$(ProjectName)\</IntDir>
-    <IncludePath>$(SolutionDir)\Externals\GLEW\;$(ProjectDir)\Externals\FreeType\;$(SolutionDir)\Externals\STB\;$(ProjectDir)\Externals\FreeTypeGL\;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\Externals\GLEW\;$(SolutionDir)\Externals\FreeType\Include\;$(SolutionDir)\Externals\STB\;$(SolutionDir)\Externals\FreeType-GL\Source\;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)\!Binaries\$(Configuration)\;$(LibraryPath)</LibraryPath>
     <TargetName>S3DGE</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IntDir>$(SolutionDir)\!Binaries\$(Configuration)\Intermediates\$(ProjectName)\</IntDir>
     <OutDir>$(SolutionDir)\!Binaries\$(Configuration)\</OutDir>
-    <IncludePath>$(SolutionDir)\Externals\GLEW\;$(ProjectDir)\Externals\FreeType\;$(SolutionDir)\Externals\STB\;$(ProjectDir)\Externals\FreeTypeGL\;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\Externals\GLEW\;$(SolutionDir)\Externals\FreeType\Include\;$(SolutionDir)\Externals\STB\;$(SolutionDir)\Externals\FreeType-GL\Source\;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)\!Binaries\$(Configuration)\;$(LibraryPath)</LibraryPath>
     <TargetName>S3DGE</TargetName>
   </PropertyGroup>
@@ -67,7 +67,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;FreeType27.lib;GLEW.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;FreeType27.lib;FreeType-GL.lib;GLEW.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -91,14 +91,10 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>opengl32.lib;FreeType27.lib;GLEW.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;FreeType27.lib;FreeType-GL.lib;GLEW.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Externals\FreeTypeGL\platform.c" />
-    <ClCompile Include="Externals\FreeTypeGL\texture-atlas.c" />
-    <ClCompile Include="Externals\FreeTypeGL\texture-font.c" />
-    <ClCompile Include="Externals\FreeTypeGL\vector.c" />
     <ClCompile Include="Source\Audio\Sound.cpp" />
     <ClCompile Include="Source\Audio\SoundManager.cpp" />
     <ClCompile Include="Source\Graphics\Fonts\Font.cpp" />
@@ -122,103 +118,7 @@
     <ClCompile Include="Source\Utilities\Timers\Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Externals\FreeTypeGL\freetype-gl.h" />
-    <ClInclude Include="Externals\FreeTypeGL\opengl.h" />
-    <ClInclude Include="Externals\FreeTypeGL\platform.h" />
-    <ClInclude Include="Externals\FreeTypeGL\texture-atlas.h" />
-    <ClInclude Include="Externals\FreeTypeGL\texture-font.h" />
     <ClInclude Include="Externals\FreeTypeGL\utf8-utils.h" />
-    <ClInclude Include="Externals\FreeTypeGL\vec234.h" />
-    <ClInclude Include="Externals\FreeTypeGL\vector.h" />
-    <ClInclude Include="Externals\FreeType\freetype\config\ftconfig.h" />
-    <ClInclude Include="Externals\FreeType\freetype\config\ftheader.h" />
-    <ClInclude Include="Externals\FreeType\freetype\config\ftmodule.h" />
-    <ClInclude Include="Externals\FreeType\freetype\config\ftoption.h" />
-    <ClInclude Include="Externals\FreeType\freetype\config\ftstdlib.h" />
-    <ClInclude Include="Externals\FreeType\freetype\freetype.h" />
-    <ClInclude Include="Externals\FreeType\freetype\ftadvanc.h" />
-    <ClInclude Include="Externals\FreeType\freetype\ftautoh.h" />
-    <ClInclude Include="Externals\FreeType\freetype\ftbbox.h" />
-    <ClInclude Include="Externals\FreeType\freetype\ftbdf.h" />
-    <ClInclude Include="Externals\FreeType\freetype\ftbitmap.h" />
-    <ClInclude Include="Externals\FreeType\freetype\ftbzip2.h" />
-    <ClInclude Include="Externals\FreeType\freetype\ftcache.h" />
-    <ClInclude Include="Externals\FreeType\freetype\ftcffdrv.h" />
-    <ClInclude Include="Externals\FreeType\freetype\ftchapters.h" />
-    <ClInclude Include="Externals\FreeType\freetype\ftcid.h" />
-    <ClInclude Include="Externals\FreeType\freetype\fterrdef.h" />
-    <ClInclude Include="Externals\FreeType\freetype\fterrors.h" />
-    <ClInclude Include="Externals\FreeType\freetype\ftfntfmt.h" />
-    <ClInclude Include="Externals\FreeType\freetype\ftgasp.h" />
-    <ClInclude Include="Externals\FreeType\freetype\ftglyph.h" />
-    <ClInclude Include="Externals\FreeType\freetype\ftgxval.h" />
-    <ClInclude Include="Externals\FreeType\freetype\ftgzip.h" />
-    <ClInclude Include="Externals\FreeType\freetype\ftimage.h" />
-    <ClInclude Include="Externals\FreeType\freetype\ftincrem.h" />
-    <ClInclude Include="Externals\FreeType\freetype\ftlcdfil.h" />
-    <ClInclude Include="Externals\FreeType\freetype\ftlist.h" />
-    <ClInclude Include="Externals\FreeType\freetype\ftlzw.h" />
-    <ClInclude Include="Externals\FreeType\freetype\ftmac.h" />
-    <ClInclude Include="Externals\FreeType\freetype\ftmm.h" />
-    <ClInclude Include="Externals\FreeType\freetype\ftmodapi.h" />
-    <ClInclude Include="Externals\FreeType\freetype\ftmoderr.h" />
-    <ClInclude Include="Externals\FreeType\freetype\ftotval.h" />
-    <ClInclude Include="Externals\FreeType\freetype\ftoutln.h" />
-    <ClInclude Include="Externals\FreeType\freetype\ftpfr.h" />
-    <ClInclude Include="Externals\FreeType\freetype\ftrender.h" />
-    <ClInclude Include="Externals\FreeType\freetype\ftsizes.h" />
-    <ClInclude Include="Externals\FreeType\freetype\ftsnames.h" />
-    <ClInclude Include="Externals\FreeType\freetype\ftstroke.h" />
-    <ClInclude Include="Externals\FreeType\freetype\ftsynth.h" />
-    <ClInclude Include="Externals\FreeType\freetype\ftsystem.h" />
-    <ClInclude Include="Externals\FreeType\freetype\fttrigon.h" />
-    <ClInclude Include="Externals\FreeType\freetype\ftttdrv.h" />
-    <ClInclude Include="Externals\FreeType\freetype\fttypes.h" />
-    <ClInclude Include="Externals\FreeType\freetype\ftwinfnt.h" />
-    <ClInclude Include="Externals\FreeType\freetype\internal\autohint.h" />
-    <ClInclude Include="Externals\FreeType\freetype\internal\ftcalc.h" />
-    <ClInclude Include="Externals\FreeType\freetype\internal\ftdebug.h" />
-    <ClInclude Include="Externals\FreeType\freetype\internal\ftdriver.h" />
-    <ClInclude Include="Externals\FreeType\freetype\internal\ftgloadr.h" />
-    <ClInclude Include="Externals\FreeType\freetype\internal\fthash.h" />
-    <ClInclude Include="Externals\FreeType\freetype\internal\ftmemory.h" />
-    <ClInclude Include="Externals\FreeType\freetype\internal\ftobjs.h" />
-    <ClInclude Include="Externals\FreeType\freetype\internal\ftpic.h" />
-    <ClInclude Include="Externals\FreeType\freetype\internal\ftrfork.h" />
-    <ClInclude Include="Externals\FreeType\freetype\internal\ftserv.h" />
-    <ClInclude Include="Externals\FreeType\freetype\internal\ftstream.h" />
-    <ClInclude Include="Externals\FreeType\freetype\internal\fttrace.h" />
-    <ClInclude Include="Externals\FreeType\freetype\internal\ftvalid.h" />
-    <ClInclude Include="Externals\FreeType\freetype\internal\internal.h" />
-    <ClInclude Include="Externals\FreeType\freetype\internal\psaux.h" />
-    <ClInclude Include="Externals\FreeType\freetype\internal\pshints.h" />
-    <ClInclude Include="Externals\FreeType\freetype\internal\services\svbdf.h" />
-    <ClInclude Include="Externals\FreeType\freetype\internal\services\svcid.h" />
-    <ClInclude Include="Externals\FreeType\freetype\internal\services\svfntfmt.h" />
-    <ClInclude Include="Externals\FreeType\freetype\internal\services\svgldict.h" />
-    <ClInclude Include="Externals\FreeType\freetype\internal\services\svgxval.h" />
-    <ClInclude Include="Externals\FreeType\freetype\internal\services\svkern.h" />
-    <ClInclude Include="Externals\FreeType\freetype\internal\services\svmm.h" />
-    <ClInclude Include="Externals\FreeType\freetype\internal\services\svotval.h" />
-    <ClInclude Include="Externals\FreeType\freetype\internal\services\svpfr.h" />
-    <ClInclude Include="Externals\FreeType\freetype\internal\services\svpostnm.h" />
-    <ClInclude Include="Externals\FreeType\freetype\internal\services\svprop.h" />
-    <ClInclude Include="Externals\FreeType\freetype\internal\services\svpscmap.h" />
-    <ClInclude Include="Externals\FreeType\freetype\internal\services\svpsinfo.h" />
-    <ClInclude Include="Externals\FreeType\freetype\internal\services\svsfnt.h" />
-    <ClInclude Include="Externals\FreeType\freetype\internal\services\svttcmap.h" />
-    <ClInclude Include="Externals\FreeType\freetype\internal\services\svtteng.h" />
-    <ClInclude Include="Externals\FreeType\freetype\internal\services\svttglyf.h" />
-    <ClInclude Include="Externals\FreeType\freetype\internal\services\svwinfnt.h" />
-    <ClInclude Include="Externals\FreeType\freetype\internal\sfnt.h" />
-    <ClInclude Include="Externals\FreeType\freetype\internal\t1types.h" />
-    <ClInclude Include="Externals\FreeType\freetype\internal\tttypes.h" />
-    <ClInclude Include="Externals\FreeType\freetype\t1tables.h" />
-    <ClInclude Include="Externals\FreeType\freetype\ttnameid.h" />
-    <ClInclude Include="Externals\FreeType\freetype\tttables.h" />
-    <ClInclude Include="Externals\FreeType\freetype\tttags.h" />
-    <ClInclude Include="Externals\FreeType\freetype\ttunpat.h" />
-    <ClInclude Include="Externals\FreeType\ft2build.h" />
     <ClInclude Include="Source\Audio\Sound.h" />
     <ClInclude Include="Source\Audio\SoundManager.h" />
     <ClInclude Include="Source\Common.h" />

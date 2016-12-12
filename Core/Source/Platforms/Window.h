@@ -4,6 +4,7 @@
 #include <map>
 #include <GL/glew.h>
 #include "CustomTypes.h"
+#include "Internal/DeleteMacros.h"
 #include "Internal/Log.h"
 #include "Maths/vec2.h"
 #include "Platforms/Windows/WindowsKeys.h"
