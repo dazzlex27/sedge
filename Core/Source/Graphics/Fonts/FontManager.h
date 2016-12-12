@@ -12,11 +12,11 @@ namespace s3dge
 		{
 		private:
 			static std::vector<Font*> _fonts;
+			static bool _initialized;
 
 		public:
 			static void Initialize();
-			static void Add(cstring name, cstring path, float size);
-			static void Add(Font* font);
+			static void Add(cstring name, cstring path, float size, bool overrideExisting = false);
 			static Font* Get(cstring name);
 			static void Dispose();
 

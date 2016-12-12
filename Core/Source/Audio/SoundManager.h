@@ -2,6 +2,7 @@
 
 #include <vector>
 #include "Internal/DeleteMacros.h"
+#include "Internal/Log.h"
 #include "Sound.h"
 
 namespace s3dge
@@ -12,11 +13,11 @@ namespace s3dge
 		{
 		private:
 			static std::vector<Sound*> _sounds;
+			static bool _initialized;
 
 		public:
 			static void Initialize();
-			static void Add(Sound* texture);
-			static void Add(cstring name, cstring path);
+			static void Add(cstring name, cstring path, bool overrideExisting = false);
 			static Sound* Get(cstring name);
 			static void Dispose();
 

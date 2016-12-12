@@ -10,9 +10,9 @@ void Application::Initialize()
 	_shaderProgram = new ShaderProgram("Resources\\basic.vs", "Resources\\basic.fs");
 	_shaderProgram->SetProjection(mat4::GetOrthographic(0.0f, 16.0f, 0.0f, 9.0f, -1.0f, 1.0f));
 	
-	TextureManager::Add(new Texture("Box", "Resources\\box.jpg"));
-	TextureManager::Add(new Texture("Gradient", "Resources\\gradient.bmp"));
-	TextureManager::Add(new Texture("Brick", "Resources\\brick.jpg"));
+	TextureManager::Add("Box", "Resources\\box.jpg");
+	TextureManager::Add("Gradient", "Resources\\gradient.bmp");
+	TextureManager::Add("Brick", "Resources\\brick.jpg");
 	FontManager::Add("test_font", "Resources\\SourceSansPro-Light.ttf", 32);
 
 	_layer = new Layer(_shaderProgram, new Renderer2D());

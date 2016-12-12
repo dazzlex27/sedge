@@ -5,6 +5,7 @@ namespace s3dge
 	bool MemoryManager::_initialized;
 	void* MemoryManager::_head;
 	uint MemoryManager::_allocations;
+	size_t MemoryManager::_size;
 
 	bool MemoryManager::Initialize(size_t size)
 	{

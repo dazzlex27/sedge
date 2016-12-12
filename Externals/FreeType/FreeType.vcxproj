@@ -133,7 +133,6 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>
       </SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <CompileAsManaged>false</CompileAsManaged>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -141,6 +140,7 @@
       <MinimalRebuild>false</MinimalRebuild>
       <DisableLanguageExtensions>true</DisableLanguageExtensions>
       <DisableSpecificWarnings>4001; 4702</DisableSpecificWarnings>
+      <AdditionalIncludeDirectories>$(ProjectDir)\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -167,7 +167,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>
       </SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)\Include\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CompileAsManaged>false</CompileAsManaged>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <DebugInformationFormat />

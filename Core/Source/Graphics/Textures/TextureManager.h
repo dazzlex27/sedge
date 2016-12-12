@@ -11,11 +11,11 @@ namespace s3dge
 		{
 		private:
 			static std::vector<Texture*> _textures;
+			static bool _initialized;
 
 		public:
 			static void Initialize();
-			static void Add(Texture* texture);
-			static void Add(cstring name, cstring path);
+			static void Add(cstring name, cstring path, bool overrideExisting = false);
 			static Texture* Get(cstring name);
 			static void Dispose();
 

@@ -5,35 +5,49 @@ namespace s3dge
 	namespace Audio
 	{
 		std::vector<Sound*> SoundManager::_sounds;
+		bool SoundManager::_initialized;
 
 		void SoundManager::Initialize()
 		{
-
+			_initialized = true;
 		}
 
-		void SoundManager::Add(Sound* texture)
+		void SoundManager::Add(cstring name, cstring path, bool overrideExisting)
 		{
-			_sounds.push_back(texture);
-		}
+			if (_initialized)
+			{
+				if (Get(name) != nullptr)
+					if (overrideExisting)
+					{
+						_sounds.push_back(new Sound(name, path));
+						return;
+					}
 
-		void SoundManager::Add(cstring name, cstring path)
-		{
-			_sounds.push_back(new Sound(name, path));
+				_sounds.push_back(new Sound(name, path));
+			}
 		}
 
 		Sound* SoundManager::Get(cstring name)
 		{
-			for (auto item : _sounds)
-				if (item->GetName() == name)
-					return item;
+			if (_initialized)
+			{
+				for (auto item : _sounds)
+					if (item->GetName() == name)
+						return item;
+			}
 
 			return nullptr;
 		}
 
 		void SoundManager::Dispose()
 		{
-			for (auto item : _sounds)
-				SafeDelete(item);
+			if (_initialized)
+			{
+				for (auto item : _sounds)
+					SafeDelete(item);
+
+				_initialized = false;
+			}
 		}
 	}
 }

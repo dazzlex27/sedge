@@ -85,7 +85,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Core\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Core\Include\</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>GLEW_STATIC;FT2_BUILD_LIBRARY;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -110,7 +110,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Core\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Core\Include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>GLEW_STATIC;FT2_BUILD_LIBRARY;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Source/Common.h"
+#include "../Source/Common.h"
 
 namespace s3dge
 {

@@ -12,8 +12,9 @@ namespace s3dge
 			cstring _name;
 			cstring _path;
 
-		public:
+		private:
 			Sound(cstring name, cstring path);
+		public:
 			~Sound();
 
 		public:
@@ -22,6 +23,8 @@ namespace s3dge
 			void Pause();
 
 			inline cstring GetName() { return _name; }
+
+			friend class SoundManager;
 		};
 	}
 }

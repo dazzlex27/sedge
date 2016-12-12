@@ -15,14 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GL\glew.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GL\wglew.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="glew.c">
       <Filter>Source Files</Filter>
     </ClCompile>
