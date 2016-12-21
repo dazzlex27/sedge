@@ -6,10 +6,18 @@ namespace s3dge
 	{
 		std::vector<Sound*> SoundManager::_sounds;
 		bool SoundManager::_initialized;
+		ga_Mixer* SoundManager::_mixer;
+		gau_Manager* SoundManager::_manager;
 
 		void SoundManager::Initialize()
 		{
-			_initialized = true;
+			if (!_initialized)
+			{
+				gc_initialize(0);
+				_manager = gau_manager_create();
+				_mixer = gau_manager_mixer(_manager);
+				_initialized = true;
+			}
 		}
 
 		void SoundManager::Add(cstring name, cstring path, bool overrideExisting)
@@ -39,12 +47,20 @@ namespace s3dge
 			return nullptr;
 		}
 
+		void SoundManager::Update()
+		{
+			gau_manager_update(_manager);
+		}
+
 		void SoundManager::Dispose()
 		{
 			if (_initialized)
 			{
 				for (auto item : _sounds)
 					SafeDelete(item);
+
+				gau_manager_destroy(_manager);
+				gc_shutdown();
 
 				_initialized = false;
 			}
