@@ -1,3 +1,11 @@
+/*
+===========================================================================
+Timer.cpp
+
+Implements timer functions. Will most likely be abstracted to incorporate a few timer engines via #ifdef's
+===========================================================================
+*/
+
 #include "Timer.h"
 #include "Internal/Log.h"
 

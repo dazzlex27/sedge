@@ -1,3 +1,11 @@
+/*
+===========================================================================
+Win32Window.cpp
+
+Main Win32 implementation file.
+===========================================================================
+*/
+
 #include <Windows.h>
 #include "Platforms/Window.h"
 
@@ -5,10 +13,12 @@ namespace s3dge
 {
 	namespace Graphics
 	{
+		// Forward declarations
 		LRESULT CALLBACK WindowProcedure(HWND, UINT, WPARAM, LPARAM);
 		PIXELFORMATDESCRIPTOR GetPixelFormatDescriptor();
 		bool SetupGLContext();
 
+		// Essential variables only
 		HWND window;
 		HINSTANCE instance;
 		HDC deviceContext;
@@ -96,6 +106,7 @@ namespace s3dge
 			return true;
 		}
 
+		// Window update implementation
 		void Window::Update()
 		{
 			POINT mousePosition;
@@ -117,11 +128,13 @@ namespace s3dge
 			SwapBuffers(deviceContext);
 		}
 
+		// Window clear implementation
 		void Window::Clear()
 		{
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		}
 
+		// Switches between window fullscreen states
 		void Window::SetFullScreen(bool fullscreen)
 		{
 			if (fullscreen)
@@ -145,6 +158,7 @@ namespace s3dge
 			_fullScreen = fullscreen;
 		}
 
+		// Switches window vsync state
 		void Window::SetVSync(bool vsync)
 		{
 			typedef BOOL(APIENTRY *PFNWGLSWAPINTERVALPROC)(int);
@@ -166,6 +180,7 @@ namespace s3dge
 			}
 		}
 
+		// Applies OpenGL context to a created window
 		bool SetupGLContext()
 		{
 			deviceContext = GetDC(window);
@@ -215,6 +230,7 @@ namespace s3dge
 			return true;
 		}
 
+		// Triggers whenever a window changes size
 		void resize_callback(Window* window, uint width, uint height)
 		{
 			if (height == 0)
@@ -230,6 +246,8 @@ namespace s3dge
 			glLoadIdentity();				//reset modelview matrix
 		}
 
+		// Triggers whenever a mouse button is manipulated.
+		// Currently supports 9 mouse buttons
 		void mousebutton_callback(Window* window, int key, int command)
 		{
 			switch (command)
@@ -307,6 +325,7 @@ namespace s3dge
 			}
 		}
 
+		// Triggers whenever a keyboard key is manipulated
 		void key_callback(Window* window, int key, int command)
 		{
 			switch (command)
@@ -325,6 +344,8 @@ namespace s3dge
 			}
 		}
 
+		// Returns a struct containing screen pixel format data.
+		// Required for window setup
 		PIXELFORMATDESCRIPTOR GetPixelFormatDescriptor()
 		{
 			PIXELFORMATDESCRIPTOR pfd = { 0 };

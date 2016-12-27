@@ -1,3 +1,11 @@
+/*
+===========================================================================
+Window.cpp
+
+Contains basic high-level window management functions.
+===========================================================================
+*/
+
 #include "Window.h"
 
 namespace s3dge
@@ -13,6 +21,7 @@ namespace s3dge
 				LOG_FATAL("Could not initialize window!");
 			else
 			{
+				// Reset input state
 				memset(&_keysDown, 0, sizeof(_keysDown));
 				memset(&_keysClicked, 0, sizeof(_keysClicked));
 				memset(&_buttonsDown, 0, sizeof(_buttonsDown));
@@ -24,6 +33,7 @@ namespace s3dge
 				_elapsedDoubleClickThreshold = 1.0f;
 				clicks = 0;
 
+				// Apply basic OpenGL setup
 				glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 				glEnable(GL_BLEND);
 				glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -40,6 +50,9 @@ namespace s3dge
 				SafeDelete(_doubleClickTimers[i]);
 		}
 
+		// Triggers once every 1/60 of a second.
+		// Resets all click and double-click states.
+		// Also resets mouse wheel rotation state
 		void Window::UpdateInputState()
 		{
 			if (_buttonsDown[VK_MWUP])
@@ -85,11 +98,13 @@ namespace s3dge
 			return _buttonsClicked[button];
 		}
 
+		// Inserts a window instance into a static window collection
 		void Window::SetHandle(void* instance, Window* window)
 		{
 			_windowInstances[instance] = window;
 		}
 
+		// Returns a window instance of a specified index
 		Window* Window::GetWindowClassInstance(void* windowInstance)
 		{
 			return _windowInstances[windowInstance];

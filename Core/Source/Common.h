@@ -1,3 +1,12 @@
+/*
+===========================================================================
+Common.h
+
+Aggregates all the basic components of the engine in a single header file.
+This file is included by the main header S3DGE.h
+===========================================================================
+*/
+
 #pragma once
 
 #include "Maths/MathsHeader.h"

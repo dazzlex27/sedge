@@ -1,3 +1,11 @@
+/*
+===========================================================================
+Converters.h
+
+Lists a few functions for mathematical conversions. Might be refactored later.
+===========================================================================
+*/
+
 #pragma once
 
 #include "CustomTypes.h"

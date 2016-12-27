@@ -1,3 +1,14 @@
+/*
+===========================================================================
+Timer.h
+
+Defines the main engine timer class.
+Relies on C++11 <chrono> features.
+
+This file will likely be #ifdef'ed to include a more conventional timer.
+===========================================================================
+*/
+
 #pragma once
 
 #include <chrono>

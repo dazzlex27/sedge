@@ -1,3 +1,12 @@
+/*
+===========================================================================
+RNG.h
+
+Defines a random number generator for the engine.
+Utilizes C++11 randomizing features.
+===========================================================================
+*/
+
 #pragma once
 
 #include <random>

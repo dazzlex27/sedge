@@ -1,3 +1,13 @@
+/* 
+===========================================================================
+WindowsKeys.h
+
+Lists all key codes as declared by the Windows OS.
+As of 12/27/2016 the engine supports all keyboard keys listed below and 9 mouse buttons.
+No support for gamepads or any other input devices just yet.
+===========================================================================
+*/
+
 #pragma once
 
 namespace s3dge
