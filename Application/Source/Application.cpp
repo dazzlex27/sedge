@@ -3,6 +3,7 @@
 using namespace s3dge;
 using namespace Maths;
 using namespace Graphics;
+using namespace Audio;
 
 void Application::Initialize()
 {
@@ -14,6 +15,7 @@ void Application::Initialize()
 	TextureManager::Add("Gradient", "Resources\\gradient.bmp");
 	TextureManager::Add("Brick", "Resources\\brick.jpg");
 	FontManager::Add("test_font", "Resources\\SourceSansPro-Light.ttf", 32);
+	SoundManager::Add("back-in-black", "Resources\\back-in-black.ogg");
 
 	_layer = new Layer(_shaderProgram, new Renderer2D());
 
@@ -53,6 +55,8 @@ void Application::Initialize()
 	}
 
 	_layer->Add(_fps);
+
+	SoundManager::Get("back-in-black")->Play();
 }
 
 void Application::UpdateInput()
@@ -72,6 +76,7 @@ void Application::Render()
 
 void Application::Dispose()
 {
+	SoundManager::Get("back-in-black")->Stop();
 	SafeDelete(_layer);
 	SafeDelete(_shaderProgram);
 }

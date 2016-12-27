@@ -30,6 +30,10 @@ namespace s3dge
 						_sounds.push_back(new Sound(name, path));
 						return;
 					}
+					else
+					{
+						return;
+					}
 
 				_sounds.push_back(new Sound(name, path));
 			}

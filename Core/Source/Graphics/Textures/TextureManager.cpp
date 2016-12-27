@@ -22,6 +22,10 @@ namespace s3dge
 						_textures.push_back(new Texture(name, path));
 						return;
 					}
+					else
+					{
+						return;
+					}
 
 				_textures.push_back(new Texture(name, path));
 			}

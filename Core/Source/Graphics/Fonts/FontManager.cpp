@@ -22,6 +22,10 @@ namespace s3dge
 						_fonts.push_back(new Font(name, path, size));
 						return;
 					}
+					else
+					{
+						return;
+					}
 
 				_fonts.push_back(new Font(name, path, size));
 			}
