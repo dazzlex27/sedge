@@ -1,3 +1,11 @@
+/*
+===========================================================================
+GraphicsStructures.h
+
+This file contains the necessary structures used by the Graphics namespace
+===========================================================================
+*/
+
 #pragma once
 
 #include "CustomTypes.h"

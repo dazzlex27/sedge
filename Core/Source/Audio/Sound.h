@@ -1,3 +1,12 @@
+/*
+===========================================================================
+Sound.h
+
+Defines a class responsible for managing audio streams.
+At the moment uses Gorilla Audio to do the heavy lifting
+===========================================================================
+*/
+
 #pragma once
 
 #include <gorilla/ga.h>

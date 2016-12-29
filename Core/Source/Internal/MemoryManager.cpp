@@ -1,3 +1,11 @@
+/*
+===========================================================================
+MemoryManager.cpp
+
+Custom memory manager implementation
+===========================================================================
+*/
+
 #include "MemoryManager.h"
 
 namespace s3dge

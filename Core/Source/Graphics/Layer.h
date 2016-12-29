@@ -1,3 +1,14 @@
+/*
+===========================================================================
+Layer.h
+
+A class designed to represent a layer of objects on screen.
+Each layer requires a shader instance and a renderer instance.
+
+Using layers is highly encouraged, event if there's only one. That helps to keep things clean.
+===========================================================================
+*/
+
 #pragma once
 
 #include <vector>
@@ -12,12 +23,12 @@ namespace s3dge
 		class Layer
 		{
 		private:
-			std::vector<Renderable2D*> _renderables;
-			ShaderProgram* _shaderProgram;
-			Renderer2D* _renderer;
-			Maths::mat4 _transformationMatrix;
-			bool _ownsRenderer;
-			bool _ownsShader;
+			std::vector<Renderable2D*> _renderables; // an array of elements in the layer
+			ShaderProgram* _shaderProgram; // a shader instance
+			Renderer2D* _renderer; // a renderer instance
+			Maths::mat4 _transformationMatrix; // transformation applied to the layer
+			bool _ownsRenderer; // flag to indicate whether the shader should be disposed by the layer upon deletion
+			bool _ownsShader; // flag to indicate whether the renderer should be disposed by the layer upon deletion
 
 		public:
 			//Layer(); // TODO: needs a default shader

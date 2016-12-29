@@ -1,3 +1,11 @@
+/*
+===========================================================================
+mat4.cpp
+
+Implements mat4 class for scene transformations
+===========================================================================
+*/
+
 #include "mat4.h"
 
 namespace s3dge
@@ -49,11 +57,31 @@ namespace s3dge
 			return *this;
 		}
 
+		/*
+		=============================================
+		Returns an identity matrix
+		Looks like this:
+		1 0 0 0
+		0 1 0 0
+		0 0 1 0
+		0 0 0 1
+		=============================================
+		*/
 		mat4 mat4::GetIdentity()
 		{
 			return mat4(1.0f);
 		}
 
+		/*
+		=============================================
+		 Returns a matrix translated according to the input vector
+		 Looks like this:
+		 1 0 0 x
+		 0 1 0 y
+		 0 0 1 z
+		 0 0 0 1
+		 =============================================
+		*/
 		mat4 mat4::Translate(const vec3f& vector)
 		{
 			mat4 result = mat4::GetIdentity();
@@ -65,6 +93,12 @@ namespace s3dge
 			return result;
 		}
 
+		/*
+		=============================================
+		Returns a matrix rotated according to the specified input parameters
+		Too big to fit its looks here, feel free to google it
+		=============================================
+		*/
 		mat4 mat4::Rotate(const vec3f& vector, float angle)
 		{
 			mat4 result = mat4::GetIdentity();
@@ -95,6 +129,16 @@ namespace s3dge
 			return result;
 		}
 
+		/*
+		=============================================
+		 Returns a matrix scaled by the input vector
+		 Looks like this:
+		 x 0 0 0
+		 0 y 0 0
+		 0 0 z 0
+		 0 0 0 1
+		 =============================================
+		*/
 		mat4 mat4::Scale(const vec3f& vector)
 		{
 			mat4 result = mat4::GetIdentity();
@@ -106,6 +150,18 @@ namespace s3dge
 			return result;
 		}
 
+		/*
+		=============================================
+		 Returns orthographic projection according to specified limits
+		 Looks like this:
+		 2/(r-l)		0			0			-(r+l)/(r-l)
+		 0			2/(t-b)		0			-(t+b)/(t-b)
+		 0			0			-2/(f-n)	-(f+n)/(f-n)
+		 0			0			0			1
+
+		 TODO: Investigate improper screen border alignment
+		 =============================================
+		*/
 		mat4 mat4::GetOrthographic(float left, float right, float bottom, float top, float near, float far)
 		{
 			mat4 result = mat4::GetIdentity();
@@ -121,6 +177,14 @@ namespace s3dge
 			return result;
 		}
 
+		/*
+		 Returns a perspective matrix with the specified settings
+		 Looks like this:
+		 2n/(r-l)	0			(r+l)/(r-l)		0
+		 0			2n(t-b)		(t+b)/(t-b)		0
+		 0			0			-(f+n)/(f-n)	-2fn(f-n)/(f-n)
+		 0			0			-1				0
+		*/
 		mat4 mat4::GetPerspective(float fov, float aspectRatio, float near, float far)
 		{
 			mat4 result;

@@ -1,6 +1,6 @@
 /*
 ===========================================================================
-CommonTypes.h
+CustomTypes.h
 
 Contains typedefs for custom-defined types.
 TODO: include definitions for different int sizes.

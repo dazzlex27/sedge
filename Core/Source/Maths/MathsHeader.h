@@ -1,3 +1,11 @@
+/*
+===========================================================================
+MathsHeader.h
+
+Aggregates all the other math-related headers
+===========================================================================
+*/
+
 #pragma once
 
 #define _USE_MATH_DEFINES

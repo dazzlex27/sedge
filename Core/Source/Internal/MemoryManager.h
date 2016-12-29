@@ -1,3 +1,11 @@
+/*
+===========================================================================
+MemoryManager.h
+
+A custom memory allocator. Basically isn't implemented yet, stay tuned for that.
+===========================================================================
+*/
+
 #pragma once
 
 #include <vector>

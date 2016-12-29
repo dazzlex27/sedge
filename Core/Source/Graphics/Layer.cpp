@@ -1,3 +1,14 @@
+/*
+===========================================================================
+Layer.cpp
+
+A class designed to represent a layer of objects on screen.
+Each layer requires a shader instance and a renderer instance.
+
+Using layers is highly encouraged, event if there's only one. That helps to keep things clean.
+===========================================================================
+*/
+
 #include "Layer.h"
 
 namespace s3dge

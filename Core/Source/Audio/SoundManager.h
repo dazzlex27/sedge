@@ -1,3 +1,14 @@
+/*
+===========================================================================
+SoundManager.h
+
+Defines a class responsible for managing Sound objects.
+
+TODO: standartize all of the manager classes
+TODO: add sound factory
+===========================================================================
+*/
+
 #pragma once
 
 #include <vector>

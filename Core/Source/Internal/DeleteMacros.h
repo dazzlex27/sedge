@@ -1,3 +1,11 @@
+/*
+===========================================================================
+DeleteMacros.h
+
+Contains a set of functions for safe deletion of objects
+===========================================================================
+*/
+
 #pragma once
 
 namespace s3dge

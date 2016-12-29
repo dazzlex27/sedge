@@ -1,3 +1,13 @@
+/*
+===========================================================================
+Log.h
+
+A simple logging mechanism. Supports printing 4 types of messages to console.
+
+Do not use functions directly, prefer macros instead.
+===========================================================================
+*/
+
 #pragma once
 
 #include <iostream>

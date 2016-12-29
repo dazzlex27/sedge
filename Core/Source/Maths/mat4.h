@@ -1,3 +1,27 @@
+/*
+===========================================================================
+mat4.h
+
+Declares mat4 class for scene transformations
+
+!!! ATTENTION !!!
+THE MAT USES COLUMN-MAJOR ORDER
+
+Example:
+Memory layout: 0 1 2 3 4 5 6 7 8 9
+
+Column Major:
+0 3 6
+1 4 7
+2 5 8
+
+Row Major:
+0 1 2
+3 4 5
+6 7 8
+===========================================================================
+*/
+
 #pragma once
 
 #include "vec3.h"
