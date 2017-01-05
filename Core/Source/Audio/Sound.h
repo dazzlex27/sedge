@@ -21,15 +21,15 @@ namespace s3dge
 		class Sound
 		{
 		private:
-			std::string _name;
-			std::string _path;
+			cstring _name;
+			cstring _path;
 			ga_Sound* _sound;
 			ga_Handle* _handle;
 			bool _playing;
 			int _count;
 
 		public:
-			Sound(const std::string& name, const std::string& path);
+			Sound(cstring name, cstring path);
 		public:
 			~Sound();
 
@@ -39,7 +39,7 @@ namespace s3dge
 			void Stop();
 			void Pause();
 
-			inline const std::string& GetName() { return _name; }
+			inline cstring GetName() { return _name; }
 			inline bool IsPlaying() { return _playing; }
 
 			friend class SoundManager;

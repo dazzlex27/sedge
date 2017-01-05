@@ -32,7 +32,7 @@ namespace s3dge
 		{
 			if (_initialized)
 			{
-				if (Get(name) != nullptr)
+				if (Get(name))
 					if (overrideExisting)
 					{
 						_sounds.push_back(new Sound(name, path));
@@ -44,6 +44,7 @@ namespace s3dge
 					}
 
 				_sounds.push_back(new Sound(name, path));
+
 			}
 		}
 

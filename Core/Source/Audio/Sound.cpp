@@ -13,15 +13,16 @@ namespace s3dge
 {
 	namespace Audio
 	{
-		Sound::Sound(const std::string& name, const std::string& path)
+		Sound::Sound(cstring name, cstring path)
+			: _name(name), _path(path)
 		{
 			_playing = false;
 			_count = 0;
 
-			_sound = gau_load_sound_file(path.c_str(), "ogg");
+			_sound = gau_load_sound_file(path, "ogg");
 			if (_sound == nullptr)
 			{
-				LOG_ERROR("Failed to load sound ", name.c_str());
+				LOG_ERROR("Failed to load sound ", name);
 				throw std::exception("Failed to load sound!");
 			}
 		}
