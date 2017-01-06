@@ -1,11 +1,18 @@
+/*
+===========================================================================
+Font.h
+
+Defines a class responsible for processing text charachters.
+
+* relies on FreeType and FreeType-GL
+===========================================================================
+*/
+
 #pragma once
 
 #include <string>
 #include <freetype-gl.h>
-#include "Internal/DeleteMacros.h"
-#include "Internal/Log.h"
 #include "CustomTypes.h"
-#include "Utilities/FileIO.h"
 
 namespace s3dge
 {

@@ -1,10 +1,15 @@
+/*
+===========================================================================
+Texture.h
+
+Defines a class responsible for processing 2D textures.
+===========================================================================
+*/
+
 #pragma once
 
 #include <GL/glew.h>
 #include "CustomTypes.h"
-#include "Utilities/ImageUtils.h"
-#include "Internal/DeleteMacros.h"
-#include "Internal/Log.h"
 
 namespace s3dge
 {

@@ -1,4 +1,15 @@
+/*
+===========================================================================
+Texture.cpp
+
+implements the 2D texture class
+===========================================================================
+*/
+
 #include "Texture.h"
+#include "Utilities/ImageUtils.h"
+#include "Internal/DeleteMacros.h"
+#include "Internal/Log.h"
 
 namespace s3dge
 {
@@ -15,6 +26,7 @@ namespace s3dge
 
 		Texture::~Texture()
 		{
+			glDeleteTextures(1, &_id);
 		}
 
 		uint Texture::Load()

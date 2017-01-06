@@ -1,4 +1,15 @@
+/*
+===========================================================================
+Font.cpp
+
+implements the font class
+===========================================================================
+*/
+
 #include "Font.h"
+#include "Internal/Log.h"
+#include "Internal/DeleteMacros.h"
+#include "Utilities/FileUtils.h"
 
 namespace s3dge
 {
@@ -13,7 +24,7 @@ namespace s3dge
 
 		bool Font::Initialize()
 		{
-			if (!FileIO::CheckFileExists(_path))
+			if (!FileUtils::CheckFileExists(_path))
 				return false;
 
 			LoadFontFromFile();

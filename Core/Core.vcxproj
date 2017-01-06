@@ -95,9 +95,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\Audio\Sound.cpp" />
+    <ClCompile Include="Source\Audio\SoundFactory.cpp" />
     <ClCompile Include="Source\Audio\SoundManager.cpp" />
     <ClCompile Include="Source\Graphics\Fonts\Font.cpp" />
+    <ClCompile Include="Source\Graphics\Fonts\FontFactory.cpp" />
     <ClCompile Include="Source\Graphics\Fonts\FontManager.cpp" />
+    <ClCompile Include="Source\Graphics\Textures\TextureFactory.cpp" />
     <ClCompile Include="Source\Internal\MemoryManager.cpp" />
     <ClCompile Include="Source\Graphics\Buffers\Buffer.cpp" />
     <ClCompile Include="Source\Graphics\Buffers\IndexBuffer.cpp" />
@@ -114,18 +117,22 @@
     <ClCompile Include="Source\Platforms\Window.cpp" />
     <ClCompile Include="Source\Maths\mat4.cpp" />
     <ClCompile Include="Source\S3DGE.cpp" />
+    <ClCompile Include="Source\Utilities\FileUtils.cpp" />
     <ClCompile Include="Source\Utilities\ImageUtils.cpp" />
     <ClCompile Include="Source\Utilities\Timers\Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Externals\FreeTypeGL\utf8-utils.h" />
     <ClInclude Include="Source\Audio\Sound.h" />
+    <ClInclude Include="Source\Audio\SoundFactory.h" />
     <ClInclude Include="Source\Audio\SoundManager.h" />
     <ClInclude Include="Source\Common.h" />
     <ClInclude Include="Source\Graphics\Fonts\Font.h" />
+    <ClInclude Include="Source\Graphics\Fonts\FontFactory.h" />
     <ClInclude Include="Source\Graphics\Fonts\FontManager.h" />
     <ClInclude Include="Source\Graphics\GraphicsStructures.h" />
     <ClInclude Include="Source\Graphics\Renderers\Renderer2DBase.h" />
+    <ClInclude Include="Source\Graphics\Textures\TextureFactory.h" />
     <ClInclude Include="Source\Internal\MemoryManager.h" />
     <ClInclude Include="Include\S3DGE.h" />
     <ClInclude Include="Source\Graphics\Buffers\Buffer.h" />
@@ -151,7 +158,7 @@
     <ClInclude Include="Source\CustomTypes.h" />
     <ClInclude Include="Source\Utilities\Converters.h" />
     <ClInclude Include="Source\Internal\DeleteMacros.h" />
-    <ClInclude Include="Source\Utilities\FileIO.h" />
+    <ClInclude Include="Source\Utilities\FileUtils.h" />
     <ClInclude Include="Source\Utilities\ImageUtils.h" />
     <ClInclude Include="Source\Internal\Log.h" />
     <ClInclude Include="Source\Utilities\RGN.h" />

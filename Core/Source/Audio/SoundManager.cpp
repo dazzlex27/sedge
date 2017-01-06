@@ -7,6 +7,9 @@ Implements the audio manager class.
 */
 
 #include "SoundManager.h"
+#include "SoundFactory.h"
+#include "Internal/Log.h"
+#include "Internal/DeleteMacros.h"
 
 namespace s3dge
 {
@@ -26,25 +29,39 @@ namespace s3dge
 				_mixer = gau_manager_mixer(_manager);
 				_initialized = true;
 			}
+			else
+			{
+				LOG_WARNING("Sound manager has already been initialized");
+			}
 		}
 
 		void SoundManager::Add(cstring name, cstring path, bool overrideExisting)
 		{
 			if (_initialized)
 			{
-				if (Get(name))
+				if (Get(name) != nullptr)
+				{
 					if (overrideExisting)
 					{
-						_sounds.push_back(new Sound(name, path));
-						return;
+						Sound* newSound = SoundFactory::CreateSound(name, path);
+						if (newSound != nullptr)
+							_sounds.push_back(newSound);
 					}
 					else
 					{
-						return;
+						LOG_WARNING("Sound \"", name, "\" already exists and will not be overwritten");
 					}
 
-				_sounds.push_back(new Sound(name, path));
+					return;
+				}
 
+				Sound* newSound = SoundFactory::CreateSound(name, path);
+				if (newSound != nullptr)
+					_sounds.push_back(newSound);
+			}
+			else
+			{
+				LOG_WARNING("Sound manager was not initialized before adding a sound file (", name, ")");
 			}
 		}
 
@@ -53,8 +70,14 @@ namespace s3dge
 			if (_initialized)
 			{
 				for (auto item : _sounds)
-					if (item->GetName() == name)
+					if (strcmp(item->GetName(), name) == 0)
 						return item;
+
+				LOG_WARNING("Sound \"", name, "\" was not found");
+			}
+			else
+			{
+				LOG_WARNING("Sound manager was not initialized before getting a sound (", name, ")");
 			}
 
 			return nullptr;
@@ -76,6 +99,10 @@ namespace s3dge
 				gc_shutdown();
 
 				_initialized = false;
+			}
+			else
+			{
+				LOG_WARNING("Cannot dispose the sound manager as it was not initialized!");
 			}
 		}
 	}

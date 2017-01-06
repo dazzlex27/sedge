@@ -81,6 +81,18 @@
     <ClCompile Include="Source\S3DGE.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Audio\SoundFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Graphics\Textures\TextureFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Graphics\Fonts\FontFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Utilities\FileUtils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\S3DGECommon.h">
@@ -99,9 +111,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Maths\mat4.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Utilities\FileIO.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Graphics\Shaders\ShaderProgram.h">
@@ -195,6 +204,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Include\S3DGE.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Audio\SoundFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Utilities\FileUtils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Graphics\Textures\TextureFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Graphics\Fonts\FontFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

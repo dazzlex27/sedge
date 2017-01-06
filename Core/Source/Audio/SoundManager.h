@@ -5,7 +5,6 @@ SoundManager.h
 Defines a class responsible for managing Sound objects.
 
 TODO: standartize all of the manager classes
-TODO: add sound factory
 ===========================================================================
 */
 
@@ -13,8 +12,6 @@ TODO: add sound factory
 
 #include <vector>
 #include <stdio.h>
-#include "Internal/DeleteMacros.h"
-#include "Internal/Log.h"
 #include "Sound.h"
 
 namespace s3dge
@@ -31,11 +28,11 @@ namespace s3dge
 			static ga_Mixer* _mixer;
 
 		public:
-			static void Initialize();
+			static void Initialize(); // must be called upon engine startup
 			static void Add(cstring name, cstring path, bool overrideExisting = false);
 			static Sound* Get(cstring name);
-			static void Update();
-			static void Dispose();
+			static void Update(); // must be called in the engine's main loop
+			static void Dispose(); // must be called upon engine shutdown
 
 			static inline uint GetCount() { return _sounds.size(); }
 

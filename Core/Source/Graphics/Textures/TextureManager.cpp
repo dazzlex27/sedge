@@ -1,4 +1,15 @@
+/*
+===========================================================================
+TextureManager.cpp
+
+Implements the texture manager class.
+===========================================================================
+*/
+
 #include "TextureManager.h"
+#include "TextureFactory.h"
+#include "Internal/Log.h"
+#include "Internal/DeleteMacros.h"
 
 namespace s3dge
 {
@@ -9,6 +20,7 @@ namespace s3dge
 
 		void TextureManager::Initialize()
 		{
+			//_textures.push_back(TextureFactory::CreateDefaultTexture());
 			_initialized = true;
 		}
 
@@ -17,17 +29,28 @@ namespace s3dge
 			if (_initialized)
 			{
 				if (Get(name) != nullptr)
+				{
 					if (overrideExisting)
 					{
-						_textures.push_back(new Texture(name, path));
-						return;
+						Texture* newTexture = TextureFactory::CreateTexture(name, path);
+						if (newTexture != nullptr)
+							_textures.push_back(newTexture);
 					}
 					else
 					{
-						return;
+						LOG_WARNING("Texture \"", name, "\" already exists and will not be overwritten");
 					}
 
-				_textures.push_back(new Texture(name, path));
+					return;
+				}
+
+				Texture* newTexture = TextureFactory::CreateTexture(name, path);
+				if (newTexture != nullptr)
+					_textures.push_back(newTexture);
+			}
+			else
+			{
+				LOG_WARNING("Texture manager was not initialized before adding a texture file (", name, ")");
 			}
 		}
 
@@ -36,8 +59,14 @@ namespace s3dge
 			if (_initialized)
 			{
 				for (auto item : _textures)
-					if (item->GetName() == name)
+					if (strcmp(item->GetName(), name) == 0)
 						return item;
+
+				LOG_WARNING("Texture \"", name, "\" was not found");
+			}
+			else
+			{
+				LOG_WARNING("Texture manager was not initialized before getting a texture (", name, ")");
 			}
 
 			return nullptr;
@@ -51,6 +80,10 @@ namespace s3dge
 					SafeDelete(item);
 
 				_initialized = false;
+			}
+			else
+			{
+				LOG_WARNING("Cannot dispose the texture manager as it was not initialized!");
 			}
 		}
 	}

@@ -1,4 +1,15 @@
+/*
+===========================================================================
+FontManager.cpp
+
+Implements the font manager class.
+===========================================================================
+*/
+
 #include "FontManager.h"
+#include "FontFactory.h"
+#include "Internal/Log.h"
+#include "Internal/DeleteMacros.h"
 
 namespace s3dge
 {
@@ -9,6 +20,7 @@ namespace s3dge
 
 		void FontManager::Initialize()
 		{
+			//_fonts.push_back(FontFactory::CreateDefaultFont());
 			_initialized = true;
 		}
 
@@ -17,17 +29,28 @@ namespace s3dge
 			if (_initialized)
 			{
 				if (Get(name) != nullptr)
+				{
 					if (overrideExisting)
 					{
-						_fonts.push_back(new Font(name, path, size));
-						return;
+						Font* newFont = FontFactory::CreateFont(name, path, size);
+						if (newFont != nullptr)
+							_fonts.push_back(newFont);
 					}
 					else
 					{
-						return;
+						LOG_WARNING("Font \"", name, "\" already exists and will not be overwritten");
 					}
 
-				_fonts.push_back(new Font(name, path, size));
+					return;
+				}
+					
+				Font* newFont = FontFactory::CreateFont(name, path, size);
+				if (newFont != nullptr)
+					_fonts.push_back(newFont);
+			}
+			else
+			{
+				LOG_WARNING("Font manager was not initialized before adding a font file (", name, ")");
 			}
 		}
 
@@ -36,8 +59,14 @@ namespace s3dge
 			if (_initialized)
 			{
 				for (auto item : _fonts)
-					if (item->GetName() == name)
+					if (strcmp(item->GetName(), name) == 0)
 						return item;
+
+				LOG_WARNING("Font \"", name, "\" was not found");
+			}
+			else
+			{
+				LOG_WARNING("Font manager was not initialized before getting a font (", name, ")");
 			}
 
 			return nullptr;
@@ -45,10 +74,17 @@ namespace s3dge
 
 		void FontManager::Dispose()
 		{
-			for (auto item : _fonts)
-				SafeDelete(item);
+			if (_initialized)
+			{
+				for (auto item : _fonts)
+					SafeDelete(item);
 
-			_initialized = true;
+				_initialized = true;
+			}
+			else
+			{
+				LOG_WARNING("Cannot dispose the font manager as it was not initialized!");
+			}
 		}
 	}
 }

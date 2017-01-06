@@ -3,7 +3,7 @@
 #include <GL/glew.h>
 #include "Maths/mat4.h"
 #include "CustomTypes.h"
-#include "Utilities/FileIO.h"
+#include "Utilities/FileUtils.h"
 #include "Maths/MathsHeader.h"
 
 namespace s3dge

@@ -22,7 +22,7 @@ namespace s3dge
 		{
 			// Create and compile vertex shader.
 			int vertexShader = glCreateShader(GL_VERTEX_SHADER);
-			std::string vertexSource = FileIO::ReadFromFile(_vertex).c_str();
+			std::string vertexSource = FileUtils::ReadFromFile(_vertex).c_str();
 			if (vertexSource == "")
 			{
 				LOG_ERROR("Cannot find vertex shader source");
@@ -35,7 +35,7 @@ namespace s3dge
 
 			// Create and compile fragment shader.
 			int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-			std::string fragmentSource = FileIO::ReadFromFile(_fragment).c_str();
+			std::string fragmentSource = FileUtils::ReadFromFile(_fragment).c_str();
 			if (fragmentSource == "")
 			{
 				LOG_ERROR("Cannot find fragment shader source");

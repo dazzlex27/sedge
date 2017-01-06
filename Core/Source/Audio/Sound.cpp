@@ -8,6 +8,7 @@ Implements Sound class.
 
 #include "Sound.h"
 #include "SoundManager.h"
+#include "Internal/Log.h"
 
 namespace s3dge
 {

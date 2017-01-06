@@ -1,3 +1,13 @@
+/*
+===========================================================================
+TextureManager.h
+
+Defines a class responsible for managing Texture objects.
+
+TODO: standartize all of the manager classes
+===========================================================================
+*/
+
 #pragma once
 
 #include <vector>

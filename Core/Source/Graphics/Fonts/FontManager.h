@@ -1,7 +1,16 @@
+/*
+===========================================================================
+FontManager.h
+
+Defines a class responsible for managing Font objects.
+
+TODO: standartize all of the manager classes
+===========================================================================
+*/
+
 #pragma once
 
 #include <vector>
-#include "CustomTypes.h"
 #include "Font.h"
 
 namespace s3dge
