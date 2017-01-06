@@ -11,10 +11,10 @@
 #pragma warning(disable:4996)
 #endif /* _WIN32 */
 
-#ifdef __linux__
-#include <strings.h>
-#define stricmp strcasecmp
-#endif /* __linux__ */
+//#ifdef __linux__
+//#include <strings.h>
+//#define stricmp strcasecmp
+//#endif /* __linux__ */
 
 /* High-Level Manager */
 typedef struct gau_Manager {
@@ -1117,11 +1117,11 @@ ga_SampleSource* gau_sample_source_create_sound(ga_Sound* in_sound)
 }
 
 /* Helper functions */
-#ifdef __APPLE__
-#define stricmp strcasecmp
-#elif defined(_WIN32)
-#define stricmp _stricmp
-#endif /* __APPLE__ */
+//#ifdef __APPLE__
+//#define stricmp strcasecmp
+//#elif defined(_WIN32)
+//#define stricmp _stricmp
+//#endif /* __APPLE__ */
 ga_Memory* gau_load_memory_file(const char* in_filename)
 {
   ga_Memory* ret;
@@ -1138,9 +1138,9 @@ ga_Sound* gau_load_sound_file(const char* in_filename, const char* in_format)
   if(dataSrc)
   {
     ga_SampleSource* sampleSrc = 0;
-    if(stricmp(in_format, "ogg") == 0)
+    if(strcmp(in_format, "ogg") == 0)
       sampleSrc = gau_sample_source_create_ogg(dataSrc);
-    else if(stricmp(in_format, "wav") == 0)
+    else if(strcmp(in_format, "wav") == 0)
       sampleSrc = gau_sample_source_create_wav(dataSrc);
     ga_data_source_release(dataSrc);
     if(sampleSrc)
@@ -1188,9 +1188,9 @@ ga_Handle* gau_create_handle_memory(ga_Mixer* in_mixer, ga_Memory* in_memory, co
   if(dataSrc)
   {
     ga_SampleSource* sampleSrc = 0;
-    if(stricmp(in_format, "ogg") == 0)
+    if(strcmp(in_format, "ogg") == 0)
       sampleSrc = gau_sample_source_create_ogg(dataSrc);
-    else if(stricmp(in_format, "wav") == 0)
+    else if(strcmp(in_format, "wav") == 0)
       sampleSrc = gau_sample_source_create_wav(dataSrc);
     if(sampleSrc)
     {
@@ -1224,9 +1224,9 @@ ga_Handle* gau_create_handle_buffered_data(ga_Mixer* in_mixer, ga_StreamManager*
   if(in_dataSrc)
   {
     ga_SampleSource* sampleSrc = 0;
-    if(stricmp(in_format, "ogg") == 0)
+    if(strcmp(in_format, "ogg") == 0)
       sampleSrc = gau_sample_source_create_ogg(dataSrc);
-    else if(stricmp(in_format, "wav") == 0)
+    else if(strcmp(in_format, "wav") == 0)
       sampleSrc = gau_sample_source_create_wav(dataSrc);
     if(sampleSrc)
     {
@@ -1267,9 +1267,9 @@ ga_Handle* gau_create_handle_buffered_file(ga_Mixer* in_mixer, ga_StreamManager*
   if(dataSrc)
   {
     ga_SampleSource* sampleSrc = 0;
-    if(stricmp(in_format, "ogg") == 0)
+    if(strcmp(in_format, "ogg") == 0)
       sampleSrc = gau_sample_source_create_ogg(dataSrc);
-    else if(stricmp(in_format, "wav") == 0)
+    else if(strcmp(in_format, "wav") == 0)
       sampleSrc = gau_sample_source_create_wav(dataSrc);
     ga_data_source_release(dataSrc);
     if(sampleSrc)
