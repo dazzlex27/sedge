@@ -32,7 +32,7 @@ namespace s3dge
 
 		public:
 			//Layer(); // TODO: needs a default shader
-			Layer(ShaderProgram* shaderProgram);
+			Layer(ShaderProgram* shaderProgram, const Window* window);
 			Layer(ShaderProgram* shaderProgram, Renderer2D* renderer);
 			~Layer();
 

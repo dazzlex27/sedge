@@ -15,6 +15,7 @@ using namespace audio;
 
 S3DGE::S3DGE()
 {
+	_state = EngineState::READY;
 }
 
 S3DGE::~S3DGE()
@@ -31,17 +32,21 @@ void S3DGE::Run()
 {
 	LOG_INFO("Application started...");
 
+	_state = EngineState::INITIALIZING;
 	LOG_INFO("Initializing components...");
 	InitializeInternalSystems();
 	InitializeResourceManagers();
 	Initialize();
+	_state = EngineState::RUNNING;
 	LOG_INFO("Running main loop...");
 	RunGameLoop();
+	_state = EngineState::DISPOSING;
 	LOG_INFO("Shutdown initiated...");
 	Dispose();
 	DisposeResourceManagers();
 	DisposeInternalSystems();
 
+	_state = EngineState::DISPOSED;
 	LOG_INFO("Application exited...");
 }
 
@@ -94,6 +99,7 @@ void S3DGE::InitializeInternalSystems()
 
 void S3DGE::InitializeResourceManagers()
 {
+	GraphicsManager::Initialize();
 	FontManager::Initialize();
 	TextureManager::Initialize();
 	SoundManager::Initialize();
@@ -106,6 +112,7 @@ void S3DGE::UpdateResourceManagers()
 
 void S3DGE::DisposeResourceManagers()
 {
+	GraphicsManager::Dispose();
 	FontManager::Dispose();
 	TextureManager::Dispose();
 	SoundManager::Dispose();

@@ -16,16 +16,13 @@ void Application::Initialize()
 	TextureManager::Add("Brick", "Resources\\brick.jpg");
 	FontManager::Add("test_font", "Resources\\SourceSansPro-Light.ttf", 32);
 	SoundManager::Add("back-in-black", "Resources\\back-in-black.ogg");
+	GraphicsManager::AddSprite("rect", 4, 3, 3, 3, 0xffffffff, TextureManager::Get("Brick"));
+	GraphicsManager::AddLabel("fps", "startup...", FontManager::Get("test_font"), 0.4f, 8.2f, 2, 2);
 
-	_layer = new Layer(_shaderProgram);
+	_layer = new Layer(_shaderProgram, _window);
 
-	_rect = new Sprite(4, 3, 3, 3, TextureManager::Get("Brick"));
-	_fps = new Label("Test", FontManager::Get("test_font"), 0.4f, 8.2f, 2, 2, 0xffffffff);
-
-	//LoadManySprites();
-
-	_layer->Add(_rect);
-	_layer->Add(_fps);
+	_layer->Add(GraphicsManager::GetSprite("rect"));
+	_layer->Add(GraphicsManager::GetLabel("fps"));
 
 	SoundManager::Get("back-in-black")->Play();
 }
@@ -38,17 +35,17 @@ void Application::UpdateInput()
 	vec2f mouse = _window->GetMousePosition();
 	_shaderProgram->SetUniform2f("light_pos", vec2f((float)(mouse.x * 16.0f / _window->GetWidth()), 
 		(float)(9.0f - mouse.y * 9.0f / _window->GetHeight())));
-	std::string text = std::to_string(GetFPS()) + " fps";
-	_fps->text = text.c_str();
+
+	GraphicsManager::GetLabel("fps")->text = std::to_string(GetFPS()) + " fps";
 
 	if (_window->KeyDown(VK_LEFT))
-		_rect->position.x -= speed;
+		GraphicsManager::GetSprite("rect")->position.x -= speed;
 	if (_window->KeyDown(VK_RIGHT))
-		_rect->position.x += speed;
+		GraphicsManager::GetSprite("rect")->position.x += speed;
 	if (_window->KeyDown(VK_UP))
-		_rect->position.y += speed;
+		GraphicsManager::GetSprite("rect")->position.y += speed;
 	if (_window->KeyDown(VK_DOWN))
-		_rect->position.y -= speed;
+		GraphicsManager::GetSprite("rect")->position.y -= speed;
 
 	if (_window->KeyClicked(VK_P))
 	{

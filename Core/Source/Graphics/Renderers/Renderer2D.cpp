@@ -12,7 +12,8 @@ Implements the Rendrer2D class
 using namespace s3dge;
 using namespace graphics;
 	
-Renderer2D::Renderer2D()
+Renderer2D::Renderer2D(const Window* window)
+	: _window(window)
 {			
 	Initialize();
 }
@@ -148,7 +149,7 @@ void Renderer2D::DrawString(const std::string& text, Font* font, const maths::ve
 
 	for (uint i = 0; i < _textures.size(); i++)
 	{
-		if (_textures[i] == font->GetAtlasID())//_atlas->id)
+		if (_textures[i] == font->GetAtlasID())
 		{
 			textureSlot = (float)(i + 1);
 			ok = true;
@@ -165,16 +166,16 @@ void Renderer2D::DrawString(const std::string& text, Font* font, const maths::ve
 			Begin();
 		}
 
-		_textures.push_back(font->GetAtlasID());//_atlas->id);
+		_textures.push_back(font->GetAtlasID());
 		textureSlot = (float)(_textures.size());
 	}
 
-	float scaleX = 1280.0f / 32.0f;
-	float scaleY = 720.0f / 18.0f;
+	float scaleX = _window->GetWidth() / 32.0f;
+	float scaleY = _window->GetHeight() / 18.0f;
 
 	for (uint i = 0; i < text.length(); i++)
 	{
-		texture_glyph_t* glyph = texture_font_get_glyph(font->GetFontFace(), text[i]);//_font, text[i]);
+		texture_glyph_t* glyph = texture_font_get_glyph(font->GetFontFace(), text[i]);
 		if (glyph != NULL)
 		{
 

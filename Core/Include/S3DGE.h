@@ -10,12 +10,14 @@ Class S3DGE must be inherited in order to build applications on the engine.
 #pragma once
 
 #include "../Source/Common.h"
+#include "../Source/Internal/enums.h"
 
 namespace s3dge
 {
 	class S3DGE
 	{
 	private:
+		EngineState _state;
 		graphics::Window* _window;
 		Timer* _timer;
 		RNG* _rng;
@@ -29,6 +31,7 @@ namespace s3dge
 	public:
 		void Run();
 		inline uint GetFPS() const { return _fps; }
+		inline EngineState GetEngineState() const { return _state; }
 
 	protected:
 		graphics::Window* CreateGameWindow(cstring name, uint width, uint height, bool fullscreen = false, bool vsync = true);

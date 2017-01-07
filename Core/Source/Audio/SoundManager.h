@@ -11,7 +11,6 @@ TODO: standartize all of the manager classes
 #pragma once
 
 #include <vector>
-#include <stdio.h>
 #include "Sound.h"
 
 namespace s3dge

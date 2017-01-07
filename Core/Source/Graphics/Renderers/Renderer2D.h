@@ -9,6 +9,7 @@
 #include "Graphics/Buffers/IndexBuffer.h"
 #include "Graphics/Buffers/VertexArray.h"
 #include "Graphics/GraphicsStructures.h"
+#include "Platforms/Window.h"
 
 namespace s3dge
 {
@@ -29,9 +30,10 @@ namespace s3dge
 			int _indexCount; // The number of indices.
 			VertexData* _buffer; // Renderables container.
 			std::vector<uint> _textures; // Texture array.
+			const Window* _window;
 
 		public:
-			Renderer2D();	
+			Renderer2D(const Window* window);	
 			~Renderer2D();
 
 			void Begin() override;

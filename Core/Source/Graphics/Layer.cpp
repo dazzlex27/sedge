@@ -25,11 +25,11 @@ using namespace graphics;
 	// _ownsShader = true;
 //}
 
-Layer::Layer(ShaderProgram* shaderProgram)
+Layer::Layer(ShaderProgram* shaderProgram, const Window* window)
 {
 	_transformationMatrix = maths::mat4::GetIdentity();
 	_shaderProgram = shaderProgram;
-	_renderer = new Renderer2D();
+	_renderer = new Renderer2D(window);
 	_ownsRenderer = true;
 	_ownsShader = false;
 }
@@ -67,8 +67,8 @@ void Layer::Render()
 
 void Layer::Dispose()
 {
-	for (uint i = 0; i < _renderables.size(); ++i)
-		SafeDelete(_renderables[i]);
+	//for (uint i = 0; i < _renderables.size(); ++i)
+	//	SafeDelete(_renderables[i]);
 
 	if (_ownsShader)
 		SafeDelete(_shaderProgram);

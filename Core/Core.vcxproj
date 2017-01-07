@@ -100,6 +100,7 @@
     <ClCompile Include="Source\Graphics\Fonts\Font.cpp" />
     <ClCompile Include="Source\Graphics\Fonts\FontFactory.cpp" />
     <ClCompile Include="Source\Graphics\Fonts\FontManager.cpp" />
+    <ClCompile Include="Source\Graphics\GraphicsManager.cpp" />
     <ClCompile Include="Source\Graphics\Renderables\Renderable2D.cpp" />
     <ClCompile Include="Source\Graphics\Textures\TextureFactory.cpp" />
     <ClCompile Include="Source\Internal\MemoryManager.cpp" />
@@ -132,9 +133,11 @@
     <ClInclude Include="Source\Graphics\Fonts\Font.h" />
     <ClInclude Include="Source\Graphics\Fonts\FontFactory.h" />
     <ClInclude Include="Source\Graphics\Fonts\FontManager.h" />
+    <ClInclude Include="Source\Graphics\GraphicsManager.h" />
     <ClInclude Include="Source\Graphics\GraphicsStructures.h" />
     <ClInclude Include="Source\Graphics\Renderers\Renderer2DBase.h" />
     <ClInclude Include="Source\Graphics\Textures\TextureFactory.h" />
+    <ClInclude Include="Source\Internal\enums.h" />
     <ClInclude Include="Source\Internal\MemoryManager.h" />
     <ClInclude Include="Include\S3DGE.h" />
     <ClInclude Include="Source\Graphics\Buffers\Buffer.h" />
