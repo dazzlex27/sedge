@@ -100,6 +100,7 @@
     <ClCompile Include="Source\Graphics\Fonts\Font.cpp" />
     <ClCompile Include="Source\Graphics\Fonts\FontFactory.cpp" />
     <ClCompile Include="Source\Graphics\Fonts\FontManager.cpp" />
+    <ClCompile Include="Source\Graphics\Renderables\Renderable2D.cpp" />
     <ClCompile Include="Source\Graphics\Textures\TextureFactory.cpp" />
     <ClCompile Include="Source\Internal\MemoryManager.cpp" />
     <ClCompile Include="Source\Graphics\Buffers\Buffer.cpp" />

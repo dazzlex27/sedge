@@ -1,3 +1,11 @@
+/*
+===========================================================================
+IndexBuffer.h
+
+Represents an entity called index buffer, designed to reduce the number of vertices in a mesh.
+===========================================================================
+*/
+
 #pragma once
 
 #include <GL/glew.h>
@@ -5,7 +13,7 @@
 
 namespace s3dge
 {
-	namespace Graphics
+	namespace graphics
 	{
 		class IndexBuffer
 		{

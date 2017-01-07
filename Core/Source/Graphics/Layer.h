@@ -18,7 +18,7 @@ Using layers is highly encouraged, event if there's only one. That helps to keep
 
 namespace s3dge
 {
-	namespace Graphics
+	namespace graphics
 	{
 		class Layer
 		{
@@ -26,7 +26,7 @@ namespace s3dge
 			std::vector<Renderable2D*> _renderables; // an array of elements in the layer
 			ShaderProgram* _shaderProgram; // a shader instance
 			Renderer2D* _renderer; // a renderer instance
-			Maths::mat4 _transformationMatrix; // transformation applied to the layer
+			maths::mat4 _transformationMatrix; // transformation applied to the layer
 			bool _ownsRenderer; // flag to indicate whether the shader should be disposed by the layer upon deletion
 			bool _ownsShader; // flag to indicate whether the renderer should be disposed by the layer upon deletion
 
@@ -45,8 +45,8 @@ namespace s3dge
 			const Renderer2D* GetRenderer() const { return _renderer; }
 			void SetRenderer(Renderer2D* renderer);
 
-			const Maths::mat4& GetTransformationMatrix() const { return _transformationMatrix; }
-			void SetTransformationMatrix(Maths::mat4 matrix);
+			const maths::mat4& GetTransformationMatrix() const { return _transformationMatrix; }
+			void SetTransformationMatrix(maths::mat4 matrix);
 
 			Layer& operator=(const Layer& other);
 

@@ -1,19 +1,18 @@
 #pragma once
 
-#include "Graphics/Renderers/Renderer2DBase.h"
-#include "Graphics/Renderables/Renderable2D.h"
 #include <GL/glew.h>
 #include <freetype-gl.h>
-#include "CustomTypes.h"
+#include "Graphics/Renderers/Renderer2DBase.h"
+#include "Graphics/Renderables/Renderable2D.h"
 #include "Graphics/Shaders/ShaderProgram.h"
-#include "Maths/MathsHeader.h"
 #include "Graphics/Buffers/Buffer.h"
 #include "Graphics/Buffers/IndexBuffer.h"
 #include "Graphics/Buffers/VertexArray.h"
+#include "Graphics/GraphicsStructures.h"
 
 namespace s3dge
 {
-	namespace Graphics
+	namespace graphics
 	{
 		#define RENDERER_MAX_SPRITES	60000
 		#define RENDERER_VERTEX_SIZE	sizeof(VertexData)
@@ -40,7 +39,7 @@ namespace s3dge
 			void Flush() override; // OpenGL drawcall. 
 			void End() override;
 
-			void DrawString(const std::string& text, Font* font, const Maths::vec3f& position, uint color) override;
+			void DrawString(const std::string& text, Font* font, const maths::vec3f& position, uint color) override;
 
 		private:
 			void Initialize();

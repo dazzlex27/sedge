@@ -5,10 +5,10 @@
 class Application : public s3dge::S3DGE
 {
 private:
-	s3dge::Graphics::Window* _window;
-	s3dge::Graphics::Layer* _layer;
-	s3dge::Graphics::Label* _fps;
-	s3dge::Graphics::ShaderProgram* _shaderProgram;
+	s3dge::graphics::Window* _window;
+	s3dge::graphics::Layer* _layer;
+	s3dge::graphics::Label* _fps;
+	s3dge::graphics::ShaderProgram* _shaderProgram;
 
 public:
 	void Initialize() override;

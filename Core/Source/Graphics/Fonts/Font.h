@@ -16,7 +16,7 @@ Defines a class responsible for processing text charachters.
 
 namespace s3dge
 {
-	namespace Graphics
+	namespace graphics
 	{
 		class Font
 		{

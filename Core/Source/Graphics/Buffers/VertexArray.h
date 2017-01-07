@@ -1,14 +1,21 @@
+/*
+===========================================================================
+VertexArray.h
+
+Designed to store vertex positions before feeding them to OpenGL.
+===========================================================================
+*/
+
 #pragma once
 
 #include <vector>
 #include <GL/glew.h>
 #include "CustomTypes.h"
 #include "Buffer.h"
-#include "../../Internal/DeleteMacros.h"
 
 namespace s3dge
 {
-	namespace Graphics
+	namespace graphics
 	{
 		class VertexArray
 		{

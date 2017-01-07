@@ -15,9 +15,9 @@ namespace s3dge
 {
 	struct VertexData
 	{
-		Maths::vec3f Vertex;
+		maths::vec3f Vertex;
 		uint Color;
-		Maths::vec2f UV;
+		maths::vec2f UV;
 		float TextureID;
 	};
 }

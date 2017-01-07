@@ -1,68 +1,52 @@
+/*
+===========================================================================
+Renderable2D.h
+
+Base class for all 2D renderable objects.
+===========================================================================
+*/
+
 #pragma once
 
 #include "Maths/MathsHeader.h"
 #include "Graphics/Textures/Texture.h"
 #include "Graphics/Buffers/VertexArray.h"
 #include "Graphics/Buffers/IndexBuffer.h"
-#include "Internal/DeleteMacros.h"
-#include "Utilities/Converters.h"
 #include "Graphics/Renderers/Renderer2DBase.h"
-#include "Graphics/GraphicsStructures.h"
 
 namespace s3dge
 {
-	namespace Graphics
+	namespace graphics
 	{
 		class Renderable2D
 		{
 		protected:
-			Maths::vec3f _position;
-			Maths::vec2f _size;
+			maths::vec3f _position;
+			maths::vec2f _size;
 			uint _color;
-			std::vector<Maths::vec2f> _uv;
+			std::vector<maths::vec2f> _uv;
 			Texture* _texture;
 
 		protected:
-			Renderable2D()
-				: _texture(nullptr)
-			{
-				SetDefaultUVConfiguration();
-			}
-
-			Renderable2D(const Maths::vec3f& position, const Maths::vec2f& size, uint color)
-				: _position(position), _size(size), _color(color), _texture(nullptr)
-			{
-				SetDefaultUVConfiguration();
-			}
+			Renderable2D();
+			Renderable2D(const maths::vec3f& position, const maths::vec2f& size, uint color);
 
 		public:
-			virtual ~Renderable2D() 
-			{
-			}
-
-			virtual void Submit(Renderer2DBase* renderer) const
-			{
-				renderer->Submit(this);
-			}
+			virtual ~Renderable2D();
+			virtual void Submit(Renderer2DBase* renderer) const;
 
 		public:
-			inline const Maths::vec3f GetPosition() const { return _position; }
-			inline const Maths::vec2f GetSize() const { return _size; }
+			inline const maths::vec3f GetPosition() const { return _position; }
+			inline const maths::vec2f GetSize() const { return _size; }
 			inline uint GetColor() const { return _color; }
-			inline std::vector<Maths::vec2f> GetUV() const { return _uv; }
+			inline std::vector<maths::vec2f> GetUV() const { return _uv; }
 			inline uint GetTextureID() const { return _texture ? _texture->GetID() : 0; }
 
-			inline void SetColor(uint color) { _color = color; }
-			inline void SetColor(const Maths::vec4f& color) { _color = ConvertColorToUint(color); }
+			void SetColor(uint color);
+			void SetColor(const maths::vec4f& color);
 
 		private:
-			void SetDefaultUVConfiguration()
-			{
-				_uv.push_back(Maths::vec2f(0, 0));
-				_uv.push_back(Maths::vec2f(0, 1));
-				_uv.push_back(Maths::vec2f(1, 1));
-				_uv.push_back(Maths::vec2f(1, 0));
-			}
+			void SetDefaultUVConfiguration();
 		};
 	}
 }

@@ -32,7 +32,7 @@ Row Major:
 
 namespace s3dge
 {
-	namespace Maths
+	namespace maths
 	{
 		struct mat4 // Column-major
 		{

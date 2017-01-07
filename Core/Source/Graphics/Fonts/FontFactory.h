@@ -12,7 +12,7 @@ Takes responsibility for creating Font objects
 
 namespace s3dge
 {
-	namespace Graphics
+	namespace graphics
 	{
 		class FontFactory
 		{

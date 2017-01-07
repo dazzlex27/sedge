@@ -9,14 +9,14 @@ At the moment uses Gorilla Audio to do the heavy lifting
 
 #pragma once
 
+#include <string>
 #include <gorilla/ga.h>
 #include <gorilla/gau.h>
-#include <string>
 #include "CustomTypes.h"
 
 namespace s3dge
 {
-	namespace Audio
+	namespace audio
 	{
 		class Sound
 		{

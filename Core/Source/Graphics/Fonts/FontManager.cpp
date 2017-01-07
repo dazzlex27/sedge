@@ -11,80 +11,75 @@ Implements the font manager class.
 #include "Internal/Log.h"
 #include "Internal/DeleteMacros.h"
 
-namespace s3dge
+using namespace s3dge;
+using namespace graphics;
+	
+std::vector<Font*> FontManager::_fonts;
+bool FontManager::_initialized;
+
+void FontManager::Initialize()
 {
-	namespace Graphics
+	//_fonts.push_back(FontFactory::CreateDefaultFont());
+	_initialized = true;
+}
+
+void FontManager::Add(cstring name, cstring path, float size, bool overrideExisting)
+{
+	if (_initialized)
 	{
-		std::vector<Font*> FontManager::_fonts;
-		bool FontManager::_initialized;
-
-		void FontManager::Initialize()
+		if (Get(name) != nullptr)
 		{
-			//_fonts.push_back(FontFactory::CreateDefaultFont());
-			_initialized = true;
-		}
-
-		void FontManager::Add(cstring name, cstring path, float size, bool overrideExisting)
-		{
-			if (_initialized)
+			if (overrideExisting)
 			{
-				if (Get(name) != nullptr)
-				{
-					if (overrideExisting)
-					{
-						Font* newFont = FontFactory::CreateFont(name, path, size);
-						if (newFont != nullptr)
-							_fonts.push_back(newFont);
-					}
-					else
-					{
-						LOG_WARNING("Font \"", name, "\" already exists and will not be overwritten");
-					}
-
-					return;
-				}
-					
 				Font* newFont = FontFactory::CreateFont(name, path, size);
 				if (newFont != nullptr)
 					_fonts.push_back(newFont);
 			}
 			else
 			{
-				LOG_WARNING("Font manager was not initialized before adding a font file (", name, ")");
+				LOG_WARNING("Font \"", name, "\" already exists and will not be overwritten");
 			}
+
+			return;
 		}
+			
+		Font* newFont = FontFactory::CreateFont(name, path, size);
+		if (newFont != nullptr)
+			_fonts.push_back(newFont);
+	}
+	else
+	{
+		LOG_WARNING("Font manager was not initialized before adding a font file (", name, ")");
+	}
+}
 
-		Font* FontManager::Get(cstring name)
-		{
-			if (_initialized)
-			{
-				for (auto item : _fonts)
-					if (strcmp(item->GetName(), name) == 0)
-						return item;
+Font* FontManager::Get(cstring name)
+{
+	if (_initialized)
+	{
+		for (auto item : _fonts)
+			if (strcmp(item->GetName(), name) == 0)
+				return item;
+	}
+	else
+	{
+		LOG_WARNING("Font manager was not initialized before getting a font (", name, ")");
+	}
 
-				LOG_WARNING("Font \"", name, "\" was not found");
-			}
-			else
-			{
-				LOG_WARNING("Font manager was not initialized before getting a font (", name, ")");
-			}
+	return nullptr;
+}
 
-			return nullptr;
-		}
+void FontManager::Dispose()
+{
+	if (_initialized)
+	{
+		for (auto item : _fonts)
+			SafeDelete(item);
 
-		void FontManager::Dispose()
-		{
-			if (_initialized)
-			{
-				for (auto item : _fonts)
-					SafeDelete(item);
-
-				_initialized = true;
-			}
-			else
-			{
-				LOG_WARNING("Cannot dispose the font manager as it was not initialized!");
-			}
-		}
+		_initialized = true;
+	}
+	else
+	{
+		LOG_WARNING("Cannot dispose the font manager as it was not initialized!");
 	}
 }

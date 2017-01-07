@@ -12,7 +12,7 @@ Takes responsibility for creating Sound objects
 
 namespace s3dge
 {
-	namespace Audio
+	namespace audio
 	{
 		class SoundFactory
 		{

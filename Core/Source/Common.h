@@ -22,3 +22,4 @@ This file is included by the main header S3DGE.h
 #include "Audio/SoundManager.h"
 #include "Utilities/Converters.h"
 #include "Utilities/RGN.h"
+#include "Internal/DeleteMacros.h"

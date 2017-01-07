@@ -1,3 +1,11 @@
+/*
+===========================================================================
+Group.h
+
+Represents a class designed to contain groups of renderables together.
+===========================================================================
+*/
+
 #pragma once
 
 #include "Renderable2D.h"
@@ -5,7 +13,7 @@
 
 namespace s3dge
 {
-	namespace Graphics
+	namespace graphics
 	{
 		class Group : public Renderable2D
 		{

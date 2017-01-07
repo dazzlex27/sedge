@@ -12,7 +12,7 @@ Takes responsibility for creating Texture objects
 
 namespace s3dge
 {
-	namespace Graphics
+	namespace graphics
 	{
 		class TextureFactory
 		{

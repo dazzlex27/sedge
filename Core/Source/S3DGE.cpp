@@ -1,8 +1,17 @@
+/*
+===========================================================================
+S3DGE.cpp
+
+Implementation of the top level engine functions.
+===========================================================================
+*/
+
 #include "../Include/S3DGE.h"
+#include "Internal/Log.h"
 
 using namespace s3dge;
-using namespace Graphics;
-using namespace Audio;
+using namespace graphics;
+using namespace audio;
 
 S3DGE::S3DGE()
 {
@@ -50,13 +59,13 @@ void S3DGE::RunGameLoop()
 		_window->Clear();
 
 		// Update input and managers.
-		if (_timer->ElapsedS() - updateTime > (1.0f / 6000.0f))
+		if (_timer->ElapsedS() - updateTime > (1.0f / 60.0f))
 		{
 			UpdateInput();
 			_window->UpdateInputState();
 			UpdateResourceManagers();
 			++updates;
-			updateTime += 1.0f / 6000.0f;
+			updateTime += 1.0f / 60.0f;
 		}
 
 		Render();

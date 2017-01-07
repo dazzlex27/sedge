@@ -1,3 +1,11 @@
+/*
+===========================================================================
+Buffer.h
+
+A class that is a wrapper around OpenGL buffers.
+===========================================================================
+*/
+
 #pragma once
 
 #include <GL/glew.h>
@@ -5,7 +13,7 @@
 
 namespace s3dge
 {
-	namespace Graphics
+	namespace graphics
 	{
 		class Buffer
 		{

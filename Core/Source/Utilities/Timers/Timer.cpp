@@ -9,48 +9,47 @@ Implements timer functions. Will most likely be abstracted to incorporate a few 
 #include "Timer.h"
 #include "Internal/Log.h"
 
-namespace s3dge
+using namespace s3dge;
+
+Timer::Timer()
 {
-	Timer::Timer()
-	{
-		_startTime = clock::now();
-		_stopTime = clock::now();
-		_running = false;
-	}
+	_startTime = clock::now();
+	_stopTime = clock::now();
+	_running = false;
+}
 
-	void Timer::Start()
-	{
-		_running = true;
-		_startTime = clock::now();
-	}
+void Timer::Start()
+{
+	_running = true;
+	_startTime = clock::now();
+}
 
-	void Timer::Stop()
-	{
-		_stopTime = clock::now();
-		_running = false;
-	}
+void Timer::Stop()
+{
+	_stopTime = clock::now();
+	_running = false;
+}
 
-	float Timer::ElapsedS() const
-	{
-		if (_running)
-			return std::chrono::duration_cast<ms>(clock::now() - _startTime).count() / 1000;
-		else
-			return std::chrono::duration_cast<ms>(_stopTime - _startTime).count() / 1000;
-	}
+float Timer::ElapsedS() const
+{
+	if (_running)
+		return std::chrono::duration_cast<ms>(clock::now() - _startTime).count() / 1000;
+	else
+		return std::chrono::duration_cast<ms>(_stopTime - _startTime).count() / 1000;
+}
 
-	float Timer::ElapsedNS() const
-	{
-		if (_running)
-			return std::chrono::duration_cast<ns>(clock::now() - _startTime).count();
-		else
-			return std::chrono::duration_cast<ns>(_stopTime - _startTime).count();
-	}
+float Timer::ElapsedNS() const
+{
+	if (_running)
+		return std::chrono::duration_cast<ns>(clock::now() - _startTime).count();
+	else
+		return std::chrono::duration_cast<ns>(_stopTime - _startTime).count();
+}
 
-	float Timer::ElapsedMS() const
-	{
-		if (_running)
-			return std::chrono::duration_cast<ms>(clock::now() - _startTime).count();
-		else
-			return std::chrono::duration_cast<ms>(_stopTime - _startTime).count();
-	}
+float Timer::ElapsedMS() const
+{
+	if (_running)
+		return std::chrono::duration_cast<ms>(clock::now() - _startTime).count();
+	else
+		return std::chrono::duration_cast<ms>(_stopTime - _startTime).count();
 }

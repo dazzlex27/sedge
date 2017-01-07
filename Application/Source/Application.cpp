@@ -1,9 +1,9 @@
 #include "Application.h"
 
 using namespace s3dge;
-using namespace Maths;
-using namespace Graphics;
-using namespace Audio;
+using namespace maths;
+using namespace graphics;
+using namespace audio;
 
 void Application::Initialize()
 {

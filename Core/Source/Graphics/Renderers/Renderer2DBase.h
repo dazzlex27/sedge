@@ -7,7 +7,7 @@
 
 namespace s3dge
 {
-	namespace Graphics
+	namespace graphics
 	{
 		class Renderable2D;
 
@@ -19,9 +19,9 @@ namespace s3dge
 			virtual void Flush() = 0;
 			virtual void End() = 0;
 
-			virtual void DrawRectangle(const Maths::vec3f& position, const Maths::vec2f& size, uint color) {}
-			virtual void DrawOval(const Maths::vec3f& position, int radiusX, int radiusY, uint color) {}
-			virtual void DrawString(const std::string& text, Font* font, const Maths::vec3f& position, uint color) {}
+			virtual void DrawRectangle(const maths::vec3f& position, const maths::vec2f& size, uint color) {}
+			virtual void DrawOval(const maths::vec3f& position, int radiusX, int radiusY, uint color) {}
+			virtual void DrawString(const std::string& text, Font* font, const maths::vec3f& position, uint color) {}
 		};
 	}
 }

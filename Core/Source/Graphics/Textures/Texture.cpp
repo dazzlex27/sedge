@@ -11,56 +11,53 @@ implements the 2D texture class
 #include "Internal/DeleteMacros.h"
 #include "Internal/Log.h"
 
-namespace s3dge
+using namespace s3dge;
+using namespace graphics;
+	
+Texture::Texture(cstring name, cstring path)
+	: _name(name), _path(path)
 {
-	namespace Graphics
-	{
-		Texture::Texture(cstring name, cstring path)
-			: _name(name), _path(path)
-		{
-			_id = Load();
+	_id = Load();
 
-			if (_id == -1)
-				LOG_ERROR("Failed to load texture: ", name);
-		}
+	if (_id == -1)
+		LOG_ERROR("Failed to load texture: ", name);
+}
 
-		Texture::~Texture()
-		{
-			glDeleteTextures(1, &_id);
-		}
+Texture::~Texture()
+{
+	glDeleteTextures(1, &_id);
+}
 
-		uint Texture::Load()
-		{
-			uint id;
+uint Texture::Load()
+{
+	uint id;
 
-			byte* imagePixels = LoadImage(_path, &_width, &_height, &_components);
+	byte* imagePixels = LoadImage(_path, &_width, &_height, &_components);
 
-			if (imagePixels == nullptr)
+	if (imagePixels == nullptr)
 
-				return -1;
+		return -1;
 
-			glGenTextures(1, &id);
-			glBindTexture(GL_TEXTURE_2D, id);
+	glGenTextures(1, &id);
+	glBindTexture(GL_TEXTURE_2D, id);
 
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, _width, _height, 0, GL_RGB, GL_UNSIGNED_BYTE, imagePixels);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, _width, _height, 0, GL_RGB, GL_UNSIGNED_BYTE, imagePixels);
 
-			glBindTexture(GL_TEXTURE_2D, 0);
+	glBindTexture(GL_TEXTURE_2D, 0);
 
-			SafeDeleteArray(imagePixels);
+	SafeDeleteArray(imagePixels);
 
-			return id;
-		}
+	return id;
+}
 
-		void Texture::Bind() const
-		{
-			glBindTexture(GL_TEXTURE_2D, _id);
-		}
+void Texture::Bind() const
+{
+	glBindTexture(GL_TEXTURE_2D, _id);
+}
 
-		void Texture::Unbind() const
-		{
-			glBindTexture(GL_TEXTURE_2D, 0);
-		}
-	}
+void Texture::Unbind() const
+{
+	glBindTexture(GL_TEXTURE_2D, 0);
 }

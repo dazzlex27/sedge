@@ -8,7 +8,7 @@
 
 namespace s3dge
 {
-	namespace Graphics
+	namespace graphics
 	{
 		class ShaderProgram
 		{
@@ -30,15 +30,15 @@ namespace s3dge
 			void Enable();
 			void Disable();
 
-			void SetUniformMat4fv(cstring name, const Maths::mat4& matrix);
+			void SetUniformMat4fv(cstring name, const maths::mat4& matrix);
 			void SetUniform1f(cstring name, float value);
-			void SetUniform2f(cstring name, Maths::vec2f value);
-			void SetUniform3f(cstring name, Maths::vec3f value);
-			void SetUniform4f(cstring name, Maths::vec4f value);
+			void SetUniform2f(cstring name, maths::vec2f value);
+			void SetUniform3f(cstring name, maths::vec3f value);
+			void SetUniform4f(cstring name, maths::vec4f value);
 			void SetUniform1i(cstring name, int value);
 			void SetUniform1iv(cstring name, int count, int* value);
 
-			void SetProjection(Maths::mat4 ortho);
+			void SetProjection(maths::mat4 ortho);
 
 		private:
 			uint Load();

@@ -16,7 +16,7 @@ TODO: standartize all of the manager classes
 
 namespace s3dge
 {
-	namespace Audio
+	namespace audio
 	{
 		class SoundManager
 		{

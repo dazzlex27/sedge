@@ -12,15 +12,13 @@ Contains basic high-level window management functions.
 #include <map>
 #include <GL/glew.h>
 #include "CustomTypes.h"
-#include "Internal/DeleteMacros.h"
-#include "Internal/Log.h"
 #include "Maths/vec2.h"
 #include "Platforms/Windows/WindowsKeys.h"
 #include "Utilities/Timers/Timer.h"
 
 namespace s3dge
 {
-	namespace Graphics
+	namespace graphics
 	{
 		class Window
 		{
@@ -38,7 +36,7 @@ namespace s3dge
 			bool _isClosed;
 			bool _fullScreen;
 			bool _vSync;
-			Maths::vec2f _mousePosition;
+			maths::vec2f _mousePosition;
 			bool _keysDown[MAX_KEYS];
 			bool _buttonsDown[MAX_BUTTONS];
 			bool _keysClicked[MAX_KEYS];
@@ -74,7 +72,7 @@ namespace s3dge
 			inline bool IsClosed() const { return _isClosed; }
 			inline bool IsVSync() const { return _vSync; }
 			inline bool IsFullScreen() const { return _fullScreen; }
-			inline Maths::vec2f GetMousePosition() const { return _mousePosition; }
+			inline maths::vec2f GetMousePosition() const { return _mousePosition; }
 
 		private:
 			bool InitializeWindow();

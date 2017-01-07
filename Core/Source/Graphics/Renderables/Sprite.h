@@ -1,15 +1,23 @@
+/*
+===========================================================================
+Sprite.h
+
+Inherits from the Renderable2D.
+===========================================================================
+*/
+
 #pragma once
 
 #include "Renderable2D.h"
 
 namespace s3dge
 {
-	namespace Graphics
+	namespace graphics
 	{
 		class Sprite : public Renderable2D
 		{
 		public:
-			Maths::vec3f position;
+			maths::vec3f position;
 
 		public:
 			Sprite(float x, float y, float width, float height, uint color);

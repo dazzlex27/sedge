@@ -13,7 +13,7 @@ Defines a class responsible for processing 2D textures.
 
 namespace s3dge
 {
-	namespace Graphics
+	namespace graphics
 	{
 		class Texture
 		{
