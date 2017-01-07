@@ -36,7 +36,7 @@ namespace s3dge
 			virtual void Submit(Renderer2DBase* renderer) const;
 
 		public:
-			inline const maths::vec3f GetPosition() const { return _position; }
+			inline virtual const maths::vec3f GetPosition() const { return _position; }
 			inline const maths::vec2f GetSize() const { return _size; }
 			inline uint GetColor() const { return _color; }
 			inline std::vector<maths::vec2f> GetUV() const { return _uv; }

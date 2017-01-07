@@ -14,7 +14,7 @@ using namespace s3dge;
 using namespace audio;
 
 Sound::Sound(cstring name, cstring path)
-	: _name(name), _path(path)
+	: _name(name), _path(path), _created(false)
 {
 	_playing = false;
 	_count = 0;
@@ -34,10 +34,24 @@ Sound::~Sound()
 
 void Sound::Play()
 {
+	if (!_created)
+	{
+		PlayFromStart();
+		return;
+	}
+
+	ga_handle_play(_handle);
+
+	_playing = true;
+}
+
+void Sound::PlayFromStart()
+{
 	_handle = gau_create_handle_sound(SoundManager::_mixer, _sound, dispose_sound_callback, this, 0);
 	ga_handle_play(_handle);
 
 	_count++;
+	_created = true;
 	_playing = true;
 }
 
@@ -46,6 +60,7 @@ void Sound::Loop()
 	_handle = gau_create_handle_sound(SoundManager::_mixer, _sound, loop_sound_callback, this, 0);
 	ga_handle_play(_handle);
 
+	_created = true;
 	_playing = true;
 }
 
@@ -54,6 +69,7 @@ void Sound::Stop()
 	if (!_playing)
 		return;
 
+	_created = false;
 	_playing = false;
 	ga_handle_stop(_handle);
 }

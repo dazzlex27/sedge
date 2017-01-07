@@ -26,6 +26,7 @@ namespace s3dge
 			ga_Sound* _sound;
 			ga_Handle* _handle;
 			bool _playing;
+			bool _created;
 			int _count;
 
 		public:
@@ -35,6 +36,7 @@ namespace s3dge
 
 		public:
 			void Play();
+			void PlayFromStart();
 			void Loop();
 			void Stop();
 			void Pause();

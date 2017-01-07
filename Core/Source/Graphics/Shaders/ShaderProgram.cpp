@@ -86,10 +86,10 @@ bool ShaderProgram::Compile(int shader)
 	return true;
 }
 
-void ShaderProgram::SetProjection(maths::mat4 ortho)
+void ShaderProgram::SetProjection(maths::mat4 matrix)
 {
 	this->Enable();
-	this->SetUniformMat4fv("pr_matrix", ortho);
+	this->SetUniformMat4fv("pr_matrix", matrix);
 }
 
 void ShaderProgram::Enable()

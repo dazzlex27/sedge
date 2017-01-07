@@ -28,6 +28,7 @@ namespace s3dge
 			~Label();
 
 			void Submit(Renderer2DBase* renderer) const override;
+			inline const maths::vec3f GetPosition() const override { return maths::vec3f(position.x, position.y, 0); }
 		};
 	}
 }

@@ -17,43 +17,14 @@ void Application::Initialize()
 	FontManager::Add("test_font", "Resources\\SourceSansPro-Light.ttf", 32);
 	SoundManager::Add("back-in-black", "Resources\\back-in-black.ogg");
 
-	_layer = new Layer(_shaderProgram, new Renderer2D());
+	_layer = new Layer(_shaderProgram);
 
+	_rect = new Sprite(4, 3, 3, 3, TextureManager::Get("Brick"));
 	_fps = new Label("Test", FontManager::Get("test_font"), 0.4f, 8.2f, 2, 2, 0xffffffff);
 
-	for (float y = 0; y < 9.0f; y += 0.5f)
-	{
-		for (float x = 0; x < 16.0f; x += 0.5f)
-		{
-			if (rand() % 4 == 0)
-			{
-				int a = 255;
-				int r = (int)(rand() % 1000 / 1000.0f * 255);
-				int g = (int)(rand() % 1000 / 1000.0f * 255);
-				int b = (int)(rand() % 1000 / 1000.0f * 255);
+	//LoadManySprites();
 
-				uint color = a << 24 | b << 16 | g << 8 | r;
-
-				_layer->Add(new Sprite(x, y, 0.4f, 0.4f, color));
-			}
-			else
-			{
-				switch (rand() % 3)
-				{
-				case 0:
-					_layer->Add(new Sprite(x, y, 0.4f, 0.4f, TextureManager::Get("Gradient")));
-					break;
-				case 1:
-					_layer->Add(new Sprite(x, y, 0.4f, 0.4f, TextureManager::Get("Box")));
-					break;
-				default:
-					_layer->Add(new Sprite(x, y, 0.4f, 0.4f, TextureManager::Get("Brick")));
-					break;
-				}
-			}
-		}
-	}
-
+	_layer->Add(_rect);
 	_layer->Add(_fps);
 
 	SoundManager::Get("back-in-black")->Play();
@@ -61,12 +32,31 @@ void Application::Initialize()
 
 void Application::UpdateInput()
 {
+	float speed = 0.1f;
+
 	_shaderProgram->Enable();
 	vec2f mouse = _window->GetMousePosition();
 	_shaderProgram->SetUniform2f("light_pos", vec2f((float)(mouse.x * 16.0f / _window->GetWidth()), 
 		(float)(9.0f - mouse.y * 9.0f / _window->GetHeight())));
 	std::string text = std::to_string(GetFPS()) + " fps";
 	_fps->text = text.c_str();
+
+	if (_window->KeyDown(VK_LEFT))
+		_rect->position.x -= speed;
+	if (_window->KeyDown(VK_RIGHT))
+		_rect->position.x += speed;
+	if (_window->KeyDown(VK_UP))
+		_rect->position.y += speed;
+	if (_window->KeyDown(VK_DOWN))
+		_rect->position.y -= speed;
+
+	if (_window->KeyClicked(VK_P))
+	{
+		if (SoundManager::Get("back-in-black")->IsPlaying())
+			SoundManager::Get("back-in-black")->Pause();
+		else
+			SoundManager::Get("back-in-black")->Play();
+	}
 }
 
 void Application::Render()
@@ -79,4 +69,40 @@ void Application::Dispose()
 	SoundManager::Get("back-in-black")->Stop();
 	SafeDelete(_layer);
 	SafeDelete(_shaderProgram);
+}
+
+void LoadManySprites(Layer* layer)
+{
+	for (float y = 0; y <= 9.0f; y += 0.5f)
+	{
+		for (float x = 0; x <= 16.0f; x += 0.5f)
+		{
+			if (rand() % 4 == 0)
+			{
+				int a = 255;
+				int r = (int)(rand() % 1000 / 1000.0f * 255);
+				int g = (int)(rand() % 1000 / 1000.0f * 255);
+				int b = (int)(rand() % 1000 / 1000.0f * 255);
+
+				uint color = a << 24 | b << 16 | g << 8 | r;
+
+				layer->Add(new Sprite(x, y, 0.4f, 0.4f, color));
+			}
+			else
+			{
+				switch (rand() % 3)
+				{
+				case 0:
+					layer->Add(new Sprite(x, y, 0.4f, 0.4f, TextureManager::Get("Gradient")));
+					break;
+				case 1:
+					layer->Add(new Sprite(x, y, 0.4f, 0.4f, TextureManager::Get("Box")));
+					break;
+				default:
+					layer->Add(new Sprite(x, y, 0.4f, 0.4f, TextureManager::Get("Brick")));
+					break;
+				}
+			}
+		}
+	}
 }
