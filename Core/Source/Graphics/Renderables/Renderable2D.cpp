@@ -29,7 +29,7 @@ Renderable2D::~Renderable2D()
 {
 }
 
-void Renderable2D::Submit(Renderer2DBase* renderer) const
+void Renderable2D::Submit(Renderer2D* renderer) const
 {
 	renderer->Submit(this);
 }

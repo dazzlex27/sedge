@@ -113,7 +113,7 @@
     <ClCompile Include="Source\Graphics\Renderables\Sprite.cpp" />
     <ClCompile Include="Source\Graphics\Renderers\Renderer2D.cpp" />
     <ClCompile Include="Source\Graphics\Shaders\ShaderProgram.cpp" />
-    <ClCompile Include="Source\Graphics\Textures\Texture.cpp" />
+    <ClCompile Include="Source\Graphics\Textures\Texture2D.cpp" />
     <ClCompile Include="Source\Graphics\Textures\TextureManager.cpp" />
     <ClCompile Include="Source\Platforms\Windows\Win32Window.cpp" />
     <ClCompile Include="Source\Platforms\Window.cpp" />
@@ -135,7 +135,6 @@
     <ClInclude Include="Source\Graphics\Fonts\FontManager.h" />
     <ClInclude Include="Source\Graphics\GraphicsManager.h" />
     <ClInclude Include="Source\Graphics\GraphicsStructures.h" />
-    <ClInclude Include="Source\Graphics\Renderers\Renderer2DBase.h" />
     <ClInclude Include="Source\Graphics\Textures\TextureFactory.h" />
     <ClInclude Include="Source\Internal\enums.h" />
     <ClInclude Include="Source\Internal\MemoryManager.h" />
@@ -150,7 +149,7 @@
     <ClInclude Include="Source\Graphics\Renderables\Sprite.h" />
     <ClInclude Include="Source\Graphics\Renderers\Renderer2D.h" />
     <ClInclude Include="Source\Graphics\Shaders\ShaderProgram.h" />
-    <ClInclude Include="Source\Graphics\Textures\Texture.h" />
+    <ClInclude Include="Source\Graphics\Textures\Texture2D.h" />
     <ClInclude Include="Source\Graphics\Textures\TextureManager.h" />
     <ClInclude Include="Source\Platforms\Windows\WindowsKeys.h" />
     <ClInclude Include="Source\Maths\mat4.h" />

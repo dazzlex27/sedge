@@ -6,7 +6,7 @@ implements the 2D texture class
 ===========================================================================
 */
 
-#include "Texture.h"
+#include "Texture2D.h"
 #include "Utilities/ImageUtils.h"
 #include "Internal/DeleteMacros.h"
 #include "Internal/Log.h"
@@ -14,7 +14,7 @@ implements the 2D texture class
 using namespace s3dge;
 using namespace graphics;
 	
-Texture::Texture(cstring name, cstring path)
+Texture2D::Texture2D(cstring name, cstring path)
 	: _name(name), _path(path)
 {
 	_id = Load();
@@ -23,12 +23,12 @@ Texture::Texture(cstring name, cstring path)
 		LOG_ERROR("Failed to load texture: ", name);
 }
 
-Texture::~Texture()
+Texture2D::~Texture2D()
 {
 	glDeleteTextures(1, &_id);
 }
 
-uint Texture::Load()
+uint Texture2D::Load()
 {
 	uint id;
 
@@ -52,12 +52,12 @@ uint Texture::Load()
 	return id;
 }
 
-void Texture::Bind() const
+void Texture2D::Bind() const
 {
 	glBindTexture(GL_TEXTURE_2D, _id);
 }
 
-void Texture::Unbind() const
+void Texture2D::Unbind() const
 {
 	glBindTexture(GL_TEXTURE_2D, 0);
 }

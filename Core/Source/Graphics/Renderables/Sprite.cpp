@@ -17,7 +17,7 @@ Sprite::Sprite(float x, float y, float width, float height, uint color)
 	this->position = _position;
 }
 
-Sprite::Sprite(float x, float y, float width, float height, Texture* texture)
+Sprite::Sprite(float x, float y, float width, float height, Texture2D* texture)
 	: Renderable2D(maths::vec3f(x, y, 0), maths::vec2f(width, height), 0xffffffff)
 {
 	this->position = _position;

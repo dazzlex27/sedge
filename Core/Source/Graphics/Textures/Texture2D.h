@@ -15,7 +15,7 @@ namespace s3dge
 {
 	namespace graphics
 	{
-		class Texture
+		class Texture2D
 		{
 		private:
 			cstring _name;
@@ -26,8 +26,8 @@ namespace s3dge
 			int _components;
 
 		public:
-			Texture(cstring name, cstring path);
-			~Texture();
+			Texture2D(cstring name, cstring path);
+			~Texture2D();
 
 		public:
 			inline cstring GetName() const { return _name; }

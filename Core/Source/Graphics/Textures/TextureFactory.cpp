@@ -13,12 +13,12 @@ Implements TextureFactory class
 using namespace s3dge;
 using namespace graphics;
 
-Texture* TextureFactory::CreateDefaultTexture()
+Texture2D* TextureFactory::CreateDefaultTexture()
 {
 	return nullptr;
 }
 
-Texture* TextureFactory::CreateTexture(cstring name, cstring path)
+Texture2D* TextureFactory::CreateTexture(cstring name, cstring path)
 {
 	if (strcmp(name, "") == 0)
 	{
@@ -38,5 +38,5 @@ Texture* TextureFactory::CreateTexture(cstring name, cstring path)
 		return nullptr;
 	}
 
-	return new Texture(name, path);
+	return new Texture2D(name, path);
 }

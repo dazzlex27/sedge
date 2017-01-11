@@ -14,7 +14,7 @@ Implements the texture manager class.
 using namespace s3dge;
 using namespace graphics;
 	
-std::vector<Texture*> TextureManager::_textures;
+std::vector<Texture2D*> TextureManager::_textures;
 bool TextureManager::_initialized;
 
 void TextureManager::Initialize()
@@ -31,7 +31,7 @@ void TextureManager::Add(cstring name, cstring path, bool overrideExisting)
 		{
 			if (overrideExisting)
 			{
-				Texture* newTexture = TextureFactory::CreateTexture(name, path);
+				Texture2D* newTexture = TextureFactory::CreateTexture(name, path);
 				if (newTexture != nullptr)
 					_textures.push_back(newTexture);
 			}
@@ -43,7 +43,7 @@ void TextureManager::Add(cstring name, cstring path, bool overrideExisting)
 			return;
 		}
 
-		Texture* newTexture = TextureFactory::CreateTexture(name, path);
+		Texture2D* newTexture = TextureFactory::CreateTexture(name, path);
 		if (newTexture != nullptr)
 			_textures.push_back(newTexture);
 	}
@@ -53,7 +53,7 @@ void TextureManager::Add(cstring name, cstring path, bool overrideExisting)
 	}
 }
 
-Texture* TextureManager::Get(cstring name)
+Texture2D* TextureManager::Get(cstring name)
 {
 	if (_initialized)
 	{

@@ -2,18 +2,26 @@
 ===========================================================================
 Renderer2D.cpp
 
-Implements the Rendrer2D class
+Implements the Renderer2D class
 ===========================================================================
 */
 
 #include "Renderer2D.h"
 #include "Internal/DeleteMacros.h"
+#include "Graphics/Renderables/Renderable2D.h"
+#include "Graphics/Buffers/IndexBuffer.h"
+#include "Graphics/Fonts/Font.h"
 
 using namespace s3dge;
 using namespace graphics;
+
+#define MAX_SPRITES	60000
+#define SPRITE_VERTEX_SIZE	sizeof(VertexData)
+#define SPRITE_SIZE	SPRITE_VERTEX_SIZE * 4
+#define SPRITE_BUFFER_SIZE	SPRITE_SIZE * MAX_SPRITES
+#define SPRITE_INDICES_SIZE	MAX_SPRITES * 6
 	
-Renderer2D::Renderer2D(const Window* window)
-	: _window(window)
+Renderer2D::Renderer2D()
 {			
 	Initialize();
 }
@@ -33,25 +41,25 @@ void Renderer2D::Initialize()
 	glGenBuffers(1, &_vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, _vbo);
 
-	glBufferData(GL_ARRAY_BUFFER, RENDERER_BUFFER_SIZE, NULL, GL_DYNAMIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, SPRITE_BUFFER_SIZE, NULL, GL_DYNAMIC_DRAW);
 
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
 	glEnableVertexAttribArray(2);
 	glEnableVertexAttribArray(3);
 
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (const void*)(offsetof(VertexData, VertexData::Vertex)));
-	glVertexAttribPointer(1, 4, GL_UNSIGNED_BYTE, GL_TRUE, RENDERER_VERTEX_SIZE, (const void*)(offsetof(VertexData, VertexData::Color)));
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (const void*)(offsetof(VertexData, VertexData::UV)));
-	glVertexAttribPointer(3, 1, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (const void*)(offsetof(VertexData, VertexData::TextureID)));
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, SPRITE_VERTEX_SIZE, (const void*)(offsetof(VertexData, VertexData::Vertex)));
+	glVertexAttribPointer(1, 4, GL_UNSIGNED_BYTE, GL_TRUE, SPRITE_VERTEX_SIZE, (const void*)(offsetof(VertexData, VertexData::Color)));
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, SPRITE_VERTEX_SIZE, (const void*)(offsetof(VertexData, VertexData::UV)));
+	glVertexAttribPointer(3, 1, GL_FLOAT, GL_FALSE, SPRITE_VERTEX_SIZE, (const void*)(offsetof(VertexData, VertexData::TextureID)));
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-	uint* indices = new uint[RENDERER_INDICES_SIZE];
+	uint* indices = new uint[SPRITE_INDICES_SIZE];
 
 	int offset = 0;
 
-	for (int i = 0; i < RENDERER_INDICES_SIZE; i += 6)
+	for (int i = 0; i < SPRITE_INDICES_SIZE; i += 6)
 	{
 		indices[i] = offset + 0;
 		indices[i + 1] = offset + 1;
@@ -64,7 +72,7 @@ void Renderer2D::Initialize()
 		offset += 4;
 	}
 
-	_ibo = new IndexBuffer(indices, RENDERER_INDICES_SIZE);
+	_ibo = new IndexBuffer(indices, SPRITE_INDICES_SIZE);
 
 	glBindVertexArray(0);
 }
@@ -170,15 +178,14 @@ void Renderer2D::DrawString(const std::string& text, Font* font, const maths::ve
 		textureSlot = (float)(_textures.size());
 	}
 
-	float scaleX = _window->GetWidth() / 32.0f;
-	float scaleY = _window->GetHeight() / 18.0f;
+	const float scaleX = 40.0f;
+	const float scaleY = 40.0f;
 
 	for (uint i = 0; i < text.length(); i++)
 	{
 		texture_glyph_t* glyph = texture_font_get_glyph(font->GetFontFace(), text[i]);
 		if (glyph != NULL)
 		{
-
 			if (i > 0)
 			{
 				float kerning = texture_glyph_get_kerning(glyph, text[i - 1]);

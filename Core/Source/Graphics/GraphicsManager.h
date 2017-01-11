@@ -31,7 +31,7 @@ namespace s3dge
 
 		public:
 			static void Initialize(); // must be called upon engine startup
-			static void AddSprite(cstring name, float x, float y, float w, float h, uint c, Texture* t = nullptr, bool overrideExisting = false);
+			static void AddSprite(cstring name, float x, float y, float w, float h, uint c, Texture2D* t = nullptr, bool overrideExisting = false);
 			static void AddLabel(cstring name, const std::string& text, Font* font, float x, float y, float w, float h, uint c = 0xffffffff, bool overrideExisting = false);
 			static void AddGroup(cstring name, bool overrideExisting = false);
 			static Sprite* GetSprite(cstring name);

@@ -19,7 +19,7 @@ void Application::Initialize()
 	GraphicsManager::AddSprite("rect", 4, 3, 3, 3, 0xffffffff, TextureManager::Get("Brick"));
 	GraphicsManager::AddLabel("fps", "startup...", FontManager::Get("test_font"), 0.4f, 8.2f, 2, 2);
 
-	_layer = new Layer(_shaderProgram, _window);
+	_layer = new Layer(_shaderProgram);
 
 	_layer->Add(GraphicsManager::GetSprite("rect"));
 	_layer->Add(GraphicsManager::GetLabel("fps"));

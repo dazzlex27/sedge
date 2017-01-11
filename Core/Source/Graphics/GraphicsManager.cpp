@@ -31,7 +31,7 @@ void GraphicsManager::Initialize()
 	}
 }
 
-void GraphicsManager::AddSprite(cstring name, float x, float y, float w, float h, uint c, Texture* t, bool overrideExisting)
+void GraphicsManager::AddSprite(cstring name, float x, float y, float w, float h, uint c, Texture2D* t, bool overrideExisting)
 {
 	if (_initialized)
 	{

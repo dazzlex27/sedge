@@ -21,7 +21,7 @@ namespace s3dge
 
 		public:
 			Sprite(float x, float y, float width, float height, uint color);
-			Sprite(float x, float y, float width, float height, Texture* texture);
+			Sprite(float x, float y, float width, float height, Texture2D* texture);
 
 			inline const maths::vec3f GetPosition() const override { return position; }
 		};

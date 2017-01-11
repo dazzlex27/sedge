@@ -9,10 +9,8 @@ Base class for all 2D renderable objects.
 #pragma once
 
 #include "Maths/MathsHeader.h"
-#include "Graphics/Textures/Texture.h"
-#include "Graphics/Buffers/VertexArray.h"
-#include "Graphics/Buffers/IndexBuffer.h"
-#include "Graphics/Renderers/Renderer2DBase.h"
+#include "Graphics/Renderers/Renderer2D.h"
+#include "Graphics/Textures/Texture2D.h"
 
 namespace s3dge
 {
@@ -25,7 +23,7 @@ namespace s3dge
 			maths::vec2f _size;
 			uint _color;
 			std::vector<maths::vec2f> _uv;
-			Texture* _texture;
+			Texture2D* _texture;
 
 		protected:
 			Renderable2D();
@@ -33,7 +31,7 @@ namespace s3dge
 
 		public:
 			virtual ~Renderable2D();
-			virtual void Submit(Renderer2DBase* renderer) const;
+			virtual void Submit(Renderer2D* renderer) const;
 
 		public:
 			inline virtual const maths::vec3f GetPosition() const { return _position; }

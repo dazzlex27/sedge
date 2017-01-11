@@ -25,11 +25,11 @@ using namespace graphics;
 	// _ownsShader = true;
 //}
 
-Layer::Layer(ShaderProgram* shaderProgram, const Window* window)
+Layer::Layer(ShaderProgram* shaderProgram)
 {
 	_transformationMatrix = maths::mat4::GetIdentity();
 	_shaderProgram = shaderProgram;
-	_renderer = new Renderer2D(window);
+	_renderer = new Renderer2D();
 	_ownsRenderer = true;
 	_ownsShader = false;
 }

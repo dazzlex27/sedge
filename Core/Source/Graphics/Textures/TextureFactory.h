@@ -8,7 +8,7 @@ Takes responsibility for creating Texture objects
 
 #pragma once
 
-#include "Texture.h"
+#include "Texture2D.h"
 
 namespace s3dge
 {
@@ -17,8 +17,8 @@ namespace s3dge
 		class TextureFactory
 		{
 		public:
-			static Texture* CreateDefaultTexture();
-			static Texture* CreateTexture(cstring name, cstring path);
+			static Texture2D* CreateDefaultTexture();
+			static Texture2D* CreateTexture(cstring name, cstring path);
 
 		private:
 			TextureFactory();

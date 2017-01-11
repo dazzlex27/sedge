@@ -7,6 +7,7 @@ Implements the Label class
 */
 
 #include "Label.h"
+#include "Graphics/Fonts/Font.h"
 
 using namespace s3dge;
 using namespace graphics;
@@ -24,7 +25,7 @@ Label::~Label()
 {
 }
 
-void Label::Submit(Renderer2DBase* renderer) const
+void Label::Submit(Renderer2D* renderer) const
 {
 	renderer->DrawString(text, font, maths::vec3f(position.x, position.y, 0), color);
 }

@@ -4,8 +4,10 @@ Layer.h
 
 A class designed to represent a layer of objects on screen.
 Each layer requires a shader instance and a renderer instance.
+In case a renderer is not specified, a local one will be created.
+TODO: In case a shader is not specified, a default one will be used.
 
-Using layers is highly encouraged, event if there's only one. That helps to keep things clean.
+Using layers is highly encouraged, even if there's only one. That helps to keep things clean.
 ===========================================================================
 */
 
@@ -32,7 +34,7 @@ namespace s3dge
 
 		public:
 			//Layer(); // TODO: needs a default shader
-			Layer(ShaderProgram* shaderProgram, const Window* window);
+			Layer(ShaderProgram* shaderProgram);
 			Layer(ShaderProgram* shaderProgram, Renderer2D* renderer);
 			~Layer();
 
