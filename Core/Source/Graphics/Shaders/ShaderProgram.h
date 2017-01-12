@@ -14,8 +14,10 @@ namespace s3dge
 		{
 		private:
 			uint _programID;
-			cstring _vertex;
-			cstring _fragment;
+			cstring _vertexPath;
+			cstring _fragmentPath;
+			int _vertex;
+			int _fragment;
 
 			int _textureIDs[16]
 			{
