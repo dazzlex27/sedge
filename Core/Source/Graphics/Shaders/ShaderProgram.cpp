@@ -4,8 +4,8 @@
 using namespace s3dge;
 using namespace graphics;
 	
-ShaderProgram::ShaderProgram(cstring vertex, cstring fragment)
-	: _vertex(vertex), _fragment(fragment)
+ShaderProgram::ShaderProgram(cstring vertexPath, cstring fragmentPath)
+	: _vertexPath(vertexPath), _fragmentPath(fragmentPath)
 {
 	_programID = Load();
 	this->Enable();
@@ -14,48 +14,50 @@ ShaderProgram::ShaderProgram(cstring vertex, cstring fragment)
 
 ShaderProgram::~ShaderProgram()
 {
+	glDetachShader(_programID, _vertex);
+	glDetachShader(_programID, _fragment);
 	glDeleteProgram(_programID);
 }
 
 uint ShaderProgram::Load()
 {
 	// Create and compile vertex shader.
-	int vertexShader = glCreateShader(GL_VERTEX_SHADER);
-	std::string vertexSource = FileUtils::ReadFromFile(_vertex).c_str();
+	_vertex = glCreateShader(GL_VERTEX_SHADER);
+	std::string vertexSource = FileUtils::ReadFromFile(_vertexPath).c_str();
 	if (vertexSource == "")
 	{
 		LOG_ERROR("Cannot find vertex shader source");
 		return -1;
 	}
 	cstring vSource = vertexSource.c_str();
-	glShaderSource(vertexShader, 1, &vSource, NULL);
-	if (!Compile(vertexShader))
+	glShaderSource(_vertex, 1, &vSource, NULL);
+	if (!Compile(_vertex))
 		return -1;
 
 	// Create and compile fragment shader.
-	int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-	std::string fragmentSource = FileUtils::ReadFromFile(_fragment).c_str();
+	_fragment = glCreateShader(GL_FRAGMENT_SHADER);
+	std::string fragmentSource = FileUtils::ReadFromFile(_fragmentPath).c_str();
 	if (fragmentSource == "")
 	{
 		LOG_ERROR("Cannot find fragment shader source");
 		return -1;
 	}
 	cstring fSource = fragmentSource.c_str();
-	glShaderSource(fragmentShader, 1, &fSource, NULL);
-	if (!Compile(fragmentShader))
+	glShaderSource(_fragment, 1, &fSource, NULL);
+	if (!Compile(_fragment))
 		return -1;
 
 	// Create a shader program and attach compiled shaders to it.
 	int program = glCreateProgram();
 
-	glAttachShader(program, vertexShader);
-	glAttachShader(program, fragmentShader);
+	glAttachShader(program, _vertex);
+	glAttachShader(program, _fragment);
 
 	glLinkProgram(program);
 	glValidateProgram(program);
 
-	glDeleteShader(vertexShader);
-	glDeleteShader(fragmentShader);
+	glDeleteShader(_vertex);
+	glDeleteShader(_fragment);
 
 	return program;
 }
