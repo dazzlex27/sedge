@@ -74,6 +74,8 @@ void Renderer2D::Initialize()
 
 	_ibo = new IndexBuffer(indices, SPRITE_INDICES_SIZE);
 
+	_indexCount = 0;
+
 	glBindVertexArray(0);
 }
 

@@ -10,6 +10,10 @@ Main Win32 implementation file.
 #include "Platforms/Window.h"
 #include "Internal/Log.h"
 
+#ifdef S3_DEBUG
+	#include "Internal/OpenGLDebug.h"
+#endif
+
 using namespace s3dge;
 using namespace graphics;
 
@@ -65,7 +69,7 @@ LRESULT CALLBACK WindowProcedure(HWND hwnd, UINT message, WPARAM wParam, LPARAM 
 }
 
 // Window initialization implementation
-bool Window::InitializeWindow()
+bool Window::Initialize()
 {
 	WNDCLASS wc = { 0 };
 	wc.lpfnWndProc = WindowProcedure;

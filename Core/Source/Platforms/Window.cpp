@@ -13,12 +13,24 @@ Contains basic high-level window management functions.
 using namespace s3dge;
 using namespace graphics;
 	
+#ifdef S3_DEBUG
+	#include <Windows.h>
+	void APIENTRY openglCallbackFunction(
+		GLenum source, 
+		GLenum type, 
+		GLuint id, 
+		GLenum severity, 
+		GLsizei length, 
+		const GLchar* message, 
+		const void* userParam);
+#endif
+
 std::map<void*, Window*> Window::_windowInstances;
 
 Window::Window(cstring title, uint width, uint height, bool fullscreen, bool vsync)
 	: _title(title), _width(width), _height(height), _fullScreen(fullscreen), _vSync(vsync), _isClosed(false)
 {
-	if (!InitializeWindow())
+	if (!Initialize())
 		LOG_FATAL("Could not initialize window!");
 	else
 	{
@@ -40,12 +52,25 @@ Window::Window(cstring title, uint width, uint height, bool fullscreen, bool vsy
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		//glEnable(GL_CULL_FACE);
 
+#ifdef S3_DEBUG
+		// Enable the debug callback
+		glEnable(GL_DEBUG_OUTPUT);
+		glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
+		glDebugMessageCallback(openglCallbackFunction, nullptr);
+		glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, NULL, true);
+#endif
+
 		LOG_INFO("OpenGL v. ", (char*)glGetString(GL_VERSION));
 		LOG_INFO("Renderer: ", (char*)glGetString(GL_RENDERER));
 	}
 }
 
 Window::~Window()
+{
+	Dispose();
+}
+
+void Window::Dispose()
 {
 	for (int i = 0; i < MAX_BUTTONS; ++i)
 		SafeDelete(_doubleClickTimers[i]);

@@ -75,7 +75,8 @@ namespace s3dge
 			inline maths::vec2f GetMousePosition() const { return _mousePosition; }
 
 		private:
-			bool InitializeWindow();
+			bool Initialize();
+			void Dispose();
 
 			friend void resize_callback(Window* window, uint width, uint height);
 			friend void key_callback(Window* window, int key, int command);
