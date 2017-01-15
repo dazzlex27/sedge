@@ -38,16 +38,16 @@ void Application::UpdateInput()
 
 	GraphicsManager::GetLabel("fps")->text = std::to_string(GetFPS()) + " fps";
 
-	if (_window->KeyDown(VK_LEFT))
+	if (_window->KeyDown(S3_KEY_LEFT))
 		GraphicsManager::GetSprite("rect")->position.x -= speed;
-	if (_window->KeyDown(VK_RIGHT))
+	if (_window->KeyDown(S3_KEY_RIGHT))
 		GraphicsManager::GetSprite("rect")->position.x += speed;
-	if (_window->KeyDown(VK_UP))
+	if (_window->KeyDown(S3_KEY_UP))
 		GraphicsManager::GetSprite("rect")->position.y += speed;
-	if (_window->KeyDown(VK_DOWN))
+	if (_window->KeyDown(S3_KEY_DOWN))
 		GraphicsManager::GetSprite("rect")->position.y -= speed;
 
-	if (_window->KeyClicked(VK_P))
+	if (_window->KeyClicked(S3_KEY_P))
 	{
 		if (SoundManager::Get("back-in-black")->IsPlaying())
 			SoundManager::Get("back-in-black")->Pause();

@@ -64,6 +64,7 @@
       <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <DisableSpecificWarnings>4996;4047</DisableSpecificWarnings>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -116,14 +117,11 @@
     <ClCompile Include="Source\Graphics\Shaders\ShaderProgram.cpp" />
     <ClCompile Include="Source\Graphics\Textures\Texture2D.cpp" />
     <ClCompile Include="Source\Graphics\Textures\TextureManager.cpp" />
-    <ClCompile Include="Source\Internal\OpenGLDebug.h" />
     <ClCompile Include="Source\Logic\Components\BaseObject.cpp" />
     <ClCompile Include="Source\Logic\Components\Camera.cpp" />
-    <ClCompile Include="Source\Platforms\Windows\Win32Window.cpp" />
-    <ClCompile Include="Source\Platforms\Window.cpp" />
-    <ClCompile Include="Source\Maths\mat4.cpp" />
+    <ClCompile Include="Source\Platforms\Platform.cpp" />
+    <ClCompile Include="Source\Graphics\Window.cpp" />
     <ClCompile Include="Source\S3DGE.cpp" />
-    <ClCompile Include="Source\Tools\ScriptParser.cpp" />
     <ClCompile Include="Source\Utilities\FileUtils.cpp" />
     <ClCompile Include="Source\Utilities\IDGenerator.cpp" />
     <ClCompile Include="Source\Utilities\ImageUtils.cpp" />
@@ -160,16 +158,17 @@
     <ClInclude Include="Source\Logic\Components\BaseObject.h" />
     <ClInclude Include="Source\Logic\Components\Camera.h" />
     <ClInclude Include="Source\Logic\Components\Entity.h" />
-    <ClInclude Include="Source\Platforms\Windows\WindowsKeys.h" />
-    <ClInclude Include="Source\Maths\mat4.h" />
-    <ClInclude Include="Source\Maths\MathsHeader.h" />
-    <ClInclude Include="Source\Maths\vec2.h" />
-    <ClInclude Include="Source\Maths\vec3.h" />
-    <ClInclude Include="Source\Maths\vec4.h" />
+    <ClInclude Include="Source\Platforms\KeyCodes.h" />
+    <ClInclude Include="Source\Platforms\Windows\Win32InputKeys.h" />
+    <ClInclude Include="Source\Platforms\Windows\Win32Window.h" />
+    <ClInclude Include="Source\Platforms\Windows\Win32OpenGLDebug.h" />
+    <ClInclude Include="Source\Maths\Matrix4.h" />
+    <ClInclude Include="Source\Maths\Vector2.h" />
+    <ClInclude Include="Source\Maths\Vector3.h" />
+    <ClInclude Include="Source\Maths\Vector4.h" />
     <ClInclude Include="Source\S3DGECommon.h" />
-    <ClInclude Include="Source\Platforms\Window.h" />
+    <ClInclude Include="Source\Graphics\Window.h" />
     <ClInclude Include="Source\CustomTypes.h" />
-    <ClInclude Include="Source\Tools\ScriptParser.h" />
     <ClInclude Include="Source\Utilities\Converters.h" />
     <ClInclude Include="Source\Internal\DeleteMacros.h" />
     <ClInclude Include="Source\Utilities\FileUtils.h" />

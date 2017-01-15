@@ -8,7 +8,9 @@ Base class for all 2D renderable objects.
 
 #pragma once
 
-#include "Maths/MathsHeader.h"
+#include "Maths/Vector2.h"
+#include "Maths/Vector3.h"
+#include "Maths/Vector4.h"
 #include "Graphics/Renderers/Renderer2D.h"
 #include "Graphics/Textures/Texture2D.h"
 

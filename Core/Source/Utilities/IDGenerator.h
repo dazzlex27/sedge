@@ -18,7 +18,7 @@ namespace s3dge
 		static uint currentID;
 
 	public:
-		inline static uint GetNewID();
+		static uint GetNewID();
 
 	private:
 		IDGenerator();

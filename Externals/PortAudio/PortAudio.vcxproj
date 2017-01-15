@@ -85,6 +85,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>PA_USE_ASIO=1;PA_USE_WASAPI=1;PA_USE_DS=0;PA_USE_WMME=1;PA_USE_WDMKS=1;PAWIN_USE_WDMKS_DEVICE_INFO;_CRT_SECURE_NO_WARNINGS;WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(ProjectDir)\Include\;$(ProjectDir)\Source\common\;$(ProjectDir)\Source\os\win\;$(ProjectDir)\Source\hostapi\asio\ASIOSDK\host\;$(ProjectDir)\Source\hostapi\asio\ASIOSDK\host\pc\;$(ProjectDir)\Source\hostapi\asio\ASIOSDK\common\</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>

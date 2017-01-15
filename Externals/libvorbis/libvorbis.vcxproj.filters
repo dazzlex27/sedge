@@ -137,9 +137,6 @@
     <ClCompile Include="Source\analysis.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\barkmel.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\bitrate.c">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -192,9 +189,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\synthesis.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\tone.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\vorbisenc.c">

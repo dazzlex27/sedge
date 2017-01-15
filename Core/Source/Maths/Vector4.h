@@ -1,6 +1,6 @@
 /*
 ===========================================================================
-vec4.h
+Vector4.h
 
 Implements a 4-component vector class
 ===========================================================================
@@ -13,20 +13,20 @@ namespace s3dge
 	namespace maths
 	{
 		template <typename T>
-		struct vec4
+		struct Vector4
 		{
 			T x;
 			T y;
 			T z;
 			T w;
 
-			vec4()
+			Vector4()
 				: x(0), y(0), z(0), w(0) {}
 
-			vec4(T x, T y, T z, T w)
+			Vector4(T x, T y, T z, T w)
 				: x(x), y(y), z(z), w(w) {}
 
-			vec4& Add(const vec4& vector)
+			Vector4& Add(const Vector4& vector)
 			{
 				this->x += vector.x;
 				this->y += vector.y;
@@ -36,7 +36,7 @@ namespace s3dge
 				return *this;
 			}
 
-			vec4& Subtract(const vec4& vector)
+			Vector4& Subtract(const Vector4& vector)
 			{
 				this->x -= vector.x;
 				this->y -= vector.y;
@@ -46,7 +46,7 @@ namespace s3dge
 				return *this;
 			}
 
-			vec4& Multiply(const vec4& vector)
+			Vector4& Multiply(const Vector4& vector)
 			{
 				this->x *= vector.x;
 				this->y *= vector.y;
@@ -71,7 +71,7 @@ namespace s3dge
 				return result;
 			}*/
 
-			vec4& Divide(const vec4& vector)
+			Vector4& Divide(const Vector4& vector)
 			{
 				this->x /= vector.x;
 				this->y /= vector.y;
@@ -81,48 +81,48 @@ namespace s3dge
 				return *this;
 			}
 
-			vec4& operator+=(const vec4& other)
+			Vector4& operator+=(const Vector4& other)
 			{
 				return this->Add(other);
 			}
 
-			vec4& operator-=(const vec4& other)
+			Vector4& operator-=(const Vector4& other)
 			{
 				return this->Subtract(other);
 			}
 
-			vec4& operator*=(const vec4& other)
+			Vector4& operator*=(const Vector4& other)
 			{
 				return this->Multiply(other);
 			}
 
-			vec4& operator/=(const vec4& other)
+			Vector4& operator/=(const Vector4& other)
 			{
 				return this->Divide(other);
 			}
 
-			vec4 operator+(const vec4& v2)
+			Vector4 operator+(const Vector4& v2)
 			{
 				return this->Add(v2);
 			}
 
-			vec4 operator-(const vec4& v2)
+			Vector4 operator-(const Vector4& v2)
 			{
 				return this->Subtract(v2);
 			}
 
-			vec4 operator*(const vec4& v2)
+			Vector4 operator*(const Vector4& v2)
 			{
 				return this->Multiply(v2);
 			}
 
-			vec4 operator/(const vec4& v2)
+			Vector4 operator/(const Vector4& v2)
 			{
 				return this->Divide(v2);
 			}
 		};
 
-		typedef vec4<float> vec4f;
-		typedef vec4<double> vec4d;
+		typedef Vector4<float> vec4f;
+		typedef Vector4<double> vec4d;
 	}
 }

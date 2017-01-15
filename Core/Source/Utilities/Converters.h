@@ -9,7 +9,7 @@ Lists a few functions for mathematical conversions. Might be refactored later.
 #pragma once
 
 #include "CustomTypes.h"
-#include "Maths/vec4.h"
+#include "Maths/Vector4.h"
 
 namespace s3dge
 {

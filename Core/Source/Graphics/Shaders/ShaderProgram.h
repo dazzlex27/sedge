@@ -1,10 +1,12 @@
 #pragma once
 
 #include <GL/glew.h>
-#include "Maths/mat4.h"
+#include "Maths/Vector2.h"
+#include "Maths/Vector3.h"
+#include "Maths/Vector4.h"
+#include "Maths/Matrix4.h"
 #include "CustomTypes.h"
 #include "Utilities/FileUtils.h"
-#include "Maths/MathsHeader.h"
 
 namespace s3dge
 {

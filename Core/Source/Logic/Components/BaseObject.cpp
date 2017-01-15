@@ -19,5 +19,4 @@ BaseObject::BaseObject()
 
 BaseObject::~BaseObject()
 {
-
 }

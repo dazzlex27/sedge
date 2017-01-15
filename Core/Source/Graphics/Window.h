@@ -8,27 +8,25 @@ Contains basic high-level window management functions.
 
 #pragma once
 
-#include <vector>
 #include <map>
-#include <GL/glew.h>
 #include "CustomTypes.h"
-#include "Maths/vec2.h"
-#include "Platforms/Windows/WindowsKeys.h"
-#include "Utilities/Timers/Timer.h"
+#include "Maths/Vector2.h"
 
 namespace s3dge
 {
+	class Timer;
+
 	namespace graphics
 	{
+		#define MODE_FULLSCREEN 1
+		#define MODE_WINDOWED 0
+		#define VSYNC_ON 1
+		#define VSYNC_OFF 0
+		#define MAX_KEYS 256
+		#define MAX_BUTTONS 16
+
 		class Window
 		{
-			#define MODE_FULLSCREEN 1
-			#define MODE_WINDOWED 0
-			#define VSYNC_ON 1
-			#define VSYNC_OFF 0
-			#define MAX_KEYS 256
-			#define MAX_BUTTONS 16
-
 		private:
 			cstring _title;
 			uint _width;
@@ -44,7 +42,6 @@ namespace s3dge
 			bool _buttonsDoubleClicked[MAX_BUTTONS];
 			Timer* _doubleClickTimers[MAX_BUTTONS];
 			float _elapsedDoubleClickThreshold;
-			int clicks;
 
 			static std::map<void*, Window*> _windowInstances;
 
@@ -77,6 +74,10 @@ namespace s3dge
 		private:
 			bool Initialize();
 			void Dispose();
+			bool CreateMainWindow();
+			void InitializeInput();
+			bool CreateContext();
+			void SetupContext();
 
 			friend void resize_callback(Window* window, uint width, uint height);
 			friend void key_callback(Window* window, int key, int command);

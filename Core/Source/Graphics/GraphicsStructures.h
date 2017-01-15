@@ -9,7 +9,8 @@ This file contains the necessary structures used by the Graphics namespace
 #pragma once
 
 #include "CustomTypes.h"
-#include "Maths/MathsHeader.h"
+#include "Maths/Vector2.h"
+#include "Maths/Vector3.h"
 
 namespace s3dge
 {

@@ -9,9 +9,9 @@ This file is included by the target platform's window implementation.
 
 #pragma once
 
-#include <Windows.h>
 #include <GL/glew.h>
-#include "Log.h"
+#include <Windows.h>
+#include "Internal/Log.h"
 
 void APIENTRY openglCallbackFunction(
 	GLenum source,
