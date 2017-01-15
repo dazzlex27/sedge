@@ -18,7 +18,7 @@ using namespace graphics;
 //Layer::Layer()
 //{
 	// TODO: create default shader to implement here.
-	//_transformationMatrix = maths::mat4::GetIdentity();
+	//_transformationMatrix = math::mat4::GetIdentity();
 	//_shaderProgram = new ShaderProgram();
 	//_renderer = new Renderer2D();
 	// _ownsRenderer = true;
@@ -27,7 +27,7 @@ using namespace graphics;
 
 Layer::Layer(ShaderProgram* shaderProgram)
 {
-	_transformationMatrix = maths::mat4::GetIdentity();
+	_transformationMatrix = math::mat4::GetIdentity();
 	_shaderProgram = shaderProgram;
 	_renderer = new Renderer2D();
 	_ownsRenderer = true;
@@ -36,7 +36,7 @@ Layer::Layer(ShaderProgram* shaderProgram)
 
 Layer::Layer(ShaderProgram* shaderProgram, Renderer2D* renderer)
 {
-	_transformationMatrix = maths::mat4::GetIdentity();
+	_transformationMatrix = math::mat4::GetIdentity();
 	_shaderProgram = shaderProgram;
 	_renderer = renderer;
 	_ownsRenderer = false;
@@ -101,7 +101,7 @@ void Layer::SetRenderer(Renderer2D* renderer)
 	_renderer = renderer;
 }
 
-void Layer::SetTransformationMatrix(maths::mat4 matrix)
+void Layer::SetTransformationMatrix(math::mat4 matrix)
 {
 	_transformationMatrix = matrix;
 }

@@ -10,7 +10,7 @@ Contains basic high-level window management functions.
 
 #include <map>
 #include "CustomTypes.h"
-#include "Maths/Vector2.h"
+#include "Math/Vector2.h"
 
 namespace s3dge
 {
@@ -34,7 +34,7 @@ namespace s3dge
 			bool _isClosed;
 			bool _fullScreen;
 			bool _vSync;
-			maths::vec2f _mousePosition;
+			math::vec2f _mousePosition;
 			bool _keysDown[MAX_KEYS];
 			bool _buttonsDown[MAX_BUTTONS];
 			bool _keysClicked[MAX_KEYS];
@@ -69,7 +69,7 @@ namespace s3dge
 			inline bool IsClosed() const { return _isClosed; }
 			inline bool IsVSync() const { return _vSync; }
 			inline bool IsFullScreen() const { return _fullScreen; }
-			inline maths::vec2f GetMousePosition() const { return _mousePosition; }
+			inline math::vec2f GetMousePosition() const { return _mousePosition; }
 
 		private:
 			bool Initialize();

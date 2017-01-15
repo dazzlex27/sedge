@@ -87,10 +87,10 @@ void Renderer2D::Begin()
 
 void Renderer2D::Submit(const Renderable2D* renderable)
 {
-	const maths::vec3f& position = renderable->GetPosition();
-	const maths::vec2f& size = renderable->GetSize();
+	const math::vec3f& position = renderable->GetPosition();
+	const math::vec2f& size = renderable->GetSize();
 	const uint color = renderable->GetColor();
-	const std::vector<maths::vec2f> uv = renderable->GetUV();
+	const std::vector<math::vec2f> uv = renderable->GetUV();
 	const uint textureID = renderable->GetTextureID();
 
 	float textureSlot = 0.0f;
@@ -128,19 +128,19 @@ void Renderer2D::Submit(const Renderable2D* renderable)
 	_buffer->TextureID = textureSlot;
 	_buffer++;
 
-	_buffer->Vertex = maths::vec3f(position.x, position.y + size.y, position.z);
+	_buffer->Vertex = math::vec3f(position.x, position.y + size.y, position.z);
 	_buffer->Color = color;
 	_buffer->UV = uv[1];
 	_buffer->TextureID = textureSlot;
 	_buffer++;
 
-	_buffer->Vertex = maths::vec3f(position.x + size.x, position.y + size.y, position.z);
+	_buffer->Vertex = math::vec3f(position.x + size.x, position.y + size.y, position.z);
 	_buffer->Color = color;
 	_buffer->UV = uv[2];
 	_buffer->TextureID = textureSlot;
 	_buffer++;
 
-	_buffer->Vertex = maths::vec3f(position.x + size.x, position.y, position.z);
+	_buffer->Vertex = math::vec3f(position.x + size.x, position.y, position.z);
 	_buffer->Color = color;
 	_buffer->UV = uv[3];
 	_buffer->TextureID = textureSlot;
@@ -149,7 +149,7 @@ void Renderer2D::Submit(const Renderable2D* renderable)
 	_indexCount += 6;
 }
 
-void Renderer2D::DrawString(const std::string& text, Font* font, const maths::vec3f& position, uint color)
+void Renderer2D::DrawString(const std::string& text, Font* font, const math::vec3f& position, uint color)
 {
 	using namespace ftgl;
 
@@ -204,26 +204,26 @@ void Renderer2D::DrawString(const std::string& text, Font* font, const maths::ve
 			float u1 = glyph->s1;
 			float v1 = glyph->t1;
 
-			_buffer->Vertex = maths::vec3f(x0, y0, 0);
-			_buffer->UV = maths::vec2f(u0, v0);
+			_buffer->Vertex = math::vec3f(x0, y0, 0);
+			_buffer->UV = math::vec2f(u0, v0);
 			_buffer->TextureID = textureSlot;
 			_buffer->Color = color;
 			_buffer++;
 
-			_buffer->Vertex = maths::vec3f(x0, y1, 0);
-			_buffer->UV = maths::vec2f(u0, v1);
+			_buffer->Vertex = math::vec3f(x0, y1, 0);
+			_buffer->UV = math::vec2f(u0, v1);
 			_buffer->TextureID = textureSlot;
 			_buffer->Color = color;
 			_buffer++;
 
-			_buffer->Vertex = maths::vec3f(x1, y1, 0);
-			_buffer->UV = maths::vec2f(u1, v1);
+			_buffer->Vertex = math::vec3f(x1, y1, 0);
+			_buffer->UV = math::vec2f(u1, v1);
 			_buffer->TextureID = textureSlot;
 			_buffer->Color = color;
 			_buffer++;
 
-			_buffer->Vertex = maths::vec3f(x1, y0, 0);
-			_buffer->UV = maths::vec2f(u1, v0);
+			_buffer->Vertex = math::vec3f(x1, y0, 0);
+			_buffer->UV = math::vec2f(u1, v0);
 			_buffer->TextureID = textureSlot;
 			_buffer->Color = color;
 			_buffer++;

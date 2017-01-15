@@ -10,7 +10,7 @@ A class to represent a game scene (level) which is responsible for managing the 
 #pragma once
 
 #include <vector>
-#include "Logic/Components/Entity.h"
+#include "Logic/Objects/Entity.h"
 
 namespace s3dge
 {

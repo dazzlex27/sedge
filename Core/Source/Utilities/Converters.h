@@ -9,11 +9,11 @@ Lists a few functions for mathematical conversions. Might be refactored later.
 #pragma once
 
 #include "CustomTypes.h"
-#include "Maths/Vector4.h"
+#include "Math/Vector4.h"
 
 namespace s3dge
 {
-	inline uint ConvertColorToUint(const maths::vec4f& color)
+	inline uint ConvertColorToUint(const math::vec4f& color)
 	{
 		int red = (int)(color.x * 255);
 		int green = (int)(color.y * 255);
@@ -23,9 +23,9 @@ namespace s3dge
 		return alpha << 24 | blue << 16 | green << 8 | red;
 	}
 
-	inline maths::vec4f ConvertColorToVec4(uint color)
+	inline math::vec4f ConvertColorToVec4(uint color)
 	{
-		maths::vec4f result;
+		math::vec4f result;
 
 		result.x = (float)(color >> 0);
 		result.y = (float)(color >> 8);

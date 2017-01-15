@@ -29,7 +29,7 @@ Row Major:
 
 namespace s3dge
 {
-	namespace maths
+	namespace math
 	{
 		template <typename T>
 		struct Matrix4

@@ -1,7 +1,7 @@
 #include "Application.h"
 
 using namespace s3dge;
-using namespace maths;
+using namespace math;
 using namespace graphics;
 using namespace audio;
 

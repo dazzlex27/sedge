@@ -9,7 +9,7 @@ Represents a game entity.
 #pragma once
 
 #include "BaseObject.h"
-#include "Maths/Vector3.h"
+#include "Math/Vector3.h"
 
 namespace s3dge
 {
@@ -18,10 +18,9 @@ namespace s3dge
 		class Entity : public BaseObject
 		{
 		protected:
-			maths::vec3f translation;
-			maths::vec3f rotation;
-			maths::vec3f scale;
-
+			math::vec3f translation;
+			math::vec3f rotation;
+			math::vec3f scale;
 
 		public:
 			Entity() {}

@@ -10,10 +10,10 @@ This file is included by the main header S3DGE.h
 #pragma once
 
 #define _USE_MATH_DEFINES
-#include "Maths/Vector2.h"
-#include "Maths/Vector3.h"
-#include "Maths/Vector4.h"
-#include "Maths/Matrix4.h"
+#include "Math/Vector2.h"
+#include "Math/Vector3.h"
+#include "Math/Vector4.h"
+#include "Math/Matrix4.h"
 
 #include "Platforms/KeyCodes.h"
 

@@ -34,7 +34,7 @@ namespace s3dge
 			void Flush(); // OpenGL drawcall. 
 			void End();
 
-			void DrawString(const std::string& text, Font* font, const maths::vec3f& position, uint color);
+			void DrawString(const std::string& text, Font* font, const math::vec3f& position, uint color);
 
 		private:
 			void Initialize();

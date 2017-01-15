@@ -10,7 +10,7 @@ Implements a 4-component vector class
 
 namespace s3dge
 {
-	namespace maths
+	namespace math
 	{
 		template <typename T>
 		struct Vector4
