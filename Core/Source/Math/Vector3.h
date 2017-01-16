@@ -1,6 +1,6 @@
 /*
 ===========================================================================
-vec3.h
+Vector3.h
 
 Implements a 3-component vector class
 ===========================================================================
@@ -10,22 +10,22 @@ Implements a 3-component vector class
 
 namespace s3dge
 {
-	namespace maths
+	namespace math
 	{
 		template <typename T>
-		struct vec3
+		struct Vector3
 		{
 			T x;
 			T y;
 			T z;
 
-			vec3()
+			Vector3()
 				: x(0), y(0), z(0) {}
 
-			vec3(T x, T y, T z)
+			Vector3(T x, T y, T z)
 				: x(x), y(y), z(z) {}
 
-			vec3& Add(const vec3& vector)
+			Vector3& Add(const Vector3& vector)
 			{
 				this->x += vector.x;
 				this->y += vector.y;
@@ -34,7 +34,7 @@ namespace s3dge
 				return *this;
 			}
 
-			vec3& Subtract(const vec3& vector)
+			Vector3& Subtract(const Vector3& vector)
 			{
 				this->x -= vector.x;
 				this->y -= vector.y;
@@ -43,7 +43,7 @@ namespace s3dge
 				return *this;
 			}
 
-			vec3& Multiply(const vec3& vector)
+			Vector3& Multiply(const Vector3& vector)
 			{
 				this->x *= vector.x;
 				this->y *= vector.y;
@@ -52,7 +52,7 @@ namespace s3dge
 				return *this;
 			}
 
-			vec3& Divide(const vec3& vector)
+			Vector3& Divide(const Vector3& vector)
 			{
 				this->x /= vector.x;
 				this->y /= vector.y;
@@ -61,42 +61,42 @@ namespace s3dge
 				return *this;
 			}
 
-			vec3& operator+=(const vec3& other)
+			Vector3& operator+=(const Vector3& other)
 			{
 				return this->Add(other);
 			}
 
-			vec3& operator-=(const vec3& other)
+			Vector3& operator-=(const Vector3& other)
 			{
 				return this->Subtract(other);
 			}
 
-			vec3& operator*=(const vec3& other)
+			Vector3& operator*=(const Vector3& other)
 			{
 				return this->Multiply(other);
 			}
 
-			vec3& operator/=(const vec3& other)
+			Vector3& operator/=(const Vector3& other)
 			{
 				return this->Divide(other);
 			}
 
-			vec3 operator+(const vec3& v2)
+			Vector3 operator+(const Vector3& v2)
 			{
 				return this->Add(v2);
 			}
 
-			vec3 operator-(const vec3& v2)
+			Vector3 operator-(const Vector3& v2)
 			{
 				return this->Subtract(v2);
 			}
 
-			vec3 operator*(const vec3& v2)
+			Vector3 operator*(const Vector3& v2)
 			{
 				return this->Multiply(v2);
 			}
 
-			vec3 operator/(const vec3& v2)
+			Vector3 operator/(const Vector3& v2)
 			{
 				return this->Divide(v2);
 			}
@@ -107,7 +107,7 @@ namespace s3dge
 			}
 		};
 
-		typedef vec3<float> vec3f;
-		typedef vec3<double> vec3d;
+		typedef Vector3<float> vec3f;
+		typedef Vector3<double> vec3d;
 	}
 }

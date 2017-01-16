@@ -11,7 +11,7 @@ Contains method implementations for Renderable2D
 
 using namespace s3dge;
 using namespace graphics;
-using namespace maths;
+using namespace math;
 
 Renderable2D::Renderable2D()
 	: _texture(nullptr)
@@ -36,10 +36,10 @@ void Renderable2D::Submit(Renderer2D* renderer) const
 
 void Renderable2D::SetDefaultUVConfiguration()
 {
-	_uv.push_back(maths::vec2f(0, 0));
-	_uv.push_back(maths::vec2f(0, 1));
-	_uv.push_back(maths::vec2f(1, 1));
-	_uv.push_back(maths::vec2f(1, 0));
+	_uv.push_back(math::vec2f(0, 0));
+	_uv.push_back(math::vec2f(0, 1));
+	_uv.push_back(math::vec2f(1, 1));
+	_uv.push_back(math::vec2f(1, 0));
 }
 
 void Renderable2D::SetColor(uint color) 
@@ -47,7 +47,7 @@ void Renderable2D::SetColor(uint color)
 	_color = color; 
 }
 
-void Renderable2D::SetColor(const maths::vec4f& color) 
+void Renderable2D::SetColor(const math::vec4f& color) 
 { 
 	_color = ConvertColorToUint(color); 
 }

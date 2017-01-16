@@ -86,6 +86,8 @@
       <SDLCheck>false</SDLCheck>
       <AdditionalIncludeDirectories>$(ProjectDir)\Include\</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_USE_MATH_DEFINES;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <DisableSpecificWarnings>4244; 4305; 4013; 4047;  4006;</DisableSpecificWarnings>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -111,6 +113,7 @@
       <AdditionalIncludeDirectories>$(ProjectDir)\Include\</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_USE_MATH_DEFINES;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <DisableSpecificWarnings>4244; 4305; 4013; 4047;  4006;</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -175,7 +178,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\analysis.c" />
-    <ClCompile Include="Source\barkmel.c" />
     <ClCompile Include="Source\bitrate.c" />
     <ClCompile Include="Source\block.c" />
     <ClCompile Include="Source\codebook.c" />
@@ -194,7 +196,6 @@
     <ClCompile Include="Source\sharedbook.c" />
     <ClCompile Include="Source\smallft.c" />
     <ClCompile Include="Source\synthesis.c" />
-    <ClCompile Include="Source\tone.c" />
     <ClCompile Include="Source\vorbisenc.c" />
     <ClCompile Include="Source\vorbisfile.c" />
     <ClCompile Include="Source\window.c" />

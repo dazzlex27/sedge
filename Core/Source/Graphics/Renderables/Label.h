@@ -22,14 +22,14 @@ namespace s3dge
 		public:
 			std::string text;
 			Font* font;
-			maths::vec2f position;
+			math::vec2f position;
 			uint color;
 
 			Label(const std::string& text, Font* font, float x, float y, float width, float height, uint color);
 			~Label();
 
 			void Submit(Renderer2D* renderer) const override;
-			inline const maths::vec3f GetPosition() const override { return maths::vec3f(position.x, position.y, 0); }
+			inline const math::vec3f GetPosition() const override { return math::vec3f(position.x, position.y, 0); }
 		};
 	}
 }

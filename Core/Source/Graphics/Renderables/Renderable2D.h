@@ -8,7 +8,9 @@ Base class for all 2D renderable objects.
 
 #pragma once
 
-#include "Maths/MathsHeader.h"
+#include "Math/Vector2.h"
+#include "Math/Vector3.h"
+#include "Math/Vector4.h"
 #include "Graphics/Renderers/Renderer2D.h"
 #include "Graphics/Textures/Texture2D.h"
 
@@ -19,29 +21,29 @@ namespace s3dge
 		class Renderable2D
 		{
 		protected:
-			maths::vec3f _position;
-			maths::vec2f _size;
+			math::vec3f _position;
+			math::vec2f _size;
 			uint _color;
-			std::vector<maths::vec2f> _uv;
+			std::vector<math::vec2f> _uv;
 			Texture2D* _texture;
 
 		protected:
 			Renderable2D();
-			Renderable2D(const maths::vec3f& position, const maths::vec2f& size, uint color);
+			Renderable2D(const math::vec3f& position, const math::vec2f& size, uint color);
 
 		public:
 			virtual ~Renderable2D();
 			virtual void Submit(Renderer2D* renderer) const;
 
 		public:
-			inline virtual const maths::vec3f GetPosition() const { return _position; }
-			inline const maths::vec2f GetSize() const { return _size; }
+			inline virtual const math::vec3f GetPosition() const { return _position; }
+			inline const math::vec2f GetSize() const { return _size; }
 			inline uint GetColor() const { return _color; }
-			inline std::vector<maths::vec2f> GetUV() const { return _uv; }
+			inline std::vector<math::vec2f> GetUV() const { return _uv; }
 			inline uint GetTextureID() const { return _texture ? _texture->GetID() : 0; }
 
 			void SetColor(uint color);
-			void SetColor(const maths::vec4f& color);
+			void SetColor(const math::vec4f& color);
 
 		private:
 			void SetDefaultUVConfiguration();

@@ -15,17 +15,19 @@ Do not use functions directly, prefer macros instead.
 
 namespace s3dge
 {
-#define LOG_WARNING(...) Logger::LogEvent(EVENT_TYPE::LOG_WARNING, __VA_ARGS__)
-#define LOG_INFO(...) Logger::LogEvent(EVENT_TYPE::LOG_INFO, __VA_ARGS__)
-#define LOG_ERROR(...) Logger::LogEvent(EVENT_TYPE::LOG_ERROR, __VA_ARGS__)
-#define LOG_FATAL(...) Logger::LogEvent(EVENT_TYPE::LOG_FATAL, __VA_ARGS__)
+#define LOG_WARNING(...) Logger::LogEvent(s3dge::EVENT_TYPE::EVENT_WARNING, __VA_ARGS__)
+#define LOG_INFO(...) Logger::LogEvent(s3dge::EVENT_TYPE::EVENT_INFO, __VA_ARGS__)
+#define LOG_ERROR(...) Logger::LogEvent(s3dge::EVENT_TYPE::EVENT_ERROR, __VA_ARGS__)
+#define LOG_FATAL(...) Logger::LogEvent(s3dge::EVENT_TYPE::EVENT_FATAL, __VA_ARGS__)
+#define LOG_OPENGL_ISSUE(...) Logger::LogEvent(s3dge::EVENT_TYPE::EVENT_OPENGL_ERROR, __VA_ARGS__)
 
 	enum EVENT_TYPE
 	{
-		LOG_WARNING,
-		LOG_INFO,
-		LOG_ERROR,
-		LOG_FATAL
+		EVENT_WARNING,
+		EVENT_INFO,
+		EVENT_ERROR,
+		EVENT_FATAL,
+		EVENT_OPENGL_ERROR
 	};
 
 	class Logger
@@ -43,17 +45,20 @@ namespace s3dge
 		{
 			switch (type)
 			{
-			case LOG_WARNING:
+			case EVENT_WARNING:
 				printf("WARNING: ");
 				break;
-			case LOG_INFO:
+			case EVENT_INFO:
 				printf("INFO: ");
 				break;
-			case LOG_ERROR:
+			case EVENT_ERROR:
 				printf("ERROR: ");
 				break;
-			case LOG_FATAL:
+			case EVENT_FATAL:
 				printf("FATAL ERROR: ");
+				break;
+			case EVENT_OPENGL_ERROR:
+				printf("OPENGL ISSUE: ");
 				break;
 			}
 
