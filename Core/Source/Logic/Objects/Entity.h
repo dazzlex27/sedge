@@ -21,13 +21,11 @@ namespace s3dge
 			math::vec3f translation;
 			math::vec3f rotation;
 			math::vec3f scale;
+			math::vec3f position;
 
 		public:
 			Entity() {}
 			~Entity() {}
-
-			virtual void Update() = 0;
-			virtual void Render() = 0;
 		};
 	}
 }
