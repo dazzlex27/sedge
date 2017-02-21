@@ -272,5 +272,8 @@
     <ClInclude Include="Source\Logic\Components\GraphicsComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Logic\Components\IComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

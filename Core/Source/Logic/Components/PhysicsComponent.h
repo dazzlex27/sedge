@@ -10,16 +10,17 @@ Should be composed by the entity in question to be enable that entity to interac
 
 #pragma once
 
+#include "IComponent.h"
 #include "Logic/Objects/Entity.h"
 
 namespace s3dge
 {
 	namespace logic
 	{
-		class PhysicsComponent
+		class PhysicsComponent : IComponent
 		{
 		public:
-			virtual void Update(Entity* entity) = 0;
+			virtual void Update(Entity* entity, GameWorld* gameWorld) override;
 			virtual ~PhysicsComponent() { }
 		};
 	}
