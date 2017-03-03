@@ -31,12 +31,6 @@ void Camera::Update()
 	projection = math::mat4::GetPerspective(_fov, _aspectRatio, _near, _far);
 }
 
-void Camera::SetViewDirection(math::vec3f direction)
-{
-	// TODO
-	Update();
-}
-
 void Camera::SetPosition(math::vec3f position)
 {
 	// TODO

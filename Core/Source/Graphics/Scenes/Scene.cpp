@@ -22,12 +22,12 @@ Scene::~Scene()
 
 void Scene::Update()
 {
-	for (auto item : _entities)
-		item->Update();
+	//for (auto item : _entities)
+	//	item->Update();
 }
 
 void Scene::Render()
 {
-	for (auto item : _entities)
-		item->Render();
+	//for (auto item : _entities)
+	//	item->Render();
 }

@@ -10,6 +10,7 @@ Represents a game entity.
 
 #include "../Components/IComponent.h"
 #include "BaseObject.h"
+#include "Math/Matrix4.h"
 #include "Math/Vector3.h"
 
 namespace s3dge
@@ -35,10 +36,8 @@ namespace s3dge
 			}
 
 		private:
-			Entity(void);
 			Entity(const Entity& tRef) = delete;				// Disable copy constructor.
 			Entity& operator = (const Entity& tRef) = delete;	// Disable assignment operator.
-			~Entity(void) = delete;
 		};
 	}
 }

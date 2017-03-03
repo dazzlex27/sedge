@@ -214,7 +214,7 @@ namespace s3dge
 			{
 				Matrix4<T> result;
 
-				T top = (T)(near*((M_PI / 180) * (fov / 2)));
+				T top = (T)(near*((3.141592 / 180) * (fov / 2)));
 				T bottom = -top;
 				T right = top * aspectRatio;
 				T left = -right;
