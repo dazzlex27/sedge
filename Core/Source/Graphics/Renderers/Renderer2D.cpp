@@ -87,10 +87,10 @@ void Renderer2D::Begin()
 
 void Renderer2D::Submit(const Renderable2D* renderable)
 {
-	const math::vec3f& position = renderable->GetPosition();
-	const math::vec2f& size = renderable->GetSize();
-	const uint color = renderable->GetColor();
-	const std::vector<math::vec2f> uv = renderable->GetUV();
+	const Point3D& position = renderable->GetPosition();
+	const Size2D& size = renderable->GetSize();
+	const Color& color = renderable->GetColor();
+	const std::vector<Point2D> uv = renderable->GetUV();
 	const uint textureID = renderable->GetTextureID();
 
 	float textureSlot = 0.0f;
@@ -122,34 +122,34 @@ void Renderer2D::Submit(const Renderable2D* renderable)
 		}
 	}
 
-	_buffer->Vertex = position;
-	_buffer->Color = color;
-	_buffer->UV = uv[0];
+	_buffer->Vertex = math::vec3f(position.x, position.y, position.z);
+	_buffer->Color = color.value;
+	_buffer->UV = math::vec2f(uv[0].x, uv[0].y);
 	_buffer->TextureID = textureSlot;
 	_buffer++;
 
-	_buffer->Vertex = math::vec3f(position.x, position.y + size.y, position.z);
-	_buffer->Color = color;
-	_buffer->UV = uv[1];
+	_buffer->Vertex = math::vec3f(position.x, position.y + size.height, position.z);
+	_buffer->Color = color.value;
+	_buffer->UV = math::vec2f(uv[1].x, uv[1].y);
 	_buffer->TextureID = textureSlot;
 	_buffer++;
 
-	_buffer->Vertex = math::vec3f(position.x + size.x, position.y + size.y, position.z);
-	_buffer->Color = color;
-	_buffer->UV = uv[2];
+	_buffer->Vertex = math::vec3f(position.x + size.width, position.y + size.height, position.z);
+	_buffer->Color = color.value;
+	_buffer->UV = math::vec2f(uv[2].x, uv[2].y);
 	_buffer->TextureID = textureSlot;
 	_buffer++;
 
-	_buffer->Vertex = math::vec3f(position.x + size.x, position.y, position.z);
-	_buffer->Color = color;
-	_buffer->UV = uv[3];
+	_buffer->Vertex = math::vec3f(position.x + size.width, position.y, position.z);
+	_buffer->Color = color.value;
+	_buffer->UV = math::vec2f(uv[3].x, uv[3].y);
 	_buffer->TextureID = textureSlot;
 	_buffer++;
 
 	_indexCount += 6;
 }
 
-void Renderer2D::DrawString(const std::string& text, Font* font, const math::vec3f& position, uint color)
+void Renderer2D::DrawString(const std::string& text, Font* font, const math::vec3f& position, const Color& color)
 {
 	using namespace ftgl;
 
@@ -207,25 +207,25 @@ void Renderer2D::DrawString(const std::string& text, Font* font, const math::vec
 			_buffer->Vertex = math::vec3f(x0, y0, 0);
 			_buffer->UV = math::vec2f(u0, v0);
 			_buffer->TextureID = textureSlot;
-			_buffer->Color = color;
+			_buffer->Color = color.value;
 			_buffer++;
 
 			_buffer->Vertex = math::vec3f(x0, y1, 0);
 			_buffer->UV = math::vec2f(u0, v1);
 			_buffer->TextureID = textureSlot;
-			_buffer->Color = color;
+			_buffer->Color = color.value;
 			_buffer++;
 
 			_buffer->Vertex = math::vec3f(x1, y1, 0);
 			_buffer->UV = math::vec2f(u1, v1);
 			_buffer->TextureID = textureSlot;
-			_buffer->Color = color;
+			_buffer->Color = color.value;
 			_buffer++;
 
 			_buffer->Vertex = math::vec3f(x1, y0, 0);
 			_buffer->UV = math::vec2f(u1, v0);
 			_buffer->TextureID = textureSlot;
-			_buffer->Color = color;
+			_buffer->Color = color.value;
 			_buffer++;
 
 			_indexCount += 6;

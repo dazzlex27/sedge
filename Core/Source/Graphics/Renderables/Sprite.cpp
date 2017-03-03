@@ -11,15 +11,12 @@ Implements the Sprite class
 using namespace s3dge;
 using namespace graphics;
 	
-Sprite::Sprite(float x, float y, float width, float height, uint color)
-	: Renderable2D(math::vec3f(x, y, 0), math::vec2f(width, height), color)
+Sprite::Sprite(float x, float y, float width, float height, const Color& color)
+	: Renderable2D(Point3D(x, y, 0), math::vec2f(width, height), color), position(_position)
 {
-	this->position = _position;
 }
 
 Sprite::Sprite(float x, float y, float width, float height, Texture2D* texture)
-	: Renderable2D(math::vec3f(x, y, 0), math::vec2f(width, height), 0xffffffff)
+	: Renderable2D(Point3D(x, y, 0), math::vec2f(width, height), texture), position(_position)
 {
-	this->position = _position;
-	_texture = texture;
 }

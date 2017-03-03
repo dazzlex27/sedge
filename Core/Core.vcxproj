@@ -134,12 +134,16 @@
     <ClInclude Include="Source\Audio\SoundFactory.h" />
     <ClInclude Include="Source\Audio\SoundManager.h" />
     <ClInclude Include="Source\Common.h" />
+    <ClInclude Include="Source\Graphics\Structures\Color.h" />
     <ClInclude Include="Source\Graphics\Fonts\Font.h" />
     <ClInclude Include="Source\Graphics\Fonts\FontFactory.h" />
     <ClInclude Include="Source\Graphics\Fonts\FontManager.h" />
     <ClInclude Include="Source\Graphics\GraphicsManager.h" />
     <ClInclude Include="Source\Graphics\GraphicsStructures.h" />
+    <ClInclude Include="Source\Graphics\Structures\Point2D.h" />
+    <ClInclude Include="Source\Graphics\Structures\Point3D.h" />
     <ClInclude Include="Source\Graphics\Scenes\Scene.h" />
+    <ClInclude Include="Source\Graphics\Structures\Size2D.h" />
     <ClInclude Include="Source\Graphics\Textures\TextureFactory.h" />
     <ClInclude Include="Source\Internal\enums.h" />
     <ClInclude Include="Source\Internal\MemoryManager.h" />
@@ -156,6 +160,10 @@
     <ClInclude Include="Source\Graphics\Shaders\ShaderProgram.h" />
     <ClInclude Include="Source\Graphics\Textures\Texture2D.h" />
     <ClInclude Include="Source\Graphics\Textures\TextureManager.h" />
+    <ClInclude Include="Source\Logic\Components\IComponent.h" />
+    <ClInclude Include="Source\Logic\Components\InputComponent.h" />
+    <ClInclude Include="Source\Logic\Components\PhysicsComponent.h" />
+    <ClInclude Include="Source\Logic\Components\GraphicsComponent.h" />
     <ClInclude Include="Source\Logic\Objects\Actor.h" />
     <ClInclude Include="Source\Logic\Objects\BaseObject.h" />
     <ClInclude Include="Source\Logic\Objects\Camera.h" />

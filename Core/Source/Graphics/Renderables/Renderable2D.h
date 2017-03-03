@@ -13,6 +13,9 @@ Base class for all 2D renderable objects.
 #include "Math/Vector4.h"
 #include "Graphics/Renderers/Renderer2D.h"
 #include "Graphics/Textures/Texture2D.h"
+#include "Graphics/Structures/Point2D.h"
+#include "Graphics/Structures/Point3D.h"
+#include "Graphics/Structures/Size2D.h"
 
 namespace s3dge
 {
@@ -21,29 +24,30 @@ namespace s3dge
 		class Renderable2D
 		{
 		protected:
-			math::vec3f _position;
-			math::vec2f _size;
-			uint _color;
-			std::vector<math::vec2f> _uv;
+			Point3D _position;
+			Size2D _size;
+			Color _color;
+			std::vector<Point2D> _uv;
 			Texture2D* _texture;
 
 		protected:
 			Renderable2D();
-			Renderable2D(const math::vec3f& position, const math::vec2f& size, uint color);
+			Renderable2D(const Point3D& position, const Size2D& size, const Color& color);
+			Renderable2D(const Point3D& position, const Size2D& size, Texture2D* texture);
 
 		public:
 			virtual ~Renderable2D();
 			virtual void Submit(Renderer2D* renderer) const;
 
 		public:
-			inline virtual const math::vec3f GetPosition() const { return _position; }
-			inline const math::vec2f GetSize() const { return _size; }
-			inline uint GetColor() const { return _color; }
-			inline std::vector<math::vec2f> GetUV() const { return _uv; }
+			inline virtual const Point3D& GetPosition() const { return _position; }
+			inline const Size2D& GetSize() const { return _size; }
+			inline const Color& GetColor() const { return _color; }
+			inline std::vector<Point2D> GetUV() const { return _uv; }
 			inline uint GetTextureID() const { return _texture ? _texture->GetID() : 0; }
 
-			void SetColor(uint color);
-			void SetColor(const math::vec4f& color);
+			void SetColor(const Color& color);
+			void SetPosition(const Point3D& position);
 
 		private:
 			void SetDefaultUVConfiguration();

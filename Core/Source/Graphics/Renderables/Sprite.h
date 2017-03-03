@@ -17,13 +17,13 @@ namespace s3dge
 		class Sprite : public Renderable2D
 		{
 		public:
-			math::vec3f position;
+			Point3D position;
 
 		public:
-			Sprite(float x, float y, float width, float height, uint color);
+			Sprite(float x, float y, float width, float height, const Color& color);
 			Sprite(float x, float y, float width, float height, Texture2D* texture);
 
-			inline const math::vec3f GetPosition() const override { return position; }
+			inline const Point3D& GetPosition() const override { return position; }
 		};
 	}
 }

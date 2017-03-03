@@ -6,6 +6,7 @@
 #include <freetype-gl.h>
 
 #include "Graphics/GraphicsStructures.h"
+#include "Graphics/Structures/Color.h"
 
 namespace s3dge
 {
@@ -34,7 +35,7 @@ namespace s3dge
 			void Flush(); // OpenGL drawcall. 
 			void End();
 
-			void DrawString(const std::string& text, Font* font, const math::vec3f& position, uint color);
+			void DrawString(const std::string& text, Font* font, const math::vec3f& position, const Color& color);
 
 		private:
 			void Initialize();
