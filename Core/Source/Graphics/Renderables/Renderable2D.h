@@ -16,6 +16,7 @@ Base class for all 2D renderable objects.
 #include "Graphics/Structures/Point2D.h"
 #include "Graphics/Structures/Point3D.h"
 #include "Graphics/Structures/Size2D.h"
+#include "Graphics/Structures/Color.h"
 
 namespace s3dge
 {
@@ -44,7 +45,7 @@ namespace s3dge
 			inline const Size2D& GetSize() const { return _size; }
 			inline const Color& GetColor() const { return _color; }
 			inline std::vector<Point2D> GetUV() const { return _uv; }
-			inline uint GetTextureID() const { return _texture ? _texture->GetID() : 0; }
+			inline id GetTextureID() const { return _texture ? _texture->GetID() : 0; }
 
 			void SetColor(const Color& color);
 			void SetPosition(const Point3D& position);

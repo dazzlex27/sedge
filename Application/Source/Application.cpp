@@ -9,14 +9,15 @@ void Application::Initialize()
 {
 	_window = CreateGameWindow("S3DGE Application", 1280, 720, false, false);
 	_shaderProgram = new ShaderProgram("Resources\\basic.vs", "Resources\\basic.fs");
-	_shaderProgram->SetProjection(mat4::GetOrthographic(0.0f, 16.0f, 0.0f, 9.0f, -1.0f, 1.0f));
+	//_shaderProgram->SetProjection(mat4::GetOrthographic(-1.0f, 1.0f, -1.0f, 1.0f, -1.0f, 10.0f));
+	_shaderProgram->SetProjection(mat4::GetPerspective(90.0f, 1.66, -1.0, 10.0));
 	
 	TextureManager::Add("Box", "Resources\\box.jpg");
 	TextureManager::Add("Gradient", "Resources\\gradient.bmp");
 	TextureManager::Add("Brick", "Resources\\brick.jpg");
 	FontManager::Add("test_font", "Resources\\SourceSansPro-Light.ttf", 32);
 	SoundManager::Add("back-in-black", "Resources\\back-in-black.ogg");
-	GraphicsManager::AddSprite("rect", 4, 3, 3, 3, 0xffffffff, TextureManager::Get("Brick"));
+	GraphicsManager::AddSprite("rect", 0, 0, 3, 3, 0xffffffff, TextureManager::Get("Brick"));
 	GraphicsManager::AddLabel("fps", "startup...", FontManager::Get("test_font"), 0.4f, 8.2f, 2, 2);
 
 	_layer = new Layer(_shaderProgram);
@@ -24,7 +25,7 @@ void Application::Initialize()
 	_layer->Add(GraphicsManager::GetSprite("rect"));
 	_layer->Add(GraphicsManager::GetLabel("fps"));
 
-	SoundManager::Get("back-in-black")->Play();
+	//SoundManager::Get("back-in-black")->Play();
 }
 
 void Application::UpdateInput()
@@ -46,6 +47,10 @@ void Application::UpdateInput()
 		GraphicsManager::GetSprite("rect")->position.y += speed;
 	if (_window->KeyDown(S3_KEY_DOWN))
 		GraphicsManager::GetSprite("rect")->position.y -= speed;
+	if (_window->KeyDown(S3_KEY_Q))
+		GraphicsManager::GetSprite("rect")->position.z -= speed;
+	if (_window->KeyDown(S3_KEY_E))
+		GraphicsManager::GetSprite("rect")->position.z += speed;
 
 	if (_window->KeyClicked(S3_KEY_P))
 	{

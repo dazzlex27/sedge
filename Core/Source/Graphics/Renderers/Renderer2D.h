@@ -6,7 +6,6 @@
 #include <freetype-gl.h>
 
 #include "Graphics/GraphicsStructures.h"
-#include "Graphics/Structures/Color.h"
 
 namespace s3dge
 {
@@ -15,16 +14,17 @@ namespace s3dge
 		class Renderable2D;
 		class IndexBuffer;
 		class Font;
+		struct Color;
 
 		class Renderer2D
 		{
 		private:
-			uint _vao; // Vertex array object.
-			uint _vbo; // Vertex buffer object.
+			id _vao; // Vertex array object.
+			id _vbo; // Vertex buffer object.
 			IndexBuffer* _ibo; // Index buffer object.
 			int _indexCount; // The number of indices.
 			VertexData* _buffer; // Renderables container.
-			std::vector<uint> _textures; // Texture array.
+			std::vector<id> _textures; // Texture array.
 
 		public:
 			Renderer2D();	

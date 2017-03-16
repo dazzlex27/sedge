@@ -3,6 +3,7 @@
 Renderer2D.cpp
 
 Implements the Renderer2D class
+Set up to process up to 250,000 vertices per frame.
 ===========================================================================
 */
 
@@ -11,15 +12,16 @@ Implements the Renderer2D class
 #include "Graphics/Renderables/Renderable2D.h"
 #include "Graphics/Buffers/IndexBuffer.h"
 #include "Graphics/Fonts/Font.h"
+#include "Graphics/GraphicsStructures.h"
+#include "Graphics/Structures/Color.h"
 
 using namespace s3dge;
 using namespace graphics;
 
-#define MAX_SPRITES	60000
-#define SPRITE_VERTEX_SIZE	sizeof(VertexData)
-#define SPRITE_SIZE	SPRITE_VERTEX_SIZE * 4
-#define SPRITE_BUFFER_SIZE	SPRITE_SIZE * MAX_SPRITES
-#define SPRITE_INDICES_SIZE	MAX_SPRITES * 6
+#define MAX_VERTICES 250000
+#define VERTEX_SIZE sizeof(VertexData)
+#define VERTEX_BUFFER_SIZE VERTEX_SIZE * MAX_VERTICES
+#define INDEX_BUFFER_SIZE VERTEX_BUFFER_SIZE
 	
 Renderer2D::Renderer2D()
 {			
@@ -41,25 +43,25 @@ void Renderer2D::Initialize()
 	glGenBuffers(1, &_vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, _vbo);
 
-	glBufferData(GL_ARRAY_BUFFER, SPRITE_BUFFER_SIZE, NULL, GL_DYNAMIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, VERTEX_BUFFER_SIZE, NULL, GL_DYNAMIC_DRAW);
 
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
 	glEnableVertexAttribArray(2);
 	glEnableVertexAttribArray(3);
 
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, SPRITE_VERTEX_SIZE, (const void*)(offsetof(VertexData, VertexData::Vertex)));
-	glVertexAttribPointer(1, 4, GL_UNSIGNED_BYTE, GL_TRUE, SPRITE_VERTEX_SIZE, (const void*)(offsetof(VertexData, VertexData::Color)));
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, SPRITE_VERTEX_SIZE, (const void*)(offsetof(VertexData, VertexData::UV)));
-	glVertexAttribPointer(3, 1, GL_FLOAT, GL_FALSE, SPRITE_VERTEX_SIZE, (const void*)(offsetof(VertexData, VertexData::TextureID)));
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, VERTEX_SIZE, (const void*)(offsetof(VertexData, VertexData::Vertex)));
+	glVertexAttribPointer(1, 4, GL_UNSIGNED_BYTE, GL_TRUE, VERTEX_SIZE, (const void*)(offsetof(VertexData, VertexData::Color)));
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, VERTEX_SIZE, (const void*)(offsetof(VertexData, VertexData::UV)));
+	glVertexAttribPointer(3, 1, GL_FLOAT, GL_FALSE, VERTEX_SIZE, (const void*)(offsetof(VertexData, VertexData::TextureID)));
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-	uint* indices = new uint[SPRITE_INDICES_SIZE];
+	uint* indices = new uint[INDEX_BUFFER_SIZE];
 
 	int offset = 0;
 
-	for (int i = 0; i < SPRITE_INDICES_SIZE; i += 6)
+	for (int i = 0; i < INDEX_BUFFER_SIZE; i += 6)
 	{
 		indices[i] = offset + 0;
 		indices[i + 1] = offset + 1;
@@ -72,7 +74,7 @@ void Renderer2D::Initialize()
 		offset += 4;
 	}
 
-	_ibo = new IndexBuffer(indices, SPRITE_INDICES_SIZE);
+	_ibo = new IndexBuffer(indices, INDEX_BUFFER_SIZE);
 
 	_indexCount = 0;
 

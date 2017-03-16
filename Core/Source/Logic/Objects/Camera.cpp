@@ -15,7 +15,7 @@ Camera::Camera()
 {
 	rotation = math::vec3f(0, 0, 0); 
 	_fov = 45.0f;
-	_aspectRatio = 16 / 9.0;
+	_aspectRatio = 16 / 9.0f;
 	_near = 0.1f;
 	_far = 100.0f;
 	_viewDirection = math::vec3f(0, 0, 0);

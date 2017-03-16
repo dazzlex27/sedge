@@ -14,11 +14,14 @@ This file contains the necessary structures used by the Graphics namespace
 
 namespace s3dge
 {
-	struct VertexData
+	namespace graphics
 	{
-		math::vec3f Vertex;
-		uint Color;
-		math::vec2f UV;
-		float TextureID;
-	};
+		struct VertexData
+		{
+			math::vec3f Vertex;
+			uint Color;
+			math::vec2f UV;
+			float TextureID;
+		};
+	}
 }

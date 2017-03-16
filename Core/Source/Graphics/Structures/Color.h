@@ -3,7 +3,7 @@
 Color.h
 
 A structure to represent color across the engine's graphics subsystem.
-Uses uint internally to store the actual color value.
+Uses uint internally to store the actual RGB-color value.
 ===========================================================================
 */
 

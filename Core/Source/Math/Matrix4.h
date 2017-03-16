@@ -25,7 +25,7 @@ Row Major:
 #pragma once
 
 #include "Vector3.h"
-
+#include <cmath>
 
 namespace s3dge
 {
@@ -212,23 +212,26 @@ namespace s3dge
 			*/
 			static Matrix4 GetPerspective(T fov, T aspectRatio, T near, T far)
 			{
-				Matrix4<T> result;
+				Matrix4<T> result = Matrix4<T>::GetIdentity();
 
-				T top = (T)(near*((3.141592 / 180) * (fov / 2)));
-				T bottom = -top;
-				T right = top * aspectRatio;
-				T left = -right;
+				float q = 1.0f / tan(toRadians(0.5f * fov));
+				float a = q / aspectRatio;
 
-				result.elements[4 * 0 + 0] = (2 * near) / (right - left);
-				result.elements[4 * 1 + 1] = (2 * near) / (top - bottom);
-				result.elements[4 * 2 + 2] = -(far + near) / (far - near);
+				float b = (near + far) / (near - far);
+				float c = (2.0f * near * far) / (near - far);
 
-				result.elements[4 * 2 + 0] = (right + left) / (right - left);
-				result.elements[4 * 2 + 1] = (top + bottom) / (top - bottom);
-				result.elements[4 * 2 + 3] = -1;
-				result.elements[4 * 3 + 2] = -(2 * far * near) / (far - near);
+				result.elements[0 + 0 * 4] = a;
+				result.elements[1 + 1 * 4] = q;
+				result.elements[2 + 2 * 4] = b;
+				result.elements[2 + 3 * 4] = -1.0f;
+				result.elements[3 + 2 * 4] = c;
 
 				return result;
+			}
+
+			inline static float toRadians(float degrees)
+			{
+				return (float)(degrees * (3.14 / 180.0f));
 			}
 		};
 
