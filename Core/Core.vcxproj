@@ -102,6 +102,7 @@
     <ClCompile Include="Source\Graphics\Fonts\FontFactory.cpp" />
     <ClCompile Include="Source\Graphics\Fonts\FontManager.cpp" />
     <ClCompile Include="Source\Graphics\GraphicsManager.cpp" />
+    <ClCompile Include="Source\Graphics\Renderables\Mesh2D.cpp" />
     <ClCompile Include="Source\Graphics\Renderables\Renderable2D.cpp" />
     <ClCompile Include="Source\Graphics\Scenes\Scene.cpp" />
     <ClCompile Include="Source\Graphics\Textures\TextureFactory.cpp" />
@@ -134,12 +135,13 @@
     <ClInclude Include="Source\Audio\SoundFactory.h" />
     <ClInclude Include="Source\Audio\SoundManager.h" />
     <ClInclude Include="Source\Common.h" />
+    <ClInclude Include="Source\Graphics\Renderables\Mesh2D.h" />
     <ClInclude Include="Source\Graphics\Structures\Color.h" />
     <ClInclude Include="Source\Graphics\Fonts\Font.h" />
     <ClInclude Include="Source\Graphics\Fonts\FontFactory.h" />
     <ClInclude Include="Source\Graphics\Fonts\FontManager.h" />
     <ClInclude Include="Source\Graphics\GraphicsManager.h" />
-    <ClInclude Include="Source\Graphics\GraphicsStructures.h" />
+    <ClInclude Include="Source\Graphics\VertexData.h" />
     <ClInclude Include="Source\Graphics\Structures\Point2D.h" />
     <ClInclude Include="Source\Graphics\Structures\Point3D.h" />
     <ClInclude Include="Source\Graphics\Scenes\Scene.h" />

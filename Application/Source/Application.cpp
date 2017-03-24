@@ -9,8 +9,8 @@ void Application::Initialize()
 {
 	_window = CreateGameWindow("S3DGE Application", 1280, 720, false, false);
 	_shaderProgram = new ShaderProgram("Resources\\basic.vs", "Resources\\basic.fs");
-	//_shaderProgram->SetProjection(mat4::GetOrthographic(-1.0f, 1.0f, -1.0f, 1.0f, -1.0f, 10.0f));
-	_shaderProgram->SetProjection(mat4::GetPerspective(90.0f, 1.66, -1.0, 10.0));
+	_shaderProgram->SetProjection(mat4::GetOrthographic(0.0f, 16.0f, 0.0f, 9.0f, -1.0f, 10.0f));
+	//_shaderProgram->SetProjection(mat4::GetPerspective(90.0f, 1.66f, -1.0f, 10.0f));
 	
 	TextureManager::Add("Box", "Resources\\box.jpg");
 	TextureManager::Add("Gradient", "Resources\\gradient.bmp");

@@ -9,14 +9,16 @@ Set up to process up to 250,000 vertices per frame.
 
 #include "Renderer2D.h"
 #include "Internal/DeleteMacros.h"
+#include "Internal/Log.h"
 #include "Graphics/Renderables/Renderable2D.h"
 #include "Graphics/Buffers/IndexBuffer.h"
 #include "Graphics/Fonts/Font.h"
-#include "Graphics/GraphicsStructures.h"
 #include "Graphics/Structures/Color.h"
+#include "Graphics/Renderables/Mesh2D.h"
 
 using namespace s3dge;
 using namespace graphics;
+using namespace ftgl;
 
 #define MAX_VERTICES 250000
 #define VERTEX_SIZE sizeof(VertexData)
@@ -89,98 +91,51 @@ void Renderer2D::Begin()
 
 void Renderer2D::Submit(const Renderable2D* renderable)
 {
-	const Point3D& position = renderable->GetPosition();
-	const Size2D& size = renderable->GetSize();
-	const Color& color = renderable->GetColor();
-	const std::vector<Point2D> uv = renderable->GetUV();
-	const uint textureID = renderable->GetTextureID();
+	auto position = renderable->GetPosition();
+	auto size = renderable->GetSize();
+	auto color = renderable->GetColor();
+	auto uv = renderable->GetUV();
+	auto textureID = renderable->GetTextureID();
 
-	float textureSlot = 0.0f;
+	auto textureSlot = 0.0f;
 
 	if (textureID > 0)
-	{
-		bool ok = false;
-		for (uint i = 0; i < _textures.size(); ++i)
-		{
-			if (_textures[i] == textureID)
-			{
-				textureSlot = (float)(i + 1);
-				ok = true;
-				break;
-			}
-		}
+		textureSlot = GetTextureSlotByID(textureID);
 
-		if (!ok)
-		{
-			if (_textures.size() >= 32)
-			{
-				End();
-				Flush();
-				Begin();
-			}
-
-			_textures.push_back(textureID);
-			textureSlot = (float)(_textures.size());
-		}
-	}
-
-	_buffer->Vertex = math::vec3f(position.x, position.y, position.z);
-	_buffer->Color = color.value;
-	_buffer->UV = math::vec2f(uv[0].x, uv[0].y);
+	_buffer->Vertex = Point3D(position.x, position.y, position.z);
+	_buffer->Color = color;
+	_buffer->UV = uv[0];
 	_buffer->TextureID = textureSlot;
 	_buffer++;
 
-	_buffer->Vertex = math::vec3f(position.x, position.y + size.height, position.z);
-	_buffer->Color = color.value;
-	_buffer->UV = math::vec2f(uv[1].x, uv[1].y);
+	_buffer->Vertex = Point3D(position.x, position.y + size.height, position.z);
+	_buffer->Color = color;
+	_buffer->UV = uv[1];
 	_buffer->TextureID = textureSlot;
 	_buffer++;
 
-	_buffer->Vertex = math::vec3f(position.x + size.width, position.y + size.height, position.z);
-	_buffer->Color = color.value;
-	_buffer->UV = math::vec2f(uv[2].x, uv[2].y);
+	_buffer->Vertex = Point3D(position.x + size.width, position.y + size.height, position.z);
+	_buffer->Color = color;
+	_buffer->UV = uv[2];
 	_buffer->TextureID = textureSlot;
 	_buffer++;
 
-	_buffer->Vertex = math::vec3f(position.x + size.width, position.y, position.z);
-	_buffer->Color = color.value;
-	_buffer->UV = math::vec2f(uv[3].x, uv[3].y);
+	_buffer->Vertex = Point3D(position.x + size.width, position.y, position.z);
+	_buffer->Color = color;
+	_buffer->UV = uv[3];
 	_buffer->TextureID = textureSlot;
 	_buffer++;
 
 	_indexCount += 6;
 }
 
-void Renderer2D::DrawString(const std::string& text, Font* font, const math::vec3f& position, const Color& color)
+void Renderer2D::DrawString(const std::string& text, Font* font, const Point3D& position, const Color& color)
 {
-	using namespace ftgl;
+	auto x = position.x;
+	auto textureSlot = 0.0f;
+	auto ok = false;
 
-	float x = position.x;
-	float textureSlot = 0.0f;
-	bool ok = false;
-
-	for (uint i = 0; i < _textures.size(); i++)
-	{
-		if (_textures[i] == font->GetAtlasID())
-		{
-			textureSlot = (float)(i + 1);
-			ok = true;
-			break;
-		}
-	}
-
-	if (!ok)
-	{
-		if (_textures.size() >= 32)
-		{
-			End();
-			Flush();
-			Begin();
-		}
-
-		_textures.push_back(font->GetAtlasID());
-		textureSlot = (float)(_textures.size());
-	}
+	textureSlot = GetTextureSlotByID(font->GetAtlasID());
 
 	const float scaleX = 40.0f;
 	const float scaleY = 40.0f;
@@ -206,41 +161,50 @@ void Renderer2D::DrawString(const std::string& text, Font* font, const math::vec
 			float u1 = glyph->s1;
 			float v1 = glyph->t1;
 
-			_buffer->Vertex = math::vec3f(x0, y0, 0);
-			_buffer->UV = math::vec2f(u0, v0);
+			_buffer->Vertex = Point3D(x0, y0, 0);
+			_buffer->UV = Point2D(u0, v0);
 			_buffer->TextureID = textureSlot;
-			_buffer->Color = color.value;
+			_buffer->Color = color;
 			_buffer++;
 
-			_buffer->Vertex = math::vec3f(x0, y1, 0);
-			_buffer->UV = math::vec2f(u0, v1);
+			_buffer->Vertex = Point3D(x0, y1, 0);
+			_buffer->UV = Point2D(u0, v1);
 			_buffer->TextureID = textureSlot;
-			_buffer->Color = color.value;
+			_buffer->Color = color;
 			_buffer++;
 
-			_buffer->Vertex = math::vec3f(x1, y1, 0);
-			_buffer->UV = math::vec2f(u1, v1);
+			_buffer->Vertex = Point3D(x1, y1, 0);
+			_buffer->UV = Point2D(u1, v1);
 			_buffer->TextureID = textureSlot;
-			_buffer->Color = color.value;
+			_buffer->Color = color;
 			_buffer++;
 
-			_buffer->Vertex = math::vec3f(x1, y0, 0);
-			_buffer->UV = math::vec2f(u1, v0);
+			_buffer->Vertex = Point3D(x1, y0, 0);
+			_buffer->UV = Point2D(u1, v0);
 			_buffer->TextureID = textureSlot;
-			_buffer->Color = color.value;
+			_buffer->Color = color;
 			_buffer++;
 
 			_indexCount += 6;
 
 			x += glyph->advance_x / scaleX;
 		}
-
 	}
+}
+
+void Renderer2D::SubmitMesh(const Mesh2D* mesh)
+{
+	/*const std::vector<VertexData>& vertices = mesh->GetVertices();
+
+	for (auto i = 0; i < vertices.size(); i++)
+	{
+		_buffer
+	}*/
 }
 
 void Renderer2D::Flush()
 {
-	for (uint i = 0; i < _textures.size(); ++i)
+	for (uint i = 0; i < _textures.size(); i++)
 	{
 		glActiveTexture(GL_TEXTURE0 + i);
 		glBindTexture(GL_TEXTURE_2D, _textures[i]);
@@ -261,4 +225,41 @@ void Renderer2D::End()
 {
 	glUnmapBuffer(GL_ARRAY_BUFFER);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
+}
+
+float Renderer2D::GetTextureSlotByID(id textureID)
+{
+	if (textureID == 0)
+	{
+		LOG_ERROR("textureID was 0");
+		return -1.0f;
+	}
+
+	float textureSlot = 0.0f;
+
+	auto ok = false;
+	for (uint i = 0; i < _textures.size(); ++i)
+	{
+		if (_textures[i] == textureID)
+		{
+			textureSlot = (float)(i + 1);
+			ok = true;
+			break;
+		}
+	}
+
+	if (!ok)
+	{
+		if (_textures.size() >= 32)
+		{
+			End();
+			Flush();
+			Begin();
+		}
+
+		_textures.push_back(textureID);
+		textureSlot = (float)(_textures.size());
+	}
+
+	return textureSlot;
 }

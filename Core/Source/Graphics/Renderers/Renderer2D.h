@@ -5,12 +5,13 @@
 #include <GL/glew.h>
 #include <freetype-gl.h>
 
-#include "Graphics/GraphicsStructures.h"
+#include "Graphics/VertexData.h"
 
 namespace s3dge
 {
 	namespace graphics
 	{
+		class Mesh2D;
 		class Renderable2D;
 		class IndexBuffer;
 		class Font;
@@ -32,13 +33,15 @@ namespace s3dge
 
 			void Begin();
 			void Submit(const Renderable2D* renderable);
+			void SubmitMesh(const Mesh2D* mesh);
 			void Flush(); // OpenGL drawcall. 
 			void End();
 
-			void DrawString(const std::string& text, Font* font, const math::vec3f& position, const Color& color);
+			void DrawString(const std::string& text, Font* font, const Point3D& position, const Color& color);
 
 		private:
 			void Initialize();
+			float GetTextureSlotByID(id textureID);
 		};
 	}
 }

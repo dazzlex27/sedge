@@ -1,6 +1,6 @@
 /*
 ===========================================================================
-GraphicsStructures.h
+VertexData.h
 
 This file contains the necessary structures used by the Graphics namespace
 ===========================================================================
@@ -9,8 +9,9 @@ This file contains the necessary structures used by the Graphics namespace
 #pragma once
 
 #include "CustomTypes.h"
-#include "Math/Vector2.h"
-#include "Math/Vector3.h"
+#include "Graphics/Structures/Color.h"
+#include "Graphics/Structures/Point2D.h"
+#include "Graphics/Structures/Point3D.h"
 
 namespace s3dge
 {
@@ -18,9 +19,9 @@ namespace s3dge
 	{
 		struct VertexData
 		{
-			math::vec3f Vertex;
-			uint Color;
-			math::vec2f UV;
+			Point3D Vertex;
+			Color Color;
+			Point2D UV;
 			float TextureID;
 		};
 	}
