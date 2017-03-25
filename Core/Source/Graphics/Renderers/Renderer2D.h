@@ -12,7 +12,7 @@ namespace s3dge
 		class Mesh2D;
 		class Renderable2D;
 		class VertexArray;
-		class Buffer;
+		class VertexBuffer;
 		class IndexBuffer;
 		class Font;
 		struct Color;
@@ -21,7 +21,7 @@ namespace s3dge
 		{
 		private:
 			VertexArray* _vao; // Vertex array object.
-			Buffer* _vbo; // Vertex buffer object.
+			VertexBuffer* _vbo; // Vertex buffer object.
 			IndexBuffer* _ibo; // Index buffer object.
 			int _indexCount; // The number of indices.
 			VertexData* _buffer; // Renderables container.

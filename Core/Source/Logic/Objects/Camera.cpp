@@ -10,15 +10,16 @@ Implements the Camera class.
 
 using namespace s3dge;
 using namespace logic;
+using namespace math;
 
 Camera::Camera()
 {
-	rotation = math::vec3f(0, 0, 0); 
+	rotation = Vector3(0, 0, 0);
 	_fov = 45.0f;
 	_aspectRatio = 16 / 9.0f;
 	_near = 0.1f;
 	_far = 100.0f;
-	_viewDirection = math::vec3f(0, 0, 0);
+	_viewDirection = Vector3(0, 0, 0);
 }
 
 Camera::~Camera()
@@ -28,16 +29,16 @@ Camera::~Camera()
 
 void Camera::Update()
 {
-	projection = math::mat4::GetPerspective(_fov, _aspectRatio, _near, _far);
+	projection = Matrix4::GetPerspective(_fov, _aspectRatio, _near, _far);
 }
 
-void Camera::SetPosition(math::vec3f position)
+void Camera::SetPosition(const Vector3& position)
 {
 	// TODO
 	Update();
 }
 
-void Camera::SetViewDirection(math::vec3f lookAt)
+void Camera::SetViewDirection(const Vector3& lookAt)
 {
 	_viewDirection = lookAt;
 	Update();
@@ -67,7 +68,7 @@ void Camera::SetFar(float far)
 	Update();
 }
 
-math::mat4 Camera::GetTransformation() const
+Matrix4 Camera::GetTransformation() const
 {
-	return math::mat4::GetIdentity();
+	return Matrix4::GetIdentity();
 }

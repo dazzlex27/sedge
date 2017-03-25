@@ -3,7 +3,7 @@
 Renderer2D.cpp
 
 Implements the Renderer2D class
-Set up to process up to 250,000 vertices per frame.
+Set up to process up to 200,000 vertices per frame.
 ===========================================================================
 */
 
@@ -11,7 +11,7 @@ Set up to process up to 250,000 vertices per frame.
 #include "Internal/DeleteMacros.h"
 #include "Internal/Log.h"
 #include "Graphics/Buffers/VertexArray.h"
-#include "Graphics/Buffers/Buffer.h"
+#include "Graphics/Buffers/VertexBuffer.h"
 #include "Graphics/Renderables/Renderable2D.h"
 #include "Graphics/Buffers/IndexBuffer.h"
 #include "Graphics/Fonts/Font.h"
@@ -22,10 +22,9 @@ using namespace s3dge;
 using namespace graphics;
 using namespace ftgl;
 
-#define MAX_VERTICES 250000
-#define VERTEX_SIZE sizeof(VertexData)
-#define VERTEX_BUFFER_SIZE VERTEX_SIZE * MAX_VERTICES
-#define INDEX_BUFFER_SIZE VERTEX_BUFFER_SIZE
+#define MAX_SPRITES 50000
+#define MAX_VERTICES MAX_SPRITES * 4
+#define MAX_INDICES MAX_SPRITES * 6
 	
 Renderer2D::Renderer2D()
 {			
@@ -36,24 +35,23 @@ Renderer2D::~Renderer2D()
 {
 	SafeDelete(_ibo);
 	SafeDelete(_vao);
-	SafeDelete(_vbo);
 }
 
 void Renderer2D::Initialize()
 {
 	_vao = new VertexArray();
 
-	_vbo = new Buffer(_buffer, sizeof(VertexData), MAX_VERTICES);
+	_vbo = new VertexBuffer(sizeof(VertexData), MAX_VERTICES);
 
 	_vao->AddBuffer(_vbo);
 
 	_vao->Bind();
 		
-	uint* indices = new uint[INDEX_BUFFER_SIZE];
+	uint* indices = new uint[MAX_INDICES];
 
 	int offset = 0;
 
-	for (int i = 0; i < INDEX_BUFFER_SIZE; i += 6)
+	for (int i = 0; i < MAX_INDICES; i += 6)
 	{
 		indices[i] = offset + 0;
 		indices[i + 1] = offset + 1;
@@ -66,7 +64,7 @@ void Renderer2D::Initialize()
 		offset += 4;
 	}
 
-	_ibo = new IndexBuffer(indices, INDEX_BUFFER_SIZE);
+	_ibo = new IndexBuffer(indices, MAX_INDICES);
 
 	_indexCount = 0;
 
@@ -76,7 +74,8 @@ void Renderer2D::Initialize()
 void Renderer2D::Begin()
 {
 	_vbo->Bind();
-	_buffer = (VertexData*)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
+	_vbo->Map();
+	_buffer = (VertexData*)_vbo->GetDataPointer();
 }
 
 void Renderer2D::Submit(const Renderable2D* renderable)
@@ -211,7 +210,7 @@ void Renderer2D::Flush()
 
 void Renderer2D::End()
 {
-	glUnmapBuffer(GL_ARRAY_BUFFER);
+	_vbo->Unmap();
 	_vbo->Unbind();
 }
 

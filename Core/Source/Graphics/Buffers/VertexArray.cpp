@@ -7,8 +7,10 @@ Implements the VertexArray class
 */
 
 #include "VertexArray.h"
-#include "Graphics/Structures/VertexData.h"
+#include <GL/glew.h>
 #include "Internal/DeleteMacros.h"
+#include "VertexBuffer.h"
+#include "Graphics/Structures/VertexData.h"
 
 using namespace s3dge;
 using namespace graphics;
@@ -20,13 +22,13 @@ VertexArray::VertexArray()
 
 VertexArray::~VertexArray()
 {
-	for (Buffer* item : _buffers)
+	for (VertexBuffer* item : _buffers)
 		SafeDelete(item);
 
 	glDeleteVertexArrays(1, &_vertexArrayID);
 }
 
-void VertexArray::AddBuffer(Buffer* buffer)
+void VertexArray::AddBuffer(VertexBuffer* buffer)
 {
 	glBindVertexArray(_vertexArrayID);
 

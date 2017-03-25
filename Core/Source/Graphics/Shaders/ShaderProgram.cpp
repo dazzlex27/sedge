@@ -3,6 +3,7 @@
 
 using namespace s3dge;
 using namespace graphics;
+using namespace math;
 	
 ShaderProgram::ShaderProgram(cstring vertexPath, cstring fragmentPath)
 	: _vertexPath(vertexPath), _fragmentPath(fragmentPath)
@@ -88,7 +89,7 @@ bool ShaderProgram::Compile(int shader)
 	return true;
 }
 
-void ShaderProgram::SetProjection(math::mat4 matrix)
+void ShaderProgram::SetProjection(Matrix4 matrix)
 {
 	this->Enable();
 	this->SetUniformMat4fv("pr_matrix", matrix);
@@ -104,9 +105,9 @@ void ShaderProgram::Disable()
 	glUseProgram(0);
 }
 
-void ShaderProgram::SetUniformMat4fv(cstring name, const math::mat4& matrix)
+void ShaderProgram::SetUniformMat4fv(cstring name, const Matrix4& matrix)
 {
-	glUniformMatrix4fv(glGetUniformLocation(_programID, name), 1, GL_FALSE, matrix.elements);
+	glUniformMatrix4fv(glGetUniformLocation(_programID, name), 1, GL_FALSE, matrix.data);
 }
 
 void ShaderProgram::SetUniform1f(cstring name, float value)
@@ -114,17 +115,17 @@ void ShaderProgram::SetUniform1f(cstring name, float value)
 	glUniform1f(glGetUniformLocation(_programID, name), value);
 }
 
-void ShaderProgram::SetUniform2f(cstring name, math::vec2f value)
+void ShaderProgram::SetUniform2f(cstring name, Vector2 value)
 {
 	glUniform2f(glGetUniformLocation(_programID, name), value.x, value.y);
 }
 
-void ShaderProgram::SetUniform3f(cstring name, math::vec3f value)
+void ShaderProgram::SetUniform3f(cstring name, Vector3 value)
 {
 	glUniform3f(glGetUniformLocation(_programID, name), value.x, value.y, value.z);
 }
 
-void ShaderProgram::SetUniform4f(cstring name, math::vec4f value)
+void ShaderProgram::SetUniform4f(cstring name, Vector4 value)
 {
 	glUniform4f(glGetUniformLocation(_programID, name), value.x, value.y, value.z, value.w);
 }

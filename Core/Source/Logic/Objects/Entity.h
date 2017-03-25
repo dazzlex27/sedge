@@ -20,13 +20,13 @@ namespace s3dge
 		class Entity : public BaseObject
 		{
 		protected:
-			math::mat4 projection;
-			math::vec3f rotation;
-			math::vec3f scale;
-			math::vec3f position;
+			math::Matrix4 projection;
+			math::Vector3 rotation;
+			math::Vector3 scale;
+			math::Vector3 position;
 
 		public:
-			Entity() { scale = math::vec3f(1, 1, 1); }
+			Entity() { scale = math::Vector3(1, 1, 1); }
 			~Entity() {}
 
 		public:

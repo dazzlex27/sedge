@@ -7,6 +7,7 @@ Implements the IndexBuffer class
 */
 
 #include "IndexBuffer.h"
+#include <GL/glew.h>
 
 using namespace s3dge;
 using namespace graphics;

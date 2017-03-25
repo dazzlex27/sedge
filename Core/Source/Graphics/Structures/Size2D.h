@@ -21,7 +21,7 @@ namespace s3dge
 
 			Size2D(float width, float height) 
 				: width(width), height(height) { }
-			Size2D(math::vec2f vector) 
+			Size2D(math::Vector2 vector) 
 				: width(vector.x), height(vector.y) { }
 		};
 	}

@@ -13,6 +13,7 @@ Using layers is highly encouraged, event if there's only one. That helps to keep
 #include "Internal/DeleteMacros.h"
 
 using namespace s3dge;
+using namespace math;
 using namespace graphics;
 	
 //Layer::Layer()
@@ -27,7 +28,7 @@ using namespace graphics;
 
 Layer::Layer(ShaderProgram* shaderProgram)
 {
-	_transformationMatrix = math::mat4::GetIdentity();
+	_transformationMatrix = Matrix4::GetIdentity();
 	_shaderProgram = shaderProgram;
 	_renderer = new Renderer2D();
 	_ownsRenderer = true;
@@ -36,7 +37,7 @@ Layer::Layer(ShaderProgram* shaderProgram)
 
 Layer::Layer(ShaderProgram* shaderProgram, Renderer2D* renderer)
 {
-	_transformationMatrix = math::mat4::GetIdentity();
+	_transformationMatrix = Matrix4::GetIdentity();
 	_shaderProgram = shaderProgram;
 	_renderer = renderer;
 	_ownsRenderer = false;
@@ -101,7 +102,7 @@ void Layer::SetRenderer(Renderer2D* renderer)
 	_renderer = renderer;
 }
 
-void Layer::SetTransformationMatrix(math::mat4 matrix)
+void Layer::SetTransformationMatrix(Matrix4 matrix)
 {
 	_transformationMatrix = matrix;
 }

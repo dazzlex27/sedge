@@ -8,7 +8,6 @@ Represents an entity called index buffer, designed to reduce the number of verti
 
 #pragma once
 
-#include <GL/glew.h>
 #include "CustomTypes.h"
 
 namespace s3dge

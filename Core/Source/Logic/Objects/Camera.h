@@ -23,7 +23,7 @@ namespace s3dge
 			float _aspectRatio;
 			float _near;
 			float _far;
-			math::vec3f _viewDirection;
+			math::Vector3 _viewDirection;
 
 		public:
 			Camera();
@@ -31,15 +31,15 @@ namespace s3dge
 
 			inline float GetFOV() const { return _fov; }
 			inline float GetAspectRatio() const { return _aspectRatio; }
-			inline math::vec3f GetLookAt() const { return _viewDirection; }
+			inline const math::Vector3& GetLookAt() const { return _viewDirection; }
  
 			void SetFOV(float fov);
 			void SetNear(float near);
 			void SetFar(float far);
 			void SetAspectRatio(float aspectRatio);
-			void SetViewDirection(math::vec3f viewDirection);
-			void SetPosition(math::vec3f position);
-			math::mat4 GetTransformation() const;
+			void SetViewDirection(const math::Vector3& viewDirection);
+			void SetPosition(const math::Vector3& position);
+			math::Matrix4 GetTransformation() const;
 
 		private:
 			void Update();

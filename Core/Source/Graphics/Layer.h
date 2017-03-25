@@ -28,7 +28,7 @@ namespace s3dge
 			std::vector<Renderable2D*> _renderables; // an array of elements in the layer
 			ShaderProgram* _shaderProgram; // a shader instance
 			Renderer2D* _renderer; // a renderer instance
-			math::mat4 _transformationMatrix; // transformation applied to the layer
+			math::Matrix4 _transformationMatrix; // transformation applied to the layer
 			bool _ownsRenderer; // flag to indicate whether the shader should be disposed by the layer upon deletion
 			bool _ownsShader; // flag to indicate whether the renderer should be disposed by the layer upon deletion
 
@@ -47,8 +47,8 @@ namespace s3dge
 			const Renderer2D* GetRenderer() const { return _renderer; }
 			void SetRenderer(Renderer2D* renderer);
 
-			const math::mat4& GetTransformationMatrix() const { return _transformationMatrix; }
-			void SetTransformationMatrix(math::mat4 matrix);
+			const math::Matrix4& GetTransformationMatrix() const { return _transformationMatrix; }
+			void SetTransformationMatrix(math::Matrix4 matrix);
 
 			Layer& operator=(const Layer& other);
 

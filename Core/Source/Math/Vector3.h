@@ -12,102 +12,42 @@ namespace s3dge
 {
 	namespace math
 	{
-		template <typename T>
 		struct Vector3
 		{
-			T x;
-			T y;
-			T z;
+			float x;
+			float y;
+			float z;
 
-			Vector3()
-				: x(0), y(0), z(0) {}
+			Vector3();
+			Vector3(float x, float y, float z);
+			Vector3(const Vector3& other);
 
-			Vector3(T x, T y, T z)
-				: x(x), y(y), z(z) {}
+			Vector3& Add(const Vector3& vector);
+			Vector3& Subtract(const Vector3& vector);
+			Vector3& Multiply(const Vector3& vector);
+			Vector3& Multiply(float value);
+			Vector3& Divide(const Vector3& vector);
+			
+			Vector3& operator+=(const Vector3& other);
+			Vector3& operator-=(const Vector3& other);
+			Vector3& operator*=(const Vector3& other);
+			Vector3& operator*=(float value);
+			Vector3& operator/=(const Vector3& other);
+			Vector3 operator+(const Vector3& v2);
+			Vector3 operator-(const Vector3& v2);
+			Vector3 operator*(const Vector3& v2);
+			Vector3 operator/(const Vector3& v2);
 
-			Vector3& Add(const Vector3& vector)
-			{
-				this->x += vector.x;
-				this->y += vector.y;
-				this->z += vector.z;
+			friend Vector3 operator+(const Vector3& v1, const Vector3& v2);
+			friend Vector3 operator-(const Vector3& v1, const Vector3& v2);
+			friend Vector3 operator*(const Vector3& v1, const Vector3& v2);
+			friend Vector3 operator/(const Vector3& v1, const Vector3& v2);
 
-				return *this;
-			}
-
-			Vector3& Subtract(const Vector3& vector)
-			{
-				this->x -= vector.x;
-				this->y -= vector.y;
-				this->z -= vector.z;
-
-				return *this;
-			}
-
-			Vector3& Multiply(const Vector3& vector)
-			{
-				this->x *= vector.x;
-				this->y *= vector.y;
-				this->z *= vector.z;
-
-				return *this;
-			}
-
-			Vector3& Divide(const Vector3& vector)
-			{
-				this->x /= vector.x;
-				this->y /= vector.y;
-				this->z /= vector.z;
-
-				return *this;
-			}
-
-			Vector3& operator+=(const Vector3& other)
-			{
-				return this->Add(other);
-			}
-
-			Vector3& operator-=(const Vector3& other)
-			{
-				return this->Subtract(other);
-			}
-
-			Vector3& operator*=(const Vector3& other)
-			{
-				return this->Multiply(other);
-			}
-
-			Vector3& operator/=(const Vector3& other)
-			{
-				return this->Divide(other);
-			}
-
-			Vector3 operator+(const Vector3& v2)
-			{
-				return this->Add(v2);
-			}
-
-			Vector3 operator-(const Vector3& v2)
-			{
-				return this->Subtract(v2);
-			}
-
-			Vector3 operator*(const Vector3& v2)
-			{
-				return this->Multiply(v2);
-			}
-
-			Vector3 operator/(const Vector3& v2)
-			{
-				return this->Divide(v2);
-			}
-
-			float Magnitude() const
-			{
-				return x* x + y * y + z * z;
-			}
+			Vector3& Normalize();
+			float GetDistance(const Vector3& v) const;
+			float GetLength() const;
+			static float GetDotProduct(const Vector3& v1, const Vector3& v2);
+			static Vector3 GetCrossProduct(const Vector3& v1, const Vector3& v2);
 		};
-
-		typedef Vector3<float> vec3f;
-		typedef Vector3<double> vec3d;
 	}
 }

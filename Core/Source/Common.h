@@ -27,6 +27,13 @@ This file is included by the main header S3DGE.h
 #include "Graphics/Fonts/FontManager.h"
 #include "Graphics/GraphicsManager.h"
 
+#include "Graphics/Structures/VertexData.h"
+
+#include "Graphics/Buffers/IndexBuffer.h"
+#include "Graphics/Buffers/VertexBuffer.h"
+
+#include "Graphics/Renderables/Mesh2D.h"
+
 #include "Audio/SoundManager.h"
 
 #include "Internal/DeleteMacros.h"

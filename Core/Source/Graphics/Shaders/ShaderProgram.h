@@ -34,15 +34,15 @@ namespace s3dge
 			void Enable();
 			void Disable();
 
-			void SetUniformMat4fv(cstring name, const math::mat4& matrix);
+			void SetUniformMat4fv(cstring name, const math::Matrix4& matrix);
 			void SetUniform1f(cstring name, float value);
-			void SetUniform2f(cstring name, math::vec2f value);
-			void SetUniform3f(cstring name, math::vec3f value);
-			void SetUniform4f(cstring name, math::vec4f value);
+			void SetUniform2f(cstring name, math::Vector2 value);
+			void SetUniform3f(cstring name, math::Vector3 value);
+			void SetUniform4f(cstring name, math::Vector4 value);
 			void SetUniform1i(cstring name, int value);
 			void SetUniform1iv(cstring name, int count, int* value);
 
-			void SetProjection(math::mat4 ortho);
+			void SetProjection(math::Matrix4 projectionMatrix);
 
 		private:
 			uint Load();

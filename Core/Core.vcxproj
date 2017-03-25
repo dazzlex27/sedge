@@ -107,7 +107,7 @@
     <ClCompile Include="Source\Graphics\Scenes\Scene.cpp" />
     <ClCompile Include="Source\Graphics\Textures\TextureFactory.cpp" />
     <ClCompile Include="Source\Internal\MemoryManager.cpp" />
-    <ClCompile Include="Source\Graphics\Buffers\Buffer.cpp" />
+    <ClCompile Include="Source\Graphics\Buffers\VertexBuffer.cpp" />
     <ClCompile Include="Source\Graphics\Buffers\IndexBuffer.cpp" />
     <ClCompile Include="Source\Graphics\Buffers\VertexArray.cpp" />
     <ClCompile Include="Source\Graphics\Renderables\Group.cpp" />
@@ -121,9 +121,13 @@
     <ClCompile Include="Source\Logic\Objects\Actor.cpp" />
     <ClCompile Include="Source\Logic\Objects\BaseObject.cpp" />
     <ClCompile Include="Source\Logic\Objects\Camera.cpp" />
+    <ClCompile Include="Source\Math\Matrix4.cpp" />
+    <ClCompile Include="Source\Math\Vector2.cpp" />
+    <ClCompile Include="Source\Math\Vector3.cpp" />
+    <ClCompile Include="Source\Math\Vector4.cpp" />
     <ClCompile Include="Source\Platforms\Platform.cpp" />
     <ClCompile Include="Source\Graphics\Window.cpp" />
-    <ClCompile Include="Source\S3DGE.cpp" />
+    <ClCompile Include="Source\S3DGEngine.cpp" />
     <ClCompile Include="Source\Utilities\FileUtils.cpp" />
     <ClCompile Include="Source\Utilities\IDGenerator.cpp" />
     <ClCompile Include="Source\Utilities\ImageUtils.cpp" />
@@ -149,8 +153,8 @@
     <ClInclude Include="Source\Graphics\Textures\TextureFactory.h" />
     <ClInclude Include="Source\Internal\enums.h" />
     <ClInclude Include="Source\Internal\MemoryManager.h" />
-    <ClInclude Include="Include\S3DGE.h" />
-    <ClInclude Include="Source\Graphics\Buffers\Buffer.h" />
+    <ClInclude Include="Include\S3DGEngine.h" />
+    <ClInclude Include="Source\Graphics\Buffers\VertexBuffer.h" />
     <ClInclude Include="Source\Graphics\Buffers\IndexBuffer.h" />
     <ClInclude Include="Source\Graphics\Buffers\VertexArray.h" />
     <ClInclude Include="Source\Graphics\Renderables\Group.h" />

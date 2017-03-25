@@ -22,10 +22,10 @@ namespace s3dge
 			uint value;
 
 			Color(uint value) : value(value) { }
-			Color(const math::vec4f& value) : value(ConvertColorToUint(value)) { }
+			Color(const math::Vector4& value) : value(ConvertColorToUint(value)) { }
 			~Color() { }
 
-			const math::vec4f& GetValueVec4() const { return ConvertColorToVec4(value); }
+			const math::Vector4& GetValueVec4() const { return ConvertColorToVec4(value); }
 		};
 	}
 }

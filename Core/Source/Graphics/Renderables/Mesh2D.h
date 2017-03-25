@@ -7,7 +7,7 @@ namespace s3dge
 	namespace graphics
 	{
 		class VertexArray;
-		class Buffer;
+		class VertexBuffer;
 		class IndexBuffer;
 		class Renderer2D;
 		class Texture2D;
@@ -17,11 +17,12 @@ namespace s3dge
 		{
 		private:
 			VertexArray* _vao;
+			VertexBuffer* _vbo;
 			IndexBuffer* _ibo;
 			Color _color;
 
 		public:
-			Mesh2D(Buffer* vbo, IndexBuffer* ibo, const Color& color = Color(0xffffffff));
+			Mesh2D(VertexBuffer* vbo, IndexBuffer* ibo, const Color& color = Color(0xffffffff));
 			~Mesh2D();
 
 		public:
