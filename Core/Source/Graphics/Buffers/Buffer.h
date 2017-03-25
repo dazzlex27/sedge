@@ -22,13 +22,13 @@ namespace s3dge
 			uint _componentCount;
 
 		public:
-			Buffer(float* data, int count, uint componentCount);
+			Buffer(void* data, int componentSize, uint componentCount);
 			~Buffer();
 
 			inline const uint GetComponentCount() const { return _componentCount; }
 
-			void Bind();
-			void Unbind();
+			void Bind() const;
+			void Unbind() const;
 		};
 	}
 }

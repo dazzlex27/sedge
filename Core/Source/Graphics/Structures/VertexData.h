@@ -2,7 +2,7 @@
 ===========================================================================
 VertexData.h
 
-This file contains the necessary structures used by the Graphics namespace
+This file contains the necessary VertexData structures used by the Graphics namespace
 ===========================================================================
 */
 
@@ -19,7 +19,7 @@ namespace s3dge
 	{
 		struct VertexData
 		{
-			Point3D Vertex;
+			Point3D Position;
 			Color Color;
 			Point2D UV;
 			float TextureID;

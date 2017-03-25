@@ -27,9 +27,10 @@ namespace s3dge
 			VertexArray();
 			~VertexArray();
 
-			void AddBuffer(Buffer* buffer, uint index);
+			void AddBuffer(Buffer* buffer);
 			void Bind() const;
 			void Unbind() const;
+			void Draw(uint indicesCount);
 		};
 	}
 }

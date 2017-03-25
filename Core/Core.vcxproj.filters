@@ -290,7 +290,7 @@
     <ClInclude Include="Source\Graphics\Renderables\Mesh2D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Graphics\VertexData.h">
+    <ClInclude Include="Source\Graphics\Structures\VertexData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
