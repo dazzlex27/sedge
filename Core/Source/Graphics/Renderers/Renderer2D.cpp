@@ -17,6 +17,7 @@ Set up to process up to 200,000 vertices per frame.
 #include "Graphics/Fonts/Font.h"
 #include "Graphics/Structures/Color.h"
 #include "Graphics/Renderables/Mesh2D.h"
+#include "Graphics/Structures/VertexLayout.h"
 
 using namespace s3dge;
 using namespace graphics;
@@ -43,9 +44,17 @@ void Renderer2D::Initialize()
 
 	_vbo = new VertexBuffer(sizeof(VertexData), MAX_VERTICES);
 
-	_vao->AddBuffer(_vbo);
+	VertexLayout layout;
+	layout.AddEntry("position", 0, 3, GL_FLOAT, GL_FALSE, sizeof(VertexData), (const void*)(offsetof(VertexData, VertexData::Position)));
+	layout.AddEntry("color", 1, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(VertexData), (const void*)(offsetof(VertexData, VertexData::Color)));
+	layout.AddEntry("uv", 2, 2, GL_FLOAT, GL_FALSE, sizeof(VertexData), (const void*)(offsetof(VertexData, VertexData::UV)));
+	layout.AddEntry("textureID", 3, 1, GL_FLOAT, GL_FALSE, sizeof(VertexData), (const void*)(offsetof(VertexData, VertexData::TextureID)));
 
 	_vao->Bind();
+	_vbo->SetLayout(&layout);
+	_vao->Unbind();
+
+	_vao->AddBuffer(_vbo);
 		
 	uint* indices = new uint[MAX_INDICES];
 

@@ -8,20 +8,20 @@ Base class for all 2D renderable objects.
 
 #pragma once
 
-#include "Math/Vector2.h"
-#include "Math/Vector3.h"
-#include "Math/Vector4.h"
-#include "Graphics/Renderers/Renderer2D.h"
-#include "Graphics/Textures/Texture2D.h"
-#include "Graphics/Structures/Point2D.h"
-#include "Graphics/Structures/Point3D.h"
-#include "Graphics/Structures/Size2D.h"
+#include <vector>
 #include "Graphics/Structures/Color.h"
+#include "Common/Structures/Point2D.h"
+#include "Common/Structures/Point3D.h"
+#include "Common/Structures/Size2D.h"
+#include "Graphics/Textures/Texture2D.h"
 
 namespace s3dge
 {
 	namespace graphics
 	{
+		class Renderer2D;
+		class Texture2D;
+
 		class Renderable2D
 		{
 		protected:

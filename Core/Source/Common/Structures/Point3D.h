@@ -12,17 +12,15 @@ Represents a point in three-dimensional coordinate space.
 
 namespace s3dge
 {
-	namespace graphics
+	struct Point3D
 	{
-		struct Point3D
-		{
-			float x;
-			float y;
-			float z;
+		float x;
+		float y;
+		float z;
 
-			Point3D(float x, float y, float z) :x(x), y(y), z(z) { }
-			Point3D(const math::Vector3& vector) : x(vector.x), y(vector.y), z(vector.z) { }
-			~Point3D() { }
-		};
-	}
+		Point3D() : x(0), y(0), z(0) { }
+		Point3D(float x, float y, float z) :x(x), y(y), z(z) { }
+		Point3D(const math::Vector3& vector) : x(vector.x), y(vector.y), z(vector.z) { }
+		~Point3D() { }
+	};
 }

@@ -8,6 +8,7 @@ Implements the Label class
 
 #include "Label.h"
 #include "Graphics/Fonts/Font.h"
+#include "Graphics/Renderers/Renderer2D.h"
 
 using namespace s3dge;
 using namespace graphics;

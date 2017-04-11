@@ -105,6 +105,7 @@
     <ClCompile Include="Source\Graphics\Renderables\Mesh2D.cpp" />
     <ClCompile Include="Source\Graphics\Renderables\Renderable2D.cpp" />
     <ClCompile Include="Source\Graphics\Scenes\Scene.cpp" />
+    <ClCompile Include="Source\Graphics\Structures\VertexLayout.cpp" />
     <ClCompile Include="Source\Graphics\Textures\TextureFactory.cpp" />
     <ClCompile Include="Source\Internal\MemoryManager.cpp" />
     <ClCompile Include="Source\Graphics\Buffers\VertexBuffer.cpp" />
@@ -146,10 +147,11 @@
     <ClInclude Include="Source\Graphics\Fonts\FontManager.h" />
     <ClInclude Include="Source\Graphics\GraphicsManager.h" />
     <ClInclude Include="Source\Graphics\Structures\VertexData.h" />
-    <ClInclude Include="Source\Graphics\Structures\Point2D.h" />
-    <ClInclude Include="Source\Graphics\Structures\Point3D.h" />
+    <ClInclude Include="Source\Common\Structures\Point2D.h" />
+    <ClInclude Include="Source\Common\Structures\Point3D.h" />
     <ClInclude Include="Source\Graphics\Scenes\Scene.h" />
-    <ClInclude Include="Source\Graphics\Structures\Size2D.h" />
+    <ClInclude Include="Source\Common\Structures\Size2D.h" />
+    <ClInclude Include="Source\Graphics\Structures\VertexLayout.h" />
     <ClInclude Include="Source\Graphics\Textures\TextureFactory.h" />
     <ClInclude Include="Source\Internal\enums.h" />
     <ClInclude Include="Source\Internal\MemoryManager.h" />

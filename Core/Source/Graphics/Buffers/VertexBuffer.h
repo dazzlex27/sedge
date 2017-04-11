@@ -14,6 +14,8 @@ namespace s3dge
 {
 	namespace graphics
 	{
+		class VertexLayout;
+
 		class VertexBuffer
 		{
 		private:
@@ -28,9 +30,10 @@ namespace s3dge
 
 			inline const uint GetComponentCount() const { return _componentCount; }
 			void* GetDataPointer() { return _data; }
+			void SetLayout(VertexLayout* layout);
 
-			void Bind() const;
-			void Unbind() const;
+			inline void Bind() const;
+			inline void Unbind() const;
 			void Map();
 			void Unmap();
 		};

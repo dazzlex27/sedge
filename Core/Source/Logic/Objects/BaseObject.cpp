@@ -10,7 +10,6 @@ Implements the BaseObject class.
 #include "Utilities/IDGenerator.h"
 
 using namespace s3dge;
-using namespace logic;
 
 BaseObject::BaseObject()
 {

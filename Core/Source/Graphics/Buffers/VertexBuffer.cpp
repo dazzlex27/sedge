@@ -8,6 +8,8 @@ Implements the Buffer class
 
 #include "VertexBuffer.h"
 #include <GL/glew.h>
+#include "Graphics/Structures/VertexLayout.h"
+#include "Graphics/Structures/VertexData.h"
 
 using namespace s3dge;
 using namespace graphics;
@@ -33,6 +35,21 @@ VertexBuffer::VertexBuffer(int componentSize, uint componentCount)
 VertexBuffer::~VertexBuffer()
 {
 	glDeleteBuffers(1, &_bufferID);
+}
+
+void VertexBuffer::SetLayout(VertexLayout* layout)
+{
+	std::vector<LayoutAttribute*> atbs = layout->GetAttributes();
+
+	Bind();
+
+	for (uint i = 0; i < atbs.size(); i++)
+	{
+		glEnableVertexAttribArray(atbs[i]->index);
+		glVertexAttribPointer(atbs[i]->index, atbs[i]->size, atbs[i]->type, atbs[i]->normalized, atbs[i]->stride, atbs[i]->offset);
+	}
+
+	Unbind();
 }
 
 void VertexBuffer::Bind() const

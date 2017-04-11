@@ -1,5 +1,7 @@
 #include "ShaderProgram.h"
+#include <GL/glew.h>
 #include "Internal/Log.h"
+#include "Utilities/FileUtils.h"
 
 using namespace s3dge;
 using namespace graphics;
@@ -115,17 +117,17 @@ void ShaderProgram::SetUniform1f(cstring name, float value)
 	glUniform1f(glGetUniformLocation(_programID, name), value);
 }
 
-void ShaderProgram::SetUniform2f(cstring name, Vector2 value)
+void ShaderProgram::SetUniform2f(cstring name, const Vector2& value)
 {
 	glUniform2f(glGetUniformLocation(_programID, name), value.x, value.y);
 }
 
-void ShaderProgram::SetUniform3f(cstring name, Vector3 value)
+void ShaderProgram::SetUniform3f(cstring name, const Vector3& value)
 {
 	glUniform3f(glGetUniformLocation(_programID, name), value.x, value.y, value.z);
 }
 
-void ShaderProgram::SetUniform4f(cstring name, Vector4 value)
+void ShaderProgram::SetUniform4f(cstring name, const Vector4& value)
 {
 	glUniform4f(glGetUniformLocation(_programID, name), value.x, value.y, value.z, value.w);
 }

@@ -8,6 +8,7 @@ Contains method implementations for Renderable2D
 
 #include "Renderable2D.h"
 #include "Utilities/Converters.h"
+#include "Graphics/Renderers/Renderer2D.h"
 
 using namespace s3dge;
 using namespace graphics;

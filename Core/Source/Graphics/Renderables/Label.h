@@ -8,6 +8,7 @@ Represents a class designed to store text glyphs.
 
 #pragma once
 
+#include <string>
 #include "CustomTypes.h"
 #include "Renderable2D.h"
 

@@ -12,17 +12,14 @@ Represents a point in two-dimensional coordinate space.
 
 namespace s3dge
 {
-	namespace graphics
+	struct Point2D
 	{
-		struct Point2D
-		{
-			float x;
-			float y;
+		float x;
+		float y;
 
-			Point2D() : x(0), y(0) { }
-			Point2D(float x, float y) : x(x), y(y) { }
-			Point2D(const math::Vector2& vector) : x(vector.x), y(vector.y) { }
-			~Point2D() { }
-		};
-	}
+		Point2D() : x(0), y(0) { }
+		Point2D(float x, float y) : x(x), y(y) { }
+		Point2D(const math::Vector2& vector) : x(vector.x), y(vector.y) { }
+		~Point2D() { }
+	};
 }

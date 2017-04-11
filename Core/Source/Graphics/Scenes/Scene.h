@@ -10,23 +10,28 @@ A class to represent a game scene (level) which is responsible for managing the 
 #pragma once
 
 #include <vector>
-#include "Logic/Objects/Entity.h"
 
 namespace s3dge
 {
-	namespace graphics
+	class Entity;
+	class Camera;
+
+	class Scene
 	{
-		class Scene
-		{
-		private:
-			std::vector<logic::Entity*> _entities;
+	private:
+		std::vector<Entity*> _entities;
+		Camera* _camera;
 
-		public:
-			Scene();
-			~Scene();
+	public:
+		Scene();
+		~Scene();
 
-			void Update();
-			void Render();
-		};
-	}
+		void AddEntity(Entity* entity);
+		void RemoveEntity(Entity* entity);
+
+		void SetCamera(Camera* camera);
+
+		void Update();
+		void Render();
+	};
 }

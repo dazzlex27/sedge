@@ -10,8 +10,8 @@ This file contains the necessary VertexData structures used by the Graphics name
 
 #include "CustomTypes.h"
 #include "Graphics/Structures/Color.h"
-#include "Graphics/Structures/Point2D.h"
-#include "Graphics/Structures/Point3D.h"
+#include "Common/Structures/Point2D.h"
+#include "Common/Structures/Point3D.h"
 
 namespace s3dge
 {

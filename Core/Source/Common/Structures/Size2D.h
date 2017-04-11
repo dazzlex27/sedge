@@ -12,17 +12,14 @@ Represents a two-dimensional size.
 
 namespace s3dge
 {
-	namespace graphics
+	struct Size2D
 	{
-		struct Size2D
-		{
-			float width;
-			float height;
+		float width;
+		float height;
 
-			Size2D(float width, float height) 
-				: width(width), height(height) { }
-			Size2D(math::Vector2 vector) 
-				: width(vector.x), height(vector.y) { }
-		};
-	}
+		Size2D(float width, float height)
+			: width(width), height(height) { }
+		Size2D(math::Vector2 vector)
+			: width(vector.x), height(vector.y) { }
+	};
 }

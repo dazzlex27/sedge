@@ -9,7 +9,6 @@ Implements the Camera class.
 #include "Camera.h"
 
 using namespace s3dge;
-using namespace logic;
 using namespace math;
 
 Camera::Camera()
@@ -19,7 +18,7 @@ Camera::Camera()
 	_aspectRatio = 16 / 9.0f;
 	_near = 0.1f;
 	_far = 100.0f;
-	_viewDirection = Vector3(0, 0, 0);
+	_lookAt = Vector3(0, 0, 0);
 }
 
 Camera::~Camera()
@@ -40,7 +39,7 @@ void Camera::SetPosition(const Vector3& position)
 
 void Camera::SetViewDirection(const Vector3& lookAt)
 {
-	_viewDirection = lookAt;
+	_lookAt = lookAt;
 	Update();
 }
 
