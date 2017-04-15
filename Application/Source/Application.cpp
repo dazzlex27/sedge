@@ -12,8 +12,8 @@ void Application::Initialize()
 	_shaderScene = new ShaderProgram("Resources\\basic.vs", "Resources\\basic.fs");
 	_shaderHUD = new ShaderProgram("Resources\\basic.vs", "Resources\\basic.fs");
 	
-	//_shaderScene->SetProjection(Matrix4::GetPerspective(90.0f, 1.66f, -1.0f, 10.0f));
-	_shaderScene->SetProjection(Matrix4::GetOrthographic(0.0f, 16.0f, 0.0f, 9.0f, -1.0f, 10.0f));
+	_shaderScene->SetProjection(Matrix4::GetPerspective(90.0f, 1.66f, -1.0f, 10.0f));
+	//_shaderScene->SetProjection(Matrix4::GetOrthographic(0.0f, 16.0f, 0.0f, 9.0f, -1.0f, 1000.0f));
 	_shaderHUD->SetProjection(Matrix4::GetOrthographic(0.0f, 16.0f, 0.0f, 9.0f, -1.0f, 10.0f));
 	
 	TextureManager::Add("Box", "Resources\\box.jpg");
@@ -28,19 +28,21 @@ void Application::Initialize()
 	Label* label = LabelFactory::CreateLabel("startup...", FontManager::Get("test_font"), Point2D(0.4f, 8.2f), Size2D(2, 2));
 	GraphicsManager::AddLabel("fps", label);
 
-	VertexData* vertexData = new VertexData[3];
+	VertexData* vertexData = new VertexData[4];
 
-	vertexData[0].Position = Point3D(5, 5, 0);
+	vertexData[0].Position = Point3D(-1, 0, 0);
 	vertexData[0].Color = Color(0xff00ffff);
-	vertexData[1].Position = Point3D(7, 5, 0);
+	vertexData[1].Position = Point3D(1, 0, 0);
 	vertexData[1].Color = Color(0xffff00ff);
-	vertexData[2].Position = Point3D(7, 7, -2);
+	vertexData[2].Position = Point3D(1, 3, 2);
 	vertexData[2].Color = Color(0xffffff00);
+	vertexData[3].Position = Point3D(5, 2, 2);
+	vertexData[3].Color = Color(0xf0fffff0);
 
-	VertexBuffer* vbo = new VertexBuffer(vertexData, sizeof(VertexData), 3);
+	VertexBuffer* vbo = new VertexBuffer(vertexData, sizeof(VertexData), 4);
 
-	uint indices[] = {0, 1, 2};
-	IndexBuffer* ibo = new IndexBuffer(indices, 3);
+	uint indices[] = {0, 1, 2, 1, 2, 3};
+	IndexBuffer* ibo = new IndexBuffer(indices, 6);
 
 	Mesh* mesh = MeshFactory::CreateMesh(vbo, ibo);
 
