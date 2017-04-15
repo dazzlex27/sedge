@@ -13,6 +13,9 @@ TODO: standartize all of the manager classes
 #include <vector>
 #include "Sound.h"
 
+struct gau_Manager;
+struct ga_Mixer;
+
 namespace s3dge
 {
 	namespace audio

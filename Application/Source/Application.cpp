@@ -49,7 +49,7 @@ void Application::Initialize()
 	_sceneLayer->AddMesh(GraphicsManager::GetMesh("mesh1"));
 	_hudLayer->Add(GraphicsManager::GetLabel("fps"));
 
-	SoundManager::Get("back-in-black")->Play();
+	//SoundManager::Get("back-in-black")->Play();
 }
 
 void Application::UpdateInput()

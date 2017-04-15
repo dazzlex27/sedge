@@ -8,6 +8,8 @@ Implements the audio manager class.
 
 #include "SoundManager.h"
 #include "SoundFactory.h"
+#include <gorilla/ga.h>
+#include <gorilla/gau.h>
 #include "Internal/Log.h"
 #include "Internal/DeleteMacros.h"
 

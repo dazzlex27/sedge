@@ -8,6 +8,8 @@ Set up to process up to 200,000 vertices per frame.
 */
 
 #include "Renderer2D.h"
+#include <GL/glew.h>
+#include <freetype-gl.h>
 #include "Internal/DeleteMacros.h"
 #include "Internal/Log.h"
 #include "Graphics/Buffers/VertexArray.h"

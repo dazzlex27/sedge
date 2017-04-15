@@ -7,6 +7,8 @@ Implements Sound class.
 */
 
 #include "Sound.h"
+#include <gorilla/ga.h>
+#include <gorilla/gau.h>
 #include "SoundManager.h"
 #include "Internal/Log.h"
 

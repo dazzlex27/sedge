@@ -10,9 +10,10 @@ At the moment uses Gorilla Audio to do the heavy lifting
 #pragma once
 
 #include <string>
-#include <gorilla/ga.h>
-#include <gorilla/gau.h>
 #include "CustomTypes.h"
+
+struct ga_Sound;
+struct ga_Handle;
 
 namespace s3dge
 {
@@ -45,8 +46,8 @@ namespace s3dge
 			inline bool IsPlaying() { return _playing; }
 
 			friend class SoundManager;
-			friend void dispose_sound_callback(ga_Handle * handle, void* context);
-			friend void loop_sound_callback(ga_Handle * handle, void* context);
+			friend void dispose_sound_callback(ga_Handle* handle, void* context);
+			friend void loop_sound_callback(ga_Handle* handle, void* context);
 		};
 	}
 }

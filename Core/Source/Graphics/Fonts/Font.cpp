@@ -7,6 +7,7 @@ implements the font class
 */
 
 #include "Font.h"
+#include <freetype-gl.h>
 #include "Internal/Log.h"
 #include "Internal/DeleteMacros.h"
 #include "Utilities/FileUtils.h"
@@ -34,6 +35,11 @@ void Font::LoadFontFromFile()
 {
 	_atlas = ftgl::texture_atlas_new(512, 512, 2);
 	_font = ftgl::texture_font_new_from_file(_atlas, _size, _path);
+}
+
+uint Font::GetAtlasID() const 
+{ 
+	return _atlas->id; 
 }
 
 Font::~Font()
