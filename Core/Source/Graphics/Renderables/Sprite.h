@@ -19,11 +19,14 @@ namespace s3dge
 		public:
 			Point3D position;
 
-		public:
-			Sprite(float x, float y, float width, float height, const Color& color);
-			Sprite(float x, float y, float width, float height, Texture2D* texture);
+		private:
+			Sprite(const Point2D& position, const Size2D& size, const Color& color);
+			Sprite(const Point2D& position, const Size2D& size, Texture2D* texture);
 
+		public:
 			inline const Point3D& GetPosition() const override { return position; }
+
+			friend class SpriteFactory;
 		};
 	}
 }

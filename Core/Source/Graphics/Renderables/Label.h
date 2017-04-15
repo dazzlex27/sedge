@@ -24,10 +24,13 @@ namespace s3dge
 			std::string text;
 			Font* font;
 
-			Label(const std::string& text, Font* font, float x, float y, float width, float height, const Color& color);
-			~Label();
+		private:
+			Label(const std::string& text, Font* font, const Point2D& position, const Size2D& size, const Color& color = Color(0xffffffff));
 
+		public:
 			void Submit(Renderer2D* renderer) const override;
+
+			friend class LabelFactory;
 		};
 	}
 }

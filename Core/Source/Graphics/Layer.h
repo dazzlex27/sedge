@@ -14,14 +14,17 @@ Using layers is highly encouraged, even if there's only one. That helps to keep 
 #pragma once
 
 #include <vector>
-#include "Graphics/Renderables/Renderable2D.h"
-#include "Graphics/Renderers/Renderer2D.h"
-#include "Graphics/Shaders/ShaderProgram.h"
+#include "../Math/Matrix4.h"
 
 namespace s3dge
 {
 	namespace graphics
 	{
+		class ShaderProgram;
+		class Renderable2D;
+		class Mesh;
+		class Renderer2D;
+
 		class Layer
 		{
 		private:
@@ -39,6 +42,7 @@ namespace s3dge
 			~Layer();
 
 			void Add(Renderable2D* renderable);
+			void AddMesh(Mesh* mesh);
 			void Render();
 
 			const ShaderProgram* GetShaderProgram() const { return _shaderProgram; }

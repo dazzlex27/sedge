@@ -28,11 +28,21 @@ This file is included by the main header S3DGE.h
 #include "Graphics/GraphicsManager.h"
 
 #include "Graphics/Structures/VertexData.h"
+#include "Graphics/Structures/VertexLayout.h"
 
 #include "Graphics/Buffers/IndexBuffer.h"
 #include "Graphics/Buffers/VertexBuffer.h"
 
-#include "Graphics/Renderables/Mesh2D.h"
+#include "Graphics/Renderables/Mesh.h"
+#include "Graphics/Renderables/MeshFactory.h"
+
+#include "Graphics/Renderables/LabelFactory.h"
+#include "Graphics/Renderables/SpriteFactory.h"
+
+#include "Common/Structures/Point2D.h"
+#include "Common/Structures/Point3D.h"
+#include "Common/Structures/Size2D.h"
+#include "Common/Structures/Size3D.h"
 
 #include "Audio/SoundManager.h"
 

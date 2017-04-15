@@ -11,11 +11,10 @@ TODO: standartize all of the manager classes
 #pragma once
 
 #include <map>
-#include <string>
 #include "Renderables/Group.h"
 #include "Renderables/Label.h"
 #include "Renderables/Sprite.h"
-#include "Fonts/Font.h"
+#include "Renderables/Mesh.h"
 
 namespace s3dge
 {
@@ -27,19 +26,25 @@ namespace s3dge
 			static std::map<cstring, Sprite*> _sprites;
 			static std::map<cstring, Label*> _labels;
 			static std::map<cstring, Group*> _groups;
+			static std::map<cstring, Mesh*> _meshes;
 			static bool _initialized;
 
 		public:
 			static void Initialize(); // must be called upon engine startup
-			static void AddSprite(cstring name, float x, float y, float w, float h, uint c, Texture2D* t = nullptr, bool overrideExisting = false);
-			static void AddLabel(cstring name, const std::string& text, Font* font, float x, float y, float w, float h, uint c = 0xffffffff, bool overrideExisting = false);
-			static void AddGroup(cstring name, bool overrideExisting = false);
+			static void AddSprite(cstring name, Sprite* sprite, bool overwrite = false);
+			static void AddLabel(cstring name, Label* label, bool overwrite = false);
+			static void AddGroup(cstring name, bool overwrite = false);
+			static void AddMesh(cstring name, Mesh* mesh, bool overwrite = false);
 			static Sprite* GetSprite(cstring name);
 			static Label* GetLabel(cstring name);
 			static Group* GetGroup(cstring name);
+			static Mesh* GetMesh(cstring name);
 			static void Dispose(); // must be called upon engine shutdown
 
-			static inline uint GetCount() { return _sprites.size() + _labels.size(); }
+			static inline uint GetSpriteCount() { return _sprites.size(); }
+			static inline uint GetLabelCount() { return _labels.size(); }
+			static inline uint GetGroupCount() { return _groups.size(); }
+			static inline uint GetMeshCount() { return _meshes.size(); }
 		};
 	}
 }

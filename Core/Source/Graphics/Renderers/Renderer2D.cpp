@@ -16,7 +16,7 @@ Set up to process up to 200,000 vertices per frame.
 #include "Graphics/Buffers/IndexBuffer.h"
 #include "Graphics/Fonts/Font.h"
 #include "Graphics/Structures/Color.h"
-#include "Graphics/Renderables/Mesh2D.h"
+#include "Graphics/Renderables/Mesh.h"
 #include "Graphics/Structures/VertexLayout.h"
 
 using namespace s3dge;
@@ -190,7 +190,7 @@ void Renderer2D::DrawString(const std::string& text, Font* font, const Point3D& 
 	}
 }
 
-void Renderer2D::SubmitMesh(Mesh2D* mesh)
+void Renderer2D::SubmitMesh(const Mesh* mesh)
 {
 	_meshes.push_back(mesh);
 }
@@ -213,8 +213,8 @@ void Renderer2D::Flush()
 
 	_indexCount = 0;
 
-	//for (uint i = 0; i < _meshes.size(); i++)
-	//	_meshes[i]->Render();
+	for (uint i = 0; i < _meshes.size(); i++)
+		_meshes[i]->Render();
 }
 
 void Renderer2D::End()

@@ -14,15 +14,11 @@ using namespace s3dge;
 using namespace graphics;
 using namespace math;
 	
-Label::Label(const std::string& text, Font* font, float x, float y, float width, float height, const Color& color)
-	: Renderable2D(Point3D(x, y, 0), Size2D(width, height), color)
+Label::Label(const std::string& text, Font* font, const Point2D& position, const Size2D& size, const Color& color)
+	: Renderable2D(Point3D(position.x, position.y, 0), size, color)
 {
 	this->text = text;
 	this->font = font;
-}
-
-Label::~Label()
-{
 }
 
 void Label::Submit(Renderer2D* renderer) const

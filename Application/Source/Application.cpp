@@ -12,7 +12,8 @@ void Application::Initialize()
 	_shaderScene = new ShaderProgram("Resources\\basic.vs", "Resources\\basic.fs");
 	_shaderHUD = new ShaderProgram("Resources\\basic.vs", "Resources\\basic.fs");
 	
-	_shaderScene->SetProjection(Matrix4::GetPerspective(90.0f, 1.66f, -1.0f, 10.0f));
+	//_shaderScene->SetProjection(Matrix4::GetPerspective(90.0f, 1.66f, -1.0f, 10.0f));
+	_shaderScene->SetProjection(Matrix4::GetOrthographic(0.0f, 16.0f, 0.0f, 9.0f, -1.0f, 10.0f));
 	_shaderHUD->SetProjection(Matrix4::GetOrthographic(0.0f, 16.0f, 0.0f, 9.0f, -1.0f, 10.0f));
 	
 	TextureManager::Add("Box", "Resources\\box.jpg");
@@ -20,30 +21,35 @@ void Application::Initialize()
 	TextureManager::Add("Brick", "Resources\\brick.jpg");
 	FontManager::Add("test_font", "Resources\\SourceSansPro-Light.ttf", 32);
 	SoundManager::Add("back-in-black", "Resources\\back-in-black.ogg");
-	GraphicsManager::AddSprite("rect", 0, 0, 1, 1, 0xffffffff, TextureManager::Get("Box"));
-	GraphicsManager::AddLabel("fps", "startup...", FontManager::Get("test_font"), 0.4f, 8.2f, 2, 2);
+	
+	Sprite* rect = SpriteFactory::CreateSprite(Point2D(0, 0), Size2D(1, 1), TextureManager::Get("Box"));
+	GraphicsManager::AddSprite("rect", rect);
+
+	Label* label = LabelFactory::CreateLabel("startup...", FontManager::Get("test_font"), Point2D(0.4f, 8.2f), Size2D(2, 2));
+	GraphicsManager::AddLabel("fps", label);
 
 	float vertices[] =
 	{
-		0.1f,0.1f,0.0f,
-		0.2f, 0.2f, 0.0f,
-		0.3f, 0.3f, 0.3f
+		0.0f, 0.0f, 0.0f,
+		2.0f, 2.0f, 0.0f,
+		0.0f, 2.0f, 0.0f
 	};
+	VertexBuffer* vbo = new VertexBuffer(vertices, sizeof(VertexData), 3);
 
 	uint indices[] = {0, 1, 2};
+	IndexBuffer* ibo = new IndexBuffer(indices, 3);
 
-	VertexBuffer vbo(vertices, sizeof(VertexData), 3);
-	IndexBuffer ibo(indices, 3);
-
-	_mesh = new Mesh2D(&vbo, &ibo, Color(0xffff00ff));
+	Mesh* mesh = MeshFactory::CreateMesh(vbo, ibo, Color(0xffffffff));
+	GraphicsManager::AddMesh("mesh1", mesh);
 
 	_sceneLayer = new Layer(_shaderScene);
 	_hudLayer = new Layer(_shaderHUD);
 
 	_sceneLayer->Add(GraphicsManager::GetSprite("rect"));
+	_sceneLayer->AddMesh(GraphicsManager::GetMesh("mesh1"));
 	_hudLayer->Add(GraphicsManager::GetLabel("fps"));
 
-	//SoundManager::Get("back-in-black")->Play();
+	SoundManager::Get("back-in-black")->Play();
 }
 
 void Application::UpdateInput()
@@ -95,7 +101,7 @@ void Application::Dispose()
 
 void LoadManySprites(Layer* layer)
 {
-	for (float y = 0; y <= 9.0f; y += 0.5f)
+	/*for (float y = 0; y <= 9.0f; y += 0.5f)
 	{
 		for (float x = 0; x <= 16.0f; x += 0.5f)
 		{
@@ -108,23 +114,23 @@ void LoadManySprites(Layer* layer)
 
 				uint color = a << 24 | b << 16 | g << 8 | r;
 
-				layer->Add(new Sprite(x, y, 0.4f, 0.4f, color));
+				layer->Add(new Sprite(Point2D(x, y), Size2D(0.4f, 0.4f), color));
 			}
 			else
 			{
 				switch (rand() % 3)
 				{
 				case 0:
-					layer->Add(new Sprite(x, y, 0.4f, 0.4f, TextureManager::Get("Gradient")));
+					layer->Add(new Sprite(Point2D(x, y), Size2D(0.4f, 0.4f), TextureManager::Get("Gradient")));
 					break;
 				case 1:
-					layer->Add(new Sprite(x, y, 0.4f, 0.4f, TextureManager::Get("Box")));
+					layer->Add(new Sprite(Point2D(x, y), Size2D(0.4f, 0.4f), TextureManager::Get("Box")));
 					break;
 				default:
-					layer->Add(new Sprite(x, y, 0.4f, 0.4f, TextureManager::Get("Brick")));
+					layer->Add(new Sprite(Point2D(x, y), Size2D(0.4f, 0.4f), TextureManager::Get("Brick")));
 					break;
 				}
 			}
 		}
-	}
+	}*/
 }
