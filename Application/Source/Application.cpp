@@ -28,18 +28,24 @@ void Application::Initialize()
 	Label* label = LabelFactory::CreateLabel("startup...", FontManager::Get("test_font"), Point2D(0.4f, 8.2f), Size2D(2, 2));
 	GraphicsManager::AddLabel("fps", label);
 
-	float vertices[] =
-	{
-		0.0f, 0.0f, 0.0f,
-		2.0f, 2.0f, 0.0f,
-		0.0f, 2.0f, 0.0f
-	};
-	VertexBuffer* vbo = new VertexBuffer(vertices, sizeof(VertexData), 3);
+	VertexData* vertexData = new VertexData[3];
+
+	vertexData[0].Position = Point3D(5, 5, 0);
+	vertexData[0].Color = Color(0xff00ffff);
+	vertexData[1].Position = Point3D(7, 5, 0);
+	vertexData[1].Color = Color(0xffff00ff);
+	vertexData[2].Position = Point3D(7, 7, -2);
+	vertexData[2].Color = Color(0xffffff00);
+
+	VertexBuffer* vbo = new VertexBuffer(vertexData, sizeof(VertexData), 3);
 
 	uint indices[] = {0, 1, 2};
 	IndexBuffer* ibo = new IndexBuffer(indices, 3);
 
-	Mesh* mesh = MeshFactory::CreateMesh(vbo, ibo, Color(0xffffffff));
+	Mesh* mesh = MeshFactory::CreateMesh(vbo, ibo);
+
+	delete[] vertexData;
+
 	GraphicsManager::AddMesh("mesh1", mesh);
 
 	_sceneLayer = new Layer(_shaderScene);

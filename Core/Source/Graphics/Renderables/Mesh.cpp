@@ -35,8 +35,8 @@ VertexLayout GetDefaultLayout()
 	return layout;
 }
 
-Mesh::Mesh(VertexBuffer* vbo, IndexBuffer* ibo, const Color& color)
-	: _ibo(ibo), color(color), _vbo(vbo), texture(nullptr)
+Mesh::Mesh(VertexBuffer* vbo, IndexBuffer* ibo)
+	: _ibo(ibo), _vbo(vbo), texture(nullptr)
 {
 	_vao = new VertexArray();
 
@@ -48,15 +48,15 @@ Mesh::Mesh(VertexBuffer* vbo, IndexBuffer* ibo, const Color& color)
 }
 
 Mesh::Mesh(VertexBuffer* vbo, IndexBuffer* ibo, Texture2D* texture)
-	: _ibo(ibo), texture(texture), _vbo(vbo), color(0xffffffff)
+	: _ibo(ibo), texture(texture), _vbo(vbo)
 {
 	_vao = new VertexArray();
 
 	_vao->Bind();
 	vbo->SetLayout(&GetDefaultLayout());
-	_vao->Unbind();
-
 	_vao->AddBuffer(vbo);
+
+	_vao->Unbind();
 }
 
 Mesh::~Mesh()
@@ -72,11 +72,11 @@ void Mesh::Submit(Renderer* renderer) const
 
 void Mesh::Render() const
 {
-	_vao->Bind();
 	_vbo->Bind();
+	_vao->Bind();
 	_ibo->Bind();
 	_vao->Draw(_ibo->GetCount());
 	_ibo->Unbind();
-	_vbo->Unbind();
 	_vao->Unbind();
+	_vbo->Unbind();
 }

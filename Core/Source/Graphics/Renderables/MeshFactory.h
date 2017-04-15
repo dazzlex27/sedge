@@ -18,8 +18,7 @@ namespace s3dge
 		class MeshFactory
 		{
 		public:
-			static Mesh* CreateMesh(VertexBuffer* vertexBuffer, IndexBuffer* indexBuffer, Texture2D* texture);
-			static Mesh* CreateMesh(VertexBuffer* vertexBuffer, IndexBuffer* indexBuffer, const Color& color);
+			static Mesh* CreateMesh(VertexBuffer* vbo, IndexBuffer* ibo);
 
 			static Mesh* CreateCuboid(const Size3D& size, Texture2D* texture);
 			static Mesh* CreateCuboid(const Size3D& size, const Color& color);

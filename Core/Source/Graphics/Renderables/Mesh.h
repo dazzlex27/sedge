@@ -34,10 +34,9 @@ namespace s3dge
 			math::Vector3 translation;
 			math::Vector3 scale;
 			Texture2D* texture;
-			Color color;
 
 		private:
-			Mesh(VertexBuffer* vbo, IndexBuffer* ibo, const Color& color = Color(0xffffffff));
+			Mesh(VertexBuffer* vbo, IndexBuffer* ibo);
 			Mesh(VertexBuffer* vbo, IndexBuffer* ibo, Texture2D* texture);
 
 		public:

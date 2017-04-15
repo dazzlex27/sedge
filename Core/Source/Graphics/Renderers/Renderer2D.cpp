@@ -42,8 +42,11 @@ Renderer2D::~Renderer2D()
 
 void Renderer2D::Initialize()
 {
+	_indexCount = 0;
+
 	_vao = new VertexArray();
 
+	_vao->Bind();
 	_vbo = new VertexBuffer(sizeof(VertexData), MAX_VERTICES);
 
 	VertexLayout layout;
@@ -52,7 +55,6 @@ void Renderer2D::Initialize()
 	layout.AddEntry("uv", 2, 2, GL_FLOAT, GL_FALSE, sizeof(VertexData), (const void*)(offsetof(VertexData, VertexData::UV)));
 	layout.AddEntry("textureID", 3, 1, GL_FLOAT, GL_FALSE, sizeof(VertexData), (const void*)(offsetof(VertexData, VertexData::TextureID)));
 
-	_vao->Bind();
 	_vbo->SetLayout(&layout);
 	_vao->Unbind();
 
@@ -76,10 +78,6 @@ void Renderer2D::Initialize()
 	}
 
 	_ibo = new IndexBuffer(indices, MAX_INDICES);
-
-	_indexCount = 0;
-
-	_vao->Unbind();
 }
 
 void Renderer2D::Begin()

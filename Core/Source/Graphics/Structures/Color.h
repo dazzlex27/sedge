@@ -21,6 +21,7 @@ namespace s3dge
 		{
 			uint value;
 
+			Color() : value(0) { }
 			Color(uint value) : value(value) { }
 			Color(const math::Vector4& value) : value(ConvertColorToUint(value)) { }
 			~Color() { }
