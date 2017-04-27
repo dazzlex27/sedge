@@ -1,13 +1,15 @@
 #pragma once
 
-#include <S3DGE.h>
+#include <S3DGEngine.h>
 
-class Application : public s3dge::S3DGE
+class Application : public s3dge::S3DGEngine
 {
 private:
 	s3dge::graphics::Window* _window;
-	s3dge::graphics::Layer* _layer;
-	s3dge::graphics::ShaderProgram* _shaderProgram;
+	s3dge::graphics::Layer* _sceneLayer;
+	s3dge::graphics::Layer* _hudLayer;
+	s3dge::graphics::ShaderProgram* _shaderScene;
+	s3dge::graphics::ShaderProgram* _shaderHUD;
 
 public:
 	void Initialize() override;

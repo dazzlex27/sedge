@@ -11,8 +11,14 @@ Defines a class responsible for processing text charachters.
 #pragma once
 
 #include <string>
-#include <freetype-gl.h>
+
 #include "CustomTypes.h"
+
+namespace ftgl
+{
+	struct texture_atlas_t;
+	struct texture_font_t;
+}
 
 namespace s3dge
 {
@@ -31,7 +37,7 @@ namespace s3dge
 			Font(cstring name, cstring path, float size);
 			~Font();
 
-			inline uint GetAtlasID() const { return _atlas->id; }
+			uint GetAtlasID() const;
 			inline ftgl::texture_font_t* GetFontFace() const { return _font; }
 			inline cstring GetName() const { return _name; }
 

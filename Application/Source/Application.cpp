@@ -8,33 +8,66 @@ using namespace audio;
 void Application::Initialize()
 {
 	_window = CreateGameWindow("S3DGE Application", 1280, 720, false, false);
-	_shaderProgram = new ShaderProgram("Resources\\basic.vs", "Resources\\basic.fs");
-	_shaderProgram->SetProjection(mat4::GetOrthographic(0.0f, 16.0f, 0.0f, 9.0f, -1.0f, 1.0f));
+
+	_shaderScene = new ShaderProgram("Resources\\basic.vs", "Resources\\basic.fs");
+	_shaderHUD = new ShaderProgram("Resources\\basic.vs", "Resources\\basic.fs");
+	
+	_shaderScene->SetProjection(Matrix4::GetPerspective(90.0f, 1.66f, -1.0f, 10.0f));
+	//_shaderScene->SetProjection(Matrix4::GetOrthographic(0.0f, 16.0f, 0.0f, 9.0f, -1.0f, 1000.0f));
+	_shaderHUD->SetProjection(Matrix4::GetOrthographic(0.0f, 16.0f, 0.0f, 9.0f, -1.0f, 10.0f));
 	
 	TextureManager::Add("Box", "Resources\\box.jpg");
 	TextureManager::Add("Gradient", "Resources\\gradient.bmp");
 	TextureManager::Add("Brick", "Resources\\brick.jpg");
 	FontManager::Add("test_font", "Resources\\SourceSansPro-Light.ttf", 32);
 	SoundManager::Add("back-in-black", "Resources\\back-in-black.ogg");
-	GraphicsManager::AddSprite("rect", 4, 3, 3, 3, 0xffffffff, TextureManager::Get("Brick"));
-	GraphicsManager::AddLabel("fps", "startup...", FontManager::Get("test_font"), 0.4f, 8.2f, 2, 2);
+	
+	Sprite* rect = SpriteFactory::CreateSprite(Point2D(0, 0), Size2D(1, 1), TextureManager::Get("Box"));
+	GraphicsManager::AddSprite("rect", rect);
 
-	_layer = new Layer(_shaderProgram);
+	Label* label = LabelFactory::CreateLabel("startup...", FontManager::Get("test_font"), Point2D(0.4f, 8.2f), Size2D(2, 2));
+	GraphicsManager::AddLabel("fps", label);
 
-	_layer->Add(GraphicsManager::GetSprite("rect"));
-	_layer->Add(GraphicsManager::GetLabel("fps"));
+	VertexData* vertexData = new VertexData[4];
 
-	SoundManager::Get("back-in-black")->Play();
+	vertexData[0].Position = Point3D(-1, 0, 0);
+	vertexData[0].Color = Color(0xff00ffff);
+	vertexData[1].Position = Point3D(1, 0, 0);
+	vertexData[1].Color = Color(0xffff00ff);
+	vertexData[2].Position = Point3D(1, 3, 2);
+	vertexData[2].Color = Color(0xffffff00);
+	vertexData[3].Position = Point3D(5, 2, 2);
+	vertexData[3].Color = Color(0xf0fffff0);
+
+	VertexBuffer* vbo = new VertexBuffer(vertexData, sizeof(VertexData), 4);
+
+	uint indices[] = {0, 1, 2, 1, 2, 3};
+	IndexBuffer* ibo = new IndexBuffer(indices, 6);
+
+	Mesh* mesh = MeshFactory::CreateMesh(vbo, ibo);
+
+	delete[] vertexData;
+
+	GraphicsManager::AddMesh("mesh1", mesh);
+
+	_sceneLayer = new Layer(_shaderScene);
+	_hudLayer = new Layer(_shaderHUD);
+
+	_sceneLayer->Add(GraphicsManager::GetSprite("rect"));
+	_sceneLayer->AddMesh(GraphicsManager::GetMesh("mesh1"));
+	_hudLayer->Add(GraphicsManager::GetLabel("fps"));
+
+	//SoundManager::Get("back-in-black")->Play();
 }
 
 void Application::UpdateInput()
 {
 	float speed = 0.1f;
 
-	_shaderProgram->Enable();
-	vec2f mouse = _window->GetMousePosition();
-	_shaderProgram->SetUniform2f("light_pos", vec2f((float)(mouse.x * 16.0f / _window->GetWidth()), 
-		(float)(9.0f - mouse.y * 9.0f / _window->GetHeight())));
+	_shaderHUD->Enable();
+	//vec2f mouse = _window->GetMousePosition();
+	//_shaderProgram->SetUniform2f("light_pos", vec2f((float)(mouse.x * 16.0f / _window->GetWidth()), 
+	//	(float)(9.0f - mouse.y * 9.0f / _window->GetHeight())));
 
 	GraphicsManager::GetLabel("fps")->text = std::to_string(GetFPS()) + " fps";
 
@@ -46,31 +79,37 @@ void Application::UpdateInput()
 		GraphicsManager::GetSprite("rect")->position.y += speed;
 	if (_window->KeyDown(S3_KEY_DOWN))
 		GraphicsManager::GetSprite("rect")->position.y -= speed;
-
-	if (_window->KeyClicked(S3_KEY_P))
-	{
-		if (SoundManager::Get("back-in-black")->IsPlaying())
-			SoundManager::Get("back-in-black")->Pause();
-		else
-			SoundManager::Get("back-in-black")->Play();
-	}
+	if (_window->KeyDown(S3_KEY_Q))
+		GraphicsManager::GetSprite("rect")->position.z -= speed;
+	if (_window->KeyDown(S3_KEY_E))
+		GraphicsManager::GetSprite("rect")->position.z += speed;
+	
+	//if (_window->KeyClicked(S3_KEY_P))
+	//{
+	//	if (SoundManager::Get("back-in-black")->IsPlaying())
+	//		SoundManager::Get("back-in-black")->Pause();
+	//	else
+	//		SoundManager::Get("back-in-black")->Play();
+	//}
 }
 
 void Application::Render()
 {
-	_layer->Render();
+	_sceneLayer->Render();
+	_hudLayer->Render();
 }
 
 void Application::Dispose()
 {
 	SoundManager::Get("back-in-black")->Stop();
-	SafeDelete(_layer);
-	SafeDelete(_shaderProgram);
+	SafeDelete(_hudLayer);
+	SafeDelete(_sceneLayer);
+	SafeDelete(_shaderHUD);
 }
 
 void LoadManySprites(Layer* layer)
 {
-	for (float y = 0; y <= 9.0f; y += 0.5f)
+	/*for (float y = 0; y <= 9.0f; y += 0.5f)
 	{
 		for (float x = 0; x <= 16.0f; x += 0.5f)
 		{
@@ -83,23 +122,23 @@ void LoadManySprites(Layer* layer)
 
 				uint color = a << 24 | b << 16 | g << 8 | r;
 
-				layer->Add(new Sprite(x, y, 0.4f, 0.4f, color));
+				layer->Add(new Sprite(Point2D(x, y), Size2D(0.4f, 0.4f), color));
 			}
 			else
 			{
 				switch (rand() % 3)
 				{
 				case 0:
-					layer->Add(new Sprite(x, y, 0.4f, 0.4f, TextureManager::Get("Gradient")));
+					layer->Add(new Sprite(Point2D(x, y), Size2D(0.4f, 0.4f), TextureManager::Get("Gradient")));
 					break;
 				case 1:
-					layer->Add(new Sprite(x, y, 0.4f, 0.4f, TextureManager::Get("Box")));
+					layer->Add(new Sprite(Point2D(x, y), Size2D(0.4f, 0.4f), TextureManager::Get("Box")));
 					break;
 				default:
-					layer->Add(new Sprite(x, y, 0.4f, 0.4f, TextureManager::Get("Brick")));
+					layer->Add(new Sprite(Point2D(x, y), Size2D(0.4f, 0.4f), TextureManager::Get("Brick")));
 					break;
 				}
 			}
 		}
-	}
+	}*/
 }

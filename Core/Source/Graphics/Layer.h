@@ -14,21 +14,24 @@ Using layers is highly encouraged, even if there's only one. That helps to keep 
 #pragma once
 
 #include <vector>
-#include "Graphics/Renderables/Renderable2D.h"
-#include "Graphics/Renderers/Renderer2D.h"
-#include "Graphics/Shaders/ShaderProgram.h"
+#include "../Math/Matrix4.h"
 
 namespace s3dge
 {
 	namespace graphics
 	{
+		class ShaderProgram;
+		class Renderable2D;
+		class Mesh;
+		class Renderer2D;
+
 		class Layer
 		{
 		private:
 			std::vector<Renderable2D*> _renderables; // an array of elements in the layer
 			ShaderProgram* _shaderProgram; // a shader instance
 			Renderer2D* _renderer; // a renderer instance
-			math::mat4 _transformationMatrix; // transformation applied to the layer
+			math::Matrix4 _transformationMatrix; // transformation applied to the layer
 			bool _ownsRenderer; // flag to indicate whether the shader should be disposed by the layer upon deletion
 			bool _ownsShader; // flag to indicate whether the renderer should be disposed by the layer upon deletion
 
@@ -39,6 +42,7 @@ namespace s3dge
 			~Layer();
 
 			void Add(Renderable2D* renderable);
+			void AddMesh(Mesh* mesh);
 			void Render();
 
 			const ShaderProgram* GetShaderProgram() const { return _shaderProgram; }
@@ -47,8 +51,8 @@ namespace s3dge
 			const Renderer2D* GetRenderer() const { return _renderer; }
 			void SetRenderer(Renderer2D* renderer);
 
-			const math::mat4& GetTransformationMatrix() const { return _transformationMatrix; }
-			void SetTransformationMatrix(math::mat4 matrix);
+			const math::Matrix4& GetTransformationMatrix() const { return _transformationMatrix; }
+			void SetTransformationMatrix(math::Matrix4 matrix);
 
 			Layer& operator=(const Layer& other);
 

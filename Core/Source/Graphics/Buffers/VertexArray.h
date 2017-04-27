@@ -9,27 +9,29 @@ Designed to store vertex positions before feeding them to OpenGL.
 #pragma once
 
 #include <vector>
-#include <GL/glew.h>
 #include "CustomTypes.h"
-#include "Buffer.h"
+
 
 namespace s3dge
 {
 	namespace graphics
 	{
+		class VertexBuffer;
+
 		class VertexArray
 		{
 		private:
 			uint _vertexArrayID;
-			std::vector<Buffer*> _buffers;
+			std::vector<VertexBuffer*> _buffers;
 
 		public:
 			VertexArray();
 			~VertexArray();
 
-			void AddBuffer(Buffer* buffer, uint index);
+			void AddBuffer(VertexBuffer* buffer);
 			void Bind() const;
 			void Unbind() const;
+			void Draw(uint indicesCount);
 		};
 	}
 }

@@ -17,6 +17,7 @@ using namespace std;
 map<cstring, Sprite*> GraphicsManager::_sprites;
 map<cstring, Label*> GraphicsManager::_labels;
 map<cstring, Group*> GraphicsManager::_groups;
+map<cstring, Mesh*> GraphicsManager::_meshes;
 bool GraphicsManager::_initialized;
 
 void GraphicsManager::Initialize()
@@ -31,94 +32,76 @@ void GraphicsManager::Initialize()
 	}
 }
 
-void GraphicsManager::AddSprite(cstring name, float x, float y, float w, float h, uint c, Texture2D* t, bool overrideExisting)
+void GraphicsManager::AddSprite(cstring name, Sprite* sprite, bool overwrite)
 {
 	if (_initialized)
 	{
-		if (GetSprite(name) != nullptr)
-		{
-			if (overrideExisting)
-			{
-				Sprite* newSprite;
-
-				if (t == nullptr)
-					newSprite = new Sprite(x, y, w, h, c);
-				else
-					newSprite = new Sprite(x, y, w, h, t);
-
-				_sprites[name] = newSprite;
-			}
-			else
-			{
-				LOG_WARNING("Sprite \"", name, "\" already exists and will not be overwritten");
-			}
-
-			return;
-		}
-
-		Sprite* newSprite;
-
-		if (t == nullptr)
-			newSprite = new Sprite(x, y, w, h, c);
+		if (GetSprite(name) == nullptr)
+			_sprites[name] = sprite;
 		else
-			newSprite = new Sprite(x, y, w, h, t);
-
-		_sprites[name] = newSprite;
+		{
+			if (overwrite)
+				_sprites[name] = sprite;
+			else
+				LOG_WARNING("Sprite \"", name, "\" already exists and will not be overwritten");
+		}
 	}
 	else
-	{
 		LOG_WARNING("Graphics manager was not initialized before adding a sprite (", name, ")");
-	}
 }
 
-void GraphicsManager::AddLabel(cstring name, const string& text, Font* font, float x, float y, float w, float h, uint c, bool overrideExisting)
+void GraphicsManager::AddLabel(cstring name, Label* label, bool overwrite)
 {
 	if (_initialized)
 	{
-		if (GetLabel(name) != nullptr)
+		if (GetSprite(name) == nullptr)
+			_labels[name] = label;
+		else
 		{
-			if (overrideExisting)
-			{
-				_labels[name] = new Label(text, font, x, y, w, h, c);
-			}
+			if (overwrite)
+				_labels[name] = label;
 			else
-			{
 				LOG_WARNING("Label \"", name, "\" already exists and will not be overwritten");
-			}
-
-			return;
 		}
-
-		_labels[name] = new Label(text, font, x, y, w, h, c);
 	}
 	else
-	{
 		LOG_WARNING("Graphics manager was not initialized before adding a label (", name, ")");
-	}
 }
 
-void GraphicsManager::AddGroup(cstring name, bool overrideExisting)
+void GraphicsManager::AddGroup(cstring name, bool overwrite)
 {
 	if (_initialized)
 	{
-		if (GetGroup(name) != nullptr)
+		if (GetGroup(name) == nullptr)
+			_groups[name] = new Group;
+		else
 		{
-			if (overrideExisting)
-			{
-				_groups[name] = new Group();
-			}
+			if (overwrite)
+				_groups[name] = new Group;
 			else
-			{
 				LOG_WARNING("Group \"", name, "\" already exists and will not be overwritten");
-			}
 		}
-
-		_groups[name] = new Group();
 	}
 	else
-	{
 		LOG_WARNING("Graphics manager was not initialized before adding a group (", name, ")");
+}
+
+void GraphicsManager::AddMesh(cstring name, Mesh* mesh, bool overwrite)
+{
+	if (_initialized)
+	{
+		if (GetMesh(name) == nullptr)
+			_meshes[name] = mesh;
+		else
+		{
+			if (overwrite)
+				_meshes[name] = mesh;
+			else
+				LOG_WARNING("Mesh \"", name, "\" already exists and will not be overwritten");
+		}
 	}
+	else
+		LOG_WARNING("Graphics manager was not initialized before adding a mesh (", name, ")");
 }
 
 Sprite* GraphicsManager::GetSprite(cstring name)
@@ -145,6 +128,14 @@ Group* GraphicsManager::GetGroup(cstring name)
 	return nullptr;
 }
 
+Mesh* GraphicsManager::GetMesh(cstring name)
+{
+	if (_meshes.find(name) != _meshes.end())
+		return _meshes[name];
+
+	return nullptr;
+}
+
 void GraphicsManager::Dispose()
 {
 	if (_initialized)
@@ -154,6 +145,8 @@ void GraphicsManager::Dispose()
 		for (auto item : _sprites)
 			SafeDelete(item.second);
 		for (auto item : _labels)
+			SafeDelete(item.second);
+		for (auto item : _meshes)
 			SafeDelete(item.second);
 
 		_initialized = false;

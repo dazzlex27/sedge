@@ -69,13 +69,13 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(SolutionDir)\!Binaries\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)\!Binaries\$(Configuration)\Intermediates\$(ProjectName)\</IntDir>
+    <OutDir>$(SolutionDir)\!bin\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)\!bin\$(Configuration)\Intermediates\$(ProjectName)\</IntDir>
     <IncludePath>$(SolutionDir)\Externals\OpenAL\Include\OpenAL\;$(SolutionDir)\Externals\libvorbis\Include\;$(SolutionDir)\Externals\libogg\Include\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(SolutionDir)\!Binaries\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)\!Binaries\$(Configuration)\Intermediates\$(ProjectName)\</IntDir>
+    <OutDir>$(SolutionDir)\!bin\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)\!bin\$(Configuration)\Intermediates\$(ProjectName)\</IntDir>
     <IncludePath>$(SolutionDir)\Externals\OpenAL\Include\OpenAL\;$(SolutionDir)\Externals\libvorbis\Include\;$(SolutionDir)\Externals\libogg\Include\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -141,6 +141,14 @@
     <ClCompile Include="Source\ga.c" />
     <ClCompile Include="Source\gau.c" />
     <ClCompile Include="Source\ga_stream.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\libogg\libogg.vcxproj">
+      <Project>{b26b8e08-4859-41b5-b91c-c0758cfb1fab}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Libvorbis\Libvorbis.vcxproj">
+      <Project>{aba62d70-d06f-457d-9f98-ba24aa549377}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

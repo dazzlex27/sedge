@@ -41,17 +41,13 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(SolutionDir)\!Binaries\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)\!Binaries\$(Configuration)\Intermediates\$(ProjectName)\</IntDir>
-    <IncludePath>$(SolutionDir)\Externals\GLEW\;$(SolutionDir)\Externals\FreeType\Include\;$(SolutionDir)\Externals\STB\;$(SolutionDir)\Externals\FreeType-GL\Source\;$(SolutionDir)\Externals\GorillaAudio\Include\;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)\!Binaries\$(Configuration)\;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)\!bin\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)\!bin\$(Configuration)\Intermediates\$(ProjectName)\</IntDir>
     <TargetName>S3DGE</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IntDir>$(SolutionDir)\!Binaries\$(Configuration)\Intermediates\$(ProjectName)\</IntDir>
-    <OutDir>$(SolutionDir)\!Binaries\$(Configuration)\</OutDir>
-    <IncludePath>$(SolutionDir)\Externals\GLEW\;$(SolutionDir)\Externals\FreeType\Include\;$(SolutionDir)\Externals\STB\;$(SolutionDir)\Externals\FreeType-GL\Source\;$(SolutionDir)\Externals\GorillaAudio\Include\;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)\!Binaries\$(Configuration)\;$(LibraryPath)</LibraryPath>
+    <IntDir>$(SolutionDir)\!bin\$(Configuration)\Intermediates\$(ProjectName)\</IntDir>
+    <OutDir>$(SolutionDir)\!bin\$(Configuration)\</OutDir>
     <TargetName>S3DGE</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -59,7 +55,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>false</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)\Source\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\Source\;$(SolutionDir)\Externals\GLEW\;$(SolutionDir)\Externals\FreeType-GL\source\;$(SolutionDir)\Externals\STB\;$(SolutionDir)\Externals\GorillaAudio\Include\</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>FT2_BUILD_LIBRARY;GLEW_STATIC;S3_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
@@ -68,8 +64,11 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;FreeType27.lib;FreeType-GL.lib;GLEW.lib;PortAudio.lib;GorillaAudio.lib;libogg.lib;libvorbis.lib;openal32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <Lib>
+      <AdditionalLibraryDirectories>
+      </AdditionalLibraryDirectories>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -78,7 +77,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>false</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)\Source\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\Source\;$(SolutionDir)\Externals\GLEW\;$(SolutionDir)\Externals\FreeType-GL\source\;$(SolutionDir)\Externals\STB\;$(SolutionDir)\Externals\GorillaAudio\Include\</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>FT2_BUILD_LIBRARY;GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
@@ -91,8 +90,11 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>opengl32.lib;FreeType27.lib;FreeType-GL.lib;GLEW.lib;PortAudio.lib;GorillaAudio.lib;libogg.lib;libvorbis.lib;openal32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <Lib>
+      <AdditionalLibraryDirectories>
+      </AdditionalLibraryDirectories>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\Audio\Sound.cpp" />
@@ -102,11 +104,16 @@
     <ClCompile Include="Source\Graphics\Fonts\FontFactory.cpp" />
     <ClCompile Include="Source\Graphics\Fonts\FontManager.cpp" />
     <ClCompile Include="Source\Graphics\GraphicsManager.cpp" />
+    <ClCompile Include="Source\Graphics\Renderables\LabelFactory.cpp" />
+    <ClCompile Include="Source\Graphics\Renderables\Mesh.cpp" />
+    <ClCompile Include="Source\Graphics\Renderables\MeshFactory.cpp" />
     <ClCompile Include="Source\Graphics\Renderables\Renderable2D.cpp" />
+    <ClCompile Include="Source\Graphics\Renderables\SpriteFactory.cpp" />
     <ClCompile Include="Source\Graphics\Scenes\Scene.cpp" />
+    <ClCompile Include="Source\Graphics\Structures\VertexLayout.cpp" />
     <ClCompile Include="Source\Graphics\Textures\TextureFactory.cpp" />
     <ClCompile Include="Source\Internal\MemoryManager.cpp" />
-    <ClCompile Include="Source\Graphics\Buffers\Buffer.cpp" />
+    <ClCompile Include="Source\Graphics\Buffers\VertexBuffer.cpp" />
     <ClCompile Include="Source\Graphics\Buffers\IndexBuffer.cpp" />
     <ClCompile Include="Source\Graphics\Buffers\VertexArray.cpp" />
     <ClCompile Include="Source\Graphics\Renderables\Group.cpp" />
@@ -117,12 +124,15 @@
     <ClCompile Include="Source\Graphics\Shaders\ShaderProgram.cpp" />
     <ClCompile Include="Source\Graphics\Textures\Texture2D.cpp" />
     <ClCompile Include="Source\Graphics\Textures\TextureManager.cpp" />
-    <ClCompile Include="Source\Logic\Objects\Actor.cpp" />
     <ClCompile Include="Source\Logic\Objects\BaseObject.cpp" />
     <ClCompile Include="Source\Logic\Objects\Camera.cpp" />
+    <ClCompile Include="Source\Math\Matrix4.cpp" />
+    <ClCompile Include="Source\Math\Vector2.cpp" />
+    <ClCompile Include="Source\Math\Vector3.cpp" />
+    <ClCompile Include="Source\Math\Vector4.cpp" />
     <ClCompile Include="Source\Platforms\Platform.cpp" />
     <ClCompile Include="Source\Graphics\Window.cpp" />
-    <ClCompile Include="Source\S3DGE.cpp" />
+    <ClCompile Include="Source\S3DGEngine.cpp" />
     <ClCompile Include="Source\Utilities\FileUtils.cpp" />
     <ClCompile Include="Source\Utilities\IDGenerator.cpp" />
     <ClCompile Include="Source\Utilities\ImageUtils.cpp" />
@@ -134,17 +144,28 @@
     <ClInclude Include="Source\Audio\SoundFactory.h" />
     <ClInclude Include="Source\Audio\SoundManager.h" />
     <ClInclude Include="Source\Common.h" />
+    <ClInclude Include="Source\Common\Structures\Size3D.h" />
+    <ClInclude Include="Source\Graphics\Renderables\Mesh.h" />
+    <ClInclude Include="Source\Graphics\Renderables\MeshFactory.h" />
+    <ClInclude Include="Source\Graphics\Renderables\SpriteFactory.h" />
+    <ClInclude Include="Source\Graphics\Renderables\LabelFactory.h" />
+    <ClInclude Include="Source\Graphics\Renderers\Renderer.h" />
+    <ClInclude Include="Source\Graphics\Structures\Color.h" />
     <ClInclude Include="Source\Graphics\Fonts\Font.h" />
     <ClInclude Include="Source\Graphics\Fonts\FontFactory.h" />
     <ClInclude Include="Source\Graphics\Fonts\FontManager.h" />
     <ClInclude Include="Source\Graphics\GraphicsManager.h" />
-    <ClInclude Include="Source\Graphics\GraphicsStructures.h" />
+    <ClInclude Include="Source\Graphics\Structures\VertexData.h" />
+    <ClInclude Include="Source\Common\Structures\Point2D.h" />
+    <ClInclude Include="Source\Common\Structures\Point3D.h" />
     <ClInclude Include="Source\Graphics\Scenes\Scene.h" />
+    <ClInclude Include="Source\Common\Structures\Size2D.h" />
+    <ClInclude Include="Source\Graphics\Structures\VertexLayout.h" />
     <ClInclude Include="Source\Graphics\Textures\TextureFactory.h" />
     <ClInclude Include="Source\Internal\enums.h" />
     <ClInclude Include="Source\Internal\MemoryManager.h" />
-    <ClInclude Include="Include\S3DGE.h" />
-    <ClInclude Include="Source\Graphics\Buffers\Buffer.h" />
+    <ClInclude Include="Include\S3DGEngine.h" />
+    <ClInclude Include="Source\Graphics\Buffers\VertexBuffer.h" />
     <ClInclude Include="Source\Graphics\Buffers\IndexBuffer.h" />
     <ClInclude Include="Source\Graphics\Buffers\VertexArray.h" />
     <ClInclude Include="Source\Graphics\Renderables\Group.h" />
@@ -156,7 +177,10 @@
     <ClInclude Include="Source\Graphics\Shaders\ShaderProgram.h" />
     <ClInclude Include="Source\Graphics\Textures\Texture2D.h" />
     <ClInclude Include="Source\Graphics\Textures\TextureManager.h" />
-    <ClInclude Include="Source\Logic\Objects\Actor.h" />
+    <ClInclude Include="Source\Logic\Components\IComponent.h" />
+    <ClInclude Include="Source\Logic\Components\InputComponent.h" />
+    <ClInclude Include="Source\Logic\Components\PhysicsComponent.h" />
+    <ClInclude Include="Source\Logic\Components\GraphicsComponent.h" />
     <ClInclude Include="Source\Logic\Objects\BaseObject.h" />
     <ClInclude Include="Source\Logic\Objects\Camera.h" />
     <ClInclude Include="Source\Logic\Objects\Entity.h" />
@@ -179,6 +203,14 @@
     <ClInclude Include="Source\Internal\Log.h" />
     <ClInclude Include="Source\Utilities\RGN.h" />
     <ClInclude Include="Source\Utilities\Timers\Timer.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Externals\FreeType-GL\FreeType-GL.vcxproj">
+      <Project>{f41993ae-f4a2-43fb-8d76-224838fad210}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Externals\GorillaAudio\GorillaAudio.vcxproj">
+      <Project>{d3268df7-596f-4c4c-9903-09862ce57ce2}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -12,18 +12,15 @@ A parent-class for all in-game objects. Takes responsibility of assigning IDs to
 
 namespace s3dge
 {
-	namespace logic
+	class BaseObject
 	{
-		class BaseObject
-		{
-		private:
-			uint _id;
+	private:
+		uint _id;
 
-		public:
-			BaseObject();
-			virtual ~BaseObject();
+	public:
+		BaseObject();
+		virtual ~BaseObject();
 
-			inline uint GetID() const { return _id; }
-		};
-	}
+		inline uint GetID() const { return _id; }
+	};
 }

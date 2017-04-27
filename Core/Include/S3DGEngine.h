@@ -14,7 +14,7 @@ Class S3DGE must be inherited in order to build applications on the engine.
 
 namespace s3dge
 {
-	class S3DGE
+	class S3DGEngine
 	{
 	private:
 		EngineState _state;
@@ -25,8 +25,8 @@ namespace s3dge
 		uint _ups;
 
 	protected:
-		S3DGE();
-		virtual ~S3DGE();
+		S3DGEngine();
+		virtual ~S3DGEngine();
 
 	public:
 		void Run();

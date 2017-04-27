@@ -69,15 +69,13 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(SolutionDir)\!Binaries\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)\!Binaries\$(Configuration)\Intermediates\$(ProjectName)\</IntDir>
-    <LibraryPath>$(SolutionDir)\!Binaries\$(Configuration)\;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)\!bin\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)\!bin\$(Configuration)\Intermediates\$(ProjectName)\</IntDir>
     <IncludePath>$(SolutionDir)\Externals\FreeType\Include;$(SolutionDir)\Externals\GLEW\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(SolutionDir)\!Binaries\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)\!Binaries\$(Configuration)\Intermediates\$(ProjectName)\</IntDir>
-    <LibraryPath>$(SolutionDir)\!Binaries\$(Configuration)\;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)\!bin\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)\!bin\$(Configuration)\Intermediates\$(ProjectName)\</IntDir>
     <IncludePath>$(SolutionDir)\Externals\FreeType\Include;$(SolutionDir)\Externals\GLEW\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -151,6 +149,14 @@
     <ClCompile Include="Source\texture-atlas.c" />
     <ClCompile Include="Source\texture-font.c" />
     <ClCompile Include="Source\vector.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FreeType\FreeType.vcxproj">
+      <Project>{8ead06c7-03e0-40ad-a969-ceee5f30bf76}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\GLEW\GLEW.vcxproj">
+      <Project>{eba14553-ada2-4562-a038-be054e9e0305}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

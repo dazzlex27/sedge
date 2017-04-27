@@ -3,23 +3,31 @@
 Renderer2D.cpp
 
 Implements the Renderer2D class
+Set up to process up to 200,000 vertices per frame.
 ===========================================================================
 */
 
 #include "Renderer2D.h"
+#include <GL/glew.h>
+#include <freetype-gl.h>
 #include "Internal/DeleteMacros.h"
+#include "Internal/Log.h"
+#include "Graphics/Buffers/VertexArray.h"
+#include "Graphics/Buffers/VertexBuffer.h"
 #include "Graphics/Renderables/Renderable2D.h"
 #include "Graphics/Buffers/IndexBuffer.h"
 #include "Graphics/Fonts/Font.h"
+#include "Graphics/Structures/Color.h"
+#include "Graphics/Renderables/Mesh.h"
+#include "Graphics/Structures/VertexLayout.h"
 
 using namespace s3dge;
 using namespace graphics;
+using namespace ftgl;
 
-#define MAX_SPRITES	60000
-#define SPRITE_VERTEX_SIZE	sizeof(VertexData)
-#define SPRITE_SIZE	SPRITE_VERTEX_SIZE * 4
-#define SPRITE_BUFFER_SIZE	SPRITE_SIZE * MAX_SPRITES
-#define SPRITE_INDICES_SIZE	MAX_SPRITES * 6
+#define MAX_SPRITES 50000
+#define MAX_VERTICES MAX_SPRITES * 4
+#define MAX_INDICES MAX_SPRITES * 6
 	
 Renderer2D::Renderer2D()
 {			
@@ -29,37 +37,34 @@ Renderer2D::Renderer2D()
 Renderer2D::~Renderer2D()
 {
 	SafeDelete(_ibo);
-	glDeleteBuffers(1, &_vbo);
-	glDeleteVertexArrays(1, &_vao);
+	SafeDelete(_vao);
 }
 
 void Renderer2D::Initialize()
 {
-	glGenVertexArrays(1, &_vao);
-	glBindVertexArray(_vao);
+	_indexCount = 0;
 
-	glGenBuffers(1, &_vbo);
-	glBindBuffer(GL_ARRAY_BUFFER, _vbo);
+	_vao = new VertexArray();
 
-	glBufferData(GL_ARRAY_BUFFER, SPRITE_BUFFER_SIZE, NULL, GL_DYNAMIC_DRAW);
+	_vao->Bind();
+	_vbo = new VertexBuffer(sizeof(VertexData), MAX_VERTICES);
 
-	glEnableVertexAttribArray(0);
-	glEnableVertexAttribArray(1);
-	glEnableVertexAttribArray(2);
-	glEnableVertexAttribArray(3);
+	VertexLayout layout;
+	layout.AddEntry("position", 0, 3, GL_FLOAT, GL_FALSE, sizeof(VertexData), (const void*)(offsetof(VertexData, VertexData::Position)));
+	layout.AddEntry("color", 1, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(VertexData), (const void*)(offsetof(VertexData, VertexData::Color)));
+	layout.AddEntry("uv", 2, 2, GL_FLOAT, GL_FALSE, sizeof(VertexData), (const void*)(offsetof(VertexData, VertexData::UV)));
+	layout.AddEntry("textureID", 3, 1, GL_FLOAT, GL_FALSE, sizeof(VertexData), (const void*)(offsetof(VertexData, VertexData::TextureID)));
 
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, SPRITE_VERTEX_SIZE, (const void*)(offsetof(VertexData, VertexData::Vertex)));
-	glVertexAttribPointer(1, 4, GL_UNSIGNED_BYTE, GL_TRUE, SPRITE_VERTEX_SIZE, (const void*)(offsetof(VertexData, VertexData::Color)));
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, SPRITE_VERTEX_SIZE, (const void*)(offsetof(VertexData, VertexData::UV)));
-	glVertexAttribPointer(3, 1, GL_FLOAT, GL_FALSE, SPRITE_VERTEX_SIZE, (const void*)(offsetof(VertexData, VertexData::TextureID)));
+	_vbo->SetLayout(&layout);
+	_vao->Unbind();
 
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-	uint* indices = new uint[SPRITE_INDICES_SIZE];
+	_vao->AddBuffer(_vbo);
+		
+	uint* indices = new uint[MAX_INDICES];
 
 	int offset = 0;
 
-	for (int i = 0; i < SPRITE_INDICES_SIZE; i += 6)
+	for (int i = 0; i < MAX_INDICES; i += 6)
 	{
 		indices[i] = offset + 0;
 		indices[i + 1] = offset + 1;
@@ -72,75 +77,48 @@ void Renderer2D::Initialize()
 		offset += 4;
 	}
 
-	_ibo = new IndexBuffer(indices, SPRITE_INDICES_SIZE);
-
-	_indexCount = 0;
-
-	glBindVertexArray(0);
+	_ibo = new IndexBuffer(indices, MAX_INDICES);
 }
 
 void Renderer2D::Begin()
 {
-	glBindBuffer(GL_ARRAY_BUFFER, _vbo);
-	_buffer = (VertexData*)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
+	_vbo->Bind();
+	_vbo->Map();
+	_buffer = (VertexData*)_vbo->GetDataPointer();
 }
 
 void Renderer2D::Submit(const Renderable2D* renderable)
 {
-	const math::vec3f& position = renderable->GetPosition();
-	const math::vec2f& size = renderable->GetSize();
-	const uint color = renderable->GetColor();
-	const std::vector<math::vec2f> uv = renderable->GetUV();
-	const uint textureID = renderable->GetTextureID();
+	auto position = renderable->GetPosition();
+	auto size = renderable->GetSize();
+	auto color = renderable->GetColor();
+	auto uv = renderable->GetUV();
+	auto textureID = renderable->GetTextureID();
 
-	float textureSlot = 0.0f;
+	auto textureSlot = 0.0f;
 
 	if (textureID > 0)
-	{
-		bool ok = false;
-		for (uint i = 0; i < _textures.size(); ++i)
-		{
-			if (_textures[i] == textureID)
-			{
-				textureSlot = (float)(i + 1);
-				ok = true;
-				break;
-			}
-		}
+		textureSlot = GetTextureSlotByID(textureID);
 
-		if (!ok)
-		{
-			if (_textures.size() >= 32)
-			{
-				End();
-				Flush();
-				Begin();
-			}
-
-			_textures.push_back(textureID);
-			textureSlot = (float)(_textures.size());
-		}
-	}
-
-	_buffer->Vertex = position;
+	_buffer->Position = Point3D(position.x, position.y, position.z);
 	_buffer->Color = color;
 	_buffer->UV = uv[0];
 	_buffer->TextureID = textureSlot;
 	_buffer++;
 
-	_buffer->Vertex = math::vec3f(position.x, position.y + size.y, position.z);
+	_buffer->Position = Point3D(position.x, position.y + size.height, position.z);
 	_buffer->Color = color;
 	_buffer->UV = uv[1];
 	_buffer->TextureID = textureSlot;
 	_buffer++;
 
-	_buffer->Vertex = math::vec3f(position.x + size.x, position.y + size.y, position.z);
+	_buffer->Position = Point3D(position.x + size.width, position.y + size.height, position.z);
 	_buffer->Color = color;
 	_buffer->UV = uv[2];
 	_buffer->TextureID = textureSlot;
 	_buffer++;
 
-	_buffer->Vertex = math::vec3f(position.x + size.x, position.y, position.z);
+	_buffer->Position = Point3D(position.x + size.width, position.y, position.z);
 	_buffer->Color = color;
 	_buffer->UV = uv[3];
 	_buffer->TextureID = textureSlot;
@@ -149,36 +127,13 @@ void Renderer2D::Submit(const Renderable2D* renderable)
 	_indexCount += 6;
 }
 
-void Renderer2D::DrawString(const std::string& text, Font* font, const math::vec3f& position, uint color)
+void Renderer2D::DrawString(const std::string& text, Font* font, const Point3D& position, const Color& color)
 {
-	using namespace ftgl;
+	auto x = position.x;
+	auto textureSlot = 0.0f;
+	auto ok = false;
 
-	float x = position.x;
-	float textureSlot = 0.0f;
-	bool ok = false;
-
-	for (uint i = 0; i < _textures.size(); i++)
-	{
-		if (_textures[i] == font->GetAtlasID())
-		{
-			textureSlot = (float)(i + 1);
-			ok = true;
-			break;
-		}
-	}
-
-	if (!ok)
-	{
-		if (_textures.size() >= 32)
-		{
-			End();
-			Flush();
-			Begin();
-		}
-
-		_textures.push_back(font->GetAtlasID());
-		textureSlot = (float)(_textures.size());
-	}
+	textureSlot = GetTextureSlotByID(font->GetAtlasID());
 
 	const float scaleX = 40.0f;
 	const float scaleY = 40.0f;
@@ -204,26 +159,26 @@ void Renderer2D::DrawString(const std::string& text, Font* font, const math::vec
 			float u1 = glyph->s1;
 			float v1 = glyph->t1;
 
-			_buffer->Vertex = math::vec3f(x0, y0, 0);
-			_buffer->UV = math::vec2f(u0, v0);
+			_buffer->Position = Point3D(x0, y0, 0);
+			_buffer->UV = Point2D(u0, v0);
 			_buffer->TextureID = textureSlot;
 			_buffer->Color = color;
 			_buffer++;
 
-			_buffer->Vertex = math::vec3f(x0, y1, 0);
-			_buffer->UV = math::vec2f(u0, v1);
+			_buffer->Position = Point3D(x0, y1, 0);
+			_buffer->UV = Point2D(u0, v1);
 			_buffer->TextureID = textureSlot;
 			_buffer->Color = color;
 			_buffer++;
 
-			_buffer->Vertex = math::vec3f(x1, y1, 0);
-			_buffer->UV = math::vec2f(u1, v1);
+			_buffer->Position = Point3D(x1, y1, 0);
+			_buffer->UV = Point2D(u1, v1);
 			_buffer->TextureID = textureSlot;
 			_buffer->Color = color;
 			_buffer++;
 
-			_buffer->Vertex = math::vec3f(x1, y0, 0);
-			_buffer->UV = math::vec2f(u1, v0);
+			_buffer->Position = Point3D(x1, y0, 0);
+			_buffer->UV = Point2D(u1, v0);
 			_buffer->TextureID = textureSlot;
 			_buffer->Color = color;
 			_buffer++;
@@ -232,31 +187,75 @@ void Renderer2D::DrawString(const std::string& text, Font* font, const math::vec
 
 			x += glyph->advance_x / scaleX;
 		}
-
 	}
+}
+
+void Renderer2D::SubmitMesh(const Mesh* mesh)
+{
+	_meshes.push_back(mesh);
 }
 
 void Renderer2D::Flush()
 {
-	for (uint i = 0; i < _textures.size(); ++i)
+	for (uint i = 0; i < _textures.size(); i++)
 	{
 		glActiveTexture(GL_TEXTURE0 + i);
 		glBindTexture(GL_TEXTURE_2D, _textures[i]);
 	}
 
-	glBindVertexArray(_vao);
+	_vao->Bind();
 	_ibo->Bind();
 
-	glDrawElements(GL_TRIANGLES, _indexCount, GL_UNSIGNED_INT, NULL);
+	_vao->Draw(_indexCount);
 
 	_ibo->Unbind();
-	glBindVertexArray(0);
+	_vao->Unbind();
 
 	_indexCount = 0;
+
+	for (uint i = 0; i < _meshes.size(); i++)
+		_meshes[i]->Render();
 }
 
 void Renderer2D::End()
 {
-	glUnmapBuffer(GL_ARRAY_BUFFER);
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	_vbo->Unmap();
+	_vbo->Unbind();
+}
+
+float Renderer2D::GetTextureSlotByID(id textureID)
+{
+	if (textureID == 0)
+	{
+		LOG_ERROR("textureID was 0");
+		return -1.0f;
+	}
+
+	float textureSlot = 0.0f;
+
+	auto ok = false;
+	for (uint i = 0; i < _textures.size(); ++i)
+	{
+		if (_textures[i] == textureID)
+		{
+			textureSlot = (float)(i + 1);
+			ok = true;
+			break;
+		}
+	}
+
+	if (!ok)
+	{
+		if (_textures.size() >= 32)
+		{
+			End();
+			Flush();
+			Begin();
+		}
+
+		_textures.push_back(textureID);
+		textureSlot = (float)(_textures.size());
+	}
+
+	return textureSlot;
 }

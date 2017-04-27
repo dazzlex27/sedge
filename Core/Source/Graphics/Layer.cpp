@@ -11,8 +11,13 @@ Using layers is highly encouraged, event if there's only one. That helps to keep
 
 #include "Layer.h"
 #include "Internal/DeleteMacros.h"
+#include "Graphics/Renderables/Mesh.h"
+#include "Graphics/Renderables/Renderable2D.h"
+#include "Graphics/Renderers/Renderer2D.h"
+#include "Graphics/Shaders/ShaderProgram.h"
 
 using namespace s3dge;
+using namespace math;
 using namespace graphics;
 	
 //Layer::Layer()
@@ -27,7 +32,7 @@ using namespace graphics;
 
 Layer::Layer(ShaderProgram* shaderProgram)
 {
-	_transformationMatrix = math::mat4::GetIdentity();
+	_transformationMatrix = Matrix4::GetIdentity();
 	_shaderProgram = shaderProgram;
 	_renderer = new Renderer2D();
 	_ownsRenderer = true;
@@ -36,7 +41,7 @@ Layer::Layer(ShaderProgram* shaderProgram)
 
 Layer::Layer(ShaderProgram* shaderProgram, Renderer2D* renderer)
 {
-	_transformationMatrix = math::mat4::GetIdentity();
+	_transformationMatrix = Matrix4::GetIdentity();
 	_shaderProgram = shaderProgram;
 	_renderer = renderer;
 	_ownsRenderer = false;
@@ -53,12 +58,17 @@ void Layer::Add(Renderable2D* renderable)
 	_renderables.push_back(renderable);
 }
 
+void Layer::AddMesh(Mesh* mesh)
+{
+	_renderer->SubmitMesh(mesh);
+}
+
 void Layer::Render()
 {
 	_shaderProgram->Enable();
 	_renderer->Begin();
 
-	for (const Renderable2D* renderable : _renderables)
+	for (const auto renderable : _renderables)
 		renderable->Submit(_renderer);
 	
 	_renderer->End();
@@ -101,7 +111,7 @@ void Layer::SetRenderer(Renderer2D* renderer)
 	_renderer = renderer;
 }
 
-void Layer::SetTransformationMatrix(math::mat4 matrix)
+void Layer::SetTransformationMatrix(Matrix4 matrix)
 {
 	_transformationMatrix = matrix;
 }

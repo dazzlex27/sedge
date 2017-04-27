@@ -7,6 +7,7 @@ implements the 2D texture class
 */
 
 #include "Texture2D.h"
+#include <GL/glew.h>
 #include "Utilities/ImageUtils.h"
 #include "Internal/DeleteMacros.h"
 #include "Internal/Log.h"

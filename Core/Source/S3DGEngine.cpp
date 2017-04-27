@@ -6,29 +6,29 @@ Implementation of the top level engine functions.
 ===========================================================================
 */
 
-#include "../Include/S3DGE.h"
+#include "../Include/S3DGEngine.h"
 #include "Internal/Log.h"
 
 using namespace s3dge;
 using namespace graphics;
 using namespace audio;
 
-S3DGE::S3DGE()
+S3DGEngine::S3DGEngine()
 {
 	_state = EngineState::READY;
 }
 
-S3DGE::~S3DGE()
+S3DGEngine::~S3DGEngine()
 {
 }
 
-Window* S3DGE::CreateGameWindow(cstring name, uint width, uint height, bool fullscreen, bool vsync)
+Window* S3DGEngine::CreateGameWindow(cstring name, uint width, uint height, bool fullscreen, bool vsync)
 {
 	_window = new Window(name, width, height, fullscreen, vsync);
 	return _window;
 }
 
-void S3DGE::Run()
+void S3DGEngine::Run()
 {
 	LOG_INFO("Application started...");
 
@@ -50,7 +50,7 @@ void S3DGE::Run()
 	LOG_INFO("Application exited...");
 }
 
-void S3DGE::RunGameLoop()
+void S3DGEngine::RunGameLoop()
 {
 	uint updates = 0;
 	float updateTime = 0.0f;
@@ -91,13 +91,13 @@ void S3DGE::RunGameLoop()
 	}
 }
 
-void S3DGE::InitializeInternalSystems()
+void S3DGEngine::InitializeInternalSystems()
 {
 	_timer = new Timer();
 	_rng = new RNG();
 }
 
-void S3DGE::InitializeResourceManagers()
+void S3DGEngine::InitializeResourceManagers()
 {
 	GraphicsManager::Initialize();
 	FontManager::Initialize();
@@ -105,12 +105,12 @@ void S3DGE::InitializeResourceManagers()
 	SoundManager::Initialize();
 }
 
-void S3DGE::UpdateResourceManagers()
+void S3DGEngine::UpdateResourceManagers()
 {
 	SoundManager::Update();
 }
 
-void S3DGE::DisposeResourceManagers()
+void S3DGEngine::DisposeResourceManagers()
 {
 	GraphicsManager::Dispose();
 	FontManager::Dispose();
@@ -118,19 +118,19 @@ void S3DGE::DisposeResourceManagers()
 	SoundManager::Dispose();
 }
 
-void S3DGE::DisposeInternalSystems()
+void S3DGEngine::DisposeInternalSystems()
 {
 	SafeDelete(_rng);
 	SafeDelete(_timer);
 	SafeDelete(_window);
 }
 
-double S3DGE::GetNextRNG()
+double S3DGEngine::GetNextRNG()
 {
 	return _rng->Next();
 }
 
-float S3DGE::GetElapsedMS()
+float S3DGEngine::GetElapsedMS()
 {
 	return _timer->ElapsedMS();
 }

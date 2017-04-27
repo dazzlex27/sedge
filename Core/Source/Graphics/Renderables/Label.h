@@ -8,6 +8,7 @@ Represents a class designed to store text glyphs.
 
 #pragma once
 
+#include <string>
 #include "CustomTypes.h"
 #include "Renderable2D.h"
 
@@ -22,14 +23,14 @@ namespace s3dge
 		public:
 			std::string text;
 			Font* font;
-			math::vec2f position;
-			uint color;
 
-			Label(const std::string& text, Font* font, float x, float y, float width, float height, uint color);
-			~Label();
+		private:
+			Label(const std::string& text, Font* font, const Point2D& position, const Size2D& size, const Color& color = Color(0xffffffff));
 
+		public:
 			void Submit(Renderer2D* renderer) const override;
-			inline const math::vec3f GetPosition() const override { return math::vec3f(position.x, position.y, 0); }
+
+			friend class LabelFactory;
 		};
 	}
 }

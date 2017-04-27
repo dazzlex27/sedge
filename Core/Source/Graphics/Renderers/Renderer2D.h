@@ -1,43 +1,57 @@
+/*
+===========================================================================
+Renderer2D.h
+
+Declares the Renderer2D class.
+===========================================================================
+*/
+
 #pragma once
 
 #include <vector>
 #include <string>
-#include <GL/glew.h>
-#include <freetype-gl.h>
 
-#include "Graphics/GraphicsStructures.h"
+#include "Graphics/Structures/VertexData.h"
+#include "Renderer.h"
 
 namespace s3dge
 {
 	namespace graphics
 	{
+		class Mesh;
 		class Renderable2D;
+		class VertexArray;
+		class VertexBuffer;
 		class IndexBuffer;
 		class Font;
+		struct Color;
 
-		class Renderer2D
+		class Renderer2D : public Renderer
 		{
 		private:
-			uint _vao; // Vertex array object.
-			uint _vbo; // Vertex buffer object.
+			VertexArray* _vao; // Vertex array object.
+			VertexBuffer* _vbo; // Vertex buffer object.
 			IndexBuffer* _ibo; // Index buffer object.
 			int _indexCount; // The number of indices.
 			VertexData* _buffer; // Renderables container.
-			std::vector<uint> _textures; // Texture array.
+			std::vector<id> _textures; // Texture array.
+			std::vector<const Mesh*> _meshes;
 
 		public:
 			Renderer2D();	
 			~Renderer2D();
 
-			void Begin();
-			void Submit(const Renderable2D* renderable);
-			void Flush(); // OpenGL drawcall. 
-			void End();
+			virtual void Begin() override;
+			virtual void Submit(const Renderable2D* renderable);
+			virtual void SubmitMesh(const Mesh* mesh) override;
+			virtual void Flush() override; // OpenGL drawcall. 
+			virtual void End() override;
 
-			void DrawString(const std::string& text, Font* font, const math::vec3f& position, uint color);
+			void DrawString(const std::string& text, Font* font, const Point3D& position, const Color& color);
 
 		private:
 			void Initialize();
+			float GetTextureSlotByID(id textureID);
 		};
 	}
 }

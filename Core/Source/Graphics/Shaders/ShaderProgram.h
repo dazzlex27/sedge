@@ -1,12 +1,10 @@
 #pragma once
 
-#include <GL/glew.h>
+#include "CustomTypes.h"
 #include "Math/Vector2.h"
 #include "Math/Vector3.h"
 #include "Math/Vector4.h"
 #include "Math/Matrix4.h"
-#include "CustomTypes.h"
-#include "Utilities/FileUtils.h"
 
 namespace s3dge
 {
@@ -34,15 +32,15 @@ namespace s3dge
 			void Enable();
 			void Disable();
 
-			void SetUniformMat4fv(cstring name, const math::mat4& matrix);
+			void SetUniformMat4fv(cstring name, const math::Matrix4& matrix);
 			void SetUniform1f(cstring name, float value);
-			void SetUniform2f(cstring name, math::vec2f value);
-			void SetUniform3f(cstring name, math::vec3f value);
-			void SetUniform4f(cstring name, math::vec4f value);
+			void SetUniform2f(cstring name, const math::Vector2& value);
+			void SetUniform3f(cstring name, const math::Vector3& value);
+			void SetUniform4f(cstring name, const math::Vector4& value);
 			void SetUniform1i(cstring name, int value);
 			void SetUniform1iv(cstring name, int count, int* value);
 
-			void SetProjection(math::mat4 ortho);
+			void SetProjection(math::Matrix4 projectionMatrix);
 
 		private:
 			uint Load();
