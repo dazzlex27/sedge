@@ -12,7 +12,11 @@ void Application::Initialize()
 	_shaderScene = new ShaderProgram("Resources\\basic.vs", "Resources\\basic.fs");
 	_shaderHUD = new ShaderProgram("Resources\\basic.vs", "Resources\\basic.fs");
 	
-	_shaderScene->SetProjection(Matrix4::GetPerspective(90.0f, 1.66f, -1.0f, 10.0f));
+	_camera = new Camera();
+	Matrix4 projection = _camera->GetWorldToViewMatrix();
+
+	_shaderScene->SetProjection(projection);
+	//_shaderScene->SetProjection(Matrix4::GetPerspective(90.0f, 1.66f, -1.0f, 10.0f));
 	//_shaderScene->SetProjection(Matrix4::GetOrthographic(0.0f, 16.0f, 0.0f, 9.0f, -1.0f, 1000.0f));
 	_shaderHUD->SetProjection(Matrix4::GetOrthographic(0.0f, 16.0f, 0.0f, 9.0f, -1.0f, 10.0f));
 	
@@ -34,9 +38,9 @@ void Application::Initialize()
 	vertexData[0].Color = Color(0xff00ffff);
 	vertexData[1].Position = Point3D(1, 0, 0);
 	vertexData[1].Color = Color(0xffff00ff);
-	vertexData[2].Position = Point3D(1, 3, 2);
+	vertexData[2].Position = Point3D(0, 1, 0);
 	vertexData[2].Color = Color(0xffffff00);
-	vertexData[3].Position = Point3D(5, 2, 2);
+	vertexData[3].Position = Point3D(1, 1, 0);
 	vertexData[3].Color = Color(0xf0fffff0);
 
 	VertexBuffer* vbo = new VertexBuffer(vertexData, sizeof(VertexData), 4);
@@ -71,14 +75,31 @@ void Application::UpdateInput()
 
 	GraphicsManager::GetLabel("fps")->text = std::to_string(GetFPS()) + " fps";
 
+	Point3D cameraPosition = _camera->GetPosition();
+
 	if (_window->KeyDown(S3_KEY_LEFT))
+		cameraPosition.x -= speed;
+	if (_window->KeyDown(S3_KEY_RIGHT))
+		cameraPosition.x += speed;
+	if (_window->KeyDown(S3_KEY_DOWN))
+		cameraPosition.y -= speed;
+	if (_window->KeyDown(S3_KEY_UP))
+		cameraPosition.y += speed;
+
+
+
+	_camera->SetPosition(cameraPosition);
+	Matrix4 projection = _camera->GetWorldToViewMatrix();
+	_shaderScene->SetProjection(projection);
+
+	/*if (_window->KeyDown(S3_KEY_LEFT))
 		GraphicsManager::GetSprite("rect")->position.x -= speed;
 	if (_window->KeyDown(S3_KEY_RIGHT))
 		GraphicsManager::GetSprite("rect")->position.x += speed;
 	if (_window->KeyDown(S3_KEY_UP))
 		GraphicsManager::GetSprite("rect")->position.y += speed;
 	if (_window->KeyDown(S3_KEY_DOWN))
-		GraphicsManager::GetSprite("rect")->position.y -= speed;
+		GraphicsManager::GetSprite("rect")->position.y -= speed;*/
 	if (_window->KeyDown(S3_KEY_Q))
 		GraphicsManager::GetSprite("rect")->position.z -= speed;
 	if (_window->KeyDown(S3_KEY_E))
@@ -105,6 +126,7 @@ void Application::Dispose()
 	SafeDelete(_hudLayer);
 	SafeDelete(_sceneLayer);
 	SafeDelete(_shaderHUD);
+	SafeDelete(_camera);
 }
 
 void LoadManySprites(Layer* layer)

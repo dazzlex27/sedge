@@ -275,7 +275,9 @@ Matrix4 Matrix4::GetPerspective(float fov, float aspectRatio, float near, float 
 
 Matrix4 Matrix4::GetLookAt(const Vector3& eye, const Vector3& center, const Vector3& up)
 {
-	Vector3 f((eye - center).Normalize());
+	Vector3 ec = eye - center;
+
+	Vector3 f(ec.Normalize());
 	Vector3 u(Vector3(up).Normalize());
 	Vector3 s(Vector3::GetCrossProduct(f, u).Normalize());
 	u = Vector3::GetCrossProduct(s, f);
