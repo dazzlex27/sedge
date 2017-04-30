@@ -12,62 +12,86 @@ using namespace s3dge;
 using namespace math;
 
 Camera::Camera()
+	: _fov(90.0f),
+	_aspectRatio(16.0f / 9.0f),
+	_near(-1.0f),
+	_far(10.0f),
+	_viewDirection(Vector3(0, 0, 1)),
+	_up(Vector3(0, 1, 0))
 {
-	rotation = Vector3(0, 0, 0);
-	_fov = 45.0f;
-	_aspectRatio = 16 / 9.0f;
-	_near = 0.1f;
-	_far = 100.0f;
-	_lookAt = Vector3(0, 0, 0);
+	UpdatePerspective();
+}
+
+Camera::Camera(float fov, float aspectRatio, float near, float far, const Vector3& viewDirection, const Vector3& up)
+	: _fov(fov),
+	_aspectRatio(aspectRatio),
+	_near(near),
+	_far(far),
+	_viewDirection(viewDirection),
+	_up(up)
+{
+	UpdatePerspective();
 }
 
 Camera::~Camera()
+{
+}
+
+void Camera::UpdatePerspective()
+{
+	_projection = Matrix4::GetPerspective(_fov, _aspectRatio, _near, _far);
+}
+
+void Camera::SetPosition(const Point3D& position)
+{
+	Position = Vector3(position);
+	UpdatePerspective();
+}
+
+void Camera::SetViewDirection(const Vector3& viewDirection)
+{
+	_viewDirection = viewDirection;
+	UpdatePerspective();
+}
+
+void Camera::SetFOV(float fov)
+{
+	_fov = fov;
+	UpdatePerspective();
+}
+
+void Camera::SetAspectRatio(float aspectRatio)
+{
+	_aspectRatio = aspectRatio;
+	UpdatePerspective();
+}
+
+void Camera::SetNear(float near)
+{
+	_near = near;
+	UpdatePerspective();
+}
+
+void Camera::SetFar(float far)
+{
+	_far = far;
+	UpdatePerspective();
+}
+
+void Camera::Render()
 {
 
 }
 
 void Camera::Update()
 {
-	projection = Matrix4::GetPerspective(_fov, _aspectRatio, _near, _far);
 }
 
-void Camera::SetPosition(const Vector3& position)
+Matrix4 Camera::GetWorldToViewMatrix()
 {
-	// TODO
-	Update();
-}
+	Matrix4 lookAt = Matrix4::GetLookAt(Position, _viewDirection, _up);
 
-void Camera::SetViewDirection(const Vector3& lookAt)
-{
-	_lookAt = lookAt;
-	Update();
-}
+	Matrix4 m = _projection.Multiply(lookAt);
 
-void Camera::SetFOV(float fov)
-{
-	_fov = fov;
-	Update();
-}
-
-void Camera::SetAspectRatio(float aspectRatio)
-{
-	_aspectRatio = aspectRatio;
-	Update();
-}
-
-void Camera::SetNear(float near)
-{
-	_near = near;
-	Update();
-}
-
-void Camera::SetFar(float far)
-{
-	_far = far;
-	Update();
-}
-
-Matrix4 Camera::GetTransformation() const
-{
-	return Matrix4::GetIdentity();
+	return m;
 }

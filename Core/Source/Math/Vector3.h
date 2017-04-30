@@ -10,6 +10,8 @@ Implements a 3-component vector class
 
 namespace s3dge
 {
+	struct Point3D;
+
 	namespace math
 	{
 		struct Vector3
@@ -19,6 +21,7 @@ namespace s3dge
 			float z;
 
 			Vector3();
+			Vector3(const Point3D& point3d);
 			Vector3(float x, float y, float z);
 			Vector3(const Vector3& other);
 

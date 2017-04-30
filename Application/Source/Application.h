@@ -10,6 +10,7 @@ private:
 	s3dge::graphics::Layer* _hudLayer;
 	s3dge::graphics::ShaderProgram* _shaderScene;
 	s3dge::graphics::ShaderProgram* _shaderHUD;
+	s3dge::Camera* _camera;
 
 public:
 	void Initialize() override;

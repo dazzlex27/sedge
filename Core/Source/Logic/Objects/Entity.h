@@ -19,13 +19,16 @@ namespace s3dge
 	class Entity : public BaseObject
 	{
 	protected:
-		Point3D position;
-		math::Matrix4 projection;
-		math::Vector3 rotation;
-		math::Vector3 scale;
+		math::Vector3 Position;
+		math::Vector3 Scale;
+		math::Vector3 Rotation;
 
 	public:
-		Entity() { scale = math::Vector3(1, 1, 1); }
+		Entity() 
+		{
+			Position = math::Vector3(0, 0, 0);
+			Scale = math::Vector3(1, 1, 1); 
+		}
 		~Entity() {}
 
 	public:
@@ -36,6 +39,11 @@ namespace s3dge
 
 		virtual void Update() = 0;
 		virtual void Render() = 0;
+
+		inline Point3D GetPosition() const { return Position; }
+
+		virtual void SetPosition(const Point3D& position) { Position = math::Vector3(position); }
+		virtual void SetScale(const math::Vector3& scale) { Scale = scale; }
 
 	private:
 		Entity(const Entity& tRef) = delete;				// Disable copy constructor.
