@@ -40,7 +40,8 @@ namespace s3dge
 			void SetUniform1i(cstring name, int value);
 			void SetUniform1iv(cstring name, int count, int* value);
 
-			void SetProjection(math::Matrix4 projectionMatrix);
+			void SetProjection(const math::Matrix4& projectionMatrix);
+			void SetView(const math::Matrix4& viewMatrix);
 
 		private:
 			uint Load();

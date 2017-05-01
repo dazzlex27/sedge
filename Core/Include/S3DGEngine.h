@@ -18,7 +18,6 @@ namespace s3dge
 	{
 	private:
 		EngineState _state;
-		graphics::Window* _window;
 		Timer* _timer;
 		RNG* _rng;
 		uint _fps;
@@ -27,6 +26,7 @@ namespace s3dge
 	protected:
 		S3DGEngine();
 		virtual ~S3DGEngine();
+		graphics::Window* WindowInstance;
 
 	public:
 		void Run();
@@ -34,7 +34,7 @@ namespace s3dge
 		inline EngineState GetEngineState() const { return _state; }
 
 	protected:
-		graphics::Window* CreateGameWindow(cstring name, uint width, uint height, bool fullscreen = false, bool vsync = true);
+		void CreateGameWindow(cstring name, uint width, uint height, bool fullscreen = false, bool vsync = true);
 		double GetNextRNG();
 		float GetElapsedMS();
 

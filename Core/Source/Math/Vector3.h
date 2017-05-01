@@ -36,17 +36,23 @@ namespace s3dge
 			Vector3& operator*=(const Vector3& other);
 			Vector3& operator*=(float value);
 			Vector3& operator/=(const Vector3& other);
-			Vector3 operator+(const Vector3& v2);
-			Vector3 operator-(const Vector3& v2);
-			Vector3 operator*(const Vector3& v2);
-			Vector3 operator/(const Vector3& v2);
 
 			friend Vector3 operator+(const Vector3& v1, const Vector3& v2);
 			friend Vector3 operator-(const Vector3& v1, const Vector3& v2);
 			friend Vector3 operator*(const Vector3& v1, const Vector3& v2);
 			friend Vector3 operator/(const Vector3& v1, const Vector3& v2);
 
-			Vector3& Normalize();
+			friend Vector3 operator+(const Vector3& v, float value);
+			friend Vector3 operator-(const Vector3& v, float value);
+			friend Vector3 operator*(const Vector3& v, float value);
+			friend Vector3 operator/(const Vector3& v, float value);
+
+			friend Vector3 operator+(float value, const Vector3& v);
+			friend Vector3 operator-(float value, const Vector3& v);
+			friend Vector3 operator*(float value, const Vector3& v);
+			friend Vector3 operator/(float value, const Vector3& v);
+
+			static Vector3 Normalize(const Vector3& vector);
 			float GetDistance(const Vector3& v) const;
 			float GetLength() const;
 			static float GetDotProduct(const Vector3& v1, const Vector3& v2);

@@ -13,6 +13,7 @@ Main Win32 implementation file.
 #include "Internal/Log.h"
 #include "Graphics/Window.h"
 #include "Win32InputKeys.h"
+#include "Utilities/Timers/Timer.h"
 
 namespace s3dge
 {
@@ -194,12 +195,6 @@ namespace s3dge
 		// Window update implementation
 		void Window::Update()
 		{
-			POINT mousePosition;
-			GetCursorPos(&mousePosition);
-			ScreenToClient(window, &mousePosition);
-			_mousePosition.x = (float)mousePosition.x;
-			_mousePosition.y = (float)mousePosition.y;
-
 			MSG messages;
 			while (PeekMessage(&messages, NULL, 0, 0, PM_REMOVE))
 			{
@@ -211,6 +206,36 @@ namespace s3dge
 			}
 
 			SwapBuffers(deviceContext);
+		}
+
+		// Triggers once every 1/60 of a second.
+		// Resets all click and double-click states.
+		// Also resets mouse wheel rotation state
+		void Window::UpdateInputState()
+		{
+			POINT mousePosition;
+			GetCursorPos(&mousePosition);
+
+			ScreenToClient(window, &mousePosition);
+
+			_mousePosition.x = (float)mousePosition.x;
+			_mousePosition.y = (float)mousePosition.y;
+
+			SetCursor(NULL);
+
+			if (_buttonsDown[S3_KEY_MWUP])
+				_buttonsDown[S3_KEY_MWUP] = false;
+			if (_buttonsDown[S3_KEY_MWDOWN])
+				_buttonsDown[S3_KEY_MWDOWN] = false;
+
+			memset(&_keysClicked, 0, sizeof(_keysClicked));
+			memset(&_buttonsClicked, 0, sizeof(_buttonsClicked));
+			for (int i = 0; i < MAX_BUTTONS; ++i)
+				if (_doubleClickTimers[i]->IsRunning())
+					if (_doubleClickTimers[i]->ElapsedS() > _elapsedDoubleClickThreshold)
+						_doubleClickTimers[i]->Stop();
+
+			memset(&_buttonsDoubleClicked, 0, sizeof(_buttonsDoubleClicked));
 		}
 
 		// Window clear implementation

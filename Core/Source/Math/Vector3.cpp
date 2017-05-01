@@ -103,26 +103,6 @@ Vector3& Vector3::operator/=(const Vector3& other)
 	return this->Divide(other);
 }
 
-Vector3 Vector3::operator+(const Vector3& v2)
-{
-	return this->Add(v2);
-}
-
-Vector3 Vector3::operator-(const Vector3& v2)
-{
-	return this->Subtract(v2);
-}
-
-Vector3 Vector3::operator*(const Vector3& v2)
-{
-	return this->Multiply(v2);
-}
-
-Vector3 Vector3::operator/(const Vector3& v2)
-{
-	return this->Divide(v2);
-}
-
 Vector3 s3dge::math::operator+(const Vector3& v1, const Vector3& v2)
 {
 	return Vector3(v1.x + v2.x, v1.y + v2.y, v1.z + v2.z);
@@ -143,16 +123,58 @@ Vector3 s3dge::math::operator/(const Vector3& v1, const Vector3& v2)
 	return Vector3(v1.x / v2.x, v1.y / v2.y, v1.z / v2.z);
 }
 
-Vector3& Vector3::Normalize()
+Vector3 s3dge::math::operator+(const Vector3& v, float value)
 {
-	if (GetLength() != 0)
+	return Vector3(v.x + value, v.y + value, v.z + value);
+}
+
+Vector3 s3dge::math::operator-(const Vector3& v, float value)
+{
+	return Vector3(v.x - value, v.y - value, v.z - value);
+}
+
+Vector3 s3dge::math::operator*(const Vector3& v, float value)
+{
+	return Vector3(v.x * value, v.y * value, v.z * value);
+}
+
+Vector3 s3dge::math::operator/(const Vector3& v, float value)
+{
+	return Vector3(v.x / value, v.y / value, v.z / value);
+}
+
+Vector3 s3dge::math::operator+(float value, const Vector3& v)
+{
+	return Vector3(v.x + value, v.y + value, v.z + value);
+}
+
+Vector3 s3dge::math::operator-(float value, const Vector3& v)
+{
+	return Vector3(v.x - value, v.y - value, v.z - value);
+}
+
+Vector3 s3dge::math::operator*(float value, const Vector3& v)
+{
+	return Vector3(v.x * value, v.y * value, v.z * value);
+}
+
+Vector3 s3dge::math::operator/(float value, const Vector3& v)
+{
+	return Vector3(v.x / value, v.y / value, v.z / value);
+}
+
+Vector3 Vector3::Normalize(const Vector3& vector)
+{
+	Vector3 result(vector);
+
+	if (result.GetLength() != 0)
 	{
-		x /= GetLength();
-		y /= GetLength();
-		z /= GetLength();
+		result.x /= result.GetLength();
+		result.y /= result.GetLength();
+		result.z /= result.GetLength();
 	}
 
-	return *this;
+	return result;
 }
 
 float Vector3::GetDistance(const Vector3& v) const

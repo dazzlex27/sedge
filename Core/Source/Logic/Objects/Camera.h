@@ -7,13 +7,16 @@ Defines a class for in-game cameras.
 */
 
 #pragma once
-
-#include "Math/Vector3.h"
-#include "Math/Matrix4.h"
+#include "../Source/Math/Vector3.h"
 #include "Entity.h"
 
 namespace s3dge
 {
+	namespace math
+	{
+		struct Matrix4;
+	}
+
 	class Camera : public Entity
 	{
 	private:
@@ -22,6 +25,7 @@ namespace s3dge
 		float _near;
 		float _far;
 		math::Matrix4 _projection;
+		math::Matrix4 _view;
 		math::Vector3 _viewDirection;
 		math::Vector3 _up;
 
@@ -43,12 +47,16 @@ namespace s3dge
 		void SetFar(float far);
 		void SetViewDirection(const math::Vector3& viewDirection);
 		virtual void SetPosition(const Point3D& position) override;
-		math::Matrix4 GetWorldToViewMatrix();
+		void SetUp(const math::Vector3& up);
+
+		math::Matrix4 GetProjection();
+		math::Matrix4 GetView();
 
 		void Render() override;
 		void Update() override;
 
 	private:
 		void UpdatePerspective();
+		void UpdateView();
 	};
 }

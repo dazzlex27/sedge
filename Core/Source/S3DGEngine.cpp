@@ -22,10 +22,10 @@ S3DGEngine::~S3DGEngine()
 {
 }
 
-Window* S3DGEngine::CreateGameWindow(cstring name, uint width, uint height, bool fullscreen, bool vsync)
+void S3DGEngine::CreateGameWindow(cstring name, uint width, uint height, bool fullscreen, bool vsync)
 {
-	_window = new Window(name, width, height, fullscreen, vsync);
-	return _window;
+	if (!WindowInstance)
+		WindowInstance = new Window(name, width, height, fullscreen, vsync);
 }
 
 void S3DGEngine::Run()
@@ -59,15 +59,15 @@ void S3DGEngine::RunGameLoop()
 	_timer->Start();
 
 	// The actual game loop.
-	while (!_window->IsClosed())
+	while (!WindowInstance->IsClosed())
 	{
-		_window->Clear();
+		WindowInstance->Clear();
 
 		// Update input and managers.
 		if (_timer->ElapsedS() - updateTime > (1.0f / 60.0f))
 		{
 			UpdateInput();
-			_window->UpdateInputState();
+			WindowInstance->UpdateInputState();
 			UpdateResourceManagers();
 			++updates;
 			updateTime += 1.0f / 60.0f;
@@ -77,7 +77,7 @@ void S3DGEngine::RunGameLoop()
 
 		++frames;
 
-		_window->Update();
+		WindowInstance->Update();
 
 		// Update service information.
 		if (_timer->ElapsedS() - renderTime > 1.0f)
@@ -122,7 +122,7 @@ void S3DGEngine::DisposeInternalSystems()
 {
 	SafeDelete(_rng);
 	SafeDelete(_timer);
-	SafeDelete(_window);
+	SafeDelete(WindowInstance);
 }
 
 double S3DGEngine::GetNextRNG()

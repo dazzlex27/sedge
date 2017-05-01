@@ -73,26 +73,6 @@ void Window::Dispose()
 		SafeDelete(_doubleClickTimers[i]);
 }
 
-// Triggers once every 1/60 of a second.
-// Resets all click and double-click states.
-// Also resets mouse wheel rotation state
-void Window::UpdateInputState()
-{
-	if (_buttonsDown[S3_KEY_MWUP])
-		_buttonsDown[S3_KEY_MWUP] = false;
-	if (_buttonsDown[S3_KEY_MWDOWN])
-		_buttonsDown[S3_KEY_MWDOWN] = false;
-
-	memset(&_keysClicked, 0, sizeof(_keysClicked));
-	memset(&_buttonsClicked, 0, sizeof(_buttonsClicked));
-	for (int i = 0; i < MAX_BUTTONS; ++i)
-		if (_doubleClickTimers[i]->IsRunning())
-			if (_doubleClickTimers[i]->ElapsedS() > _elapsedDoubleClickThreshold)
-				_doubleClickTimers[i]->Stop();
-
-	memset(&_buttonsDoubleClicked, 0, sizeof(_buttonsDoubleClicked));
-}
-
 bool Window::KeyDown(uint key) const
 {
 	return _keysDown[key];

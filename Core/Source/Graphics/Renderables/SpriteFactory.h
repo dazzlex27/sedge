@@ -26,8 +26,8 @@ namespace s3dge
 		class SpriteFactory
 		{
 		public:
-			static Sprite* CreateSprite(const Point2D& position, const Size2D& size, Texture2D* texture);
-			static Sprite* CreateSprite(const Point2D& position, const Size2D& size, const Color& color = 0xffffffff);
+			static Sprite* CreateSprite(const Point2D& position, float zIndex, const Size2D& size, Texture2D* texture);
+			static Sprite* CreateSprite(const Point2D& position, float zIndex, const Size2D& size, const Color& color = 0xffffffff);
 		};
 	}
 }

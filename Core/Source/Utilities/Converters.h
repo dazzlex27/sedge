@@ -34,4 +34,14 @@ namespace s3dge
 		
 		return result;
 	}
+
+	inline float DegToRad(float degrees)
+	{
+		return degrees * 3.14159265f / 180.0f;
+	}
+
+	inline float RadToDeg(float radians)
+	{
+		return radians / 3.14159265f * 180.0f;
+	}
 }

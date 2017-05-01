@@ -24,7 +24,7 @@ Row Major:
 
 #pragma once
 
-#include <string>
+#include "CustomTypes.h"
 
 namespace s3dge
 {
@@ -38,13 +38,15 @@ namespace s3dge
 
 			Matrix4();
 			Matrix4(float value);
+			Matrix4(const Matrix4& ref);
 
 			Matrix4 Multiply(const Matrix4& other);
 
 			Matrix4& Invert();
 
-			Matrix4 operator*(const Matrix4& matrix);
 			Matrix4& operator*=(const Matrix4& other);
+
+			friend Matrix4 operator*(const Matrix4& left, const Matrix4& right);
 
 			/*
 			=============================================
@@ -106,10 +108,13 @@ namespace s3dge
 			/*
 			Returns a perspective matrix with the specified settings
 			Looks like this:
-			2n/(r-l)	0			(r+l)/(r-l)		0
-			0			2n(t-b)		(t+b)/(t-b)		0
-			0			0			-(f+n)/(f-n)	-2fn(f-n)/(f-n)
-			0			0			-1				0
+			uh = Cot( fov/2 ) == 1/Tan(fov/2)
+			uw / uh = 1/aspect
+			 
+			uw        0       0       0
+			0		  uh      0       0
+			0         0      f/(f-n)  1
+			0         0    -fn/(f-n)  0
 			*/
 			static Matrix4 GetPerspective(float fov, float aspectRatio, float near, float far);
 
@@ -126,7 +131,7 @@ namespace s3dge
 			*/
 			static Matrix4 GetLookAt(const Vector3& eye, const Vector3& center, const Vector3& up);
 
-			std::string Print();
+			cstring Print();
 		};
 	}
 }

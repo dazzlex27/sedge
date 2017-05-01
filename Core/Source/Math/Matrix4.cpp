@@ -1,7 +1,9 @@
 #define _USE_MATH_DEFINES
+#include <string>
 #include "Matrix4.h"
 #include "Vector3.h"
 #include "Internal/Log.h"
+#include "Utilities/Converters.h"
 
 using namespace s3dge;
 using namespace math;
@@ -21,6 +23,12 @@ Matrix4::Matrix4(float value)
 	data[4 * 1 + 1] = value;
 	data[4 * 2 + 2] = value;
 	data[4 * 3 + 3] = value;
+}
+
+Matrix4::Matrix4(const Matrix4& ref)
+{
+	for (int i = 0; i < 16; i++)
+		data[i] = ref.data[i];
 }
 
 Matrix4 Matrix4::Multiply(const Matrix4& other)
@@ -170,15 +178,16 @@ Matrix4& Matrix4::Invert()
 	return *this;
 }
 
-Matrix4 Matrix4::operator*(const Matrix4& matrix)
-{
-	return this->Multiply(matrix);
-}
-
 Matrix4& Matrix4::operator*=(const Matrix4& other)
 {
 	*this = this->Multiply(other);
 	return *this;
+}
+
+Matrix4 s3dge::math::operator*(const Matrix4& left, const Matrix4& right)
+{
+	Matrix4 result(left);
+	return result.Multiply(right);
 }
 
 Matrix4 Matrix4::Translate(const Vector3& vector)
@@ -253,33 +262,64 @@ Matrix4 Matrix4::GetOrthographic(float left, float right, float bottom, float to
 	return result;
 }
 
-inline static float ToRadians(float degrees)
-{
-	return (float)(degrees * (3.14 / 180.0f));
-}
+//Matrix4 Matrix4::GetPerspective(float fov, float aspectRatio, float near, float far)
+//{
+//	Matrix4 result = Matrix4::GetIdentity();
+//
+//	float tanHalfFOV = tanf(DegToRad(fov / 2.0f));
+//
+//	result.data[4 * 0 + 0] = 1.0f / (tanHalfFOV * aspectRatio);
+//	result.data[4 * 1 + 1] = 1.0f / tanHalfFOV;
+//	result.data[4 * 2 + 2] = (-near - far) / (near - far);
+//	result.data[4 * 2 + 3] = 2.0f * far * near / (near - far);
+//	result.data[4 * 3 + 2] = -1.0f;
+//
+//	return result;
+//}
 
-Matrix4 Matrix4::GetPerspective(float fov, float aspectRatio, float near, float far)
+Matrix4 Matrix4::GetPerspective( float fov, float aspect, float nearDist, float farDist)
 {
 	Matrix4 result = Matrix4::GetIdentity();
+	bool leftHanded = true;
+	//
+	// General form of the Projection Matrix
+	//
+	// uh = Cot( fov/2 ) == 1/Tan(fov/2)
+	// uw / uh = 1/aspect
+	// 
+	//   uw         0       0       0
+	//    0        uh       0       0
+	//    0         0      f/(f-n)  1
+	//    0         0    -fn/(f-n)  0
+	//
+	// Make result to be identity first
 
-	float tanHalfFOV = tanf(ToRadians(fov / 2.0f));
+	// check for bad parameters to avoid divide by zero:
+	// if found, assert and return an identity matrix.
+	/*if (fov <= 0 || aspect == 0)
+	{
+		assert(fov > 0 && aspect != 0);
+		return;
+	}*/
 
-	result.data[4 * 0 + 0] = 1.0f / (tanHalfFOV * aspectRatio);
-	result.data[4 * 1 + 1] = 1.0f / tanHalfFOV;
-	result.data[4 * 2 + 2] = (-near - far) / (near - far);
-	result.data[4 * 2 + 3] = 2.0f * far * near / (near - far);
-	//result.data[4 * 3 + 2] = -1.0f;
+	float frustumDepth = farDist - nearDist;
+	float oneOverDepth = 1 / frustumDepth;
+
+	result.data[1 * 4 + 1] = 1 / tan(0.5f * fov);
+	result.data[0 * 4 + 0] = (leftHanded ? 1 : -1) * result.data[1 * 4  + 1] / aspect;
+	result.data[2 * 4 + 2] = farDist * oneOverDepth;
+	result.data[3 * 4 + 2] = (-farDist * nearDist) * oneOverDepth;
+	result.data[2 * 4 + 3] = 1;
+	result.data[3 * 4 + 3] = 0;
 
 	return result;
 }
 
 Matrix4 Matrix4::GetLookAt(const Vector3& eye, const Vector3& center, const Vector3& up)
 {
-	Vector3 ec = eye - center;
-
-	Vector3 f(ec.Normalize());
-	Vector3 u(Vector3(up).Normalize());
-	Vector3 s(Vector3::GetCrossProduct(f, u).Normalize());
+	Vector3 f(Vector3::Normalize(center - eye));
+	Vector3 u(Vector3::Normalize(up));
+	Vector3 s(Vector3::Normalize(Vector3::GetCrossProduct(f, u)));
 	u = Vector3::GetCrossProduct(s, f);
 
 	Matrix4 result(1);
@@ -300,12 +340,12 @@ Matrix4 Matrix4::GetLookAt(const Vector3& eye, const Vector3& center, const Vect
 
 }
 
-std::string Matrix4::Print()
+cstring Matrix4::Print()
 {
 	std::string result;
 
 	for (int i = 0; i < 16; i++)
 		result += data[i] + i == 15 ? "" : " ";
 
-	return result;
+	return result.c_str();
 }

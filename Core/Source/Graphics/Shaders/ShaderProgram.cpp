@@ -91,10 +91,16 @@ bool ShaderProgram::Compile(int shader)
 	return true;
 }
 
-void ShaderProgram::SetProjection(Matrix4 matrix)
+void ShaderProgram::SetProjection(const Matrix4& matrix)
 {
 	this->Enable();
 	this->SetUniformMat4fv("pr_matrix", matrix);
+}
+
+void ShaderProgram::SetView(const Matrix4& matrix)
+{
+	this->Enable();
+	this->SetUniformMat4fv("vw_matrix", matrix);
 }
 
 void ShaderProgram::Enable()
