@@ -4,8 +4,8 @@
 #include "Graphics/Buffers/IndexBuffer.h"
 #include "Graphics/Structures/VertexData.h"
 #include "Internal/Log.h"
-#include "Common/Structures/Point3D.h"
-#include "Common/Structures/Size3D.h"
+#include "Math/Point3D.h"
+#include "Math/Size3D.h"
 #include "Internal/DeleteMacros.h"
 
 using namespace s3dge;

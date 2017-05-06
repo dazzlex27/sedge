@@ -16,7 +16,7 @@ Camera::Camera()
 	_aspectRatio(16.0f / 9.0f),
 	_near(0.1f),
 	_far(100.0f),
-	_viewDirection(Vector3(0, 0, 1)),
+	_viewDirection(Vector3(0, 0, -1)),
 	_up(Vector3(0, 1, 0))
 {
 	UpdatePerspective();

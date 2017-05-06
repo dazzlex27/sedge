@@ -7,7 +7,7 @@ Implements a 3-component vector class
 */
 
 #include "Vector3.h"
-#include "Common/Structures/Point3D.h"
+#include "Math/Point3D.h"
 #include <cmath>
 
 using namespace s3dge;

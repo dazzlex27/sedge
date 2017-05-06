@@ -16,5 +16,6 @@ Image loading relies on the stb_image library by Sean T. Barrett.
 // image loading via stb_image. Supports *.bmp, *.png and whatnot. Haven't tested anything else.
 byte* LoadImage(cstring path, int* width, int* height, int* components)
 {
+	stbi_set_flip_vertically_on_load(1);
 	return stbi_load(path, width, height, components, 0);
 }

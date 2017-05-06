@@ -10,9 +10,9 @@ Base class for all 2D renderable objects.
 
 #include <vector>
 #include "Graphics/Structures/Color.h"
-#include "Common/Structures/Point2D.h"
-#include "Common/Structures/Point3D.h"
-#include "Common/Structures/Size2D.h"
+#include "Math/Point2D.h"
+#include "Math/Point3D.h"
+#include "Math/Size2D.h"
 #include "Graphics/Textures/Texture2D.h"
 
 namespace s3dge

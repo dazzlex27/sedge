@@ -10,7 +10,7 @@ Represents a game entity.
 
 #include "../Components/IComponent.h"
 #include "BaseObject.h"
-#include "Common/Structures/Point3D.h"
+#include "Math/Point3D.h"
 #include "Math/Matrix4.h"
 #include "Math/Vector3.h"
 

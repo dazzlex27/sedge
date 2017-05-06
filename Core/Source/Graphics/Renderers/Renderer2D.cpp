@@ -100,25 +100,25 @@ void Renderer2D::Submit(const Renderable2D* renderable)
 	if (textureID > 0)
 		textureSlot = GetTextureSlotByID(textureID);
 
-	_buffer->Position = Point3D(position.x, position.y, position.z);
+	_buffer->Position = Point3D(position.x, position.y - size.height, position.z);
 	_buffer->Color = color;
 	_buffer->UV = uv[0];
 	_buffer->TextureID = textureSlot;
 	_buffer++;
 
-	_buffer->Position = Point3D(position.x, position.y + size.height, position.z);
+	_buffer->Position = Point3D(position.x, position.y, position.z);
 	_buffer->Color = color;
 	_buffer->UV = uv[1];
 	_buffer->TextureID = textureSlot;
 	_buffer++;
-
-	_buffer->Position = Point3D(position.x + size.width, position.y + size.height, position.z);
+	
+	_buffer->Position = Point3D(position.x + size.width, position.y, position.z);
 	_buffer->Color = color;
 	_buffer->UV = uv[2];
 	_buffer->TextureID = textureSlot;
 	_buffer++;
 
-	_buffer->Position = Point3D(position.x + size.width, position.y, position.z);
+	_buffer->Position = Point3D(position.x + size.width, position.y - size.height, position.z);
 	_buffer->Color = color;
 	_buffer->UV = uv[3];
 	_buffer->TextureID = textureSlot;
@@ -159,26 +159,26 @@ void Renderer2D::DrawString(const std::string& text, Font* font, const Point3D& 
 			float u1 = glyph->s1;
 			float v1 = glyph->t1;
 
-			_buffer->Position = Point3D(x0, y0, 0);
-			_buffer->UV = Point2D(u0, v0);
-			_buffer->TextureID = textureSlot;
-			_buffer->Color = color;
-			_buffer++;
-
 			_buffer->Position = Point3D(x0, y1, 0);
 			_buffer->UV = Point2D(u0, v1);
 			_buffer->TextureID = textureSlot;
 			_buffer->Color = color;
 			_buffer++;
 
-			_buffer->Position = Point3D(x1, y1, 0);
-			_buffer->UV = Point2D(u1, v1);
+			_buffer->Position = Point3D(x0, y0, 0);
+			_buffer->UV = Point2D(u0, v0);
 			_buffer->TextureID = textureSlot;
 			_buffer->Color = color;
 			_buffer++;
 
 			_buffer->Position = Point3D(x1, y0, 0);
 			_buffer->UV = Point2D(u1, v0);
+			_buffer->TextureID = textureSlot;
+			_buffer->Color = color;
+			_buffer++;
+
+			_buffer->Position = Point3D(x1, y1, 0);
+			_buffer->UV = Point2D(u1, v1);
 			_buffer->TextureID = textureSlot;
 			_buffer->Color = color;
 			_buffer++;

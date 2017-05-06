@@ -145,7 +145,7 @@
     <ClInclude Include="Source\Audio\SoundFactory.h" />
     <ClInclude Include="Source\Audio\SoundManager.h" />
     <ClInclude Include="Source\Common.h" />
-    <ClInclude Include="Source\Common\Structures\Size3D.h" />
+    <ClInclude Include="Source\Math\Size3D.h" />
     <ClInclude Include="Source\Graphics\Renderables\Mesh.h" />
     <ClInclude Include="Source\Graphics\Renderables\MeshFactory.h" />
     <ClInclude Include="Source\Graphics\Renderables\SpriteFactory.h" />
@@ -157,10 +157,10 @@
     <ClInclude Include="Source\Graphics\Fonts\FontManager.h" />
     <ClInclude Include="Source\Graphics\GraphicsManager.h" />
     <ClInclude Include="Source\Graphics\Structures\VertexData.h" />
-    <ClInclude Include="Source\Common\Structures\Point2D.h" />
-    <ClInclude Include="Source\Common\Structures\Point3D.h" />
+    <ClInclude Include="Source\Math\Point2D.h" />
+    <ClInclude Include="Source\Math\Point3D.h" />
     <ClInclude Include="Source\Graphics\Scenes\Scene.h" />
-    <ClInclude Include="Source\Common\Structures\Size2D.h" />
+    <ClInclude Include="Source\Math\Size2D.h" />
     <ClInclude Include="Source\Graphics\Structures\VertexLayout.h" />
     <ClInclude Include="Source\Graphics\Textures\TextureFactory.h" />
     <ClInclude Include="Source\Internal\enums.h" />

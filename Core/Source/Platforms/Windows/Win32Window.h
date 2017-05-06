@@ -192,6 +192,7 @@ namespace s3dge
 			glEnable(GL_DEPTH_TEST);
 			glEnable(GL_BLEND);
 			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+			glFrontFace(GL_CW);
 			//glEnable(GL_CULL_FACE);
 
 #ifdef S3_DEBUG
@@ -233,7 +234,7 @@ namespace s3dge
 			ScreenToClient(window, &mousePosition);
 
 			if (_hasFocus)
-				SetCursorPos(_width / 2.0, _height / 2.0);
+				SetCursorPos((int)(_width / 2.0f), (int)(_height / 2.0f));
 
 			_mousePosition.x = (float)mousePosition.x;
 			_mousePosition.y = (float)mousePosition.y;

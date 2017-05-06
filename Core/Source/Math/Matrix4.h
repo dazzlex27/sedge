@@ -114,7 +114,7 @@ namespace s3dge
 		0         0      f/(f-n)  1
 		0         0    -fn/(f-n)  0
 		*/
-		static Matrix4 GetPerspective(float fov, float aspectRatio, float near, float far);
+		static Matrix4 GetPerspective(float fov, float aspectRatio, float near, float far, bool LeftHanded = false);
 
 		/*
 		=============================================

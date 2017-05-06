@@ -10,7 +10,7 @@ Contains basic high-level window management functions.
 
 #include <map>
 #include "CustomTypes.h"
-#include "Common/Structures/Point2D.h"
+#include "Math/Point2D.h"
 #include "Math/Vector2.h"
 
 namespace s3dge

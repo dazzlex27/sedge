@@ -41,10 +41,10 @@ This file is included by the main header S3DGE.h
 #include "Graphics/Renderables/LabelFactory.h"
 #include "Graphics/Renderables/SpriteFactory.h"
 
-#include "Common/Structures/Point2D.h"
-#include "Common/Structures/Point3D.h"
-#include "Common/Structures/Size2D.h"
-#include "Common/Structures/Size3D.h"
+#include "Math/Point2D.h"
+#include "Math/Point3D.h"
+#include "Math/Size2D.h"
+#include "Math/Size3D.h"
 
 #include "Audio/SoundManager.h"
 
