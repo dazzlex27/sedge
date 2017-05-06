@@ -7,11 +7,10 @@ Implements a 3-component vector class
 */
 
 #include "Vector3.h"
-#include "Common/Structures//Point3D.h"
+#include "Common/Structures/Point3D.h"
 #include <cmath>
 
 using namespace s3dge;
-using namespace math;
 
 Vector3::Vector3()
 	: x(0), y(0), z(0) 
@@ -103,62 +102,62 @@ Vector3& Vector3::operator/=(const Vector3& other)
 	return this->Divide(other);
 }
 
-Vector3 s3dge::math::operator+(const Vector3& v1, const Vector3& v2)
+Vector3 s3dge::operator+(const Vector3& v1, const Vector3& v2)
 {
 	return Vector3(v1.x + v2.x, v1.y + v2.y, v1.z + v2.z);
 }
 
-Vector3 s3dge::math::operator-(const Vector3& v1, const Vector3& v2)
+Vector3 s3dge::operator-(const Vector3& v1, const Vector3& v2)
 {
 	return Vector3(v1.x - v2.x, v1.y - v2.y, v1.z - v2.z);
 }
 
-Vector3 s3dge::math::operator*(const Vector3& v1, const Vector3& v2)
+Vector3 s3dge::operator*(const Vector3& v1, const Vector3& v2)
 {
 	return Vector3(v1.x * v2.x, v1.y * v2.y, v1.z * v2.z);
 }
 
-Vector3 s3dge::math::operator/(const Vector3& v1, const Vector3& v2)
+Vector3 s3dge::operator/(const Vector3& v1, const Vector3& v2)
 {
 	return Vector3(v1.x / v2.x, v1.y / v2.y, v1.z / v2.z);
 }
 
-Vector3 s3dge::math::operator+(const Vector3& v, float value)
+Vector3 s3dge::operator+(const Vector3& v, float value)
 {
 	return Vector3(v.x + value, v.y + value, v.z + value);
 }
 
-Vector3 s3dge::math::operator-(const Vector3& v, float value)
+Vector3 s3dge::operator-(const Vector3& v, float value)
 {
 	return Vector3(v.x - value, v.y - value, v.z - value);
 }
 
-Vector3 s3dge::math::operator*(const Vector3& v, float value)
+Vector3 s3dge::operator*(const Vector3& v, float value)
 {
 	return Vector3(v.x * value, v.y * value, v.z * value);
 }
 
-Vector3 s3dge::math::operator/(const Vector3& v, float value)
+Vector3 s3dge::operator/(const Vector3& v, float value)
 {
 	return Vector3(v.x / value, v.y / value, v.z / value);
 }
 
-Vector3 s3dge::math::operator+(float value, const Vector3& v)
+Vector3 s3dge::operator+(float value, const Vector3& v)
 {
 	return Vector3(v.x + value, v.y + value, v.z + value);
 }
 
-Vector3 s3dge::math::operator-(float value, const Vector3& v)
+Vector3 s3dge::operator-(float value, const Vector3& v)
 {
 	return Vector3(v.x - value, v.y - value, v.z - value);
 }
 
-Vector3 s3dge::math::operator*(float value, const Vector3& v)
+Vector3 s3dge::operator*(float value, const Vector3& v)
 {
 	return Vector3(v.x * value, v.y * value, v.z * value);
 }
 
-Vector3 s3dge::math::operator/(float value, const Vector3& v)
+Vector3 s3dge::operator/(float value, const Vector3& v)
 {
 	return Vector3(v.x / value, v.y / value, v.z / value);
 }

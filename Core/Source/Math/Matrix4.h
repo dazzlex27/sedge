@@ -28,110 +28,107 @@ Row Major:
 
 namespace s3dge
 {
-	namespace math
+	struct Vector3;
+
+	struct Matrix4
 	{
-		struct Vector3;
+		float data[16];
 
-		struct Matrix4
-		{
-			float data[16];
+		Matrix4();
+		Matrix4(float value);
+		Matrix4(const Matrix4& ref);
 
-			Matrix4();
-			Matrix4(float value);
-			Matrix4(const Matrix4& ref);
+		Matrix4& Multiply(const Matrix4& other);
 
-			Matrix4 Multiply(const Matrix4& other);
+		Matrix4& Invert();
 
-			Matrix4& Invert();
+		Matrix4& operator*=(const Matrix4& other);
 
-			Matrix4& operator*=(const Matrix4& other);
+		friend Matrix4 operator*(const Matrix4& left, const Matrix4& right);
 
-			friend Matrix4 operator*(const Matrix4& left, const Matrix4& right);
+		/*
+		=============================================
+		Returns a matrix translated according to the input vector
+		Looks like this:
+		1 0 0 x
+		0 1 0 y
+		0 0 1 z
+		0 0 0 1
+		=============================================
+		*/
+		static Matrix4 Translate(const Vector3& vector);
 
-			/*
-			=============================================
-			Returns a matrix translated according to the input vector
-			Looks like this:
-			1 0 0 x
-			0 1 0 y
-			0 0 1 z
-			0 0 0 1
-			=============================================
-			*/
-			static Matrix4 Translate(const Vector3& vector);
+		/*
+		=============================================
+		Returns a matrix rotated according to the specified input parameters
+		Too big to fit its looks here, feel free to google it
+		=============================================
+		*/
+		static Matrix4 Rotate(const Vector3& vector, float angle);
 
-			/*
-			=============================================
-			Returns a matrix rotated according to the specified input parameters
-			Too big to fit its looks here, feel free to google it
-			=============================================
-			*/
-			static Matrix4 Rotate(const Vector3& vector, float angle);
+		/*
+		=============================================
+		Returns a matrix scaled by the input vector
+		Looks like this:
+		x 0 0 0
+		0 y 0 0
+		0 0 z 0
+		0 0 0 1
+		=============================================
+		*/
+		static Matrix4 Scale(const Vector3& vector);
 
-			/*
-			=============================================
-			Returns a matrix scaled by the input vector
-			Looks like this:
-			x 0 0 0
-			0 y 0 0
-			0 0 z 0
-			0 0 0 1
-			=============================================
-			*/
-			static Matrix4 Scale(const Vector3& vector);
+		/*
+		=============================================
+		Returns an identity matrix
+		Looks like this:
+		1 0 0 0
+		0 1 0 0
+		0 0 1 0
+		0 0 0 1
+		=============================================
+		*/
+		static Matrix4 GetIdentity();
 
-			/*
-			=============================================
-			Returns an identity matrix
-			Looks like this:
-			1 0 0 0
-			0 1 0 0
-			0 0 1 0
-			0 0 0 1
-			=============================================
-			*/
-			static Matrix4 GetIdentity();
+		/*
+		=============================================
+		Returns orthographic projection according to specified limits
+		Looks like this:
+		2/(r-l)		0			0			-(r+l)/(r-l)
+		0			2/(t-b)		0			-(t+b)/(t-b)
+		0			0			-2/(f-n)	-(f+n)/(f-n)
+		0			0			0			1
 
-			/*
-			=============================================
-			Returns orthographic projection according to specified limits
-			Looks like this:
-			2/(r-l)		0			0			-(r+l)/(r-l)
-			0			2/(t-b)		0			-(t+b)/(t-b)
-			0			0			-2/(f-n)	-(f+n)/(f-n)
-			0			0			0			1
+		=============================================
+		*/
+		static Matrix4 GetOrthographic(float left, float right, float bottom, float top, float near, float far);
 
-			=============================================
-			*/
-			static Matrix4 GetOrthographic(float left, float right, float bottom, float top, float near, float far);
+		/*
+		Returns a perspective matrix with the specified settings
+		Looks like this:
+		uh = Cot( fov/2 ) == 1/Tan(fov/2)
+		uw / uh = 1/aspect
 
-			/*
-			Returns a perspective matrix with the specified settings
-			Looks like this:
-			uh = Cot( fov/2 ) == 1/Tan(fov/2)
-			uw / uh = 1/aspect
-			 
-			uw        0       0       0
-			0		  uh      0       0
-			0         0      f/(f-n)  1
-			0         0    -fn/(f-n)  0
-			*/
-			static Matrix4 GetPerspective(float fov, float aspectRatio, float near, float far);
+		uw        0       0       0
+		0		  uh      0       0
+		0         0      f/(f-n)  1
+		0         0    -fn/(f-n)  0
+		*/
+		static Matrix4 GetPerspective(float fov, float aspectRatio, float near, float far);
 
-			/*
-			=============================================
-			Returns lookAt matrix for a given trinity of vectors
-			Looks like this:
-			Sx			Ux			-Fx			-dot(s, eye)
-			Sy			Uy			-Fy			-dot(u, eye)
-			Sz			Uz			-Fz			dot(f, eye)
-			0			0			0			1
+		/*
+		=============================================
+		Returns lookAt matrix for a set of position, view direction and up vectors 
+		Looks like this:
+		Sx			Ux			-Fx			-dot(s, eye)
+		Sy			Uy			-Fy			-dot(u, eye)
+		Sz			Uz			-Fz			dot(f, eye)
+		0			0			0			1
 
-			=============================================
-			*/
-			static Matrix4 GetLookAt(const Vector3& eye, const Vector3& center, const Vector3& up);
+		=============================================
+		*/
+		static Matrix4 GetLookAt(const Vector3& eye, const Vector3& center, const Vector3& up);
 
-			cstring Print();
-		};
-	}
+		cstring Print();
+	};
 }

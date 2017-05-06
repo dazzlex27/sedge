@@ -20,7 +20,7 @@ namespace s3dge
 
 		Size3D(float width, float height, float depth)
 			: width(width), height(height), depth(depth) { }
-		Size3D(const math::Vector3& vector)
+		Size3D(const Vector3& vector)
 			: width(vector.x), height(vector.y), depth(vector.z) { }
 	};
 }

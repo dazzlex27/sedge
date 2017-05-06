@@ -17,13 +17,12 @@ Using layers is highly encouraged, event if there's only one. That helps to keep
 #include "Graphics/Shaders/ShaderProgram.h"
 
 using namespace s3dge;
-using namespace math;
 using namespace graphics;
 	
 //Layer::Layer()
 //{
 	// TODO: create default shader to implement here.
-	//_transformationMatrix = math::mat4::GetIdentity();
+	//_transformationMatrix = mat4::GetIdentity();
 	//_shaderProgram = new ShaderProgram();
 	//_renderer = new Renderer2D();
 	// _ownsRenderer = true;

@@ -5,8 +5,7 @@
 
 using namespace s3dge;
 using namespace graphics;
-using namespace math;
-	
+
 ShaderProgram::ShaderProgram(cstring vertexPath, cstring fragmentPath)
 	: _vertexPath(vertexPath), _fragmentPath(fragmentPath)
 {

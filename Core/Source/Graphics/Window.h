@@ -35,6 +35,7 @@ namespace s3dge
 			bool _isClosed;
 			bool _fullScreen;
 			bool _vSync;
+			bool _hasFocus;
 			Point2D _mousePosition;
 			bool _keysDown[MAX_KEYS];
 			bool _buttonsDown[MAX_BUTTONS];
@@ -69,6 +70,7 @@ namespace s3dge
 			inline uint GetHeight() const { return _height; }
 			inline bool IsClosed() const { return _isClosed; }
 			inline bool IsVSync() const { return _vSync; }
+			inline bool HasFocus() const { return _hasFocus; }
 			inline bool IsFullScreen() const { return _fullScreen; }
 			inline Point2D GetMousePosition() const { return _mousePosition; }
 
@@ -83,6 +85,7 @@ namespace s3dge
 			friend void resize_callback(Window* window, uint width, uint height);
 			friend void key_callback(Window* window, int key, int command);
 			friend void mousebutton_callback(Window* window, int key, int command);
+			friend void focus_callback(Window* window, bool hasFocus);
 
 			Window(const Window& tRef) = delete;				// Disable copy constructor.
 			Window& operator = (const Window& tRef) = delete;	// Disable assignment operator.

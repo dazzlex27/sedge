@@ -13,7 +13,7 @@ Lists a few functions for mathematical conversions. Might be refactored later.
 
 namespace s3dge
 {
-	inline uint ConvertColorToUint(const math::Vector4& color)
+	inline uint ConvertColorToUint(const Vector4& color)
 	{
 		int red = (int)(color.x * 255);
 		int green = (int)(color.y * 255);
@@ -23,9 +23,9 @@ namespace s3dge
 		return alpha << 24 | blue << 16 | green << 8 | red;
 	}
 
-	inline math::Vector4 ConvertColorToVec4(uint color)
+	inline Vector4 ConvertColorToVec4(uint color)
 	{
-		math::Vector4 result;
+		Vector4 result;
 
 		result.x = (float)(color >> 0);
 		result.y = (float)(color >> 8);

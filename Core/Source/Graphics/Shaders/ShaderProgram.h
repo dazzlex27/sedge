@@ -32,16 +32,16 @@ namespace s3dge
 			void Enable();
 			void Disable();
 
-			void SetUniformMat4fv(cstring name, const math::Matrix4& matrix);
+			void SetUniformMat4fv(cstring name, const Matrix4& matrix);
 			void SetUniform1f(cstring name, float value);
-			void SetUniform2f(cstring name, const math::Vector2& value);
-			void SetUniform3f(cstring name, const math::Vector3& value);
-			void SetUniform4f(cstring name, const math::Vector4& value);
+			void SetUniform2f(cstring name, const Vector2& value);
+			void SetUniform3f(cstring name, const Vector3& value);
+			void SetUniform4f(cstring name, const Vector4& value);
 			void SetUniform1i(cstring name, int value);
 			void SetUniform1iv(cstring name, int count, int* value);
 
-			void SetProjection(const math::Matrix4& projectionMatrix);
-			void SetView(const math::Matrix4& viewMatrix);
+			void SetProjection(const Matrix4& projectionMatrix);
+			void SetView(const Matrix4& viewMatrix);
 
 		private:
 			uint Load();

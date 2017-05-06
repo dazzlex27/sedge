@@ -10,7 +10,6 @@ Implements a 2-component vector class
 #include <cmath>
 
 using namespace s3dge;
-using namespace math;
 
 Vector2::Vector2()
 	: x(0), y(0) 

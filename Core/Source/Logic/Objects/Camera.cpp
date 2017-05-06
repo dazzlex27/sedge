@@ -10,7 +10,6 @@ Implements the Camera class.
 #include "Math/Matrix4.h"
 
 using namespace s3dge;
-using namespace math;
 
 Camera::Camera()
 	: _fov(45.0f),

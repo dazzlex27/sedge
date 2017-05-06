@@ -12,7 +12,6 @@ Contains method implementations for Renderable2D
 
 using namespace s3dge;
 using namespace graphics;
-using namespace math;
 
 Renderable2D::Renderable2D()
 	: _texture(nullptr), _color(0xffffffff), _position(0, 0, 0), _size(0, 0)

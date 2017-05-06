@@ -2,7 +2,6 @@
 #include <cmath>
 
 using namespace s3dge;
-using namespace math;
 using namespace graphics;
 using namespace audio;
 

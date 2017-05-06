@@ -6,7 +6,6 @@
 #include "Utilities/Converters.h"
 
 using namespace s3dge;
-using namespace math;
 
 Matrix4::Matrix4()
 {
@@ -31,7 +30,7 @@ Matrix4::Matrix4(const Matrix4& ref)
 		data[i] = ref.data[i];
 }
 
-Matrix4 Matrix4::Multiply(const Matrix4& other)
+Matrix4& Matrix4::Multiply(const Matrix4& other)
 {
 	Matrix4 result;
 
@@ -184,7 +183,7 @@ Matrix4& Matrix4::operator*=(const Matrix4& other)
 	return *this;
 }
 
-Matrix4 s3dge::math::operator*(const Matrix4& left, const Matrix4& right)
+Matrix4 s3dge::operator*(const Matrix4& left, const Matrix4& right)
 {
 	Matrix4 result(left);
 	return result.Multiply(right);

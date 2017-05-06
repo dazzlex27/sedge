@@ -31,8 +31,8 @@ namespace s3dge
 			IndexBuffer* _ibo;
 
 		public:
-			math::Vector3 translation;
-			math::Vector3 scale;
+			Vector3 translation;
+			Vector3 scale;
 			Texture2D* texture;
 
 		private:

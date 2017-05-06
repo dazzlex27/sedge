@@ -39,6 +39,13 @@ namespace s3dge
 
 			switch (message)
 			{
+			case WM_ACTIVATE:
+			case WM_SETFOCUS:
+				if (winInstance)
+					focus_callback(winInstance, true);
+			case WM_KILLFOCUS:
+				if (winInstance)
+					focus_callback(winInstance, false);
 			case WM_CREATE:
 				break;
 			case WM_DESTROY:
@@ -95,6 +102,13 @@ namespace s3dge
 			if (!RegisterClass(&wc))
 				return 1;
 
+			RECT clientArea;
+			clientArea.left = 0;
+			clientArea.top = 0;
+			clientArea.bottom = _height;
+			clientArea.right = _width;
+			AdjustWindowRectEx(&clientArea, WS_OVERLAPPEDWINDOW | WS_VISIBLE, false, WS_EX_APPWINDOW);
+
 			window = CreateWindowEx(
 				WS_EX_APPWINDOW,
 				wc.lpszClassName,
@@ -102,8 +116,8 @@ namespace s3dge
 				WS_OVERLAPPEDWINDOW | WS_VISIBLE,
 				0,
 				0,
-				_width,
-				_height,
+				clientArea.right - clientArea.left,
+				clientArea.bottom - clientArea.top,
 				HWND_DESKTOP,
 				NULL,
 				instance,
@@ -215,12 +229,16 @@ namespace s3dge
 		{
 			POINT mousePosition;
 			GetCursorPos(&mousePosition);
-
+			
 			ScreenToClient(window, &mousePosition);
+
+			if (_hasFocus)
+				SetCursorPos(_width / 2.0, _height / 2.0);
 
 			_mousePosition.x = (float)mousePosition.x;
 			_mousePosition.y = (float)mousePosition.y;
 
+			// Hide cursor
 			SetCursor(NULL);
 
 			if (_buttonsDown[S3_KEY_MWUP])
@@ -261,7 +279,7 @@ namespace s3dge
 				SetWindowLong(window, GWL_EXSTYLE, WS_EX_APPWINDOW);
 				SetWindowPlacement(window, &wpc);
 				ShowWindow(window, SW_SHOWDEFAULT);
-
+				SetFocus(window);
 			}
 
 			SetFocus(window);
@@ -401,6 +419,12 @@ namespace s3dge
 					window->SetFullScreen(!window->IsFullScreen());
 				break;
 			}
+		}
+
+		// Triggers whenever window focus state is changed
+		void s3dge::graphics::focus_callback(Window* window, bool hasFocus)
+		{
+			window->_hasFocus = hasFocus;
 		}
 	}
 }

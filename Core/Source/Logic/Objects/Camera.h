@@ -12,10 +12,7 @@ Defines a class for in-game cameras.
 
 namespace s3dge
 {
-	namespace math
-	{
-		struct Matrix4;
-	}
+	struct Matrix4;
 
 	class Camera : public Entity
 	{
@@ -24,33 +21,33 @@ namespace s3dge
 		float _aspectRatio;
 		float _near;
 		float _far;
-		math::Matrix4 _projection;
-		math::Matrix4 _view;
-		math::Vector3 _viewDirection;
-		math::Vector3 _up;
+		Matrix4 _projection;
+		Matrix4 _view;
+		Vector3 _viewDirection;
+		Vector3 _up;
 
 	public:
 		Camera();
-		Camera(float fov, float aspectRatio, float near, float far, const math::Vector3& viewDirection = math::Vector3(0, 0, -1), const math::Vector3& up = math::Vector3(0, 1, 0));
+		Camera(float fov, float aspectRatio, float near, float far, const Vector3& viewDirection = Vector3(0, 0, -1), const Vector3& up = Vector3(0, 1, 0));
 		~Camera();
 
 		inline float GetFOV() const { return _fov; }
 		inline float GetAspectRatio() const { return _aspectRatio; }
 		inline float GetNear() const { return _near; }
 		inline float GetFar() const { return _far; }
-		inline const math::Vector3& GetViewDirection() const { return _viewDirection; }
-		inline const math::Vector3& GetUp() const { return _up; }
+		inline const Vector3& GetViewDirection() const { return _viewDirection; }
+		inline const Vector3& GetUp() const { return _up; }
 
 		void SetFOV(float fov);
 		void SetAspectRatio(float aspectRatio);
 		void SetNear(float near);
 		void SetFar(float far);
-		void SetViewDirection(const math::Vector3& viewDirection);
+		void SetViewDirection(const Vector3& viewDirection);
 		virtual void SetPosition(const Point3D& position) override;
-		void SetUp(const math::Vector3& up);
+		void SetUp(const Vector3& up);
 
-		math::Matrix4 GetProjection();
-		math::Matrix4 GetView();
+		Matrix4 GetProjection();
+		Matrix4 GetView();
 
 		void Render() override;
 		void Update() override;

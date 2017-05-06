@@ -10,7 +10,6 @@ Implements a 4-component vector class
 #include <cmath>
 
 using namespace s3dge;
-using namespace math;
 
 Vector4::Vector4()
 	: x(0), y(0), z(0), w(0) {}

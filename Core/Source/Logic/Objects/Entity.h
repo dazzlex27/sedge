@@ -19,16 +19,13 @@ namespace s3dge
 	class Entity : public BaseObject
 	{
 	protected:
-		math::Vector3 Position;
-		math::Vector3 Scale;
-		math::Vector3 Rotation;
+		Vector3 Position;
+		Vector3 Scale;
+		Vector3 Rotation;
+		Matrix4 ModelMatrix;
 
 	public:
-		Entity() 
-		{
-			Position = math::Vector3(0, 0, 0);
-			Scale = math::Vector3(1, 1, 1); 
-		}
+		Entity();
 		~Entity() {}
 
 	public:
@@ -40,12 +37,18 @@ namespace s3dge
 		virtual void Update() = 0;
 		virtual void Render() = 0;
 
-		inline Point3D GetPosition() const { return Position; }
+		inline virtual const Vector3& GetPosition() const { return Position; }
+		inline virtual const Vector3& GetScale() const { return Scale; }
+		inline virtual const Vector3& GetRotation() const { return Rotation; }
+		inline virtual const Matrix4& GetModelMatrix() const { return ModelMatrix; }
 
-		virtual void SetPosition(const Point3D& position) { Position = math::Vector3(position); }
-		virtual void SetScale(const math::Vector3& scale) { Scale = scale; }
+		virtual void SetPosition(const Point3D& position);
+		virtual void SetScale(const Vector3& scale);
+		virtual void SetRotation(const Vector3& rotation);
 
 	private:
+		void UpdateModelMatrix();
+
 		Entity(const Entity& tRef) = delete;				// Disable copy constructor.
 		Entity& operator = (const Entity& tRef) = delete;	// Disable assignment operator.
 	};
