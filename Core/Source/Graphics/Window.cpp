@@ -15,16 +15,11 @@ Contains basic high-level window management functions.
 using namespace s3dge;
 using namespace graphics;
 
-std::map<void*, Window*> Window::_windowInstances;
+std::map<void*, Window*> Window::Instances;
 
 Window::Window(cstring title, uint width, uint height, bool fullscreen, bool vsync)
 	: _title(title), _width(width), _height(height), _fullScreen(fullscreen), _vSync(vsync), _isClosed(false)
 {
-	if (!Initialize())
-	{
-		LOG_FATAL("Could not initialize window!");
-		abort();
-	}
 }
 
 bool Window::Initialize()
@@ -69,6 +64,8 @@ Window::~Window()
 
 void Window::Dispose()
 {
+	DestroyContext();
+
 	for (int i = 0; i < MAX_BUTTONS; ++i)
 		SafeDelete(_doubleClickTimers[i]);
 }
@@ -98,14 +95,27 @@ bool Window::MouseButtonClicked(uint button) const
 	return _buttonsClicked[button];
 }
 
-// Inserts a window instance into a static window collection
-void Window::SetHandle(void* instance, Window* window)
+void* Window::GetHandle()
 {
-	_windowInstances[instance] = window;
+	return _handle;
+}
+
+
+void Window::SetHandle(void* handle)
+{
+	_handle = handle;
 }
 
 // Returns a window instance of a specified index
-Window* Window::GetWindowClassInstance(void* windowInstance)
+Window* Window::GetInstance(void* handle)
 {
-	return _windowInstances[windowInstance];
+	return Instances[handle];
+}
+
+// Inserts a window instance into a static window collection
+void Window::SetInstance(void* handle, Window* instance)
+{
+	Instances[handle] = instance;
+	if (instance != nullptr)
+		instance->SetHandle(handle);
 }

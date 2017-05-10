@@ -23,34 +23,29 @@ namespace s3dge
 			#include "Win32OpenGLDebug.h"
 		#endif
 
-		// Essential variables only
-		HWND window;
-		HINSTANCE instance;
 		HDC deviceContext;
-		WNDCLASSEX windowClass = {};
-		HGLRC renderingContext;
-		PIXELFORMATDESCRIPTOR pixelFormatDescriptor;
 		WINDOWPLACEMENT wpc;
 
 		// Main message pump handler method
 		LRESULT CALLBACK WindowProcedure(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 		{
-			Window* winInstance = Window::GetWindowClassInstance(window);
+			Window* winInstance = Window::GetInstance(hwnd);
 
 			switch (message)
 			{
-			case WM_ACTIVATE:
+				break;
 			case WM_SETFOCUS:
 				if (winInstance)
 					focus_callback(winInstance, true);
+				break;
 			case WM_KILLFOCUS:
 				if (winInstance)
 					focus_callback(winInstance, false);
 			case WM_CREATE:
 				break;
 			case WM_DESTROY:
-				wglMakeCurrent(deviceContext, NULL);	// Deselect rendering context.
-				wglDeleteContext(renderingContext);
+				if (winInstance)
+					winInstance->Dispose();
 				PostQuitMessage(0);
 				break;
 			case WM_MENUCHAR:
@@ -96,7 +91,6 @@ namespace s3dge
 		{
 			WNDCLASS wc = { 0 };
 			wc.lpfnWndProc = WindowProcedure;
-			wc.hInstance = instance;
 			wc.hbrBackground = (HBRUSH)(COLOR_BACKGROUND);
 			wc.lpszClassName = "S3DGE_Win32WindowClass";
 			if (!RegisterClass(&wc))
@@ -109,7 +103,7 @@ namespace s3dge
 			clientArea.right = _width;
 			AdjustWindowRectEx(&clientArea, WS_OVERLAPPEDWINDOW | WS_VISIBLE, false, WS_EX_APPWINDOW);
 
-			window = CreateWindowEx(
+			HWND window = CreateWindowEx(
 				WS_EX_APPWINDOW,
 				wc.lpszClassName,
 				_title,
@@ -120,7 +114,7 @@ namespace s3dge
 				clientArea.bottom - clientArea.top,
 				HWND_DESKTOP,
 				NULL,
-				instance,
+				wc.hInstance,
 				NULL);
 
 			if (!window)
@@ -129,7 +123,7 @@ namespace s3dge
 				return false;
 			}
 
-			Window::SetHandle(window, this);
+			Window::SetInstance(window, this);
 
 			return true;
 		}
@@ -137,7 +131,7 @@ namespace s3dge
 		// Applies OpenGL context to a created window
 		bool Window::CreateContext()
 		{
-			deviceContext = GetDC(window);
+			deviceContext = GetDC((HWND)_handle);
 
 			if (!deviceContext)
 			{
@@ -145,7 +139,7 @@ namespace s3dge
 				return false;
 			}
 
-			pixelFormatDescriptor = GetPixelFormatDescriptor();
+			PIXELFORMATDESCRIPTOR pixelFormatDescriptor = GetPixelFormatDescriptor();
 
 			int pixelFormat = ChoosePixelFormat(deviceContext, &pixelFormatDescriptor);
 
@@ -161,7 +155,7 @@ namespace s3dge
 				return false;
 			}
 
-			renderingContext = wglCreateContext(deviceContext);
+			HGLRC renderingContext = wglCreateContext(deviceContext);
 
 			if (!renderingContext)
 			{
@@ -230,16 +224,13 @@ namespace s3dge
 		{
 			POINT mousePosition;
 			GetCursorPos(&mousePosition);
-			
-			ScreenToClient(window, &mousePosition);
-
-			//if (_hasFocus)
-			//	SetCursorPos((int)(_width / 2.0f), (int)(_height / 2.0f));
 
 			_mousePosition.x = (float)mousePosition.x;
 			_mousePosition.y = (float)mousePosition.y;
 
-			// Hide cursor
+			if (_hasFocus)
+				SetCursorPos(_width / 2, _height / 2);
+
 			SetCursor(NULL);
 
 			if (_buttonsDown[S3_KEY_MWUP])
@@ -257,15 +248,15 @@ namespace s3dge
 			memset(&_buttonsDoubleClicked, 0, sizeof(_buttonsDoubleClicked));
 		}
 
-		// Window clear implementation
 		void Window::Clear()
 		{
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		}
 
-		// Switches between window fullscreen states
 		void Window::SetFullScreen(bool fullscreen)
 		{
+			HWND window = (HWND)_handle;
+
 			if (fullscreen)
 			{
 				GetWindowPlacement(window, &wpc);
@@ -287,7 +278,6 @@ namespace s3dge
 			_fullScreen = fullscreen;
 		}
 
-		// Switches window vsync state
 		void Window::SetVSync(bool vsync)
 		{
 			typedef BOOL(APIENTRY *PFNWGLSWAPINTERVALPROC)(int);
@@ -309,20 +299,32 @@ namespace s3dge
 			}
 		}
 
+		void Window::DestroyContext()
+		{
+			HGLRC renderingContext;
+
+			if (renderingContext = wglGetCurrentContext())
+			{
+				deviceContext = wglGetCurrentDC();
+				// make the rendering context not current  
+				wglMakeCurrent(NULL, NULL);
+				// release the device context  
+				ReleaseDC((HWND)_handle, deviceContext);
+				// delete the rendering context  
+				wglDeleteContext(renderingContext);
+			}
+		}
+
 		// Triggers whenever a window changes size
 		void s3dge::graphics::resize_callback(Window* window, uint width, uint height)
 		{
-			if (height == 0)
-				height = 1;
+			RECT rect = RECT();
+			GetClientRect((HWND)window->_handle, &rect);
 
-			window->_width = width;
-			window->_height = height;
+			window->_width = rect.right - rect.left;
+			window->_height = rect.bottom - rect.top;
 
-			glViewport(0, 0, width, height);
-			glMatrixMode(GL_PROJECTION);	//  Set current Matrix to projection
-			glLoadIdentity();				//reset projection matrix
-			glMatrixMode(GL_MODELVIEW);		//set modelview matrix
-			glLoadIdentity();				//reset modelview matrix
+			glViewport(0, 0, window->_width, window->_height);
 		}
 
 		// Triggers whenever a mouse button is manipulated. Currently supports 9 mouse buttons.

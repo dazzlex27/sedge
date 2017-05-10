@@ -12,12 +12,12 @@ private:
 	s3dge::Camera* _camera;
 	float horizontalAngle;
 	float verticalAngle;
-	float _lastX;
-	float _lastY;
 
 public:
 	void Initialize() override;
 	void UpdateInput() override;
 	void Render() override;
 	void Dispose() override;
+
+	void UpdateCamera(const s3dge::Point2D& mousePosition);
 };

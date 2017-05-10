@@ -45,7 +45,7 @@ void Camera::UpdatePerspective()
 
 void Camera::UpdateView()
 {
-	ViewMatrix = Matrix4::GetLookAt(Position, Position + ViewDirection, Up);
+	ViewMatrix = Matrix4::LookAt(Position, Position + ViewDirection, Up);
 }
 
 void Camera::SetPosition(const Point3D& position)

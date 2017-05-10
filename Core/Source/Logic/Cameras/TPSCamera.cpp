@@ -32,5 +32,5 @@ void TPSCamera::SetOffset(const Vector3& offset)
 
 void TPSCamera::UpdateView()
 {
-	ViewMatrix = Matrix4::GetLookAt(Position + Offset, Position + Offset + ViewDirection, Up);
+	ViewMatrix = Matrix4::LookAt(Position + Offset, Position + Offset + ViewDirection, Up);
 }

@@ -353,5 +353,8 @@
     <ClInclude Include="Source\Graphics\Renderables\Renderable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Graphics\Enums.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

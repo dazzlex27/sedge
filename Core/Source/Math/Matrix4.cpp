@@ -276,14 +276,13 @@ Matrix4 Matrix4::GetPerspective(float fov, float aspect, float near, float far)
 	return result;
 }
 
-Matrix4 Matrix4::GetLookAt(const Vector3& eye, const Vector3& center, const Vector3& up)
+Matrix4 Matrix4::LookAt(const Vector3& eye, const Vector3& target, const Vector3& up)
 {
-	Vector3 f(Vector3::Normalize(center - eye));
-	Vector3 u(Vector3::Normalize(up));
-	Vector3 s(Vector3::Normalize(Vector3::GetCrossProduct(f, u)));
-	u = Vector3::GetCrossProduct(s, f);
+	Vector3 f(Vector3::Normalize(target - eye));
+	Vector3 s(Vector3::Normalize(Vector3::GetCrossProduct(f, up)));
+	Vector3 u(Vector3::Normalize(Vector3::GetCrossProduct(s, f)));
 
-	Matrix4 result(1);
+	Matrix4 result(GetIdentity());
 	result.data[4 * 0 + 0] = s.x;
 	result.data[4 * 1 + 0] = s.y;
 	result.data[4 * 2 + 0] = s.z;
@@ -293,11 +292,8 @@ Matrix4 Matrix4::GetLookAt(const Vector3& eye, const Vector3& center, const Vect
 	result.data[4 * 0 + 2] = f.x;
 	result.data[4 * 1 + 2] = f.y;
 	result.data[4 * 2 + 2] = f.z;
-	result.data[4 * 3 + 0] = -Vector3::GetDotProduct(s, eye);
-	result.data[4 * 3 + 1] = -Vector3::GetDotProduct(u, eye);
-	result.data[4 * 3 + 2] = -Vector3::GetDotProduct(f, eye);
 
-	return result;
+	return result * Translate(Vector3(-target.x, -target.y, -target.z));
 }
 
 cstring Matrix4::Print()

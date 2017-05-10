@@ -13,9 +13,6 @@ void Application::Initialize()
 
 	Point2D mousePos = WindowInstance->GetMousePosition();
 
-	_lastX = mousePos.x;
-	_lastY = mousePos.y;
-
 	horizontalAngle = -1;
 	verticalAngle = -1;
 
@@ -56,26 +53,37 @@ void Application::Initialize()
 
 void Application::UpdateInput()
 {
-	float speed = 0.1f;
-	float mouseSpeed = 0.01f;
-
 	Point3D cameraPosition = _camera->GetPosition();
-	Vector3 position(cameraPosition);
 
 	GraphicsManager::GetLabel("fps")->text = std::to_string(GetFPS()) + " fps";
 	GraphicsManager::GetLabel("position")->text = std::to_string(cameraPosition.x) + " " + std::to_string(cameraPosition.y) + " " + std::to_string(cameraPosition.z);
 
-	Point2D mousePos = WindowInstance->GetMousePosition();
+	UpdateCamera(WindowInstance->GetMousePosition());
 
-	horizontalAngle -= mouseSpeed * (_lastX - mousePos.x);
-	verticalAngle += mouseSpeed * (_lastY - mousePos.y);
+	_shaderScene->SetProjection(_camera->GetProjection());
+	_shaderScene->SetView(_camera->GetView());
+}
 
-	printf("xy = %f\t%f\n", _lastX - mousePos.x, _lastY - mousePos.y);
-	
-	_lastX = mousePos.x;
-	_lastY = mousePos.y;
+void Application::UpdateCamera(const Point2D& mousePosition)
+{
+	if (horizontalAngle == -1)
+	{
+		horizontalAngle = 0;
+		verticalAngle = 0;
+		return;
+	}
 
-	printf("angle = %f\t%f\n", horizontalAngle, verticalAngle);
+	float speed = 0.1f;
+	float mouseSpeed = 0.005f;
+
+	Point3D cameraPosition = _camera->GetPosition();
+	Vector3 position(cameraPosition);
+
+	horizontalAngle -= mouseSpeed * (WindowInstance->GetWidth() / 2 - mousePosition.x);
+	verticalAngle += mouseSpeed * (WindowInstance->GetHeight() / 2 - mousePosition.y);
+
+	//printf("angle = %f\t%f\n", horizontalAngle, verticalAngle);
+	//printf("xy = %f\t%f\n", (1280 / 2 - mousePosition.x), (1280 / 2 - mousePosition.y));
 
 	Vector3 direction(cos(verticalAngle) * sin(horizontalAngle), sin(verticalAngle), -cos(verticalAngle) * cos(horizontalAngle));
 	Vector3 right(-(float)sin(horizontalAngle - 3.14 / 2.0f), 0, (float)cos(horizontalAngle - 3.14 / 2.0f));
@@ -102,9 +110,6 @@ void Application::UpdateInput()
 	_camera->SetPosition(Point3D(position.x, position.y, position.z));
 	_camera->SetViewDirection(direction);
 	_camera->SetUp(up);
-
-	_shaderScene->SetProjection(_camera->GetProjection());
-	_shaderScene->SetView(_camera->GetView());
 }
 
 void Application::Render()

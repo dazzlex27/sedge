@@ -17,7 +17,7 @@ namespace s3dge
 	class S3DGEngine
 	{
 	private:
-		EngineState _state;
+		ENGINE_STATE _state;
 		Timer* _timer;
 		RNG* _rng;
 		uint _fps;
@@ -31,7 +31,7 @@ namespace s3dge
 	public:
 		void Run();
 		inline uint GetFPS() const { return _fps; }
-		inline EngineState GetEngineState() const { return _state; }
+		inline ENGINE_STATE GetEngineState() const { return _state; }
 
 	protected:
 		void CreateGameWindow(cstring name, uint width, uint height, bool fullscreen = false, bool vsync = true);

@@ -120,14 +120,14 @@ namespace s3dge
 		=============================================
 		Returns lookAt matrix for a set of position, view direction and up vectors 
 		Looks like this:
-		Sx			Ux			-Fx			-dot(s, eye)
-		Sy			Uy			-Fy			-dot(u, eye)
-		Sz			Uz			-Fz			dot(f, eye)
+		Sx			Sy			Sz			-dot(s, eye)
+		Fx			Fy			Fz			-dot(u, eye)
+		Ux			Uy			Uz			dot(f, eye)
 		0			0			0			1
 
 		=============================================
 		*/
-		static Matrix4 GetLookAt(const Vector3& eye, const Vector3& center, const Vector3& up);
+		static Matrix4 LookAt(const Vector3& eye, const Vector3& center, const Vector3& up);
 
 		cstring Print();
 	};

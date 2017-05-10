@@ -1,6 +1,6 @@
 #pragma once
 
-enum EngineState
+enum ENGINE_STATE
 {
 	READY,
 	INITIALIZING,

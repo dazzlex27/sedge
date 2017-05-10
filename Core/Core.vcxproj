@@ -148,6 +148,7 @@
     <ClInclude Include="Source\Audio\SoundFactory.h" />
     <ClInclude Include="Source\Audio\SoundManager.h" />
     <ClInclude Include="Source\Common.h" />
+    <ClInclude Include="Source\Graphics\Enums.h" />
     <ClInclude Include="Source\Graphics\Renderables\Renderable.h" />
     <ClInclude Include="Source\Graphics\Renderers\RendererBF.h" />
     <ClInclude Include="Source\Logic\Cameras\FPSCamera.h" />

@@ -24,7 +24,7 @@ void RendererBF::Begin()
 
 void RendererBF::Flush()
 {
-	for (int i = 0; i < _renderables.size(); i++)
+	for (uint i = 0; i < _renderables.size(); i++)
 		_renderables[i]->Render();
 }
 

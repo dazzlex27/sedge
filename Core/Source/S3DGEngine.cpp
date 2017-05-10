@@ -15,7 +15,7 @@ using namespace audio;
 
 S3DGEngine::S3DGEngine()
 {
-	_state = EngineState::READY;
+	_state = ENGINE_STATE::READY;
 }
 
 S3DGEngine::~S3DGEngine()
@@ -25,28 +25,36 @@ S3DGEngine::~S3DGEngine()
 void S3DGEngine::CreateGameWindow(cstring name, uint width, uint height, bool fullscreen, bool vsync)
 {
 	if (!WindowInstance)
+	{
 		WindowInstance = new Window(name, width, height, fullscreen, vsync);
+
+		if (!WindowInstance->Initialize())
+		{
+			LOG_FATAL("Could not initialize window!");
+			abort();
+		}
+	}
 }
 
 void S3DGEngine::Run()
 {
 	LOG_INFO("Application started...");
 
-	_state = EngineState::INITIALIZING;
+	_state = ENGINE_STATE::INITIALIZING;
 	LOG_INFO("Initializing components...");
 	InitializeInternalSystems();
 	InitializeResourceManagers();
 	Initialize();
-	_state = EngineState::RUNNING;
+	_state = ENGINE_STATE::RUNNING;
 	LOG_INFO("Running main loop...");
 	RunGameLoop();
-	_state = EngineState::DISPOSING;
+	_state = ENGINE_STATE::DISPOSING;
 	LOG_INFO("Shutdown initiated...");
 	Dispose();
 	DisposeResourceManagers();
 	DisposeInternalSystems();
 
-	_state = EngineState::DISPOSED;
+	_state = ENGINE_STATE::DISPOSED;
 	LOG_INFO("Application exited...");
 }
 
@@ -57,6 +65,8 @@ void S3DGEngine::RunGameLoop()
 	uint frames = 0;
 	float renderTime = 0.0f;
 	_timer->Start();
+
+	WindowInstance->UpdateInputState();
 
 	// The actual game loop.
 	while (!WindowInstance->IsClosed())

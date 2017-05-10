@@ -44,12 +44,16 @@ namespace s3dge
 			bool _buttonsDoubleClicked[MAX_BUTTONS];
 			Timer* _doubleClickTimers[MAX_BUTTONS];
 			float _elapsedDoubleClickThreshold;
+			void* _handle;
 
-			static std::map<void*, Window*> _windowInstances;
+			static std::map<void*, Window*> Instances;
 
 		public:
 			Window(cstring title, uint width, uint height, bool fullscreen = false, bool vsync = true);
 			~Window();
+
+			bool Initialize();
+			void Dispose();
 
 			void Clear();
 			void Update();
@@ -60,11 +64,6 @@ namespace s3dge
 			bool MouseButtonClicked(uint button) const;
 			bool MouseButtonDoubleClicked(uint key) const;
 
-			static void SetHandle(void* handle, Window* window);
-			void SetVSync(bool vsync);
-			void SetFullScreen(bool fullscreen);
-
-			static Window* GetWindowClassInstance(void* windowInstance);
 			inline cstring GetTitle() const { return _title; }
 			inline uint GetWidth() const { return _width; }
 			inline uint GetHeight() const { return _height; }
@@ -73,14 +72,22 @@ namespace s3dge
 			inline bool HasFocus() const { return _hasFocus; }
 			inline bool IsFullScreen() const { return _fullScreen; }
 			inline Point2D GetMousePosition() const { return _mousePosition; }
+			
+			static Window* GetInstance(void* handle);
+
+			void SetVSync(bool vsync);
+			void SetFullScreen(bool fullscreen);
+			static void SetInstance(void* handle, Window* instance);
 
 		private:
-			bool Initialize();
-			void Dispose();
 			bool CreateMainWindow();
 			void InitializeInput();
 			bool CreateContext();
 			void SetupContext();
+			void DestroyContext();
+
+			void* GetHandle();
+			void SetHandle(void* handle);
 
 			friend void resize_callback(Window* window, uint width, uint height);
 			friend void key_callback(Window* window, int key, int command);
