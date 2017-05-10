@@ -5,6 +5,8 @@ using namespace s3dge;
 using namespace graphics;
 using namespace audio;
 
+Mesh* CreateArrowPolygon();
+
 void Application::Initialize()
 {
 	CreateGameWindow("S3DGE Application", 1280, 720, false, true);
@@ -14,8 +16,8 @@ void Application::Initialize()
 	_lastX = mousePos.x;
 	_lastY = mousePos.y;
 
-	horizontalAngle = 0;
-	verticalAngle = 0;
+	horizontalAngle = -1;
+	verticalAngle = -1;
 
 	_shaderScene = new ShaderProgram("Resources\\basic.vs", "Resources\\basic.fs");
 	_shaderHUD = new ShaderProgram("Resources\\basic.vs", "Resources\\basic.fs");
@@ -39,25 +41,7 @@ void Application::Initialize()
 	Label* label2 = LabelFactory::CreateLabel("p:", FontManager::Get("test_font"), Point2D(0.4f, 7.2f), Size2D(2, 2));
 	GraphicsManager::AddLabel("position", label2);
 
-	VertexData* vertexData = new VertexData[3];
-
-	vertexData[0].Position = Point3D(1, 1, -5);
-	vertexData[0].Color = Color(0xff00ffff);
-	vertexData[1].Position = Point3D(2, 0.5, -5);
-	vertexData[1].Color = Color(0xffff00ff);
-	vertexData[2].Position = Point3D(1, 0, -5);
-	vertexData[2].Color = Color(0xffffff00);
-
-	VertexBuffer* vbo = new VertexBuffer(vertexData, sizeof(VertexData), 4);
-
-	uint indices[] = {0, 1, 2};
-	IndexBuffer* ibo = new IndexBuffer(indices, 3);
-
-	Mesh* mesh = MeshFactory::CreateMesh(vbo, ibo);
-
-	delete[] vertexData;
-
-	GraphicsManager::AddMesh("mesh1", mesh);
+	GraphicsManager::AddMesh("mesh1", CreateArrowPolygon());
 
 	_sceneLayer = new Layer(_shaderScene);
 	_hudLayer = new Layer(_shaderHUD);
@@ -73,6 +57,7 @@ void Application::Initialize()
 void Application::UpdateInput()
 {
 	float speed = 0.1f;
+	float mouseSpeed = 0.01f;
 
 	Point3D cameraPosition = _camera->GetPosition();
 	Vector3 position(cameraPosition);
@@ -82,8 +67,8 @@ void Application::UpdateInput()
 
 	Point2D mousePos = WindowInstance->GetMousePosition();
 
-	horizontalAngle += 0;// speed * (_lastX - mousePos.x);
-	verticalAngle += 0;// speed * (_lastY - mousePos.y);
+	horizontalAngle -= mouseSpeed * (_lastX - mousePos.x);
+	verticalAngle += mouseSpeed * (_lastY - mousePos.y);
 
 	printf("xy = %f\t%f\n", _lastX - mousePos.x, _lastY - mousePos.y);
 	
@@ -92,8 +77,8 @@ void Application::UpdateInput()
 
 	printf("angle = %f\t%f\n", horizontalAngle, verticalAngle);
 
-	Vector3 direction(0, 0, -1);// cos(verticalAngle) * sin(horizontalAngle), sin(verticalAngle), cos(verticalAngle) * cos(horizontalAngle));
-	Vector3 right(1, 0, 0); //(float)sin(horizontalAngle - 3.14 / 2.0f), 0, (float)cos(horizontalAngle - 3.14 / 2.0f));
+	Vector3 direction(cos(verticalAngle) * sin(horizontalAngle), sin(verticalAngle), -cos(verticalAngle) * cos(horizontalAngle));
+	Vector3 right(-(float)sin(horizontalAngle - 3.14 / 2.0f), 0, (float)cos(horizontalAngle - 3.14 / 2.0f));
 	Vector3 up((Vector3::GetCrossProduct(right, direction)));
 
 	if (WindowInstance->KeyDown(S3_KEY_W))
@@ -108,6 +93,11 @@ void Application::UpdateInput()
 		position -= speed * up;
 	if (WindowInstance->KeyDown(S3_KEY_E))
 		position += speed * up;
+	if (WindowInstance->KeyDown(S3_KEY_SPACE))
+	{
+		horizontalAngle = 0;
+		verticalAngle = 0;
+	}
 
 	_camera->SetPosition(Point3D(position.x, position.y, position.z));
 	_camera->SetViewDirection(direction);
@@ -130,4 +120,27 @@ void Application::Dispose()
 	SafeDelete(_sceneLayer);
 	SafeDelete(_shaderHUD);
 	SafeDelete(_camera);
+}
+
+Mesh* CreateArrowPolygon()
+{
+	VertexData* vertexData = new VertexData[3];
+
+	vertexData[0].Position = Point3D(1, 1, -5);
+	vertexData[0].Color = Color(0xff00ffff);
+	vertexData[1].Position = Point3D(2, 0.5, -5);
+	vertexData[1].Color = Color(0xffff00ff);
+	vertexData[2].Position = Point3D(1, 0, -5);
+	vertexData[2].Color = Color(0xffffff00);
+
+	VertexBuffer* vbo = new VertexBuffer(vertexData, sizeof(VertexData), 4);
+
+	uint indices[] = { 0, 1, 2 };
+	IndexBuffer* ibo = new IndexBuffer(indices, 3);
+
+	Mesh* mesh = MeshFactory::CreateMesh(vbo, ibo);
+
+	delete[] vertexData;
+
+	return mesh;
 }

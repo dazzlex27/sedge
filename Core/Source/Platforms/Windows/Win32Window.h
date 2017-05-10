@@ -233,8 +233,8 @@ namespace s3dge
 			
 			ScreenToClient(window, &mousePosition);
 
-			if (_hasFocus)
-				SetCursorPos((int)(_width / 2.0f), (int)(_height / 2.0f));
+			//if (_hasFocus)
+			//	SetCursorPos((int)(_width / 2.0f), (int)(_height / 2.0f));
 
 			_mousePosition.x = (float)mousePosition.x;
 			_mousePosition.y = (float)mousePosition.y;

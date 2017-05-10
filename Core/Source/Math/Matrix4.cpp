@@ -259,38 +259,19 @@ Matrix4 Matrix4::GetOrthographic(float left, float right, float bottom, float to
 	return result;
 }
 
-//Matrix4 Matrix4::GetPerspective(float fov, float aspectRatio, float near, float far)
-//{
-//	Matrix4 result = Matrix4::GetIdentity();
-//
-//	float tanHalfFOV = tanf(DegToRad(fov / 2.0f));
-//
-//	result.data[4 * 0 + 0] = 1.0f / (tanHalfFOV * aspectRatio);
-//	result.data[4 * 1 + 1] = 1.0f / tanHalfFOV;
-//	result.data[4 * 2 + 2] = (-near - far) / (near - far);
-//	result.data[4 * 2 + 3] = 2.0f * far * near / (near - far);
-//	result.data[4 * 3 + 2] = -1.0f;
-//
-//	return result;
-//}
-
-Matrix4 Matrix4::GetPerspective(float fov, float aspect, float nearDist, float farDist, bool leftHanded)
+Matrix4 Matrix4::GetPerspective(float fov, float aspect, float near, float far)
 {
-	leftHanded = true;
-
-	float fovRad = DegToRad(fov);
-
 	Matrix4 result = Matrix4::GetIdentity();
 
-	float frustumDepth = farDist - nearDist;
-	float oneOverDepth = 1 / frustumDepth;
+	float frustumDepth = far - near;
+	float oneDivByDepth = 1 / frustumDepth;
+	float fovRad = DegToRad(fov);
 
-	result.data[1 * 4 + 1] = 1 / tan(0.5f * fovRad);
-	result.data[0 * 4 + 0] = (leftHanded ? 1 : -1) * result.data[1 * 4  + 1] / aspect;
-	result.data[2 * 4 + 2] = farDist * oneOverDepth;
-	result.data[3 * 4 + 2] = (-farDist * nearDist) * oneOverDepth;
-	result.data[2 * 4 + 3] = 1;
-	result.data[3 * 4 + 3] = 0;
+	result.data[4 * 1 + 1] = 1 / tan(0.5f * fovRad);
+	result.data[4 * 0 + 0] = result.data[1 * 4 + 1] / aspect;
+	result.data[4 * 2 + 2] = far * oneDivByDepth;
+	result.data[4 * 3 + 2] = (-far * near) * oneDivByDepth;
+	result.data[4 * 2 + 3] = 1;
 
 	return result;
 }
@@ -304,20 +285,19 @@ Matrix4 Matrix4::GetLookAt(const Vector3& eye, const Vector3& center, const Vect
 
 	Matrix4 result(1);
 	result.data[4 * 0 + 0] = s.x;
-	result.data[4 * 0 + 1] = s.y;
-	result.data[4 * 0 + 2] = s.z;
-	result.data[4 * 1 + 0] = u.x;
+	result.data[4 * 1 + 0] = s.y;
+	result.data[4 * 2 + 0] = s.z;
+	result.data[4 * 0 + 1] = u.x;
 	result.data[4 * 1 + 1] = u.y;
-	result.data[4 * 1 + 2] = u.z;
-	result.data[4 * 2 + 0] = f.x;
-	result.data[4 * 2 + 1] = f.y;
+	result.data[4 * 2 + 1] = u.z;
+	result.data[4 * 0 + 2] = f.x;
+	result.data[4 * 1 + 2] = f.y;
 	result.data[4 * 2 + 2] = f.z;
 	result.data[4 * 3 + 0] = -Vector3::GetDotProduct(s, eye);
 	result.data[4 * 3 + 1] = -Vector3::GetDotProduct(u, eye);
 	result.data[4 * 3 + 2] = -Vector3::GetDotProduct(f, eye);
 
 	return result;
-
 }
 
 cstring Matrix4::Print()
