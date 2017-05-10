@@ -12,24 +12,24 @@ Implements the Camera class.
 using namespace s3dge;
 
 Camera::Camera()
-	: _fov(45.0f),
-	_aspectRatio(16.0f / 9.0f),
-	_near(0.1f),
-	_far(100.0f),
-	_viewDirection(Vector3(0, 0, -1)),
-	_up(Vector3(0, 1, 0))
+	: Fov(45.0f),
+	AspectRatio(16.0f / 9.0f),
+	Near(0.1f),
+	Far(100.0f),
+	ViewDirection(Vector3(0, 0, -1)),
+	Up(Vector3(0, 1, 0))
 {
 	UpdatePerspective();
 	UpdateView();
 }
 
 Camera::Camera(float fov, float aspectRatio, float near, float far, const Vector3& viewDirection, const Vector3& up)
-	: _fov(fov),
-	_aspectRatio(aspectRatio),
-	_near(near),
-	_far(far),
-	_viewDirection(viewDirection),
-	_up(up)
+	: Fov(fov),
+	AspectRatio(aspectRatio),
+	Near(near),
+	Far(far),
+	ViewDirection(viewDirection),
+	Up(up)
 {
 	UpdatePerspective();
 	UpdateView();
@@ -41,12 +41,12 @@ Camera::~Camera()
 
 void Camera::UpdatePerspective()
 {
-	_projection = Matrix4::GetPerspective(_fov, _aspectRatio, _near, _far);
+	ProjectionMatrix = Matrix4::GetPerspective(Fov, AspectRatio, Near, Far);
 }
 
 void Camera::UpdateView()
 {
-	_view = Matrix4::GetLookAt(Position, Position + _viewDirection, _up);
+	ViewMatrix = Matrix4::GetLookAt(Position, Position + ViewDirection, Up);
 }
 
 void Camera::SetPosition(const Point3D& position)
@@ -57,37 +57,37 @@ void Camera::SetPosition(const Point3D& position)
 
 void Camera::SetViewDirection(const Vector3& viewDirection)
 {
-	_viewDirection = viewDirection;
+	ViewDirection = viewDirection;
 	UpdateView();
 }
 
 void Camera::SetUp(const Vector3& up)
 {
-	_up = up;
+	Up = up;
 	UpdateView();
 }
 
 void Camera::SetFOV(float fov)
 {
-	_fov = fov;
+	Fov = fov;
 	UpdatePerspective();
 }
 
 void Camera::SetAspectRatio(float aspectRatio)
 {
-	_aspectRatio = aspectRatio;
+	AspectRatio = aspectRatio;
 	UpdatePerspective();
 }
 
 void Camera::SetNear(float near)
 {
-	_near = near;
+	Near = near;
 	UpdatePerspective();
 }
 
 void Camera::SetFar(float far)
 {
-	_far = far;
+	Far = far;
 	UpdatePerspective();
 }
 
@@ -100,12 +100,12 @@ void Camera::Update()
 {
 }
 
-Matrix4 Camera::GetProjection()
+const Matrix4& Camera::GetProjection()
 {
-	return _projection;
+	return ProjectionMatrix;
 }
 
-Matrix4 Camera::GetView()
+const Matrix4& Camera::GetView()
 {
-	return _view;
+	return ViewMatrix;
 }

@@ -22,7 +22,7 @@ void Application::Initialize()
 	_shaderScene = new ShaderProgram("Resources\\basic.vs", "Resources\\basic.fs");
 	_shaderHUD = new ShaderProgram("Resources\\basic.vs", "Resources\\basic.fs");
 	
-	_camera = new Camera();
+	_camera = new FPSCamera();
 
 	_shaderScene->SetProjection(_camera->GetProjection());
 	_shaderHUD->SetProjection(Matrix4::GetOrthographic(0.0f, 16.0f, 0.0f, 9.0f, -1.0f, 10.0f));

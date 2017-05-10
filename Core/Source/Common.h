@@ -33,7 +33,7 @@ This file is included by the main header S3DGE.h
 #include "Graphics/Buffers/IndexBuffer.h"
 #include "Graphics/Buffers/VertexBuffer.h"
 
-#include "Logic/Objects/Camera.h"
+#include "Logic/Cameras/FPSCamera.h"
 
 #include "Graphics/Renderables/Mesh.h"
 #include "Graphics/Renderables/MeshFactory.h"

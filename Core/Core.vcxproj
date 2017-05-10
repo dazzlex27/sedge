@@ -124,8 +124,9 @@
     <ClCompile Include="Source\Graphics\Shaders\ShaderProgram.cpp" />
     <ClCompile Include="Source\Graphics\Textures\Texture2D.cpp" />
     <ClCompile Include="Source\Graphics\Textures\TextureManager.cpp" />
+    <ClCompile Include="Source\Logic\Cameras\FPSCamera.cpp" />
     <ClCompile Include="Source\Logic\Objects\BaseObject.cpp" />
-    <ClCompile Include="Source\Logic\Objects\Camera.cpp" />
+    <ClCompile Include="Source\Logic\Cameras\Camera.cpp" />
     <ClCompile Include="Source\Logic\Objects\Entity.cpp" />
     <ClCompile Include="Source\Math\Matrix4.cpp" />
     <ClCompile Include="Source\Math\Vector2.cpp" />
@@ -145,6 +146,7 @@
     <ClInclude Include="Source\Audio\SoundFactory.h" />
     <ClInclude Include="Source\Audio\SoundManager.h" />
     <ClInclude Include="Source\Common.h" />
+    <ClInclude Include="Source\Logic\Cameras\FPSCamera.h" />
     <ClInclude Include="Source\Math\Size3D.h" />
     <ClInclude Include="Source\Graphics\Renderables\Mesh.h" />
     <ClInclude Include="Source\Graphics\Renderables\MeshFactory.h" />
@@ -183,7 +185,7 @@
     <ClInclude Include="Source\Logic\Components\PhysicsComponent.h" />
     <ClInclude Include="Source\Logic\Components\GraphicsComponent.h" />
     <ClInclude Include="Source\Logic\Objects\BaseObject.h" />
-    <ClInclude Include="Source\Logic\Objects\Camera.h" />
+    <ClInclude Include="Source\Logic\Cameras\Camera.h" />
     <ClInclude Include="Source\Logic\Objects\Entity.h" />
     <ClInclude Include="Source\Platforms\KeyCodes.h" />
     <ClInclude Include="Source\Platforms\Windows\Win32InputKeys.h" />
