@@ -109,7 +109,7 @@
     <ClCompile Include="Source\Graphics\Renderables\MeshFactory.cpp" />
     <ClCompile Include="Source\Graphics\Renderables\Renderable2D.cpp" />
     <ClCompile Include="Source\Graphics\Renderables\SpriteFactory.cpp" />
-    <ClCompile Include="Source\Graphics\Scenes\Scene.cpp" />
+    <ClCompile Include="Source\Graphics\Renderers\RendererBF.cpp" />
     <ClCompile Include="Source\Graphics\Structures\VertexLayout.cpp" />
     <ClCompile Include="Source\Graphics\Textures\TextureFactory.cpp" />
     <ClCompile Include="Source\Internal\MemoryManager.cpp" />
@@ -125,9 +125,11 @@
     <ClCompile Include="Source\Graphics\Textures\Texture2D.cpp" />
     <ClCompile Include="Source\Graphics\Textures\TextureManager.cpp" />
     <ClCompile Include="Source\Logic\Cameras\FPSCamera.cpp" />
+    <ClCompile Include="Source\Logic\Cameras\TPSCamera.cpp" />
     <ClCompile Include="Source\Logic\Objects\BaseObject.cpp" />
     <ClCompile Include="Source\Logic\Cameras\Camera.cpp" />
     <ClCompile Include="Source\Logic\Objects\Entity.cpp" />
+    <ClCompile Include="Source\Logic\Objects\Scene.cpp" />
     <ClCompile Include="Source\Math\Matrix4.cpp" />
     <ClCompile Include="Source\Math\Vector2.cpp" />
     <ClCompile Include="Source\Math\Vector3.cpp" />
@@ -146,7 +148,11 @@
     <ClInclude Include="Source\Audio\SoundFactory.h" />
     <ClInclude Include="Source\Audio\SoundManager.h" />
     <ClInclude Include="Source\Common.h" />
+    <ClInclude Include="Source\Graphics\Renderables\Renderable.h" />
+    <ClInclude Include="Source\Graphics\Renderers\RendererBF.h" />
     <ClInclude Include="Source\Logic\Cameras\FPSCamera.h" />
+    <ClInclude Include="Source\Logic\Cameras\TPSCamera.h" />
+    <ClInclude Include="Source\Logic\Objects\Scene.h" />
     <ClInclude Include="Source\Math\Size3D.h" />
     <ClInclude Include="Source\Graphics\Renderables\Mesh.h" />
     <ClInclude Include="Source\Graphics\Renderables\MeshFactory.h" />
@@ -161,7 +167,6 @@
     <ClInclude Include="Source\Graphics\Structures\VertexData.h" />
     <ClInclude Include="Source\Math\Point2D.h" />
     <ClInclude Include="Source\Math\Point3D.h" />
-    <ClInclude Include="Source\Graphics\Scenes\Scene.h" />
     <ClInclude Include="Source\Math\Size2D.h" />
     <ClInclude Include="Source\Graphics\Structures\VertexLayout.h" />
     <ClInclude Include="Source\Graphics\Textures\TextureFactory.h" />

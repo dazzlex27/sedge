@@ -9,6 +9,7 @@ Base class for all 2D renderable objects.
 #pragma once
 
 #include <vector>
+#include "Renderable.h"
 #include "Graphics/Structures/Color.h"
 #include "Math/Point2D.h"
 #include "Math/Point3D.h"

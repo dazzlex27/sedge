@@ -16,6 +16,11 @@ Represents a game entity.
 
 namespace s3dge
 {
+	namespace graphics
+	{
+		class Renderable;
+	}
+
 	class Entity : public BaseObject
 	{
 	protected:
@@ -23,6 +28,9 @@ namespace s3dge
 		Vector3 Scale;
 		Vector3 Rotation;
 		Matrix4 ModelMatrix;
+
+	private:
+		graphics::Renderable* _renderable;
 
 	public:
 		Entity();
@@ -41,10 +49,12 @@ namespace s3dge
 		inline virtual const Vector3& GetScale() const { return Scale; }
 		inline virtual const Vector3& GetRotation() const { return Rotation; }
 		inline virtual const Matrix4& GetModelMatrix() const { return ModelMatrix; }
+		inline virtual const graphics::Renderable* GetRenderable() const { return _renderable; }
 
 		virtual void SetPosition(const Point3D& position);
 		virtual void SetScale(const Vector3& scale);
 		virtual void SetRotation(const Vector3& rotation);
+		virtual void SetRenderable(graphics::Renderable* renderable);
 
 	private:
 		void UpdateModelMatrix();

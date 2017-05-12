@@ -7,7 +7,6 @@ Implements the Camera class.
 */
 
 #include "Camera.h"
-#include "Math/Matrix4.h"
 
 using namespace s3dge;
 
@@ -89,15 +88,6 @@ void Camera::SetFar(float far)
 {
 	Far = far;
 	UpdatePerspective();
-}
-
-void Camera::Render()
-{
-
-}
-
-void Camera::Update()
-{
 }
 
 const Matrix4& Camera::GetProjection()

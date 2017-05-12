@@ -27,6 +27,11 @@ void Entity::SetRotation(const Vector3& rotation)
 	UpdateModelMatrix();
 }
 
+void Entity::SetRenderable(graphics::Renderable* renderable)
+{
+	_renderable = renderable;
+}
+
 void Entity::UpdateModelMatrix()
 {
 	Matrix4 translation = Matrix4::Translate(Position);

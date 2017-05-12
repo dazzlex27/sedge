@@ -42,6 +42,7 @@ namespace s3dge
 
 			void SetProjection(const Matrix4& projectionMatrix);
 			void SetView(const Matrix4& viewMatrix);
+			void SetModel(const Matrix4& modelMatrix);
 
 		private:
 			uint Load();

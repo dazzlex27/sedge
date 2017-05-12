@@ -8,6 +8,7 @@ Declares the Mesh class
 
 #pragma once
 
+#include "Renderable.h"
 #include "Math/Vector3.h"
 #include "Graphics/Structures/Color.h"
 
@@ -23,7 +24,7 @@ namespace s3dge
 		class Renderer;
 		class VertexLayout;
 
-		class Mesh
+		class Mesh : public Renderable
 		{
 		private:
 			VertexArray* _vao;
@@ -47,7 +48,7 @@ namespace s3dge
 			IndexBuffer* GetIBO() const { return _ibo; }
 
 			void Submit(Renderer* renderer) const;
-			void Render() const;
+			void Render() const override;
 
 		private:
 			VertexLayout GetDefaultVertexLayout();
