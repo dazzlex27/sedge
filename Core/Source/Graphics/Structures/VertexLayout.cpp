@@ -1,7 +1,6 @@
 #include "VertexLayout.h"
 
 using namespace s3dge;
-using namespace graphics;
 
 void VertexLayout::AddEntry(LayoutAttribute * attribute)
 {

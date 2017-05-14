@@ -16,18 +16,15 @@ namespace s3dge
 	struct Point2D;
 	struct Size2D;
 
-	namespace graphics
-	{
-		class Texture2D;
-		class Sprite;
-		class Label;
-		class Font;
+	class Texture2D;
+	class Sprite;
+	class Label;
+	class Font;
 
-		class SpriteFactory
-		{
-		public:
-			static Sprite* CreateSprite(const Point2D& position, float zIndex, const Size2D& size, Texture2D* texture);
-			static Sprite* CreateSprite(const Point2D& position, float zIndex, const Size2D& size, const Color& color = 0xffffffff);
-		};
-	}
+	class SpriteFactory
+	{
+	public:
+		static Sprite* CreateSprite(const Point2D& position, float zIndex, const Size2D& size, Texture2D* texture);
+		static Sprite* CreateSprite(const Point2D& position, float zIndex, const Size2D& size, const Color& color = 0xffffffff);
+	};
 }

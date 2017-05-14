@@ -7,13 +7,12 @@ Contains basic high-level window management functions.
 */
 
 #include "Window.h"
-#include "Internal/Log.h"
-#include "Internal/DeleteMacros.h"
-#include "Platforms/KeyCodes.h"
-#include "Utilities/Timers/Timer.h"
+#include "KeyCodes.h"
+#include "System/Log.h"
+#include "System/DeleteMacros.h"
+#include "System/Timer.h"
 
 using namespace s3dge;
-using namespace graphics;
 
 std::map<void*, Window*> Window::Instances;
 
@@ -99,7 +98,6 @@ void* Window::GetHandle()
 {
 	return _handle;
 }
-
 
 void Window::SetHandle(void* handle)
 {

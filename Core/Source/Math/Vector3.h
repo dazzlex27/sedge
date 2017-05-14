@@ -10,6 +10,7 @@ Implements a 3-component vector class
 
 namespace s3dge
 {
+	struct Matrix4;
 	struct Point3D;
 
 	struct Vector3
@@ -49,6 +50,8 @@ namespace s3dge
 		friend Vector3 operator-(float value, const Vector3& v);
 		friend Vector3 operator*(float value, const Vector3& v);
 		friend Vector3 operator/(float value, const Vector3& v);
+
+		friend Vector3 operator*(const Matrix4& m ,const Vector3& v);
 
 		static Vector3 Normalize(const Vector3& vector);
 		float GetDistance(const Vector3& v) const;

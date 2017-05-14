@@ -7,10 +7,9 @@ Implements the Group class
 */
 
 #include "Group.h"
-#include "Internal/DeleteMacros.h"
+#include "System/DeleteMacros.h"
 
 using namespace s3dge;
-using namespace graphics;
 
 Group::Group()
 {

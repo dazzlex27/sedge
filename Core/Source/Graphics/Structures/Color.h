@@ -11,22 +11,36 @@ Uses uint internally to store the actual RGB-color value.
 
 #include "CustomTypes.h"
 #include "Math/Vector4.h"
-#include "Utilities/Converters.h"
 
 namespace s3dge
 {
-	namespace graphics
+	struct Color
 	{
-		struct Color
-		{
-			uint value;
+		uint value;
 
-			Color() : value(0) { }
-			Color(uint value) : value(value) { }
-			Color(const Vector4& value) : value(ConvertColorToUint(value)) { }
-			~Color() { }
+		Color() : value(0) { }
+		Color(uint value) : value(value) { }
+		Color(const Vector4& color)
+		{ 
+			int red = (int)(color.x * 255);
+			int green = (int)(color.y * 255);
+			int blue = (int)(color.z * 255);
+			int alpha = (int)(color.w * 255);
 
-			const Vector4& GetValueVec4() const { return ConvertColorToVec4(value); }
-		};
-	}
+			value =  alpha << 24 | blue << 16 | green << 8 | red;
+		}
+		~Color() { }
+
+		const Vector4& GetValueVec4() const 
+		{ 
+			Vector4 result;
+
+			result.x = (float)(value >> 0);
+			result.y = (float)(value >> 8);
+			result.z = (float)(value >> 16);
+			result.w = (float)(value >> 24);
+
+			return result;
+		}
+	};
 }

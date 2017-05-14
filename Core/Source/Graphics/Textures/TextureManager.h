@@ -15,27 +15,24 @@ TODO: standartize all of the manager classes
 
 namespace s3dge
 {
-	namespace graphics
+	class TextureManager
 	{
-		class TextureManager
-		{
-		private:
-			static std::vector<Texture2D*> _textures;
-			static bool _initialized;
+	private:
+		static std::vector<Texture2D*> _textures;
+		static bool _initialized;
 
-		public:
-			static void Initialize();
-			static void Add(cstring name, cstring path, bool overrideExisting = false);
-			static Texture2D* Get(cstring name);
-			static void Dispose();
+	public:
+		static void Initialize();
+		static void Add(cstring name, cstring path, TextureWrapMode wrapMode = REPEAT, TextureFilterMode filterModebool = LINEAR, bool overrideExisting = false);
+		static Texture2D* Get(cstring name);
+		static void Dispose();
 
-			static inline uint GetCount() { return _textures.size(); }
+		static inline uint GetCount() { return _textures.size(); }
 
-		private:
-			TextureManager();
-			TextureManager(const TextureManager& tRef) = delete;
-			TextureManager& operator = (const TextureManager& tRef) = delete;
-			~TextureManager(void) {}
-		};
-	}
+	private:
+		TextureManager();
+		TextureManager(const TextureManager& tRef) = delete;
+		TextureManager& operator = (const TextureManager& tRef) = delete;
+		~TextureManager(void) {}
+	};
 }

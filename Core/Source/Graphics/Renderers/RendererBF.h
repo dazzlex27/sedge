@@ -5,23 +5,20 @@
 
 namespace s3dge
 {
-	namespace graphics
+	class Mesh;
+
+	class RendererBF : public Renderer
 	{
-		class Mesh;
+	private:
+		std::vector<const Mesh*> _renderables;
 
-		class RendererBF : public Renderer
-		{
-		private:
-			std::vector<const Mesh*> _renderables;
+	public:
+		RendererBF();
+		virtual ~RendererBF();
 
-		public:
-			RendererBF();
-			virtual ~RendererBF();
-
-			virtual void Begin() override;
-			virtual void SubmitMesh(const Mesh* mesh) override;
-			virtual void Flush() override;
-			virtual void End() override;
-		};
-	}
+		virtual void Begin() override;
+		virtual void SubmitMesh(const Mesh* mesh) override;
+		virtual void Flush() override;
+		virtual void End() override;
+	};
 }

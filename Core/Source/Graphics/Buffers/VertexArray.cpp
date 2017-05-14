@@ -8,12 +8,11 @@ Implements the VertexArray class
 
 #include "VertexArray.h"
 #include <GL/glew.h>
-#include "Internal/DeleteMacros.h"
 #include "VertexBuffer.h"
 #include "Graphics/Structures/VertexData.h"
+#include "System/DeleteMacros.h"
 
 using namespace s3dge;
-using namespace graphics;
 	
 VertexArray::VertexArray()
 {

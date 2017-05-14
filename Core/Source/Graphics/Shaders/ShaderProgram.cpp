@@ -1,10 +1,13 @@
 #include "ShaderProgram.h"
 #include <GL/glew.h>
-#include "Internal/Log.h"
-#include "Utilities/FileUtils.h"
+#include "System/Log.h"
+#include "System/FileUtils.h"
+#include "Math/Vector2.h"
+#include "Math/Vector3.h"
+#include "Math/Vector4.h"
+#include "Math/Matrix4.h"
 
 using namespace s3dge;
-using namespace graphics;
 
 ShaderProgram::ShaderProgram(cstring vertexPath, cstring fragmentPath)
 	: _vertexPath(vertexPath), _fragmentPath(fragmentPath)
@@ -102,12 +105,18 @@ void ShaderProgram::SetView(const Matrix4& matrix)
 	this->SetUniformMat4fv("vw_matrix", matrix);
 }
 
-void ShaderProgram::Enable()
+void ShaderProgram::SetModel(const Matrix4& matrix)
+{
+	this->Enable();
+	this->SetUniformMat4fv("ml_matrix", matrix);
+}
+
+void ShaderProgram::Enable() const
 {
 	glUseProgram(_programID);
 }
 
-void ShaderProgram::Disable()
+void ShaderProgram::Disable() const
 {
 	glUseProgram(0);
 }

@@ -7,18 +7,16 @@ Implemlents the Mesh class
 */
 
 #include "Mesh.h"
-
 #include "Graphics/Textures/Texture2D.h"
 #include "Graphics/Buffers/VertexArray.h"
 #include "Graphics/Buffers/VertexBuffer.h"
-#include "Graphics/Buffers/IndexBuffer.h"
-#include "Internal/DeleteMacros.h"
+#include "Graphics/Buffers/ElementBuffer.h"
 #include "Graphics/Renderers/Renderer.h"
 #include "Graphics/Structures/VertexLayout.h"
 #include "Graphics/Structures/VertexData.h"
+#include "System/DeleteMacros.h"
 
 using namespace s3dge;
-using namespace graphics;
 using namespace std;
 
 #define GL_FLOAT 0x1406
@@ -35,7 +33,7 @@ VertexLayout GetDefaultLayout()
 	return layout;
 }
 
-Mesh::Mesh(VertexBuffer* vbo, IndexBuffer* ibo)
+Mesh::Mesh(VertexBuffer* vbo, ElementBuffer* ibo)
 	: _ibo(ibo), _vbo(vbo), texture(nullptr)
 {
 	_vao = new VertexArray();
@@ -47,7 +45,7 @@ Mesh::Mesh(VertexBuffer* vbo, IndexBuffer* ibo)
 	_vao->AddBuffer(vbo);
 }
 
-Mesh::Mesh(VertexBuffer* vbo, IndexBuffer* ibo, Texture2D* texture)
+Mesh::Mesh(VertexBuffer* vbo, ElementBuffer* ibo, Texture2D* texture)
 	: _ibo(ibo), texture(texture), _vbo(vbo)
 {
 	_vao = new VertexArray();

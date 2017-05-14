@@ -22,28 +22,25 @@ namespace ftgl
 
 namespace s3dge
 {
-	namespace graphics
+	class Font
 	{
-		class Font
-		{
-		private:
-			cstring _name;
-			cstring _path;
-			float _size;
-			ftgl::texture_atlas_t* _atlas;
-			ftgl::texture_font_t* _font;
+	private:
+		cstring _name;
+		cstring _path;
+		float _size;
+		ftgl::texture_atlas_t* _atlas;
+		ftgl::texture_font_t* _font;
 
-		public:
-			Font(cstring name, cstring path, float size);
-			~Font();
+	public:
+		Font(cstring name, cstring path, float size);
+		~Font();
 
-			uint GetAtlasID() const;
-			inline ftgl::texture_font_t* GetFontFace() const { return _font; }
-			inline cstring GetName() const { return _name; }
+		uint GetAtlasID() const;
+		inline ftgl::texture_font_t* GetFontFace() const { return _font; }
+		inline cstring GetName() const { return _name; }
 
-		private:
-			bool Initialize();
-			void LoadFontFromFile();
-		};
-	}
+	private:
+		bool Initialize();
+		void LoadFontFromFile();
+	};
 }

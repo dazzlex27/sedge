@@ -8,13 +8,13 @@ Implements the audio manager class.
 
 #include "SoundManager.h"
 #include "SoundFactory.h"
+#include "Sound.h"
 #include <gorilla/ga.h>
 #include <gorilla/gau.h>
-#include "Internal/Log.h"
-#include "Internal/DeleteMacros.h"
+#include "System/Log.h"
+#include "System/DeleteMacros.h"
 
 using namespace s3dge;
-using namespace audio;
 
 std::vector<Sound*> SoundManager::_sounds;
 bool SoundManager::_initialized;

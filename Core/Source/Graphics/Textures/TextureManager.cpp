@@ -8,11 +8,10 @@ Implements the texture manager class.
 
 #include "TextureManager.h"
 #include "TextureFactory.h"
-#include "Internal/Log.h"
-#include "Internal/DeleteMacros.h"
+#include "System/Log.h"
+#include "System/DeleteMacros.h"
 
 using namespace s3dge;
-using namespace graphics;
 	
 std::vector<Texture2D*> TextureManager::_textures;
 bool TextureManager::_initialized;
@@ -23,7 +22,7 @@ void TextureManager::Initialize()
 	_initialized = true;
 }
 
-void TextureManager::Add(cstring name, cstring path, bool overrideExisting)
+void TextureManager::Add(cstring name, cstring path, TextureWrapMode wrapMode, TextureFilterMode filterMode, bool overrideExisting)
 {
 	if (_initialized)
 	{
@@ -31,7 +30,7 @@ void TextureManager::Add(cstring name, cstring path, bool overrideExisting)
 		{
 			if (overrideExisting)
 			{
-				Texture2D* newTexture = TextureFactory::CreateTexture(name, path);
+				Texture2D* newTexture = TextureFactory::CreateTextureFromFile(name, path, wrapMode, filterMode);
 				if (newTexture != nullptr)
 					_textures.push_back(newTexture);
 			}
@@ -43,7 +42,7 @@ void TextureManager::Add(cstring name, cstring path, bool overrideExisting)
 			return;
 		}
 
-		Texture2D* newTexture = TextureFactory::CreateTexture(name, path);
+		Texture2D* newTexture = TextureFactory::CreateTextureFromFile(name, path, wrapMode, filterMode);
 		if (newTexture != nullptr)
 			_textures.push_back(newTexture);
 	}

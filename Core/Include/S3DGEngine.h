@@ -3,17 +3,25 @@
 S3DGE.h
 
 Main header file for the engine.
-Class S3DGE must be inherited in order to build applications on the engine.
+The S3DGEngine class must be inherited in order to build applications using the engine.
 ===========================================================================
 */
 
 #pragma once
 
 #include "../Source/Common.h"
-#include "../Source/Internal/enums.h"
 
 namespace s3dge
 {
+	enum ENGINE_STATE
+	{
+		READY,
+		INITIALIZING,
+		RUNNING,
+		DISPOSING,
+		DISPOSED
+	};
+
 	class S3DGEngine
 	{
 	private:
@@ -26,7 +34,7 @@ namespace s3dge
 	protected:
 		S3DGEngine();
 		virtual ~S3DGEngine();
-		graphics::Window* WindowInstance;
+		Window* WindowInstance;
 
 	public:
 		void Run();

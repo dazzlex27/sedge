@@ -10,14 +10,13 @@ Using layers is highly encouraged, event if there's only one. That helps to keep
 */
 
 #include "Layer.h"
-#include "Internal/DeleteMacros.h"
 #include "Graphics/Renderables/Mesh.h"
 #include "Graphics/Renderables/Renderable2D.h"
 #include "Graphics/Renderers/Renderer2D.h"
 #include "Graphics/Shaders/ShaderProgram.h"
+#include "System/DeleteMacros.h"
 
 using namespace s3dge;
-using namespace graphics;
 	
 //Layer::Layer()
 //{

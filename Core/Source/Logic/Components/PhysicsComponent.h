@@ -15,13 +15,10 @@ Should be composed by the entity in question to be enable that entity to interac
 
 namespace s3dge
 {
-	namespace logic
+	class PhysicsComponent : IComponent
 	{
-		class PhysicsComponent : IComponent
-		{
-		public:
-			virtual void Update(Entity* entity, GameWorld* gameWorld) override;
-			virtual ~PhysicsComponent() { }
-		};
-	}
+	public:
+		virtual void Update(Entity* entity, GameWorld* gameWorld) override;
+		virtual ~PhysicsComponent() { }
+	};
 }

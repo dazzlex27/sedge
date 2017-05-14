@@ -7,11 +7,10 @@ Implements the renderables manager class.
 */
 
 #include "GraphicsManager.h"
-#include "Internal/Log.h"
-#include "Internal/DeleteMacros.h"
+#include "System/Log.h"
+#include "System/DeleteMacros.h"
 
 using namespace s3dge;
-using namespace graphics;
 using namespace std;
 
 map<cstring, Sprite*> GraphicsManager::_sprites;

@@ -12,4 +12,7 @@ At the moment only includes image loading. A lot of stuff to do here.
 #include <string.h>
 #include "CustomTypes.h"
 
-byte* LoadImage(cstring path, int* width, int* height, int* components);
+namespace s3dge
+{
+	byte* LoadImage(cstring path, int* width, int* height, int* components);
+}

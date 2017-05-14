@@ -7,11 +7,10 @@ Implements FontFactory class
 */
 
 #include "FontFactory.h"
-#include "Utilities/FileUtils.h"
-#include "Internal/Log.h"
+#include "System/FileUtils.h"
+#include "System/Log.h"
 
 using namespace s3dge;
-using namespace graphics;
 
 Font* FontFactory::CreateDefaultFont()
 {

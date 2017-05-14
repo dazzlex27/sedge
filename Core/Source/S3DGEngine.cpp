@@ -7,11 +7,9 @@ Implementation of the top level engine functions.
 */
 
 #include "../Include/S3DGEngine.h"
-#include "Internal/Log.h"
+#include "System/Log.h"
 
 using namespace s3dge;
-using namespace graphics;
-using namespace audio;
 
 S3DGEngine::S3DGEngine()
 {

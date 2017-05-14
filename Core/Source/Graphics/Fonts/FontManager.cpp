@@ -8,11 +8,10 @@ Implements the font manager class.
 
 #include "FontManager.h"
 #include "FontFactory.h"
-#include "Internal/Log.h"
-#include "Internal/DeleteMacros.h"
+#include "System/Log.h"
+#include "System/DeleteMacros.h"
 
 using namespace s3dge;
-using namespace graphics;
 	
 std::vector<Font*> FontManager::_fonts;
 bool FontManager::_initialized;

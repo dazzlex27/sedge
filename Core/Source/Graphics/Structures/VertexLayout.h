@@ -4,29 +4,26 @@
 
 namespace s3dge
 {
-	namespace graphics
+	struct LayoutAttribute
 	{
-		struct LayoutAttribute
-		{
-			const char* name;
-			int index;
-			int size;
-			int type;
-			int normalized;
-			int stride;
-			const void* offset;
-		};
+		const char* name;
+		int index;
+		int size;
+		int type;
+		int normalized;
+		int stride;
+		const void* offset;
+	};
 
-		class VertexLayout
-		{
-		private:
-			std::vector<LayoutAttribute*> _attributes;
+	class VertexLayout
+	{
+	private:
+		std::vector<LayoutAttribute*> _attributes;
 
-		public:
-			inline const std::vector<LayoutAttribute*>& GetAttributes() const { return _attributes; }
+	public:
+		inline const std::vector<LayoutAttribute*>& GetAttributes() const { return _attributes; }
 
-			void AddEntry(LayoutAttribute* attribute);
-			void AddEntry(const char* name, int index, int size, int type, int normalized, int stride, const void* offset);
-		};
-	}
+		void AddEntry(LayoutAttribute* attribute);
+		void AddEntry(const char* name, int index, int size, int type, int normalized, int stride, const void* offset);
+	};
 }

@@ -12,29 +12,39 @@ Implements the Buffer class
 #include "Graphics/Structures/VertexData.h"
 
 using namespace s3dge;
-using namespace graphics;
-	
-VertexBuffer::VertexBuffer(void* data, int componentSize, uint componentCount)
-	: _componentCount(componentCount), _data(data)
+
+int GetDrawingModeValue(DrawingMode drawingMode)
 {
-	glGenBuffers(1, &_bufferID);
-	glBindBuffer(GL_ARRAY_BUFFER, _bufferID);
-	glBufferData(GL_ARRAY_BUFFER, componentCount * componentSize, data, GL_DYNAMIC_DRAW);
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	int mode = 0;
+
+	switch (drawingMode)
+	{
+	case DrawingMode::DYNAMIC_DRAW:
+		mode = GL_DYNAMIC_DRAW;
+		break;
+	case DrawingMode::STATIC_DRAW:
+		mode = GL_STATIC_DRAW;
+		break;
+	case DrawingMode::STREAM_DRAW:
+		mode = GL_STREAM_DRAW;
+		break;
+	}
+
+	return mode;
 }
 
-VertexBuffer::VertexBuffer(int componentSize, uint componentCount)
-	: _componentCount(componentCount)
+VertexBuffer::VertexBuffer(int elementSize, uint elementCount, void* dataPtr, DrawingMode drawingMode)
+	: Buffer(elementSize, elementCount, dataPtr)
 {
-	glGenBuffers(1, &_bufferID);
-	glBindBuffer(GL_ARRAY_BUFFER, _bufferID);
-	glBufferData(GL_ARRAY_BUFFER, componentCount * componentSize, nullptr, GL_DYNAMIC_DRAW);
+	glGenBuffers(1, &BufferID);
+	glBindBuffer(GL_ARRAY_BUFFER, BufferID);
+	glBufferData(GL_ARRAY_BUFFER, elementSize * elementCount, dataPtr, GetDrawingModeValue(drawingMode));
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
 VertexBuffer::~VertexBuffer()
 {
-	glDeleteBuffers(1, &_bufferID);
+	glDeleteBuffers(1, &BufferID);
 }
 
 void VertexBuffer::SetLayout(VertexLayout* layout)
@@ -54,7 +64,7 @@ void VertexBuffer::SetLayout(VertexLayout* layout)
 
 void VertexBuffer::Bind() const
 {
-	glBindBuffer(GL_ARRAY_BUFFER, _bufferID);
+	glBindBuffer(GL_ARRAY_BUFFER, BufferID);
 }
 
 void VertexBuffer::Unbind() const
@@ -64,7 +74,7 @@ void VertexBuffer::Unbind() const
 
 void VertexBuffer::Map()
 {
-	_data = glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
+	DataPtr = glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
 }
 
 void VertexBuffer::Unmap()

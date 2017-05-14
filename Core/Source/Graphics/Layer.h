@@ -18,47 +18,44 @@ Using layers is highly encouraged, even if there's only one. That helps to keep 
 
 namespace s3dge
 {
-	namespace graphics
+	class ShaderProgram;
+	class Renderable2D;
+	class Mesh;
+	class Renderer2D;
+
+	class Layer
 	{
-		class ShaderProgram;
-		class Renderable2D;
-		class Mesh;
-		class Renderer2D;
+	private:
+		std::vector<Renderable2D*> _renderables; // an array of elements in the layer
+		ShaderProgram* _shaderProgram; // a shader instance
+		Renderer2D* _renderer; // a renderer instance
+		Matrix4 _transformationMatrix; // transformation applied to the layer
+		bool _ownsRenderer; // flag to indicate whether the shader should be disposed by the layer upon deletion
+		bool _ownsShader; // flag to indicate whether the renderer should be disposed by the layer upon deletion
 
-		class Layer
-		{
-		private:
-			std::vector<Renderable2D*> _renderables; // an array of elements in the layer
-			ShaderProgram* _shaderProgram; // a shader instance
-			Renderer2D* _renderer; // a renderer instance
-			Matrix4 _transformationMatrix; // transformation applied to the layer
-			bool _ownsRenderer; // flag to indicate whether the shader should be disposed by the layer upon deletion
-			bool _ownsShader; // flag to indicate whether the renderer should be disposed by the layer upon deletion
+	public:
+		//Layer(); // TODO: needs a default shader
+		Layer(ShaderProgram* shaderProgram);
+		Layer(ShaderProgram* shaderProgram, Renderer2D* renderer);
+		~Layer();
 
-		public:
-			//Layer(); // TODO: needs a default shader
-			Layer(ShaderProgram* shaderProgram);
-			Layer(ShaderProgram* shaderProgram, Renderer2D* renderer);
-			~Layer();
+		void Add(Renderable2D* renderable);
+		void AddMesh(Mesh* mesh);
+		void Render();
 
-			void Add(Renderable2D* renderable);
-			void AddMesh(Mesh* mesh);
-			void Render();
+		const ShaderProgram* GetShaderProgram() const { return _shaderProgram; }
+		void SetShaderProgram(ShaderProgram* shaderProgram);
 
-			const ShaderProgram* GetShaderProgram() const { return _shaderProgram; }
-			void SetShaderProgram(ShaderProgram* shaderProgram);
+		const Renderer2D* GetRenderer() const { return _renderer; }
+		void SetRenderer(Renderer2D* renderer);
 
-			const Renderer2D* GetRenderer() const { return _renderer; }
-			void SetRenderer(Renderer2D* renderer);
+		const Matrix4& GetTransformationMatrix() const { return _transformationMatrix; }
+		void SetTransformationMatrix(Matrix4 matrix);
 
-			const Matrix4& GetTransformationMatrix() const { return _transformationMatrix; }
-			void SetTransformationMatrix(Matrix4 matrix);
+		Layer& operator=(const Layer& other);
 
-			Layer& operator=(const Layer& other);
-
-		private:
-			void Dispose();
-			Layer(const Layer& tRef) = delete;
-		};
-	}
+	private:
+		void Dispose();
+		Layer(const Layer& tRef) = delete;
+	};
 }

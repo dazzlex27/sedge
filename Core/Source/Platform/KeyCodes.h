@@ -10,6 +10,5 @@ This file is included by the common header and hence all the keys defined here a
 #pragma once
 
 #ifdef _WIN32
-	#include "Windows/Win32InputKeys.h"
+	#include "Win32/Win32InputKeys.h"
 #endif
-

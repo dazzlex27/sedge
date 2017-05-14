@@ -20,13 +20,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -100,6 +100,7 @@
     <ClCompile Include="Source\Audio\Sound.cpp" />
     <ClCompile Include="Source\Audio\SoundFactory.cpp" />
     <ClCompile Include="Source\Audio\SoundManager.cpp" />
+    <ClCompile Include="Source\Graphics\Buffers\FrameBuffer.cpp" />
     <ClCompile Include="Source\Graphics\Fonts\Font.cpp" />
     <ClCompile Include="Source\Graphics\Fonts\FontFactory.cpp" />
     <ClCompile Include="Source\Graphics\Fonts\FontManager.cpp" />
@@ -112,9 +113,9 @@
     <ClCompile Include="Source\Graphics\Renderers\RendererBF.cpp" />
     <ClCompile Include="Source\Graphics\Structures\VertexLayout.cpp" />
     <ClCompile Include="Source\Graphics\Textures\TextureFactory.cpp" />
-    <ClCompile Include="Source\Internal\MemoryManager.cpp" />
+    <ClCompile Include="Source\System\MemoryManager.cpp" />
     <ClCompile Include="Source\Graphics\Buffers\VertexBuffer.cpp" />
-    <ClCompile Include="Source\Graphics\Buffers\IndexBuffer.cpp" />
+    <ClCompile Include="Source\Graphics\Buffers\ElementBuffer.cpp" />
     <ClCompile Include="Source\Graphics\Buffers\VertexArray.cpp" />
     <ClCompile Include="Source\Graphics\Renderables\Group.cpp" />
     <ClCompile Include="Source\Graphics\Renderables\Label.cpp" />
@@ -134,13 +135,13 @@
     <ClCompile Include="Source\Math\Vector2.cpp" />
     <ClCompile Include="Source\Math\Vector3.cpp" />
     <ClCompile Include="Source\Math\Vector4.cpp" />
-    <ClCompile Include="Source\Platforms\Platform.cpp" />
-    <ClCompile Include="Source\Graphics\Window.cpp" />
+    <ClCompile Include="Source\Platform\Platform.cpp" />
+    <ClCompile Include="Source\Platform\Window.cpp" />
     <ClCompile Include="Source\S3DGEngine.cpp" />
-    <ClCompile Include="Source\Utilities\FileUtils.cpp" />
-    <ClCompile Include="Source\Utilities\IDGenerator.cpp" />
-    <ClCompile Include="Source\Utilities\ImageUtils.cpp" />
-    <ClCompile Include="Source\Utilities\Timers\Timer.cpp" />
+    <ClCompile Include="Source\System\FileUtils.cpp" />
+    <ClCompile Include="Source\System\IDGenerator.cpp" />
+    <ClCompile Include="Source\System\ImageUtils.cpp" />
+    <ClCompile Include="Source\System\Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Externals\FreeTypeGL\utf8-utils.h" />
@@ -148,7 +149,8 @@
     <ClInclude Include="Source\Audio\SoundFactory.h" />
     <ClInclude Include="Source\Audio\SoundManager.h" />
     <ClInclude Include="Source\Common.h" />
-    <ClInclude Include="Source\Graphics\Enums.h" />
+    <ClInclude Include="Source\Graphics\Buffers\Buffer.h" />
+    <ClInclude Include="Source\Graphics\Buffers\FrameBuffer.h" />
     <ClInclude Include="Source\Graphics\Renderables\Renderable.h" />
     <ClInclude Include="Source\Graphics\Renderers\RendererBF.h" />
     <ClInclude Include="Source\Logic\Cameras\FPSCamera.h" />
@@ -171,11 +173,10 @@
     <ClInclude Include="Source\Math\Size2D.h" />
     <ClInclude Include="Source\Graphics\Structures\VertexLayout.h" />
     <ClInclude Include="Source\Graphics\Textures\TextureFactory.h" />
-    <ClInclude Include="Source\Internal\enums.h" />
-    <ClInclude Include="Source\Internal\MemoryManager.h" />
+    <ClInclude Include="Source\System\MemoryManager.h" />
     <ClInclude Include="Include\S3DGEngine.h" />
     <ClInclude Include="Source\Graphics\Buffers\VertexBuffer.h" />
-    <ClInclude Include="Source\Graphics\Buffers\IndexBuffer.h" />
+    <ClInclude Include="Source\Graphics\Buffers\ElementBuffer.h" />
     <ClInclude Include="Source\Graphics\Buffers\VertexArray.h" />
     <ClInclude Include="Source\Graphics\Renderables\Group.h" />
     <ClInclude Include="Source\Graphics\Renderables\Label.h" />
@@ -193,25 +194,25 @@
     <ClInclude Include="Source\Logic\Objects\BaseObject.h" />
     <ClInclude Include="Source\Logic\Cameras\Camera.h" />
     <ClInclude Include="Source\Logic\Objects\Entity.h" />
-    <ClInclude Include="Source\Platforms\KeyCodes.h" />
-    <ClInclude Include="Source\Platforms\Windows\Win32InputKeys.h" />
-    <ClInclude Include="Source\Platforms\Windows\Win32Window.h" />
-    <ClInclude Include="Source\Platforms\Windows\Win32OpenGLDebug.h" />
+    <ClInclude Include="Source\Platform\KeyCodes.h" />
+    <ClInclude Include="Source\Platform\Win32\Win32InputKeys.h" />
+    <ClInclude Include="Source\Platform\Win32\Win32Window.h" />
+    <ClInclude Include="Source\Platform\Win32\Win32OpenGLDebug.h" />
     <ClInclude Include="Source\Math\Matrix4.h" />
     <ClInclude Include="Source\Math\Vector2.h" />
     <ClInclude Include="Source\Math\Vector3.h" />
     <ClInclude Include="Source\Math\Vector4.h" />
     <ClInclude Include="Source\S3DGECommon.h" />
-    <ClInclude Include="Source\Graphics\Window.h" />
+    <ClInclude Include="Source\Platform\Window.h" />
     <ClInclude Include="Source\CustomTypes.h" />
-    <ClInclude Include="Source\Utilities\Converters.h" />
-    <ClInclude Include="Source\Internal\DeleteMacros.h" />
-    <ClInclude Include="Source\Utilities\FileUtils.h" />
-    <ClInclude Include="Source\Utilities\IDGenerator.h" />
-    <ClInclude Include="Source\Utilities\ImageUtils.h" />
-    <ClInclude Include="Source\Internal\Log.h" />
-    <ClInclude Include="Source\Utilities\RGN.h" />
-    <ClInclude Include="Source\Utilities\Timers\Timer.h" />
+    <ClInclude Include="Source\Math\Converters.h" />
+    <ClInclude Include="Source\System\DeleteMacros.h" />
+    <ClInclude Include="Source\System\FileUtils.h" />
+    <ClInclude Include="Source\System\IDGenerator.h" />
+    <ClInclude Include="Source\System\ImageUtils.h" />
+    <ClInclude Include="Source\System\Log.h" />
+    <ClInclude Include="Source\System\RNG.h" />
+    <ClInclude Include="Source\System\Timer.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Externals\FreeType-GL\FreeType-GL.vcxproj">

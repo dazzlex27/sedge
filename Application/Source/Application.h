@@ -5,10 +5,10 @@
 class Application : public s3dge::S3DGEngine
 {
 private:
-	s3dge::graphics::Layer* _sceneLayer;
-	s3dge::graphics::Layer* _hudLayer;
-	s3dge::graphics::ShaderProgram* _shaderScene;
-	s3dge::graphics::ShaderProgram* _shaderHUD;
+	s3dge::Layer* _sceneLayer;
+	s3dge::Layer* _hudLayer;
+	s3dge::ShaderProgram* _shaderScene;
+	s3dge::ShaderProgram* _shaderHUD;
 	s3dge::Camera* _camera;
 	float horizontalAngle;
 	float verticalAngle;

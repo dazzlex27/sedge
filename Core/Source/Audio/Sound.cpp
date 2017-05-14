@@ -10,10 +10,9 @@ Implements Sound class.
 #include <gorilla/ga.h>
 #include <gorilla/gau.h>
 #include "SoundManager.h"
-#include "Internal/Log.h"
+#include "System/Log.h"
 
 using namespace s3dge;
-using namespace audio;
 
 Sound::Sound(cstring name, cstring path)
 	: _name(name), _path(path), _created(false)
@@ -85,7 +84,7 @@ void Sound::Pause()
 	ga_handle_stop(_handle);
 }
 
-void s3dge::audio::dispose_sound_callback(ga_Handle* handle, void* context)
+void s3dge::dispose_sound_callback(ga_Handle* handle, void* context)
 {
 	Sound* sound = (Sound*)context;
 	sound->_count--;
@@ -94,7 +93,7 @@ void s3dge::audio::dispose_sound_callback(ga_Handle* handle, void* context)
 }
 
 
-void s3dge::audio::loop_sound_callback(ga_Handle* handle, void* context)
+void s3dge::loop_sound_callback(ga_Handle* handle, void* context)
 {
 	Sound* sound = (Sound*)context;
 	sound->Loop();

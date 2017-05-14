@@ -18,41 +18,39 @@ Base class for all 2D renderable objects.
 
 namespace s3dge
 {
-	namespace graphics
+	class Renderer2D;
+	class Texture2D;
+
+	class Renderable2D
 	{
-		class Renderer2D;
-		class Texture2D;
+	protected:
+		Point3D Position;
+		Size2D Size;
+		Color Col;
+		std::vector<Point2D> Uv;
+		Texture2D* Texture;
 
-		class Renderable2D
-		{
-		protected:
-			Point3D _position;
-			Size2D _size;
-			Color _color;
-			std::vector<Point2D> _uv;
-			Texture2D* _texture;
+	protected:
+		Renderable2D();
+		Renderable2D(const Point3D& position, const Size2D& size, const Color& color);
+		Renderable2D(const Point3D& position, const Size2D& size, Texture2D* texture);
 
-		protected:
-			Renderable2D();
-			Renderable2D(const Point3D& position, const Size2D& size, const Color& color);
-			Renderable2D(const Point3D& position, const Size2D& size, Texture2D* texture);
+	public:
+		virtual ~Renderable2D();
+		virtual void Submit(Renderer2D* renderer) const;
 
-		public:
-			virtual ~Renderable2D();
-			virtual void Submit(Renderer2D* renderer) const;
+	public:
+		inline virtual const Point3D& GetPosition() const { return Position; }
+		inline const Size2D& GetSize() const { return Size; }
+		inline const Color& GetColor() const { return Col; }
+		inline std::vector<Point2D> GetUV() const { return Uv; }
+		inline id GetTextureID() const { return Texture ? Texture->GetID() : 0; }
 
-		public:
-			inline virtual const Point3D& GetPosition() const { return _position; }
-			inline const Size2D& GetSize() const { return _size; }
-			inline const Color& GetColor() const { return _color; }
-			inline std::vector<Point2D> GetUV() const { return _uv; }
-			inline id GetTextureID() const { return _texture ? _texture->GetID() : 0; }
+		void SetColor(const Color& color);
+		void SetPosition(const Point3D& position);
+		void SetZIndex(float zIndex);
 
-			void SetColor(const Color& color);
-			void SetPosition(const Point3D& position);
-
-		private:
-			void SetDefaultUVConfiguration();
-		};
-	}
+	private:
+		void SetDefaultUVConfiguration();
+	};
 }

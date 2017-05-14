@@ -7,7 +7,7 @@ Implements timer functions. Will most likely be abstracted to incorporate a few 
 */
 
 #include "Timer.h"
-#include "Internal/Log.h"
+#include "System/Log.h"
 
 using namespace s3dge;
 

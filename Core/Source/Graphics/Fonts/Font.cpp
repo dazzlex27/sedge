@@ -8,12 +8,11 @@ implements the font class
 
 #include "Font.h"
 #include <freetype-gl.h>
-#include "Internal/Log.h"
-#include "Internal/DeleteMacros.h"
-#include "Utilities/FileUtils.h"
+#include "System/Log.h"
+#include "System/DeleteMacros.h"
+#include "System/FileUtils.h"
 
 using namespace s3dge;
-using namespace graphics;
 	
 Font::Font(cstring name, cstring path, float size)
 	: _name(name), _path(path), _size(size)

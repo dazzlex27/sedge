@@ -10,19 +10,18 @@ Set up to process up to 200,000 vertices per frame.
 #include "Renderer2D.h"
 #include <GL/glew.h>
 #include <freetype-gl.h>
-#include "Internal/DeleteMacros.h"
-#include "Internal/Log.h"
 #include "Graphics/Buffers/VertexArray.h"
 #include "Graphics/Buffers/VertexBuffer.h"
+#include "Graphics/Buffers/ElementBuffer.h"
 #include "Graphics/Renderables/Renderable2D.h"
-#include "Graphics/Buffers/IndexBuffer.h"
 #include "Graphics/Fonts/Font.h"
 #include "Graphics/Structures/Color.h"
 #include "Graphics/Renderables/Mesh.h"
 #include "Graphics/Structures/VertexLayout.h"
+#include "System/DeleteMacros.h"
+#include "System/Log.h"
 
 using namespace s3dge;
-using namespace graphics;
 using namespace ftgl;
 
 #define MAX_SPRITES 50000
@@ -77,7 +76,7 @@ void Renderer2D::Initialize()
 		offset += 4;
 	}
 
-	_ibo = new IndexBuffer(indices, MAX_INDICES);
+	_ibo = new ElementBuffer(MAX_INDICES, indices);
 }
 
 void Renderer2D::Begin()

@@ -13,19 +13,16 @@ Represents a class designed to contain groups of renderables together.
 
 namespace s3dge
 {
-	namespace graphics
+	class Group : public Renderable2D
 	{
-		class Group : public Renderable2D
-		{
-		private:
-			std::vector<Renderable2D*> _renderables;
+	private:
+		std::vector<Renderable2D*> _renderables;
 
-		public:
-			Group();
-			~Group();
+	public:
+		Group();
+		~Group();
 
-			void Add(Renderable2D* renderable);
-			void Submit(Renderer2D* renderer);
-		};
-	}
+		void Add(Renderable2D* renderable);
+		void Submit(Renderer2D* renderer);
+	};
 }

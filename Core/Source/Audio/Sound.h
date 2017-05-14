@@ -17,37 +17,34 @@ struct ga_Handle;
 
 namespace s3dge
 {
-	namespace audio
+	class Sound
 	{
-		class Sound
-		{
-		private:
-			cstring _name;
-			cstring _path;
-			ga_Sound* _sound;
-			ga_Handle* _handle;
-			bool _playing;
-			bool _created;
-			int _count;
+	private:
+		cstring _name;
+		cstring _path;
+		ga_Sound* _sound;
+		ga_Handle* _handle;
+		bool _playing;
+		bool _created;
+		int _count;
 
-		public:
-			Sound(cstring name, cstring path);
-		public:
-			~Sound();
+	public:
+		Sound(cstring name, cstring path);
+	public:
+		~Sound();
 
-		public:
-			void Play();
-			void PlayFromStart();
-			void Loop();
-			void Stop();
-			void Pause();
+	public:
+		void Play();
+		void PlayFromStart();
+		void Loop();
+		void Stop();
+		void Pause();
 
-			inline cstring GetName() { return _name; }
-			inline bool IsPlaying() { return _playing; }
+		inline cstring GetName() const { return _name; }
+		inline bool IsPlaying() const { return _playing; }
 
-			friend class SoundManager;
-			friend void dispose_sound_callback(ga_Handle* handle, void* context);
-			friend void loop_sound_callback(ga_Handle* handle, void* context);
-		};
-	}
+		friend class SoundManager;
+		friend void dispose_sound_callback(ga_Handle* handle, void* context);
+		friend void loop_sound_callback(ga_Handle* handle, void* context);
+	};
 }

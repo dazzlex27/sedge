@@ -1,24 +1,28 @@
 #include "MeshFactory.h"
 #include "Mesh.h"
 #include "Graphics/Buffers/VertexBuffer.h"
-#include "Graphics/Buffers/IndexBuffer.h"
+#include "Graphics/Buffers/ElementBuffer.h"
 #include "Graphics/Structures/VertexData.h"
-#include "Internal/Log.h"
 #include "Math/Point3D.h"
 #include "Math/Size3D.h"
-#include "Internal/DeleteMacros.h"
+#include "System/Log.h"
+#include "System/DeleteMacros.h"
 
 using namespace s3dge;
-using namespace graphics;
 
-Mesh* MeshFactory::CreateMesh(VertexBuffer* vbo, IndexBuffer* ibo)
+Mesh* MeshFactory::CreateMesh(VertexBuffer* vbo, ElementBuffer* ibo)
 {
 	Mesh* mesh = new Mesh(vbo, ibo);
 
 	return mesh;
 }
 
-Mesh* MeshFactory::CreateCuboid(const Size3D& size, const Color& color)
+Mesh* MeshFactory::CreateCuboid(const Size3D & size, Texture2D* texture, DrawingMode drawingMode)
+{
+	return nullptr;
+}
+
+Mesh* MeshFactory::CreateCuboid(const Size3D& size, const Color& color, DrawingMode drawingMode)
 {
 	float hw = size.width / 2;
 	float hy = size.height / 2;
@@ -43,7 +47,7 @@ Mesh* MeshFactory::CreateCuboid(const Size3D& size, const Color& color)
 	vertexData[7].Position = Point3D(-hw, hy, -hz);
 	vertexData[7].Color = Color(0xffffff00);
 
-	VertexBuffer* vbo = new VertexBuffer(vertexData, sizeof(VertexData), 8);
+	VertexBuffer* vbo = new VertexBuffer(sizeof(VertexData), 8, vertexData, drawingMode);
 
 	uint indices[] =
 	{
@@ -54,7 +58,7 @@ Mesh* MeshFactory::CreateCuboid(const Size3D& size, const Color& color)
 		16, 17, 18, 16, 18, 19,  //upper
 		20, 21, 22, 20, 22, 23   //bottom
 	};
-	IndexBuffer* ibo = new IndexBuffer(indices, 36);
+	ElementBuffer* ibo = new ElementBuffer(36, indices, drawingMode);
 
 	Mesh* mesh = new Mesh(vbo, ibo);
 
@@ -63,7 +67,7 @@ Mesh* MeshFactory::CreateCuboid(const Size3D& size, const Color& color)
 	return mesh;
 }
 
-Mesh* MeshFactory::CreateCube(float size, Texture2D* texture)
+Mesh* MeshFactory::CreateCube(float size, Texture2D* texture, DrawingMode drawingMode)
 {
 	float h = size / 2;
 
@@ -86,7 +90,7 @@ Mesh* MeshFactory::CreateCube(float size, Texture2D* texture)
 	vertexData[7].Position = Point3D(-h, h, -h);
 	vertexData[7].Color = Color(0xffffff00);
 
-	VertexBuffer* vbo = new VertexBuffer(vertexData, sizeof(VertexData), 8);
+	VertexBuffer* vbo = new VertexBuffer(sizeof(VertexData), 8, vertexData, drawingMode);
 
 	uint indices[] =
 	{
@@ -97,7 +101,7 @@ Mesh* MeshFactory::CreateCube(float size, Texture2D* texture)
 		16, 17, 18, 16, 18, 19,  //upper
 		20, 21, 22, 20, 22, 23   //bottom
 	};
-	IndexBuffer* ibo = new IndexBuffer(indices, 36);
+	ElementBuffer* ibo = new ElementBuffer(36, indices, drawingMode);
 
 	Mesh* mesh = new Mesh(vbo, ibo, texture);
 
@@ -106,7 +110,7 @@ Mesh* MeshFactory::CreateCube(float size, Texture2D* texture)
 	return mesh;
 }
 
-Mesh* MeshFactory::CreateCube(float size, const Color& color)
+Mesh* MeshFactory::CreateCube(float size, const Color& color, DrawingMode drawingMode)
 {
 	float h = size / 2;
 
@@ -129,7 +133,7 @@ Mesh* MeshFactory::CreateCube(float size, const Color& color)
 	vertexData[7].Position = Point3D(-h, h, -h);
 	vertexData[7].Color = color;
 
-	VertexBuffer* vbo = new VertexBuffer(vertexData, sizeof(VertexData), 8);
+	VertexBuffer* vbo = new VertexBuffer(sizeof(VertexData), 8, vertexData, drawingMode);
 
 	uint indices[] =
 	{
@@ -140,7 +144,7 @@ Mesh* MeshFactory::CreateCube(float size, const Color& color)
 		16, 17, 18, 16, 18, 19,  //upper
 		20, 21, 22, 20, 22, 23   //bottom
 	};
-	IndexBuffer* ibo = new IndexBuffer(indices, 36);
+	ElementBuffer* ibo = new ElementBuffer(36, indices, drawingMode);
 
 	Mesh* mesh = new Mesh(vbo, ibo);
 

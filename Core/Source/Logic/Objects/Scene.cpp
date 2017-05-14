@@ -1,12 +1,19 @@
+/*
+===========================================================================
+Scene.cpp
+
+Implements the Scene class
+===========================================================================
+*/
+
 #include "Scene.h"
 #include "Entity.h"
 #include "Logic/Cameras/Camera.h"
 #include "Graphics/Renderers/RendererBF.h"
-#include "Internal/DeleteMacros.h"
+#include "System/DeleteMacros.h"
 #include "Graphics/Shaders/ShaderProgram.h"
 
 using namespace s3dge;
-using namespace graphics;
 
 Scene::Scene(ShaderProgram* shaderProgram)
 {

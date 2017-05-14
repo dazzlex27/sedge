@@ -15,13 +15,10 @@ Should be composed by the entity in question to be enable that entity to respond
 
 namespace s3dge
 {
-	namespace logic
+	class InputComponent : IComponent
 	{
-		class InputComponent : IComponent
-		{
-		public:
-			virtual void Update(Entity* entity, GameWorld* gameWorld) override;
-			virtual ~InputComponent() { }
-		};
-	}
+	public:
+		virtual void Update(Entity* entity, GameWorld* gameWorld) override;
+		virtual ~InputComponent() { }
+	};
 }

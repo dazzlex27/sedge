@@ -1,9 +1,17 @@
+/*
+===========================================================================
+Matrix4.cpp
+
+Implements the Matrix4 class
+===========================================================================
+*/
+
 #define _USE_MATH_DEFINES
 #include <string>
 #include "Matrix4.h"
 #include "Vector3.h"
-#include "Internal/Log.h"
-#include "Utilities/Converters.h"
+#include "System/Log.h"
+#include "Converters.h"
 
 using namespace s3dge;
 
@@ -247,7 +255,6 @@ Matrix4 Matrix4::GetIdentity()
 Matrix4 Matrix4::GetOrthographic(float left, float right, float bottom, float top, float near, float far)
 {
 	Matrix4 result = Matrix4::GetIdentity();
-
 	result.data[4 * 0 + 0] = 2 / (right - left);
 	result.data[4 * 1 + 1] = 2 / (top - bottom);
 	result.data[4 * 2 + 2] = -2 / (far - near);
@@ -282,7 +289,7 @@ Matrix4 Matrix4::LookAt(const Vector3& eye, const Vector3& target, const Vector3
 	Vector3 s(Vector3::Normalize(Vector3::GetCrossProduct(f, up)));
 	Vector3 u(Vector3::Normalize(Vector3::GetCrossProduct(s, f)));
 
-	Matrix4 result(GetIdentity());
+	Matrix4 result = GetIdentity();
 	result.data[4 * 0 + 0] = s.x;
 	result.data[4 * 1 + 0] = s.y;
 	result.data[4 * 2 + 0] = s.z;

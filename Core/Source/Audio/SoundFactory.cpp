@@ -7,11 +7,11 @@ Implements SoundFactory class
 */
 
 #include "SoundFactory.h"
-#include "Utilities/FileUtils.h"
-#include "Internal/Log.h"
+#include "Sound.h"
+#include "System/FileUtils.h"
+#include "System/Log.h"
 
 using namespace s3dge;
-using namespace audio;
 
 Sound* SoundFactory::CreateSound(cstring name, cstring path)
 {

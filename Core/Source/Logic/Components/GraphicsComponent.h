@@ -15,13 +15,10 @@ Should be composed by the entity in question to be enable that entity to be disp
 
 namespace s3dge
 {
-	namespace logic
+	class GraphicsComponent : IComponent
 	{
-		class GraphicsComponent : IComponent
-		{
-		public:
-			virtual void Update(Entity* entity, GameWorld* gameWorld) override;
-			virtual ~GraphicsComponent() { }
-		};
-	}
+	public:
+		virtual void Update(Entity* entity, GameWorld* gameWorld) override;
+		virtual ~GraphicsComponent() { }
+	};
 }

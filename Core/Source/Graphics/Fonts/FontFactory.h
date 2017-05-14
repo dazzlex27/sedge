@@ -12,19 +12,16 @@ Takes responsibility for creating Font objects
 
 namespace s3dge
 {
-	namespace graphics
+	class FontFactory
 	{
-		class FontFactory
-		{
-		public:
-			static Font* CreateDefaultFont();
-			static Font* CreateFont(cstring name, cstring path, float size);
+	public:
+		static Font* CreateDefaultFont();
+		static Font* CreateFont(cstring name, cstring path, float size);
 
-		private:
-			FontFactory();
-			FontFactory(const FontFactory& tRef) = delete;
-			FontFactory& operator = (const FontFactory& tRef) = delete;
-			~FontFactory(void) {}
-		};
-	}
+	private:
+		FontFactory();
+		FontFactory(const FontFactory& tRef) = delete;
+		FontFactory& operator = (const FontFactory& tRef) = delete;
+		~FontFactory(void) {}
+	};
 }

@@ -2,7 +2,6 @@
 #include "Graphics/Renderables/Mesh.h"
 
 using namespace s3dge;
-using namespace graphics;
 using namespace std;
 
 RendererBF::RendererBF()

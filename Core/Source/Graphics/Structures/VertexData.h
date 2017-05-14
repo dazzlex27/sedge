@@ -15,14 +15,11 @@ This file contains the necessary VertexData structures used by the Graphics name
 
 namespace s3dge
 {
-	namespace graphics
+	struct VertexData
 	{
-		struct VertexData
-		{
-			Point3D Position;
-			Color Color;
-			Point2D UV;
-			float TextureID;
-		};
-	}
+		Point3D Position;
+		Color Color;
+		Point2D UV;
+		float TextureID;
+	};
 }

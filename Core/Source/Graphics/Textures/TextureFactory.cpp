@@ -7,18 +7,17 @@ Implements TextureFactory class
 */
 
 #include "TextureFactory.h"
-#include "Utilities/FileUtils.h"
-#include "Internal/Log.h"
+#include "System/FileUtils.h"
+#include "System/Log.h"
 
 using namespace s3dge;
-using namespace graphics;
 
 Texture2D* TextureFactory::CreateDefaultTexture()
 {
 	return nullptr;
 }
 
-Texture2D* TextureFactory::CreateTexture(cstring name, cstring path)
+Texture2D* TextureFactory::CreateTextureFromFile(cstring name, cstring path, TextureWrapMode wrapMode, TextureFilterMode filterMode)
 {
 	if (strcmp(name, "") == 0)
 	{
@@ -38,5 +37,13 @@ Texture2D* TextureFactory::CreateTexture(cstring name, cstring path)
 		return nullptr;
 	}
 
-	return new Texture2D(name, path);
+	Texture2D* texture = new Texture2D(name, path, wrapMode, filterMode);
+
+	if (!texture->Load())
+	{
+		LOG_ERROR("Failed to load texture: ", name);
+		return nullptr;
+	}
+
+	return texture;
 }

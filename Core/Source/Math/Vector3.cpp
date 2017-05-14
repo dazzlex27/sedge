@@ -8,6 +8,7 @@ Implements a 3-component vector class
 
 #include "Vector3.h"
 #include "Math/Point3D.h"
+#include "Matrix4.h"
 #include <cmath>
 
 using namespace s3dge;
@@ -160,6 +161,12 @@ Vector3 s3dge::operator*(float value, const Vector3& v)
 Vector3 s3dge::operator/(float value, const Vector3& v)
 {
 	return Vector3(v.x / value, v.y / value, v.z / value);
+}
+
+Vector3 s3dge::operator*(const Matrix4& m, const Vector3& v)
+{
+	// TODO
+	return Vector3();
 }
 
 Vector3 Vector3::Normalize(const Vector3& vector)

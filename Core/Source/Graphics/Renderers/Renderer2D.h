@@ -16,42 +16,39 @@ Declares the Renderer2D class.
 
 namespace s3dge
 {
-	namespace graphics
+	class Mesh;
+	class Renderable2D;
+	class VertexArray;
+	class VertexBuffer;
+	class ElementBuffer;
+	class Font;
+	struct Color;
+
+	class Renderer2D : public Renderer
 	{
-		class Mesh;
-		class Renderable2D;
-		class VertexArray;
-		class VertexBuffer;
-		class IndexBuffer;
-		class Font;
-		struct Color;
+	private:
+		VertexArray* _vao; // Vertex array object.
+		VertexBuffer* _vbo; // Vertex buffer object.
+		ElementBuffer* _ibo; // Index buffer object.
+		int _indexCount; // The number of indices.
+		VertexData* _buffer; // Renderables container.
+		std::vector<id> _textures; // Texture array.
+		std::vector<const Mesh*> _meshes;
 
-		class Renderer2D : public Renderer
-		{
-		private:
-			VertexArray* _vao; // Vertex array object.
-			VertexBuffer* _vbo; // Vertex buffer object.
-			IndexBuffer* _ibo; // Index buffer object.
-			int _indexCount; // The number of indices.
-			VertexData* _buffer; // Renderables container.
-			std::vector<id> _textures; // Texture array.
-			std::vector<const Mesh*> _meshes;
+	public:
+		Renderer2D();
+		~Renderer2D();
 
-		public:
-			Renderer2D();	
-			~Renderer2D();
+		virtual void Begin() override;
+		virtual void Submit(const Renderable2D* renderable);
+		virtual void SubmitMesh(const Mesh* mesh) override;
+		virtual void Flush() override; // OpenGL drawcall. 
+		virtual void End() override;
 
-			virtual void Begin() override;
-			virtual void Submit(const Renderable2D* renderable);
-			virtual void SubmitMesh(const Mesh* mesh) override;
-			virtual void Flush() override; // OpenGL drawcall. 
-			virtual void End() override;
+		void DrawString(const std::string& text, Font* font, const Point3D& position, const Color& color);
 
-			void DrawString(const std::string& text, Font* font, const Point3D& position, const Color& color);
-
-		private:
-			void Initialize();
-			float GetTextureSlotByID(id textureID);
-		};
-	}
+	private:
+		void Initialize();
+		float GetTextureSlotByID(id textureID);
+	};
 }

@@ -5,11 +5,8 @@
 
 namespace s3dge
 {
-	namespace graphics
-	{
-		class Renderer;
-		class ShaderProgram;
-	}
+	class Renderer;
+	class ShaderProgram;
 
 	class Entity;
 	class Camera;
@@ -19,10 +16,10 @@ namespace s3dge
 	private:
 		std::vector<Entity*> _entities;
 		Camera* _activeCamera;
-		graphics::ShaderProgram* _shaderProgram;
+		ShaderProgram* _shaderProgram;
 
 	public:
-		Scene(graphics::ShaderProgram* shaderProgram);
+		Scene(ShaderProgram* shaderProgram);
 		virtual ~Scene();
 
 	public:

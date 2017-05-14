@@ -27,7 +27,7 @@ void Entity::SetRotation(const Vector3& rotation)
 	UpdateModelMatrix();
 }
 
-void Entity::SetRenderable(graphics::Renderable* renderable)
+void Entity::SetRenderable(Renderable* renderable)
 {
 	_renderable = renderable;
 }

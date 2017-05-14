@@ -14,46 +14,43 @@ Declares the Mesh class
 
 namespace s3dge
 {
-	namespace graphics
+	class VertexArray;
+	class VertexBuffer;
+	class ElementBuffer;
+	class Renderer2D;
+	class Texture2D;
+	class Renderer;
+	class VertexLayout;
+
+	class Mesh : public Renderable
 	{
-		class VertexArray;
-		class VertexBuffer;
-		class IndexBuffer;
-		class Renderer2D;
-		class Texture2D;
-		class Renderer;
-		class VertexLayout;
+	private:
+		VertexArray* _vao;
+		VertexBuffer* _vbo;
+		ElementBuffer* _ibo;
 
-		class Mesh : public Renderable
-		{
-		private:
-			VertexArray* _vao;
-			VertexBuffer* _vbo;
-			IndexBuffer* _ibo;
+	public:
+		Vector3 translation;
+		Vector3 scale;
+		Texture2D* texture;
 
-		public:
-			Vector3 translation;
-			Vector3 scale;
-			Texture2D* texture;
+	private:
+		Mesh(VertexBuffer* vbo, ElementBuffer* ibo);
+		Mesh(VertexBuffer* vbo, ElementBuffer* ibo, Texture2D* texture);
 
-		private:
-			Mesh(VertexBuffer* vbo, IndexBuffer* ibo);
-			Mesh(VertexBuffer* vbo, IndexBuffer* ibo, Texture2D* texture);
+	public:
+		~Mesh();
 
-		public:
-			~Mesh();
+	public:
+		VertexArray* GetVAO() const { return _vao; }
+		ElementBuffer* GetIBO() const { return _ibo; }
 
-		public:
-			VertexArray* GetVAO() const { return _vao; }
-			IndexBuffer* GetIBO() const { return _ibo; }
+		void Submit(Renderer* renderer) const;
+		void Render() const override;
 
-			void Submit(Renderer* renderer) const;
-			void Render() const override;
+	private:
+		VertexLayout GetDefaultVertexLayout();
 
-		private:
-			VertexLayout GetDefaultVertexLayout();
-
-			friend class MeshFactory;
-		};
-	}
+		friend class MeshFactory;
+	};
 }

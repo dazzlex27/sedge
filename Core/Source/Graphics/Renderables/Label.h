@@ -14,23 +14,20 @@ Represents a class designed to store text glyphs.
 
 namespace s3dge
 {
-	namespace graphics
+	class Font;
+
+	class Label : public Renderable2D
 	{
-		class Font;
+	public:
+		std::string text;
+		Font* font;
 
-		class Label : public Renderable2D
-		{
-		public:
-			std::string text;
-			Font* font;
+	private:
+		Label(const std::string& text, Font* font, const Point2D& position, float zIndex, const Size2D& size, const Color& color = Color(0xffffffff));
 
-		private:
-			Label(const std::string& text, Font* font, const Point2D& position, const Size2D& size, const Color& color = Color(0xffffffff));
+	public:
+		void Submit(Renderer2D* renderer) const override;
 
-		public:
-			void Submit(Renderer2D* renderer) const override;
-
-			friend class LabelFactory;
-		};
-	}
+		friend class LabelFactory;
+	};
 }

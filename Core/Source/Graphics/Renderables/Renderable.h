@@ -2,11 +2,8 @@
 
 namespace s3dge
 {
-	namespace graphics
+	class Renderable
 	{
-		class Renderable
-		{
-			virtual void Render() const = 0;
-		};
-	}
+		virtual void Render() const = 0;
+	};
 }
