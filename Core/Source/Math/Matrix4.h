@@ -29,6 +29,7 @@ Row Major:
 namespace s3dge
 {
 	struct Vector3;
+	struct Quaternion;
 
 	struct Matrix4
 	{
@@ -64,7 +65,7 @@ namespace s3dge
 		Too big to fit its looks here, feel free to google it
 		=============================================
 		*/
-		static Matrix4 Rotate(const Vector3& vector, float angle);
+		static Matrix4 Rotate(const Vector3& axis, float angle);
 
 		/*
 		=============================================

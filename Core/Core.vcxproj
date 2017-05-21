@@ -113,6 +113,7 @@
     <ClCompile Include="Source\Graphics\Renderers\RendererBF.cpp" />
     <ClCompile Include="Source\Graphics\Structures\VertexLayout.cpp" />
     <ClCompile Include="Source\Graphics\Textures\TextureFactory.cpp" />
+    <ClCompile Include="Source\Math\Quatertion.cpp" />
     <ClCompile Include="Source\System\MemoryManager.cpp" />
     <ClCompile Include="Source\Graphics\Buffers\VertexBuffer.cpp" />
     <ClCompile Include="Source\Graphics\Buffers\ElementBuffer.cpp" />
@@ -156,6 +157,7 @@
     <ClInclude Include="Source\Logic\Cameras\FPSCamera.h" />
     <ClInclude Include="Source\Logic\Cameras\TPSCamera.h" />
     <ClInclude Include="Source\Logic\Objects\Scene.h" />
+    <ClInclude Include="Source\Math\Quaternion.h" />
     <ClInclude Include="Source\Math\Size3D.h" />
     <ClInclude Include="Source\Graphics\Renderables\Mesh.h" />
     <ClInclude Include="Source\Graphics\Renderables\MeshFactory.h" />

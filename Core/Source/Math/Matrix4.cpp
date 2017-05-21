@@ -10,6 +10,7 @@ Implements the Matrix4 class
 #include <string>
 #include "Matrix4.h"
 #include "Vector3.h"
+#include "Quaternion.h"
 #include "System/Log.h"
 #include "Converters.h"
 
@@ -206,32 +207,27 @@ Matrix4 Matrix4::Translate(const Vector3& vector)
 	return result;
 }
 
-Matrix4 Matrix4::Rotate(const Vector3& vector, float angle)
+Matrix4 Matrix4::Rotate(const Vector3& axis, float angle)
 {
-	Matrix4 result = Matrix4::GetIdentity();
+	Matrix4 result = GetIdentity();
 
-	float L = pow(vector.GetLength(), 2);
-	float angleR = -(float)(angle * M_PI / 180.0);
-	float c = (float)cos(angleR);
-	float s = (float)sin(angleR);
-	float u = vector.x;
-	float v = vector.y;
-	float w = vector.z;
-	float u2 = vector.x * vector.x;
-	float v2 = vector.y * vector.y;
-	float w2 = vector.z * vector.z;
+	float angleRad = DegToRad(angle);
 
-	result.data[4 * 0 + 0] = (float)((u2 + (v2 + w2) * c) / L);
-	result.data[4 * 0 + 1] = (float)((u * v * (1 - c) - w * sqrt(L) * s) / L);
-	result.data[4 * 0 + 2] = (float)((u * w * (1 - c) + v * sqrt(L) * s) / L);
+	Quaternion q;
+	q.w = cos(angleRad / 2);
+	q.x = axis.x * sin(angleRad / 2);
+	q.y = axis.y * sin(angleRad / 2);
+	q.z = axis.z * sin(angleRad / 2);
 
-	result.data[4 * 1 + 0] = (float)((u * v * (1 - c) + w * sqrt(L) * s) / L);
-	result.data[4 * 1 + 1] = (float)((v2 + (u2 + w2) * c) / L);
-	result.data[4 * 1 + 2] = (float)((v * w * (1 - c) - u * sqrt(L) * s) / L);
-
-	result.data[4 * 2 + 0] = (float)((u * w * (1 - c) - v * sqrt(L) * s) / L);
-	result.data[4 * 2 + 1] = (float)((v * w * (1 - c) + u * sqrt(L) * s) / L);
-	result.data[4 * 2 + 2] = (float)((w2 + (u2 + v2) * c) / L);
+	result.data[4 * 0 + 0] = 1 - 2 * q.y * q.y - 2 * q.z * q.z;
+	result.data[4 * 0 + 1] = 2 * q.x * q.y + 2 * q.w * q.z;
+	result.data[4 * 0 + 2] = 2 * q.x * q.z - 2 * q.w * q.y;
+	result.data[4 * 1 + 0] = 2 * q.x * q.y - 2 * q.w * q.z;
+	result.data[4 * 1 + 1] = 1 - 2 * q.x * q.x - 2 * q.z * q.z;
+	result.data[4 * 1 + 2] = 2 * q.y * q.z - 2 * q.w * q.x;
+	result.data[4 * 2 + 0] = 2 * q.x * q.z + 2 * q.w * q.y;
+	result.data[4 * 2 + 1] = 2 * q.y * q.z + 2 * q.w * q.x;
+	result.data[4 * 2 + 2] = 1 - 2 * q.x * q.x - 2 * q.y * q.y;
 
 	return result;
 }
@@ -312,3 +308,28 @@ cstring Matrix4::Print()
 
 	return result.c_str();
 }
+
+
+
+/*float L = pow(vector.GetLength(), 2);
+float angleR = -(float)(angle * M_PI / 180.0);
+float c = (float)cos(angleR);
+float s = (float)sin(angleR);
+float u = vector.x;
+float v = vector.y;
+float w = vector.z;
+float u2 = vector.x * vector.x;
+float v2 = vector.y * vector.y;
+float w2 = vector.z * vector.z;
+
+result.data[4 * 0 + 0] = (float)((u2 + (v2 + w2) * c) / L);
+result.data[4 * 0 + 1] = (float)((u * v * (1 - c) - w * sqrt(L) * s) / L);
+result.data[4 * 0 + 2] = (float)((u * w * (1 - c) + v * sqrt(L) * s) / L);
+
+result.data[4 * 1 + 0] = (float)((u * v * (1 - c) + w * sqrt(L) * s) / L);
+result.data[4 * 1 + 1] = (float)((v2 + (u2 + w2) * c) / L);
+result.data[4 * 1 + 2] = (float)((v * w * (1 - c) - u * sqrt(L) * s) / L);
+
+result.data[4 * 2 + 0] = (float)((u * w * (1 - c) - v * sqrt(L) * s) / L);
+result.data[4 * 2 + 1] = (float)((v * w * (1 - c) + u * sqrt(L) * s) / L);
+result.data[4 * 2 + 2] = (float)((w2 + (u2 + v2) * c) / L);*/
