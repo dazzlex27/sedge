@@ -40,6 +40,16 @@ ElementBuffer::~ElementBuffer()
 	glDeleteBuffers(1, &BufferID);
 }
 
+void ElementBuffer::Map()
+{
+	DataPtr = glMapBuffer(GL_ELEMENT_ARRAY_BUFFER, GL_WRITE_ONLY);
+}
+
+void ElementBuffer::Unmap()
+{
+	glUnmapBuffer(GL_ELEMENT_ARRAY_BUFFER);
+}
+
 void ElementBuffer::Bind() const
 {
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, BufferID);

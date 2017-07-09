@@ -1,0 +1,7 @@
+#pragma once
+
+#include <S3DGEngine.h>
+
+s3dge::Mesh* CreateArrowMesh();
+
+s3dge::Mesh* CreateRoomMesh();

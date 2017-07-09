@@ -1,13 +1,12 @@
 #include "Application.h"
 #include <cmath>
+#include "Logic.h"
 
 using namespace s3dge;
 
-Mesh* CreateArrowPolygon();
-
 void Application::Initialize()
 {
-	CreateGameWindow("S3DGE Application", 1280, 720, false, true);
+	CreateGameWindow("S3DGE Application", 1280, 720, false, false);
 
 	Point2D mousePos = WindowInstance->GetMousePosition();
 
@@ -35,13 +34,16 @@ void Application::Initialize()
 	Label* label2 = LabelFactory::CreateLabel("p:", FontManager::Get("test_font"), Point2D(0.3f, 7.4f), 0, Size2D(2, 2));
 	GraphicsManager::AddLabel("position", label2);
 
-	GraphicsManager::AddMesh("mesh1", CreateArrowPolygon());
+	GraphicsManager::AddMesh("arrow", CreateArrowMesh());
+	GraphicsManager::AddMesh("room", CreateRoomMesh());
 
-	_sceneLayer = new Layer(_shaderScene);
-	_hudLayer = new Layer(_shaderHUD);
+	_sceneLayer2D = new Layer2D(_shaderScene);
+	_sceneLayer3D = new Layer(_shaderScene);
+	_hudLayer = new Layer2D(_shaderHUD);
 
-	_sceneLayer->Add(GraphicsManager::GetSprite("rect"));
-	_sceneLayer->AddMesh(GraphicsManager::GetMesh("mesh1"));
+	_sceneLayer2D->Add(GraphicsManager::GetSprite("rect"));
+	_sceneLayer3D->Add(GraphicsManager::GetMesh("arrow"));
+	_sceneLayer3D->Add(GraphicsManager::GetMesh("room"));
 	_hudLayer->Add(GraphicsManager::GetLabel("fps"));
 	_hudLayer->Add(GraphicsManager::GetLabel("position"));
 
@@ -106,7 +108,8 @@ void Application::UpdateCamera(const Point2D& mousePosition)
 
 void Application::Render()
 {
-	_sceneLayer->Render();
+	_sceneLayer2D->Render();
+	_sceneLayer3D->Render();
 	_hudLayer->Render();
 }
 
@@ -114,30 +117,8 @@ void Application::Dispose()
 {
 	SoundManager::Get("back-in-black")->Stop();
 	SafeDelete(_hudLayer);
-	SafeDelete(_sceneLayer);
+	SafeDelete(_sceneLayer2D);
+	SafeDelete(_sceneLayer3D);
 	SafeDelete(_shaderHUD);
 	SafeDelete(_camera);
-}
-
-Mesh* CreateArrowPolygon()
-{
-	VertexData* vertexData = new VertexData[3];
-
-	vertexData[0].Position = Point3D(1, 1, -5);
-	vertexData[0].Color = Color(0xff00ffff);
-	vertexData[1].Position = Point3D(2, 0.5, -5);
-	vertexData[1].Color = Color(0xffff00ff);
-	vertexData[2].Position = Point3D(1, 0, -5);
-	vertexData[2].Color = Color(0xffffff00);
-
-	VertexBuffer* vbo = new VertexBuffer(sizeof(VertexData), 4, vertexData);
-
-	uint indices[] = { 0, 1, 2 };
-	ElementBuffer* ibo = new ElementBuffer(3, indices);
-
-	Mesh* mesh = MeshFactory::CreateMesh(vbo, ibo);
-
-	delete[] vertexData;
-
-	return mesh;
 }

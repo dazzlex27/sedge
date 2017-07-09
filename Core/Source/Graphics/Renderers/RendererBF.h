@@ -17,7 +17,7 @@ namespace s3dge
 		virtual ~RendererBF();
 
 		virtual void Begin() override;
-		virtual void SubmitMesh(const Mesh* mesh) override;
+		virtual void SubmitMesh(const Mesh* mesh);
 		virtual void Flush() override;
 		virtual void End() override;
 	};

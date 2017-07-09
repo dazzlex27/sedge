@@ -10,9 +10,9 @@
 
 using namespace s3dge;
 
-Mesh* MeshFactory::CreateMesh(VertexBuffer* vbo, ElementBuffer* ibo)
+Mesh* MeshFactory::CreateMesh(VertexData* vertices, uint vertexCount, uint* elements, uint elementCount)
 {
-	Mesh* mesh = new Mesh(vbo, ibo);
+	Mesh* mesh = new Mesh(vertices, vertexCount, elements, elementCount);
 
 	return mesh;
 }
@@ -47,9 +47,7 @@ Mesh* MeshFactory::CreateCuboid(const Size3D& size, const Color& color, DrawingM
 	vertexData[7].Position = Point3D(-hw, hy, -hz);
 	vertexData[7].Color = Color(0xffffff00);
 
-	VertexBuffer* vbo = new VertexBuffer(sizeof(VertexData), 8, vertexData, drawingMode);
-
-	uint indices[] =
+	uint elements[] =
 	{
 		0,  1,  2,  0,  2,  3,   //front
 		4,  5,  6,  4,  6,  7,   //right
@@ -58,9 +56,8 @@ Mesh* MeshFactory::CreateCuboid(const Size3D& size, const Color& color, DrawingM
 		16, 17, 18, 16, 18, 19,  //upper
 		20, 21, 22, 20, 22, 23   //bottom
 	};
-	ElementBuffer* ibo = new ElementBuffer(36, indices, drawingMode);
 
-	Mesh* mesh = new Mesh(vbo, ibo);
+	Mesh* mesh = new Mesh(vertexData, 8, elements, 36);
 
 	SafeDeleteArray(vertexData);
 
@@ -90,9 +87,7 @@ Mesh* MeshFactory::CreateCube(float size, Texture2D* texture, DrawingMode drawin
 	vertexData[7].Position = Point3D(-h, h, -h);
 	vertexData[7].Color = Color(0xffffff00);
 
-	VertexBuffer* vbo = new VertexBuffer(sizeof(VertexData), 8, vertexData, drawingMode);
-
-	uint indices[] =
+	uint elements[] =
 	{
 		0,  1,  2,  0,  2,  3,   //front
 		4,  5,  6,  4,  6,  7,   //right
@@ -101,9 +96,8 @@ Mesh* MeshFactory::CreateCube(float size, Texture2D* texture, DrawingMode drawin
 		16, 17, 18, 16, 18, 19,  //upper
 		20, 21, 22, 20, 22, 23   //bottom
 	};
-	ElementBuffer* ibo = new ElementBuffer(36, indices, drawingMode);
 
-	Mesh* mesh = new Mesh(vbo, ibo, texture);
+	Mesh* mesh = new Mesh(vertexData, 8, elements, 36);
 
 	SafeDeleteArray(vertexData);
 
@@ -133,9 +127,7 @@ Mesh* MeshFactory::CreateCube(float size, const Color& color, DrawingMode drawin
 	vertexData[7].Position = Point3D(-h, h, -h);
 	vertexData[7].Color = color;
 
-	VertexBuffer* vbo = new VertexBuffer(sizeof(VertexData), 8, vertexData, drawingMode);
-
-	uint indices[] =
+	uint elements[] =
 	{
 		0,  1,  2,  0,  2,  3,   //front
 		4,  5,  6,  4,  6,  7,   //right
@@ -144,9 +136,8 @@ Mesh* MeshFactory::CreateCube(float size, const Color& color, DrawingMode drawin
 		16, 17, 18, 16, 18, 19,  //upper
 		20, 21, 22, 20, 22, 23   //bottom
 	};
-	ElementBuffer* ibo = new ElementBuffer(36, indices, drawingMode);
 
-	Mesh* mesh = new Mesh(vbo, ibo);
+	Mesh* mesh = new Mesh(vertexData, 8, elements, 36);
 
 	SafeDeleteArray(vertexData);
 

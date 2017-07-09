@@ -18,6 +18,9 @@ namespace s3dge
 		ElementBuffer(uint count, uint* dataPtr = nullptr, DrawingMode drawingMode = STATIC_DRAW);
 		~ElementBuffer();
 
+		void Map();
+		void Unmap();
+
 		void Bind() const override;
 		void Unbind() const override;
 	};

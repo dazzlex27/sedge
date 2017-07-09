@@ -26,7 +26,7 @@ using namespace ftgl;
 
 #define MAX_SPRITES 50000
 #define MAX_VERTICES MAX_SPRITES * 4
-#define MAX_INDICES MAX_SPRITES * 6
+#define MAX_ELEMENTS MAX_SPRITES * 6
 	
 Renderer2D::Renderer2D()
 {			
@@ -35,13 +35,13 @@ Renderer2D::Renderer2D()
 
 Renderer2D::~Renderer2D()
 {
-	SafeDelete(_ibo);
+	SafeDelete(_ebo);
 	SafeDelete(_vao);
 }
 
 void Renderer2D::Initialize()
 {
-	_indexCount = 0;
+	_elementCount = 0;
 
 	_vao = new VertexArray();
 
@@ -49,34 +49,34 @@ void Renderer2D::Initialize()
 	_vbo = new VertexBuffer(sizeof(VertexData), MAX_VERTICES);
 
 	VertexLayout layout;
-	layout.AddEntry("position", 0, 3, GL_FLOAT, GL_FALSE, sizeof(VertexData), (const void*)(offsetof(VertexData, VertexData::Position)));
-	layout.AddEntry("color", 1, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(VertexData), (const void*)(offsetof(VertexData, VertexData::Color)));
-	layout.AddEntry("uv", 2, 2, GL_FLOAT, GL_FALSE, sizeof(VertexData), (const void*)(offsetof(VertexData, VertexData::UV)));
-	layout.AddEntry("textureID", 3, 1, GL_FLOAT, GL_FALSE, sizeof(VertexData), (const void*)(offsetof(VertexData, VertexData::TextureID)));
+	layout.AddEntry("position", 0, 3, ElementType::FLOAT, GL_FALSE, sizeof(VertexData), (const void*)(offsetof(VertexData, VertexData::Position)));
+	layout.AddEntry("color", 1, 4, ElementType::UBYTE, GL_TRUE, sizeof(VertexData), (const void*)(offsetof(VertexData, VertexData::Color)));
+	layout.AddEntry("uv", 2, 2, ElementType::FLOAT, GL_FALSE, sizeof(VertexData), (const void*)(offsetof(VertexData, VertexData::UV)));
+	layout.AddEntry("textureID", 3, 1, ElementType::FLOAT, GL_FALSE, sizeof(VertexData), (const void*)(offsetof(VertexData, VertexData::TextureID)));
 
 	_vbo->SetLayout(&layout);
 	_vao->Unbind();
 
 	_vao->AddBuffer(_vbo);
 		
-	uint* indices = new uint[MAX_INDICES];
+	uint* elements = new uint[MAX_ELEMENTS];
 
 	int offset = 0;
 
-	for (int i = 0; i < MAX_INDICES; i += 6)
+	for (int i = 0; i < MAX_ELEMENTS; i += 6)
 	{
-		indices[i] = offset + 0;
-		indices[i + 1] = offset + 1;
-		indices[i + 2] = offset + 2;
+		elements[i] = offset + 0;
+		elements[i + 1] = offset + 1;
+		elements[i + 2] = offset + 2;
 
-		indices[i + 3] = offset + 2;
-		indices[i + 4] = offset + 3;
-		indices[i + 5] = offset + 0;
+		elements[i + 3] = offset + 2;
+		elements[i + 4] = offset + 3;
+		elements[i + 5] = offset + 0;
 
 		offset += 4;
 	}
 
-	_ibo = new ElementBuffer(MAX_INDICES, indices);
+	_ebo = new ElementBuffer(MAX_ELEMENTS, elements);
 }
 
 void Renderer2D::Begin()
@@ -84,6 +84,10 @@ void Renderer2D::Begin()
 	_vbo->Bind();
 	_vbo->Map();
 	_buffer = (VertexData*)_vbo->GetDataPointer();
+}
+
+void Renderer2D::Submit(const Renderable* renderable)
+{
 }
 
 void Renderer2D::Submit(const Renderable2D* renderable)
@@ -123,7 +127,7 @@ void Renderer2D::Submit(const Renderable2D* renderable)
 	_buffer->TextureID = textureSlot;
 	_buffer++;
 
-	_indexCount += 6;
+	_elementCount += 6;
 }
 
 void Renderer2D::DrawString(const std::string& text, Font* font, const Point3D& position, const Color& color)
@@ -182,7 +186,7 @@ void Renderer2D::DrawString(const std::string& text, Font* font, const Point3D& 
 			_buffer->Color = color;
 			_buffer++;
 
-			_indexCount += 6;
+			_elementCount += 6;
 
 			x += glyph->advance_x / scaleX;
 		}
@@ -203,17 +207,17 @@ void Renderer2D::Flush()
 	}
 
 	_vao->Bind();
-	_ibo->Bind();
+	_ebo->Bind();
 
-	_vao->Draw(_indexCount);
+	_vao->Draw(_elementCount);
 
-	_ibo->Unbind();
+	_ebo->Unbind();
 	_vao->Unbind();
 
-	_indexCount = 0;
+	_elementCount = 0;
 
-	for (uint i = 0; i < _meshes.size(); i++)
-		_meshes[i]->Render();
+	/*for (uint i = 0; i < _meshes.size(); i++)
+		_meshes[i]->Render();*/
 }
 
 void Renderer2D::End()

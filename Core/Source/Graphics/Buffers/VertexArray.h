@@ -11,7 +11,6 @@ Designed to store vertex positions before feeding them to OpenGL.
 #include <vector>
 #include "CustomTypes.h"
 
-
 namespace s3dge
 {
 	class VertexBuffer;
