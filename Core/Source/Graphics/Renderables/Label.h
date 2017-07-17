@@ -15,19 +15,26 @@ Represents a class designed to store text glyphs.
 namespace s3dge
 {
 	class Font;
+	struct VertexData;
 
 	class Label : public Renderable2D
 	{
-	public:
-		std::string text;
-		Font* font;
+	private:
+		std::string _text;
+		Font* _font;
 
 	private:
-		Label(const std::string& text, Font* font, const Point2D& position, float zIndex, const Size2D& size, const Color& color = Color(0xffffffff));
+		Label(const std::string& text, Font* font, const Point2D& position, const float zIndex, const Size2D& size, const Color& color = Color(0xffffffff));
 
 	public:
-		void Submit(Renderer2D* renderer) const override;
+		void SetText(const std::string& text);
+		const std::string& GetText() const { return _text; }
+
+		virtual const uint GetTextureID() const override;
 
 		friend class LabelFactory;
+
+	private:
+		void CreateTextTexture();
 	};
 }

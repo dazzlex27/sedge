@@ -105,7 +105,6 @@
     <ClCompile Include="Source\Graphics\Fonts\FontFactory.cpp" />
     <ClCompile Include="Source\Graphics\Fonts\FontManager.cpp" />
     <ClCompile Include="Source\Graphics\GraphicsManager.cpp" />
-    <ClCompile Include="Source\Graphics\Layer2D.cpp" />
     <ClCompile Include="Source\Graphics\Renderables\LabelFactory.cpp" />
     <ClCompile Include="Source\Graphics\Renderables\Mesh.cpp" />
     <ClCompile Include="Source\Graphics\Renderables\MeshFactory.cpp" />
@@ -113,7 +112,6 @@
     <ClCompile Include="Source\Graphics\Renderables\Renderable2D.cpp" />
     <ClCompile Include="Source\Graphics\Renderables\SpriteFactory.cpp" />
     <ClCompile Include="Source\Graphics\Renderers\Renderer3D.cpp" />
-    <ClCompile Include="Source\Graphics\Renderers\RendererBF.cpp" />
     <ClCompile Include="Source\Graphics\Structures\VertexLayout.cpp" />
     <ClCompile Include="Source\Graphics\Textures\TextureFactory.cpp" />
     <ClCompile Include="Source\Math\Quatertion.cpp" />
@@ -126,7 +124,6 @@
     <ClCompile Include="Source\Graphics\Renderables\Label.cpp" />
     <ClCompile Include="Source\Graphics\Layer.cpp" />
     <ClCompile Include="Source\Graphics\Renderables\Sprite.cpp" />
-    <ClCompile Include="Source\Graphics\Renderers\Renderer2D.cpp" />
     <ClCompile Include="Source\Graphics\Shaders\ShaderProgram.cpp" />
     <ClCompile Include="Source\Graphics\Textures\Texture2D.cpp" />
     <ClCompile Include="Source\Graphics\Textures\TextureManager.cpp" />
@@ -156,10 +153,8 @@
     <ClInclude Include="Source\Common.h" />
     <ClInclude Include="Source\Graphics\Buffers\Buffer.h" />
     <ClInclude Include="Source\Graphics\Buffers\FrameBuffer.h" />
-    <ClInclude Include="Source\Graphics\Layer2D.h" />
     <ClInclude Include="Source\Graphics\Renderables\Renderable.h" />
     <ClInclude Include="Source\Graphics\Renderers\Renderer3D.h" />
-    <ClInclude Include="Source\Graphics\Renderers\RendererBF.h" />
     <ClInclude Include="Source\Logic\Cameras\FPSCamera.h" />
     <ClInclude Include="Source\Logic\Cameras\TPSCamera.h" />
     <ClInclude Include="Source\Logic\Objects\Scene.h" />
@@ -192,7 +187,6 @@
     <ClInclude Include="Source\Graphics\Layer.h" />
     <ClInclude Include="Source\Graphics\Renderables\Renderable2D.h" />
     <ClInclude Include="Source\Graphics\Renderables\Sprite.h" />
-    <ClInclude Include="Source\Graphics\Renderers\Renderer2D.h" />
     <ClInclude Include="Source\Graphics\Shaders\ShaderProgram.h" />
     <ClInclude Include="Source\Graphics\Textures\Texture2D.h" />
     <ClInclude Include="Source\Graphics\Textures\TextureManager.h" />

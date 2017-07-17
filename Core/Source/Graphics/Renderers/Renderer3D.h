@@ -13,8 +13,8 @@ Takes plain Renderable objects and piles them up in a single buffer.
 #include <vector>
 #include <string>
 
-#include "Graphics/Structures/VertexData.h"
 #include "Renderer.h"
+#include "Graphics/Structures/VertexData.h"
 
 namespace s3dge
 {
@@ -33,8 +33,10 @@ namespace s3dge
 		ElementBuffer* _ebo; // Index buffer object.
 		uint _elementCount; // The number of indices.
 		VertexData* _vertexBuffer; // Renderables container.
+		uint _elementOffset;
 		uint* _elementBuffer;
 		std::vector<id> _textures; // Texture array.
+		uint _textureMaxCount;
 
 	public:
 		Renderer3D();
@@ -45,10 +47,8 @@ namespace s3dge
 		virtual void Flush() override; // OpenGL drawcall. 
 		virtual void End() override;
 
-		//void DrawString(const std::string& text, Font* font, const Point3D& position, const Color& color);
-
 	private:
 		void Initialize();
-		//float GetTextureSlotByID(id textureID);
+		float GetTextureIndexByID(id textureID);
 	};
 }

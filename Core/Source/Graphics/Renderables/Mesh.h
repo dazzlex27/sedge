@@ -25,8 +25,7 @@ namespace s3dge
 		Texture2D* texture;
 
 	private:
-		Mesh(VertexData* vertices, uint vertexCount, uint* elements, uint elementCount);
-		Mesh(VertexData* vertices, uint vertexCount, uint* elements, uint elementCount, Texture2D* texture);
+		Mesh(VertexData* vertices, uint vertexCount, uint* elements, uint elementCount, Texture2D* texture = nullptr);
 
 		friend class MeshFactory;
 	};

@@ -86,3 +86,23 @@ Mesh* CreateRoomMesh()
 
 	return mesh;
 }
+
+
+//vertexData[0].Position = Point3D(-4, -1, 8);
+//vertexData[0].Color = Color(0xf0ff0000);
+//vertexData[1].Position = Point3D(4, -1, 8);
+//vertexData[1].Color = Color(0xf0ff0000);
+//vertexData[2].Position = Point3D(4, 3, 8);
+//vertexData[2].Color = Color(0xf0ff0000);
+//vertexData[3].Position = Point3D(-4, 3, 8);
+//vertexData[3].Color = Color(0xf0ff0000);
+//vertexData[4].Position = Point3D(-4, -1, -8);
+//vertexData[4].Color = Color(0xf0ffffff);
+//vertexData[5].Position = Point3D(4, -1, -8);
+//vertexData[5].Color = Color(0xf0ffffff);
+//vertexData[6].Position = Point3D(4, 3, -8);
+//vertexData[6].Color = Color(0xf0ffffff);
+//vertexData[7].Position = Point3D(-4, 3, -8);
+//vertexData[7].Color = Color(0xf0ffffff);
+
+

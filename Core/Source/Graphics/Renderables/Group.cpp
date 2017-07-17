@@ -8,6 +8,7 @@ Implements the Group class
 
 #include "Group.h"
 #include "System/DeleteMacros.h"
+#include "Graphics/Renderers/Renderer.h"
 
 using namespace s3dge;
 
@@ -26,7 +27,7 @@ void Group::Add(Renderable2D* renderable)
 	_renderables.push_back(renderable);
 }
 
-void Group::Submit(Renderer2D* renderer)
+void Group::Submit(Renderer* renderer)
 {
 	for (auto item : _renderables)
 		renderer->Submit(item);

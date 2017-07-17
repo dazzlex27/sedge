@@ -34,7 +34,7 @@ namespace s3dge
 	protected:
 		S3DGEngine();
 		virtual ~S3DGEngine();
-		Window* WindowInstance;
+		Window* MainWindow;
 
 	public:
 		void Run();

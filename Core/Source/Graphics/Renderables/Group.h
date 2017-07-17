@@ -8,8 +8,8 @@ Represents a class designed to contain groups of renderables together.
 
 #pragma once
 
+#include <vector>
 #include "Renderable2D.h"
-#include "Graphics/Renderers/Renderer2D.h"
 
 namespace s3dge
 {
@@ -23,6 +23,6 @@ namespace s3dge
 		~Group();
 
 		void Add(Renderable2D* renderable);
-		void Submit(Renderer2D* renderer);
+		void Submit(Renderer* renderer);
 	};
 }

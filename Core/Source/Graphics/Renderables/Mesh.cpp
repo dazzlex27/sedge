@@ -19,11 +19,6 @@ Implemlents the Mesh class
 using namespace s3dge;
 using namespace std;
 
-Mesh::Mesh(VertexData* vertices, uint vertexCount, uint* elements, uint elementCount)
-	: Renderable(vertices, vertexCount, elements, elementCount)
-{
-}
-
 Mesh::Mesh(VertexData* vertices, uint vertexCount, uint* elements, uint elementCount, Texture2D* texture)
 	: Renderable(vertices, vertexCount, elements, elementCount, texture)
 {
