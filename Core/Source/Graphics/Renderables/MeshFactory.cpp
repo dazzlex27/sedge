@@ -10,9 +10,9 @@
 
 using namespace s3dge;
 
-Mesh* MeshFactory::CreateMesh(VertexData* vertices, uint vertexCount, uint* elements, uint elementCount)
+Mesh* MeshFactory::CreateMesh(VertexData* vertices, uint vertexCount, uint* elements, uint elementCount, Texture2D* texture)
 {
-	Mesh* mesh = new Mesh(vertices, vertexCount, elements, elementCount);
+	Mesh* mesh = new Mesh(vertices, vertexCount, elements, elementCount, texture);
 
 	return mesh;
 }

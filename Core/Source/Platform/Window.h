@@ -60,7 +60,7 @@ namespace s3dge
 		void SetupContext();
 		void DestroyContext();
 
-		void* GetHandle();
+		void* GetHandle() const;
 		void SetHandle(void* handle);
 
 		friend void resize_callback(Window* window, uint width, uint height);

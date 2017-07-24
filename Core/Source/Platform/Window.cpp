@@ -52,7 +52,7 @@ void Window::Dispose()
 	DestroyContext();
 }
 
-void* Window::GetHandle()
+void* Window::GetHandle() const
 {
 	return _handle;
 }

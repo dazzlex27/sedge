@@ -24,18 +24,21 @@ void Application::Initialize()
 	
 	TextureManager::Add("Box", "Resources/Textures/box.jpg");
 	TextureManager::Add("Brick", "Resources/Textures/brick.jpg");
+	TextureManager::Add("Concrete", "Resources/Textures/concrete.jpg");
 	FontManager::Add("test_font", "Resources/Fonts/Assistant-Regular.ttf", 24);
 	SoundManager::Add("back-in-black", "Resources/Audio/back-in-black.ogg");
 	
 	Sprite* rect = SpriteFactory::CreateSprite(Point2D(0, 0), -3, Size2D(1, 1), TextureManager::Get("Box"));
 	Mesh* arrow = CreateArrowMesh();
 	Mesh* room = CreateRoomMesh();
+	Mesh* cube = CreateTexturedCube(TextureManager::Get("Concrete"));
 	Label* label = LabelFactory::CreateLabel("startup...", FontManager::Get("test_font"), Point2D(0.3f, 8.4f), 0, Size2D(2, 2));
 	Label* label2 = LabelFactory::CreateLabel("p:", FontManager::Get("test_font"), Point2D(0.3f, 7.4f), 0, Size2D(2, 2));
 	
 	GraphicsManager::AddSprite("rect", rect);
 	GraphicsManager::AddMesh("arrow", arrow);
 	GraphicsManager::AddMesh("room", room);
+	GraphicsManager::AddMesh("cube", cube);
 	GraphicsManager::AddLabel("fps", label);
 	GraphicsManager::AddLabel("position", label2);
 
@@ -45,6 +48,7 @@ void Application::Initialize()
 	_sceneLayer->Add(GraphicsManager::GetMesh("arrow"));
 	_sceneLayer->Add(GraphicsManager::GetSprite("rect"));
 	_sceneLayer->Add(GraphicsManager::GetMesh("room"));
+	_sceneLayer->Add(GraphicsManager::GetMesh("cube"));
 	_hudLayer->Add(GraphicsManager::GetLabel("fps"));
 	_hudLayer->Add(GraphicsManager::GetLabel("position"));*/
 
@@ -101,6 +105,12 @@ void Application::UpdateCamera(const Point2D& mousePosition)
 		horizontalAngle = 0;
 		verticalAngle = 0;
 	}
+	if (MainWindow->KeyDown(S3_KEY_MWDOWN))
+		_camera->SetFOV(_camera->GetFOV() - 1);
+	if (MainWindow->KeyDown(S3_KEY_MWUP))
+		_camera->SetFOV(_camera->GetFOV() + 1);
+	if (MainWindow->KeyDown(S3_KEY_MMB))
+		_camera->SetFOV(_camera->GetFOV() + 1);
 
 	_camera->SetPosition(Point3D(position.x, position.y, position.z));
 	_camera->SetViewDirection(direction);
@@ -110,6 +120,7 @@ void Application::UpdateCamera(const Point2D& mousePosition)
 		LOG_INFO("MW up");
 	if (WindowInstance->MouseButtonDown(S3_KEY_MWDOWN))
 		LOG_INFO("MW down");*/
+	_shaderScene->SetProjection(_camera->GetProjection());
 }
 
 void Application::Render()

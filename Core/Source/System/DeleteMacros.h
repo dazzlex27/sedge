@@ -14,13 +14,13 @@ namespace s3dge
 	inline void SafeDelete(T*& a)
 	{
 		delete a;
-		a = 0;
+		a = nullptr;
 	}
 
 	template<typename T>
 	inline void SafeDeleteArray(T*& a)
 	{
 		delete[] a;
-		a = 0;
+		a = nullptr;
 	}
 }
