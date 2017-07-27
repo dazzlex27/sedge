@@ -14,6 +14,7 @@ Main Win32 implementation file.
 #include "Platform/Window.h"
 #include "Win32InputKeys.h"
 #include "System/Timer.h"
+#include "System/InputManager.h"
 
 namespace s3dge
 {
@@ -21,51 +22,54 @@ namespace s3dge
 #include "Win32OpenGLDebug.h"
 #endif
 
-	HDC deviceContext;
-	WINDOWPLACEMENT wpc; // Saved for restoring last window size and position when exiting fullscreen
+	static HCURSOR ActiveCursor;
+	static bool CtrlKeyActive;
+	static HDC deviceContext;
+	static WINDOWPLACEMENT wpc; // Saved for restoring last window size and position when exiting fullscreen
 
-	void ResetMousePosition(Window* window);
+	static void ResetCursorPosition(const Window* window);
 
 	// Main message pump handler method
 	LRESULT CALLBACK WindowProcedure(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 	{
-		Window* winInstance = Window::GetInstance(hwnd);
+		Window* callingWindow = Window::GetInstance(hwnd);
 
 		switch (message)
 		{
-			break;
 		case WM_SETFOCUS:
-			if (winInstance)
-				focus_callback(winInstance, true);
+			focus_callback(callingWindow, true);
 			break;
 		case WM_KILLFOCUS:
-			if (winInstance)
-				focus_callback(winInstance, false);
+			focus_callback(callingWindow, false);
+			break;
 		case WM_CREATE:
 			break;
 		case WM_DESTROY:
-			if (winInstance)
-				winInstance->Dispose();
+			if (callingWindow)
+				callingWindow->Dispose();
 			PostQuitMessage(0);
 			break;
 		case WM_MENUCHAR:
-			if (LOWORD(wParam) == VK_RETURN && winInstance)
+			if (LOWORD(wParam) == VK_RETURN)
 				return MAKELRESULT(0, MNC_CLOSE);
 			return MAKELRESULT(0, MNC_IGNORE);
 		case WM_KEYDOWN:
 		case WM_KEYUP:
+			key_callback(callingWindow, wParam, message);
+			break;
 		case WM_SYSKEYDOWN:
-		case WM_SYSKEYUP:
-			if (winInstance)
-				key_callback(winInstance, wParam, message);
+			if (callingWindow && wParam == S3_KEY_RETURN)
+				callingWindow->SetFullScreen(!callingWindow->IsFullScreen());
 			break;
 		case WM_SIZE:
-			if (winInstance)
-				resize_callback(winInstance, LOWORD(lParam), HIWORD(lParam));
+			resize_callback(callingWindow, LOWORD(lParam), HIWORD(lParam));
+			break;
+		case WM_MOUSEMOVE:
+			cursor_position_callback(callingWindow);
 			break;
 		default:
-			if (message > 512 && message < 527 && winInstance)
-				mousebutton_callback(winInstance, wParam, message);
+			if (callingWindow && message > 512 && message < 527)
+				key_callback(callingWindow, wParam, message);
 		}
 
 		return DefWindowProc(hwnd, message, wParam, lParam);
@@ -123,6 +127,8 @@ namespace s3dge
 		}
 
 		Window::SetInstance(window, this);
+
+		ActiveCursor = GetCursor();
 
 		return true;
 	}
@@ -213,33 +219,6 @@ namespace s3dge
 		SwapBuffers(deviceContext);
 	}
 
-	void Window::UpdateInputState()
-	{
-		POINT mousePosition;
-		GetCursorPos(&mousePosition);
-
-		_mousePosition.x = (float)mousePosition.x;
-		_mousePosition.y = (float)mousePosition.y;
-
-		ResetMousePosition(this);
-
-		SetCursor(NULL);
-
-		if (_buttonsDown[S3_KEY_MWUP])
-			_buttonsDown[S3_KEY_MWUP] = false;
-		if (_buttonsDown[S3_KEY_MWDOWN])
-			_buttonsDown[S3_KEY_MWDOWN] = false;
-
-		memset(&_keysClicked, 0, sizeof(_keysClicked));
-		memset(&_buttonsClicked, 0, sizeof(_buttonsClicked));
-		for (int i = 0; i < MAX_BUTTONS; ++i)
-			if (_doubleClickTimers[i]->IsRunning())
-				if (_doubleClickTimers[i]->ElapsedS() > _elapsedDoubleClickThreshold)
-					_doubleClickTimers[i]->Stop();
-
-		memset(&_buttonsDoubleClicked, 0, sizeof(_buttonsDoubleClicked));
-	}
-
 	void Window::Clear()
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -265,7 +244,7 @@ namespace s3dge
 		}
 
 		SetFocus(window);
-		ResetMousePosition(this);
+		ResetCursorPosition(this);
 		_fullScreen = fullscreen;
 	}
 
@@ -306,8 +285,17 @@ namespace s3dge
 		}
 	}
 
+	static void ResetCursorPosition(const Window* window)
+	{
+		if (window != nullptr)
+			SetCursorPos(window->GetWidth() / 2, window->GetHeight() / 2);
+	}
+
 	void resize_callback(Window* window, uint width, uint height)
 	{
+		if (!window)
+			return;
+
 		RECT rect = RECT();
 		GetClientRect((HWND)window->_handle, &rect);
 
@@ -317,63 +305,98 @@ namespace s3dge
 		glViewport(0, 0, window->_width, window->_height);
 	}
 
-	void mousebutton_callback(Window* window, int key, int command)
+	void cursor_position_callback(const Window* window)
 	{
+		if (!window)
+			return;
+
+		InputManager::_freeCursorActive = InputManager::_keysDown[S3_FREE_CURSOR_KEY];
+
+		POINT mousePosition;
+		GetCursorPos(&mousePosition);
+
+		InputManager::_mousePosition.x = (float)mousePosition.x;
+		InputManager::_mousePosition.y = (float)mousePosition.y;
+
+		if (!InputManager::_freeCursorActive)
+		{
+			InputManager::_mouseDisplacement.x = InputManager::_mousePosition.x / (window->GetWidth() / 2);
+			InputManager::_mouseDisplacement.y = InputManager::_mousePosition.y / (window->GetHeight() / 2);
+
+			ResetCursorPosition(window);
+			SetCursor(NULL);
+		}
+		else
+		{
+			SetCursor(ActiveCursor);
+		}
+	}
+
+	void key_callback(const Window* window, int key, int command)
+	{
+		if (!window)
+			return;
+
+		if (InputManager::KeyDown(S3_FREE_CURSOR_KEY))
+			std::cout << "OK" << std::endl;
+
+		InputManager::_freeCursorActive = InputManager::_keysDown[S3_FREE_CURSOR_KEY];
+
 		switch (command)
 		{
 		case WM_LBUTTONDOWN:
 		{
-			window->_buttonsDown[S3_KEY_LMB] = true;
-			window->_buttonsClicked[S3_KEY_LMB] = true;
+			InputManager::_keysDown[S3_KEY_LMB] = true;
+			InputManager::_keysClicked[S3_KEY_LMB] = true;
 			return;
 		}
 		case WM_LBUTTONUP:
 		{
-			window->_buttonsDown[S3_KEY_LMB] = false;
+			InputManager::_keysDown[S3_KEY_LMB] = false;
 			return;
 		}
 		case WM_RBUTTONDOWN:
 		{
-			window->_buttonsDown[S3_KEY_RMB] = true;
-			window->_buttonsClicked[S3_KEY_RMB] = true;
+			InputManager::_keysDown[S3_KEY_RMB] = true;
+			InputManager::_keysClicked[S3_KEY_RMB] = true;
 			return;
 		}
 		case WM_RBUTTONUP:
 		{
-			window->_buttonsDown[S3_KEY_RMB] = false;
+			InputManager::_keysDown[S3_KEY_RMB] = false;
 			return;
 		}
 		case WM_MBUTTONDOWN:
 		{
-			window->_buttonsDown[S3_KEY_MMB] = true;
-			window->_buttonsClicked[S3_KEY_MMB] = true;
+			InputManager::_keysDown[S3_KEY_MMB] = true;
+			InputManager::_keysClicked[S3_KEY_MMB] = true;
 			return;
 		}
 		case WM_MBUTTONUP:
 		{
-			window->_buttonsDown[S3_KEY_MMB] = false;
+			InputManager::_keysDown[S3_KEY_MMB] = false;
 			return;
 		}
 		case WM_XBUTTONDOWN:
 		{
 			if (GET_XBUTTON_WPARAM(key) == XBUTTON1)
 			{
-				window->_buttonsDown[S3_KEY_XBUTTON1] = true;
-				window->_buttonsClicked[S3_KEY_XBUTTON1] = true;
+				InputManager::_keysDown[S3_KEY_XBUTTON1] = true;
+				InputManager::_keysClicked[S3_KEY_XBUTTON1] = true;
 			}
 			else
 			{
-				window->_buttonsDown[S3_KEY_XBUTTON2] = true;
-				window->_buttonsClicked[S3_KEY_XBUTTON2] = true;
+				InputManager::_keysDown[S3_KEY_XBUTTON2] = true;
+				InputManager::_keysClicked[S3_KEY_XBUTTON2] = true;
 			}
 			return;
 		}
 		case WM_XBUTTONUP:
 		{
 			if (GET_XBUTTON_WPARAM(key) == XBUTTON1)
-				window->_buttonsDown[S3_KEY_XBUTTON1] = false;
+				InputManager::_keysDown[S3_KEY_XBUTTON1] = false;
 			else
-				window->_buttonsDown[S3_KEY_XBUTTON2] = false;
+				InputManager::_keysDown[S3_KEY_XBUTTON2] = false;
 			return;
 		}
 		case WM_MOUSEWHEEL:
@@ -381,45 +404,29 @@ namespace s3dge
 			short zDelta = (short)GET_WHEEL_DELTA_WPARAM(key);
 			if (zDelta > 0)
 			{
-				window->_buttonsDown[S3_KEY_MWUP] = true;
-				window->_buttonsClicked[S3_KEY_MWUP] = true;
+				InputManager::_keysDown[S3_KEY_MWUP] = true;
+				InputManager::_keysClicked[S3_KEY_MWUP] = true;
 			}
 			if (zDelta < 0)
 			{
-				window->_buttonsDown[S3_KEY_MWDOWN] = true;
-				window->_buttonsClicked[S3_KEY_MWDOWN] = true;
+				InputManager::_keysDown[S3_KEY_MWDOWN] = true;
+				InputManager::_keysClicked[S3_KEY_MWDOWN] = true;
 			}
 			return;
 		}
-		}
-	}
-
-	void key_callback(Window* window, int key, int command)
-	{
-		switch (command)
-		{
 		case WM_KEYDOWN:
-			window->_keysDown[key] = true;
-			window->_keysClicked[key] = true;
-			break;
+			InputManager::_keysDown[key] = true;
+			InputManager::_keysClicked[key] = true;
+			return;
 		case WM_KEYUP:
-			window->_keysDown[key] = false;
-			break;
-		case WM_SYSKEYDOWN:
-			if (key == S3_KEY_RETURN)
-				window->SetFullScreen(!window->IsFullScreen());
-			break;
+			InputManager::_keysDown[key] = false;
+			return;
 		}
 	}
 
 	void focus_callback(Window* window, bool hasFocus)
 	{
-		window->_hasFocus = hasFocus;
-	}
-
-	void ResetMousePosition(Window* window)
-	{
-		if (window->HasFocus())
-			SetCursorPos(window->GetWidth() / 2, window->GetHeight() / 2);
+		if (window)
+			window->_hasFocus = hasFocus;
 	}
 }

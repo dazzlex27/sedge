@@ -117,6 +117,7 @@
     <ClCompile Include="Source\Graphics\Structures\VertexLayout.cpp" />
     <ClCompile Include="Source\Graphics\Textures\TextureFactory.cpp" />
     <ClCompile Include="Source\Math\Quatertion.cpp" />
+    <ClCompile Include="Source\System\InputManager.cpp" />
     <ClCompile Include="Source\System\MemoryManager.cpp" />
     <ClCompile Include="Source\Graphics\Buffers\VertexBuffer.cpp" />
     <ClCompile Include="Source\Graphics\Buffers\ElementBuffer.cpp" />
@@ -180,6 +181,7 @@
     <ClInclude Include="Source\Math\Size2D.h" />
     <ClInclude Include="Source\Graphics\Structures\VertexLayout.h" />
     <ClInclude Include="Source\Graphics\Textures\TextureFactory.h" />
+    <ClInclude Include="Source\System\InputManager.h" />
     <ClInclude Include="Source\System\MemoryManager.h" />
     <ClInclude Include="Include\S3DGEngine.h" />
     <ClInclude Include="Source\Graphics\Buffers\VertexBuffer.h" />

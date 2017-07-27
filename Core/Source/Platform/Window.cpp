@@ -38,22 +38,8 @@ bool Window::Initialize()
 	SetupContext();
 	SetFullScreen(_fullScreen);
 	SetVSync(_vSync);
-	InitializeInput();
 
 	return true;
-}
-
-void Window::InitializeInput()
-{
-	memset(&_keysDown, 0, sizeof(_keysDown));
-	memset(&_keysClicked, 0, sizeof(_keysClicked));
-	memset(&_buttonsDown, 0, sizeof(_buttonsDown));
-	memset(&_buttonsClicked, 0, sizeof(_buttonsClicked));
-	memset(&_buttonsDoubleClicked, 0, sizeof(_buttonsDoubleClicked));
-	for (int i = 0; i < MAX_BUTTONS; ++i)
-		_doubleClickTimers[i] = new Timer();
-
-	_elapsedDoubleClickThreshold = 1.0f;
 }
 
 Window::~Window()
@@ -64,34 +50,6 @@ Window::~Window()
 void Window::Dispose()
 {
 	DestroyContext();
-
-	for (int i = 0; i < MAX_BUTTONS; ++i)
-		SafeDelete(_doubleClickTimers[i]);
-}
-
-bool Window::KeyDown(uint key) const
-{
-	return _keysDown[key];
-}
-
-bool Window::KeyClicked(uint key) const
-{
-	return _keysClicked[key];
-}
-
-bool Window::MouseButtonDoubleClicked(uint key) const
-{
-	return _buttonsDoubleClicked[key];
-}
-
-bool Window::MouseButtonDown(uint button) const
-{
-	return _buttonsDown[button];
-}
-
-bool Window::MouseButtonClicked(uint button) const
-{
-	return _buttonsClicked[button];
 }
 
 void* Window::GetHandle()
@@ -116,4 +74,15 @@ void Window::SetInstance(void* handle, Window* instance)
 	Instances[handle] = instance;
 	if (instance != nullptr)
 		instance->SetHandle(handle);
+}
+
+Window* Window::GetWindowInFocus()
+{
+	for (auto window : Instances)
+	{
+		if (window.second->HasFocus())
+			return window.second;
+	}
+
+	return nullptr;
 }

@@ -12,15 +12,17 @@ No support for gamepads or any other input devices just yet.
 
 namespace s3dge
 {
-	#define S3_KEY_LMB				0x00
-	#define S3_KEY_RMB				0x01
-	#define S3_KEY_MMB				0x02
-	#define S3_KEY_CANCEL			0x03
-	#define S3_KEY_MBUTTON			0x04
-	#define S3_KEY_XBUTTON1			0x05
-	#define S3_KEY_XBUTTON2			0x06
-	#define S3_KEY_MWUP				0x07
-	#define S3_KEY_MWDOWN			0x08
+	#define S3_FREE_CURSOR_KEY S3_KEY_0 
+
+	#define S3_KEY_LMB				0xB0
+	#define S3_KEY_RMB				0xB1
+	#define S3_KEY_MMB				0xB2
+	#define S3_KEY_CANCEL			0xB3
+	#define S3_KEY_MBUTTON			0xB4
+	#define S3_KEY_XBUTTON1			0xB5
+	#define S3_KEY_XBUTTON2			0xB6
+	#define S3_KEY_MWUP				0xB7
+	#define S3_KEY_MWDOWN			0xB8
 	
 	#define S3_KEY_BACK				0x08 // BACKSPACE
 	#define S3_KEY_TAB				0x09

@@ -1,14 +1,15 @@
 #include "Application.h"
 #include <cmath>
-#include "Logic.h"
+//#include "Logic.h"
 
 using namespace s3dge;
 
 void Application::Initialize()
 {
 	CreateGameWindow("S3DGE Application", 1280, 720, false, false);
+	LOG_INFO("Let's start");
 
-	Point2D mousePos = WindowInstance->GetMousePosition();
+	/*Point2D mousePos = WindowInstance->GetMousePosition();
 
 	horizontalAngle = 0;
 	verticalAngle = 0;
@@ -45,14 +46,14 @@ void Application::Initialize()
 	_sceneLayer3D->Add(GraphicsManager::GetMesh("arrow"));
 	_sceneLayer3D->Add(GraphicsManager::GetMesh("room"));
 	_hudLayer->Add(GraphicsManager::GetLabel("fps"));
-	_hudLayer->Add(GraphicsManager::GetLabel("position"));
+	_hudLayer->Add(GraphicsManager::GetLabel("position"));*/
 
 	//SoundManager::Get("back-in-black")->Play();
 }
 
-void Application::UpdateInput()
+void Application::Update()
 {
-	Point3D cameraPosition = _camera->GetPosition();
+	/*Point3D cameraPosition = _camera->GetPosition();
 
 	GraphicsManager::GetLabel("fps")->text = std::to_string(GetFPS()) + " fps";
 	GraphicsManager::GetLabel("position")->text = std::to_string(cameraPosition.x) + " " + std::to_string(cameraPosition.y) + " " + std::to_string(cameraPosition.z);
@@ -60,12 +61,12 @@ void Application::UpdateInput()
 	UpdateCamera(WindowInstance->GetMousePosition());
 
 	_shaderScene->SetProjection(_camera->GetProjection());
-	_shaderScene->SetView(_camera->GetView());
+	_shaderScene->SetView(_camera->GetView());*/
 }
 
 void Application::UpdateCamera(const Point2D& mousePosition)
 {
-	float speed = 0.1f;
+	/*float speed = 0.1f;
 	float mouseSpeed = 0.005f;
 
 	Point3D cameraPosition = _camera->GetPosition();
@@ -103,22 +104,27 @@ void Application::UpdateCamera(const Point2D& mousePosition)
 
 	_camera->SetPosition(Point3D(position.x, position.y, position.z));
 	_camera->SetViewDirection(direction);
-	_camera->SetUp(up);
+	_camera->SetUp(up);*/
+
+	/*if (WindowInstance->MouseButtonDown(S3_KEY_MWUP))
+		LOG_INFO("MW up");
+	if (WindowInstance->MouseButtonDown(S3_KEY_MWDOWN))
+		LOG_INFO("MW down");*/
 }
 
 void Application::Render()
 {
-	_sceneLayer2D->Render();
+	/*_sceneLayer2D->Render();
 	_sceneLayer3D->Render();
-	_hudLayer->Render();
+	_hudLayer->Render();*/
 }
 
 void Application::Dispose()
 {
-	SoundManager::Get("back-in-black")->Stop();
+	/*SoundManager::Get("back-in-black")->Stop();
 	SafeDelete(_hudLayer);
 	SafeDelete(_sceneLayer2D);
 	SafeDelete(_sceneLayer3D);
 	SafeDelete(_shaderHUD);
-	SafeDelete(_camera);
+	SafeDelete(_camera);*/
 }

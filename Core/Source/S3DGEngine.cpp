@@ -64,18 +64,15 @@ void S3DGEngine::RunGameLoop()
 	float renderTime = 0.0f;
 	_timer->Start();
 
-	WindowInstance->UpdateInputState();
-
 	// The actual game loop.
-	while (!WindowInstance->IsClosed())
+	while (WindowInstance != nullptr && !WindowInstance->IsClosed())
 	{
 		WindowInstance->Clear();
 
 		// Update input and managers.
 		if (_timer->ElapsedS() - updateTime > (1.0f / 60.0f))
 		{
-			UpdateInput();
-			WindowInstance->UpdateInputState();
+			Update();
 			UpdateResourceManagers();
 			++updates;
 			updateTime += 1.0f / 60.0f;
@@ -111,10 +108,12 @@ void S3DGEngine::InitializeResourceManagers()
 	FontManager::Initialize();
 	TextureManager::Initialize();
 	SoundManager::Initialize();
+	InputManager::Initialize();
 }
 
 void S3DGEngine::UpdateResourceManagers()
 {
+	InputManager::Update();
 	SoundManager::Update();
 }
 
@@ -124,6 +123,7 @@ void S3DGEngine::DisposeResourceManagers()
 	FontManager::Dispose();
 	TextureManager::Dispose();
 	SoundManager::Dispose();
+	InputManager::Dispose();
 }
 
 void S3DGEngine::DisposeInternalSystems()

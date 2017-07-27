@@ -44,9 +44,11 @@ This file is included by the main header S3DGE.h
 #include "Logic/Cameras/FPSCamera.h"
 #include "Logic/Cameras/TPSCamera.h"
 
+#include "System/InputManager.h"
 #include "System/DeleteMacros.h"
 #include "System/Timer.h"
 #include "System/RNG.h"
+#include "System/Log.h"
 
 #include "Audio/Sound.h"
 #include "Audio/SoundManager.h"

@@ -47,7 +47,7 @@ namespace s3dge
 		float GetElapsedMS();
 
 		virtual void Initialize() = 0; // Runs upon startup.
-		virtual void UpdateInput() = 0; // Runs 60 times a second.
+		virtual void Update() = 0; // Runs 60 times a second.
 		virtual void Render() = 0; // Runs the number of times the current frame rate.
 		virtual void Dispose() = 0; // Runs upon closing the main window.
 
