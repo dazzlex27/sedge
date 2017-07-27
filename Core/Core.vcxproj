@@ -108,6 +108,7 @@
     <ClCompile Include="Source\Graphics\Renderables\LabelFactory.cpp" />
     <ClCompile Include="Source\Graphics\Renderables\Mesh.cpp" />
     <ClCompile Include="Source\Graphics\Renderables\MeshFactory.cpp" />
+    <ClCompile Include="Source\Graphics\Renderables\Model.cpp" />
     <ClCompile Include="Source\Graphics\Renderables\Renderable.cpp" />
     <ClCompile Include="Source\Graphics\Renderables\Renderable2D.cpp" />
     <ClCompile Include="Source\Graphics\Renderables\SpriteFactory.cpp" />
@@ -143,6 +144,7 @@
     <ClCompile Include="Source\System\FileUtils.cpp" />
     <ClCompile Include="Source\System\IDGenerator.cpp" />
     <ClCompile Include="Source\System\ImageUtils.cpp" />
+    <ClCompile Include="Source\System\ModelLoader.cpp" />
     <ClCompile Include="Source\System\Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -153,6 +155,7 @@
     <ClInclude Include="Source\Common.h" />
     <ClInclude Include="Source\Graphics\Buffers\Buffer.h" />
     <ClInclude Include="Source\Graphics\Buffers\FrameBuffer.h" />
+    <ClInclude Include="Source\Graphics\Renderables\Model.h" />
     <ClInclude Include="Source\Graphics\Renderables\Renderable.h" />
     <ClInclude Include="Source\Graphics\Renderers\Renderer3D.h" />
     <ClInclude Include="Source\Logic\Cameras\FPSCamera.h" />
@@ -214,6 +217,7 @@
     <ClInclude Include="Source\System\IDGenerator.h" />
     <ClInclude Include="Source\System\ImageUtils.h" />
     <ClInclude Include="Source\System\Log.h" />
+    <ClInclude Include="Source\System\ModelLoader.h" />
     <ClInclude Include="Source\System\RNG.h" />
     <ClInclude Include="Source\System\Timer.h" />
   </ItemGroup>

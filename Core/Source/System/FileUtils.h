@@ -27,5 +27,4 @@ namespace s3dge
 		FileUtils& operator = (const FileUtils& tRef) = delete;	// Disable assignment operator.
 		~FileUtils(void) {}
 	};
-	
 }

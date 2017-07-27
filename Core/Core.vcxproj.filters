@@ -153,10 +153,15 @@
     <ClCompile Include="Source\Graphics\Renderers\Renderer3D.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\System\InputManager.cpp">
+    <ClCompile Include="Source\Graphics\Renderables\Model.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-  </ItemGroup>
+    <ClCompile Include="Source\System\ModelLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\InputManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>  </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\S3DGECommon.h">
       <Filter>Header Files</Filter>
@@ -365,8 +370,13 @@
     <ClInclude Include="Source\Graphics\Renderers\Renderer3D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\System\InputManager.h">
+    <ClInclude Include="Source\Graphics\Renderables\Model.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-  </ItemGroup>
+    <ClInclude Include="Source\System\ModelLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\InputManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>  </ItemGroup>
 </Project>
