@@ -11,8 +11,7 @@ Implements the ElementBuffer class
 
 using namespace s3dge;
 
-ElementBuffer::ElementBuffer(uint count, uint* data, DrawingMode drawingMode)
-	: Buffer(sizeof(uint), count, data)
+static int GetDrawingModeValue(DrawingMode drawingMode)
 {
 	int mode = 0;
 
@@ -29,9 +28,15 @@ ElementBuffer::ElementBuffer(uint count, uint* data, DrawingMode drawingMode)
 		break;
 	}
 
+	return mode;
+}
+
+ElementBuffer::ElementBuffer(uint count, uint* data, DrawingMode drawingMode)
+	: Buffer(sizeof(uint), count, data)
+{
 	glGenBuffers(1, &BufferID);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, BufferID);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, count * sizeof(data), data, mode);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, count * sizeof(data), data, GetDrawingModeValue(drawingMode));
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 

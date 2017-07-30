@@ -36,7 +36,5 @@ namespace s3dge
 		const uint GetElementCount() const { return ElementCount; }
 		const Texture2D* GetTexture() const { return Texture; }
 		virtual const uint GetTextureID() const;
-
-		void DisposeGeometry();
 	};
 }

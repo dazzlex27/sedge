@@ -52,13 +52,16 @@ void Renderer3D::Initialize()
 	layout.AddEntry("uv", 2, 2, ElementType::FLOAT, GL_FALSE, sizeof(VertexData), (const void*)(offsetof(VertexData, VertexData::UV)));
 	layout.AddEntry("textureID", 3, 1, ElementType::FLOAT, GL_FALSE, sizeof(VertexData), (const void*)(offsetof(VertexData, VertexData::TextureID)));
 
-	_vbo->SetLayout(&layout);
-	_vao->AddBuffer(_vbo);
+	_vbo->Bind();
+	_vao->SetLayout(&layout);
 
 	uint* elements = new uint[MAX_ELEMENTS];
 	_ebo = new ElementBuffer(MAX_ELEMENTS, elements);
+	_ebo->Bind();
 
 	_textureMaxCount =  32;
+
+	_vao->Unbind();
 }
 
 void Renderer3D::Begin()

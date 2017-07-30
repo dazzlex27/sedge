@@ -1,15 +1,12 @@
 #include "Application.h"
 #include <cmath>
-//#include "Logic.h"
+#include "Logic.h"
 
 using namespace s3dge;
 
 void Application::Initialize()
 {
 	CreateGameWindow("S3DGE Application", 1280, 720, false, false);
-	LOG_INFO("Let's start");
-
-	Point2D mousePos = MainWindow->GetMousePosition();
 
 	horizontalAngle = 0;
 	verticalAngle = 0;
@@ -50,34 +47,34 @@ void Application::Initialize()
 	_sceneLayer->Add(GraphicsManager::GetMesh("room"));
 	_sceneLayer->Add(GraphicsManager::GetMesh("cube"));
 	_hudLayer->Add(GraphicsManager::GetLabel("fps"));
-	_hudLayer->Add(GraphicsManager::GetLabel("position"));*/
+	_hudLayer->Add(GraphicsManager::GetLabel("position"));
 
-	//SoundManager::Get("back-in-black")->Play();
+	SoundManager::Get("back-in-black")->Play();
 }
 
 void Application::Update()
 {
-	/*Point3D cameraPosition = _camera->GetPosition();
+	Point3D cameraPosition = _camera->GetPosition();
 
 	GraphicsManager::GetLabel("fps")->SetText(std::to_string(GetFPS()) + " fps");
 	GraphicsManager::GetLabel("position")->SetText(std::to_string(cameraPosition.x) + " " + std::to_string(cameraPosition.y) + " " + std::to_string(cameraPosition.z));
 
-	UpdateCamera(MainWindow->GetMousePosition());
+	UpdateCamera(InputManager::GetMouseDisplacement());
 
 	_shaderScene->SetProjection(_camera->GetProjection());
-	_shaderScene->SetView(_camera->GetView());*/
+	_shaderScene->SetView(_camera->GetView());
 }
 
-void Application::UpdateCamera(const Point2D& mousePosition)
+void Application::UpdateCamera(const Vector2& displacement)
 {
-	/*float speed = 0.1f;
-	float mouseSpeed = 0.005f;
+	float speed = 0.1f;
+	float mouseSpeed = 3.0f;
 
 	Point3D cameraPosition = _camera->GetPosition();
 	Vector3 position(cameraPosition);
 
-	horizontalAngle -= mouseSpeed * (MainWindow->GetWidth() / 2 - mousePosition.x);
-	verticalAngle += mouseSpeed * (MainWindow->GetHeight() / 2 - mousePosition.y);
+	horizontalAngle += mouseSpeed * displacement.x;
+	verticalAngle -= mouseSpeed * displacement.y;
 
 	if (verticalAngle > 1.57f)
 		verticalAngle = 1.57f;
@@ -88,52 +85,48 @@ void Application::UpdateCamera(const Point2D& mousePosition)
 	Vector3 right(-(float)sin(horizontalAngle - 3.14 / 2.0f), 0, (float)cos(horizontalAngle - 3.14 / 2.0f));
 	Vector3 up((Vector3::GetCrossProduct(right, direction)));
 
-	if (MainWindow->KeyDown(S3_KEY_W))
+	if (InputManager::KeyDown(S3_KEY_W))
 		position += speed * direction;
-	if (MainWindow->KeyDown(S3_KEY_S))
+	if (InputManager::KeyDown(S3_KEY_S))
 		position -= speed * direction;
-	if (MainWindow->KeyDown(S3_KEY_A))
+	if (InputManager::KeyDown(S3_KEY_A))
 		position -= speed * right;
-	if (MainWindow->KeyDown(S3_KEY_D))
+	if (InputManager::KeyDown(S3_KEY_D))
 		position += speed * right;
-	if (MainWindow->KeyDown(S3_KEY_Q))
+	if (InputManager::KeyDown(S3_KEY_Q))
 		position -= speed * up;
-	if (MainWindow->KeyDown(S3_KEY_E))
+	if (InputManager::KeyDown(S3_KEY_E))
 		position += speed * up;
-	if (MainWindow->KeyDown(S3_KEY_SPACE))
+	if (InputManager::KeyDown(S3_KEY_SPACE))
 	{
 		horizontalAngle = 0;
 		verticalAngle = 0;
 	}
-	if (MainWindow->KeyDown(S3_KEY_MWDOWN))
+	if (InputManager::KeyDown(S3_KEY_MWDOWN))
 		_camera->SetFOV(_camera->GetFOV() - 1);
-	if (MainWindow->KeyDown(S3_KEY_MWUP))
+	if (InputManager::KeyDown(S3_KEY_MWUP))
 		_camera->SetFOV(_camera->GetFOV() + 1);
-	if (MainWindow->KeyDown(S3_KEY_MMB))
+	if (InputManager::KeyDown(S3_KEY_MMB))
 		_camera->SetFOV(_camera->GetFOV() + 1);
 
 	_camera->SetPosition(Point3D(position.x, position.y, position.z));
 	_camera->SetViewDirection(direction);
-	_camera->SetUp(up);*/
+	_camera->SetUp(up);
 
-	/*if (WindowInstance->MouseButtonDown(S3_KEY_MWUP))
-		LOG_INFO("MW up");
-	if (WindowInstance->MouseButtonDown(S3_KEY_MWDOWN))
-		LOG_INFO("MW down");*/
 	_shaderScene->SetProjection(_camera->GetProjection());
 }
 
 void Application::Render()
 {
 	_sceneLayer->Render();
-	_hudLayer->Render();*/
+	_hudLayer->Render();
 }
 
 void Application::Dispose()
 {
-	/*SoundManager::Get("back-in-black")->Stop();
+	SoundManager::Get("back-in-black")->Stop();
 	SafeDelete(_hudLayer);
 	SafeDelete(_sceneLayer);
 	SafeDelete(_shaderHUD);
-	SafeDelete(_camera);*/
+	SafeDelete(_camera);
 }

@@ -24,7 +24,6 @@ bool* InputManager::_keysClicked;
 bool* InputManager::_keysDoubleClicked;
 bool InputManager::_initialized;
 Timer* InputManager::_doubleClickTimers;
-bool InputManager::_freeCursorActive;
 
 void InputManager::Initialize()
 {

@@ -19,5 +19,5 @@ public:
 	void Render() override;
 	void Dispose() override;
 
-	void UpdateCamera(const s3dge::Point2D& mousePosition);
+	void UpdateCamera(const s3dge::Vector2& mousePosition);
 };

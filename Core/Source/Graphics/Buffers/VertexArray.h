@@ -13,19 +13,19 @@ Designed to store vertex positions before feeding them to OpenGL.
 
 namespace s3dge
 {
-	class VertexBuffer;
+	class VertexLayout;
 
 	class VertexArray
 	{
 	private:
 		uint _vertexArrayID;
-		std::vector<VertexBuffer*> _buffers;
 
 	public:
 		VertexArray();
 		~VertexArray();
 
-		void AddBuffer(VertexBuffer* buffer);
+		void SetLayout(VertexLayout* layout);
+
 		void Bind() const;
 		void Unbind() const;
 		void Draw(uint indicesCount);

@@ -146,10 +146,7 @@ void GraphicsManager::Dispose()
 		for (auto item : _labels)
 			SafeDelete(item.second);
 		for (auto item : _meshes)
-		{
-			item.second->DisposeGeometry();
 			SafeDelete(item.second);
-		}
 
 		_initialized = false;
 	}

@@ -75,14 +75,3 @@ void Window::SetInstance(void* handle, Window* instance)
 	if (instance != nullptr)
 		instance->SetHandle(handle);
 }
-
-Window* Window::GetWindowInFocus()
-{
-	for (auto window : Instances)
-	{
-		if (window.second->HasFocus())
-			return window.second;
-	}
-
-	return nullptr;
-}

@@ -48,7 +48,6 @@ namespace s3dge
 		inline bool IsFullScreen() const { return _fullScreen; }
 
 		static Window* GetInstance(void* handle);
-		static Window* GetWindowInFocus();
 
 		void SetVSync(bool vsync);
 		void SetFullScreen(bool fullscreen);

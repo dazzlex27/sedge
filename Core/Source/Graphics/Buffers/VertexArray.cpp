@@ -10,6 +10,7 @@ Implements the VertexArray class
 #include <GL/glew.h>
 #include "VertexBuffer.h"
 #include "Graphics/Structures/VertexData.h"
+#include "Graphics/Structures/VertexLayout.h"
 #include "System/DeleteMacros.h"
 
 using namespace s3dge;
@@ -21,15 +22,22 @@ VertexArray::VertexArray()
 
 VertexArray::~VertexArray()
 {
-	for (VertexBuffer* item : _buffers)
-		SafeDelete(item);
-
 	glDeleteVertexArrays(1, &_vertexArrayID);
 }
 
-void VertexArray::AddBuffer(VertexBuffer* buffer)
+void VertexArray::SetLayout(VertexLayout* layout)
 {
-	_buffers.push_back(buffer);
+	std::vector<LayoutAttribute*> atbs = layout->GetAttributes();
+
+	Bind();
+
+	for (uint i = 0; i < atbs.size(); i++)
+	{
+		glEnableVertexAttribArray(atbs[i]->index);
+		glVertexAttribPointer(atbs[i]->index, atbs[i]->size, atbs[i]->type, atbs[i]->normalized, atbs[i]->stride, atbs[i]->offset);
+	}
+
+	Unbind();
 }
 
 void VertexArray::Bind() const

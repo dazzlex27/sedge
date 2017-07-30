@@ -1,19 +1,17 @@
 /*
 ===========================================================================
-Buffer.cpp
+VertexBuffer.cpp
 
-Implements the Buffer class
+Implements the VertexBuffer class
 ===========================================================================
 */
 
 #include "VertexBuffer.h"
 #include <GL/glew.h>
-#include "Graphics/Structures/VertexLayout.h"
-#include "Graphics/Structures/VertexData.h"
 
 using namespace s3dge;
 
-int GetDrawingModeValue(DrawingMode drawingMode)
+static int GetDrawingModeValue(DrawingMode drawingMode)
 {
 	int mode = 0;
 
@@ -33,33 +31,18 @@ int GetDrawingModeValue(DrawingMode drawingMode)
 	return mode;
 }
 
-VertexBuffer::VertexBuffer(int elementSize, uint elementCount, void* dataPtr, DrawingMode drawingMode)
-	: Buffer(elementSize, elementCount, dataPtr)
+VertexBuffer::VertexBuffer(int vertexSize, uint vertexCount, void* dataPtr, DrawingMode drawingMode)
+	: Buffer(vertexSize, vertexCount, dataPtr)
 {
 	glGenBuffers(1, &BufferID);
 	glBindBuffer(GL_ARRAY_BUFFER, BufferID);
-	glBufferData(GL_ARRAY_BUFFER, elementSize * elementCount, dataPtr, GetDrawingModeValue(drawingMode));
+	glBufferData(GL_ARRAY_BUFFER, vertexSize * vertexCount, dataPtr, GetDrawingModeValue(drawingMode));
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
 VertexBuffer::~VertexBuffer()
 {
 	glDeleteBuffers(1, &BufferID);
-}
-
-void VertexBuffer::SetLayout(VertexLayout* layout)
-{
-	std::vector<LayoutAttribute*> atbs = layout->GetAttributes();
-
-	Bind();
-
-	for (uint i = 0; i < atbs.size(); i++)
-	{
-		glEnableVertexAttribArray(atbs[i]->index);
-		glVertexAttribPointer(atbs[i]->index, atbs[i]->size, atbs[i]->type, atbs[i]->normalized, atbs[i]->stride, atbs[i]->offset);
-	}
-
-	Unbind();
 }
 
 void VertexBuffer::Bind() const

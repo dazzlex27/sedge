@@ -35,7 +35,6 @@ namespace s3dge
 		static bool* _keysDoubleClicked;
 		static bool _initialized;
 		static Timer* _doubleClickTimers;
-		static bool _freeCursorActive;
 
 	public:
 		static void Initialize();

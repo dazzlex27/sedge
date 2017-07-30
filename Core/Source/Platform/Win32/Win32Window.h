@@ -42,8 +42,6 @@ namespace s3dge
 		case WM_KILLFOCUS:
 			focus_callback(callingWindow, false);
 			break;
-		case WM_CREATE:
-			break;
 		case WM_DESTROY:
 			if (callingWindow)
 				callingWindow->Dispose();
@@ -287,8 +285,12 @@ namespace s3dge
 
 	static void ResetCursorPosition(const Window* window)
 	{
-		if (window != nullptr)
-			SetCursorPos(window->GetWidth() / 2, window->GetHeight() / 2);
+		if (window)
+		{
+			uint halfWidth = window->GetWidth() / 2;
+			uint halfHeight = window->GetHeight() / 2;
+			SetCursorPos(halfWidth, halfHeight);
+		}
 	}
 
 	void resize_callback(Window* window, uint width, uint height)
@@ -310,37 +312,29 @@ namespace s3dge
 		if (!window)
 			return;
 
-		InputManager::_freeCursorActive = InputManager::_keysDown[S3_FREE_CURSOR_KEY];
-
 		POINT mousePosition;
 		GetCursorPos(&mousePosition);
 
 		InputManager::_mousePosition.x = (float)mousePosition.x;
 		InputManager::_mousePosition.y = (float)mousePosition.y;
 
-		if (!InputManager::_freeCursorActive)
-		{
-			InputManager::_mouseDisplacement.x = InputManager::_mousePosition.x / (window->GetWidth() / 2);
-			InputManager::_mouseDisplacement.y = InputManager::_mousePosition.y / (window->GetHeight() / 2);
+		uint halfWidth = window->GetWidth() / 2;
+		uint halfHeight = window->GetHeight() / 2;
 
-			ResetCursorPosition(window);
-			SetCursor(NULL);
-		}
-		else
+		if (InputManager::_mousePosition.x != halfWidth || InputManager::_mousePosition.y != halfHeight)
 		{
-			SetCursor(ActiveCursor);
+			InputManager::_mouseDisplacement.x = (InputManager::_mousePosition.x - halfWidth) / (halfWidth);
+			InputManager::_mouseDisplacement.y = (InputManager::_mousePosition.y - halfHeight) / (halfHeight);
+			ResetCursorPosition(window);
 		}
+
+		SetCursor(NULL);
 	}
 
 	void key_callback(const Window* window, int key, int command)
 	{
 		if (!window)
 			return;
-
-		if (InputManager::KeyDown(S3_FREE_CURSOR_KEY))
-			std::cout << "OK" << std::endl;
-
-		InputManager::_freeCursorActive = InputManager::_keysDown[S3_FREE_CURSOR_KEY];
 
 		switch (command)
 		{

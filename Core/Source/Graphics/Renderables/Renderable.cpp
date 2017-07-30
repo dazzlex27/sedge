@@ -24,14 +24,6 @@ void Renderable::Submit(Renderer* renderer) const
 	renderer->Submit(this);
 }
 
-void Renderable::DisposeGeometry()
-{
-	SafeDeleteArray(Vertices);
-	VertexCount = 0;
-	SafeDeleteArray(Elements);
-	ElementCount = 0;
-}
-
 const uint Renderable::GetTextureID() const
 {
 	return Texture == nullptr ? 0 : Texture->GetID();

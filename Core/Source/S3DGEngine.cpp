@@ -65,7 +65,7 @@ void S3DGEngine::RunGameLoop()
 	_timer->Start();
 
 	// The actual game loop.
-	while (WindowInstance != nullptr && !WindowInstance->IsClosed())
+	while (MainWindow != nullptr && !MainWindow->IsClosed())
 	{
 		MainWindow->Clear();
 

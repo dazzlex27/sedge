@@ -22,4 +22,22 @@ using namespace std;
 Mesh::Mesh(VertexData* vertices, uint vertexCount, uint* elements, uint elementCount, Texture2D* texture)
 	: Renderable(vertices, vertexCount, elements, elementCount, texture)
 {
+	VAO = new VertexArray();
+	VBO = new VertexBuffer(sizeof(VertexData), vertexCount, vertices);
+	EBO = new ElementBuffer(elementCount, elements);
+
+	VAO->Bind();
+	VBO->Bind();
+	EBO->Bind();
+
+	//VAO->SetLayout();
+
+	VAO->Unbind();
+}
+
+Mesh::~Mesh()
+{
+	SafeDelete(VAO);
+	SafeDelete(VBO);
+	SafeDelete(EBO);
 }
