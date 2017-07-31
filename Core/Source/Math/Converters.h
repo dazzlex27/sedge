@@ -13,12 +13,12 @@ Lists a few functions for mathematical conversions. Might be refactored later.
 
 namespace s3dge
 {
-	inline float DegToRad(float degrees)
+	inline const float DegToRad(const float degrees)
 	{
 		return degrees * 3.14159265f / 180.0f;
 	}
 
-	inline float RadToDeg(float radians)
+	inline const float RadToDeg(const float radians)
 	{
 		return radians / 3.14159265f * 180.0f;
 	}

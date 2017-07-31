@@ -25,9 +25,9 @@ VertexArray::~VertexArray()
 	glDeleteVertexArrays(1, &_vertexArrayID);
 }
 
-void VertexArray::SetLayout(VertexLayout* layout)
+void VertexArray::SetLayout(const VertexLayout& layout)
 {
-	std::vector<LayoutAttribute*> atbs = layout->GetAttributes();
+	const std::vector<LayoutAttribute*> atbs = layout.GetAttributes();
 
 	Bind();
 
@@ -50,7 +50,7 @@ void VertexArray::Unbind() const
 	glBindVertexArray(0);
 }
 
-void VertexArray::Draw(uint indicesCount)
+void VertexArray::Draw(const uint elementCount)
 {
-	glDrawElements(GL_TRIANGLES, indicesCount, GL_UNSIGNED_INT, NULL);
+	glDrawElements(GL_TRIANGLES, elementCount, GL_UNSIGNED_INT, NULL);
 }

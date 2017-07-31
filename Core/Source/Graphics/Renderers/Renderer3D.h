@@ -28,14 +28,14 @@ namespace s3dge
 	class Renderer3D : public Renderer
 	{
 	private:
-		VertexArray* _vao; // Vertex array object.
-		VertexBuffer* _vbo; // Vertex buffer object.
-		ElementBuffer* _ebo; // Index buffer object.
-		uint _elementCount; // The number of indices.
-		VertexData* _vertexBuffer; // Renderables container.
+		VertexArray* _vao;
+		VertexBuffer* _vbo;
+		ElementBuffer* _ebo;
+		uint _elementCount;
+		VertexData* _vertexBuffer;
 		uint _elementOffset;
 		uint* _elementBuffer;
-		std::vector<id> _textures; // Texture array.
+		std::vector<id> _textures; 
 		uint _textureMaxCount;
 
 	public:
@@ -46,9 +46,8 @@ namespace s3dge
 		virtual void Submit(const Renderable* renderable) override;
 		virtual void Flush() override; // OpenGL drawcall. 
 		virtual void End() override;
-
+	
 	private:
-		void Initialize();
-		float GetTextureIndexByID(id textureID);
+		const float GetTextureIndexByID(const id textureID);
 	};
 }

@@ -29,6 +29,7 @@ namespace s3dge
 		Renderable(VertexData* vertices, uint vertexCount, uint* elements, uint elementCount, Texture2D* texture = nullptr);
 
 		virtual void Submit(Renderer* renderer) const;
+		virtual void Draw() const { }
 
 		const VertexData* GetVertexData() const { return Vertices; }
 		const uint GetVertexCount() const { return VertexCount; }

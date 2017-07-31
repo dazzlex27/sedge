@@ -19,6 +19,7 @@ namespace s3dge
 	{
 		Point3D Position;
 		Color Color;
+		Vector3 Normal;
 		Point2D UV;
 		float TextureID;
 	};

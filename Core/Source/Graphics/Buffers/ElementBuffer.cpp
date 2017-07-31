@@ -11,24 +11,19 @@ Implements the ElementBuffer class
 
 using namespace s3dge;
 
-static int GetDrawingModeValue(DrawingMode drawingMode)
+static int GetDrawingModeValue(const DrawingMode drawingMode)
 {
-	int mode = 0;
-
 	switch (drawingMode)
 	{
 	case DrawingMode::DYNAMIC_DRAW:
-		mode = GL_DYNAMIC_DRAW;
-		break;
+		return GL_DYNAMIC_DRAW;
 	case DrawingMode::STATIC_DRAW:
-		mode = GL_STATIC_DRAW;
-		break;
+		return GL_STATIC_DRAW;
 	case DrawingMode::STREAM_DRAW:
-		mode = GL_STREAM_DRAW;
-		break;
+		return GL_STREAM_DRAW;
+	default:
+		return 0;
 	}
-
-	return mode;
 }
 
 ElementBuffer::ElementBuffer(uint count, uint* data, DrawingMode drawingMode)

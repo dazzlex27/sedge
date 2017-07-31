@@ -9,6 +9,7 @@ in DATA
 {
 	vec4 position;
 	vec4 color;
+	vec3 normal;
 	vec2 uv;
 	float textureID;
 } fs_in;
@@ -16,12 +17,15 @@ in DATA
 
 void main()
 {
-	float intensity = 1.0f / length(fs_in.position.xy - light_pos);	
+	float ambientFactor = 0.1f;
+	vec3 ambient = ambientFactor * vec3(1.0f,1.0f,1.0f);
+
 	vec4 textureColor = fs_in.color;
 	if (fs_in.textureID > 0.0)
 	{
 		int textureID = int(fs_in.textureID - 0.5);
 		textureColor = fs_in.color * texture(textureArray[textureID], fs_in.uv); 
 	}
-	color = textureColor;// * intensity;
+
+	color = ambient * textureColor;
 }

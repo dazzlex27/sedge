@@ -30,9 +30,11 @@ Mesh::Mesh(VertexData* vertices, uint vertexCount, uint* elements, uint elementC
 	VBO->Bind();
 	EBO->Bind();
 
-	//VAO->SetLayout();
+	VAO->SetLayout(VertexLayout::GetDefaultVertexLayout());
 
 	VAO->Unbind();
+	VBO->Unbind();
+	EBO->Unbind();
 }
 
 Mesh::~Mesh()
@@ -40,4 +42,11 @@ Mesh::~Mesh()
 	SafeDelete(VAO);
 	SafeDelete(VBO);
 	SafeDelete(EBO);
+}
+
+void Mesh::Draw() const
+{
+	VAO->Bind();
+	VAO->Draw(EBO->GetCount());
+	VAO->Unbind();
 }

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include "CustomTypes.h"
 
 namespace s3dge
 {
@@ -30,6 +31,8 @@ namespace s3dge
 		inline const std::vector<LayoutAttribute*>& GetAttributes() const { return _attributes; }
 
 		void AddEntry(LayoutAttribute* attribute);
-		void AddEntry(const char* name, int index, int size, ElementType type, int normalized, int stride, const void* offset);
+		void AddEntry(cstring name, const int index, const int size, const ElementType type, const bool normalized, const int stride, const void* offset);
+
+		static VertexLayout GetDefaultVertexLayout();
 	};
 }

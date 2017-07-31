@@ -15,8 +15,8 @@ namespace s3dge
 		uint _programID;
 		cstring _vertexPath;
 		cstring _fragmentPath;
-		int _vertex;
-		int _fragment;
+		uint _vertex;
+		uint _fragment;
 
 		int _textureIDs[16]
 		{
@@ -32,19 +32,19 @@ namespace s3dge
 		void Disable() const;
 
 		void SetUniformMat4fv(cstring name, const Matrix4& matrix);
-		void SetUniform1f(cstring name, float value);
+		void SetUniform1f(cstring name, const float value);
 		void SetUniform2f(cstring name, const Vector2& value);
 		void SetUniform3f(cstring name, const Vector3& value);
 		void SetUniform4f(cstring name, const Vector4& value);
-		void SetUniform1i(cstring name, int value);
-		void SetUniform1iv(cstring name, int count, int* value);
+		void SetUniform1i(cstring name, const int value);
+		void SetUniform1iv(cstring name, const int count, const int* value);
 
 		void SetProjection(const Matrix4& projectionMatrix);
 		void SetView(const Matrix4& viewMatrix);
 		void SetModel(const Matrix4& modelMatrix);
 
 	private:
-		uint Load();
-		bool Compile(int shader);
+		const uint Load();
+		const bool Compile(const uint shader);
 	};
 }

@@ -36,7 +36,7 @@ namespace s3dge
 		float data[16];
 
 		Matrix4();
-		Matrix4(float value);
+		Matrix4(const float value);
 		Matrix4(const Matrix4& ref);
 
 		Matrix4& Multiply(const Matrix4& other);

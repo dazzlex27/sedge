@@ -17,7 +17,7 @@ Font* FontFactory::CreateDefaultFont()
 	return nullptr;
 }
 
-Font* FontFactory::CreateFont(cstring name, cstring path, float size)
+Font* FontFactory::CreateFont(cstring name, cstring path, const float size)
 {
 	if (strcmp(name, "") == 0)
 	{

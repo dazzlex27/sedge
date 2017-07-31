@@ -1,8 +1,9 @@
 #include "VertexLayout.h"
+#include "VertexData.h"
 
 using namespace s3dge;
 
-int GetTypeIntFromTypeEnum(ElementType type)
+static const int GetTypeIntFromTypeEnum(const ElementType type)
 {
 	switch (type)
 	{
@@ -20,7 +21,7 @@ void VertexLayout::AddEntry(LayoutAttribute* attribute)
 	_attributes.push_back(attribute);
 }
 
-void VertexLayout::AddEntry(const char * name, int index, int size, ElementType type, int normalized, int stride, const void * offset)
+void VertexLayout::AddEntry(cstring name, const int index, const int size, const ElementType type, const bool normalized, const int stride, const void* offset)
 {
 	LayoutAttribute* attribute = new LayoutAttribute;
 
@@ -33,4 +34,16 @@ void VertexLayout::AddEntry(const char * name, int index, int size, ElementType 
 	attribute->offset = offset;
 
 	_attributes.push_back(attribute);
+}
+
+VertexLayout VertexLayout::GetDefaultVertexLayout()
+{
+	VertexLayout layout;
+	layout.AddEntry("position", 0, 3, ElementType::FLOAT, false, sizeof(VertexData), (const void*)(offsetof(VertexData, VertexData::Position)));
+	layout.AddEntry("color", 1, 4, ElementType::UBYTE, true, sizeof(VertexData), (const void*)(offsetof(VertexData, VertexData::Color)));
+	layout.AddEntry("normal", 2, 3, ElementType::FLOAT, false, sizeof(VertexData), (const void*)(offsetof(VertexData, VertexData::Normal)));
+	layout.AddEntry("uv", 3, 2, ElementType::FLOAT, false, sizeof(VertexData), (const void*)(offsetof(VertexData, VertexData::UV)));
+	layout.AddEntry("textureID", 4, 1, ElementType::FLOAT, false, sizeof(VertexData), (const void*)(offsetof(VertexData, VertexData::TextureID)));
+
+	return layout;
 }

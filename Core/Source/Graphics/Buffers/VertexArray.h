@@ -24,10 +24,10 @@ namespace s3dge
 		VertexArray();
 		~VertexArray();
 
-		void SetLayout(VertexLayout* layout);
+		void SetLayout(const VertexLayout& layout);
 
 		void Bind() const;
 		void Unbind() const;
-		void Draw(uint indicesCount);
+		void Draw(const uint indicesCount);
 	};
 }

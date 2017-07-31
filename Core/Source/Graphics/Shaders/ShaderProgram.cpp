@@ -13,8 +13,8 @@ ShaderProgram::ShaderProgram(cstring vertexPath, cstring fragmentPath)
 	: _vertexPath(vertexPath), _fragmentPath(fragmentPath)
 {
 	_programID = Load();
-	this->Enable();
-	this->SetUniform1iv("textureArray", 16, _textureIDs);
+	Enable();
+	SetUniform1iv("textureArray", 16, _textureIDs);
 }
 
 ShaderProgram::~ShaderProgram()
@@ -24,7 +24,7 @@ ShaderProgram::~ShaderProgram()
 	glDeleteProgram(_programID);
 }
 
-uint ShaderProgram::Load()
+const uint ShaderProgram::Load()
 {
 	// Create and compile vertex shader.
 	_vertex = glCreateShader(GL_VERTEX_SHADER);
@@ -67,15 +67,15 @@ uint ShaderProgram::Load()
 	return program;
 }
 
-bool ShaderProgram::Compile(int shader)
+const bool ShaderProgram::Compile(const uint shader)
 {
-	glCompileShader(shader); // Compile the shader
+	glCompileShader(shader);
 
 	// Check the compilation status and report any errors
 	int shaderStatus;
 	glGetShaderiv(shader, GL_COMPILE_STATUS, &shaderStatus);
 
-	// If the shader failed to compile, display the info log and quit out
+	// If the shader failed to compile, display the info log and return
 	if (shaderStatus == GL_FALSE)
 	{
 		GLint infoLogLength;
@@ -95,20 +95,20 @@ bool ShaderProgram::Compile(int shader)
 
 void ShaderProgram::SetProjection(const Matrix4& matrix)
 {
-	this->Enable();
-	this->SetUniformMat4fv("pr_matrix", matrix);
+	Enable();
+	SetUniformMat4fv("pr_matrix", matrix);
 }
 
 void ShaderProgram::SetView(const Matrix4& matrix)
 {
-	this->Enable();
-	this->SetUniformMat4fv("vw_matrix", matrix);
+	Enable();
+	SetUniformMat4fv("vw_matrix", matrix);
 }
 
 void ShaderProgram::SetModel(const Matrix4& matrix)
 {
-	this->Enable();
-	this->SetUniformMat4fv("ml_matrix", matrix);
+	Enable();
+	SetUniformMat4fv("ml_matrix", matrix);
 }
 
 void ShaderProgram::Enable() const
@@ -126,7 +126,7 @@ void ShaderProgram::SetUniformMat4fv(cstring name, const Matrix4& matrix)
 	glUniformMatrix4fv(glGetUniformLocation(_programID, name), 1, GL_FALSE, matrix.data);
 }
 
-void ShaderProgram::SetUniform1f(cstring name, float value)
+void ShaderProgram::SetUniform1f(cstring name, const float value)
 {
 	glUniform1f(glGetUniformLocation(_programID, name), value);
 }
@@ -146,12 +146,12 @@ void ShaderProgram::SetUniform4f(cstring name, const Vector4& value)
 	glUniform4f(glGetUniformLocation(_programID, name), value.x, value.y, value.z, value.w);
 }
 
-void ShaderProgram::SetUniform1i(cstring name, int value)
+void ShaderProgram::SetUniform1i(cstring name, const int value)
 {
 	glUniform1i(glGetUniformLocation(_programID, name), value);
 }
 
-void ShaderProgram::SetUniform1iv(cstring name, int count, int* value)
+void ShaderProgram::SetUniform1iv(cstring name, const int count, const int* value)
 {
 	glUniform1iv(glGetUniformLocation(_programID, name), count, value);
 }
