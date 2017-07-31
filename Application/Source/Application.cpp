@@ -11,8 +11,8 @@ void Application::Initialize()
 	horizontalAngle = 0;
 	verticalAngle = 0;
 
-	_shaderScene = new ShaderProgram("Resources/Shaders/basic.vert", "Resources/Shaders/basic.frag");
-	_shaderHUD = new ShaderProgram("Resources/Shaders/basic.vert", "Resources/Shaders/basic.frag");
+	_shaderScene = new ShaderProgram("Resources/Shaders/basic.vert", "Resources/Shaders/light.frag");
+	_shaderHUD = new ShaderProgram("Resources/Shaders/basic.vert", "Resources/Shaders/static.frag");
 	
 	_camera = new FPSCamera();
 
@@ -49,7 +49,7 @@ void Application::Initialize()
 	_hudLayer->Add(GraphicsManager::GetLabel("fps"));
 	_hudLayer->Add(GraphicsManager::GetLabel("position"));
 
-	SoundManager::Get("back-in-black")->Play();
+	//SoundManager::Get("back-in-black")->Play();
 }
 
 void Application::Update()
@@ -63,6 +63,8 @@ void Application::Update()
 
 	_shaderScene->SetProjection(_camera->GetProjection());
 	_shaderScene->SetView(_camera->GetView());
+
+	_shaderScene->SetUniform3f("light_pos", Vector3(cameraPosition.x, cameraPosition.y, cameraPosition.z));
 }
 
 void Application::UpdateCamera(const Vector2& displacement)
@@ -124,7 +126,7 @@ void Application::Render()
 
 void Application::Dispose()
 {
-	SoundManager::Get("back-in-black")->Stop();
+	//SoundManager::Get("back-in-black")->Stop();
 	SafeDelete(_hudLayer);
 	SafeDelete(_sceneLayer);
 	SafeDelete(_shaderHUD);

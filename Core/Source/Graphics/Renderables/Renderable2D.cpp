@@ -44,23 +44,27 @@ void Renderable2D::PerformDefaultGeometrySetup()
 
 	Vertices[0].Position = Point3D(Position.x - Size.width / 2, Position.y - Size.height / 2, Position.z);
 	Vertices[0].Color = Col;
-	Vertices[0].TextureID = (float)(Texture == nullptr ? 0 : Texture->GetID());
+	Vertices[0].Normal = Vector3(0.0f, 0.0f, 1.0f);
 	Vertices[0].UV = Point2D(0, 0);
+	Vertices[0].TextureID = (float)(Texture == nullptr ? 0 : Texture->GetID());
 
 	Vertices[1].Position = Point3D(Position.x - Size.width / 2, Position.y + Size.height / 2, Position.z);
 	Vertices[1].Color = Col;
-	Vertices[1].TextureID = (float)(Texture == nullptr ? 0 : Texture->GetID());
+	Vertices[0].Normal = Vector3(0.0f, 0.0f, 1.0f);
 	Vertices[1].UV = Point2D(0, 1);
+	Vertices[1].TextureID = (float)(Texture == nullptr ? 0 : Texture->GetID());
 
 	Vertices[2].Position = Point3D(Position.x + Size.width / 2, Position.y + Size.height / 2, Position.z);
 	Vertices[2].Color = Col;
-	Vertices[2].TextureID = (float)(Texture == nullptr ? 0 : Texture->GetID());
+	Vertices[0].Normal = Vector3(0.0f, 0.0f, 1.0f);
 	Vertices[2].UV = Point2D(1, 1);
+	Vertices[2].TextureID = (float)(Texture == nullptr ? 0 : Texture->GetID());
 
 	Vertices[3].Position = Point3D(Position.x + Size.width / 2, Position.y - Size.height / 2, Position.z);
 	Vertices[3].Color = Col;
-	Vertices[3].TextureID = (float)(Texture == nullptr ? 0 : Texture->GetID());
+	Vertices[0].Normal = Vector3(0.0f, 0.0f, 1.0f);
 	Vertices[3].UV = Point2D(1, 0);
+	Vertices[3].TextureID = (float)(Texture == nullptr ? 0 : Texture->GetID());
 
 	VertexCount = 4;
 

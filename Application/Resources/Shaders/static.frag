@@ -17,9 +17,6 @@ in DATA
 
 void main()
 {
-	float ambientFactor = 0.1f;
-	vec3 ambient = ambientFactor * vec3(1.0f,1.0f,1.0f);
-
 	vec4 textureColor = fs_in.color;
 	if (fs_in.textureID > 0.0)
 	{
@@ -27,5 +24,5 @@ void main()
 		textureColor = fs_in.color * texture(textureArray[textureID], fs_in.uv); 
 	}
 
-	color = ambient * textureColor;
+	color = textureColor;
 }
