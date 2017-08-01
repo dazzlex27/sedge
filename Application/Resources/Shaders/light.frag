@@ -2,12 +2,31 @@
 
 layout (location = 0) out vec4 resultColor;
 
-uniform vec3 light_pos;
+struct Material 
+{
+    vec3 ambient;
+    vec3 diffuse;
+    vec3 specular;
+    float shininess;
+}; 
+
+struct Light 
+{
+    vec3 position;
+	vec3 direction;
+    vec3 ambient;
+    vec3 diffuse;
+    vec3 specular;
+};
+
+uniform vec3 viewPos;
+uniform Light light;
+uniform Material material;
 uniform sampler2D textureArray[32];
 
 in DATA
 {
-	vec4 position;
+	vec3 position;
 	vec4 color;
 	vec3 normal;
 	vec2 uv;
@@ -23,17 +42,20 @@ void main()
 		textureColor = fs_in.color * texture(textureArray[textureID], fs_in.uv); 
 	}
 
-	vec3 lightColor = vec3(1.0f,1.0f,1.0f);
-	float ambientFactor = 0.3f;
-	float specularFactor = 0.5f;
-	
-	vec3 norm = normalize(fs_in.normal);
-	vec3 lightDir = normalize(light_pos - fs_in.position.xyz);
-	vec3 reflectDir = reflect(-lightDir, norm);
-	
-	vec3 ambient = ambientFactor * lightColor;
-	vec3 diffuse = max(dot(norm, lightDir), 0.0) * lightColor;
-	vec3 specular = specularFactor * pow(max(dot(fs_in.position.xyz, reflectDir), 0.0f), 32) * lightColor;
+	// ambient light
+	vec3 ambient = light.ambient * material.ambient;
 
-	resultColor = vec4((ambient + diffuse /*+ specular*/), 1) * textureColor;
+	// diffuse color
+	vec3 norm = normalize(fs_in.normal);
+	vec3 lightDir = normalize(light.position - fs_in.position);
+	float diff = max(dot(norm, lightDir), 0.0f);
+	vec3 diffuse = light.diffuse * (diff * material.diffuse);
+
+	// specular light
+	vec3 viewDir = normalize(viewPos - fs_in.position);
+	vec3 reflectDir = reflect(-lightDir, norm);
+	float spec = pow(max(dot(viewDir, reflectDir), 0.0f), material.shininess);
+	vec3 specular = light.specular * (spec * material.specular);
+
+	resultColor = vec4((ambient + diffuse + specular), 1) * textureColor;
 }

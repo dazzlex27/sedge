@@ -2,12 +2,12 @@
 
 layout (location = 0) out vec4 color;
 
-uniform vec2 light_pos;
+uniform vec2 lightPos;
 uniform sampler2D textureArray[32];
 
 in DATA
 {
-	vec4 position;
+	vec3 position;
 	vec4 color;
 	vec3 normal;
 	vec2 uv;

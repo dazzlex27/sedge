@@ -64,7 +64,8 @@ void Application::Update()
 	_shaderScene->SetProjection(_camera->GetProjection());
 	_shaderScene->SetView(_camera->GetView());
 
-	_shaderScene->SetUniform3f("light_pos", Vector3(cameraPosition.x, cameraPosition.y, cameraPosition.z));
+	_shaderScene->SetUniform3f("light.position", Vector3(0,0,0));
+	
 }
 
 void Application::UpdateCamera(const Vector2& displacement)
@@ -116,11 +117,25 @@ void Application::UpdateCamera(const Vector2& displacement)
 	_camera->SetUp(up);
 
 	_shaderScene->SetProjection(_camera->GetProjection());
+
+	_shaderScene->SetUniform3f("viewPos", Vector3(cameraPosition.x, cameraPosition.y, cameraPosition.z));
 }
 
 void Application::Render()
 {
-	_sceneLayer->Render();
+	_shaderScene->Enable();
+	_shaderScene->SetUniform3f("light.ambient", Vector3(0.2f, 0.2f, 0.2f));
+	_shaderScene->SetUniform3f("light.diffuse", Vector3(0.5f, 0.5f, 0.5f));
+	_shaderScene->SetUniform3f("light.specular", Vector3(1.0f, 1.0f, 1.0f));
+	_shaderScene->SetUniform3f("material.ambient", Vector3(1.0f, 0.5f, 0.31f));
+	_shaderScene->SetUniform3f("material.diffuse", Vector3(1.0f, 0.5f, 0.31f));
+	_shaderScene->SetUniform3f("material.specular", Vector3(0.5f, 0.5f, 0.5f));
+	_shaderScene->SetUniform1f("material.shininess", 32.0f);
+	GraphicsManager::GetMesh("room")->Draw();
+	GraphicsManager::GetMesh("arrow")->Draw();
+	GraphicsManager::GetMesh("cube")->Draw();
+	//_sceneLayer->Render();
+
 	_hudLayer->Render();
 }
 

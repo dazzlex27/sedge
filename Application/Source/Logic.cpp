@@ -134,7 +134,7 @@ Mesh* CreateRoomMesh()
 	return mesh;
 }
 
-void AssignVertexData(VertexData& vertex, const Point3D& position, const uint color, const Vector3& normal, const Point2D& uv)
+void AssignVertexData(VertexData& vertex, const Point3D& position, const uint color, const Vector3& normal, const Point2D& uv, const uint textureID)
 {
 	vertex.Position = position;
 	vertex.Color = Color(color);
@@ -144,50 +144,52 @@ void AssignVertexData(VertexData& vertex, const Point3D& position, const uint co
 
 Mesh* CreateTexturedCube(Texture2D* texture)
 {
-	int vertexCount = 24;
+	const uint textureID = texture->GetID();
+
+	const int vertexCount = 24;
 	VertexData* vertexData = new VertexData[vertexCount];
 
 	// front face
 	Vector3 frontNormal(0, 0, -1);
-	AssignVertexData(vertexData[0], Point3D(-2, 0, -2.5f), 0xffffffff, frontNormal, Point2D(0.0f, 0.0f));
-	AssignVertexData(vertexData[1], Point3D(-2, 1, -2.5f), 0xffffffff, frontNormal, Point2D(0.0f, 1.0f));
-	AssignVertexData(vertexData[2], Point3D(-1, 1, -2.5f), 0xffffffff, frontNormal, Point2D(1.0f, 1.0f));
-	AssignVertexData(vertexData[3], Point3D(-1, 0, -2.5f), 0xffffffff, frontNormal, Point2D(1.0f, 0.0f));
+	AssignVertexData(vertexData[0], Point3D(-2, 0, -2.5f), 0xffffffff, frontNormal, Point2D(0.0f, 0.0f), textureID);
+	AssignVertexData(vertexData[1], Point3D(-2, 1, -2.5f), 0xffffffff, frontNormal, Point2D(0.0f, 1.0f), textureID);
+	AssignVertexData(vertexData[2], Point3D(-1, 1, -2.5f), 0xffffffff, frontNormal, Point2D(1.0f, 1.0f), textureID);
+	AssignVertexData(vertexData[3], Point3D(-1, 0, -2.5f), 0xffffffff, frontNormal, Point2D(1.0f, 0.0f), textureID);
 
 	// back face
 	Vector3 backNormal(0, 0, 1);
-	AssignVertexData(vertexData[4], Point3D(-1, 0, -1.5f), 0xffffffff, backNormal, Point2D(0.0f, 0.0f));
-	AssignVertexData(vertexData[5], Point3D(-1, 1, -1.5f), 0xffffffff, backNormal, Point2D(0.0f, 1.0f));
-	AssignVertexData(vertexData[6], Point3D(-2, 1, -1.5f), 0xffffffff, backNormal, Point2D(1.0f, 1.0f));
-	AssignVertexData(vertexData[7], Point3D(-2, 0, -1.5f), 0xffffffff, backNormal, Point2D(1.0f, 0.0f));
+	AssignVertexData(vertexData[4], Point3D(-1, 0, -1.5f), 0xffffffff, backNormal, Point2D(0.0f, 0.0f), textureID);
+	AssignVertexData(vertexData[5], Point3D(-1, 1, -1.5f), 0xffffffff, backNormal, Point2D(0.0f, 1.0f), textureID);
+	AssignVertexData(vertexData[6], Point3D(-2, 1, -1.5f), 0xffffffff, backNormal, Point2D(1.0f, 1.0f), textureID);
+	AssignVertexData(vertexData[7], Point3D(-2, 0, -1.5f), 0xffffffff, backNormal, Point2D(1.0f, 0.0f), textureID);
 
 	// top face
 	Vector3 topNormal(0, 1, 0);
-	AssignVertexData(vertexData[8], Point3D(-2, 1, -2.5f), 0xffffffff, topNormal, Point2D(0.0f, 0.0f));
-	AssignVertexData(vertexData[9], Point3D(-2, 1, -1.5f), 0xffffffff, topNormal, Point2D(0.0f, 1.0f));
-	AssignVertexData(vertexData[10], Point3D(-1, 1, -1.5f), 0xffffffff, topNormal, Point2D(1.0f, 1.0f));
-	AssignVertexData(vertexData[11], Point3D(-1, 1, -2.5f), 0xffffffff, topNormal, Point2D(1.0f, 0.0f));
+	AssignVertexData(vertexData[8], Point3D(-2, 1, -2.5f), 0xffffffff, topNormal, Point2D(0.0f, 0.0f), textureID);
+	AssignVertexData(vertexData[9], Point3D(-2, 1, -1.5f), 0xffffffff, topNormal, Point2D(0.0f, 1.0f), textureID);
+	AssignVertexData(vertexData[10], Point3D(-1, 1, -1.5f), 0xffffffff, topNormal, Point2D(1.0f, 1.0f), textureID);
+	AssignVertexData(vertexData[11], Point3D(-1, 1, -2.5f), 0xffffffff, topNormal, Point2D(1.0f, 0.0f), textureID);
 
 	// bottom face
 	Vector3 bottomNormal(0, -1, 0);
-	AssignVertexData(vertexData[12], Point3D(-2, 0, -1.5f), 0xffffffff, bottomNormal, Point2D(0.0f, 0.0f));
-	AssignVertexData(vertexData[13], Point3D(-2, 0, -2.5f), 0xffffffff, bottomNormal, Point2D(0.0f, 1.0f));
-	AssignVertexData(vertexData[14], Point3D(-1, 0, -2.5f), 0xffffffff, bottomNormal, Point2D(1.0f, 1.0f));
-	AssignVertexData(vertexData[15], Point3D(-1, 0, -1.5f), 0xffffffff, bottomNormal, Point2D(1.0f, 0.0f));
+	AssignVertexData(vertexData[12], Point3D(-2, 0, -1.5f), 0xffffffff, bottomNormal, Point2D(0.0f, 0.0f), textureID);
+	AssignVertexData(vertexData[13], Point3D(-2, 0, -2.5f), 0xffffffff, bottomNormal, Point2D(0.0f, 1.0f), textureID);
+	AssignVertexData(vertexData[14], Point3D(-1, 0, -2.5f), 0xffffffff, bottomNormal, Point2D(1.0f, 1.0f), textureID);
+	AssignVertexData(vertexData[15], Point3D(-1, 0, -1.5f), 0xffffffff, bottomNormal, Point2D(1.0f, 0.0f), textureID);
 
 	// left face
 	Vector3 leftNormal(-1, 0, 0);
-	AssignVertexData(vertexData[16], Point3D(-2, 0, -2.5f), 0xffffffff, leftNormal, Point2D(0.0f, 0.0f));
-	AssignVertexData(vertexData[17], Point3D(-2, 1, -2.5f), 0xffffffff, leftNormal, Point2D(0.0f, 1.0f));
-	AssignVertexData(vertexData[18], Point3D(-2, 1, -1.5f), 0xffffffff, leftNormal, Point2D(1.0f, 1.0f));
-	AssignVertexData(vertexData[19], Point3D(-2, 0, -1.5f), 0xffffffff, leftNormal, Point2D(1.0f, 0.0f));
+	AssignVertexData(vertexData[16], Point3D(-2, 0, -2.5f), 0xffffffff, leftNormal, Point2D(0.0f, 0.0f), textureID);
+	AssignVertexData(vertexData[17], Point3D(-2, 1, -2.5f), 0xffffffff, leftNormal, Point2D(0.0f, 1.0f), textureID);
+	AssignVertexData(vertexData[18], Point3D(-2, 1, -1.5f), 0xffffffff, leftNormal, Point2D(1.0f, 1.0f), textureID);
+	AssignVertexData(vertexData[19], Point3D(-2, 0, -1.5f), 0xffffffff, leftNormal, Point2D(1.0f, 0.0f), textureID);
 
 	// right face
 	Vector3 rightNormal(1, 0, 0);
-	AssignVertexData(vertexData[20], Point3D(-1, 0, -1.5f), 0xffffffff, rightNormal, Point2D(0.0f, 0.0f));
-	AssignVertexData(vertexData[21], Point3D(-1, 1, -1.5f), 0xffffffff, rightNormal, Point2D(0.0f, 1.0f));
-	AssignVertexData(vertexData[22], Point3D(-1, 1, -2.5f), 0xffffffff, rightNormal, Point2D(1.0f, 1.0f));
-	AssignVertexData(vertexData[23], Point3D(-1, 0, -2.5f), 0xffffffff, rightNormal, Point2D(1.0f, 0.0f));
+	AssignVertexData(vertexData[20], Point3D(-1, 0, -1.5f), 0xffffffff, rightNormal, Point2D(0.0f, 0.0f), textureID);
+	AssignVertexData(vertexData[21], Point3D(-1, 1, -1.5f), 0xffffffff, rightNormal, Point2D(0.0f, 1.0f), textureID);
+	AssignVertexData(vertexData[22], Point3D(-1, 1, -2.5f), 0xffffffff, rightNormal, Point2D(1.0f, 1.0f), textureID);
+	AssignVertexData(vertexData[23], Point3D(-1, 0, -2.5f), 0xffffffff, rightNormal, Point2D(1.0f, 0.0f), textureID);
 
 	Mesh* mesh = MeshFactory::CreateMesh(vertexData, vertexCount, CreateCube24ElementArray(), 36, texture);
 
