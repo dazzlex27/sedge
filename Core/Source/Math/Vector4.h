@@ -18,7 +18,7 @@ namespace s3dge
 		float w;
 
 		Vector4();
-		Vector4(float x, float y, float z, float w);
+		Vector4(const float x, const float y, const float z, const float w);
 
 		Vector4& Add(const Vector4& vector);
 		Vector4& Subtract(const Vector4& vector);
@@ -37,9 +37,9 @@ namespace s3dge
 		Vector4 operator/(const Vector4& v2);
 
 		Vector4& Normalize();
-		float GetDistance(Vector4 v) const;
-		float GetLength() const;
+		const float GetDistance(const Vector4& v) const;
+		const float GetLength() const;
 
-		static float GetDotProduct(Vector4 v1, Vector4 v2);
+		static const float GetDotProduct(const Vector4& v1, const Vector4& v2);
 	};
 }

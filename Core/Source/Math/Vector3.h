@@ -21,7 +21,7 @@ namespace s3dge
 
 		Vector3();
 		Vector3(const Point3D& point3d);
-		Vector3(float x, float y, float z);
+		Vector3(const float x, const float y, const float z);
 		Vector3(const Vector3& other);
 
 		Vector3& Add(const Vector3& vector);
@@ -54,9 +54,9 @@ namespace s3dge
 		friend Vector3 operator*(const Matrix4& m ,const Vector3& v);
 
 		static Vector3 Normalize(const Vector3& vector);
-		float GetDistance(const Vector3& v) const;
-		float GetLength() const;
-		static float GetDotProduct(const Vector3& v1, const Vector3& v2);
-		static Vector3 GetCrossProduct(const Vector3& v1, const Vector3& v2);
+		const float GetDistance(const Vector3& v) const;
+		const float GetLength() const;
+		static const float GetDotProduct(const Vector3& v1, const Vector3& v2);
+		static const Vector3 GetCrossProduct(const Vector3& v1, const Vector3& v2);
 	};
 }

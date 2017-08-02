@@ -17,7 +17,7 @@ namespace s3dge
 		float width;
 		float height;
 
-		Size2D(float width, float height)
+		Size2D(const float width, const float height)
 			: width(width), height(height) { }
 		Size2D(const Vector2& vector)
 			: width(vector.x), height(vector.y) { }

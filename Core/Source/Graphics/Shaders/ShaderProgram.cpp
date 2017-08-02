@@ -13,7 +13,7 @@ ShaderProgram::ShaderProgram(cstring vertexPath, cstring fragmentPath)
 	: _vertexPath(vertexPath), _fragmentPath(fragmentPath)
 {
 	_programID = Load();
-	Enable();
+	Bind();
 	SetUniform1iv("textureArray", 16, _textureIDs);
 }
 
@@ -95,28 +95,28 @@ const bool ShaderProgram::Compile(const uint shader)
 
 void ShaderProgram::SetProjection(const Matrix4& matrix)
 {
-	Enable();
+	Bind();
 	SetUniformMat4fv("pr_matrix", matrix);
 }
 
 void ShaderProgram::SetView(const Matrix4& matrix)
 {
-	Enable();
+	Bind();
 	SetUniformMat4fv("vw_matrix", matrix);
 }
 
 void ShaderProgram::SetModel(const Matrix4& matrix)
 {
-	Enable();
+	Bind();
 	SetUniformMat4fv("ml_matrix", matrix);
 }
 
-void ShaderProgram::Enable() const
+void ShaderProgram::Bind() const
 {
 	glUseProgram(_programID);
 }
 
-void ShaderProgram::Disable() const
+void ShaderProgram::Unbind() const
 {
 	glUseProgram(0);
 }

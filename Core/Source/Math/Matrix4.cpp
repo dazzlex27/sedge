@@ -209,7 +209,7 @@ Matrix4 Matrix4::Translate(const Vector3& vector)
 	return result;
 }
 
-Matrix4 Matrix4::Rotate(const Vector3& axis, float angle)
+Matrix4 Matrix4::Rotate(const Vector3& axis, const float angle)
 {
 	Matrix4 result = GetIdentity();
 
@@ -250,7 +250,7 @@ Matrix4 Matrix4::GetIdentity()
 	return Matrix4(1);
 }
 
-Matrix4 Matrix4::GetOrthographic(float left, float right, float bottom, float top, float near, float far)
+Matrix4 Matrix4::GetOrthographic(const float left, const float right, const float bottom, const float top, const float near, const float far)
 {
 	Matrix4 result = Matrix4::GetIdentity();
 	result.data[4 * 0 + 0] = 2 / (right - left);
@@ -264,13 +264,13 @@ Matrix4 Matrix4::GetOrthographic(float left, float right, float bottom, float to
 	return result;
 }
 
-Matrix4 Matrix4::GetPerspective(float fov, float aspect, float near, float far)
+Matrix4 Matrix4::GetPerspective(const float fov, const float aspect, const float near, const float far)
 {
 	Matrix4 result = Matrix4::GetIdentity();
 
-	float frustumDepth = far - near;
-	float oneDivByDepth = 1 / frustumDepth;
-	float fovRad = DegToRad(fov);
+	const float frustumDepth = far - near;
+	const float oneDivByDepth = 1 / frustumDepth;
+	const float fovRad = DegToRad(fov);
 
 	result.data[4 * 1 + 1] = 1 / tan(0.5f * fovRad);
 	result.data[4 * 0 + 0] = result.data[1 * 4 + 1] / aspect;
@@ -283,9 +283,9 @@ Matrix4 Matrix4::GetPerspective(float fov, float aspect, float near, float far)
 
 Matrix4 Matrix4::LookAt(const Vector3& eye, const Vector3& target, const Vector3& up)
 {
-	Vector3 f(Vector3::Normalize(target - eye));
-	Vector3 s(Vector3::Normalize(Vector3::GetCrossProduct(f, up)));
-	Vector3 u(Vector3::Normalize(Vector3::GetCrossProduct(s, f)));
+	const Vector3 f(Vector3::Normalize(target - eye));
+	const Vector3 s(Vector3::Normalize(Vector3::GetCrossProduct(f, up)));
+	const Vector3 u(Vector3::Normalize(Vector3::GetCrossProduct(s, f)));
 
 	Matrix4 result = GetIdentity();
 	result.data[4 * 0 + 0] = s.x;
@@ -310,28 +310,3 @@ cstring Matrix4::Print()
 
 	return result.c_str();
 }
-
-
-
-/*float L = pow(vector.GetLength(), 2);
-float angleR = -(float)(angle * M_PI / 180.0);
-float c = (float)cos(angleR);
-float s = (float)sin(angleR);
-float u = vector.x;
-float v = vector.y;
-float w = vector.z;
-float u2 = vector.x * vector.x;
-float v2 = vector.y * vector.y;
-float w2 = vector.z * vector.z;
-
-result.data[4 * 0 + 0] = (float)((u2 + (v2 + w2) * c) / L);
-result.data[4 * 0 + 1] = (float)((u * v * (1 - c) - w * sqrt(L) * s) / L);
-result.data[4 * 0 + 2] = (float)((u * w * (1 - c) + v * sqrt(L) * s) / L);
-
-result.data[4 * 1 + 0] = (float)((u * v * (1 - c) + w * sqrt(L) * s) / L);
-result.data[4 * 1 + 1] = (float)((v2 + (u2 + w2) * c) / L);
-result.data[4 * 1 + 2] = (float)((v * w * (1 - c) - u * sqrt(L) * s) / L);
-
-result.data[4 * 2 + 0] = (float)((u * w * (1 - c) - v * sqrt(L) * s) / L);
-result.data[4 * 2 + 1] = (float)((v * w * (1 - c) + u * sqrt(L) * s) / L);
-result.data[4 * 2 + 2] = (float)((w2 + (u2 + v2) * c) / L);*/

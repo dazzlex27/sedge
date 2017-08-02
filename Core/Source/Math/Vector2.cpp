@@ -16,94 +16,94 @@ Vector2::Vector2()
 {
 }
 
-Vector2::Vector2(float x, float y)
+Vector2::Vector2(const float x, const float y)
 	: x(x), y(y) 
 {
 }
 
 Vector2& Vector2::Add(const Vector2& vector)
 {
-	this->x += vector.x;
-	this->y += vector.y;
+	x += vector.x;
+	y += vector.y;
 
 	return *this;
 }
 
 Vector2& Vector2::Subtract(const Vector2& vector)
 {
-	this->x -= vector.x;
-	this->y -= vector.y;
+	x -= vector.x;
+	y -= vector.y;
 
 	return *this;
 }
 
 Vector2& Vector2::Multiply(const Vector2& vector)
 {
-	this->x *= vector.x;
-	this->y *= vector.y;
+	x *= vector.x;
+	y *= vector.y;
 
 	return *this;
 }
 
-Vector2& Vector2::Multiply(float value)
+Vector2& Vector2::Multiply(const float value)
 {
-	this->x *= value;
-	this->y *= value;
+	x *= value;
+	y *= value;
 
 	return *this;
 }
 
 Vector2& Vector2::Divide(const Vector2& vector)
 {
-	this->x /= vector.x;
-	this->y /= vector.y;
+	x /= vector.x;
+	y /= vector.y;
 
 	return *this;
 }
 
 Vector2& Vector2::operator+=(const Vector2& other)
 {
-	return this->Add(other);
+	return Add(other);
 }
 
 Vector2& Vector2::operator-=(const Vector2& other)
 {
-	return this->Subtract(other);
+	return Subtract(other);
 }
 
 Vector2& Vector2::operator*=(const Vector2& other)
 {
-	return this->Multiply(other);
+	return Multiply(other);
 }
 
 Vector2& Vector2::operator*=(float value)
 {
-	return this->Multiply(value);
+	return Multiply(value);
 }
 
 Vector2& Vector2::operator/=(const Vector2& other)
 {
-	return this->Divide(other);
+	return Divide(other);
 }
 
 Vector2 Vector2::operator+(const Vector2& v2)
 {
-	return this->Add(v2);
+	return Add(v2);
 }
 
 Vector2 Vector2::operator-(const Vector2& v2)
 {
-	return this->Subtract(v2);
+	return Subtract(v2);
 }
 
 Vector2 Vector2::operator*(const Vector2& v2)
 {
-	return this->Multiply(v2);
+	return Multiply(v2);
 }
 
 Vector2 Vector2::operator/(const Vector2& v2)
 {
-	return this->Divide(v2);
+	return Divide(v2);
 }
 
 Vector2& Vector2::Normalize()
@@ -117,18 +117,18 @@ Vector2& Vector2::Normalize()
 	return *this;
 }
 
-float Vector2::GetDistance(Vector2 v) const
+const float Vector2::GetDistance(const Vector2& v) const
 {
-	Vector2 d(v.x - x, v.y - y);
+	const Vector2 d(v.x - x, v.y - y);
 	return d.GetLength();
 }
 
-float Vector2::GetLength() const
+const float Vector2::GetLength() const
 {
 	return (float)std::sqrt(x * x + y * y);
 }
 
-float Vector2::GetDotProduct(Vector2 v1, Vector2 v2)
+const float Vector2::GetDotProduct(const Vector2& v1, const Vector2& v2)
 {
 	return v1.x * v2.x + v1.y * v2.y;
 }

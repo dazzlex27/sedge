@@ -48,7 +48,7 @@ void Layer::Add(Renderable* renderable)
 
 void Layer::Render()
 {
-	_shaderProgram->Enable();
+	_shaderProgram->Bind();
 	_renderer->Begin();
 
 	for (const auto renderable : _renderables)

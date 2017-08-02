@@ -28,8 +28,8 @@ namespace s3dge
 		ShaderProgram(cstring vertex, cstring fragment);
 		~ShaderProgram();
 
-		void Enable() const;
-		void Disable() const;
+		void Bind() const;
+		void Unbind() const;
 
 		void SetUniformMat4fv(cstring name, const Matrix4& matrix);
 		void SetUniform1f(cstring name, const float value);

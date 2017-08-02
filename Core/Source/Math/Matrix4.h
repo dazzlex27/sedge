@@ -102,7 +102,7 @@ namespace s3dge
 
 		=============================================
 		*/
-		static Matrix4 GetOrthographic(float left, float right, float bottom, float top, float near, float far);
+		static Matrix4 GetOrthographic(const float left, const float right, const float bottom, const float top, const float near, const float far);
 
 		/*
 		Returns a perspective matrix with the specified settings
@@ -115,7 +115,7 @@ namespace s3dge
 		0         0      f/(f-n)  1
 		0         0    -fn/(f-n)  0
 		*/
-		static Matrix4 GetPerspective(float fov, float aspectRatio, float near, float far);
+		static Matrix4 GetPerspective(const float fov, const float aspectRatio, const float near, const float far);
 
 		/*
 		=============================================

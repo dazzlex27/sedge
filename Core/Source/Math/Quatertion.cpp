@@ -8,7 +8,7 @@ Quaternion::Quaternion()
 {
 }
 
-Quaternion::Quaternion(float w, float x, float y, float z)
+Quaternion::Quaternion(const float w, const float x, const float y, const float z)
 	: w(w), x(x), y(y), z(z)
 {
 }
@@ -22,7 +22,7 @@ Quaternion Quaternion::Normalize(const Quaternion& q)
 {
 	Quaternion result(q);
 
-	float magnitude = q.GetMagnitude();
+	const float magnitude = q.GetMagnitude();
 	result.w /= magnitude;
 	result.x /= magnitude;
 	result.y /= magnitude;

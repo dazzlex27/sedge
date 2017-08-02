@@ -10,7 +10,7 @@ namespace s3dge
 		float z;
 
 		Quaternion();
-		Quaternion(float w, float x, float y, float z);
+		Quaternion(const float w, const float x, const float y, const float z);
 		Quaternion(const Quaternion& q);
 
 		static Quaternion Normalize(const Quaternion& q);

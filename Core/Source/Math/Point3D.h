@@ -19,7 +19,7 @@ namespace s3dge
 		float z;
 
 		Point3D() : x(0), y(0), z(0) { }
-		Point3D(float x, float y, float z) :x(x), y(y), z(z) { }
+		Point3D(const float x, const float y, const float z) :x(x), y(y), z(z) { }
 		Point3D(const Vector3& vector) : x(vector.x), y(vector.y), z(vector.z) { }
 		~Point3D() { }
 	};
