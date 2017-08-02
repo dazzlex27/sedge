@@ -14,56 +14,57 @@ implements the 2D texture class
 
 using namespace s3dge;
 
-int GetWrapModeValue(TextureWrapMode wrapMode)
+static int GetChannelsCode(int channelCount)
 {
-	int mode = 0;
+	switch (channelCount)
+	{
+	case 1:
+		return GL_LUMINANCE;
+	case 3:
+		return GL_RGB;
+	case 4:
+		return GL_RGBA;
+	}
 
+	return -1; // error
+}
+
+static int GetWrapModeValue(TextureWrapMode wrapMode)
+{
 	switch (wrapMode)
 	{
 	case REPEAT:
-		mode = GL_REPEAT;
-		break;
+		return GL_REPEAT;
 	case MIRRORED_REPEAT:
-		mode = GL_MIRRORED_REPEAT;
-		break;
+		return GL_MIRRORED_REPEAT;
 	case CLAMP_TO_BORDER:
-		mode = GL_CLAMP_TO_BORDER;
-		break;
+		return GL_CLAMP_TO_BORDER;
 	case CLAMP_TO_EDGE:
-		mode = GL_CLAMP_TO_EDGE;
-		break;
+		return GL_CLAMP_TO_EDGE;
 	}
 
-	return mode;
+	return -1; // error
 }
 
-int GetFilterModeValue(TextureFilterMode filterMode)
+static int GetFilterModeValue(TextureFilterMode filterMode)
 {
-	int mode = 0;
-
 	switch (filterMode)
 	{
 	case NEAREST:
-		mode = GL_NEAREST;
-		break;
+		return GL_NEAREST;
 	case LINEAR:
-		mode = GL_LINEAR;
-		break;
+		return GL_LINEAR;
 	case MIPMAP_NEAREST_NEAREST:
-		mode = GL_NEAREST_MIPMAP_NEAREST;
-		break;
+		return GL_NEAREST_MIPMAP_NEAREST;
 	case MIPMAP_NEAREST_LINEAR:
-		mode = GL_NEAREST_MIPMAP_LINEAR;
-		break;
+		return GL_NEAREST_MIPMAP_LINEAR;
 	case MIPMAP_LINEAR_NEAREST:
-		mode = GL_LINEAR_MIPMAP_NEAREST;
-		break;
+		return GL_LINEAR_MIPMAP_NEAREST;
 	case MIPMAP_LINEAR_LINEAR:
-		mode = GL_LINEAR_MIPMAP_LINEAR;
-		break;
+		return GL_LINEAR_MIPMAP_LINEAR;
 	}
 
-	return mode;
+	return -1; // error
 }
 
 Texture2D::Texture2D(cstring name, cstring path, TextureWrapMode wrapMode, TextureFilterMode filterMode)
@@ -97,7 +98,7 @@ bool Texture2D::Load()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, filterMode);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wrapMode);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrapMode);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, _width, _height, 0, GL_RGB, GL_UNSIGNED_BYTE, imagePixels);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, _width, _height, 0, GetChannelsCode(_components), GL_UNSIGNED_BYTE, imagePixels);
 
 	glGenerateMipmap(GL_TEXTURE_2D);
 
@@ -118,6 +119,12 @@ void Texture2D::Bind() const
 void Texture2D::Unbind() const
 {
 	glBindTexture(GL_TEXTURE_2D, 0);
+}
+
+void Texture2D::AssignToPosition(const float position)
+{
+	glActiveTexture(GL_TEXTURE0 + position);
+	Bind();
 }
 
 void Texture2D::SetWrapMode(TextureWrapMode wrapMode)

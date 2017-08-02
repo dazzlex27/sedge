@@ -15,37 +15,37 @@ void Application::Initialize()
 	_shaderHUD = new ShaderProgram("Resources/Shaders/basic.vert", "Resources/Shaders/static.frag");
 	
 	_camera = new FPSCamera();
+	_camera->SetPosition(Vector3(0, 1.5, 4));
 
 	_shaderScene->SetProjection(_camera->GetProjection());
 	_shaderHUD->SetProjection(Matrix4::GetOrthographic(0.0f, 16.0f, 0.0f, 9.0f, -1.0f, 1.0f));
 	
-	TextureManager::Add("Box", "Resources/Textures/box.jpg");
-	TextureManager::Add("Brick", "Resources/Textures/brick.jpg");
-	TextureManager::Add("Concrete", "Resources/Textures/concrete.jpg");
-	FontManager::Add("test_font", "Resources/Fonts/Assistant-Regular.ttf", 24);
+	TextureManager::Add("floor", "Resources/Textures/floor.jpg");
+	TextureManager::Add("box", "Resources/Textures/box.jpg");
+	TextureManager::Add("brick", "Resources/Textures/brick.jpg");
+	TextureManager::Add("concrete", "Resources/Textures/concrete.jpg");
+	TextureManager::Add("lm-test", "Resources/Textures/lm-test.png");
+	TextureManager::Add("green", "Resources/Textures/green.png");
+	TextureManager::Add("blue", "Resources/Textures/blue.png");
+	FontManager::Add("font1", "Resources/Fonts/Assistant-Regular.ttf", 24);
 	SoundManager::Add("back-in-black", "Resources/Audio/back-in-black.ogg");
 	
-	Sprite* rect = SpriteFactory::CreateSprite(Point2D(0, 0), -3, Size2D(1, 1), TextureManager::Get("Box"));
-	Mesh* arrow = CreateArrowMesh();
-	Mesh* room = CreateRoomMesh();
-	Mesh* cube = CreateTexturedCube(TextureManager::Get("Concrete"));
-	Label* label = LabelFactory::CreateLabel("startup...", FontManager::Get("test_font"), Point2D(0.3f, 8.4f), 0, Size2D(2, 2));
-	Label* label2 = LabelFactory::CreateLabel("p:", FontManager::Get("test_font"), Point2D(0.3f, 7.4f), 0, Size2D(2, 2));
+	Label* label = LabelFactory::CreateLabel("startup...", FontManager::Get("font1"), Point2D(0.3f, 8.4f), 0, Size2D(2, 2));
+	Label* label2 = LabelFactory::CreateLabel("p:", FontManager::Get("font1"), Point2D(0.3f, 7.4f), 0, Size2D(2, 2));
 	
-	GraphicsManager::AddSprite("rect", rect);
-	GraphicsManager::AddMesh("arrow", arrow);
-	GraphicsManager::AddMesh("room", room);
-	GraphicsManager::AddMesh("cube", cube);
+	GraphicsManager::AddSprite("rect", SpriteFactory::CreateSprite(Point2D(0, 0), -3, Size2D(1, 1), TextureManager::Get("box")));
+	GraphicsManager::AddMesh("arrow", CreateArrowMesh());
+	GraphicsManager::AddMesh("room", CreateRoomMesh(TextureManager::Get("floor"), 1));
+	GraphicsManager::AddMesh("cube", CreateTexturedCubeUnitSize(TextureManager::Get("concrete"), 2));
+	GraphicsManager::AddMesh("cube2", CreateTexturedCubeUnitSize(TextureManager::Get("brick"), 3));
+	GraphicsManager::AddMesh("cube3", CreateTexturedCubeUnitSize(TextureManager::Get("lm-test"), 4));
+	GraphicsManager::AddMesh("cube4", CreateTexturedCubeUnitSize(TextureManager::Get("green"), 5));
+	GraphicsManager::AddMesh("cube5", CreateTexturedCubeUnitSize(TextureManager::Get("blue"), 6));
 	GraphicsManager::AddLabel("fps", label);
 	GraphicsManager::AddLabel("position", label2);
 
-	_sceneLayer = new Layer(_shaderScene);
 	_hudLayer = new Layer(_shaderHUD);
 
-	_sceneLayer->Add(GraphicsManager::GetMesh("arrow"));
-	_sceneLayer->Add(GraphicsManager::GetSprite("rect"));
-	_sceneLayer->Add(GraphicsManager::GetMesh("room"));
-	_sceneLayer->Add(GraphicsManager::GetMesh("cube"));
 	_hudLayer->Add(GraphicsManager::GetLabel("fps"));
 	_hudLayer->Add(GraphicsManager::GetLabel("position"));
 
@@ -64,14 +64,14 @@ void Application::Update()
 	_shaderScene->SetProjection(_camera->GetProjection());
 	_shaderScene->SetView(_camera->GetView());
 
-	_shaderScene->SetUniform3f("light.position", Vector3(0,0,0));
+	_shaderScene->SetUniform3f("light.position", Vector3(0,3,-3));
 	
 }
 
 void Application::UpdateCamera(const Vector2& displacement)
 {
-	float speed = 0.1f;
-	float mouseSpeed = 3.0f;
+	const float speed = 0.1f;
+	const float mouseSpeed = 3.0f;
 
 	Point3D cameraPosition = _camera->GetPosition();
 	Vector3 position(cameraPosition);
@@ -110,7 +110,7 @@ void Application::UpdateCamera(const Vector2& displacement)
 	if (InputManager::KeyDown(S3_KEY_MWUP))
 		_camera->SetFOV(_camera->GetFOV() + 1);
 	if (InputManager::KeyDown(S3_KEY_MMB))
-		_camera->SetFOV(_camera->GetFOV() + 1);
+		_camera->SetFOV(45);
 
 	_camera->SetPosition(Point3D(position.x, position.y, position.z));
 	_camera->SetViewDirection(direction);
@@ -123,18 +123,33 @@ void Application::UpdateCamera(const Vector2& displacement)
 
 void Application::Render()
 {
-	_shaderScene->Enable();
-	_shaderScene->SetUniform3f("light.ambient", Vector3(0.2f, 0.2f, 0.2f));
+	_shaderScene->Bind();
+	_shaderScene->SetModel(Matrix4::GetIdentity());
+	_shaderScene->SetUniform3f("light.ambient", Vector3(0.5f, 0.5f, 0.5f));
 	_shaderScene->SetUniform3f("light.diffuse", Vector3(0.5f, 0.5f, 0.5f));
 	_shaderScene->SetUniform3f("light.specular", Vector3(1.0f, 1.0f, 1.0f));
-	_shaderScene->SetUniform3f("material.ambient", Vector3(1.0f, 0.5f, 0.31f));
-	_shaderScene->SetUniform3f("material.diffuse", Vector3(1.0f, 0.5f, 0.31f));
-	_shaderScene->SetUniform3f("material.specular", Vector3(0.5f, 0.5f, 0.5f));
+	_shaderScene->SetUniform3f("material.ambient", Vector3(0.5f, 0.5f, 0.5f));
+	_shaderScene->SetUniform3f("material.diffuse", Vector3(0.5f, 0.5f, 0.5f));
+	_shaderScene->SetUniform3f("material.specular", Vector3(0.8f, 0.8f, 0.8f));
 	_shaderScene->SetUniform1f("material.shininess", 32.0f);
+	TextureManager::Get("floor")->AssignToPosition(0);
 	GraphicsManager::GetMesh("room")->Draw();
 	GraphicsManager::GetMesh("arrow")->Draw();
+	_shaderScene->SetModel(Matrix4::Translate(Vector3(-1.5, 0, -2.5)) * Matrix4::Scale(Vector3(1.5, 1.5, 1)));
+	TextureManager::Get("concrete")->AssignToPosition(1);
 	GraphicsManager::GetMesh("cube")->Draw();
-	//_sceneLayer->Render();
+	_shaderScene->SetModel(Matrix4::Rotate(Vector3(0, 1, 0), 45) * Matrix4::Translate(Vector3(2, 0, 0)));
+	TextureManager::Get("brick")->AssignToPosition(2);
+	GraphicsManager::GetMesh("cube2")->Draw();
+	_shaderScene->SetModel(Matrix4::Translate(Vector3(-0.5, 0, -1)));
+	TextureManager::Get("lm-test")->AssignToPosition(3);
+	GraphicsManager::GetMesh("cube3")->Draw();
+	_shaderScene->SetModel(Matrix4::Translate(Vector3(-1.5, 0, -0.2)) * Matrix4::Scale(Vector3(0.5, 0.5, 0.5)));
+	TextureManager::Get("green")->AssignToPosition(4);
+	GraphicsManager::GetMesh("cube4")->Draw();
+	_shaderScene->SetModel(Matrix4::Rotate(Vector3(0, 1, 0), 30) * Matrix4::Translate(Vector3(1, 0, 0.5)) * Matrix4::Scale(Vector3(0.8, 1, 0.5)));
+	TextureManager::Get("blue")->AssignToPosition(5);
+	GraphicsManager::GetMesh("cube5")->Draw();
 
 	_hudLayer->Render();
 }
@@ -143,7 +158,6 @@ void Application::Dispose()
 {
 	//SoundManager::Get("back-in-black")->Stop();
 	SafeDelete(_hudLayer);
-	SafeDelete(_sceneLayer);
 	SafeDelete(_shaderHUD);
 	SafeDelete(_camera);
 }

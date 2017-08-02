@@ -61,6 +61,8 @@ namespace s3dge
 		void Bind() const;
 		void Unbind() const;
 
+		void AssignToPosition(const float position);
+
 	private:
 		bool Load();
 

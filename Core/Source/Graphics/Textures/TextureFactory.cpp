@@ -9,6 +9,7 @@ Implements TextureFactory class
 #include "TextureFactory.h"
 #include "System/FileUtils.h"
 #include "System/Log.h"
+#include "System/DeleteMacros.h"
 
 using namespace s3dge;
 
@@ -33,7 +34,7 @@ Texture2D* TextureFactory::CreateTextureFromFile(cstring name, cstring path, Tex
 
 	if (!FileUtils::CheckFileExists(path))
 	{
-		LOG_ERROR("Texture file ", "\"name\"", " was not found");
+		LOG_ERROR("Texture file \"", path, "\"was not found");
 		return nullptr;
 	}
 
@@ -42,6 +43,7 @@ Texture2D* TextureFactory::CreateTextureFromFile(cstring name, cstring path, Tex
 	if (!texture->Load())
 	{
 		LOG_ERROR("Failed to load texture: ", name);
+		SafeDelete(texture);
 		return nullptr;
 	}
 
