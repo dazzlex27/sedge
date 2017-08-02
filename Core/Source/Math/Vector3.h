@@ -21,6 +21,7 @@ namespace s3dge
 
 		Vector3();
 		Vector3(const Point3D& point3d);
+		Vector3(const float value);
 		Vector3(const float x, const float y, const float z);
 		Vector3(const Vector3& other);
 

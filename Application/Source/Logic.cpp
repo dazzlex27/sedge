@@ -122,8 +122,6 @@ void AssignVertexData(VertexData& vertex, const Point3D& position, const uint co
 
 Mesh* CreateTexturedCubeUnitSize(Texture2D* texture, const float textureNum)
 {
-	const uint textureID = texture->GetID();
-
 	const int vertexCount = 24;
 	VertexData* vertexData = new VertexData[vertexCount];
 

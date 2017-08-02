@@ -23,6 +23,11 @@ Vector3::Vector3(const Point3D& point)
 {
 }
 
+Vector3::Vector3(const float value)
+	:x(value), y(value), z(value)
+{
+}
+
 Vector3::Vector3(const float x, const float y, const float z)
 	: x(x), y(y), z(z) 
 {

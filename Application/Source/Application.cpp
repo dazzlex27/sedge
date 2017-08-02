@@ -36,6 +36,7 @@ void Application::Initialize()
 	GraphicsManager::AddSprite("rect", SpriteFactory::CreateSprite(Point2D(0, 0), -3, Size2D(1, 1), TextureManager::Get("box")));
 	GraphicsManager::AddMesh("arrow", CreateArrowMesh());
 	GraphicsManager::AddMesh("room", CreateRoomMesh(TextureManager::Get("floor"), 1));
+	GraphicsManager::AddMesh("light", CreateTexturedCubeUnitSize(nullptr, 0));
 	GraphicsManager::AddMesh("cube", CreateTexturedCubeUnitSize(TextureManager::Get("concrete"), 2));
 	GraphicsManager::AddMesh("cube2", CreateTexturedCubeUnitSize(TextureManager::Get("brick"), 3));
 	GraphicsManager::AddMesh("cube3", CreateTexturedCubeUnitSize(TextureManager::Get("lm-test"), 4));
@@ -64,7 +65,7 @@ void Application::Update()
 	_shaderScene->SetProjection(_camera->GetProjection());
 	_shaderScene->SetView(_camera->GetView());
 
-	_shaderScene->SetUniform3f("light.position", Vector3(0,3,-3));
+	_shaderScene->SetUniform3f("light.position", Vector3(0, 2, 0));
 	
 }
 
@@ -150,6 +151,12 @@ void Application::Render()
 	_shaderScene->SetModel(Matrix4::Rotate(Vector3(0, 1, 0), 30) * Matrix4::Translate(Vector3(1, 0, 0.5)) * Matrix4::Scale(Vector3(0.8, 1, 0.5)));
 	TextureManager::Get("blue")->AssignToPosition(5);
 	GraphicsManager::GetMesh("cube5")->Draw();
+	_shaderScene->SetUniform3f("material.ambient", Vector3(1.0f));
+	_shaderScene->SetUniform3f("material.diffuse", Vector3(1.0f));
+	_shaderScene->SetUniform3f("material.specular", Vector3(1.0f));
+	_shaderScene->SetUniform1f("material.shininess", 32.0f);
+	_shaderScene->SetModel(Matrix4::Translate(Vector3(0, 2, 0)) * Matrix4::Scale(Vector3(0.1, 0.1, 0.1)) * Matrix4::Scale(Vector3(-0.1,-0.1,-0.1)));
+	GraphicsManager::GetMesh("light")->Draw();
 
 	_hudLayer->Render();
 }
