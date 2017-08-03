@@ -14,12 +14,12 @@ Implemlents the Renderable class
 
 using namespace s3dge;
 
-Renderable::Renderable(VertexData* vertices, uint vertexCount, uint* elements, uint elementCount, Texture2D* texture)
+Renderable::Renderable(VertexData*const vertices, const uint vertexCount, uint*const elements, const uint elementCount, Texture2D*const texture)
 	: Vertices(vertices), VertexCount(vertexCount), Elements(elements), ElementCount(elementCount), Texture(texture)
 {
 }
 
-void Renderable::Submit(Renderer* renderer) const
+void Renderable::Submit(Renderer*const renderer) const
 {
 	renderer->Submit(this);
 }

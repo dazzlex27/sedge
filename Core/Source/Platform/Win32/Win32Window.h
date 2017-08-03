@@ -293,7 +293,7 @@ namespace s3dge
 		}
 	}
 
-	void resize_callback(Window* window, uint width, uint height)
+	void resize_callback(Window*const window, const uint width, const uint height)
 	{
 		if (!window)
 			return;
@@ -307,7 +307,7 @@ namespace s3dge
 		glViewport(0, 0, window->_width, window->_height);
 	}
 
-	void cursor_position_callback(const Window* window)
+	void cursor_position_callback(const Window*const window)
 	{
 		if (!window)
 			return;
@@ -331,7 +331,7 @@ namespace s3dge
 		SetCursor(NULL);
 	}
 
-	void key_callback(const Window* window, int key, int command)
+	void key_callback(const Window*const window, const int key, const int command)
 	{
 		if (!window)
 			return;
@@ -418,7 +418,7 @@ namespace s3dge
 		}
 	}
 
-	void focus_callback(Window* window, bool hasFocus)
+	void focus_callback(Window*const window, const bool hasFocus)
 	{
 		if (window)
 			window->_hasFocus = hasFocus;

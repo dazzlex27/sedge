@@ -13,7 +13,7 @@ Declares LabelFactory class that is responsible for creating Label instances.
 
 namespace s3dge
 {
-	struct Point2D;
+	struct Vector2;
 	struct Size2D;
 
 	class Label;
@@ -22,6 +22,6 @@ namespace s3dge
 	class LabelFactory
 	{
 	public:
-		static Label* CreateLabel(cstring text, Font* font, const Point2D& position, float zIndex, const Size2D& size, const Color& color = Color(0xffffffff));
+		static Label*const CreateLabel(cstring text, Font*const font, const Vector2& position, float zIndex, const Size2D& size, const Color& color = Color(0xffffffff));
 	};
 }

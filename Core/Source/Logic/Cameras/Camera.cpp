@@ -22,7 +22,7 @@ Camera::Camera()
 	UpdateView();
 }
 
-Camera::Camera(float fov, float aspectRatio, float near, float far, const Vector3& viewDirection, const Vector3& up)
+Camera::Camera(const float fov, const float aspectRatio, const float near, const float far, const Vector3& viewDirection, const Vector3& up)
 	: Fov(fov),
 	AspectRatio(aspectRatio),
 	Near(near),
@@ -48,9 +48,9 @@ void Camera::UpdateView()
 	ViewMatrix = Matrix4::LookAt(Position, Position + ViewDirection, Up);
 }
 
-void Camera::SetPosition(const Point3D& position)
+void Camera::SetPosition(const Vector3& position)
 {
-	Position = Vector3(position);
+	Position = position;
 	UpdateView();
 }
 
@@ -66,25 +66,25 @@ void Camera::SetUp(const Vector3& up)
 	UpdateView();
 }
 
-void Camera::SetFOV(float fov)
+void Camera::SetFOV(const float fov)
 {
 	Fov = fov;
 	UpdatePerspective();
 }
 
-void Camera::SetAspectRatio(float aspectRatio)
+void Camera::SetAspectRatio(const float aspectRatio)
 {
 	AspectRatio = aspectRatio;
 	UpdatePerspective();
 }
 
-void Camera::SetNear(float near)
+void Camera::SetNear(const float near)
 {
 	Near = near;
 	UpdatePerspective();
 }
 
-void Camera::SetFar(float far)
+void Camera::SetFar(const float far)
 {
 	Far = far;
 	UpdatePerspective();

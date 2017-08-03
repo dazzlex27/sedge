@@ -26,7 +26,7 @@ namespace s3dge
 		ElementBuffer* EBO;
 
 	private:
-		Mesh(VertexData* vertices, uint vertexCount, uint* elements, uint elementCount, Texture2D* texture = nullptr);
+		Mesh(VertexData*const vertices, const uint vertexCount, uint*const elements, const uint elementCount, Texture2D*const texture = nullptr);
 
 	public:
 		~Mesh();

@@ -16,14 +16,14 @@ static const int GetTypeIntFromTypeEnum(const ElementType type)
 	return 0;
 }
 
-void VertexLayout::AddEntry(LayoutAttribute* attribute)
+void VertexLayout::AddEntry(LayoutAttribute*const attribute)
 {
 	_attributes.push_back(attribute);
 }
 
-void VertexLayout::AddEntry(cstring name, const int index, const int size, const ElementType type, const bool normalized, const int stride, const void* offset)
+void VertexLayout::AddEntry(cstring name, const int index, const int size, const ElementType type, const bool normalized, const int stride, const void*const offset)
 {
-	LayoutAttribute* attribute = new LayoutAttribute;
+	LayoutAttribute*const attribute = new LayoutAttribute;
 
 	attribute->name = name;
 	attribute->index = index;

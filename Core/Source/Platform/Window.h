@@ -10,7 +10,6 @@ Contains basic high-level window management functions.
 
 #include <map>
 #include "CustomTypes.h"
-#include "Math/Point2D.h"
 
 namespace s3dge
 {
@@ -31,7 +30,7 @@ namespace s3dge
 		static std::map<void*, Window*> Instances;
 
 	public:
-		Window(cstring title, uint width, uint height, bool fullscreen = false, bool vsync = true);
+		Window(cstring title, const uint width, const uint height, const bool fullscreen = false, const bool vsync = true);
 		~Window();
 
 		bool Initialize();
@@ -47,11 +46,11 @@ namespace s3dge
 		inline bool HasFocus() const { return _hasFocus; }
 		inline bool IsFullScreen() const { return _fullScreen; }
 
-		static Window* GetInstance(void* handle);
+		static Window* GetInstance(void*const handle);
 
-		void SetVSync(bool vsync);
-		void SetFullScreen(bool fullscreen);
-		static void SetInstance(void* handle, Window* instance);
+		void SetVSync(const bool vsync);
+		void SetFullScreen(const bool fullscreen);
+		static void SetInstance(void*const handle, Window*const instance);
 
 	private:
 		bool CreateMainWindow();
@@ -60,10 +59,10 @@ namespace s3dge
 		void DestroyContext();
 
 		void* GetHandle() const;
-		void SetHandle(void* handle);
+		void SetHandle(void*const handle);
 
-		friend void resize_callback(Window* window, uint width, uint height);
-		friend void focus_callback(Window* window, bool hasFocus);
+		friend void resize_callback(Window*const window, const uint width, const uint height);
+		friend void focus_callback(Window*const window, const bool hasFocus);
 
 		Window(const Window& tRef) = delete;				// Disable copy constructor.
 		Window& operator = (const Window& tRef) = delete;	// Disable assignment operator.

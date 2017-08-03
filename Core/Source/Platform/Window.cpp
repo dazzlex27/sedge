@@ -16,7 +16,7 @@ using namespace s3dge;
 
 std::map<void*, Window*> Window::Instances;
 
-Window::Window(cstring title, uint width, uint height, bool fullscreen, bool vsync)
+Window::Window(cstring title, const uint width, const uint height, const bool fullscreen, const bool vsync)
 	: _title(title), _width(width), _height(height), _fullScreen(fullscreen), _vSync(vsync), _isClosed(false)
 {
 }
@@ -57,21 +57,21 @@ void* Window::GetHandle() const
 	return _handle;
 }
 
-void Window::SetHandle(void* handle)
+void Window::SetHandle(void*const handle)
 {
 	_handle = handle;
 }
 
 // Returns a window instance of a specified index
-Window* Window::GetInstance(void* handle)
+Window* Window::GetInstance(void*const handle)
 {
 	return Instances[handle];
 }
 
 // Inserts a window instance into a static window collection
-void Window::SetInstance(void* handle, Window* instance)
+void Window::SetInstance(void*const handle, Window*const instance)
 {
 	Instances[handle] = instance;
-	if (instance != nullptr)
+	if (instance)
 		instance->SetHandle(handle);
 }

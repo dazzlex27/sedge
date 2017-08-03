@@ -11,7 +11,6 @@ Implements a 3-component vector class
 namespace s3dge
 {
 	struct Matrix4;
-	struct Point3D;
 
 	struct Vector3
 	{
@@ -20,7 +19,6 @@ namespace s3dge
 		float z;
 
 		Vector3();
-		Vector3(const Point3D& point3d);
 		Vector3(const float value);
 		Vector3(const float x, const float y, const float z);
 		Vector3(const Vector3& other);
@@ -60,4 +58,6 @@ namespace s3dge
 		static const float GetDotProduct(const Vector3& v1, const Vector3& v2);
 		static const Vector3 GetCrossProduct(const Vector3& v1, const Vector3& v2);
 	};
+
+	typedef Vector3 vec3;
 }

@@ -15,9 +15,9 @@ Implements InputManager class.
 
 using namespace s3dge;
 
-static float _elapsedDoubleClickThreshold = 0.5f;
+static const float _elapsedDoubleClickThreshold = 0.5f;
 
-Point2D InputManager::_mousePosition;
+Vector3 InputManager::_mousePosition;
 Vector2 InputManager::_mouseDisplacement;
 bool* InputManager::_keysDown;
 bool* InputManager::_keysClicked;

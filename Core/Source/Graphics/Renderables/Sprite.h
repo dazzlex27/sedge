@@ -2,7 +2,7 @@
 ===========================================================================
 Sprite.h
 
-Inherits from the Renderable2D.
+Represents a renderable 2D object with position, size and a Z index.
 ===========================================================================
 */
 
@@ -15,8 +15,8 @@ namespace s3dge
 	class Sprite : public Renderable2D
 	{
 	private:
-		Sprite(const Point2D& position, const float zIndex, const Size2D& size, const Color& color);
-		Sprite(const Point2D& position, const float zIndex, const Size2D& size, Texture2D* texture);
+		Sprite(const Vector2& position, const float zIndex, const Size2D& size, const Color& color);
+		Sprite(const Vector2& position, const float zIndex, const Size2D& size, Texture2D*const texture);
 
 		friend class SpriteFactory;
 	};

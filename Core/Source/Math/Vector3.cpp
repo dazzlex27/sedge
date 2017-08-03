@@ -7,7 +7,6 @@ Implements a 3-component vector class
 */
 
 #include "Vector3.h"
-#include "Math/Point3D.h"
 #include "Matrix4.h"
 #include <cmath>
 
@@ -15,11 +14,6 @@ using namespace s3dge;
 
 Vector3::Vector3()
 	: x(0), y(0), z(0) 
-{
-}
-
-Vector3::Vector3(const Point3D& point)
-	: x(point.x), y(point.y), z(point.z)
 {
 }
 

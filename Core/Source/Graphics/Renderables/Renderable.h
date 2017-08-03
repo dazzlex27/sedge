@@ -26,16 +26,16 @@ namespace s3dge
 		Texture2D* Texture;
 
 	public:
-		Renderable(VertexData* vertices, uint vertexCount, uint* elements, uint elementCount, Texture2D* texture = nullptr);
+		Renderable(VertexData*const vertices, const uint vertexCount, uint*const elements, const uint elementCount, Texture2D*const texture = nullptr);
 
-		virtual void Submit(Renderer* renderer) const;
+		virtual void Submit(Renderer*const renderer) const;
 		virtual void Draw() const { }
 
-		const VertexData* GetVertexData() const { return Vertices; }
+		const VertexData*const GetVertexData() const { return Vertices; }
 		const uint GetVertexCount() const { return VertexCount; }
-		const uint* GetElementData() const { return Elements; }
+		const uint*const GetElementData() const { return Elements; }
 		const uint GetElementCount() const { return ElementCount; }
-		const Texture2D* GetTexture() const { return Texture; }
+		const Texture2D*const GetTexture() const { return Texture; }
 		virtual const uint GetTextureID() const;
 	};
 }

@@ -13,8 +13,6 @@ This file is included by the main header S3DGE.h
 #include "Math/Vector3.h"
 #include "Math/Vector4.h"
 #include "Math/Matrix4.h"
-#include "Math/Point2D.h"
-#include "Math/Point3D.h"
 #include "Math/Size2D.h"
 #include "Math/Size3D.h"
 

@@ -30,8 +30,8 @@ namespace s3dge
 	public:
 		inline const std::vector<LayoutAttribute*>& GetAttributes() const { return _attributes; }
 
-		void AddEntry(LayoutAttribute* attribute);
-		void AddEntry(cstring name, const int index, const int size, const ElementType type, const bool normalized, const int stride, const void* offset);
+		void AddEntry(LayoutAttribute*const attribute);
+		void AddEntry(cstring name, const int index, const int size, const ElementType type, const bool normalized, const int stride, const void*const offset);
 
 		static VertexLayout GetDefaultVertexLayout();
 	};

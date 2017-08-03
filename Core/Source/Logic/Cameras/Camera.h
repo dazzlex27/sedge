@@ -38,12 +38,12 @@ namespace s3dge
 		inline const Vector3& GetViewDirection() const { return ViewDirection; }
 		inline const Vector3& GetUp() const { return Up; }
 
-		void SetFOV(float fov);
-		void SetAspectRatio(float aspectRatio);
-		void SetNear(float near);
-		void SetFar(float far);
+		void SetFOV(const float fov);
+		void SetAspectRatio(const float aspectRatio);
+		void SetNear(const float near);
+		void SetFar(const float far);
 		void SetViewDirection(const Vector3& viewDirection);
-		virtual void SetPosition(const Point3D& position);
+		virtual void SetPosition(const Vector3& position);
 		void SetUp(const Vector3& up);
 
 		const Matrix4& GetProjection();
@@ -51,7 +51,7 @@ namespace s3dge
 
 	protected:
 		Camera();
-		Camera(float fov, float aspectRatio, float near, float far, const Vector3& viewDirection = Vector3(0, 0, -1), const Vector3& up = Vector3(0, 1, 0));
+		Camera(const float fov, const float aspectRatio, const float near, const float far, const Vector3& viewDirection = Vector3(0, 0, -1), const Vector3& up = Vector3(0, 1, 0));
 		
 	public:
 		virtual ~Camera();

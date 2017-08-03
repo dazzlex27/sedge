@@ -10,14 +10,12 @@ Represents a game entity.
 
 #include "../Components/IComponent.h"
 #include "BaseObject.h"
-#include "Math/Point3D.h"
-#include "Math/Matrix4.h"
 #include "Math/Vector3.h"
+#include "Math/Matrix4.h"
 
 namespace s3dge
 {
 	class Renderable;
-	struct Point3D;
 	struct Vector3;
 	struct Matrix4;
 
@@ -37,7 +35,7 @@ namespace s3dge
 		~Entity() {}
 
 	public:
-		void AddComponent(IComponent* component)
+		void AddComponent(IComponent*const component)
 		{
 
 		}
@@ -51,10 +49,10 @@ namespace s3dge
 		inline virtual const Matrix4& GetModelMatrix() const { return ModelMatrix; }
 		inline virtual const Renderable* GetRenderable() const { return _renderable; }
 
-		virtual void SetPosition(const Point3D& position);
+		virtual void SetPosition(const Vector3& position);
 		virtual void SetScale(const Vector3& scale);
 		virtual void SetRotation(const Vector3& rotation);
-		virtual void SetRenderable(Renderable* renderable);
+		virtual void SetRenderable(Renderable*const renderable);
 
 	private:
 		void UpdateModelMatrix();

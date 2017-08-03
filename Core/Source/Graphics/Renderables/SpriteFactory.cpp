@@ -11,12 +11,12 @@ Implements the SpriteFactory class
 
 using namespace s3dge;
 
-Sprite* SpriteFactory::CreateSprite(const Point2D& position, float zIndex, const Size2D& size, Texture2D* texture)
+Sprite*const SpriteFactory::CreateSprite(const Vector2& position, const float zIndex, const Size2D& size, Texture2D*const texture)
 {
 	return new Sprite(position, zIndex, size, texture);
 }
 
-Sprite* SpriteFactory::CreateSprite(const Point2D& position, float zIndex, const Size2D& size, const Color& color)
+Sprite*const SpriteFactory::CreateSprite(const Vector2& position, const float zIndex, const Size2D& size, const Color& color)
 {
 	return new Sprite(position, zIndex, size, color);
 }

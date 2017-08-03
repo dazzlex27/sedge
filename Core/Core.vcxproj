@@ -105,6 +105,7 @@
     <ClCompile Include="Source\Graphics\Fonts\FontFactory.cpp" />
     <ClCompile Include="Source\Graphics\Fonts\FontManager.cpp" />
     <ClCompile Include="Source\Graphics\GraphicsManager.cpp" />
+    <ClCompile Include="Source\Graphics\Lights\Light.cpp" />
     <ClCompile Include="Source\Graphics\Renderables\LabelFactory.cpp" />
     <ClCompile Include="Source\Graphics\Renderables\Mesh.cpp" />
     <ClCompile Include="Source\Graphics\Renderables\MeshFactory.cpp" />
@@ -155,6 +156,7 @@
     <ClInclude Include="Source\Common.h" />
     <ClInclude Include="Source\Graphics\Buffers\Buffer.h" />
     <ClInclude Include="Source\Graphics\Buffers\FrameBuffer.h" />
+    <ClInclude Include="Source\Graphics\Lights\Light.h" />
     <ClInclude Include="Source\Graphics\Renderables\Model.h" />
     <ClInclude Include="Source\Graphics\Renderables\Renderable.h" />
     <ClInclude Include="Source\Graphics\Renderers\Renderer3D.h" />
@@ -174,8 +176,6 @@
     <ClInclude Include="Source\Graphics\Fonts\FontManager.h" />
     <ClInclude Include="Source\Graphics\GraphicsManager.h" />
     <ClInclude Include="Source\Graphics\Structures\VertexData.h" />
-    <ClInclude Include="Source\Math\Point2D.h" />
-    <ClInclude Include="Source\Math\Point3D.h" />
     <ClInclude Include="Source\Math\Size2D.h" />
     <ClInclude Include="Source\Graphics\Structures\VertexLayout.h" />
     <ClInclude Include="Source\Graphics\Textures\TextureFactory.h" />

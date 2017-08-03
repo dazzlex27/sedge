@@ -30,10 +30,10 @@ void Application::Initialize()
 	FontManager::Add("font1", "Resources/Fonts/Assistant-Regular.ttf", 24);
 	SoundManager::Add("back-in-black", "Resources/Audio/back-in-black.ogg");
 	
-	Label* label = LabelFactory::CreateLabel("startup...", FontManager::Get("font1"), Point2D(0.3f, 8.4f), 0, Size2D(2, 2));
-	Label* label2 = LabelFactory::CreateLabel("p:", FontManager::Get("font1"), Point2D(0.3f, 7.4f), 0, Size2D(2, 2));
+	Label* label = LabelFactory::CreateLabel("startup...", FontManager::Get("font1"), Vector2(0.3f, 8.4f), 0, Size2D(2, 2));
+	Label* label2 = LabelFactory::CreateLabel("p:", FontManager::Get("font1"), Vector2(0.3f, 7.4f), 0, Size2D(2, 2));
 	
-	GraphicsManager::AddSprite("rect", SpriteFactory::CreateSprite(Point2D(0, 0), -3, Size2D(1, 1), TextureManager::Get("box")));
+	GraphicsManager::AddSprite("rect", SpriteFactory::CreateSprite(Vector2(0, 0), -3, Size2D(1, 1), TextureManager::Get("box")));
 	GraphicsManager::AddMesh("arrow", CreateArrowMesh());
 	GraphicsManager::AddMesh("room", CreateRoomMesh(TextureManager::Get("floor"), 1));
 	GraphicsManager::AddMesh("light", CreateTexturedCubeUnitSize(nullptr, 0));
@@ -55,7 +55,7 @@ void Application::Initialize()
 
 void Application::Update()
 {
-	Point3D cameraPosition = _camera->GetPosition();
+	Vector3 cameraPosition = _camera->GetPosition();
 
 	GraphicsManager::GetLabel("fps")->SetText(std::to_string(GetFPS()) + " fps");
 	GraphicsManager::GetLabel("position")->SetText(std::to_string(cameraPosition.x) + " " + std::to_string(cameraPosition.y) + " " + std::to_string(cameraPosition.z));
@@ -74,8 +74,7 @@ void Application::UpdateCamera(const Vector2& displacement)
 	const float speed = 0.1f;
 	const float mouseSpeed = 3.0f;
 
-	Point3D cameraPosition = _camera->GetPosition();
-	Vector3 position(cameraPosition);
+	Vector3 cameraPosition = _camera->GetPosition();
 
 	horizontalAngle += mouseSpeed * displacement.x;
 	verticalAngle -= mouseSpeed * displacement.y;
@@ -90,17 +89,17 @@ void Application::UpdateCamera(const Vector2& displacement)
 	Vector3 up((Vector3::GetCrossProduct(right, direction)));
 
 	if (InputManager::KeyDown(S3_KEY_W))
-		position += speed * direction;
+		cameraPosition += speed * direction;
 	if (InputManager::KeyDown(S3_KEY_S))
-		position -= speed * direction;
+		cameraPosition -= speed * direction;
 	if (InputManager::KeyDown(S3_KEY_A))
-		position -= speed * right;
+		cameraPosition -= speed * right;
 	if (InputManager::KeyDown(S3_KEY_D))
-		position += speed * right;
+		cameraPosition += speed * right;
 	if (InputManager::KeyDown(S3_KEY_Q))
-		position -= speed * up;
+		cameraPosition -= speed * up;
 	if (InputManager::KeyDown(S3_KEY_E))
-		position += speed * up;
+		cameraPosition += speed * up;
 	if (InputManager::KeyDown(S3_KEY_SPACE))
 	{
 		horizontalAngle = 0;
@@ -113,13 +112,13 @@ void Application::UpdateCamera(const Vector2& displacement)
 	if (InputManager::KeyDown(S3_KEY_MMB))
 		_camera->SetFOV(45);
 
-	_camera->SetPosition(Point3D(position.x, position.y, position.z));
+	_camera->SetPosition(cameraPosition);
 	_camera->SetViewDirection(direction);
 	_camera->SetUp(up);
 
 	_shaderScene->SetProjection(_camera->GetProjection());
 
-	_shaderScene->SetUniform3f("viewPos", Vector3(cameraPosition.x, cameraPosition.y, cameraPosition.z));
+	_shaderScene->SetUniform3f("viewPos", cameraPosition);
 }
 
 void Application::Render()

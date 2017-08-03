@@ -5,7 +5,6 @@
 
 namespace s3dge
 {
-	struct Point3D;
 	struct Size3D;
 
 	class Mesh;
@@ -18,12 +17,12 @@ namespace s3dge
 	class MeshFactory
 	{
 	public:
-		static Mesh* CreateMesh(VertexData* vertices, uint vertexCount, uint* elements, uint elementCount, Texture2D* texture = nullptr);
+		static Mesh*const CreateMesh(VertexData*const vertices, const uint vertexCount, uint*const elements, const uint elementCount, Texture2D*const texture = nullptr);
 
-		static Mesh* CreateCuboid(const Size3D& size, Texture2D* texture, DrawingMode drawingMode);
-		static Mesh* CreateCuboid(const Size3D& size, const Color& color, DrawingMode drawingMode);
+		static Mesh*const CreateCuboid(const Size3D& size, Texture2D*const texture, const DrawingMode drawingMode);
+		static Mesh*const CreateCuboid(const Size3D& size, const Color& color, const DrawingMode drawingMode);
 
-		static Mesh* CreateCube(float size, Texture2D* texture, DrawingMode drawingMode);
-		static Mesh* CreateCube(float size, const Color& color, DrawingMode drawingMode);
+		static Mesh*const CreateCube(const float size, Texture2D*const texture, const DrawingMode drawingMode);
+		static Mesh*const CreateCube(const float size, const Color& color, const DrawingMode drawingMode);
 	};
 }

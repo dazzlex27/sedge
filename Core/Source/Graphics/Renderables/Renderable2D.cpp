@@ -13,7 +13,7 @@ Contains method implementations for Renderable2D
 
 using namespace s3dge;
 
-void SetVertexPosition(VertexData* vertices, uint vertexCount, const Point2D& position, const Size2D& size);
+static void SetVertexPosition(VertexData*const vertices, const uint vertexCount, const Vector2& position, const Size2D& size);
 
 Renderable2D::Renderable2D()
 	: Col(0xffffffff), Position(0, 0, 0), Size(0, 0), Renderable(nullptr, 0, nullptr, 0)
@@ -21,13 +21,13 @@ Renderable2D::Renderable2D()
 	PerformDefaultGeometrySetup();
 }
 
-Renderable2D::Renderable2D(const Point3D& position, const Size2D& size, const Color& color)
+Renderable2D::Renderable2D(const Vector3& position, const Size2D& size, const Color& color)
 	: Position(position), Size(size), Col(color), Renderable(nullptr, 0, nullptr, 0)
 {
 	PerformDefaultGeometrySetup();
 }
 
-Renderable2D::Renderable2D(const Point3D& position, const Size2D& size, Texture2D* texture)
+Renderable2D::Renderable2D(const Vector3& position, const Size2D& size, Texture2D*const texture)
 	: Position(position), Size(size), Col(0xffffffff), Renderable(nullptr, 0, nullptr, 0)
 {
 	Texture = texture;
@@ -42,28 +42,28 @@ void Renderable2D::PerformDefaultGeometrySetup()
 {
 	Vertices = new VertexData[4];
 
-	Vertices[0].Position = Point3D(Position.x - Size.width / 2, Position.y - Size.height / 2, Position.z);
+	Vertices[0].Position = Vector3(Position.x - Size.width / 2, Position.y - Size.height / 2, Position.z);
 	Vertices[0].Color = Col;
 	Vertices[0].Normal = Vector3(0.0f, 0.0f, 1.0f);
-	Vertices[0].UV = Point2D(0, 0);
+	Vertices[0].UV = Vector2(0, 0);
 	Vertices[0].TextureID = (float)(Texture == nullptr ? 0 : Texture->GetID());
 
-	Vertices[1].Position = Point3D(Position.x - Size.width / 2, Position.y + Size.height / 2, Position.z);
+	Vertices[1].Position = Vector3(Position.x - Size.width / 2, Position.y + Size.height / 2, Position.z);
 	Vertices[1].Color = Col;
 	Vertices[0].Normal = Vector3(0.0f, 0.0f, 1.0f);
-	Vertices[1].UV = Point2D(0, 1);
+	Vertices[1].UV = Vector2(0, 1);
 	Vertices[1].TextureID = (float)(Texture == nullptr ? 0 : Texture->GetID());
 
-	Vertices[2].Position = Point3D(Position.x + Size.width / 2, Position.y + Size.height / 2, Position.z);
+	Vertices[2].Position = Vector3(Position.x + Size.width / 2, Position.y + Size.height / 2, Position.z);
 	Vertices[2].Color = Col;
 	Vertices[0].Normal = Vector3(0.0f, 0.0f, 1.0f);
-	Vertices[2].UV = Point2D(1, 1);
+	Vertices[2].UV = Vector2(1, 1);
 	Vertices[2].TextureID = (float)(Texture == nullptr ? 0 : Texture->GetID());
 
-	Vertices[3].Position = Point3D(Position.x + Size.width / 2, Position.y - Size.height / 2, Position.z);
+	Vertices[3].Position = Vector3(Position.x + Size.width / 2, Position.y - Size.height / 2, Position.z);
 	Vertices[3].Color = Col;
 	Vertices[0].Normal = Vector3(0.0f, 0.0f, 1.0f);
-	Vertices[3].UV = Point2D(1, 0);
+	Vertices[3].UV = Vector2(1, 0);
 	Vertices[3].TextureID = (float)(Texture == nullptr ? 0 : Texture->GetID());
 
 	VertexCount = 4;
@@ -87,19 +87,19 @@ void Renderable2D::SetColor(const Color& color)
 		Vertices[i].Color = Col;
 }
 
-void Renderable2D::SetPosition(const Point2D& position)
+void Renderable2D::SetPosition(const Vector2& position)
 {
-	Position = Point3D(position.x, position.y, Position.z);
+	Position = Vector3(position.x, position.y, Position.z);
 
 	SetVertexPosition(Vertices, VertexCount, position, Size);
 }
 
-void Renderable2D::SetZIndex(float zIndex)
+void Renderable2D::SetZIndex(const float zIndex)
 {
 	Position.z = zIndex;
 }
 
-void SetVertexPosition(VertexData* vertices, uint vertexCount, const Point2D& position, const Size2D& size)
+void SetVertexPosition(VertexData*const vertices, const uint vertexCount, const Vector2& position, const Size2D& size)
 {
 	if (vertexCount != 4)
 	{
@@ -107,9 +107,9 @@ void SetVertexPosition(VertexData* vertices, uint vertexCount, const Point2D& po
 		abort();
 	}
 
-	vertices[0].Position = Point3D(position.x - size.width / 2, position.y - size.height / 2, 0);
-	vertices[1].Position = Point3D(position.x - size.width / 2, position.y + size.height / 2, 0);
-	vertices[2].Position = Point3D(position.x + size.width / 2, position.y + size.height / 2, 0);
-	vertices[3].Position = Point3D(position.x - size.width / 2, position.y - size.height / 2, 0);
+	vertices[0].Position = Vector3(position.x - size.width / 2, position.y - size.height / 2, 0);
+	vertices[1].Position = Vector3(position.x - size.width / 2, position.y + size.height / 2, 0);
+	vertices[2].Position = Vector3(position.x + size.width / 2, position.y + size.height / 2, 0);
+	vertices[3].Position = Vector3(position.x - size.width / 2, position.y - size.height / 2, 0);
 	
 }

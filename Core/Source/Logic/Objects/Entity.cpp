@@ -9,7 +9,7 @@ Entity::Entity()
 	ModelMatrix = Matrix4::GetIdentity();
 }
 
-void Entity::SetPosition(const Point3D& position)
+void Entity::SetPosition(const Vector3& position)
 {
 	Position = Vector3(position);
 	UpdateModelMatrix();
@@ -27,7 +27,7 @@ void Entity::SetRotation(const Vector3& rotation)
 	UpdateModelMatrix();
 }
 
-void Entity::SetRenderable(Renderable* renderable)
+void Entity::SetRenderable(Renderable*const renderable)
 {
 	_renderable = renderable;
 }

@@ -19,7 +19,7 @@ Implemlents the Mesh class
 using namespace s3dge;
 using namespace std;
 
-Mesh::Mesh(VertexData* vertices, uint vertexCount, uint* elements, uint elementCount, Texture2D* texture)
+Mesh::Mesh(VertexData*const vertices, const uint vertexCount, uint*const elements, const uint elementCount, Texture2D*const texture)
 	: Renderable(vertices, vertexCount, elements, elementCount, texture)
 {
 	VAO = new VertexArray();

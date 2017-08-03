@@ -13,7 +13,8 @@ Declares LabelFactory class that is responsible for creating Label instances.
 
 namespace s3dge
 {
-	struct Point2D;
+	struct Vector2;
+	struct Vector3;
 	struct Size2D;
 
 	class Texture2D;
@@ -24,7 +25,7 @@ namespace s3dge
 	class SpriteFactory
 	{
 	public:
-		static Sprite* CreateSprite(const Point2D& position, float zIndex, const Size2D& size, Texture2D* texture);
-		static Sprite* CreateSprite(const Point2D& position, float zIndex, const Size2D& size, const Color& color = 0xffffffff);
+		static Sprite*const CreateSprite(const Vector2& position, const float zIndex, const Size2D& size, Texture2D*const texture);
+		static Sprite*const CreateSprite(const Vector2& position, const float zIndex, const Size2D& size, const Color& color = 0xffffffff);
 	};
 }

@@ -9,18 +9,18 @@ This file contains the necessary VertexData structures used by the Graphics name
 #pragma once
 
 #include "CustomTypes.h"
+#include "Math/Vector2.h"
+#include "Math/Vector3.h"
 #include "Graphics/Structures/Color.h"
-#include "Math/Point2D.h"
-#include "Math/Point3D.h"
 
 namespace s3dge
 {
 	struct VertexData
 	{
-		Point3D Position;
+		Vector3 Position;
 		Color Color;
 		Vector3 Normal;
-		Point2D UV;
+		Vector2 UV;
 		float TextureID;
 	};
 }
