@@ -116,6 +116,7 @@
     <ClCompile Include="Source\Graphics\Renderers\Renderer3D.cpp" />
     <ClCompile Include="Source\Graphics\Structures\VertexLayout.cpp" />
     <ClCompile Include="Source\Graphics\Textures\TextureFactory.cpp" />
+    <ClCompile Include="Source\Logic\Objects\Actor.cpp" />
     <ClCompile Include="Source\Math\Quatertion.cpp" />
     <ClCompile Include="Source\System\InputManager.cpp" />
     <ClCompile Include="Source\System\MemoryManager.cpp" />
@@ -162,6 +163,7 @@
     <ClInclude Include="Source\Graphics\Renderers\Renderer3D.h" />
     <ClInclude Include="Source\Logic\Cameras\FPSCamera.h" />
     <ClInclude Include="Source\Logic\Cameras\TPSCamera.h" />
+    <ClInclude Include="Source\Logic\Objects\Actor.h" />
     <ClInclude Include="Source\Logic\Objects\Scene.h" />
     <ClInclude Include="Source\Math\Quaternion.h" />
     <ClInclude Include="Source\Math\Size3D.h" />

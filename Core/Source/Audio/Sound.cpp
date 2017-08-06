@@ -30,6 +30,7 @@ Sound::Sound(cstring name, cstring path)
 
 Sound::~Sound()
 {
+	Stop();
 	ga_sound_release(_sound);
 }
 

@@ -121,10 +121,9 @@ void Texture2D::Unbind() const
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-void Texture2D::AssignToPosition(const float position)
+void Texture2D::ActivateTexture(const uint num)
 {
-	glActiveTexture(GL_TEXTURE0 + position);
-	Bind();
+	glActiveTexture(GL_TEXTURE0 + num);
 }
 
 void Texture2D::SetWrapMode(TextureWrapMode wrapMode)

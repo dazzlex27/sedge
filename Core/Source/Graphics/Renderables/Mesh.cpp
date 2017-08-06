@@ -46,6 +46,9 @@ Mesh::~Mesh()
 
 void Mesh::Draw() const
 {
+	if (Texture)
+		Texture->Bind();
+
 	VAO->Bind();
 	VAO->Draw(EBO->GetCount());
 	VAO->Unbind();

@@ -36,6 +36,7 @@ This file is included by the main header S3DGE.h
 #include "Graphics/Renderables/LabelFactory.h"
 #include "Graphics/Renderables/SpriteFactory.h"
 
+#include "Logic/Objects/Actor.h"
 #include "Logic/Objects/Scene.h"
 #include "Logic/Objects/Entity.h"
 #include "Logic/Cameras/FPSCamera.h"

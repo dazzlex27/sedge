@@ -2,8 +2,12 @@
 
 #include <S3DGEngine.h>
 
-s3dge::Mesh* CreateArrowMesh();
+void LoadResources();
 
-s3dge::Mesh* CreateRoomMesh(s3dge::Texture2D*const texture, const float textureNum);
+void CreateRenderables();
 
-s3dge::Mesh* CreateTexturedCubeUnitSize(s3dge::Texture2D*const texture, const float textureNum);
+s3dge::Mesh*const CreateArrowMesh();
+
+s3dge::Mesh*const CreateRoomMesh(s3dge::Texture2D*const texture);
+
+s3dge::Mesh*const CreateTexturedCubeUnitSize(s3dge::Texture2D*const texture);

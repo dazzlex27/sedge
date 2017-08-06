@@ -11,6 +11,7 @@ Represents a game entity.
 #include "../Components/IComponent.h"
 #include "BaseObject.h"
 #include "Math/Vector3.h"
+#include "Math/Vector4.h"
 #include "Math/Matrix4.h"
 
 namespace s3dge
@@ -24,7 +25,7 @@ namespace s3dge
 	protected:
 		Vector3 Position;
 		Vector3 Scale;
-		Vector3 Rotation;
+		Vector4 Rotation;
 		Matrix4 ModelMatrix;
 
 	private:
@@ -41,17 +42,17 @@ namespace s3dge
 		}
 
 		virtual void Update() = 0;
-		virtual void Render() = 0;
+		virtual void Draw() = 0;
 
 		inline virtual const Vector3& GetPosition() const { return Position; }
 		inline virtual const Vector3& GetScale() const { return Scale; }
-		inline virtual const Vector3& GetRotation() const { return Rotation; }
+		inline virtual const Vector4& GetRotation() const { return Rotation; }
 		inline virtual const Matrix4& GetModelMatrix() const { return ModelMatrix; }
 		inline virtual const Renderable* GetRenderable() const { return _renderable; }
 
 		virtual void SetPosition(const Vector3& position);
 		virtual void SetScale(const Vector3& scale);
-		virtual void SetRotation(const Vector3& rotation);
+		virtual void SetRotation(const Vector3& rotation, const float angle);
 		virtual void SetRenderable(Renderable*const renderable);
 
 	private:

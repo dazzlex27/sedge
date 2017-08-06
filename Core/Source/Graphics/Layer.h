@@ -41,7 +41,7 @@ namespace s3dge
 		~Layer();
 
 		void Add(Renderable* renderable);
-		void Render();
+		void Draw();
 
 		const ShaderProgram* GetShaderProgram() const { return _shaderProgram; }
 		void SetShaderProgram(ShaderProgram* shaderProgram);

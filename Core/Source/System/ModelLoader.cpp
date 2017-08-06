@@ -55,6 +55,7 @@ bool ModelUtils::ReadObjDataFromFile(cstring filepath, vector<Mesh*>& meshVector
 
 			continue;
 		}
-
 	}
+
+	return false;
 }

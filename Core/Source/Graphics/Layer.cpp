@@ -46,7 +46,7 @@ void Layer::Add(Renderable* renderable)
 	_renderables.push_back(renderable);
 }
 
-void Layer::Render()
+void Layer::Draw()
 {
 	_shaderProgram->Bind();
 	_renderer->Begin();

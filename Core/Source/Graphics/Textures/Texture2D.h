@@ -55,17 +55,17 @@ namespace s3dge
 		inline TextureWrapMode GetWrapMode() const { return _wrapMode; }
 		inline TextureFilterMode GetFilterMode() const { return _filterMode; }
 
-		void SetWrapMode(TextureWrapMode wrapMode);
-		void SetFilterMode(TextureFilterMode filterMode);
+		void SetWrapMode(const TextureWrapMode wrapMode);
+		void SetFilterMode(const TextureFilterMode filterMode);
 
 		void Bind() const;
 		void Unbind() const;
 
-		void AssignToPosition(const float position);
+		friend class TextureFactory;
+
+		static void ActivateTexture(const uint num);
 
 	private:
 		bool Load();
-
-		friend class TextureFactory;
 	};
 }

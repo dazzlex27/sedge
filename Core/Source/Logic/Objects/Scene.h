@@ -23,15 +23,15 @@ namespace s3dge
 		virtual ~Scene();
 
 	public:
-		const Camera* GetActiveCamera() const { return _activeCamera; }
+		const Camera*const GetActiveCamera() const { return _activeCamera; }
 		const std::vector<Entity*> GetEntities() const { return _entities; }
 
-		void SetActiveCamera(Camera* camera);
-		void AddEntity(Entity* entity);
-		void RemoveEntity(Entity* entity);
+		void SetActiveCamera(Camera*const camera);
+		void AddEntity(Entity*const entity);
+		void RemoveEntity(Entity*const entity);
 
 		virtual void Update();
-		virtual void Render();
+		virtual void Draw();
 
 	private:
 		void UpdateCamera();
