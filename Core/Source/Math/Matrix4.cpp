@@ -216,20 +216,20 @@ Matrix4 Matrix4::Rotate(const Vector3& axis, const float angle)
 	const float angleRad = DegToRad(angle);
 
 	Quaternion q;
-	q.w = cos(angleRad / 2);
 	q.x = axis.x * sin(angleRad / 2);
 	q.y = axis.y * sin(angleRad / 2);
 	q.z = axis.z * sin(angleRad / 2);
+	q.w = cos(angleRad / 2);
 
-	result.data[4 * 0 + 0] = 1 - 2 * q.y * q.y - 2 * q.z * q.z;
+	result.data[4 * 0 + 0] = 1 - 2 * pow(q.y, 2) - 2 * pow(q.z, 2);
 	result.data[4 * 0 + 1] = 2 * q.x * q.y + 2 * q.w * q.z;
 	result.data[4 * 0 + 2] = 2 * q.x * q.z - 2 * q.w * q.y;
 	result.data[4 * 1 + 0] = 2 * q.x * q.y - 2 * q.w * q.z;
-	result.data[4 * 1 + 1] = 1 - 2 * q.x * q.x - 2 * q.z * q.z;
+	result.data[4 * 1 + 1] = 1 - 2 * pow(q.x, 2) - 2 * pow(q.z, 2);
 	result.data[4 * 1 + 2] = 2 * q.y * q.z - 2 * q.w * q.x;
 	result.data[4 * 2 + 0] = 2 * q.x * q.z + 2 * q.w * q.y;
 	result.data[4 * 2 + 1] = 2 * q.y * q.z + 2 * q.w * q.x;
-	result.data[4 * 2 + 2] = 1 - 2 * q.x * q.x - 2 * q.y * q.y;
+	result.data[4 * 2 + 2] = 1 - 2 * pow(q.x, 2) - 2 * pow(q.y, 2);
 
 	return result;
 }

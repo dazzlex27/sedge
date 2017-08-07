@@ -143,14 +143,14 @@ Mesh*const CreateTexturedCubeUnitSize(Texture2D*const texture)
 	VertexData* vertexData = new VertexData[vertexCount];
 
 	// front face
-	Vector3 frontNormal(0, 0, -1);
+	Vector3 frontNormal(0, 0, 1);
 	AssignVertexData(vertexData[0], Vector3(0, 0, 1), 0xffffffff, frontNormal, Vector2(0.0f, 0.0f));
 	AssignVertexData(vertexData[1], Vector3(0, 1, 1), 0xffffffff, frontNormal, Vector2(0.0f, 1.0f));
 	AssignVertexData(vertexData[2], Vector3(1, 1, 1), 0xffffffff, frontNormal, Vector2(1.0f, 1.0f));
 	AssignVertexData(vertexData[3], Vector3(1, 0, 1), 0xffffffff, frontNormal, Vector2(1.0f, 0.0f));
 
 	// back face
-	Vector3 backNormal(0, 0, 1);
+	Vector3 backNormal(0, 0, -1);
 	AssignVertexData(vertexData[4], Vector3(1, 0, 0), 0xffffffff, backNormal, Vector2(0.0f, 0.0f));
 	AssignVertexData(vertexData[5], Vector3(1, 1, 0), 0xffffffff, backNormal, Vector2(0.0f, 1.0f));
 	AssignVertexData(vertexData[6], Vector3(0, 1, 0), 0xffffffff, backNormal, Vector2(1.0f, 1.0f));

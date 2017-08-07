@@ -34,13 +34,22 @@ void Application::Initialize()
 	_hudLayer->Add(GraphicsManager::GetLabel("position"));
 
 	_shaderScene->Bind();
-	_shaderScene->SetUniform3f("light.position", Vector3(0, 1, 3));
+	_shaderScene->SetUniform3f("light.direction", Vector3(0, -0.5, 1));
+	_shaderScene->SetUniform1f("light.constant", 1.0f);
+	_shaderScene->SetUniform1f("light.linear", 0.09f);
+	_shaderScene->SetUniform1f("light.quadratic", 0.032f);
 }
 
 void Application::Update()
 {
 	Vector3 cameraPosition = _camera->GetPosition();
 	UpdateCamera(*_camera, cameraPosition, InputManager::GetMouseDisplacement());
+
+	_shaderScene->Bind(); 
+	_shaderScene->SetUniform3f("light.position", _camera->GetPosition());
+	_shaderScene->SetUniform3f("light.direction", _camera->GetViewDirection());
+	_shaderScene->SetUniform1f("light.inCutOff", cos(0.226893));
+	_shaderScene->SetUniform1f("light.outCutOff", cos(0.314159));
 
 	GraphicsManager::GetLabel("fps")->SetText(std::to_string(GetFPS()) + " fps");
 	GraphicsManager::GetLabel("position")->SetText(std::to_string(cameraPosition.x) + " " + std::to_string(cameraPosition.y) + " " + std::to_string(cameraPosition.z));
@@ -63,8 +72,13 @@ void Application::Render()
 	TextureManager::Get("lm-test")->Bind();
 	Texture2D::ActivateTexture(1);
 	TextureManager::Get("lm-test-sp")->Bind();
-
-	_mainScene->Draw();
+	GraphicsManager::GetMesh("cube")->Draw();
+	_shaderScene->SetModel(Matrix4::Translate(Vector3(-2, 0, 0)));
+	GraphicsManager::GetMesh("cube")->Draw();
+	_shaderScene->SetModel(Matrix4::Rotate(Vector3(0, 1, 0), 35) * Matrix4::Translate(Vector3(-1, 1, 0)));
+	GraphicsManager::GetMesh("cube")->Draw();
+	_shaderScene->SetModel(Matrix4::Rotate(Vector3(1, 0, 0), 25) * Matrix4::Translate(Vector3(0, 1, -1)));
+	GraphicsManager::GetMesh("cube")->Draw();
 	_hudLayer->Draw();
 }
 
