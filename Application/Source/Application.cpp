@@ -34,10 +34,29 @@ void Application::Initialize()
 	_hudLayer->Add(GraphicsManager::GetLabel("position"));
 
 	_shaderScene->Bind();
-	_shaderScene->SetUniform3f("light.direction", Vector3(0, -0.5, 1));
-	_shaderScene->SetUniform1f("light.constant", 1.0f);
-	_shaderScene->SetUniform1f("light.linear", 0.09f);
-	_shaderScene->SetUniform1f("light.quadratic", 0.032f);
+
+	_shaderScene->SetUniform3f("dirLight.direction", Vector3(-1, -0.5, 1));
+	_shaderScene->SetUniform3f("dirLight.ambient", Vector3(0.5f, 0.5f, 0.5f));
+	_shaderScene->SetUniform3f("dirLight.diffuse", Vector3(0.5f, 0.5f, 0.5f));
+	_shaderScene->SetUniform3f("dirLight.specular", Vector3(1.0f, 1.0f, 1.0f));
+
+	_shaderScene->SetUniform3f("pointLight.position", Vector3(2, 0.5, 0));
+	_shaderScene->SetUniform3f("pointLight.ambient", Vector3(0.5f, 0.5f, 0.5f));
+	_shaderScene->SetUniform3f("pointLight.diffuse", Vector3(0.5f, 0.5f, 0.5f));
+	_shaderScene->SetUniform3f("pointLight.specular", Vector3(1.0f, 1.0f, 1.0f));
+	_shaderScene->SetUniform1f("pointLight.constant", 1.0f);
+	_shaderScene->SetUniform1f("pointLight.linear", 0.09f);
+	_shaderScene->SetUniform1f("pointLight.quadratic", 0.032f);
+
+	_shaderScene->SetUniform3f("spotLight.direction", Vector3(0, -0.5, 1));
+	_shaderScene->SetUniform3f("spotLight.ambient", Vector3(0.5f, 0.5f, 0.5f));
+	_shaderScene->SetUniform3f("spotLight.diffuse", Vector3(0.5f, 0.5f, 0.5f));
+	_shaderScene->SetUniform3f("spotLight.specular", Vector3(1.0f, 1.0f, 1.0f));
+	_shaderScene->SetUniform1f("spotLight.constant", 1.0f);
+	_shaderScene->SetUniform1f("spotLight.linear", 0.09f);
+	_shaderScene->SetUniform1f("spotLight.quadratic", 0.032f);
+	_shaderScene->SetUniform1f("spotLight.inCutOff", (float)cos(0.226893));
+	_shaderScene->SetUniform1f("spotLight.outCutOff", (float)cos(0.314159));
 }
 
 void Application::Update()
@@ -46,10 +65,8 @@ void Application::Update()
 	UpdateCamera(*_camera, cameraPosition, InputManager::GetMouseDisplacement());
 
 	_shaderScene->Bind(); 
-	_shaderScene->SetUniform3f("light.position", _camera->GetPosition());
-	_shaderScene->SetUniform3f("light.direction", _camera->GetViewDirection());
-	_shaderScene->SetUniform1f("light.inCutOff", cos(0.226893));
-	_shaderScene->SetUniform1f("light.outCutOff", cos(0.314159));
+	_shaderScene->SetUniform3f("spotLight.position", _camera->GetPosition());
+	_shaderScene->SetUniform3f("spotLight.direction", _camera->GetViewDirection());
 
 	GraphicsManager::GetLabel("fps")->SetText(std::to_string(GetFPS()) + " fps");
 	GraphicsManager::GetLabel("position")->SetText(std::to_string(cameraPosition.x) + " " + std::to_string(cameraPosition.y) + " " + std::to_string(cameraPosition.z));
@@ -61,13 +78,10 @@ void Application::Update()
 void Application::Render()
 {
 	_shaderScene->Bind();
-	_shaderScene->SetModel(Matrix4::GetIdentity());
-	_shaderScene->SetUniform3f("light.ambient", Vector3(0.5f, 0.5f, 0.5f));
-	_shaderScene->SetUniform3f("light.diffuse", Vector3(0.5f, 0.5f, 0.5f));
-	_shaderScene->SetUniform3f("light.specular", Vector3(1.0f, 1.0f, 1.0f));
 	_shaderScene->SetUniform1i("material.diffuse", 0);
 	_shaderScene->SetUniform1i("material.specular", 1);
 	_shaderScene->SetUniform1f("material.shininess", 32.0f);
+	_shaderScene->SetModel(Matrix4::GetIdentity());
 	Texture2D::ActivateTexture(0);
 	TextureManager::Get("lm-test")->Bind();
 	Texture2D::ActivateTexture(1);
