@@ -11,6 +11,5 @@ TODO: include definitions for different int sizes.
 
 typedef unsigned int uint;
 typedef unsigned char byte;
-typedef const char* cstring;
 typedef unsigned short ushort;
 typedef uint id;

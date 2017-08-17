@@ -16,6 +16,7 @@ Base class for all 2D renderable objects.
 
 namespace s3dge
 {
+	class Renderer2D;
 	class Texture2D;
 
 	class Renderable2D : public Renderable
@@ -41,6 +42,8 @@ namespace s3dge
 		virtual void SetColor(const Color& color);
 		virtual void SetPosition(const Vector2& position);
 		virtual void SetZIndex(const float zIndex);
+
+		virtual void Submit(Renderer2D*const renderer) const;
 
 	private:
 		void PerformDefaultGeometrySetup();

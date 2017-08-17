@@ -16,6 +16,7 @@ namespace s3dge
 {
 	class Font;
 	struct VertexData;
+	class Renderer2D;
 
 	class Label : public Renderable2D
 	{
@@ -23,7 +24,7 @@ namespace s3dge
 		std::string _text;
 		Font* _font;
 
-	private:
+	public:
 		Label(const std::string& text, Font*const font, const Vector2& position, const float zIndex, const Size2D& size, const Color& color = Color(0xffffffff));
 
 	public:
@@ -31,6 +32,8 @@ namespace s3dge
 		const std::string& GetText() const { return _text; }
 
 		virtual const uint GetTextureID() const override;
+
+		void Submit(Renderer2D*const renderer2d) const override;
 
 		friend class LabelFactory;
 

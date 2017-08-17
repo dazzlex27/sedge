@@ -29,7 +29,7 @@ namespace s3dge
 	class Light
 	{
 	private:
-		cstring _name;
+		const char* _name;
 		LightType _type;
 		Vector3 _position;
 		Vector3 _direction;

@@ -13,8 +13,9 @@ implements the font class
 #include "System/FileUtils.h"
 
 using namespace s3dge;
+using namespace ftgl;
 	
-Font::Font(cstring name, cstring path, float size)
+Font::Font(const char* name, const char* path, const float size)
 	: _name(name), _path(path), _size(size)
 {
 	if (!Initialize())
@@ -27,23 +28,24 @@ bool Font::Initialize()
 		return false;
 
 	LoadFontFromFile();
+
 	return true;
 }
 
 void Font::LoadFontFromFile()
 {
-	_atlas = ftgl::texture_atlas_new(512, 512, 2);
-	_font = ftgl::texture_font_new_from_file(_atlas, _size, _path);
-	ftgl::texture_atlas_upload(_atlas);
+	_atlas = texture_atlas_new(512, 512, 2);
+	_font = texture_font_new_from_file(_atlas, _size, _path);
+	texture_atlas_upload(_atlas);
 }
 
-uint Font::GetAtlasID() const 
+const uint Font::GetAtlasID() const 
 { 
 	return _atlas->id; 
 }
 
 Font::~Font()
 {
-	ftgl::texture_atlas_delete(_atlas);
-	ftgl::texture_font_delete(_font);
+	texture_atlas_delete(_atlas);
+	texture_font_delete(_font);
 }

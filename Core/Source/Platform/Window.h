@@ -18,7 +18,7 @@ namespace s3dge
 	class Window
 	{
 	private:
-		cstring _title;
+		const char* _title;
 		uint _width;
 		uint _height;
 		bool _isClosed;
@@ -30,7 +30,7 @@ namespace s3dge
 		static std::map<void*, Window*> Instances;
 
 	public:
-		Window(cstring title, const uint width, const uint height, const bool fullscreen = false, const bool vsync = true);
+		Window(const char* title, const uint width, const uint height, const bool fullscreen = false, const bool vsync = true);
 		~Window();
 
 		bool Initialize();
@@ -38,7 +38,7 @@ namespace s3dge
 		void Clear();
 		void Dispose();
 
-		inline cstring GetTitle() const { return _title; }
+		inline const char* GetTitle() const { return _title; }
 		inline uint GetWidth() const { return _width; }
 		inline uint GetHeight() const { return _height; }
 		inline bool IsClosed() const { return _isClosed; }

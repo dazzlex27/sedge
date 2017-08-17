@@ -11,6 +11,7 @@ Implements the Label class
 #include "System/DeleteMacros.h"
 #include "Graphics/Fonts/Font.h"
 #include "Graphics/Structures/VertexData.h"
+#include "Graphics/Renderers/Renderer2D.h"
 
 using namespace s3dge;
 using namespace ftgl;
@@ -45,8 +46,8 @@ void Label::CreateTextTexture()
 
 	VertexData* buffer = Vertices;
 
-	const float scaleX = 40.0f;
-	const float scaleY = 40.0f;
+	const float scaleX = 50.0f;
+	const float scaleY = 50.0f;
 
 	float x = Position.x;
 	uint offset = 0;
@@ -116,4 +117,9 @@ void Label::CreateTextTexture()
 const uint Label::GetTextureID() const
 {
 	return _font->GetAtlasID();
+}
+
+void Label::Submit(Renderer2D*const renderer2d) const
+{
+	renderer2d->RenderText(_text.c_str(), *_font, Position, Col);
 }

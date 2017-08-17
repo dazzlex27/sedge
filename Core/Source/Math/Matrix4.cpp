@@ -301,7 +301,7 @@ Matrix4 Matrix4::LookAt(const Vector3& eye, const Vector3& target, const Vector3
 	return result * Translate(Vector3(-target.x, -target.y, -target.z));
 }
 
-cstring Matrix4::Print()
+const char* Matrix4::Print()
 {
 	std::string result;
 

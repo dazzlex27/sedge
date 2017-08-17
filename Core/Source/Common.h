@@ -19,7 +19,7 @@ This file is included by the main header S3DGE.h
 #include "Platform/KeyCodes.h"
 #include "Platform/Window.h"
 
-#include "Graphics/Layer.h"
+#include "Graphics/Layer2D.h"
 #include "Graphics/Shaders/ShaderProgram.h"
 #include "Graphics/Renderers/Renderer3D.h"
 #include "Graphics/Renderables/Sprite.h"

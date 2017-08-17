@@ -13,7 +13,7 @@ namespace s3dge
 		std::vector<Mesh*> _meshes;
 
 	public:
-		bool LoadModel(cstring path);
+		bool LoadModel(const char* path);
 		virtual void Submit(Renderer*const renderer) const override;
 		virtual void Draw() const override;
 	};

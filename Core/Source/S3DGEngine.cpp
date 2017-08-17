@@ -20,7 +20,7 @@ S3DGEngine::~S3DGEngine()
 {
 }
 
-void S3DGEngine::CreateGameWindow(cstring name, uint width, uint height, bool fullscreen, bool vsync)
+void S3DGEngine::CreateGameWindow(const char* name, uint width, uint height, bool fullscreen, bool vsync)
 {
 	if (!MainWindow)
 	{

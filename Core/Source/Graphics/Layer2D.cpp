@@ -1,33 +1,31 @@
 /*
 ===========================================================================
-Layer.cpp
+Layer2D.cpp
 
-A class designed to represent a layer of objects on screen.
-Each layer requires a shader instance and a renderer instance.
-
-Using layers is highly encouraged, event if there's only one. That helps to keep things clean.
+A class designed to represent a Layer2D of objects on screen.
+Each Layer2D requires a shader instance and a renderer instance.
 ===========================================================================
 */
 
-#include "Layer.h"
-#include "Graphics/Renderables/Mesh.h"
-#include "Graphics/Renderables/Renderable.h"
-#include "Graphics/Renderers/Renderer3D.h"
+#include "Layer2D.h"
+#include "Graphics/Renderables/Renderable2D.h"
+#include "Graphics/Renderers/Renderer2D.h"
 #include "Graphics/Shaders/ShaderProgram.h"
 #include "System/DeleteMacros.h"
+#include "Graphics/Renderables/Label.h"
 
 using namespace s3dge;
 
-Layer::Layer(ShaderProgram* shaderProgram)
+Layer2D::Layer2D(ShaderProgram* shaderProgram)
 {
 	_transformationMatrix = Matrix4::GetIdentity();
 	_shaderProgram = shaderProgram;
-	_renderer = new Renderer3D();
+	_renderer = new Renderer2D();
 	_ownsRenderer = true;
 	_ownsShader = false;
 }
 
-Layer::Layer(ShaderProgram* shaderProgram, Renderer* renderer)
+Layer2D::Layer2D(ShaderProgram* shaderProgram, Renderer2D* renderer)
 {
 	_transformationMatrix = Matrix4::GetIdentity();
 	_shaderProgram = shaderProgram;
@@ -36,29 +34,29 @@ Layer::Layer(ShaderProgram* shaderProgram, Renderer* renderer)
 	_ownsShader = false;
 }
 
-Layer::~Layer()
+Layer2D::~Layer2D()
 {
 	Dispose();
 }
 
-void Layer::Add(Renderable* renderable)
+void Layer2D::Add(Renderable2D* renderable)
 {
 	_renderables.push_back(renderable);
 }
 
-void Layer::Draw()
+void Layer2D::Draw()
 {
 	_shaderProgram->Bind();
 	_renderer->Begin();
 
-	for (const auto renderable : _renderables)
+	for (const Renderable2D* renderable : _renderables)
 		renderable->Submit(_renderer);
 	
 	_renderer->End();
 	_renderer->Flush();
 }
 
-void Layer::Dispose()
+void Layer2D::Dispose()
 {
 	if (_ownsShader)
 		SafeDelete(_shaderProgram);
@@ -67,13 +65,13 @@ void Layer::Dispose()
 		SafeDelete(_renderer);
 }
 
-Layer& Layer::operator=(const Layer& other)
+Layer2D& Layer2D::operator=(const Layer2D& other)
 {
 	Dispose();
 	return *this;
 }
 
-void Layer::SetShaderProgram(ShaderProgram* shaderProgram)
+void Layer2D::SetShaderProgram(ShaderProgram* shaderProgram)
 {
 	if (_ownsShader)
 		SafeDelete(_shaderProgram);
@@ -82,7 +80,7 @@ void Layer::SetShaderProgram(ShaderProgram* shaderProgram)
 	_ownsShader = false;
 }
 
-void Layer::SetRenderer(Renderer* renderer)
+void Layer2D::SetRenderer(Renderer2D* renderer)
 {
 	if (_ownsRenderer)
 		SafeDelete(_renderer);
@@ -91,7 +89,7 @@ void Layer::SetRenderer(Renderer* renderer)
 	_renderer = renderer;
 }
 
-void Layer::SetTransformationMatrix(Matrix4 matrix)
+void Layer2D::SetTransformationMatrix(Matrix4 matrix)
 {
 	_transformationMatrix = matrix;
 }

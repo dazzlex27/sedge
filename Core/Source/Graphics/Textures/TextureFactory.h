@@ -16,7 +16,7 @@ namespace s3dge
 	{
 	public:
 		static Texture2D* CreateDefaultTexture();
-		static Texture2D* CreateTextureFromFile(cstring name, cstring path, TextureWrapMode wrapMode = REPEAT, TextureFilterMode filterMode = LINEAR);
+		static Texture2D* CreateTextureFromFile(const char* name, const char* path, TextureWrapMode wrapMode = REPEAT, TextureFilterMode filterMode = LINEAR);
 
 	private:
 		TextureFactory();

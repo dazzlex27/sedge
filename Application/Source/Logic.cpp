@@ -7,6 +7,7 @@ uint* Cube24ElementArray = nullptr;
 
 void LoadResources()
 {
+	TextureManager::Add("cry", "Resources/Models/nanosuit/body_dif.png");
 	TextureManager::Add("lm-test", "Resources/Textures/lm-test.png");
 	TextureManager::Add("lm-test-sp", "Resources/Textures/lm-test-sp.png");
 	FontManager::Add("font1", "Resources/Fonts/Assistant-Regular.ttf", 24);
@@ -15,7 +16,7 @@ void LoadResources()
 void CreateRenderables()
 {
 	Label* label = LabelFactory::CreateLabel("startup...", FontManager::Get("font1"), Vector2(0.3f, 8.4f), 0, Size2D(2, 2));
-	Label* label2 = LabelFactory::CreateLabel("p:", FontManager::Get("font1"), Vector2(0.3f, 7.4f), 0, Size2D(2, 2));
+	Label* label2 = LabelFactory::CreateLabel("p:", FontManager::Get("font1"), Vector2(0.3f, 7.8f), 0, Size2D(2, 2));
 
 	GraphicsManager::AddMesh("cube", CreateTexturedCubeUnitSize(nullptr));
 	GraphicsManager::AddLabel("fps", label);

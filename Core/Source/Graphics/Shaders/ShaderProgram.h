@@ -13,8 +13,8 @@ namespace s3dge
 	{
 	private:
 		uint _programID;
-		cstring _vertexPath;
-		cstring _fragmentPath;
+		const char* _vertexPath;
+		const char* _fragmentPath;
 		uint _vertex;
 		uint _fragment;
 
@@ -25,19 +25,19 @@ namespace s3dge
 		};
 
 	public:
-		ShaderProgram(cstring vertex, cstring fragment);
+		ShaderProgram(const char* vertex, const char* fragment);
 		~ShaderProgram();
 
 		void Bind() const;
 		void Unbind() const;
 
-		void SetUniformMat4fv(cstring name, const Matrix4& matrix);
-		void SetUniform1f(cstring name, const float value);
-		void SetUniform2f(cstring name, const Vector2& value);
-		void SetUniform3f(cstring name, const Vector3& value);
-		void SetUniform4f(cstring name, const Vector4& value);
-		void SetUniform1i(cstring name, const int value);
-		void SetUniform1iv(cstring name, const int count, const int* value);
+		void SetUniformMat4fv(const char* name, const Matrix4& matrix);
+		void SetUniform1f(const char* name, const float value);
+		void SetUniform2f(const char* name, const Vector2& value);
+		void SetUniform3f(const char* name, const Vector3& value);
+		void SetUniform4f(const char* name, const Vector4& value);
+		void SetUniform1i(const char* name, const int value);
+		void SetUniform1iv(const char* name, const int count, const int* value);
 
 		void SetProjection(const Matrix4& projectionMatrix);
 		void SetView(const Matrix4& viewMatrix);

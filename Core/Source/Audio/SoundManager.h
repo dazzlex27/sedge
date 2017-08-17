@@ -31,8 +31,8 @@ namespace s3dge
 
 	public:
 		static void Initialize(); // must be called upon engine startup
-		static void Add(cstring name, cstring path, bool overrideExisting = false);
-		static Sound* Get(cstring name);
+		static void Add(const char* name, const char* path, bool overrideExisting = false);
+		static Sound* Get(const char* name);
 		static void Update(); // must be called in the engine's main loop
 		static void Dispose(); // must be called upon engine shutdown
 

@@ -33,8 +33,8 @@ namespace s3dge
 	class Texture2D
 	{
 	private:
-		cstring _name;
-		cstring _path;
+		const char* _name;
+		const char* _path;
 		id _id;
 		int _width;
 		int _height;
@@ -43,11 +43,11 @@ namespace s3dge
 		TextureFilterMode _filterMode;
 
 	public:
-		Texture2D(cstring name, cstring path, TextureWrapMode wrapMode = REPEAT, TextureFilterMode filterMode = LINEAR);
+		Texture2D(const char* name, const char* path, TextureWrapMode wrapMode = REPEAT, TextureFilterMode filterMode = LINEAR);
 		~Texture2D();
 
 	public:
-		inline cstring GetName() const { return _name; }
+		inline const char* GetName() const { return _name; }
 		inline id GetID() const { return _id; }
 		inline int GetWidth() const { return _width; }
 		inline int GetHeight() const { return _height; }
@@ -64,6 +64,7 @@ namespace s3dge
 		friend class TextureFactory;
 
 		static void ActivateTexture(const uint num);
+		static void BindById(const id texId);
 
 	private:
 		bool Load();

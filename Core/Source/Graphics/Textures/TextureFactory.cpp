@@ -18,7 +18,7 @@ Texture2D* TextureFactory::CreateDefaultTexture()
 	return nullptr;
 }
 
-Texture2D* TextureFactory::CreateTextureFromFile(cstring name, cstring path, TextureWrapMode wrapMode, TextureFilterMode filterMode)
+Texture2D* TextureFactory::CreateTextureFromFile(const char* name, const char* path, TextureWrapMode wrapMode, TextureFilterMode filterMode)
 {
 	if (strcmp(name, "") == 0)
 	{

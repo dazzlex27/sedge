@@ -22,7 +22,7 @@ void TextureManager::Initialize()
 	_initialized = true;
 }
 
-void TextureManager::Add(cstring name, cstring path, TextureWrapMode wrapMode, TextureFilterMode filterMode, bool overrideExisting)
+void TextureManager::Add(const char* name, const char* path, TextureWrapMode wrapMode, TextureFilterMode filterMode, bool overrideExisting)
 {
 	if (_initialized)
 	{
@@ -52,7 +52,7 @@ void TextureManager::Add(cstring name, cstring path, TextureWrapMode wrapMode, T
 	}
 }
 
-Texture2D* TextureManager::Get(cstring name)
+Texture2D* TextureManager::Get(const char* name)
 {
 	if (_initialized)
 	{

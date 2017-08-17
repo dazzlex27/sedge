@@ -23,4 +23,12 @@ namespace s3dge
 		Vector2 UV;
 		float TextureID;
 	};
+
+	struct VertexDataS
+	{
+		Vector3 Position;
+		Color Color;
+		Vector2 UV;
+		float TextureID;
+	};
 }

@@ -67,7 +67,7 @@ static int GetFilterModeValue(TextureFilterMode filterMode)
 	return -1; // error
 }
 
-Texture2D::Texture2D(cstring name, cstring path, TextureWrapMode wrapMode, TextureFilterMode filterMode)
+Texture2D::Texture2D(const char* name, const char* path, TextureWrapMode wrapMode, TextureFilterMode filterMode)
 	: _name(name), _path(path)
 {
 	_wrapMode = wrapMode;
@@ -124,6 +124,11 @@ void Texture2D::Unbind() const
 void Texture2D::ActivateTexture(const uint num)
 {
 	glActiveTexture(GL_TEXTURE0 + num);
+}
+
+void Texture2D::BindById(const id texId)
+{
+	glBindTexture(GL_TEXTURE_2D, texId);
 }
 
 void Texture2D::SetWrapMode(TextureWrapMode wrapMode)

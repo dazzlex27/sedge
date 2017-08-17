@@ -17,9 +17,9 @@ namespace s3dge
 	class FileUtils
 	{
 	public:
-		static std::string ReadFromFile(cstring filepath);
+		static std::string ReadFromFile(const char* filepath);
 		static std::string ReadFromFile(const std::string& filepath);
-		static bool CheckFileExists(cstring name);
+		static bool CheckFileExists(const char* name);
 
 	private:
 		FileUtils(void);

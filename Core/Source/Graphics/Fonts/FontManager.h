@@ -23,8 +23,8 @@ namespace s3dge
 
 	public:
 		static void Initialize();
-		static void Add(cstring name, cstring path, float size, bool overrideExisting = false);
-		static Font* Get(cstring name);
+		static void Add(const char* name, const char* path, float size, bool overrideExisting = false);
+		static Font* Get(const char* name);
 		static void Dispose();
 
 	private:

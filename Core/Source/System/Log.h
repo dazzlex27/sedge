@@ -36,7 +36,7 @@ namespace s3dge
 		static void Print(uint i) { printf("%u", i); }
 		static void Print(float f) { printf("%.3f", f); }
 		static void Print(double d) { printf("%.6f", d); }
-		static void Print(cstring s) { printf("%s", s); }
+		static void Print(const char* s) { printf("%s", s); }
 		static void Print(bool b) { if (b) printf("true"); else printf("false"); }
 
 	public:

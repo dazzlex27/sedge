@@ -12,7 +12,7 @@ Implements the LabelFactory class
 
 using namespace s3dge;
 
-Label*const LabelFactory::CreateLabel(cstring text, Font*const font, const Vector2& position, const float zIndex, const Size2D& size, const Color& color)
+Label*const LabelFactory::CreateLabel(const char* text, Font*const font, const Vector2& position, const float zIndex, const Size2D& size, const Color& color)
 {
 	return new Label(std::string(text), font, position, zIndex, size, color);
 }

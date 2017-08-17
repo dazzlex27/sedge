@@ -130,6 +130,6 @@ namespace s3dge
 		*/
 		static Matrix4 LookAt(const Vector3& eye, const Vector3& center, const Vector3& up);
 
-		cstring Print();
+		const char* Print();
 	};
 }

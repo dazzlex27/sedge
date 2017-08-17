@@ -25,19 +25,21 @@ namespace s3dge
 	class Font
 	{
 	private:
-		cstring _name;
-		cstring _path;
-		float _size;
+		const char* _name;
+		const char* _path;
+		const float _size;
 		ftgl::texture_atlas_t* _atlas;
 		ftgl::texture_font_t* _font;
 
 	public:
-		Font(cstring name, cstring path, float size);
+		Font(const char* name, const char* path, const float size);
 		~Font();
 
-		uint GetAtlasID() const;
+		const uint GetAtlasID() const;
 		inline ftgl::texture_font_t* GetFontFace() const { return _font; }
-		inline cstring GetName() const { return _name; }
+		inline const char* GetName() const { return _name; }
+		inline const float GetScaleX() const { return 50.0f; }
+		inline const float GetScaleY() const { return 50.0f; }
 
 	private:
 		bool Initialize();

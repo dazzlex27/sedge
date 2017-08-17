@@ -36,7 +36,7 @@ void SoundManager::Initialize()
 	}
 }
 
-void SoundManager::Add(cstring name, cstring path, bool overrideExisting)
+void SoundManager::Add(const char* name, const char* path, bool overrideExisting)
 {
 	if (_initialized)
 	{
@@ -66,7 +66,7 @@ void SoundManager::Add(cstring name, cstring path, bool overrideExisting)
 	}
 }
 
-Sound* SoundManager::Get(cstring name)
+Sound* SoundManager::Get(const char* name)
 {
 	if (_initialized)
 	{

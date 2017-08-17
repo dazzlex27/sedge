@@ -23,8 +23,8 @@ namespace s3dge
 
 	public:
 		static void Initialize();
-		static void Add(cstring name, cstring path, TextureWrapMode wrapMode = REPEAT, TextureFilterMode filterModebool = LINEAR, bool overrideExisting = false);
-		static Texture2D* Get(cstring name);
+		static void Add(const char* name, const char* path, TextureWrapMode wrapMode = REPEAT, TextureFilterMode filterModebool = LINEAR, bool overrideExisting = false);
+		static Texture2D* Get(const char* name);
 		static void Dispose();
 
 		static inline uint GetCount() { return _textures.size(); }

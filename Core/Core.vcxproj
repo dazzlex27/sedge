@@ -114,6 +114,7 @@
     <ClCompile Include="Source\Graphics\Renderables\Renderable2D.cpp" />
     <ClCompile Include="Source\Graphics\Renderables\SpriteFactory.cpp" />
     <ClCompile Include="Source\Graphics\Renderers\Renderer3D.cpp" />
+    <ClCompile Include="Source\Graphics\Renderers\Renderer2D.cpp" />
     <ClCompile Include="Source\Graphics\Structures\VertexLayout.cpp" />
     <ClCompile Include="Source\Graphics\Textures\TextureFactory.cpp" />
     <ClCompile Include="Source\Logic\Objects\Actor.cpp" />
@@ -125,7 +126,7 @@
     <ClCompile Include="Source\Graphics\Buffers\VertexArray.cpp" />
     <ClCompile Include="Source\Graphics\Renderables\Group.cpp" />
     <ClCompile Include="Source\Graphics\Renderables\Label.cpp" />
-    <ClCompile Include="Source\Graphics\Layer.cpp" />
+    <ClCompile Include="Source\Graphics\Layer2D.cpp" />
     <ClCompile Include="Source\Graphics\Renderables\Sprite.cpp" />
     <ClCompile Include="Source\Graphics\Shaders\ShaderProgram.cpp" />
     <ClCompile Include="Source\Graphics\Textures\Texture2D.cpp" />
@@ -161,6 +162,7 @@
     <ClInclude Include="Source\Graphics\Renderables\Model.h" />
     <ClInclude Include="Source\Graphics\Renderables\Renderable.h" />
     <ClInclude Include="Source\Graphics\Renderers\Renderer3D.h" />
+    <ClInclude Include="Source\Graphics\Renderers\Renderer2D.h" />
     <ClInclude Include="Source\Logic\Cameras\FPSCamera.h" />
     <ClInclude Include="Source\Logic\Cameras\TPSCamera.h" />
     <ClInclude Include="Source\Logic\Objects\Actor.h" />
@@ -189,7 +191,7 @@
     <ClInclude Include="Source\Graphics\Buffers\VertexArray.h" />
     <ClInclude Include="Source\Graphics\Renderables\Group.h" />
     <ClInclude Include="Source\Graphics\Renderables\Label.h" />
-    <ClInclude Include="Source\Graphics\Layer.h" />
+    <ClInclude Include="Source\Graphics\Layer2D.h" />
     <ClInclude Include="Source\Graphics\Renderables\Renderable2D.h" />
     <ClInclude Include="Source\Graphics\Renderables\Sprite.h" />
     <ClInclude Include="Source\Graphics\Shaders\ShaderProgram.h" />

@@ -22,7 +22,7 @@ void FontManager::Initialize()
 	_initialized = true;
 }
 
-void FontManager::Add(cstring name, cstring path, float size, bool overrideExisting)
+void FontManager::Add(const char* name, const char* path, float size, bool overrideExisting)
 {
 	if (_initialized)
 	{
@@ -52,7 +52,7 @@ void FontManager::Add(cstring name, cstring path, float size, bool overrideExist
 	}
 }
 
-Font* FontManager::Get(cstring name)
+Font* FontManager::Get(const char* name)
 {
 	if (_initialized)
 	{

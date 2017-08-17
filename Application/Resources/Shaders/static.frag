@@ -17,12 +17,14 @@ in DATA
 
 void main()
 {
-	vec4 textureColor = fs_in.color;
-	if (fs_in.textureID > 0.0)
+	if (fs_in.textureID < 0.0)
 	{
-		int textureID = int(fs_in.textureID - 0.5);
-		textureColor = fs_in.color * texture(textureArray[textureID], fs_in.uv); 
+		color = fs_in.color;
+		return;
 	}
+
+	int textureID = int(fs_in.textureID - 0.5);
+	vec4 textureColor = fs_in.color * texture(textureArray[textureID], fs_in.uv); 
 
 	color = textureColor;
 }

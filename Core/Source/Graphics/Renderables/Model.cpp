@@ -4,7 +4,7 @@
 
 using namespace s3dge;
 
-bool Model::LoadModel(cstring path)
+bool Model::LoadModel(const char* path)
 {
 	// TODO:
 

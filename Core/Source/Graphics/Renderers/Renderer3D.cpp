@@ -118,12 +118,12 @@ void Renderer3D::Flush()
 const float Renderer3D::GetTextureIndexByID(const id textureID)
 {
 	if (textureID == 0)
-		return 0.0f;
+		return -1.0f;
 
 	for (id i = 0; i < _textures.size(); ++i)
 	{
 		if (_textures[i] == textureID)
-			return (const float)(i + 1);
+			return i;
 	}
 
 	if (_textures.size() >= _textureMaxCount)

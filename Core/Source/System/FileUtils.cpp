@@ -12,7 +12,7 @@ Contains implementations for file utilities functions
 using namespace std;
 using namespace s3dge;
 
-string FileUtils::ReadFromFile(cstring filepath)
+string FileUtils::ReadFromFile(const char* filepath)
 {
 	ifstream ifs(filepath);
 	string content(istreambuf_iterator<char>(ifs.rdbuf()), istreambuf_iterator<char>());
@@ -28,7 +28,7 @@ string FileUtils::ReadFromFile(const string& filepath)
 	return content;
 }
 
-bool FileUtils::CheckFileExists(cstring name)
+bool FileUtils::CheckFileExists(const char* name)
 {
 	if (FILE *file = fopen(name, "r"))
 	{

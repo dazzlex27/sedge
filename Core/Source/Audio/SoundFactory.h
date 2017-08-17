@@ -17,7 +17,7 @@ namespace s3dge
 	class SoundFactory
 	{
 	public:
-		static Sound* CreateSound(cstring name, cstring path);
+		static Sound* CreateSound(const char* name, const char* path);
 
 	private:
 		SoundFactory();

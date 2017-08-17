@@ -42,7 +42,7 @@ namespace s3dge
 		inline ENGINE_STATE GetEngineState() const { return _state; }
 
 	protected:
-		void CreateGameWindow(cstring name, uint width, uint height, bool fullscreen = false, bool vsync = true);
+		void CreateGameWindow(const char* name, uint width, uint height, bool fullscreen = false, bool vsync = true);
 		double GetNextRNG();
 		float GetElapsedMS();
 

@@ -10,6 +10,7 @@ Contains method implementations for Renderable2D
 #include "System/Log.h"
 #include "Graphics/Textures/Texture2D.h"
 #include "Graphics/Structures/VertexData.h"
+#include "Graphics/Renderers/Renderer2D.h"
 
 using namespace s3dge;
 
@@ -97,6 +98,11 @@ void Renderable2D::SetPosition(const Vector2& position)
 void Renderable2D::SetZIndex(const float zIndex)
 {
 	Position.z = zIndex;
+}
+
+void Renderable2D::Submit(Renderer2D*const renderer) const
+{
+	renderer->Submit(*this);
 }
 
 void SetVertexPosition(VertexData*const vertices, const uint vertexCount, const Vector2& position, const Size2D& size)

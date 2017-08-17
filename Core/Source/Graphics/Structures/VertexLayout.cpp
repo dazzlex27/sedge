@@ -7,9 +7,9 @@ static const int GetTypeIntFromTypeEnum(const ElementType type)
 {
 	switch (type)
 	{
-	case FLOAT:
+	case Float:
 		return 0x1406;
-	case UBYTE:
+	case Ubyte:
 		return 0x1401;
 	}
 
@@ -21,7 +21,7 @@ void VertexLayout::AddEntry(LayoutAttribute*const attribute)
 	_attributes.push_back(attribute);
 }
 
-void VertexLayout::AddEntry(cstring name, const int index, const int size, const ElementType type, const bool normalized, const int stride, const void*const offset)
+void VertexLayout::AddEntry(const char* name, const int index, const int size, const ElementType type, const bool normalized, const int stride, const void*const offset)
 {
 	LayoutAttribute*const attribute = new LayoutAttribute;
 
@@ -38,12 +38,27 @@ void VertexLayout::AddEntry(cstring name, const int index, const int size, const
 
 VertexLayout VertexLayout::GetDefaultVertexLayout()
 {
+	const int structSize = sizeof(VertexData);
+
 	VertexLayout layout;
-	layout.AddEntry("position", 0, 3, ElementType::FLOAT, false, sizeof(VertexData), (const void*)(offsetof(VertexData, VertexData::Position)));
-	layout.AddEntry("color", 1, 4, ElementType::UBYTE, true, sizeof(VertexData), (const void*)(offsetof(VertexData, VertexData::Color)));
-	layout.AddEntry("normal", 2, 3, ElementType::FLOAT, false, sizeof(VertexData), (const void*)(offsetof(VertexData, VertexData::Normal)));
-	layout.AddEntry("uv", 3, 2, ElementType::FLOAT, false, sizeof(VertexData), (const void*)(offsetof(VertexData, VertexData::UV)));
-	layout.AddEntry("textureID", 4, 1, ElementType::FLOAT, false, sizeof(VertexData), (const void*)(offsetof(VertexData, VertexData::TextureID)));
+	layout.AddEntry("position", 0, 3, Float, false, structSize, (const void*)(offsetof(VertexData, Position)));
+	layout.AddEntry("color", 1, 4, Ubyte, true, structSize, (const void*)(offsetof(VertexData, Color)));
+	layout.AddEntry("normal", 2, 3, Float, false, structSize, (const void*)(offsetof(VertexData, Normal)));
+	layout.AddEntry("uv", 3, 2, Float, false, structSize, (const void*)(offsetof(VertexData, UV)));
+	layout.AddEntry("textureID", 4, 1, Float, false, structSize, (const void*)(offsetof(VertexData, TextureID)));
+
+	return layout;
+}
+
+VertexLayout VertexLayout::GetDefaultVertexLayoutSprite()
+{
+	const int structSize = sizeof(VertexDataS);
+
+	VertexLayout layout;
+	layout.AddEntry("position", 0, 3, Float, false, structSize, (const void*)(offsetof(VertexDataS, Position)));
+	layout.AddEntry("color", 1, 4, Ubyte, true, structSize, (const void*)(offsetof(VertexDataS, Color)));
+	layout.AddEntry("uv", 3, 2, Float, false, structSize, (const void*)(offsetof(VertexDataS, UV)));
+	layout.AddEntry("textureID", 4, 1, Float, false, structSize, (const void*)(offsetof(VertexDataS, TextureID)));
 
 	return layout;
 }

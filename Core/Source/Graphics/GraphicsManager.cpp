@@ -13,10 +13,10 @@ Implements the renderables manager class.
 using namespace s3dge;
 using namespace std;
 
-map<cstring, Sprite*> GraphicsManager::_sprites;
-map<cstring, Label*> GraphicsManager::_labels;
-map<cstring, Group*> GraphicsManager::_groups;
-map<cstring, Mesh*> GraphicsManager::_meshes;
+map<const char*, Sprite*> GraphicsManager::_sprites;
+map<const char*, Label*> GraphicsManager::_labels;
+map<const char*, Group*> GraphicsManager::_groups;
+map<const char*, Mesh*> GraphicsManager::_meshes;
 bool GraphicsManager::_initialized;
 
 void GraphicsManager::Initialize()
@@ -31,7 +31,7 @@ void GraphicsManager::Initialize()
 	}
 }
 
-void GraphicsManager::AddSprite(cstring name, Sprite* sprite, bool overwrite)
+void GraphicsManager::AddSprite(const char* name, Sprite* sprite, bool overwrite)
 {
 	if (_initialized)
 	{
@@ -49,7 +49,7 @@ void GraphicsManager::AddSprite(cstring name, Sprite* sprite, bool overwrite)
 		LOG_WARNING("Graphics manager was not initialized before adding a sprite (", name, ")");
 }
 
-void GraphicsManager::AddLabel(cstring name, Label* label, bool overwrite)
+void GraphicsManager::AddLabel(const char* name, Label* label, bool overwrite)
 {
 	if (_initialized)
 	{
@@ -67,7 +67,7 @@ void GraphicsManager::AddLabel(cstring name, Label* label, bool overwrite)
 		LOG_WARNING("Graphics manager was not initialized before adding a label (", name, ")");
 }
 
-void GraphicsManager::AddGroup(cstring name, bool overwrite)
+void GraphicsManager::AddGroup(const char* name, bool overwrite)
 {
 	if (_initialized)
 	{
@@ -85,7 +85,7 @@ void GraphicsManager::AddGroup(cstring name, bool overwrite)
 		LOG_WARNING("Graphics manager was not initialized before adding a group (", name, ")");
 }
 
-void GraphicsManager::AddMesh(cstring name, Mesh* mesh, bool overwrite)
+void GraphicsManager::AddMesh(const char* name, Mesh* mesh, bool overwrite)
 {
 	if (_initialized)
 	{
@@ -103,7 +103,7 @@ void GraphicsManager::AddMesh(cstring name, Mesh* mesh, bool overwrite)
 		LOG_WARNING("Graphics manager was not initialized before adding a mesh (", name, ")");
 }
 
-Sprite* GraphicsManager::GetSprite(cstring name)
+Sprite* GraphicsManager::GetSprite(const char* name)
 {
 	if (_sprites.find(name) != _sprites.end())
 		return _sprites[name];
@@ -111,7 +111,7 @@ Sprite* GraphicsManager::GetSprite(cstring name)
 	return nullptr;
 }
 
-Label* GraphicsManager::GetLabel(cstring name)
+Label* GraphicsManager::GetLabel(const char* name)
 {
 	if (_labels.find(name) != _labels.end())
 			return _labels[name];
@@ -119,7 +119,7 @@ Label* GraphicsManager::GetLabel(cstring name)
 	return nullptr;
 }
 
-Group* GraphicsManager::GetGroup(cstring name)
+Group* GraphicsManager::GetGroup(const char* name)
 {
 	if (_groups.find(name) != _groups.end())
 			return _groups[name];
@@ -127,7 +127,7 @@ Group* GraphicsManager::GetGroup(cstring name)
 	return nullptr;
 }
 
-Mesh* GraphicsManager::GetMesh(cstring name)
+Mesh* GraphicsManager::GetMesh(const char* name)
 {
 	if (_meshes.find(name) != _meshes.end())
 		return _meshes[name];

@@ -16,7 +16,7 @@ using namespace s3dge;
 
 std::map<void*, Window*> Window::Instances;
 
-Window::Window(cstring title, const uint width, const uint height, const bool fullscreen, const bool vsync)
+Window::Window(const char* title, const uint width, const uint height, const bool fullscreen, const bool vsync)
 	: _title(title), _width(width), _height(height), _fullScreen(fullscreen), _vSync(vsync), _isClosed(false)
 {
 }

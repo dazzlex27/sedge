@@ -7,6 +7,7 @@ Implements the ElementBuffer class
 */
 
 #include "ElementBuffer.h"
+#include "System/DeleteMacros.h"
 #include <GL/glew.h>
 
 using namespace s3dge;
@@ -38,6 +39,9 @@ ElementBuffer::ElementBuffer(uint count, uint* data, DrawingMode drawingMode)
 ElementBuffer::~ElementBuffer()
 {
 	glDeleteBuffers(1, &BufferID);
+
+	if (DataPtr)
+		SafeDeleteArray(DataPtr);
 }
 
 void ElementBuffer::Map()

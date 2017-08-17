@@ -14,7 +14,7 @@ Implements Sound class.
 
 using namespace s3dge;
 
-Sound::Sound(cstring name, cstring path)
+Sound::Sound(const char* name, const char* path)
 	: _name(name), _path(path), _created(false)
 {
 	_playing = false;

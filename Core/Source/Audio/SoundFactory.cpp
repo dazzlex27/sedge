@@ -13,7 +13,7 @@ Implements SoundFactory class
 
 using namespace s3dge;
 
-Sound* SoundFactory::CreateSound(cstring name, cstring path)
+Sound* SoundFactory::CreateSound(const char* name, const char* path)
 {
 	if (strcmp(name, "") == 0)
 	{

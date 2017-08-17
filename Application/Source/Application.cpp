@@ -9,7 +9,7 @@ void Application::Initialize()
 {
 	CreateGameWindow("S3DGE Application", 1280, 720, false, false);
 
-	_shaderScene = new ShaderProgram("Resources/Shaders/basic.vert", "Resources/Shaders/light.frag");
+	_shaderScene = new ShaderProgram("Resources/Shaders/basic.vert", "Resources/Shaders/static.frag");
 	_shaderHUD = new ShaderProgram("Resources/Shaders/basic.vert", "Resources/Shaders/static.frag");
 	
 	_camera = new FPSCamera();
@@ -28,10 +28,10 @@ void Application::Initialize()
 	_mainScene->AddEntity(cube);
 	_mainScene->SetActiveCamera(_camera);
 
-	_hudLayer = new Layer(_shaderHUD);
+	_hudLayer = new Layer2D(_shaderHUD);
 
-	_hudLayer->Add(GraphicsManager::GetLabel("fps"));
-	_hudLayer->Add(GraphicsManager::GetLabel("position"));
+	_hudLayer->Add((Label*)(GraphicsManager::GetLabel("fps")));
+	_hudLayer->Add((Label*)(GraphicsManager::GetLabel("position")));
 
 	_shaderScene->Bind();
 
@@ -83,7 +83,7 @@ void Application::Render()
 	_shaderScene->SetUniform1f("material.shininess", 32.0f);
 	_shaderScene->SetModel(Matrix4::GetIdentity());
 	Texture2D::ActivateTexture(0);
-	TextureManager::Get("lm-test")->Bind();
+	TextureManager::Get("cry")->Bind();
 	Texture2D::ActivateTexture(1);
 	TextureManager::Get("lm-test-sp")->Bind();
 	GraphicsManager::GetMesh("cube")->Draw();

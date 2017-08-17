@@ -9,7 +9,7 @@
 using namespace std;
 using namespace s3dge;
 
-bool ModelUtils::ReadObjDataFromFile(cstring filepath, vector<Mesh*>& meshVector)
+bool ModelUtils::ReadObjDataFromFile(const char* filepath, vector<Mesh*>& meshVector)
 {
 	if (!FileUtils::CheckFileExists(filepath))
 	{
