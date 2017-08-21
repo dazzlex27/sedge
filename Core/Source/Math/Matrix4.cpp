@@ -16,6 +16,10 @@ Implements the Matrix4 class
 
 using namespace s3dge;
 
+static void TranslateMatrix(Matrix4& matrix, const Vector3& vector);
+static void RotateMatrix(Matrix4& matrix, const Vector3& axis, const float angle);
+static void ScaleMatrix(Matrix4& matrix, const Vector3& vector);
+
 Matrix4::Matrix4()
 {
 	for (int i = 0; i < 16; i++)
@@ -186,6 +190,27 @@ Matrix4& Matrix4::Invert()
 	return *this;
 }
 
+Matrix4& Matrix4::Translate(const Vector3& vector)
+{
+	TranslateMatrix(*this, vector);
+
+	return *this;
+}
+
+Matrix4& Matrix4::Rotate(const Vector3& axis, const float angleRad)
+{
+	RotateMatrix(*this, axis, angleRad);
+
+	return *this;
+}
+
+Matrix4& Matrix4::Scale(const Vector3& vector)
+{
+	ScaleMatrix(*this, vector);
+
+	return *this;
+}
+
 Matrix4& Matrix4::operator*=(const Matrix4& other)
 {
 	*this = Multiply(other);
@@ -198,13 +223,16 @@ Matrix4 s3dge::operator*(const Matrix4& left, const Matrix4& right)
 	return result.Multiply(right);
 }
 
+Matrix4 Matrix4::GetIdentity()
+{
+	return Matrix4(1);
+}
+
 Matrix4 Matrix4::GetTranslation(const Vector3& vector)
 {
 	Matrix4 result = Matrix4::GetIdentity();
 
-	result.data[4 * 3 + 0] = vector.x;
-	result.data[4 * 3 + 1] = vector.y;
-	result.data[4 * 3 + 2] = vector.z;
+	TranslateMatrix(result, vector);
 
 	return result;
 }
@@ -213,23 +241,7 @@ Matrix4 Matrix4::GetRotation(const Vector3& axis, const float angle)
 {
 	Matrix4 result = GetIdentity();
 
-	const float angleRad = DegToRad(angle);
-
-	Quaternion q;
-	q.x = axis.x * sin(angleRad / 2);
-	q.y = axis.y * sin(angleRad / 2);
-	q.z = axis.z * sin(angleRad / 2);
-	q.w = cos(angleRad / 2);
-
-	result.data[4 * 0 + 0] = 1 - 2 * pow(q.y, 2) - 2 * pow(q.z, 2);
-	result.data[4 * 0 + 1] = 2 * q.x * q.y + 2 * q.w * q.z;
-	result.data[4 * 0 + 2] = 2 * q.x * q.z - 2 * q.w * q.y;
-	result.data[4 * 1 + 0] = 2 * q.x * q.y - 2 * q.w * q.z;
-	result.data[4 * 1 + 1] = 1 - 2 * pow(q.x, 2) - 2 * pow(q.z, 2);
-	result.data[4 * 1 + 2] = 2 * q.y * q.z - 2 * q.w * q.x;
-	result.data[4 * 2 + 0] = 2 * q.x * q.z + 2 * q.w * q.y;
-	result.data[4 * 2 + 1] = 2 * q.y * q.z + 2 * q.w * q.x;
-	result.data[4 * 2 + 2] = 1 - 2 * pow(q.x, 2) - 2 * pow(q.y, 2);
+	RotateMatrix(result, axis, angle);
 
 	return result;
 }
@@ -238,16 +250,9 @@ Matrix4 Matrix4::GetScale(const Vector3& vector)
 {
 	Matrix4 result = Matrix4::GetIdentity();
 
-	result.data[4 * 0 + 0] = vector.x;
-	result.data[4 * 1 + 1] = vector.y;
-	result.data[4 * 2 + 2] = vector.z;
+	ScaleMatrix(result, vector);
 
 	return result;
-}
-
-Matrix4 Matrix4::GetIdentity()
-{
-	return Matrix4(1);
 }
 
 Matrix4 Matrix4::GetOrthographic(const float left, const float right, const float bottom, const float top, const float near, const float far)
@@ -309,4 +314,39 @@ const char* Matrix4::Print()
 		result += data[i] + i == 15 ? "" : " ";
 
 	return result.c_str();
+}
+
+void TranslateMatrix(Matrix4& matrix, const Vector3& vector)
+{
+	matrix.data[4 * 3 + 0] = vector.x;
+	matrix.data[4 * 3 + 1] = vector.y;
+	matrix.data[4 * 3 + 2] = vector.z;
+}
+
+void RotateMatrix(Matrix4& matrix, const Vector3& axis, const float angle)
+{
+	const float angleRad = DegToRad(angle);
+
+	Quaternion q;
+	q.x = axis.x * sin(angleRad / 2);
+	q.y = axis.y * sin(angleRad / 2);
+	q.z = axis.z * sin(angleRad / 2);
+	q.w = cos(angleRad / 2);
+
+	matrix.data[4 * 0 + 0] = 1 - 2 * pow(q.y, 2) - 2 * pow(q.z, 2);
+	matrix.data[4 * 0 + 1] = 2 * q.x * q.y + 2 * q.w * q.z;
+	matrix.data[4 * 0 + 2] = 2 * q.x * q.z - 2 * q.w * q.y;
+	matrix.data[4 * 1 + 0] = 2 * q.x * q.y - 2 * q.w * q.z;
+	matrix.data[4 * 1 + 1] = 1 - 2 * pow(q.x, 2) - 2 * pow(q.z, 2);
+	matrix.data[4 * 1 + 2] = 2 * q.y * q.z - 2 * q.w * q.x;
+	matrix.data[4 * 2 + 0] = 2 * q.x * q.z + 2 * q.w * q.y;
+	matrix.data[4 * 2 + 1] = 2 * q.y * q.z + 2 * q.w * q.x;
+	matrix.data[4 * 2 + 2] = 1 - 2 * pow(q.x, 2) - 2 * pow(q.y, 2);
+}
+
+void ScaleMatrix(Matrix4& matrix, const Vector3& vector)
+{
+	matrix.data[4 * 0 + 0] = vector.x;
+	matrix.data[4 * 1 + 1] = vector.y;
+	matrix.data[4 * 2 + 2] = vector.z;
 }

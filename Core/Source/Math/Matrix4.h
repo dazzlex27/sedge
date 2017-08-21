@@ -40,8 +40,10 @@ namespace s3dge
 		Matrix4(const Matrix4& ref);
 
 		Matrix4& Multiply(const Matrix4& other);
-
 		Matrix4& Invert();
+		Matrix4& Translate(const Vector3& vector);
+		Matrix4& Rotate(const Vector3& axis, const float angleRad);
+		Matrix4& Scale(const Vector3& vector);
 
 		Matrix4& operator*=(const Matrix4& other);
 
