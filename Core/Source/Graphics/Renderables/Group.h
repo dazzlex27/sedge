@@ -22,7 +22,7 @@ namespace s3dge
 		Group();
 		~Group();
 
-		void Add(Renderable2D* renderable);
-		void Submit(Renderer* renderer);
+		void Add(Renderable2D*const renderable);
+		virtual void Submit(Renderer2D*const renderer) const override;
 	};
 }

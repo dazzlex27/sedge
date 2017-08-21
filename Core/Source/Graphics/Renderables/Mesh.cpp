@@ -20,7 +20,6 @@ using namespace s3dge;
 using namespace std;
 
 Mesh::Mesh(VertexData*const vertices, const uint vertexCount, uint*const elements, const uint elementCount, Texture2D*const texture)
-	: Renderable(vertices, vertexCount, elements, elementCount, texture)
 {
 	VAO = new VertexArray();
 	VBO = new VertexBuffer(sizeof(VertexData), vertexCount, vertices);
@@ -46,8 +45,8 @@ Mesh::~Mesh()
 
 void Mesh::Draw() const
 {
-	if (Texture)
-		Texture->Bind();
+	/*if (Texture)
+		Texture->Bind();*/
 
 	VAO->Bind();
 	VAO->Draw(EBO->GetCount());

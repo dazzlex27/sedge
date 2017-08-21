@@ -25,6 +25,7 @@ namespace s3dge
 		Vector3 Position;
 		Size2D Size;
 		Color Col;
+		Texture2D* Texture;
 
 	protected:
 		Renderable2D();
@@ -38,14 +39,12 @@ namespace s3dge
 		inline virtual const Vector3& GetPosition() const { return Position; }
 		inline const Size2D& GetSize() const { return Size; }
 		inline const Color& GetColor() const { return Col; }
+		virtual const id GetTextureID() const;
 
 		virtual void SetColor(const Color& color);
 		virtual void SetPosition(const Vector2& position);
 		virtual void SetZIndex(const float zIndex);
 
 		virtual void Submit(Renderer2D*const renderer) const;
-
-	private:
-		void PerformDefaultGeometrySetup();
 	};
 }

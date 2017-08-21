@@ -35,9 +35,9 @@ void Entity::SetRenderable(Renderable*const renderable)
 
 void Entity::UpdateModelMatrix()
 {
-	Matrix4 translation = Matrix4::Translate(Position);
-	Matrix4 scale = Matrix4::Scale(Scale);
-	Matrix4 rotation = Matrix4::Rotate(Vector3(Rotation.x, Rotation.y, Rotation.z), Rotation.w);
+	Matrix4 translation = Matrix4::GetTranslation(Position);
+	Matrix4 scale = Matrix4::GetScale(Scale);
+	Matrix4 rotation = Matrix4::GetRotation(Vector3(Rotation.x, Rotation.y, Rotation.z), Rotation.w);
 
 	ModelMatrix = rotation * translation * scale;
 }

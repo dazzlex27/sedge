@@ -61,12 +61,12 @@ void Renderer2D::Begin()
 	_buffer = (VertexDataS*)_vbo->GetDataPointer();
 }
 
-void Renderer2D::Submit(const Renderable2D& sprite)
+void Renderer2D::Submit(const Renderable2D*const sprite)
 {
-	const Vector3& position = sprite.GetPosition();
-	const Size2D& size = sprite.GetSize();
-	const Color& color = sprite.GetColor();
-	const float samplerIndex = GetSamplerIndexByTID(sprite.GetTextureID());
+	const Vector3& position = sprite->GetPosition();
+	const Size2D& size = sprite->GetSize();
+	const Color& color = sprite->GetColor();
+	const float samplerIndex = GetSamplerIndexByTID(sprite->GetTextureID());
 
 	_buffer->Position = Vector3(position.x, position.y - size.height, position.z);
 	_buffer->Color = color;
@@ -95,18 +95,18 @@ void Renderer2D::Submit(const Renderable2D& sprite)
 	_elementCount += 6;
 }
 
-void Renderer2D::RenderText(const char* text, const Font& font, const Vector3& position, const Color& color)
+void Renderer2D::RenderText(const char* text, const Font*const font, const Vector3& position, const Color& color)
 {
-	const float samplerIndex = GetSamplerIndexByTID(font.GetAtlasID());
+	const float samplerIndex = GetSamplerIndexByTID(font->GetAtlasID());
 
-	const float scaleX = font.GetScaleX();
-	const float scaleY = font.GetScaleY();
+	const float scaleX = font->GetScaleX();
+	const float scaleY = font->GetScaleY();
 	
 	float x = position.x;
 
 	for (uint i = 0; i < strlen(text); i++)
 	{
-		texture_glyph_t*const glyph = texture_font_get_glyph(font.GetFontFace(), text[i]);
+		texture_glyph_t*const glyph = texture_font_get_glyph(font->GetFontFace(), text[i]);
 
 		if (glyph)
 		{

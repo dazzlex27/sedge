@@ -11,11 +11,11 @@ bool Model::LoadModel(const char* path)
 	return false;
 }
 
-void Model::Submit(Renderer*const renderer) const
-{
-	for (uint i = 0; i < _meshes.size(); i++)
-		renderer->Submit(_meshes[i]);
-}
+//void Model::Submit(Renderer*const renderer) const
+//{
+//	for (uint i = 0; i < _meshes.size(); i++)
+//		renderer->Submit(_meshes[i]);
+//}
 
 void Model::Draw() const
 {

@@ -15,5 +15,5 @@ void Actor::Update()
 
 void Actor::Draw()
 {
-	_renderable->Draw();
+	//_renderable->Draw();
 }

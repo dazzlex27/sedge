@@ -8,7 +8,7 @@ Implements the Group class
 
 #include "Group.h"
 #include "System/DeleteMacros.h"
-#include "Graphics/Renderers/Renderer.h"
+#include "Graphics/Renderers/Renderer2D.h"
 
 using namespace s3dge;
 
@@ -22,12 +22,12 @@ Group::~Group()
 		SafeDelete(item);
 }
 
-void Group::Add(Renderable2D* renderable)
+void Group::Add(Renderable2D*const renderable)
 {
 	_renderables.push_back(renderable);
 }
 
-void Group::Submit(Renderer* renderer)
+void Group::Submit(Renderer2D*const renderer) const
 {
 	for (auto item : _renderables)
 		renderer->Submit(item);

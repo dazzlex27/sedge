@@ -14,7 +14,6 @@ namespace s3dge
 
 	public:
 		bool LoadModel(const char* path);
-		virtual void Submit(Renderer*const renderer) const override;
-		virtual void Draw() const override;
+		void Draw() const;
 	};
 }

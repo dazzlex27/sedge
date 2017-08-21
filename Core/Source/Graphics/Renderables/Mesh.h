@@ -31,7 +31,7 @@ namespace s3dge
 	public:
 		~Mesh();
 
-		void Draw() const override;
+		void Draw() const;
 
 		friend class MeshFactory;
 	};

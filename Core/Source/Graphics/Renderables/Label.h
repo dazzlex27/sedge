@@ -31,13 +31,10 @@ namespace s3dge
 		void SetText(const std::string& text);
 		const std::string& GetText() const { return _text; }
 
-		virtual const uint GetTextureID() const override;
+		virtual const id GetTextureID() const override;
 
 		void Submit(Renderer2D*const renderer2d) const override;
 
 		friend class LabelFactory;
-
-	private:
-		void CreateTextTexture();
 	};
 }

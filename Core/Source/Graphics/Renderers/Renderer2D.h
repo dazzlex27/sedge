@@ -35,8 +35,8 @@ namespace s3dge
 		~Renderer2D();
 
 		void Begin();
-		void Submit(const Renderable2D& sprite);
-		void RenderText(const char* text, const Font& font, const Vector3& position, const Color& color);
+		void Submit(const Renderable2D*const sprite);
+		void RenderText(const char* text, const Font*const font, const Vector3& position, const Color& color);
 		void End();
 		void Flush();
 

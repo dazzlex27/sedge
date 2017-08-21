@@ -198,7 +198,7 @@ Matrix4 s3dge::operator*(const Matrix4& left, const Matrix4& right)
 	return result.Multiply(right);
 }
 
-Matrix4 Matrix4::Translate(const Vector3& vector)
+Matrix4 Matrix4::GetTranslation(const Vector3& vector)
 {
 	Matrix4 result = Matrix4::GetIdentity();
 
@@ -209,7 +209,7 @@ Matrix4 Matrix4::Translate(const Vector3& vector)
 	return result;
 }
 
-Matrix4 Matrix4::Rotate(const Vector3& axis, const float angle)
+Matrix4 Matrix4::GetRotation(const Vector3& axis, const float angle)
 {
 	Matrix4 result = GetIdentity();
 
@@ -234,7 +234,7 @@ Matrix4 Matrix4::Rotate(const Vector3& axis, const float angle)
 	return result;
 }
 
-Matrix4 Matrix4::Scale(const Vector3& vector)
+Matrix4 Matrix4::GetScale(const Vector3& vector)
 {
 	Matrix4 result = Matrix4::GetIdentity();
 
@@ -298,7 +298,7 @@ Matrix4 Matrix4::LookAt(const Vector3& eye, const Vector3& target, const Vector3
 	result.data[4 * 1 + 2] = f.y;
 	result.data[4 * 2 + 2] = f.z;
 
-	return result * Translate(Vector3(-target.x, -target.y, -target.z));
+	return result * GetTranslation(Vector3(-target.x, -target.y, -target.z));
 }
 
 const char* Matrix4::Print()

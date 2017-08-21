@@ -57,7 +57,7 @@ namespace s3dge
 		0 0 0 1
 		=============================================
 		*/
-		static Matrix4 Translate(const Vector3& vector);
+		static Matrix4 GetTranslation(const Vector3& vector);
 
 		/*
 		=============================================
@@ -65,7 +65,7 @@ namespace s3dge
 		Too big to fit its looks here, feel free to google it
 		=============================================
 		*/
-		static Matrix4 Rotate(const Vector3& axis, float angle);
+		static Matrix4 GetRotation(const Vector3& axis, float angle);
 
 		/*
 		=============================================
@@ -77,7 +77,7 @@ namespace s3dge
 		0 0 0 1
 		=============================================
 		*/
-		static Matrix4 Scale(const Vector3& vector);
+		static Matrix4 GetScale(const Vector3& vector);
 
 		/*
 		=============================================

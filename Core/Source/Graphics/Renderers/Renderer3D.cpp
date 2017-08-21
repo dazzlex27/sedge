@@ -66,7 +66,7 @@ void Renderer3D::Begin()
 
 void Renderer3D::Submit(const Renderable* renderable)
 {
-	const VertexData* vertices = renderable->GetVertexData();
+	/*const VertexData* vertices = renderable->GetVertexData();
 	const uint vertexCount = renderable->GetVertexCount();
 	const uint* elements = renderable->GetElementData();
 	const uint elementCount = renderable->GetElementCount();
@@ -88,7 +88,7 @@ void Renderer3D::Submit(const Renderable* renderable)
 	}
 
 	_elementOffset += vertexCount;
-	_elementCount += elementCount;
+	_elementCount += elementCount;*/
 }
 
 void Renderer3D::End()

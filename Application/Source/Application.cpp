@@ -9,7 +9,7 @@ void Application::Initialize()
 {
 	CreateGameWindow("S3DGE Application", 1280, 720, false, false);
 
-	_shaderScene = new ShaderProgram("Resources/Shaders/basic.vert", "Resources/Shaders/static.frag");
+	_shaderScene = new ShaderProgram("Resources/Shaders/basic.vert", "Resources/Shaders/light.frag");
 	_shaderHUD = new ShaderProgram("Resources/Shaders/basic.vert", "Resources/Shaders/static.frag");
 	
 	_camera = new FPSCamera();
@@ -87,11 +87,11 @@ void Application::Render()
 	Texture2D::ActivateTexture(1);
 	TextureManager::Get("lm-test-sp")->Bind();
 	GraphicsManager::GetMesh("cube")->Draw();
-	_shaderScene->SetModel(Matrix4::Translate(Vector3(-2, 0, 0)));
+	_shaderScene->SetModel(Matrix4::GetTranslation(Vector3(-2, 0, 0)));
 	GraphicsManager::GetMesh("cube")->Draw();
-	_shaderScene->SetModel(Matrix4::Rotate(Vector3(0, 1, 0), 35) * Matrix4::Translate(Vector3(-1, 1, 0)));
+	_shaderScene->SetModel(Matrix4::GetRotation(Vector3(0, 1, 0), 35) * Matrix4::GetTranslation(Vector3(-1, 1, 0)));
 	GraphicsManager::GetMesh("cube")->Draw();
-	_shaderScene->SetModel(Matrix4::Rotate(Vector3(1, 0, 0), 25) * Matrix4::Translate(Vector3(0, 1, -1)));
+	_shaderScene->SetModel(Matrix4::GetRotation(Vector3(1, 0, 0), 25) * Matrix4::GetTranslation(Vector3(0, 1, -1)));
 	GraphicsManager::GetMesh("cube")->Draw();
 	_hudLayer->Draw();
 }
