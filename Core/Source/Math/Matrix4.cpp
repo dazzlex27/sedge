@@ -318,9 +318,9 @@ const char* Matrix4::Print()
 
 void TranslateMatrix(Matrix4& matrix, const Vector3& vector)
 {
-	matrix.data[4 * 3 + 0] = vector.x;
-	matrix.data[4 * 3 + 1] = vector.y;
-	matrix.data[4 * 3 + 2] = vector.z;
+	matrix.data[4 * 3 + 0] += vector.x;
+	matrix.data[4 * 3 + 1] += vector.y;
+	matrix.data[4 * 3 + 2] += vector.z;
 }
 
 void RotateMatrix(Matrix4& matrix, const Vector3& axis, const float angle)
@@ -346,7 +346,7 @@ void RotateMatrix(Matrix4& matrix, const Vector3& axis, const float angle)
 
 void ScaleMatrix(Matrix4& matrix, const Vector3& vector)
 {
-	matrix.data[4 * 0 + 0] = vector.x;
-	matrix.data[4 * 1 + 1] = vector.y;
-	matrix.data[4 * 2 + 2] = vector.z;
+	matrix.data[4 * 0 + 0] *= vector.x;
+	matrix.data[4 * 1 + 1] *= vector.y;
+	matrix.data[4 * 2 + 2] *= vector.z;
 }
