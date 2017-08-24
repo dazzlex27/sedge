@@ -8,7 +8,7 @@ Declares the Mesh class
 
 #pragma once
 
-#include "Renderable.h"
+#include "Renderable3D.h"
 
 namespace s3dge
 {
@@ -18,7 +18,7 @@ namespace s3dge
 	class ElementBuffer;
 	class Texture2D;
 
-	class Mesh : public Renderable
+	class Mesh : public Renderable3D
 	{
 	protected:
 		VertexArray* VAO;
@@ -31,7 +31,7 @@ namespace s3dge
 	public:
 		~Mesh();
 
-		void Draw() const;
+		virtual void Draw() const override;
 
 		friend class MeshFactory;
 	};

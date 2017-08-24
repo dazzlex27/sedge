@@ -11,7 +11,7 @@ namespace s3dge
 	class ModelUtils
 	{
 	public:
-		static bool ReadObjDataFromFile(const char* filepath, std::vector<Mesh*>& meshVector);
+		static Model* ReadFromFile(const char* filepath);
 
 	private:
 		ModelUtils(void);

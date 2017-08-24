@@ -1,19 +1,19 @@
 #pragma once
 
 #include <vector>
-#include "Renderable.h"
+#include "Renderable3D.h"
 
 namespace s3dge
 {
 	class Mesh;
 
-	class Model : public Renderable
+	class Model : public Renderable3D
 	{
 	private:
 		std::vector<Mesh*> _meshes;
 
 	public:
 		bool LoadModel(const char* path);
-		void Draw() const;
+		virtual void Draw() const override;
 	};
 }
