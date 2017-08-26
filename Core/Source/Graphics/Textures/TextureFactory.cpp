@@ -19,7 +19,7 @@ Texture2D* TextureFactory::CreateDefaultTexture()
 	return nullptr;
 }
 
-Texture2D* TextureFactory::CreateTexture2DFromFile(const char* name, const char* path, TextureWrapMode wrapMode, TextureFilterMode filterMode)
+Texture2D* TextureFactory::CreateTexture2DFromFile(const char* name, const char* path, TextureType type, TextureWrapMode wrapMode, TextureFilterMode filterMode)
 {
 	if (strcmp(name, "") == 0)
 	{
@@ -39,7 +39,7 @@ Texture2D* TextureFactory::CreateTexture2DFromFile(const char* name, const char*
 		return nullptr;
 	}
 
-	Texture2D* texture = new Texture2D(name, path, wrapMode, filterMode);
+	Texture2D* texture = new Texture2D(name, path, type, wrapMode, filterMode);
 
 	if (!texture->Load())
 	{

@@ -15,7 +15,7 @@ namespace s3dge
 	class ElementBuffer : public Buffer
 	{
 	public:
-		ElementBuffer(uint count, uint* dataPtr = nullptr, DrawingMode drawingMode = STATIC_DRAW);
+		ElementBuffer(const uint count, uint*const dataPtr = nullptr, const DrawingMode drawingMode = STATIC_DRAW);
 		~ElementBuffer();
 
 		void Map();

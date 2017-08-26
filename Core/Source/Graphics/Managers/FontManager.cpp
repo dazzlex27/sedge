@@ -7,7 +7,7 @@ Implements the font manager class.
 */
 
 #include "FontManager.h"
-#include "FontFactory.h"
+#include "Graphics/Fonts/FontFactory.h"
 #include "System/Log.h"
 #include "System/DeleteMacros.h"
 

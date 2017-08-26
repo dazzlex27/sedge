@@ -103,8 +103,9 @@
     <ClCompile Include="Source\Graphics\Buffers\FrameBuffer.cpp" />
     <ClCompile Include="Source\Graphics\Fonts\Font.cpp" />
     <ClCompile Include="Source\Graphics\Fonts\FontFactory.cpp" />
-    <ClCompile Include="Source\Graphics\Fonts\FontManager.cpp" />
-    <ClCompile Include="Source\Graphics\GraphicsManager.cpp" />
+    <ClCompile Include="Source\Graphics\Managers\Renderable3DManager.cpp" />
+    <ClCompile Include="Source\Graphics\Managers\FontManager.cpp" />
+    <ClCompile Include="Source\Graphics\Managers\Renderable2DManager.cpp" />
     <ClCompile Include="Source\Graphics\Lights\Light.cpp" />
     <ClCompile Include="Source\Graphics\Renderables\LabelFactory.cpp" />
     <ClCompile Include="Source\Graphics\Renderables\Mesh.cpp" />
@@ -134,7 +135,7 @@
     <ClCompile Include="Source\Graphics\Renderables\Sprite.cpp" />
     <ClCompile Include="Source\Graphics\Shaders\ShaderProgram.cpp" />
     <ClCompile Include="Source\Graphics\Textures\Texture2D.cpp" />
-    <ClCompile Include="Source\Graphics\Textures\TextureManager.cpp" />
+    <ClCompile Include="Source\Graphics\Managers\TextureManager.cpp" />
     <ClCompile Include="Source\Logic\Cameras\FPSCamera.cpp" />
     <ClCompile Include="Source\Logic\Cameras\TPSCamera.cpp" />
     <ClCompile Include="Source\Logic\Objects\BaseObject.cpp" />
@@ -151,7 +152,7 @@
     <ClCompile Include="Source\System\FileUtils.cpp" />
     <ClCompile Include="Source\System\IDGenerator.cpp" />
     <ClCompile Include="Source\System\ImageUtils.cpp" />
-    <ClCompile Include="Source\System\ModelLoader.cpp" />
+    <ClCompile Include="Source\System\ModelUtils.cpp" />
     <ClCompile Include="Source\System\Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -164,6 +165,7 @@
     <ClInclude Include="Source\Graphics\Buffers\BufferEnums.h" />
     <ClInclude Include="Source\Graphics\Buffers\FrameBuffer.h" />
     <ClInclude Include="Source\Graphics\Lights\Light.h" />
+    <ClInclude Include="Source\Graphics\Managers\Renderable3DManager.h" />
     <ClInclude Include="Source\Graphics\Renderables\Model.h" />
     <ClInclude Include="Source\Graphics\Renderables\Renderable.h" />
     <ClInclude Include="Source\Graphics\Renderables\Renderable3D.h" />
@@ -187,8 +189,8 @@
     <ClInclude Include="Source\Graphics\Structures\Color.h" />
     <ClInclude Include="Source\Graphics\Fonts\Font.h" />
     <ClInclude Include="Source\Graphics\Fonts\FontFactory.h" />
-    <ClInclude Include="Source\Graphics\Fonts\FontManager.h" />
-    <ClInclude Include="Source\Graphics\GraphicsManager.h" />
+    <ClInclude Include="Source\Graphics\Managers\FontManager.h" />
+    <ClInclude Include="Source\Graphics\Managers\Renderable2DManager.h" />
     <ClInclude Include="Source\Graphics\Structures\VertexData.h" />
     <ClInclude Include="Source\Math\Size2D.h" />
     <ClInclude Include="Source\Graphics\Structures\VertexLayout.h" />
@@ -206,7 +208,7 @@
     <ClInclude Include="Source\Graphics\Renderables\Sprite.h" />
     <ClInclude Include="Source\Graphics\Shaders\ShaderProgram.h" />
     <ClInclude Include="Source\Graphics\Textures\Texture2D.h" />
-    <ClInclude Include="Source\Graphics\Textures\TextureManager.h" />
+    <ClInclude Include="Source\Graphics\Managers\TextureManager.h" />
     <ClInclude Include="Source\Logic\Components\IComponent.h" />
     <ClInclude Include="Source\Logic\Components\InputComponent.h" />
     <ClInclude Include="Source\Logic\Components\PhysicsComponent.h" />
@@ -231,7 +233,7 @@
     <ClInclude Include="Source\System\IDGenerator.h" />
     <ClInclude Include="Source\System\ImageUtils.h" />
     <ClInclude Include="Source\System\Log.h" />
-    <ClInclude Include="Source\System\ModelLoader.h" />
+    <ClInclude Include="Source\System\ModelUtils.h" />
     <ClInclude Include="Source\System\RNG.h" />
     <ClInclude Include="Source\System\Timer.h" />
   </ItemGroup>

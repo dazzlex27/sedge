@@ -28,7 +28,7 @@ namespace s3dge
 		uint ElementCount;
 
 	protected:
-		Buffer(uint elementSize, uint elementCount, void* dataPtr = nullptr)
+		Buffer(const uint elementSize, const uint elementCount, void*const dataPtr = nullptr)
 			: ElementSize(elementSize), ElementCount(elementCount), DataPtr(dataPtr) {}
 
 	public:
@@ -41,7 +41,7 @@ namespace s3dge
 		inline const uint GetElementSize() const { return ElementSize; }
 		inline const uint GetTotalLength() const { return ElementCount * ElementSize; }
 
-		virtual void SetDataPointer(void* dataPtr) { DataPtr = dataPtr; }
+		virtual void SetDataPointer(void*const dataPtr) { DataPtr = dataPtr; }
 
 		inline virtual void Bind() const = 0;
 		inline virtual void Unbind() const = 0;

@@ -11,7 +11,7 @@ TODO: standartize all of the manager classes
 #pragma once
 
 #include <vector>
-#include "Font.h"
+#include "Graphics/Fonts/Font.h"
 
 namespace s3dge
 {

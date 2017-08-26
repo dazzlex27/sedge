@@ -145,14 +145,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Application.cpp" />
-    <ClCompile Include="Source\Logic.cpp" />
     <ClCompile Include="Source\main.cpp" />
-    <ClCompile Include="Source\UpdateLogic.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application.h" />
-    <ClInclude Include="Source\Logic.h" />
-    <ClInclude Include="Source\UpdateLogic.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

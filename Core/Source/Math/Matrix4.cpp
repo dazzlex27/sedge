@@ -15,6 +15,7 @@ Implements the Matrix4 class
 #include "Converters.h"
 
 using namespace s3dge;
+using namespace std;
 
 static void TranslateMatrix(Matrix4& matrix, const Vector3& vector);
 static void RotateMatrix(Matrix4& matrix, const Vector3& axis, const float angle);
@@ -308,7 +309,7 @@ Matrix4 Matrix4::LookAt(const Vector3& eye, const Vector3& target, const Vector3
 
 const char* Matrix4::Print()
 {
-	std::string result;
+	string result;
 
 	for (int i = 0; i < 16; i++)
 		result += data[i] + i == 15 ? "" : " ";

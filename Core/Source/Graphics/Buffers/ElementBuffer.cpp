@@ -27,7 +27,7 @@ static int GetDrawingModeValue(const DrawingMode drawingMode)
 	}
 }
 
-ElementBuffer::ElementBuffer(uint count, uint* data, DrawingMode drawingMode)
+ElementBuffer::ElementBuffer(const uint count, uint*const data, const DrawingMode drawingMode)
 	: Buffer(sizeof(uint), count, data)
 {
 	glGenBuffers(1, &BufferID);
@@ -39,9 +39,6 @@ ElementBuffer::ElementBuffer(uint count, uint* data, DrawingMode drawingMode)
 ElementBuffer::~ElementBuffer()
 {
 	glDeleteBuffers(1, &BufferID);
-
-	if (DataPtr)
-		SafeDeleteArray(DataPtr);
 }
 
 void ElementBuffer::Map()

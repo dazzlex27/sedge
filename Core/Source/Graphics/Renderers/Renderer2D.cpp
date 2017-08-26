@@ -36,6 +36,7 @@ Renderer2D::Renderer2D(const uint maxVertices)
 	const uint maxElements = _maxVertices * 1.5;
 	uint* elements = FillElementBuffer(maxElements);
 	_ebo = new ElementBuffer(maxElements, elements);
+	SafeDeleteArray(elements);
 	_ebo->Bind();
 
 	_vao->SetLayout(VertexLayout::GetDefaultVertexLayoutSprite());
@@ -172,7 +173,7 @@ void Renderer2D::Flush()
 	}
 
 	_vao->Bind();
-	_vao->Draw(_elementCount);
+	_vao->DrawElements(_elementCount);
 	_vao->Unbind();
 
 	_elementCount = 0;

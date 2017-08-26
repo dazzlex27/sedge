@@ -50,7 +50,7 @@ void VertexArray::Unbind() const
 	glBindVertexArray(0);
 }
 
-void VertexArray::Draw(const uint elementCount)
+void VertexArray::DrawElements(const uint elementCount)
 {
 	glDrawElements(GL_TRIANGLES, elementCount, GL_UNSIGNED_INT, NULL);
 }

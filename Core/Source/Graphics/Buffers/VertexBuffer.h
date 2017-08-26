@@ -17,7 +17,7 @@ namespace s3dge
 	class VertexBuffer : public Buffer
 	{
 	public:
-		VertexBuffer(int vertexSize, uint vertexCount, void* dataPtr = nullptr, DrawingMode drawingMode = STATIC_DRAW);
+		VertexBuffer(uint vertexSize, uint vertexCount, void*const dataPtr = nullptr, DrawingMode drawingMode = STATIC_DRAW);
 		~VertexBuffer();
 
 		void Bind() const override;

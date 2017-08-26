@@ -12,15 +12,24 @@ Defines a class responsible for processing 2D textures.
 
 namespace s3dge
 {
-	class Texture2D : public Texture
+	enum TextureType
+	{
+		Diffuse,
+		Specular
+	};
+
+	enum TextureWrapMode
 	{
 	private:
 		int _width;
 		int _height;
 		int _components;
+		TextureType _type;
 
 	public:
-		Texture2D(const char* name, const char* path, TextureWrapMode wrapMode = Repeat, TextureFilterMode filterMode = Linear);
+		Texture2D() { }
+		Texture2D(const char* name, const char* path, TextureType type = Diffuse, TextureWrapMode wrapMode = REPEAT, TextureFilterMode filterMode = LINEAR);
+		~Texture2D();
 
 	public:
 		inline int GetWidth() const { return _width; }
@@ -38,7 +47,7 @@ namespace s3dge
 		static void ActivateTexture(const uint num);
 		static void BindById(const id texId);
 
-	private:
+	public:
 		virtual bool Load() override;
 	};
 }

@@ -17,6 +17,7 @@ namespace s3dge
 	{
 	public:
 		static Texture2D* CreateDefaultTexture();
+		static Texture2D* CreateTextureFromFile(const char* name, const char* path, TextureType type = Diffuse, TextureWrapMode wrapMode = REPEAT, TextureFilterMode filterMode = LINEAR);
 		static Texture2D* CreateTexture2DFromFile(const char* name, const char* path, const TextureWrapMode wrapMode = Repeat, const TextureFilterMode filterMode = Linear);
 		static Cubemap* CreateCubemapFromFile(const char* name, const std::vector<const char*>& paths, const TextureWrapMode wrapMode = Repeat, const TextureFilterMode filterMode = Linear);
 

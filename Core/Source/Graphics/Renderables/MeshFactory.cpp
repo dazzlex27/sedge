@@ -1,144 +1,109 @@
 #include "MeshFactory.h"
 #include "Mesh.h"
-#include "Graphics/Buffers/VertexBuffer.h"
-#include "Graphics/Buffers/ElementBuffer.h"
-#include "Graphics/Structures/VertexData.h"
-#include "Math/Size3D.h"
 #include "System/Log.h"
+#include "Graphics/Structures/VertexData.h"
 #include "System/DeleteMacros.h"
+#include "Graphics/Textures/Texture2D.h"
 
 using namespace s3dge;
 
-Mesh*const MeshFactory::CreateMesh(VertexData*const vertices, const uint vertexCount, uint*const elements, const uint elementCount, Texture2D*const texture)
+uint* Get24CubeElements()
 {
-	Mesh*const mesh = new Mesh(vertices, vertexCount, elements, elementCount, texture);
+	int offset = 0;
+	uint*const elements = new uint[36];
 
-	return mesh;
-}
-
-Mesh*const MeshFactory::CreateCuboid(const Size3D& size, Texture2D*const texture, const DrawingMode drawingMode)
-{
-	return nullptr;
-}
-
-Mesh*const MeshFactory::CreateCuboid(const Size3D& size, const Color& color, const DrawingMode drawingMode)
-{
-	const float hw = size.width / 2;
-	const float hy = size.height / 2;
-	const float hz = size.depth / 2;
-
-	VertexData* vertexData = new VertexData[8];
-
-	vertexData[0].Position = Vector3(-hw, -hy, hz);
-	vertexData[0].Color = Color(0xffffff00);
-	vertexData[1].Position = Vector3(hw, -hy, hz);
-	vertexData[1].Color = Color(0xffffff00);
-	vertexData[2].Position = Vector3(hw, hy, hz);
-	vertexData[2].Color = Color(0xffffff00);
-	vertexData[3].Position = Vector3(-hw, hy, hz);
-	vertexData[3].Color = Color(0xffffff00);
-	vertexData[4].Position = Vector3(-hw, -hy, -hz);
-	vertexData[4].Color = Color(0xffffff00);
-	vertexData[5].Position = Vector3(hw, -hy, -hz);
-	vertexData[5].Color = Color(0xffffff00);
-	vertexData[6].Position = Vector3(hw, hy, -hz);
-	vertexData[6].Color = Color(0xffffff00);
-	vertexData[7].Position = Vector3(-hw, hy, -hz);
-	vertexData[7].Color = Color(0xffffff00);
-
-	uint elements[] =
+	for (int i = 0; i < 36; i += 6)
 	{
-		0,  1,  2,  0,  2,  3,   //front
-		4,  5,  6,  4,  6,  7,   //right
-		8,  9,  10, 8,  10, 11,  //back
-		12, 13, 14, 12, 14, 15,  //left
-		16, 17, 18, 16, 18, 19,  //upper
-		20, 21, 22, 20, 22, 23   //bottom
-	};
+		elements[i + 0] = 0 + offset;
+		elements[i + 1] = 1 + offset;
+		elements[i + 2] = 2 + offset;
+		elements[i + 3] = 2 + offset;
+		elements[i + 4] = 3 + offset;
+		elements[i + 5] = 0 + offset;
+		offset += 4;
+	}
 
-	Mesh*const mesh = new Mesh(vertexData, 8, elements, 36);
-
-	SafeDeleteArray(vertexData);
-
-	return mesh;
+	return elements;
 }
 
-Mesh*const MeshFactory::CreateCube(const float size, Texture2D*const texture, const DrawingMode drawingMode)
+static void AssignVertexData(VertexData& vertex, const Vector3& position, const uint color, const Vector3& normal, const Vector2& uv);
+
+Mesh*const MeshFactory::CreateMesh(VertexData*const vertices, const uint vertexCount, uint*const elements, const uint elementCount, id*const textures, const uint textureCount)
 {
-	const float h = size / 2;
-
-	VertexData* vertexData = new VertexData[8];
-
-	vertexData[0].Position = Vector3(-h, -h, h);
-	vertexData[0].Color = Color(0xffffff00);
-	vertexData[1].Position = Vector3(h, -h, h);
-	vertexData[1].Color = Color(0xffffff00);
-	vertexData[2].Position = Vector3(h, h, h);
-	vertexData[2].Color = Color(0xffffff00);
-	vertexData[3].Position = Vector3(-h, h, h);
-	vertexData[3].Color = Color(0xffffff00);
-	vertexData[4].Position = Vector3(-h, -h, -h);
-	vertexData[4].Color = Color(0xffffff00);
-	vertexData[5].Position = Vector3(h, -h, -h);
-	vertexData[5].Color = Color(0xffffff00);
-	vertexData[6].Position = Vector3(h, h, -h);
-	vertexData[6].Color = Color(0xffffff00);
-	vertexData[7].Position = Vector3(-h, h, -h);
-	vertexData[7].Color = Color(0xffffff00);
-
-	uint elements[] =
-	{
-		0,  1,  2,  0,  2,  3,   //front
-		4,  5,  6,  4,  6,  7,   //right
-		8,  9,  10, 8,  10, 11,  //back
-		12, 13, 14, 12, 14, 15,  //left
-		16, 17, 18, 16, 18, 19,  //upper
-		20, 21, 22, 20, 22, 23   //bottom
-	};
-
-	Mesh*const mesh = new Mesh(vertexData, 8, elements, 36);
-
-	SafeDeleteArray(vertexData);
-
-	return mesh;
+	return new Mesh(vertices, vertexCount, elements, elementCount, textures, textureCount);
 }
 
-Mesh*const MeshFactory::CreateCube(const float size, const Color& color, const DrawingMode drawingMode)
+Mesh*const const MeshFactory::CreateCubeOfUnitSize(Texture2D*const texture)
 {
-	const float h = size / 2;
+	const int vertexCount = 24;
+	VertexData* vertexData = new VertexData[vertexCount];
 
-	VertexData* vertexData = new VertexData[8];
+	// front face
+	Vector3 frontNormal(0, 0, 1);
+	AssignVertexData(vertexData[0], Vector3(0, 0, 1), 0xffffffff, frontNormal, Vector2(0.0f, 0.0f));
+	AssignVertexData(vertexData[1], Vector3(0, 1, 1), 0xffffffff, frontNormal, Vector2(0.0f, 1.0f));
+	AssignVertexData(vertexData[2], Vector3(1, 1, 1), 0xffffffff, frontNormal, Vector2(1.0f, 1.0f));
+	AssignVertexData(vertexData[3], Vector3(1, 0, 1), 0xffffffff, frontNormal, Vector2(1.0f, 0.0f));
 
-	vertexData[0].Position = Vector3(-h, -h, h);
-	vertexData[0].Color = color;
-	vertexData[1].Position = Vector3(h, -h, h);
-	vertexData[1].Color = color;
-	vertexData[2].Position = Vector3(h, h, h);
-	vertexData[2].Color = color;
-	vertexData[3].Position = Vector3(-h, h, h);
-	vertexData[3].Color = color;
-	vertexData[4].Position = Vector3(-h, -h, -h);
-	vertexData[4].Color = color;
-	vertexData[5].Position = Vector3(h, -h, -h);
-	vertexData[5].Color = color;
-	vertexData[6].Position = Vector3(h, h, -h);
-	vertexData[6].Color = color;
-	vertexData[7].Position = Vector3(-h, h, -h);
-	vertexData[7].Color = color;
+	// back face
+	Vector3 backNormal(0, 0, -1);
+	AssignVertexData(vertexData[4], Vector3(1, 0, 0), 0xffffffff, backNormal, Vector2(0.0f, 0.0f));
+	AssignVertexData(vertexData[5], Vector3(1, 1, 0), 0xffffffff, backNormal, Vector2(0.0f, 1.0f));
+	AssignVertexData(vertexData[6], Vector3(0, 1, 0), 0xffffffff, backNormal, Vector2(1.0f, 1.0f));
+	AssignVertexData(vertexData[7], Vector3(0, 0, 0), 0xffffffff, backNormal, Vector2(1.0f, 0.0f));
 
-	uint elements[] =
+	// top face
+	Vector3 topNormal(0, 1, 0);
+	AssignVertexData(vertexData[8], Vector3(0, 1, 1), 0xffffffff, topNormal, Vector2(0.0f, 0.0f));
+	AssignVertexData(vertexData[9], Vector3(0, 1, 0), 0xffffffff, topNormal, Vector2(0.0f, 1.0f));
+	AssignVertexData(vertexData[10], Vector3(1, 1, 0), 0xffffffff, topNormal, Vector2(1.0f, 1.0f));
+	AssignVertexData(vertexData[11], Vector3(1, 1, 1), 0xffffffff, topNormal, Vector2(1.0f, 0.0f));
+
+	// bottom face
+	Vector3 bottomNormal(0, -1, 0);
+	AssignVertexData(vertexData[12], Vector3(0, 0, 1), 0xffffffff, bottomNormal, Vector2(0.0f, 0.0f));
+	AssignVertexData(vertexData[13], Vector3(0, 0, 0), 0xffffffff, bottomNormal, Vector2(0.0f, 1.0f));
+	AssignVertexData(vertexData[14], Vector3(1, 0, 0), 0xffffffff, bottomNormal, Vector2(1.0f, 1.0f));
+	AssignVertexData(vertexData[15], Vector3(1, 0, 1), 0xffffffff, bottomNormal, Vector2(1.0f, 0.0f));
+
+	// left face
+	Vector3 leftNormal(-1, 0, 0);
+	AssignVertexData(vertexData[16], Vector3(0, 0, 0), 0xffffffff, leftNormal, Vector2(0.0f, 0.0f));
+	AssignVertexData(vertexData[17], Vector3(0, 1, 0), 0xffffffff, leftNormal, Vector2(0.0f, 1.0f));
+	AssignVertexData(vertexData[18], Vector3(0, 1, 1), 0xffffffff, leftNormal, Vector2(1.0f, 1.0f));
+	AssignVertexData(vertexData[19], Vector3(0, 0, 1), 0xffffffff, leftNormal, Vector2(1.0f, 0.0f));
+
+	// right face
+	Vector3 rightNormal(1, 0, 0);
+	AssignVertexData(vertexData[20], Vector3(1, 0, 1), 0xffffffff, rightNormal, Vector2(0.0f, 0.0f));
+	AssignVertexData(vertexData[21], Vector3(1, 1, 1), 0xffffffff, rightNormal, Vector2(0.0f, 1.0f));
+	AssignVertexData(vertexData[22], Vector3(1, 1, 0), 0xffffffff, rightNormal, Vector2(1.0f, 1.0f));
+	AssignVertexData(vertexData[23], Vector3(1, 0, 0), 0xffffffff, rightNormal, Vector2(1.0f, 0.0f));
+
+	uint* elements = Get24CubeElements();
+
+	if (texture)
 	{
-		0,  1,  2,  0,  2,  3,   //front
-		4,  5,  6,  4,  6,  7,   //right
-		8,  9,  10, 8,  10, 11,  //back
-		12, 13, 14, 12, 14, 15,  //left
-		16, 17, 18, 16, 18, 19,  //upper
-		20, 21, 22, 20, 22, 23   //bottom
-	};
+		uint tex = texture->GetID();
+		uint* tex1 = &tex;
 
-	Mesh*const mesh = new Mesh(vertexData, 8, elements, 36);
+		Mesh*const mesh = new Mesh(vertexData, vertexCount, elements, 36, tex1, 1);
+		SafeDeleteArray(elements);
+		return mesh;
+	}
+	else
+	{
+		Mesh*const mesh = new Mesh(vertexData, vertexCount, elements, 36);
+		SafeDeleteArray(elements);
+		return mesh;
+	}
+}
 
-	SafeDeleteArray(vertexData);
-
-	return mesh;
+static void AssignVertexData(VertexData& vertex, const Vector3& position, const uint color, const Vector3& normal, const Vector2& uv)
+{
+	vertex.Position = position;
+	vertex.Color = Color(color);
+	vertex.Normal = normal;
+	vertex.UV = uv;
+	vertex.TextureID = 1;
 }

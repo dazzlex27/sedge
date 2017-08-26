@@ -104,7 +104,8 @@ void S3DGEngine::InitializeInternalSystems()
 
 void S3DGEngine::InitializeResourceManagers()
 {
-	GraphicsManager::Initialize();
+	Renderable2DManager::Initialize();
+	Renderable3DManager::Initialize();
 	FontManager::Initialize();
 	TextureManager::Initialize();
 	SoundManager::Initialize();
@@ -119,7 +120,8 @@ void S3DGEngine::UpdateResourceManagers()
 
 void S3DGEngine::DisposeResourceManagers()
 {
-	GraphicsManager::Dispose();
+	Renderable2DManager::Dispose();
+	Renderable3DManager::Dispose();
 	FontManager::Dispose();
 	TextureManager::Dispose();
 	SoundManager::Dispose();

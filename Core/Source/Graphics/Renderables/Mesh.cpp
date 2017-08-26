@@ -15,11 +15,13 @@ Implemlents the Mesh class
 #include "Graphics/Structures/VertexLayout.h"
 #include "Graphics/Structures/VertexData.h"
 #include "System/DeleteMacros.h"
+#include "Graphics/Textures/TextureManager.h"
 
 using namespace s3dge;
 using namespace std;
 
-Mesh::Mesh(VertexData*const vertices, const uint vertexCount, uint*const elements, const uint elementCount, Texture2D*const texture)
+Mesh::Mesh(VertexData*const vertices, const uint vertexCount, uint*const elements, const uint elementCount, id*const textures, const uint textureCount)
+	: TextureCount(textureCount)
 {
 	VAO = new VertexArray();
 	VBO = new VertexBuffer(sizeof(VertexData), vertexCount, vertices);
@@ -34,6 +36,13 @@ Mesh::Mesh(VertexData*const vertices, const uint vertexCount, uint*const element
 	VAO->Unbind();
 	VBO->Unbind();
 	EBO->Unbind();
+
+	if (TextureCount > 0 && textures)
+	{
+		Textures = new id[TextureCount];
+		for (uint i = 0; i < TextureCount; i++)
+			Textures[i] = textures[i];
+	}
 }
 
 Mesh::~Mesh()
@@ -45,10 +54,21 @@ Mesh::~Mesh()
 
 void Mesh::Draw() const
 {
-	/*if (Texture)
-		Texture->Bind();*/
+	if (TextureCount > 0)
+	{
+		for (uint i = 0; i < TextureCount; i++)
+		{
+			Texture2D* texture = TextureManager::GetByID(Textures[i]);
+
+			if (!texture)
+				continue;
+
+			Texture2D::ActivateTexture(i);
+			texture->Bind();
+		}
+	}
 
 	VAO->Bind();
-	VAO->Draw(EBO->GetCount());
+	VAO->DrawElements(EBO->GetCount());
 	VAO->Unbind();
 }

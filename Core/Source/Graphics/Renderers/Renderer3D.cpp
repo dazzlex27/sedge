@@ -108,7 +108,7 @@ void Renderer3D::Flush()
 	}
 
 	_vao->Bind();
-	_vao->Draw(_elementCount);
+	_vao->DrawElements(_elementCount);
 	_vao->Unbind();
 
 	_elementOffset = 0;

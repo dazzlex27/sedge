@@ -26,7 +26,7 @@ static int GetDrawingModeValue(const DrawingMode drawingMode)
 	}
 }
 
-VertexBuffer::VertexBuffer(int vertexSize, uint vertexCount, void* dataPtr, DrawingMode drawingMode)
+VertexBuffer::VertexBuffer(uint vertexSize, uint vertexCount, void*const dataPtr, DrawingMode drawingMode)
 	: Buffer(vertexSize, vertexCount, dataPtr)
 {
 	glGenBuffers(1, &BufferID);

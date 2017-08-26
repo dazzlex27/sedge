@@ -18,8 +18,8 @@ static int GetChannelsCode(int channelCount);
 static int GetWrapModeValue(TextureWrapMode wrapMode);
 static int GetFilterModeValue(TextureFilterMode filterMode);
 
-Texture2D::Texture2D(const char* name, const char* path, TextureWrapMode wrapMode, TextureFilterMode filterMode)
-	: Texture(name, path, TextureTarget::Tex2D, wrapMode, filterMode)
+Texture2D::Texture2D(const char* name, const char* path, TextureType type, TextureWrapMode wrapMode, TextureFilterMode filterMode)
+	: Texture(name, path, TextureTarget::Tex2D, wrapMode, filterMode), _type(type)
 {
 }
 
