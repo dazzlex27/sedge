@@ -38,4 +38,11 @@ namespace s3dge
 		WrapT,
 		WrapR
 	};
+
+	enum TextureType
+	{
+		Diffuse,
+		Specular
+	};
+
 }

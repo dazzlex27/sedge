@@ -10,16 +10,17 @@ Defines a class responsible for processing cubical textures.
 
 #include "Texture.h"
 #include <vector>
+#include <string>
 
 namespace s3dge
 {
 	class Cubemap : public Texture
 	{
 	private:
-		std::vector<const char*> _paths;
+		std::vector<std::string> _paths;
 
 	public:
-		Cubemap(const char* name, const std::vector<const char*>& paths, const TextureWrapMode wrapMode = Repeat, const TextureFilterMode filterMode = Linear);
+		Cubemap(const char*const name, const std::vector<std::string>& paths, const TextureWrapMode wrapMode = Repeat, const TextureFilterMode filterMode = Linear);
 
 	public:
 		virtual void Bind() const override;

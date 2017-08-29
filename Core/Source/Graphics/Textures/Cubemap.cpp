@@ -19,8 +19,8 @@ static int GetChannelsCode(int channelCount);
 static int GetWrapModeValue(TextureWrapMode wrapMode);
 static int GetFilterModeValue(TextureFilterMode filterMode);
 
-Cubemap::Cubemap(const char* name, const vector<const char*>& paths, const TextureWrapMode wrapMode, const TextureFilterMode filterMode)
-	: _paths(paths), Texture(name, paths[0], TextureTarget::Cube, wrapMode, filterMode)
+Cubemap::Cubemap(const char*const name, const vector<std::string>& paths, const TextureWrapMode wrapMode, const TextureFilterMode filterMode)
+	: _paths(paths), Texture(name, paths[0].c_str(), TextureTarget::Cube, wrapMode, filterMode)
 {
 }
 
@@ -47,7 +47,7 @@ bool Cubemap::Load()
 
 	for (uint i = 0; i < _paths.size(); i++)
 	{
-		byte* imagePixels = ImageUtils::LoadImage(_paths[i], &width, &height, &components);
+		byte* imagePixels = ImageUtils::LoadImage(_paths[i].c_str(), &width, &height, &components);
 
 		if (!imagePixels)
 		{

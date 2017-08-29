@@ -10,9 +10,10 @@ Implements TextureFactory class
 #include "System/FileUtils.h"
 #include "System/Log.h"
 #include "System/DeleteMacros.h"
+#include "Texture2D.h"
+#include "Cubemap.h"
 
 using namespace s3dge;
-
 
 Texture2D* TextureFactory::CreateDefaultTexture()
 {
@@ -51,7 +52,7 @@ Texture2D* TextureFactory::CreateTexture2DFromFile(const char* name, const char*
 	return texture;
 }
 
-Cubemap* TextureFactory::CreateCubemapFromFile(const char* name, const std::vector<const char*>& paths, const TextureWrapMode wrapMode, const TextureFilterMode filterMode)
+Cubemap* TextureFactory::CreateCubemapFromFile(const char*const name, const std::vector<std::string>& paths, const TextureWrapMode wrapMode, const TextureFilterMode filterMode)
 {
 	if (strcmp(name, "") == 0)
 	{
@@ -61,15 +62,15 @@ Cubemap* TextureFactory::CreateCubemapFromFile(const char* name, const std::vect
 
 	for (uint i = 0; i < paths.size(); i++)
 	{
-		if (strcmp(paths[i], "") == 0)
+		if (strcmp(paths[i].c_str(), "") == 0)
 		{
 			LOG_ERROR("Cannot create a texture with an empty path string");
 			return nullptr;
 		}
 
-		if (!FileUtils::CheckFileExists(paths[i]))
+		if (!FileUtils::CheckFileExists(paths[i].c_str()))
 		{
-			LOG_ERROR("Texture file \"", paths[i], "\"was not found");
+			LOG_ERROR("Texture file \"", paths[i].c_str(), "\"was not found");
 			return nullptr;
 		}
 	}

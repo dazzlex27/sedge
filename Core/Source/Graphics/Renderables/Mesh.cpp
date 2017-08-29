@@ -15,7 +15,7 @@ Implemlents the Mesh class
 #include "Graphics/Structures/VertexLayout.h"
 #include "Graphics/Structures/VertexData.h"
 #include "System/DeleteMacros.h"
-#include "Graphics/Textures/TextureManager.h"
+#include "Graphics/Managers/TextureManager.h"
 
 using namespace s3dge;
 using namespace std;
@@ -58,7 +58,7 @@ void Mesh::Draw() const
 	{
 		for (uint i = 0; i < TextureCount; i++)
 		{
-			Texture2D* texture = TextureManager::GetByID(Textures[i]);
+			Texture2D* texture = TextureManager::GetTex2DByID(Textures[i]);
 
 			if (!texture)
 				continue;

@@ -52,7 +52,6 @@ uniform DirLight dirLight;
 uniform PointLight pointLight;
 uniform SpotLight spotLight;
 uniform Material material;
-uniform sampler2D textureArray[32];
 
 in DATA
 {
@@ -60,7 +59,6 @@ in DATA
 	vec4 color;
 	vec3 normal;
 	vec2 uv;
-	float textureID;
 } fragment;
 
 vec3 GetDirLight(DirLight light, vec3 normal, vec3 viewDir);

@@ -8,7 +8,7 @@ void Application::Initialize()
 {
 	CreateGameWindow("S3DGE Application", 1280, 720, false, false);
 
-	_shaderScene = new ShaderProgram("Resources/Shaders/basic.vert", "Resources/Shaders/light.frag");
+	_shaderScene = new ShaderProgram("Resources/Shaders/scene.vert", "Resources/Shaders/scene.frag");
 	_shaderHUD = new ShaderProgram("Resources/Shaders/basic.vert", "Resources/Shaders/static.frag");
 	
 	_camera = new FPSCamera();
@@ -17,10 +17,10 @@ void Application::Initialize()
 	_shaderScene->SetProjection(_camera->GetProjection());
 	_shaderHUD->SetProjection(Matrix4::GetOrthographic(0.0f, 16.0f, 0.0f, 9.0f, -1.0f, 1.0f));
 	
-	TextureManager::Add("cry", "Resources/Models/nanosuit/body_dif.png");
-	TextureManager::Add("lm-test", "Resources/Textures/lm-test.png");
-	TextureManager::Add("lm-test-sp", "Resources/Textures/lm-test-sp.png");
 	FontManager::Add("font1", "Resources/Fonts/Assistant-Regular.ttf", 24);
+	TextureManager::AddTex2D("cry", "Resources/Models/nanosuit/body_dif.png");
+	TextureManager::AddTex2D("lm-test", "Resources/Textures/lm-test.png");
+	TextureManager::AddTex2D("lm-test-sp", "Resources/Textures/lm-test-sp.png");
 
 	Renderable3DManager::AddModel("nano", ModelUtils::ReadFromFile("Resources/Models/nanosuit/nanosuit.obj"));
 

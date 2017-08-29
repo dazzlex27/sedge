@@ -126,7 +126,7 @@ static void LoadMaterialTextures(vector<id>& textures, aiMaterial* material, aiT
 			outType = Diffuse;
 		}
 
-		TextureManager::Add(textureName.C_Str(), fullpath.c_str(), outType);
-		textures.push_back(TextureManager::Get(textureName.C_Str())->GetID());
+		TextureManager::AddTex2D(textureName.C_Str(), fullpath.c_str(), outType);
+		textures.push_back(TextureManager::GetTex2D(textureName.C_Str())->GetID());
 	}
 }
