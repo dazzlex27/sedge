@@ -19,7 +19,7 @@ namespace s3dge
 	private:
 		std::vector<std::string> _paths;
 
-	public:
+	private:
 		Cubemap(const char*const name, const std::vector<std::string>& paths, const TextureWrapMode wrapMode = Repeat, const TextureFilterMode filterMode = Linear);
 
 	public:

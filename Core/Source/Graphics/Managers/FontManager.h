@@ -10,21 +10,22 @@ TODO: standartize all of the manager classes
 
 #pragma once
 
-#include <vector>
-#include "Graphics/Fonts/Font.h"
+#include <map>
 
 namespace s3dge
 {
+	class Font;
+
 	class FontManager
 	{
 	private:
-		static std::vector<Font*> _fonts;
+		static std::map<std::string, Font*> _fonts;
 		static bool _initialized;
 
 	public:
 		static void Initialize();
-		static void Add(const char* name, const char* path, float size, bool overrideExisting = false);
-		static Font* Get(const char* name);
+		static void Add(const char*const name, const char*const path, const float size, const bool overrideExisting = false);
+		static Font* Get(const char*const name);
 		static void Dispose();
 
 	private:

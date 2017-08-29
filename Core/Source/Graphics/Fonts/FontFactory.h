@@ -15,8 +15,7 @@ namespace s3dge
 	class FontFactory
 	{
 	public:
-		static Font* CreateDefaultFont();
-		static Font* CreateFont(const char* name, const char* path, float size);
+		static Font* CreateFont(const char*const name, const char*const path, const float size);
 
 	private:
 		FontFactory();

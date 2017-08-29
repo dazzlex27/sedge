@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CustomTypes.h"
+#include <string>
 
 namespace s3dge
 {
@@ -12,21 +13,22 @@ namespace s3dge
 	class ShaderProgram
 	{
 	private:
-		uint _programID;
-		const char* _vertexPath;
-		const char* _fragmentPath;
-		uint _vertex;
-		uint _fragment;
+		std::string _name;
+		std::string _vertexPath;
+		std::string _fragmentPath;
+		id _programID;
+		uint _vertexID;
+		uint _fragmentID;
 
-		int _textureIDs[16]
-		{
-			0,1,2,3,4,5,6,7,8,9,
-			10,11,12,13,14,15,
-		};
+	private:
+		ShaderProgram(const char*const name, const char*const vertexPath, const char*const fragmentPath);
 
 	public:
-		ShaderProgram(const char* vertex, const char* fragment);
 		~ShaderProgram();
+
+	public:
+		const char*const GetName() const { return _name.c_str(); }
+		const id GetProgramID() const { return _programID; }
 
 		void Bind() const;
 		void Unbind() const;
@@ -43,8 +45,10 @@ namespace s3dge
 		void SetView(const Matrix4& viewMatrix);
 		void SetModel(const Matrix4& modelMatrix);
 
+		friend class ShaderFactory;
+
 	private:
-		const uint Load();
+		const bool Load();
 		const bool Compile(const uint shader);
 	};
 }

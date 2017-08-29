@@ -12,12 +12,7 @@ Implements FontFactory class
 
 using namespace s3dge;
 
-Font* FontFactory::CreateDefaultFont()
-{
-	return nullptr;
-}
-
-Font* FontFactory::CreateFont(const char* name, const char* path, const float size)
+Font* FontFactory::CreateFont(const char*const name, const char*const path, const float size)
 {
 	if (strcmp(name, "") == 0)
 	{

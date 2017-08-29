@@ -107,6 +107,7 @@ void S3DGEngine::InitializeResourceManagers()
 	Renderable2DManager::Initialize();
 	Renderable3DManager::Initialize();
 	FontManager::Initialize();
+	ShaderManager::Initialize();
 	TextureManager::Initialize();
 	SoundManager::Initialize();
 	InputManager::Initialize();
@@ -123,6 +124,7 @@ void S3DGEngine::DisposeResourceManagers()
 	Renderable2DManager::Dispose();
 	Renderable3DManager::Dispose();
 	FontManager::Dispose();
+	ShaderManager::Dispose();
 	TextureManager::Dispose();
 	SoundManager::Dispose();
 	InputManager::Dispose();

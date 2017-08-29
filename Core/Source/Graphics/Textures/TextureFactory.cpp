@@ -28,12 +28,6 @@ Texture2D* TextureFactory::CreateTexture2DFromFile(const char* name, const char*
 		return nullptr;
 	}
 
-	if (strcmp(path, "") == 0)
-	{
-		LOG_ERROR("Cannot create a texture with an empty path string");
-		return nullptr;
-	}
-
 	if (!FileUtils::CheckFileExists(path))
 	{
 		LOG_ERROR("Texture file \"", path, "\"was not found");

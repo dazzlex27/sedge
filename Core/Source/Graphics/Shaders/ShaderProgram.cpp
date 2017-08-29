@@ -9,62 +9,63 @@
 
 using namespace s3dge;
 
-ShaderProgram::ShaderProgram(const char* vertexPath, const char* fragmentPath)
-	: _vertexPath(vertexPath), _fragmentPath(fragmentPath)
+ShaderProgram::ShaderProgram(const char*const name, const char*const vertexPath, const char*const fragmentPath)
+	: _name(name), _vertexPath(vertexPath), _fragmentPath(fragmentPath)
 {
-	_programID = Load();
-	Bind();
-	SetUniform1iv("textureArray", 16, _textureIDs);
+	_programID = glCreateProgram();
 }
 
 ShaderProgram::~ShaderProgram()
 {
-	glDetachShader(_programID, _vertex);
-	glDetachShader(_programID, _fragment);
+	glDetachShader(_programID, _vertexID);
+	glDetachShader(_programID, _fragmentID);
 	glDeleteProgram(_programID);
 }
 
-const uint ShaderProgram::Load()
+const bool ShaderProgram::Load()
 {
 	// Create and compile vertex shader.
-	_vertex = glCreateShader(GL_VERTEX_SHADER);
-	std::string vertexSource = FileUtils::ReadFromFile(_vertexPath).c_str();
+	_vertexID = glCreateShader(GL_VERTEX_SHADER);
+	std::string vertexSource = FileUtils::ReadFromFile(_vertexPath);
+
 	if (vertexSource == "")
 	{
 		LOG_ERROR("Cannot find vertex shader source");
-		return -1;
+		return false;
 	}
+
 	const char* vSource = vertexSource.c_str();
-	glShaderSource(_vertex, 1, &vSource, NULL);
-	if (!Compile(_vertex))
-		return -1;
+	glShaderSource(_vertexID, 1, &vSource, NULL);
+
+	if (!Compile(_vertexID))
+		return false;
 
 	// Create and compile fragment shader.
-	_fragment = glCreateShader(GL_FRAGMENT_SHADER);
-	std::string fragmentSource = FileUtils::ReadFromFile(_fragmentPath).c_str();
+	_fragmentID = glCreateShader(GL_FRAGMENT_SHADER);
+	std::string fragmentSource = FileUtils::ReadFromFile(_fragmentPath);
+
 	if (fragmentSource == "")
 	{
 		LOG_ERROR("Cannot find fragment shader source");
-		return -1;
+		return false;
 	}
+
 	const char* fSource = fragmentSource.c_str();
-	glShaderSource(_fragment, 1, &fSource, NULL);
-	if (!Compile(_fragment))
-		return -1;
+	glShaderSource(_fragmentID, 1, &fSource, NULL);
 
-	// Create a shader program and attach compiled shaders to it.
-	int program = glCreateProgram();
+	if (!Compile(_fragmentID))
+		return false;
 
-	glAttachShader(program, _vertex);
-	glAttachShader(program, _fragment);
+	glAttachShader(_programID, _vertexID);
+	glAttachShader(_programID, _fragmentID);
 
-	glLinkProgram(program);
-	glValidateProgram(program);
+	glLinkProgram(_programID);
+	glValidateProgram(_programID);
 
-	glDeleteShader(_vertex);
-	glDeleteShader(_fragment);
+	glDeleteShader(_vertexID);
+	glDeleteShader(_fragmentID);
 
-	return program;
+	return true;
 }
 
 const bool ShaderProgram::Compile(const uint shader)

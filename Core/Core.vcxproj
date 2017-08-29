@@ -107,6 +107,7 @@
     <ClCompile Include="Source\Graphics\Managers\FontManager.cpp" />
     <ClCompile Include="Source\Graphics\Managers\Renderable2DManager.cpp" />
     <ClCompile Include="Source\Graphics\Lights\Light.cpp" />
+    <ClCompile Include="Source\Graphics\Managers\ShaderManager.cpp" />
     <ClCompile Include="Source\Graphics\Renderables\LabelFactory.cpp" />
     <ClCompile Include="Source\Graphics\Renderables\Mesh.cpp" />
     <ClCompile Include="Source\Graphics\Renderables\MeshFactory.cpp" />
@@ -118,6 +119,7 @@
     <ClCompile Include="Source\Graphics\Renderers\Renderer3D.cpp" />
     <ClCompile Include="Source\Graphics\Renderers\Renderer2D.cpp" />
     <ClCompile Include="Source\Graphics\RenderSystem.cpp" />
+    <ClCompile Include="Source\Graphics\Shaders\ShaderFactory.cpp" />
     <ClCompile Include="Source\Graphics\Structures\VertexLayout.cpp" />
     <ClCompile Include="Source\Graphics\Textures\Cubemap.cpp" />
     <ClCompile Include="Source\Graphics\Textures\Texture.cpp" />
@@ -166,12 +168,14 @@
     <ClInclude Include="Source\Graphics\Buffers\FrameBuffer.h" />
     <ClInclude Include="Source\Graphics\Lights\Light.h" />
     <ClInclude Include="Source\Graphics\Managers\Renderable3DManager.h" />
+    <ClInclude Include="Source\Graphics\Managers\ShaderManager.h" />
     <ClInclude Include="Source\Graphics\Renderables\Model.h" />
     <ClInclude Include="Source\Graphics\Renderables\Renderable.h" />
     <ClInclude Include="Source\Graphics\Renderables\Renderable3D.h" />
     <ClInclude Include="Source\Graphics\Renderers\Renderer3D.h" />
     <ClInclude Include="Source\Graphics\Renderers\Renderer2D.h" />
     <ClInclude Include="Source\Graphics\RenderSystem.h" />
+    <ClInclude Include="Source\Graphics\Shaders\ShaderFactory.h" />
     <ClInclude Include="Source\Graphics\Textures\Cubemap.h" />
     <ClInclude Include="Source\Graphics\Textures\Texture.h" />
     <ClInclude Include="Source\Graphics\Textures\TextureEnums.h" />

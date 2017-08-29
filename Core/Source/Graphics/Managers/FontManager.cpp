@@ -2,7 +2,7 @@
 ===========================================================================
 FontManager.cpp
 
-Implements the font manager class.
+Implements the FontManager class.
 ===========================================================================
 */
 
@@ -13,7 +13,7 @@ Implements the font manager class.
 
 using namespace s3dge;
 	
-std::vector<Font*> FontManager::_fonts;
+std::map<std::string, Font*> FontManager::_fonts;
 bool FontManager::_initialized;
 
 void FontManager::Initialize()
@@ -22,7 +22,7 @@ void FontManager::Initialize()
 	_initialized = true;
 }
 
-void FontManager::Add(const char* name, const char* path, float size, bool overrideExisting)
+void FontManager::Add(const char*const name, const char*const path, const float size, const bool overrideExisting)
 {
 	if (_initialized)
 	{
@@ -30,9 +30,9 @@ void FontManager::Add(const char* name, const char* path, float size, bool overr
 		{
 			if (overrideExisting)
 			{
-				Font* newFont = FontFactory::CreateFont(name, path, size);
-				if (newFont != nullptr)
-					_fonts.push_back(newFont);
+				Font* font = FontFactory::CreateFont(name, path, size);
+				if (font != nullptr)
+					_fonts[name] = font;
 			}
 			else
 			{
@@ -42,23 +42,22 @@ void FontManager::Add(const char* name, const char* path, float size, bool overr
 			return;
 		}
 			
-		Font* newFont = FontFactory::CreateFont(name, path, size);
-		if (newFont != nullptr)
-			_fonts.push_back(newFont);
+		Font* font = FontFactory::CreateFont(name, path, size);
+		if (font != nullptr)
+			_fonts[name] = font;
 	}
 	else
 	{
-		LOG_WARNING("Font manager was not initialized before adding a font file (", name, ")");
+		LOG_WARNING("Font manager was not initialized before adding a font (", name, ")");
 	}
 }
 
-Font* FontManager::Get(const char* name)
+Font* FontManager::Get(const char*const name)
 {
 	if (_initialized)
 	{
-		for (auto item : _fonts)
-			if (strcmp(item->GetName(), name) == 0)
-				return item;
+		if (_fonts.find(name) != _fonts.end())
+			return _fonts[name];
 	}
 	else
 	{
@@ -73,7 +72,7 @@ void FontManager::Dispose()
 	if (_initialized)
 	{
 		for (auto item : _fonts)
-			SafeDelete(item);
+			SafeDelete(item.second);
 
 		_initialized = true;
 	}
