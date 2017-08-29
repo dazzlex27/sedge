@@ -83,9 +83,9 @@ void Application::Render()
 	_shaderScene->SetUniform1f("material.shininess", 32.0f);
 	_shaderScene->SetModel(Matrix4::GetIdentity());
 	Texture2D::ActivateTexture(0);
-	TextureManager::Get("cry")->Bind();
+	TextureManager::GetTex2D("cry")->Bind();
 	Texture2D::ActivateTexture(1);
-	TextureManager::Get("lm-test-sp")->Bind();
+	TextureManager::GetTex2D("lm-test-sp")->Bind();
 	GraphicsManager::GetMesh("cube")->Draw();
 	_shaderScene->SetModel(Matrix4::GetTranslation(Vector3(-2, 0, 0)));
 	GraphicsManager::GetMesh("cube")->Draw();

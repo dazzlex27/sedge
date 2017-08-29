@@ -116,7 +116,10 @@
     <ClCompile Include="Source\Graphics\Renderables\SpriteFactory.cpp" />
     <ClCompile Include="Source\Graphics\Renderers\Renderer3D.cpp" />
     <ClCompile Include="Source\Graphics\Renderers\Renderer2D.cpp" />
+    <ClCompile Include="Source\Graphics\RenderSystem.cpp" />
     <ClCompile Include="Source\Graphics\Structures\VertexLayout.cpp" />
+    <ClCompile Include="Source\Graphics\Textures\Cubemap.cpp" />
+    <ClCompile Include="Source\Graphics\Textures\Texture.cpp" />
     <ClCompile Include="Source\Graphics\Textures\TextureFactory.cpp" />
     <ClCompile Include="Source\Logic\Objects\Actor.cpp" />
     <ClCompile Include="Source\Math\Quatertion.cpp" />
@@ -158,6 +161,7 @@
     <ClInclude Include="Source\Audio\SoundManager.h" />
     <ClInclude Include="Source\Common.h" />
     <ClInclude Include="Source\Graphics\Buffers\Buffer.h" />
+    <ClInclude Include="Source\Graphics\Buffers\BufferEnums.h" />
     <ClInclude Include="Source\Graphics\Buffers\FrameBuffer.h" />
     <ClInclude Include="Source\Graphics\Lights\Light.h" />
     <ClInclude Include="Source\Graphics\Renderables\Model.h" />
@@ -165,6 +169,10 @@
     <ClInclude Include="Source\Graphics\Renderables\Renderable3D.h" />
     <ClInclude Include="Source\Graphics\Renderers\Renderer3D.h" />
     <ClInclude Include="Source\Graphics\Renderers\Renderer2D.h" />
+    <ClInclude Include="Source\Graphics\RenderSystem.h" />
+    <ClInclude Include="Source\Graphics\Textures\Cubemap.h" />
+    <ClInclude Include="Source\Graphics\Textures\Texture.h" />
+    <ClInclude Include="Source\Graphics\Textures\TextureEnums.h" />
     <ClInclude Include="Source\Logic\Cameras\FPSCamera.h" />
     <ClInclude Include="Source\Logic\Cameras\TPSCamera.h" />
     <ClInclude Include="Source\Logic\Objects\Actor.h" />

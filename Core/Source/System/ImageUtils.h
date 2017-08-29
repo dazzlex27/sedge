@@ -14,5 +14,10 @@ At the moment only includes image loading. A lot of stuff to do here.
 
 namespace s3dge
 {
-	byte* LoadImage(const char* path, int* width, int* height, int* components);
+	class ImageUtils
+	{
+	public:
+		static byte* LoadImage(const char* path, int* width, int* height, int* components);
+		static void ReleaseImage(void* data);
+	};
 }

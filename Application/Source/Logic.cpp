@@ -7,9 +7,9 @@ uint* Cube24ElementArray = nullptr;
 
 void LoadResources()
 {
-	TextureManager::Add("cry", "Resources/Models/nanosuit/body_dif.png");
-	TextureManager::Add("lm-test", "Resources/Textures/lm-test.png");
-	TextureManager::Add("lm-test-sp", "Resources/Textures/lm-test-sp.png");
+	TextureManager::AddTex2D("cry", "Resources/Models/nanosuit/body_dif.png");
+	TextureManager::AddTex2D("lm-test", "Resources/Textures/lm-test.png");
+	TextureManager::AddTex2D("lm-test-sp", "Resources/Textures/lm-test-sp.png");
 	FontManager::Add("font1", "Resources/Fonts/Assistant-Regular.ttf", 24);
 }
 

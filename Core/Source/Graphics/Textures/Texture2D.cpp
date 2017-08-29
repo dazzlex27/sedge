@@ -2,7 +2,7 @@
 ===========================================================================
 Texture.cpp
 
-implements the 2D texture class
+implements the Texture2D class
 ===========================================================================
 */
 
@@ -13,6 +13,87 @@ implements the 2D texture class
 #include "System/Log.h"
 
 using namespace s3dge;
+
+static int GetChannelsCode(int channelCount);
+static int GetWrapModeValue(TextureWrapMode wrapMode);
+static int GetFilterModeValue(TextureFilterMode filterMode);
+
+Texture2D::Texture2D(const char* name, const char* path, TextureWrapMode wrapMode, TextureFilterMode filterMode)
+	: Texture(name, path, TextureTarget::Tex2D, wrapMode, filterMode)
+{
+}
+
+bool Texture2D::Load()
+{
+	const int wrapMode = GetWrapModeValue(WrapMode);
+	const int filterMode = GetFilterModeValue(FilterMode);
+
+	byte* imagePixels = ImageUtils::LoadImage(Path.c_str(), &_width, &_height, &_components);
+
+	if (!imagePixels)
+	{
+		LOG_ERROR("Failed to load texture \"", Name.c_str(), "\"");
+		ImageUtils::ReleaseImage(imagePixels);
+		return false;
+	}
+
+	glBindTexture(GL_TEXTURE_2D, ID);
+
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, _width, _height, 0, GetChannelsCode(_components), GL_UNSIGNED_BYTE, imagePixels);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, filterMode);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, filterMode);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wrapMode);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrapMode);
+
+	glGenerateMipmap(GL_TEXTURE_2D);
+
+	glBindTexture(GL_TEXTURE_2D, 0);
+
+	ImageUtils::ReleaseImage(imagePixels);
+
+	return true;
+}
+
+void Texture2D::Bind() const
+{
+	glBindTexture(GL_TEXTURE_2D, ID);
+}
+
+void Texture2D::Unbind() const
+{
+	glBindTexture(GL_TEXTURE_2D, 0);
+}
+
+void Texture2D::ActivateTexture(const uint num)
+{
+	glActiveTexture(GL_TEXTURE0 + num);
+}
+
+void Texture2D::BindById(const id texId)
+{
+	glBindTexture(GL_TEXTURE_2D, texId);
+}
+
+void Texture2D::SetWrapMode(TextureWrapMode wrapMode)
+{
+	WrapMode = wrapMode;
+
+	Bind();
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GetWrapModeValue(wrapMode));
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GetWrapModeValue(wrapMode));
+	Unbind();
+}
+
+void Texture2D::SetFilterMode(TextureFilterMode filterMode)
+{
+	FilterMode = filterMode;
+
+	Bind();
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GetFilterModeValue(filterMode));
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GetFilterModeValue(filterMode));
+	Unbind();
+}
 
 static int GetChannelsCode(int channelCount)
 {
@@ -33,13 +114,13 @@ static int GetWrapModeValue(TextureWrapMode wrapMode)
 {
 	switch (wrapMode)
 	{
-	case REPEAT:
+	case Repeat:
 		return GL_REPEAT;
-	case MIRRORED_REPEAT:
+	case MirroredRepeat:
 		return GL_MIRRORED_REPEAT;
-	case CLAMP_TO_BORDER:
+	case ClampToBorder:
 		return GL_CLAMP_TO_BORDER;
-	case CLAMP_TO_EDGE:
+	case ClampToEdge:
 		return GL_CLAMP_TO_EDGE;
 	}
 
@@ -50,103 +131,19 @@ static int GetFilterModeValue(TextureFilterMode filterMode)
 {
 	switch (filterMode)
 	{
-	case NEAREST:
+	case Nearest:
 		return GL_NEAREST;
-	case LINEAR:
+	case Linear:
 		return GL_LINEAR;
-	case MIPMAP_NEAREST_NEAREST:
+	case NearestMipmapNearest:
 		return GL_NEAREST_MIPMAP_NEAREST;
-	case MIPMAP_NEAREST_LINEAR:
+	case NearestMipmapLinear:
 		return GL_NEAREST_MIPMAP_LINEAR;
-	case MIPMAP_LINEAR_NEAREST:
+	case LinearMipmapNearest:
 		return GL_LINEAR_MIPMAP_NEAREST;
-	case MIPMAP_LINEAR_LINEAR:
+	case LinearMipmapLinear:
 		return GL_LINEAR_MIPMAP_LINEAR;
 	}
 
 	return -1; // error
-}
-
-Texture2D::Texture2D(const char* name, const char* path, TextureWrapMode wrapMode, TextureFilterMode filterMode)
-	: _name(name), _path(path)
-{
-	_wrapMode = wrapMode;
-	_filterMode = filterMode;
-}
-
-Texture2D::~Texture2D()
-{
-	glDeleteTextures(1, &_id);
-}
-
-bool Texture2D::Load()
-{
-	int wrapMode = GetWrapModeValue(_wrapMode);
-	int filterMode = GetFilterModeValue(_filterMode);
-
-	uint id;
-
-	byte* imagePixels = LoadImage(_path, &_width, &_height, &_components);
-
-	if (imagePixels == nullptr)
-		return false;
-
-	glGenTextures(1, &id);
-	glBindTexture(GL_TEXTURE_2D, id);
-
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, filterMode);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, filterMode);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wrapMode);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrapMode);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, _width, _height, 0, GetChannelsCode(_components), GL_UNSIGNED_BYTE, imagePixels);
-
-	glGenerateMipmap(GL_TEXTURE_2D);
-
-	glBindTexture(GL_TEXTURE_2D, 0);
-
-	SafeDeleteArray(imagePixels);
-
-	_id = id;
-
-	return true;
-}
-
-void Texture2D::Bind() const
-{
-	glBindTexture(GL_TEXTURE_2D, _id);
-}
-
-void Texture2D::Unbind() const
-{
-	glBindTexture(GL_TEXTURE_2D, 0);
-}
-
-void Texture2D::ActivateTexture(const uint num)
-{
-	glActiveTexture(GL_TEXTURE0 + num);
-}
-
-void Texture2D::BindById(const id texId)
-{
-	glBindTexture(GL_TEXTURE_2D, texId);
-}
-
-void Texture2D::SetWrapMode(TextureWrapMode wrapMode)
-{
-	_wrapMode = wrapMode;
-
-	Bind();
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GetWrapModeValue(wrapMode));
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GetWrapModeValue(wrapMode));
-	Unbind();
-}
-
-void Texture2D::SetFilterMode(TextureFilterMode filterMode)
-{
-	_filterMode = filterMode;
-
-	Bind();
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GetFilterModeValue(filterMode));
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GetFilterModeValue(filterMode));
-	Unbind();
 }
