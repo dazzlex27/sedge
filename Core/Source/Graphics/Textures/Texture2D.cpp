@@ -8,8 +8,8 @@ implements the Texture2D class
 
 #include "Texture2D.h"
 #include <GL/glew.h>
+#include "Graphics/GraphicsAPI.h"
 #include "System/ImageUtils.h"
-#include "System/DeleteMacros.h"
 #include "System/Log.h"
 
 using namespace s3dge;
@@ -37,7 +37,7 @@ bool Texture2D::Load()
 		return false;
 	}
 
-	glBindTexture(GL_TEXTURE_2D, ID);
+	Bind();
 
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, _width, _height, 0, GetChannelsCode(_components), GL_UNSIGNED_BYTE, imagePixels);
 
@@ -46,33 +46,13 @@ bool Texture2D::Load()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wrapMode);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrapMode);
 
-	glGenerateMipmap(GL_TEXTURE_2D);
+	GraphicsAPI::GenerateMipmap(Target);
 
-	glBindTexture(GL_TEXTURE_2D, 0);
+	Unbind();
 
 	ImageUtils::ReleaseImage(imagePixels);
 
 	return true;
-}
-
-void Texture2D::Bind() const
-{
-	glBindTexture(GL_TEXTURE_2D, ID);
-}
-
-void Texture2D::Unbind() const
-{
-	glBindTexture(GL_TEXTURE_2D, 0);
-}
-
-void Texture2D::ActivateTexture(const uint num)
-{
-	glActiveTexture(GL_TEXTURE0 + num);
-}
-
-void Texture2D::BindById(const id texId)
-{
-	glBindTexture(GL_TEXTURE_2D, texId);
 }
 
 void Texture2D::SetWrapMode(TextureWrapMode wrapMode)

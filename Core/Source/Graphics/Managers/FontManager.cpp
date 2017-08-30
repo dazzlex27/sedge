@@ -74,7 +74,7 @@ void FontManager::Dispose()
 		for (auto item : _fonts)
 			SafeDelete(item.second);
 
-		_initialized = true;
+		_initialized = false;
 	}
 	else
 	{

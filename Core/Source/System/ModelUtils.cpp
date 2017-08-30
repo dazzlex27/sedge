@@ -19,7 +19,7 @@ using namespace std;
 using namespace s3dge;
 
 static void ProcessNode(vector<Mesh*>& meshes, const aiNode*const node, const aiScene*const scene, const string& rootDir);
-static Mesh* ProcessMesh(const aiMesh*const mesh, const const aiScene*const scene, const string& rootDir);
+static Mesh* ProcessMesh(const aiMesh*const mesh, const aiScene*const scene, const string& rootDir);
 static void LoadMaterialTextures(vector<id>& textures, aiMaterial* material, aiTextureType textureType, const string& rootDir);
 
 Model* ModelUtils::ReadFromFile(const char* filepath)
@@ -58,7 +58,7 @@ static void ProcessNode(vector<Mesh*>& meshes, const aiNode*const node, const ai
 		ProcessNode(meshes, node->mChildren[i], scene, rootDir);
 }
 
-static Mesh* ProcessMesh(const aiMesh*const mesh, const const aiScene*const scene, const string& rootDir)
+static Mesh* ProcessMesh(const aiMesh*const mesh, const aiScene*const scene, const string& rootDir)
 {
 	vector<VertexData> vertices;
 	vector<uint> elements;

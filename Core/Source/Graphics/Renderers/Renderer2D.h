@@ -1,3 +1,12 @@
+/*
+===========================================================================
+Renderer2D.h
+
+This renderer is a batch renderer designed to deal with quad objects.
+TODO: make this an instanced renderer.
+===========================================================================
+*/
+
 #pragma once
 
 #include <vector>
@@ -8,7 +17,7 @@ namespace s3dge
 	class VertexArray;
 	class VertexBuffer;
 	class ElementBuffer;
-	class VertexDataS;
+	struct VertexDataS;
 
 	class Renderable2D;
 	class Label;

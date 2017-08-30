@@ -123,7 +123,7 @@ const float Renderer3D::GetTextureIndexByID(const id textureID)
 	for (id i = 0; i < _textures.size(); ++i)
 	{
 		if (_textures[i] == textureID)
-			return i;
+			return (const float)i;
 	}
 
 	if (_textures.size() >= _textureMaxCount)

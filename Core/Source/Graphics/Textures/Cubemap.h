@@ -22,10 +22,6 @@ namespace s3dge
 	private:
 		Cubemap(const char*const name, const std::vector<std::string>& paths, const TextureWrapMode wrapMode = Repeat, const TextureFilterMode filterMode = Linear);
 
-	public:
-		virtual void Bind() const override;
-		virtual void Unbind() const override;
-
 		friend class TextureFactory;
 
 	private:

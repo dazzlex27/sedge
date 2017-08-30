@@ -10,9 +10,8 @@ Defines a class responsible for processing text charachters.
 
 #pragma once
 
-#include <string>
-
 #include "CustomTypes.h"
+#include <string>
 
 namespace ftgl
 {
@@ -25,8 +24,8 @@ namespace s3dge
 	class Font
 	{
 	private:
-		const char* _name;
-		const char* _path;
+		std::string _name;
+		std::string _path;
 		const float _size;
 		ftgl::texture_atlas_t* _atlas;
 		ftgl::texture_font_t* _font;
@@ -37,7 +36,7 @@ namespace s3dge
 
 		const uint GetAtlasID() const;
 		inline ftgl::texture_font_t* GetFontFace() const { return _font; }
-		inline const char* GetName() const { return _name; }
+		inline const char* GetName() const { return _name.c_str(); }
 		inline const float GetScaleX() const { return 50.0f; }
 		inline const float GetScaleY() const { return 50.0f; }
 

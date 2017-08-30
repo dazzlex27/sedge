@@ -8,6 +8,7 @@ Implements ShaderManager class
 
 #include "ShaderManager.h"
 #include "Graphics/Shaders/ShaderFactory.h"
+#include "Graphics/Shaders/ShaderProgram.h"
 #include "System/Log.h"
 #include "System/DeleteMacros.h"
 
@@ -76,7 +77,7 @@ void ShaderManager::Dispose()
 		for (auto item : _programs)
 			SafeDelete(item.second);
 
-		_initialized = true;
+		_initialized = false;
 	}
 	else
 	{

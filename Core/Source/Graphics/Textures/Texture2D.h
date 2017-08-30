@@ -31,13 +31,9 @@ namespace s3dge
 		void SetWrapMode(const TextureWrapMode wrapMode);
 		void SetFilterMode(const TextureFilterMode filterMode);
 
-		virtual void Bind() const override;
-		virtual void Unbind() const override;
-
 		friend class TextureFactory;
 
-		static void ActivateTexture(const uint num);
-		static void BindById(const id texId);
+		
 
 	public:
 		virtual bool Load() override;

@@ -1,3 +1,11 @@
+/*
+===========================================================================
+Renderer2D.cpp
+
+Implements the Renderer2D class
+===========================================================================
+*/
+
 #include "Renderer2D.h"
 #include "Graphics/Buffers/VertexArray.h"
 #include "Graphics/Buffers/VertexBuffer.h"
@@ -33,7 +41,7 @@ Renderer2D::Renderer2D(const uint maxVertices)
 	_vbo = new VertexBuffer(sizeof(VertexDataS), _maxVertices);
 	_vbo->Bind();
 
-	const uint maxElements = _maxVertices * 1.5;
+	const uint maxElements = (const uint)(_maxVertices * 1.5);
 	uint* elements = FillElementBuffer(maxElements);
 	_ebo = new ElementBuffer(maxElements, elements);
 	SafeDeleteArray(elements);
@@ -169,7 +177,7 @@ void Renderer2D::Flush()
 	for (uint i = 0; i < _textureIDs.size(); i++)
 	{
 		Texture2D::ActivateTexture(i);
-		Texture2D::BindById(_textureIDs[i]);
+		Texture2D::BindById(TextureTarget::Tex2D, _textureIDs[i]);
 	}
 
 	_vao->Bind();
@@ -187,7 +195,7 @@ const float Renderer2D::GetSamplerIndexByTID(const id texID)
 	for (uint i = 0; i < _textureIDs.size(); ++i)
 	{
 		if (_textureIDs[i] == texID)
-			return i;
+			return (const float)i;
 	}
 
 	if (_textureIDs.size() >= 32)
@@ -199,14 +207,14 @@ const float Renderer2D::GetSamplerIndexByTID(const id texID)
 
 	_textureIDs.push_back(texID);
 
-	return _textureIDs.size();
+	return (const float)_textureIDs.size();
 }
 
 static uint* FillElementBuffer(const uint maxElements)
 {
 	uint* elements = new uint[maxElements];
 
-	for (int i = 0, offset = 0; i < maxElements; i += 6, offset += 4)
+	for (uint i = 0, offset = 0; i < maxElements; i += 6, offset += 4)
 	{
 		elements[i] = offset + 0;
 		elements[i + 1] = offset + 1;

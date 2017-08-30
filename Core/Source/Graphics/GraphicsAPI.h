@@ -1,3 +1,11 @@
+/*
+===========================================================================
+GraphicsAPI.h
+
+Declares functions for calling API-dependent graphics code.
+===========================================================================
+*/
+
 #pragma once
 
 #include "CustomTypes.h"
@@ -6,7 +14,7 @@
 
 namespace s3dge
 {
-	class RenderSystem
+	class GraphicsAPI
 	{
 	public:
 		// Buffers
@@ -22,6 +30,7 @@ namespace s3dge
 		static void DeleteTextures(const uint n, uint*const textures);
 		static void BindTexture(const TextureTarget target, const uint id);
 		static void GenerateMipmap(const TextureTarget target);
+		static void ActivateTexture(const uint num);
 		//static void SetTexParametri(const TextureTarget target, const Texture)
 
 		static void EnableFaceCulling();

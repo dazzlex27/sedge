@@ -33,7 +33,7 @@ Mesh*const MeshFactory::CreateMesh(VertexData*const vertices, const uint vertexC
 	return new Mesh(vertices, vertexCount, elements, elementCount, textures, textureCount);
 }
 
-Mesh*const const MeshFactory::CreateCubeOfUnitSize(Texture2D*const texture)
+Mesh*const MeshFactory::CreateCubeOfUnitSize(Texture2D*const texture)
 {
 	const int vertexCount = 24;
 	VertexData* vertexData = new VertexData[vertexCount];

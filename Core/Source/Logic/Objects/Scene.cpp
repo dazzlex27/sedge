@@ -65,5 +65,4 @@ void Scene::UpdateCamera()
 
 Scene::~Scene()
 {
-	SafeDelete(_shaderProgram);
 }

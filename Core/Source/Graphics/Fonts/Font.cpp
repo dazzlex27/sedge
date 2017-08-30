@@ -24,7 +24,7 @@ Font::Font(const char* name, const char* path, const float size)
 
 bool Font::Initialize()
 {
-	if (!FileUtils::CheckFileExists(_path))
+	if (!FileUtils::CheckFileExists(_path.c_str()))
 		return false;
 
 	LoadFontFromFile();
@@ -35,7 +35,7 @@ bool Font::Initialize()
 void Font::LoadFontFromFile()
 {
 	_atlas = texture_atlas_new(512, 512, 2);
-	_font = texture_font_new_from_file(_atlas, _size, _path);
+	_font = texture_font_new_from_file(_atlas, _size, _path.c_str());
 	texture_atlas_upload(_atlas);
 }
 

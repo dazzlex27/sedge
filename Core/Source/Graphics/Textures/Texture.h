@@ -1,3 +1,11 @@
+/*
+===========================================================================
+Texture.h
+
+Base class for texture objects.
+===========================================================================
+*/
+
 #pragma once
 
 #include <string>
@@ -6,7 +14,7 @@
 
 namespace s3dge
 {
-		class Texture
+	class Texture
 	{
 	protected:
 		std::string Name;
@@ -28,8 +36,11 @@ namespace s3dge
 		const TextureWrapMode GetWrapMode() const { return WrapMode; }
 		const TextureFilterMode GetFilterMode() const { return FilterMode; }
 
-		virtual void Bind() const = 0;
-		virtual void Unbind() const = 0;
+		virtual void Bind() const;
+		virtual void Unbind() const;
+
+		static void ActivateTexture(const uint num);
+		static void BindById(const TextureTarget target, const id texId);
 
 	private:
 		virtual bool Load() = 0;

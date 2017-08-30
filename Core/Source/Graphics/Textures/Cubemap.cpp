@@ -24,16 +24,6 @@ Cubemap::Cubemap(const char*const name, const vector<std::string>& paths, const 
 {
 }
 
-void Cubemap::Bind() const
-{
-	glBindTexture(GL_TEXTURE_CUBE_MAP, ID);
-}
-
-void Cubemap::Unbind() const
-{
-	glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
-}
-
 bool Cubemap::Load()
 {
 	const int wrapMode = GetWrapModeValue(WrapMode);
