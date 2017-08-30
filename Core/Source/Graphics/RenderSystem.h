@@ -13,6 +13,9 @@ namespace s3dge
 		static void GenBuffers(const uint n, uint*const buffers);
 		static void DeleteBuffers(const uint n, uint*const buffers);
 		static void BindBuffer(const BufferTarget target, const uint id);
+		static void SetBufferData(const BufferTarget target, const uint bufferSize, const void* bufferData, const DrawingMode mode);
+		static void* MapBufferForWriting(const BufferTarget target);
+		static void UnmapBuffer(const BufferTarget target);
 
 		// Textures
 		static void GenTextures(const uint n, uint*const textures);

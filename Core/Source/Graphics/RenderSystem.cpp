@@ -1,4 +1,5 @@
 #include "RenderSystem.h"
+#include "RenderEnumParser.h"
 #include <GL/glew.h>
 
 using namespace s3dge;
@@ -17,6 +18,21 @@ void RenderSystem::BindBuffer(const BufferTarget target, const uint id)
 {
 	// TODO
 	glBindBuffer(target, id);
+}
+
+void RenderSystem::SetBufferData(const BufferTarget target, const uint bufferSize, const void* bufferData, const DrawingMode mode)
+{
+	glBufferData(RenderEnumParser::GetBufferTarget(target), bufferSize, bufferData, RenderEnumParser::GetDrawingModeValue(mode));
+}
+
+void* RenderSystem::MapBufferForWriting(const BufferTarget target)
+{
+	return glMapBuffer(RenderEnumParser::GetBufferTarget(target), GL_WRITE_ONLY);
+}
+
+void RenderSystem::UnmapBuffer(const BufferTarget target)
+{
+	glUnmapBuffer(RenderEnumParser::GetBufferTarget(target));
 }
 
 void RenderSystem::GenTextures(const uint n, uint*const textures)

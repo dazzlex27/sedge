@@ -4,7 +4,14 @@ namespace s3dge
 {
 	enum BufferTarget
 	{
-		ArrayBuffer,
-		ElementBuffer
+		Array,
+		Element
+	};
+
+	enum DrawingMode
+	{
+		Static,
+		Dynamic,
+		Stream
 	};
 }

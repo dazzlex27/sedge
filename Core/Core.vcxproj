@@ -100,6 +100,7 @@
     <ClCompile Include="Source\Audio\Sound.cpp" />
     <ClCompile Include="Source\Audio\SoundFactory.cpp" />
     <ClCompile Include="Source\Audio\SoundManager.cpp" />
+    <ClCompile Include="Source\Graphics\Buffers\Buffer.cpp" />
     <ClCompile Include="Source\Graphics\Buffers\FrameBuffer.cpp" />
     <ClCompile Include="Source\Graphics\Fonts\Font.cpp" />
     <ClCompile Include="Source\Graphics\Fonts\FontFactory.cpp" />
@@ -116,6 +117,7 @@
     <ClCompile Include="Source\Graphics\Renderables\Renderable2D.cpp" />
     <ClCompile Include="Source\Graphics\Renderables\Renderable3D.cpp" />
     <ClCompile Include="Source\Graphics\Renderables\SpriteFactory.cpp" />
+    <ClCompile Include="Source\Graphics\RenderEnumParser.cpp" />
     <ClCompile Include="Source\Graphics\Renderers\Renderer3D.cpp" />
     <ClCompile Include="Source\Graphics\Renderers\Renderer2D.cpp" />
     <ClCompile Include="Source\Graphics\RenderSystem.cpp" />
@@ -172,6 +174,7 @@
     <ClInclude Include="Source\Graphics\Renderables\Model.h" />
     <ClInclude Include="Source\Graphics\Renderables\Renderable.h" />
     <ClInclude Include="Source\Graphics\Renderables\Renderable3D.h" />
+    <ClInclude Include="Source\Graphics\RenderEnumParser.h" />
     <ClInclude Include="Source\Graphics\Renderers\Renderer3D.h" />
     <ClInclude Include="Source\Graphics\Renderers\Renderer2D.h" />
     <ClInclude Include="Source\Graphics\RenderSystem.h" />
