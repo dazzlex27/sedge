@@ -176,6 +176,7 @@
     <ClInclude Include="Source\Graphics\Renderables\Renderable.h" />
     <ClInclude Include="Source\Graphics\Renderables\Renderable3D.h" />
     <ClInclude Include="Source\Graphics\Renderers\Renderer2D.h" />
+    <ClInclude Include="Source\Graphics\Shaders\ShaderEnums.h" />
     <ClInclude Include="Source\Graphics\Shaders\ShaderFactory.h" />
     <ClInclude Include="Source\Graphics\Textures\Cubemap.h" />
     <ClInclude Include="Source\Graphics\Textures\Texture.h" />

@@ -14,6 +14,7 @@ This should be the only place where GL/glew.h is included!
 #include "System/Log.h"
 #include <GL/glew.h>
 #include <string>
+#include "System/DeleteMacros.h"
 
 #ifdef S3_DEBUG
 #include "Win32OpenGLDebug.h"
@@ -136,7 +137,122 @@ void GraphicsAPI::SetTextureFilterMode(const TextureTarget target, const Texture
 	glTextureParameteri(EnumConverter::GetTextureTarget(target), EnumConverter::GetTextureFilter(filter), EnumConverter::GetTextureFilterMode(mode));
 }
 
-bool GraphicsAPI::Initialize()
+const uint GraphicsAPI::CreateShaderProgram()
+{
+	return glCreateProgram();
+}
+
+void GraphicsAPI::LinkShaderProgram(const uint programID)
+{
+	glLinkProgram(programID);
+}
+
+void GraphicsAPI::ValidateShaderProgram(const uint programID)
+{
+	glValidateProgram(programID);
+}
+
+void GraphicsAPI::DeleteShaderProgram(const uint programID)
+{
+	glDeleteProgram(programID);
+}
+
+void GraphicsAPI::DeleteShader(const uint shaderID)
+{
+	glDeleteShader(shaderID);
+}
+
+const uint GraphicsAPI::CreateShader(const ShaderTarget target)
+{
+	return glCreateShader(EnumConverter::GetShaderTarget(target));
+}
+
+void GraphicsAPI::AttachShader(const uint programID, const uint shaderID)
+{
+	glAttachShader(programID, shaderID);
+}
+
+void GraphicsAPI::DetachShader(const uint programID, const uint shaderID)
+{
+	glDetachShader(programID, shaderID);
+}
+
+const bool GraphicsAPI::CompileShader(const uint shaderID)
+{
+	glCompileShader(shaderID);
+
+	int shaderStatus;
+	glGetShaderiv(shaderID, GL_COMPILE_STATUS, &shaderStatus);
+
+	return shaderStatus == GL_TRUE;
+}
+
+const char*const GraphicsAPI::GetShaderInfoLog(const uint shaderID)
+{
+	GLint infoLogLength;
+	glGetShaderiv(shaderID, GL_INFO_LOG_LENGTH, &infoLogLength);
+
+	char* strInfoLog = new char[infoLogLength + 1];
+	glGetShaderInfoLog(shaderID, infoLogLength, 0, strInfoLog);
+
+	std::string infoLog(strInfoLog);
+
+	SafeDelete(strInfoLog);
+
+	return infoLog.c_str();
+}
+
+void GraphicsAPI::BindShaderProgram(const uint programID)
+{
+	glUseProgram(programID);
+}
+
+void GraphicsAPI::LoadShaderSource(const uint shaderID, const char*const source)
+{
+	glShaderSource(shaderID, 1, &source, NULL);
+}
+
+const int GraphicsAPI::GetUniformLocation(const uint programID, const char * const name)
+{
+	return glGetUniformLocation(programID, name);
+}
+
+void GraphicsAPI::SetUniformMatrix4(const int location, const int count, const bool transpose, const float*const values)
+{
+	glUniformMatrix4fv(location, 1, transpose, values);
+}
+
+void GraphicsAPI::SetUniform1f(const int location, const float value)
+{
+	glUniform1f(location, value);
+}
+
+void GraphicsAPI::SetUniform2f(const int location, const float value1, const float value2)
+{
+	glUniform2f(location, value1, value2);
+}
+
+void GraphicsAPI::SetUniform3f(const int location, const float value1, const float value2, const float value3)
+{
+	glUniform3f(location, value1, value2, value3);
+}
+
+void GraphicsAPI::SetUniform4f(const int location, const float value1, const float value2, const float value3, const float value4)
+{
+	glUniform4f(location, value1, value2, value3, value4);
+}
+
+void GraphicsAPI::SetUniform1i(const int location, const int value)
+{
+	glUniform1i(location, value);
+}
+
+void GraphicsAPI::SetUniform1iv(const int location, const int count, const int*const values)
+{
+	glUniform1iv(location, count, values);
+}
+
+const bool GraphicsAPI::Initialize()
 {
 	return glewInit() == GLEW_OK;
 }
@@ -347,6 +463,19 @@ const int EnumConverter::GetTextureFilterMode(const TextureFilterMode filterMode
 		return GL_LINEAR_MIPMAP_NEAREST;
 	case LinearMipmapLinear:
 		return GL_LINEAR_MIPMAP_LINEAR;
+	default:
+		return 0;
+	}
+}
+
+const int EnumConverter::GetShaderTarget(const ShaderTarget target)
+{
+	switch (target)
+	{
+	case Vertex:
+		return GL_VERTEX_SHADER;
+	case Fragment:
+		return GL_FRAGMENT_SHADER;
 	default:
 		return 0;
 	}

@@ -10,6 +10,7 @@ Declares parsers to convert s3dge graphics enums to API-dependent ones.
 
 #include "Graphics/Buffers/BufferEnums.h"
 #include "Graphics/Textures/TextureEnums.h"
+#include "Graphics/Shaders/ShaderEnums.h"
 #include "DrawingEnums.h"
 
 namespace s3dge
@@ -26,6 +27,8 @@ namespace s3dge
 		static const int GetTextureFilter(const TextureFilter filter);
 		static const int GetTextureFilterMode(const TextureFilterMode filterMode);
 		static const int GetColorCode(const ColorCode code);
+
+		static const int GetShaderTarget(const ShaderTarget target);
 
 		static const int GetPrimitiveType(const PrimitiveType type);
 		static const int GetValueType(const ValueType type);
