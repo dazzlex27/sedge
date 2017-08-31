@@ -189,6 +189,9 @@
     <ClCompile Include="Source\Graphics\GraphicsAPI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Graphics\Buffers\Buffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\S3DGECommon.h">

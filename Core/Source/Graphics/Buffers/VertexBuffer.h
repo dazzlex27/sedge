@@ -18,12 +18,5 @@ namespace s3dge
 	{
 	public:
 		VertexBuffer(uint vertexSize, uint vertexCount, void*const dataPtr = nullptr, DrawingMode drawingMode = Static);
-		~VertexBuffer();
-
-		void Bind() const override;
-		void Unbind() const override;
-
-		void Map();
-		void Unmap();
 	};
 }

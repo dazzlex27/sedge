@@ -62,7 +62,7 @@ void GraphicsAPI::BindVertexArray(const uint id)
 	glBindVertexArray(id);
 }
 
-inline void GraphicsAPI::EnableVertexAttributeArray(const uint index)
+void GraphicsAPI::EnableVertexAttributeArray(const uint index)
 {
 	glEnableVertexAttribArray(index);
 }

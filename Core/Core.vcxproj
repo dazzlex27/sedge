@@ -100,6 +100,7 @@
     <ClCompile Include="Source\Audio\Sound.cpp" />
     <ClCompile Include="Source\Audio\SoundFactory.cpp" />
     <ClCompile Include="Source\Audio\SoundManager.cpp" />
+    <ClCompile Include="Source\Graphics\Buffers\Buffer.cpp" />
     <ClCompile Include="Source\Graphics\Buffers\FrameBuffer.cpp" />
     <ClCompile Include="Source\Graphics\Fonts\Font.cpp" />
     <ClCompile Include="Source\Graphics\Fonts\FontFactory.cpp" />

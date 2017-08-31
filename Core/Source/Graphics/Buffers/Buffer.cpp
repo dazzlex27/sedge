@@ -1,15 +1,23 @@
+/*
+===========================================================================
+Buffer.cpp
+
+Implements Buffer class.
+===========================================================================
+*/
+
 #include "Buffer.h"
 #include "Graphics/GraphicsAPI.h"
 
 using namespace s3dge;
 
-Buffer::Buffer(const BufferTarget target, const uint elementSize, const uint elementCount, void*const data, const DrawingMode drawingMode)
-	: Target(target), ElementSize(elementSize), ElementCount(elementCount), DataPtr(data)
+Buffer::Buffer(const BufferTarget target, const uint elementSize, const uint elementCount, void*const dataPtr, const DrawingMode drawingMode)
+	: Target(target), ElementSize(elementSize), ElementCount(elementCount), DataPtr(dataPtr), Mode(drawingMode)
 {
 	GraphicsAPI::GenBuffers(1, &BufferID);
-	GraphicsAPI::BindBuffer(Target, BufferID);
-	GraphicsAPI::SetBufferData(Target, elementCount * sizeof(/* DEREFERENCE!! */data), data, drawingMode);
-	GraphicsAPI::BindBuffer(Target, 0);
+	Bind();
+	GraphicsAPI::SetBufferData(Target, ElementSize * ElementCount, DataPtr, drawingMode);
+	Unbind();
 }
 
 Buffer::~Buffer()

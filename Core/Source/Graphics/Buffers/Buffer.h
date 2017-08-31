@@ -20,13 +20,14 @@ namespace s3dge
 		void* DataPtr;
 		uint ElementSize;
 		uint ElementCount;
+		BufferTarget Target;
+		DrawingMode Mode;
 
 	protected:
-		Buffer(const uint elementSize, const uint elementCount, void*const dataPtr = nullptr)
-			: ElementSize(elementSize), ElementCount(elementCount), DataPtr(dataPtr) {}
+		Buffer(const BufferTarget target, const uint elementSize, const uint elementCount, void*const dataPtr = nullptr, const DrawingMode drawingMode = Static);
 
 	public:
-		virtual ~Buffer() {}
+		virtual ~Buffer();
 
 	public:
 		inline const id GetBufferID() const { return BufferID; }
@@ -37,7 +38,10 @@ namespace s3dge
 
 		virtual void SetDataPointer(void*const dataPtr) { DataPtr = dataPtr; }
 
-		inline virtual void Bind() const = 0;
-		inline virtual void Unbind() const = 0;
+		virtual void Bind() const;
+		virtual void Unbind() const;
+
+		virtual void Map();
+		virtual void Unmap();
 	};
 }
