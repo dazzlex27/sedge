@@ -11,6 +11,7 @@ Contains basic high-level window management functions.
 #include "System/Log.h"
 #include "System/DeleteMacros.h"
 #include "System/Timer.h"
+#include "Graphics/GraphicsAPI.h"
 
 using namespace s3dge;
 
@@ -19,6 +20,11 @@ std::map<void*, Window*> Window::Instances;
 Window::Window(const char* title, const uint width, const uint height, const bool fullscreen, const bool vsync)
 	: _title(title), _width(width), _height(height), _fullScreen(fullscreen), _vSync(vsync), _isClosed(false)
 {
+}
+
+Window::~Window()
+{
+	DestroyContext();
 }
 
 bool Window::Initialize()
@@ -42,14 +48,21 @@ bool Window::Initialize()
 	return true;
 }
 
-Window::~Window()
+void Window::SetupContext()
 {
-	Dispose();
+	GraphicsAPI::SetUnpackAlignment(1);
+	GraphicsAPI::EnableDepthTesting();
+	GraphicsAPI::EnableBlending();
+	GraphicsAPI::SetStandartBlending();
+	GraphicsAPI::SetWindingOrder(Clockwise);
+
+	LOG_INFO(GraphicsAPI::GetVersion());
+	LOG_INFO(GraphicsAPI::GetRenderer());
 }
 
-void Window::Dispose()
+void Window::Clear()
 {
-	DestroyContext();
+	GraphicsAPI::Clear();
 }
 
 void* Window::GetHandle() const
@@ -63,7 +76,7 @@ void Window::SetHandle(void*const handle)
 }
 
 // Returns a window instance of a specified index
-Window* Window::GetInstance(void*const handle)
+Window*const Window::GetInstance(void*const handle)
 {
 	return Instances[handle];
 }

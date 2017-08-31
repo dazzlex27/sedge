@@ -21,21 +21,16 @@ namespace s3dge
 		TextureType _type;
 
 	private:
-		Texture2D(const char* name, const char* path, TextureType type = Diffuse, TextureWrapMode wrapMode = Repeat, TextureFilterMode filterMode = Linear);
+		Texture2D(const char*const name, const char*const path, const TextureType type = Diffuse, const TextureWrapMode wrapMode = Repeat, const TextureFilterMode filterMode = Linear);
 
 	public:
 		inline int GetWidth() const { return _width; }
 		inline int GetHeight() const { return _height; }
 		inline int GetComponentsCount() const { return _components; }
-
-		void SetWrapMode(const TextureWrapMode wrapMode);
-		void SetFilterMode(const TextureFilterMode filterMode);
-
-		friend class TextureFactory;
-
 		
-
 	public:
 		virtual bool Load() override;
+
+		friend class TextureFactory;
 	};
 }

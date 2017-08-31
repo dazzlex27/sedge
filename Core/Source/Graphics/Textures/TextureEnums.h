@@ -45,4 +45,10 @@ namespace s3dge
 		Specular
 	};
 
+	enum ColorCode
+	{
+		Mono,
+		Rgb,
+		Rgba
+	};
 }

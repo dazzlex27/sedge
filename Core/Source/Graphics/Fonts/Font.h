@@ -41,7 +41,8 @@ namespace s3dge
 		inline const float GetScaleY() const { return 50.0f; }
 
 	private:
-		bool Initialize();
-		void LoadFontFromFile();
+		bool LoadFontFromFile();
+
+		friend class FontFactory;
 	};
 }

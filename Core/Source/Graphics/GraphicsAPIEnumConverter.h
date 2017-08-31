@@ -21,8 +21,15 @@ namespace s3dge
 		static const int GetBufferTarget(const BufferTarget target);
 
 		static const int GetTextureTarget(const TextureTarget target);
+		static const int GetTextureWrap(const TextureWrap wrap);
+		static const int GetTextureWrapMode(const TextureWrapMode mode);
+		static const int GetTextureFilter(const TextureFilter filter);
+		static const int GetTextureFilterMode(const TextureFilterMode filterMode);
+		static const int GetColorCode(const ColorCode code);
 
 		static const int GetPrimitiveType(const PrimitiveType type);
 		static const int GetValueType(const ValueType type);
+
+		static const int GetWindingOrder(const WindingOrder order);
 	};
 }

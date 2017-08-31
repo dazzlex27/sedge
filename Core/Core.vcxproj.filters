@@ -135,9 +135,6 @@
     <ClCompile Include="Source\Math\Quatertion.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Graphics\Renderables\Renderable.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Graphics\Renderables\Model.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -296,9 +293,6 @@
     <ClInclude Include="Source\Graphics\Renderables\MeshFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Graphics\Renderers\Renderer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Graphics\Renderables\LabelFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -363,9 +357,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Platform\Win32\Win32InputKeys.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Platform\Win32\Win32OpenGLDebug.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Platform\Win32\Win32Window.h">

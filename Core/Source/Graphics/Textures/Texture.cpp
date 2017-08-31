@@ -41,3 +41,20 @@ void Texture::BindById(const TextureTarget target, const id texId)
 {
 	GraphicsAPI::BindTexture(target, texId);
 }
+
+void Texture::SetWrapMode(TextureWrapMode wrapMode)
+{
+	WrapMode = wrapMode;
+
+	GraphicsAPI::SetTextureWrapMode(Target, WrapS, wrapMode);
+	GraphicsAPI::SetTextureWrapMode(Target, WrapT, wrapMode);
+	GraphicsAPI::SetTextureWrapMode(Target, WrapR, wrapMode);
+}
+
+void Texture::SetFilterMode(TextureFilterMode filterMode)
+{
+	FilterMode = filterMode;
+
+	GraphicsAPI::SetTextureFilterMode(Target, Min, filterMode);
+	GraphicsAPI::SetTextureFilterMode(Target, Mag, filterMode);
+}

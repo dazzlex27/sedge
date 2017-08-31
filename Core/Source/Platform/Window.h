@@ -9,6 +9,7 @@ Contains basic high-level window management functions.
 #pragma once
 
 #include <map>
+#include <string>
 #include "CustomTypes.h"
 
 namespace s3dge
@@ -18,7 +19,7 @@ namespace s3dge
 	class Window
 	{
 	private:
-		const char* _title;
+		std::string _title;
 		uint _width;
 		uint _height;
 		bool _isClosed;
@@ -36,9 +37,8 @@ namespace s3dge
 		bool Initialize();
 		void Update();
 		void Clear();
-		void Dispose();
 
-		inline const char* GetTitle() const { return _title; }
+		inline const char* GetTitle() const { return _title.c_str(); }
 		inline uint GetWidth() const { return _width; }
 		inline uint GetHeight() const { return _height; }
 		inline bool IsClosed() const { return _isClosed; }
@@ -46,7 +46,7 @@ namespace s3dge
 		inline bool HasFocus() const { return _hasFocus; }
 		inline bool IsFullScreen() const { return _fullScreen; }
 
-		static Window* GetInstance(void*const handle);
+		static Window*const GetInstance(void*const handle);
 
 		void SetVSync(const bool vsync);
 		void SetFullScreen(const bool fullscreen);

@@ -1,6 +1,5 @@
 #include "Model.h"
 #include "Mesh.h"
-#include "Graphics/Renderers/Renderer.h"
 
 using namespace s3dge;
 using namespace std;

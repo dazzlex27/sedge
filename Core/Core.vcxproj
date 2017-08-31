@@ -114,7 +114,6 @@
     <ClCompile Include="Source\Graphics\Renderables\Mesh.cpp" />
     <ClCompile Include="Source\Graphics\Renderables\MeshFactory.cpp" />
     <ClCompile Include="Source\Graphics\Renderables\Model.cpp" />
-    <ClCompile Include="Source\Graphics\Renderables\Renderable.cpp" />
     <ClCompile Include="Source\Graphics\Renderables\Renderable2D.cpp" />
     <ClCompile Include="Source\Graphics\Renderables\Renderable3D.cpp" />
     <ClCompile Include="Source\Graphics\Renderables\SpriteFactory.cpp" />
@@ -191,7 +190,6 @@
     <ClInclude Include="Source\Graphics\Renderables\MeshFactory.h" />
     <ClInclude Include="Source\Graphics\Renderables\SpriteFactory.h" />
     <ClInclude Include="Source\Graphics\Renderables\LabelFactory.h" />
-    <ClInclude Include="Source\Graphics\Renderers\Renderer.h" />
     <ClInclude Include="Source\Graphics\Structures\Color.h" />
     <ClInclude Include="Source\Graphics\Fonts\Font.h" />
     <ClInclude Include="Source\Graphics\Fonts\FontFactory.h" />
@@ -225,7 +223,6 @@
     <ClInclude Include="Source\Platform\KeyCodes.h" />
     <ClInclude Include="Source\Platform\Win32\Win32InputKeys.h" />
     <ClInclude Include="Source\Platform\Win32\Win32Window.h" />
-    <ClInclude Include="Source\Platform\Win32\Win32OpenGLDebug.h" />
     <ClInclude Include="Source\Math\Matrix4.h" />
     <ClInclude Include="Source\Math\Vector2.h" />
     <ClInclude Include="Source\Math\Vector3.h" />

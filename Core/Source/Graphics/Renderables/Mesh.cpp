@@ -11,7 +11,6 @@ Implemlents the Mesh class
 #include "Graphics/Buffers/VertexArray.h"
 #include "Graphics/Buffers/VertexBuffer.h"
 #include "Graphics/Buffers/ElementBuffer.h"
-#include "Graphics/Renderers/Renderer.h"
 #include "Graphics/Structures/VertexLayout.h"
 #include "Graphics/Structures/VertexData.h"
 #include "System/DeleteMacros.h"

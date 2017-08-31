@@ -28,15 +28,23 @@ Font* FontFactory::CreateFont(const char*const name, const char*const path, cons
 
 	if (!FileUtils::CheckFileExists(path))
 	{
-		LOG_ERROR("Font file ", "\"name\"", " was not found");
+		LOG_ERROR("Font file \"", name, "\" was not found");
 		return nullptr;
 	}
 
 	if (size < 0.1)
 	{
-		LOG_ERROR("Font size was less than 0.1, ", "\"name\"", " will not be created");
+		LOG_ERROR("Font size was less than 0.1, \"", name, "\" will not be created");
 		return nullptr;
 	}
 
-	return new Font(name, path, size);
+	Font* font = new Font(name, path, size);
+
+	if (!font->LoadFontFromFile())
+	{
+		LOG_ERROR("Failed to load font \"", name, "\"");
+		return nullptr;
+	}
+
+	return font;
 }

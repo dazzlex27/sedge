@@ -42,6 +42,9 @@ namespace s3dge
 		static void ActivateTexture(const uint num);
 		static void BindById(const TextureTarget target, const id texId);
 
+		virtual void SetWrapMode(const TextureWrapMode Mode);
+		virtual void SetFilterMode(const TextureFilterMode Mode);
+
 	private:
 		virtual bool Load() = 0;
 	};

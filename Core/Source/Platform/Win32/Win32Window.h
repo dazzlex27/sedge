@@ -9,25 +9,20 @@ Main Win32 implementation file.
 #pragma once
 
 #include <Windows.h>
-#include <GL/glew.h>
 #include "System/Log.h"
 #include "Platform/Window.h"
 #include "Win32InputKeys.h"
-#include "System/Timer.h"
 #include "System/InputManager.h"
+#include "Graphics/GraphicsAPI.h"
 
 namespace s3dge
 {
-#ifdef S3_DEBUG
-#include "Win32OpenGLDebug.h"
-#endif
-
 	static HCURSOR ActiveCursor;
 	static bool CtrlKeyActive;
 	static HDC deviceContext;
 	static WINDOWPLACEMENT wpc; // Saved for restoring last window size and position when exiting fullscreen
 
-	static void ResetCursorPosition(const Window* window);
+	static void ResetCursorPosition(const Window*const window);
 
 	// Main message pump handler method
 	LRESULT CALLBACK WindowProcedure(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
@@ -43,8 +38,6 @@ namespace s3dge
 			focus_callback(callingWindow, false);
 			break;
 		case WM_DESTROY:
-			if (callingWindow)
-				callingWindow->Dispose();
 			PostQuitMessage(0);
 			break;
 		case WM_MENUCHAR:
@@ -107,7 +100,7 @@ namespace s3dge
 		HWND window = CreateWindowEx(
 			WS_EX_APPWINDOW,
 			wc.lpszClassName,
-			_title,
+			_title.c_str(),
 			WS_OVERLAPPEDWINDOW | WS_VISIBLE,
 			0,
 			0,
@@ -171,37 +164,15 @@ namespace s3dge
 			return false;
 		}
 
-		if (glewInit() != GLEW_OK)
+		if (!GraphicsAPI::Initialize())
 		{
-			LOG_ERROR("Failed to initialize GLEW!");
+			LOG_ERROR("Failed to initialize GraphicsAPI!");
 			return false;
 		}
 
 		return true;
 	}
-
-	void Window::SetupContext()
-	{
-		// Apply basic OpenGL setup
-		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-		glEnable(GL_DEPTH_TEST);
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		glFrontFace(GL_CW);
-		//glEnable(GL_CULL_FACE);
-
-#ifdef S3_DEBUG
-			// Enable the debug callback
-		glEnable(GL_DEBUG_OUTPUT);
-		glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
-		glDebugMessageCallback(openglCallbackFunction, nullptr);
-		glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, NULL, true);
-#endif
-
-		LOG_INFO("OpenGL v. ", (char*)glGetString(GL_VERSION));
-		LOG_INFO("Renderer: ", (char*)glGetString(GL_RENDERER));
-	}
-
+	
 	void Window::Update()
 	{
 		MSG messages;
@@ -216,13 +187,8 @@ namespace s3dge
 
 		SwapBuffers(deviceContext);
 	}
-
-	void Window::Clear()
-	{
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	}
-
-	void Window::SetFullScreen(bool fullscreen)
+	
+	void Window::SetFullScreen(const bool fullscreen)
 	{
 		HWND window = (HWND)_handle;
 
@@ -246,12 +212,12 @@ namespace s3dge
 		_fullScreen = fullscreen;
 	}
 
-	void Window::SetVSync(bool vsync)
+	void Window::SetVSync(const bool vsync)
 	{
 		typedef BOOL(APIENTRY *PFNWGLSWAPINTERVALPROC)(int);
 		PFNWGLSWAPINTERVALPROC wglSwapIntervalEXT = 0;
 
-		const char* extensions = (char*)glGetString(GL_EXTENSIONS);
+		const char* extensions = GraphicsAPI::GetExtensions();
 
 		if (strstr(extensions, "WGL_EXT_swap_control") == 0)
 			return;
@@ -283,7 +249,7 @@ namespace s3dge
 		}
 	}
 
-	static void ResetCursorPosition(const Window* window)
+	static void ResetCursorPosition(const Window*const window)
 	{
 		if (window)
 		{
@@ -304,7 +270,7 @@ namespace s3dge
 		window->_width = rect.right - rect.left;
 		window->_height = rect.bottom - rect.top;
 
-		glViewport(0, 0, window->_width, window->_height);
+		GraphicsAPI::SetViewPort(0, 0, window->GetWidth(), window->GetHeight());
 	}
 
 	void cursor_position_callback(const Window*const window)

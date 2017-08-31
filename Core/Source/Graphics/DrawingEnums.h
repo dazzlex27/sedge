@@ -20,5 +20,12 @@ namespace s3dge
 	{
 		UnsignedInt,
 		UnsginedShort,
+		UnsignedByte
+	};
+
+	enum WindingOrder
+	{
+		Clockwise,
+		CounterClockwise
 	};
 }

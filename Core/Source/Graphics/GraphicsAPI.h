@@ -41,16 +41,39 @@ namespace s3dge
 		static void GenTextures(const uint n, uint*const textures);
 		static void DeleteTextures(const uint n, uint*const textures);
 		static void BindTexture(const TextureTarget target, const uint id);
+		static void LoadTex2DImage(const int level, const ColorCode internalFormat, const int width, const int height, const int border, const ColorCode format, const ValueType valueType, const void*const pixels);
+		static void LoadCubemapImage(const uint num, const int level, const ColorCode internalFormat, const int width, const int height, const int border, const ColorCode format, const ValueType valueType, const void*const pixels);
 		static void GenerateMipmap(const TextureTarget target);
 		static void ActivateTexture(const uint num);
-		//static void SetTexParametri(const TextureTarget target, const Texture)
+		static void SetTextureWrapMode(const TextureTarget target, const TextureWrap wrap, const TextureWrapMode mode);
+		static void SetTextureFilterMode(const TextureTarget target, const TextureFilter filter, const TextureFilterMode mode);
+
+		// General
+		static bool Initialize();
+
+		static void Clear();
+
+		static void SetUnpackAlignment(const int alignment);
+
+		static void SetViewPort(const int x, const int y, const int width, const int height);
 
 		static void EnableFaceCulling();
 		static void DisableFaceCulling();
 		static void SetFaceCulling(const bool cullFaces);
 
+		static void EnableBlending();
+		static void DisableBlending();
+		static void SetBlending(const bool blend);
+		static void SetStandartBlending();
+
 		static void EnableDepthTesting();
 		static void DisableDepthTesting();
 		static void SetDepthTesting(const bool testDepth);
+
+		static void SetWindingOrder(const WindingOrder order);
+
+		static const char*const GetVersion();
+		static const char*const GetRenderer();
+		static const char*const GetExtensions();
 	};
 }

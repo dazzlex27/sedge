@@ -7,33 +7,25 @@ implements the Cubemap class
 */
 
 #include "Cubemap.h"
-#include <GL/glew.h>
 #include "System/ImageUtils.h"
-#include "System/DeleteMacros.h"
 #include "System/Log.h"
+#include "Graphics/GraphicsAPI.h"
 
 using namespace s3dge;
 using namespace std;
 
-static int GetChannelsCode(int channelCount);
-static int GetWrapModeValue(TextureWrapMode wrapMode);
-static int GetFilterModeValue(TextureFilterMode filterMode);
-
 Cubemap::Cubemap(const char*const name, const vector<std::string>& paths, const TextureWrapMode wrapMode, const TextureFilterMode filterMode)
-	: _paths(paths), Texture(name, paths[0].c_str(), TextureTarget::Cube, wrapMode, filterMode)
+	:  Texture(name, paths[0].c_str(), Cube, wrapMode, filterMode), _paths(paths)
 {
 }
 
 bool Cubemap::Load()
 {
-	const int wrapMode = GetWrapModeValue(WrapMode);
-	const int filterMode = GetFilterModeValue(FilterMode);
-
 	int width;
 	int height;
 	int components;
 
-	glBindTexture(GL_TEXTURE_CUBE_MAP, ID);
+	Bind();
 
 	for (uint i = 0; i < _paths.size(); i++)
 	{
@@ -45,69 +37,29 @@ bool Cubemap::Load()
 			ImageUtils::ReleaseImage(imagePixels);
 			return false;
 		}
+
+		ColorCode format;
+		switch (components)
+		{
+		case 1:
+			format = Mono;
+			break;
+		case 3:
+			format = Rgb;
+			break;
+		case 4:
+			format = Rgba;
+			break;
+		}
 		
-		glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, imagePixels);
+		GraphicsAPI::LoadCubemapImage(i, 0, format, width, height, 0, format, UnsignedByte, imagePixels);
 		ImageUtils::ReleaseImage(imagePixels);
 	}
 
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, filterMode);
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, filterMode);
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, wrapMode);
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, wrapMode);
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, wrapMode);
+	SetFilterMode(FilterMode);
+	SetWrapMode(WrapMode);
+
+	Unbind();
 	
 	return true;
-}
-
-static int GetChannelsCode(int channelCount)
-{
-	switch (channelCount)
-	{
-	case 1:
-		return GL_LUMINANCE;
-	case 3:
-		return GL_RGB;
-	case 4:
-		return GL_RGBA;
-	}
-
-	return -1; // error
-}
-
-static int GetWrapModeValue(TextureWrapMode wrapMode)
-{
-	switch (wrapMode)
-	{
-	case Repeat:
-		return GL_REPEAT;
-	case MirroredRepeat:
-		return GL_MIRRORED_REPEAT;
-	case ClampToBorder:
-		return GL_CLAMP_TO_BORDER;
-	case ClampToEdge:
-		return GL_CLAMP_TO_EDGE;
-	}
-
-	return -1; // error
-}
-
-static int GetFilterModeValue(TextureFilterMode filterMode)
-{
-	switch (filterMode)
-	{
-	case Nearest:
-		return GL_NEAREST;
-	case Linear:
-		return GL_LINEAR;
-	case NearestMipmapNearest:
-		return GL_NEAREST_MIPMAP_NEAREST;
-	case NearestMipmapLinear:
-		return GL_NEAREST_MIPMAP_LINEAR;
-	case LinearMipmapNearest:
-		return GL_LINEAR_MIPMAP_NEAREST;
-	case LinearMipmapLinear:
-		return GL_LINEAR_MIPMAP_LINEAR;
-	}
-
-	return -1; // error
 }
