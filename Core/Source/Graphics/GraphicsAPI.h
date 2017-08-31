@@ -11,6 +11,7 @@ Declares functions for calling API-dependent graphics code.
 #include "CustomTypes.h"
 #include "Buffers/BufferEnums.h"
 #include "Textures/TextureEnums.h"
+#include "DrawingEnums.h"
 
 namespace s3dge
 {
@@ -24,6 +25,17 @@ namespace s3dge
 		static void SetBufferData(const BufferTarget target, const uint bufferSize, const void* bufferData, const DrawingMode mode);
 		static void* MapBufferForWriting(const BufferTarget target);
 		static void UnmapBuffer(const BufferTarget target);
+
+		// VAO
+		static void GenVertexArrays(const uint n, uint*const arrays);
+		static void DeleteVertexArrays(const uint n, uint*const arrays);
+		static void BindVertexArray(const uint id);
+		static void EnableVertexAttributeArray(const uint index);
+		static void VertexAttributePointer(const uint index, const int size, const int type, const int normalized, const int stride, const void*const offset);
+
+		// Drawing
+		static void DrawArrays(const PrimitiveType primitiveType, const int first, const uint count);
+		static void DrawElements(const PrimitiveType primitiveType, const uint count, const ValueType type, const void*const elements);
 
 		// Textures
 		static void GenTextures(const uint n, uint*const textures);

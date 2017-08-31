@@ -138,9 +138,6 @@
     <ClCompile Include="Source\Graphics\Renderables\Renderable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Graphics\Renderers\Renderer3D.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Graphics\Renderables\Model.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -190,9 +187,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Graphics\GraphicsAPI.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Graphics\RenderEnumParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -383,9 +377,6 @@
     <ClInclude Include="Source\Math\Quaternion.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Graphics\Renderers\Renderer3D.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Graphics\Renderables\Model.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -440,16 +431,16 @@
     <ClInclude Include="Source\Graphics\Shaders\ShaderFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Graphics\RenderEnumParser.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Graphics\GraphicsAPI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Graphics\GraphicsAPIEnumParser.h">
+    <ClInclude Include="Source\Graphics\OpenGLBindings.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Graphics\OpenGLBindings.h">
+    <ClInclude Include="Source\Graphics\GraphicsAPIEnumConverter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Graphics\DrawingEnums.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

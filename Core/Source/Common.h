@@ -22,7 +22,6 @@ This file is included by the main header S3DGE.h
 #include "Graphics/Layer2D.h"
 
 #include "Graphics/Shaders/ShaderProgram.h"
-#include "Graphics/Renderers/Renderer3D.h"
 #include "Graphics/Renderables/Sprite.h"
 #include "Graphics/Renderables/Label.h"
 #include "Graphics/Renderables/Mesh.h"

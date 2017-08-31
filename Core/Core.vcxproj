@@ -117,8 +117,6 @@
     <ClCompile Include="Source\Graphics\Renderables\Renderable2D.cpp" />
     <ClCompile Include="Source\Graphics\Renderables\Renderable3D.cpp" />
     <ClCompile Include="Source\Graphics\Renderables\SpriteFactory.cpp" />
-    <ClCompile Include="Source\Graphics\RenderEnumParser.cpp" />
-    <ClCompile Include="Source\Graphics\Renderers\Renderer3D.cpp" />
     <ClCompile Include="Source\Graphics\Renderers\Renderer2D.cpp" />
     <ClCompile Include="Source\Graphics\Shaders\ShaderFactory.cpp" />
     <ClCompile Include="Source\Graphics\Structures\VertexLayout.cpp" />
@@ -167,8 +165,9 @@
     <ClInclude Include="Source\Graphics\Buffers\Buffer.h" />
     <ClInclude Include="Source\Graphics\Buffers\BufferEnums.h" />
     <ClInclude Include="Source\Graphics\Buffers\FrameBuffer.h" />
+    <ClInclude Include="Source\Graphics\DrawingEnums.h" />
     <ClInclude Include="Source\Graphics\GraphicsAPI.h" />
-    <ClInclude Include="Source\Graphics\GraphicsAPIEnumParser.h" />
+    <ClInclude Include="Source\Graphics\GraphicsAPIEnumConverter.h" />
     <ClInclude Include="Source\Graphics\Lights\Light.h" />
     <ClInclude Include="Source\Graphics\Managers\Renderable3DManager.h" />
     <ClInclude Include="Source\Graphics\Managers\ShaderManager.h" />
@@ -176,8 +175,6 @@
     <ClInclude Include="Source\Graphics\Renderables\Model.h" />
     <ClInclude Include="Source\Graphics\Renderables\Renderable.h" />
     <ClInclude Include="Source\Graphics\Renderables\Renderable3D.h" />
-    <ClInclude Include="Source\Graphics\RenderEnumParser.h" />
-    <ClInclude Include="Source\Graphics\Renderers\Renderer3D.h" />
     <ClInclude Include="Source\Graphics\Renderers\Renderer2D.h" />
     <ClInclude Include="Source\Graphics\Shaders\ShaderFactory.h" />
     <ClInclude Include="Source\Graphics\Textures\Cubemap.h" />

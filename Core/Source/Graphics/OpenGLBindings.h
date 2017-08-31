@@ -10,10 +10,12 @@ This should be the only place where GL/glew.h is included!
 #pragma once
 
 #include "GraphicsAPI.h"
-#include "GraphicsAPIEnumParser.h"
+#include "GraphicsAPIEnumConverter.h"
 #include <GL/glew.h>
 
 using namespace s3dge;
+
+typedef GraphicsAPIEnumConverter EnumConverter;
 
 void GraphicsAPI::GenBuffers(const uint n, uint*const buffers)
 {
@@ -27,22 +29,57 @@ void GraphicsAPI::DeleteBuffers(const uint n, uint*const buffers)
 
 void GraphicsAPI::BindBuffer(const BufferTarget target, const uint id)
 {
-	glBindBuffer(GraphicsAPIEnumParser::GetBufferTarget(target), id);
+	glBindBuffer(EnumConverter::GetBufferTarget(target), id);
 }
 
-void GraphicsAPI::SetBufferData(const BufferTarget target, const uint bufferSize, const void* bufferData, const DrawingMode mode)
+void GraphicsAPI::SetBufferData(const BufferTarget target, const uint bufferSize, const void* bufferData, const DrawingMode hint)
 {
-	glBufferData(GraphicsAPIEnumParser::GetBufferTarget(target), bufferSize, bufferData, GraphicsAPIEnumParser::GetDrawingModeValue(mode));
+	glBufferData(EnumConverter::GetBufferTarget(target), bufferSize, bufferData, EnumConverter::GetDrawingModeValue(hint));
 }
 
 void* GraphicsAPI::MapBufferForWriting(const BufferTarget target)
 {
-	return glMapBuffer(GraphicsAPIEnumParser::GetBufferTarget(target), GL_WRITE_ONLY);
+	return glMapBuffer(EnumConverter::GetBufferTarget(target), GL_WRITE_ONLY);
 }
 
 void GraphicsAPI::UnmapBuffer(const BufferTarget target)
 {
-	glUnmapBuffer(GraphicsAPIEnumParser::GetBufferTarget(target));
+	glUnmapBuffer(EnumConverter::GetBufferTarget(target));
+}
+
+void GraphicsAPI::GenVertexArrays(const uint n, uint* const arrays)
+{
+	glGenVertexArrays(n, arrays);
+}
+
+void GraphicsAPI::DeleteVertexArrays(const uint n, uint*const arrays)
+{
+	glDeleteVertexArrays(1, arrays);
+}
+
+void GraphicsAPI::BindVertexArray(const uint id)
+{
+	glBindVertexArray(id);
+}
+
+inline void GraphicsAPI::EnableVertexAttributeArray(const uint index)
+{
+	glEnableVertexAttribArray(index);
+}
+
+void GraphicsAPI::VertexAttributePointer(const uint index, const int size, const int type, const int normalized, const int stride, const void * const offset)
+{
+	glVertexAttribPointer(index, size, type, normalized, stride, offset);
+}
+
+void GraphicsAPI::DrawArrays(const PrimitiveType primitiveType, const int first, const uint count)
+{
+	glDrawArrays(EnumConverter::GetPrimitiveType(primitiveType), first, count);
+}
+
+void GraphicsAPI::DrawElements(const PrimitiveType primitiveType, const uint count, const ValueType type, const void*const elements)
+{
+	glDrawElements(EnumConverter::GetPrimitiveType(primitiveType), count, EnumConverter::GetValueType(type), elements);
 }
 
 void GraphicsAPI::GenTextures(const uint n, uint*const textures)
@@ -57,12 +94,12 @@ void GraphicsAPI::DeleteTextures(const uint n, uint*const textures)
 
 void GraphicsAPI::BindTexture(const TextureTarget target, const uint id)
 {
-	glBindTexture(GraphicsAPIEnumParser::GetTextureTarget(target), id);
+	glBindTexture(EnumConverter::GetTextureTarget(target), id);
 }
 
 void GraphicsAPI::GenerateMipmap(const TextureTarget target)
 {
-	glGenerateMipmap(GraphicsAPIEnumParser::GetTextureTarget(target));
+	glGenerateMipmap(EnumConverter::GetTextureTarget(target));
 }
 
 void GraphicsAPI::ActivateTexture(const uint num)
@@ -106,22 +143,26 @@ void GraphicsAPI::SetDepthTesting(const bool testDepth)
 		DisableDepthTesting();
 }
 
-int GraphicsAPIEnumParser::GetDrawingModeValue(const DrawingMode drawingMode)
+// ============================================================================
+// Enum converters
+// ============================================================================
+
+const int EnumConverter::GetDrawingModeValue(const DrawingMode drawingMode)
 {
 	switch (drawingMode)
 	{
-	case DrawingMode::Dynamic:
+	case Dynamic:
 		return GL_DYNAMIC_DRAW;
-	case DrawingMode::Static:
+	case Static:
 		return GL_STATIC_DRAW;
-	case DrawingMode::Stream:
+	case Stream:
 		return GL_STREAM_DRAW;
 	default:
 		return 0;
 	}
 }
 
-int GraphicsAPIEnumParser::GetBufferTarget(const BufferTarget target)
+const int EnumConverter::GetBufferTarget(const BufferTarget target)
 {
 	switch (target)
 	{
@@ -134,7 +175,7 @@ int GraphicsAPIEnumParser::GetBufferTarget(const BufferTarget target)
 	}
 }
 
-int GraphicsAPIEnumParser::GetTextureTarget(const TextureTarget target)
+const int EnumConverter::GetTextureTarget(const TextureTarget target)
 {
 	switch (target)
 	{
@@ -142,6 +183,44 @@ int GraphicsAPIEnumParser::GetTextureTarget(const TextureTarget target)
 		return GL_TEXTURE_2D;
 	case Cube:
 		return GL_TEXTURE_CUBE_MAP;
+	default:
+		return 0;
+	}
+}
+
+const int EnumConverter::GetPrimitiveType(const PrimitiveType type)
+{
+	switch (type)
+	{
+	case Triangles:
+		return GL_TRIANGLES;
+	case Lines:
+		return GL_LINES;
+	case Points:
+		return GL_POINTS;
+	case LineStrips:
+		return GL_LINE_STRIP;
+	case Quads:
+		return GL_QUADS;
+	case LineLoops:
+		return GL_LINE_LOOP;
+	case QuadStrips:
+		return GL_QUAD_STRIP;
+	case Polygons:
+		return GL_POLYGON;
+	default:
+		return 0;
+	}
+}
+
+const int EnumConverter::GetValueType(const ValueType type)
+{
+	switch (type)
+	{
+	case UnsginedShort:
+		return GL_UNSIGNED_SHORT;
+	case UnsignedInt:
+		return GL_UNSIGNED_INT;
 	default:
 		return 0;
 	}

@@ -8,7 +8,6 @@ Designed to store vertex positions before feeding them to OpenGL.
 
 #pragma once
 
-#include <vector>
 #include "CustomTypes.h"
 
 namespace s3dge
