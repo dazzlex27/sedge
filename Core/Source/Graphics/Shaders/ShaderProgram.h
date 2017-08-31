@@ -33,13 +33,13 @@ namespace s3dge
 		void Bind() const;
 		void Unbind() const;
 
-		void SetUniformMat4fv(const char* name, const Matrix4& matrix);
-		void SetUniform1f(const char* name, const float value);
-		void SetUniform2f(const char* name, const Vector2& value);
-		void SetUniform3f(const char* name, const Vector3& value);
-		void SetUniform4f(const char* name, const Vector4& value);
-		void SetUniform1i(const char* name, const int value);
-		void SetUniform1iv(const char* name, const int count, const int* value);
+		void SetUniformMat4fv(const char*const name, const Matrix4& matrix);
+		void SetUniform1f(const char*const name, const float value);
+		void SetUniform2f(const char*const name, const Vector2& value);
+		void SetUniform3f(const char*const name, const Vector3& value);
+		void SetUniform4f(const char*const name, const Vector4& value);
+		void SetUniform1i(const char*const name, const int value);
+		void SetUniform1iv(const char*const name, const int count, const int*const value);
 
 		void SetProjection(const Matrix4& projectionMatrix);
 		void SetView(const Matrix4& viewMatrix);

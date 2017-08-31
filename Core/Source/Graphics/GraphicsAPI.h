@@ -11,6 +11,7 @@ Declares functions for calling API-dependent graphics code.
 #include "CustomTypes.h"
 #include "Buffers/BufferEnums.h"
 #include "Textures/TextureEnums.h"
+#include "Shaders/ShaderEnums.h"
 #include "DrawingEnums.h"
 
 namespace s3dge
@@ -48,8 +49,30 @@ namespace s3dge
 		static void SetTextureWrapMode(const TextureTarget target, const TextureWrap wrap, const TextureWrapMode mode);
 		static void SetTextureFilterMode(const TextureTarget target, const TextureFilter filter, const TextureFilterMode mode);
 
+		// Shaders
+		static const uint CreateShaderProgram();
+		static void LinkShaderProgram(const uint programID);
+		static void ValidateShaderProgram(const uint programID);
+		static const uint CreateShader(const ShaderTarget target);
+		static void DeleteShaderProgram(const uint programID);
+		static void DeleteShader(const uint shaderID);
+		static void AttachShader(const uint programID, const uint shaderID);
+		static void DetachShader(const uint programID, const uint shaderID);
+		static const bool CompileShader(const uint shaderID);
+		static const char*const GetShaderInfoLog(const uint shaderID);
+		static void BindShaderProgram(const uint programID);
+		static void LoadShaderSource(const uint shaderID, const char*const source);
+		static const int GetUniformLocation(const uint programID, const char*const name);
+		static void SetUniformMatrix4(const int location, const int count, const bool transpose, const float*const values);
+		static void SetUniform1f(const int location, const float value);
+		static void SetUniform2f(const int location, const float value1, const float value2);
+		static void SetUniform3f(const int location, const float value1, const float value2, const float value3);
+		static void SetUniform4f(const int location, const float value1, const float value2, const float value3, const float value4);
+		static void SetUniform1i(const int location, const int value);
+		static void SetUniform1iv(const int location, const int count, const int*const values);
+
 		// General
-		static bool Initialize();
+		static const bool Initialize();
 
 		static void Clear();
 
