@@ -437,5 +437,8 @@
     <ClInclude Include="Source\Graphics\DrawingEnums.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Graphics\Shaders\ShaderEnums.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
