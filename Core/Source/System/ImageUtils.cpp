@@ -15,10 +15,14 @@ Image loading done via stb_image library by Sean T. Barrett.
 
 using namespace s3dge;
 
+void ImageUtils::SetFlipVertically(const bool flip)
+{
+	stbi_set_flip_vertically_on_load(flip);
+}
+
 // image loading via stb_image. Supports *.bmp, *.png and whatnot.
 byte* ImageUtils::LoadImage(const char* path, int* width, int* height, int* components)
 {
-	stbi_set_flip_vertically_on_load(1);
 	return stbi_load(path, width, height, components, 0);
 }
 

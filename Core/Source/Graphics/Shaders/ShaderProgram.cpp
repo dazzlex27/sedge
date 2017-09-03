@@ -78,8 +78,12 @@ const bool ShaderProgram::Compile(const uint shader)
 	// If the shader failed to compile, display the info log and return
 	if (!GraphicsAPI::CompileShader(shader))
 	{
-		LOG_ERROR("shader compilation failed: ", GraphicsAPI::GetShaderInfoLog(shader));
+		char* info = GraphicsAPI::GetShaderInfoLog(shader);
+
+		LOG_ERROR("shader compilation failed: ", info);
 		
+		delete[] info;
+
 		GraphicsAPI::DeleteShader(shader);
 
 		return false;

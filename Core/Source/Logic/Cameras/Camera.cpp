@@ -13,8 +13,8 @@ using namespace s3dge;
 Camera::Camera()
 	: Fov(45.0f),
 	AspectRatio(16.0f / 9.0f),
-	Near(0.11f),
-	Far(100.0f),
+	Near(0.1f),
+	Far(1000.0f),
 	ViewDirection(Vector3(0, 0, -1)),
 	Up(Vector3(0, 1, 0))
 {

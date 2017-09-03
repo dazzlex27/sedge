@@ -217,11 +217,11 @@ static uint* FillElementBuffer(const uint maxElements)
 	for (uint i = 0, offset = 0; i < maxElements; i += 6, offset += 4)
 	{
 		elements[i] = offset + 0;
-		elements[i + 1] = offset + 1;
-		elements[i + 2] = offset + 2;
+		elements[i + 1] = offset + 2;
+		elements[i + 2] = offset + 1;
 
-		elements[i + 3] = offset + 2;
-		elements[i + 4] = offset + 3;
+		elements[i + 3] = offset + 3;
+		elements[i + 4] = offset + 2;
 		elements[i + 5] = offset + 0;
 	}
 

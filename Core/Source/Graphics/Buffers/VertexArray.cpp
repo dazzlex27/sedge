@@ -47,6 +47,11 @@ void VertexArray::Unbind() const
 	GraphicsAPI::BindVertexArray(0);
 }
 
+void VertexArray::DrawArrays(const uint count)
+{
+	GraphicsAPI::DrawArrays(Triangles, 0, count);
+}
+
 void VertexArray::DrawElements(const uint elementCount)
 {
 	GraphicsAPI::DrawElements(Triangles, elementCount, UnsignedInt, 0);
