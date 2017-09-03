@@ -17,6 +17,7 @@ namespace s3dge
 	class ImageUtils
 	{
 	public:
+		static void SetFlipVertically(const bool flip);
 		static byte* LoadImage(const char* path, int* width, int* height, int* components);
 		static void ReleaseImage(void* data);
 	};

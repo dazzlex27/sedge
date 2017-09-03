@@ -14,16 +14,26 @@ This should be the only place where GL/glew.h is included!
 #include "System/Log.h"
 #include <GL/glew.h>
 #include <string>
-#include "System/DeleteMacros.h"
-
-#ifdef S3_DEBUG
-#include "Win32OpenGLDebug.h"
-#endif
+#include "System/ImageUtils.h"
 
 using namespace s3dge;
 
+#ifdef S3_DEBUG
+#ifdef _WIN32
+#include <Windows.h>
+#else
+#define APIENTRY _stdcall
+#endif
 
-
+void APIENTRY openglCallbackFunction(
+	GLenum source,
+	GLenum type,
+	GLuint id,
+	GLenum severity,
+	GLsizei length,
+	const GLchar* message,
+	const void* userParam);
+#endif
 
 typedef GraphicsAPIEnumConverter EnumConverter;
 
@@ -129,12 +139,12 @@ void GraphicsAPI::ActivateTexture(const uint num)
 
 void GraphicsAPI::SetTextureWrapMode(const TextureTarget target, const TextureWrap wrap, const TextureWrapMode wrapMode)
 {
-	glTextureParameteri(EnumConverter::GetTextureTarget(target), EnumConverter::GetTextureWrap(wrap), EnumConverter::GetTextureWrapMode(wrapMode));
+	glTexParameteri(EnumConverter::GetTextureTarget(target), EnumConverter::GetTextureWrap(wrap), EnumConverter::GetTextureWrapMode(wrapMode));
 }
 
 void GraphicsAPI::SetTextureFilterMode(const TextureTarget target, const TextureFilter filter, const TextureFilterMode mode)
 {
-	glTextureParameteri(EnumConverter::GetTextureTarget(target), EnumConverter::GetTextureFilter(filter), EnumConverter::GetTextureFilterMode(mode));
+	glTexParameteri(EnumConverter::GetTextureTarget(target), EnumConverter::GetTextureFilter(filter), EnumConverter::GetTextureFilterMode(mode));
 }
 
 const uint GraphicsAPI::CreateShaderProgram()
@@ -187,7 +197,7 @@ const bool GraphicsAPI::CompileShader(const uint shaderID)
 	return shaderStatus == GL_TRUE;
 }
 
-const char*const GraphicsAPI::GetShaderInfoLog(const uint shaderID)
+char* GraphicsAPI::GetShaderInfoLog(const uint shaderID)
 {
 	GLint infoLogLength;
 	glGetShaderiv(shaderID, GL_INFO_LOG_LENGTH, &infoLogLength);
@@ -195,11 +205,7 @@ const char*const GraphicsAPI::GetShaderInfoLog(const uint shaderID)
 	char* strInfoLog = new char[infoLogLength + 1];
 	glGetShaderInfoLog(shaderID, infoLogLength, 0, strInfoLog);
 
-	std::string infoLog(strInfoLog);
-
-	SafeDelete(strInfoLog);
-
-	return infoLog.c_str();
+	return strInfoLog;
 }
 
 void GraphicsAPI::BindShaderProgram(const uint programID)
@@ -254,7 +260,24 @@ void GraphicsAPI::SetUniform1iv(const int location, const int count, const int*c
 
 const bool GraphicsAPI::Initialize()
 {
-	return glewInit() == GLEW_OK;
+	int result = glewInit();
+
+	if (result != GLEW_OK)
+		return false;
+
+#ifdef S3_DEBUG
+	// Enable the debug callback
+	glEnable(GL_DEBUG_OUTPUT);
+	glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
+	glDebugMessageCallback(openglCallbackFunction, nullptr);
+	glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, NULL, true);
+#endif
+
+	glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
+
+	ImageUtils::SetFlipVertically(true);
+
+	return true;
 }
 
 void GraphicsAPI::Clear()
@@ -270,6 +293,24 @@ void GraphicsAPI::SetUnpackAlignment(const int alignment)
 void GraphicsAPI::SetViewPort(const int x, const int y, const int width, const int height)
 {
 	glViewport(x, y, width, height);
+}
+
+void GraphicsAPI::EnableDepthMask()
+{
+	glDepthMask(GL_TRUE);
+}
+
+void GraphicsAPI::DisableDepthMask()
+{
+	glDepthMask(GL_FALSE);
+}
+
+void GraphicsAPI::SetDepthMask(const bool useMask)
+{
+	if (useMask)
+		EnableDepthMask();
+	else
+		DisableDepthMask();
 }
 
 void GraphicsAPI::EnableFaceCulling()
@@ -336,25 +377,19 @@ void GraphicsAPI::SetWindingOrder(const WindingOrder order)
 	glFrontFace(EnumConverter::GetWindingOrder(order));
 }
 
-const char*const GraphicsAPI::GetVersion()
+char* GraphicsAPI::GetVersion()
 {
-	std::string title("OpenGL v. ");
-	std::string number((char*)glGetString(GL_VERSION));
-	
-	return std::string(title + number).c_str();
+	return (char*)glGetString(GL_VERSION);
 }
 
-const char*const GraphicsAPI::GetRenderer()
+char* GraphicsAPI::GetRenderer()
 {
-	std::string title("Renderer: ");
-	std::string number((char*)glGetString(GL_RENDERER));
-
-	return std::string(title + number).c_str();
+	return (char*)glGetString(GL_RENDERER);
 }
 
-const char*const GraphicsAPI::GetExtensions()
+char* GraphicsAPI::GetExtensions()
 {
-	return (const char*)glGetString(GL_EXTENSIONS);
+	return (char*)glGetString(GL_EXTENSIONS);
 }
 
 // ============================================================================
@@ -550,17 +585,6 @@ const int EnumConverter::GetWindingOrder(const WindingOrder order)
 }
 
 #ifdef S3_DEBUG
-// Enable the debug callback
-glEnable(GL_DEBUG_OUTPUT);
-glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
-glDebugMessageCallback(openglCallbackFunction, nullptr);
-glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, NULL, true);
-
-#ifdef _WIN32
-#include <Windows.h>
-#else
-#define APIENTRY _stdcall
-#endif
 
 void APIENTRY openglCallbackFunction(
 	GLenum source,
@@ -603,8 +627,9 @@ void APIENTRY openglCallbackFunction(
 	case GL_DEBUG_TYPE_OTHER:               errTpText = "other"; break;
 	}
 
-	s3dge::LOG_OPENGL_ISSUE("\nsource = ", srcText, "\ntype = ", errTpText, "\nmessage = ", message);
+	s3dge::LOG_OPENGL_ISSUE("(source - ", srcText, ", type - ", errTpText, ")\nmessage - ", message);
 	if (severity == GL_DEBUG_SEVERITY_HIGH)
 		abort();
 }
+
 #endif

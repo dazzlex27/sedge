@@ -70,7 +70,6 @@ static Mesh* ProcessMesh(const aiMesh*const mesh, const aiScene*const scene, con
 		
 		vertex.Position = Vector3(mesh->mVertices[i].x, mesh->mVertices[i].y, mesh->mVertices[i].z);
 		vertex.Color = 0xffffffff;
-		vertex.TextureID = 1;
 
 		if (mesh->HasNormals())
 			vertex.Normal = Vector3(mesh->mNormals[i].x, mesh->mNormals[i].y, mesh->mNormals[i].z);

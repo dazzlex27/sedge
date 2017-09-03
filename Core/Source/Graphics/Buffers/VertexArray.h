@@ -27,6 +27,7 @@ namespace s3dge
 
 		void Bind() const;
 		void Unbind() const;
+		void DrawArrays(const uint count);
 		void DrawElements(const uint elementCount);
 	};
 }

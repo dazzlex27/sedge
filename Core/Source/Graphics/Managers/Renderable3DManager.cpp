@@ -12,12 +12,14 @@ Implements the Renderable3DManager class.
 
 #include "Graphics/Renderables/Mesh.h"
 #include "Graphics/Renderables/Model.h"
+#include "Graphics/Renderables/Skybox.h"
 
 using namespace s3dge;
 using namespace std;
 
 map<string, Mesh*> Renderable3DManager::_meshes;
 map<string, Model*> Renderable3DManager::_models;
+map<string, Skybox*> Renderable3DManager::_skyboxes;
 bool Renderable3DManager::_initialized;
 
 void Renderable3DManager::Initialize()
@@ -32,7 +34,7 @@ void Renderable3DManager::Initialize()
 	}
 }
 
-void Renderable3DManager::AddMesh(const char* name, Mesh* mesh, bool overwrite)
+void Renderable3DManager::AddMesh(const char*const name, Mesh*const mesh, const bool overwrite)
 {
 	if (_initialized)
 	{
@@ -50,7 +52,7 @@ void Renderable3DManager::AddMesh(const char* name, Mesh* mesh, bool overwrite)
 		LOG_WARNING("Renderable3D manager was not initialized before adding a mesh (", name, ")");
 }
 
-void Renderable3DManager::AddModel(const char* name, Model* model, bool overwrite)
+void Renderable3DManager::AddModel(const char*const name, Model*const model, const bool overwrite)
 {
 	if (_initialized)
 	{
@@ -68,7 +70,25 @@ void Renderable3DManager::AddModel(const char* name, Model* model, bool overwrit
 		LOG_WARNING("Renderable3D manager was not initialized before adding a model (", name, ")");
 }
 
-Mesh* Renderable3DManager::GetMesh(const char* name)
+void Renderable3DManager::AddSkybox(const char*const name, Skybox*const skybox, const bool overwrite)
+{
+	if (_initialized)
+	{
+		if (GetSkybox(name) == nullptr)
+			_skyboxes[name] = skybox;
+		else
+		{
+			if (overwrite)
+				_skyboxes[name] = skybox;
+			else
+				LOG_WARNING("Skybox \"", name, "\" already exists and will not be overwritten");
+		}
+	}
+	else
+		LOG_WARNING("Renderable3D manager was not initialized before adding a skybox (", name, ")");
+}
+
+Mesh* Renderable3DManager::GetMesh(const char*const name)
 {
 	if (_meshes.find(name) != _meshes.end())
 		return _meshes[name];
@@ -76,10 +96,18 @@ Mesh* Renderable3DManager::GetMesh(const char* name)
 	return nullptr;
 }
 
-Model* Renderable3DManager::GetModel(const char* name)
+Model* Renderable3DManager::GetModel(const char*const name)
 {
 	if (_models.find(name) != _models.end())
 		return _models[name];
+
+	return nullptr;
+}
+
+Skybox* Renderable3DManager::GetSkybox(const char*const name)
+{
+	if (_skyboxes.find(name) != _skyboxes.end())
+		return _skyboxes[name];
 
 	return nullptr;
 }

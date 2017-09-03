@@ -13,31 +13,30 @@ void Application::Initialize()
 	ShaderManager::Add("skybox", "Resources/Shaders/skybox.vert", "Resources/Shaders/skybox.frag");
 	
 	_camera = new FPSCamera();
-	_camera->SetPosition(Vector3(0, 1.5, 4));
 
 	ShaderManager::Get("scene")->SetProjection(_camera->GetProjection());
 	ShaderManager::Get("hud")->SetProjection(Matrix4::GetOrthographic(0.0f, 16.0f, 0.0f, 9.0f, -1.0f, 1.0f));
 	
 	FontManager::Add("font1", "Resources/Fonts/Assistant-Regular.ttf", 24);
-	TextureManager::AddTex2D("cry", "Resources/Models/nanosuit/body_dif.png");
 	TextureManager::AddTex2D("lm-test", "Resources/Textures/lm-test.png");
 	TextureManager::AddTex2D("lm-test-sp", "Resources/Textures/lm-test-sp.png");
 
 	std::vector<std::string> sb_paths;
-	sb_paths.push_back("Resources/Textures/sb/sb_rt.jpg");
-	sb_paths.push_back("Resources/Textures/sb/sb_lt.jpg");
-	sb_paths.push_back("Resources/Textures/sb/sb_tp.jpg");
-	sb_paths.push_back("Resources/Textures/sb/sb_bt.jpg");
-	sb_paths.push_back("Resources/Textures/sb/sb_bk.jpg");
-	sb_paths.push_back("Resources/Textures/sb/sb_ft.jpg");
+	sb_paths.push_back("Resources/Textures/sb/sb_rt.png");
+	sb_paths.push_back("Resources/Textures/sb/sb_lt.png");
+	sb_paths.push_back("Resources/Textures/sb/sb_tp.png");
+	sb_paths.push_back("Resources/Textures/sb/sb_bt.png");
+	sb_paths.push_back("Resources/Textures/sb/sb_bk.png");
+	sb_paths.push_back("Resources/Textures/sb/sb_ft.png");
 	TextureManager::AddCubemap("skybox", sb_paths);
 
-	Renderable3DManager::AddModel("nano", ModelUtils::ReadFromFile("Resources/Models/nanosuit/nanosuit.obj"));
+	Renderable3DManager::AddMesh("cube", MeshFactory::CreateCubeOfUnitSize(nullptr));
+	Renderable3DManager::AddModel("nano", ModelFactory::CreateModel("Resources/Models/nanosuit/nanosuit.obj"));
+	Renderable3DManager::AddSkybox("sky1", SkyboxFactory::CreateSkybox(TextureManager::GetCubemap("skybox")));
 
 	Label* label = LabelFactory::CreateLabel("startup...", FontManager::Get("font1"), Vector2(0.3f, 8.4f), 0, Size2D(2, 2));
 	Label* label2 = LabelFactory::CreateLabel("p:", FontManager::Get("font1"), Vector2(0.3f, 7.8f), 0, Size2D(2, 2));
-
-	Renderable3DManager::AddMesh("cube", MeshFactory::CreateCubeOfUnitSize(nullptr));
+	
 	Renderable2DManager::AddLabel("fps", label);
 	Renderable2DManager::AddLabel("position", label2);
 
@@ -99,14 +98,26 @@ void Application::Update()
 
 void Application::Render()
 {
+	GraphicsAPI::EnableDepthTesting();
+	ShaderProgram* shaderSkybox = ShaderManager::Get("skybox");
+	shaderSkybox->SetProjection(_camera->GetProjection());
+	Matrix4 view = _camera->GetView();
+	shaderSkybox->SetView(view);
+
+	shaderSkybox->Bind();
+	GraphicsAPI::DisableDepthMask();
+	Renderable3DManager::GetSkybox("sky1")->Draw();
+	GraphicsAPI::EnableDepthMask();
+
 	ShaderProgram* shaderScene = ShaderManager::Get("scene");
 	shaderScene->Bind();
 	shaderScene->SetUniform1i("material.diffuse", 0);
 	shaderScene->SetUniform1i("material.specular", 1);
 	shaderScene->SetUniform1f("material.shininess", 32.0f);
-	shaderScene->SetModel(Matrix4::GetScale(Vector3(0.3f, 0.3f, 0.3f)));
+	shaderScene->SetModel(Matrix4::GetTranslation(Vector3(0, -1, -2.5f)) * Matrix4::GetScale(Vector3(0.1f, 0.1f, 0.1f)));
 	Renderable3DManager::GetModel("nano")->Draw();
 
+	GraphicsAPI::DisableDepthTesting();
 	_hudLayer->Draw();
 }
 

@@ -1,8 +1,12 @@
 #version 330 core
 
-layout (location = 0) out vec4 color;
+in vec3 sbUV;
+
+out vec4 color;
+
+uniform samplerCube skybox;
 
 void main()
 {
-	color = vec4(1.0,1.0,1.0,1.0);
+	color = texture(skybox, sbUV);
 }

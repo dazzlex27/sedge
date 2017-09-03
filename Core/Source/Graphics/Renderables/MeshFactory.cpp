@@ -105,5 +105,4 @@ static void AssignVertexData(VertexData& vertex, const Vector3& position, const 
 	vertex.Color = Color(color);
 	vertex.Normal = normal;
 	vertex.UV = uv;
-	vertex.TextureID = 1;
 }

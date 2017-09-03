@@ -45,7 +45,6 @@ VertexLayout VertexLayout::GetDefaultVertexLayout()
 	layout.AddEntry("color", 1, 4, Ubyte, true, structSize, (const void*)(offsetof(VertexData, Color)));
 	layout.AddEntry("normal", 2, 3, Float, false, structSize, (const void*)(offsetof(VertexData, Normal)));
 	layout.AddEntry("uv", 3, 2, Float, false, structSize, (const void*)(offsetof(VertexData, UV)));
-	layout.AddEntry("textureID", 4, 1, Float, false, structSize, (const void*)(offsetof(VertexData, TextureID)));
 
 	return layout;
 }
@@ -60,5 +59,16 @@ VertexLayout VertexLayout::GetDefaultVertexLayoutSprite()
 	layout.AddEntry("uv", 3, 2, Float, false, structSize, (const void*)(offsetof(VertexDataS, UV)));
 	layout.AddEntry("textureID", 4, 1, Float, false, structSize, (const void*)(offsetof(VertexDataS, TextureID)));
 
+	return layout;
+}
+
+VertexLayout VertexLayout::GetDefaultVertexLayoutCb()
+{
+	const int structSize = sizeof(VertexDataCb);
+
+	VertexLayout layout;
+	layout.AddEntry("position", 0, 3, Float, false, structSize, (const void*)(offsetof(VertexDataCb, Position)));
+	layout.AddEntry("uv", 1, 3, Float, false, structSize, (const void*)(offsetof(VertexDataCb, UV)));
+	
 	return layout;
 }
