@@ -1,3 +1,13 @@
+/*
+===========================================================================
+Mode.h
+
+Declares the Model class
+A model is a collection of meshes.
+TODO: implement transformation for a model (that is for all meshes in a model).
+===========================================================================
+*/
+
 #pragma once
 
 #include <vector>

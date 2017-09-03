@@ -59,7 +59,7 @@ namespace s3dge
 		static void AttachShader(const uint programID, const uint shaderID);
 		static void DetachShader(const uint programID, const uint shaderID);
 		static const bool CompileShader(const uint shaderID);
-		static const char*const GetShaderInfoLog(const uint shaderID);
+		static char* GetShaderInfoLog(const uint shaderID);
 		static void BindShaderProgram(const uint programID);
 		static void LoadShaderSource(const uint shaderID, const char*const source);
 		static const int GetUniformLocation(const uint programID, const char*const name);
@@ -80,6 +80,10 @@ namespace s3dge
 
 		static void SetViewPort(const int x, const int y, const int width, const int height);
 
+		static void EnableDepthMask();
+		static void DisableDepthMask();
+		static void SetDepthMask(const bool useMask);
+
 		static void EnableFaceCulling();
 		static void DisableFaceCulling();
 		static void SetFaceCulling(const bool cullFaces);
@@ -95,8 +99,8 @@ namespace s3dge
 
 		static void SetWindingOrder(const WindingOrder order);
 
-		static const char*const GetVersion();
-		static const char*const GetRenderer();
-		static const char*const GetExtensions();
+		static char* GetVersion();
+		static char* GetRenderer();
+		static char* GetExtensions();
 	};
 }

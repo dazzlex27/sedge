@@ -35,5 +35,6 @@ namespace s3dge
 
 		static VertexLayout GetDefaultVertexLayout();
 		static VertexLayout GetDefaultVertexLayoutSprite();
+		static VertexLayout GetDefaultVertexLayoutCb();
 	};
 }

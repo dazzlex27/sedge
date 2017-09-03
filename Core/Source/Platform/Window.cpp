@@ -53,11 +53,12 @@ void Window::SetupContext()
 	GraphicsAPI::SetUnpackAlignment(1);
 	GraphicsAPI::EnableDepthTesting();
 	GraphicsAPI::EnableBlending();
+	GraphicsAPI::EnableFaceCulling();
 	GraphicsAPI::SetStandartBlending();
-	GraphicsAPI::SetWindingOrder(Clockwise);
+	GraphicsAPI::SetWindingOrder(CounterClockwise);
 
-	LOG_INFO(GraphicsAPI::GetVersion());
-	LOG_INFO(GraphicsAPI::GetRenderer());
+	LOG_INFO("Version: ", GraphicsAPI::GetVersion());
+	LOG_INFO("Renderer: ", GraphicsAPI::GetRenderer());
 }
 
 void Window::Clear()

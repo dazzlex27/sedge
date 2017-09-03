@@ -104,7 +104,7 @@
     <ClCompile Include="Source\Graphics\Buffers\FrameBuffer.cpp" />
     <ClCompile Include="Source\Graphics\Fonts\Font.cpp" />
     <ClCompile Include="Source\Graphics\Fonts\FontFactory.cpp" />
-    <ClCompile Include="Source\Graphics\GraphicsAPI.cpp" />
+    <ClCompile Include="Source\Graphics\GraphicsAPIImplementation.cpp" />
     <ClCompile Include="Source\Graphics\Managers\Renderable3DManager.cpp" />
     <ClCompile Include="Source\Graphics\Managers\FontManager.cpp" />
     <ClCompile Include="Source\Graphics\Managers\Renderable2DManager.cpp" />
@@ -114,8 +114,11 @@
     <ClCompile Include="Source\Graphics\Renderables\Mesh.cpp" />
     <ClCompile Include="Source\Graphics\Renderables\MeshFactory.cpp" />
     <ClCompile Include="Source\Graphics\Renderables\Model.cpp" />
+    <ClCompile Include="Source\Graphics\Renderables\ModelFactory.cpp" />
     <ClCompile Include="Source\Graphics\Renderables\Renderable2D.cpp" />
     <ClCompile Include="Source\Graphics\Renderables\Renderable3D.cpp" />
+    <ClCompile Include="Source\Graphics\Renderables\Skybox.cpp" />
+    <ClCompile Include="Source\Graphics\Renderables\SkyboxFactory.cpp" />
     <ClCompile Include="Source\Graphics\Renderables\SpriteFactory.cpp" />
     <ClCompile Include="Source\Graphics\Renderers\Renderer2D.cpp" />
     <ClCompile Include="Source\Graphics\Shaders\ShaderFactory.cpp" />
@@ -173,8 +176,11 @@
     <ClInclude Include="Source\Graphics\Managers\ShaderManager.h" />
     <ClInclude Include="Source\Graphics\OpenGLBindings.h" />
     <ClInclude Include="Source\Graphics\Renderables\Model.h" />
+    <ClInclude Include="Source\Graphics\Renderables\ModelFactory.h" />
     <ClInclude Include="Source\Graphics\Renderables\Renderable.h" />
     <ClInclude Include="Source\Graphics\Renderables\Renderable3D.h" />
+    <ClInclude Include="Source\Graphics\Renderables\Skybox.h" />
+    <ClInclude Include="Source\Graphics\Renderables\SkyboxFactory.h" />
     <ClInclude Include="Source\Graphics\Renderers\Renderer2D.h" />
     <ClInclude Include="Source\Graphics\Shaders\ShaderEnums.h" />
     <ClInclude Include="Source\Graphics\Shaders\ShaderFactory.h" />
