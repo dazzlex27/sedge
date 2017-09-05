@@ -36,7 +36,7 @@ void VertexLayout::AddEntry(const char* name, const int index, const int size, c
 	_attributes.push_back(attribute);
 }
 
-VertexLayout VertexLayout::GetDefaultVertexLayout()
+VertexLayout VertexLayout::GetDefaultMeshVertexLayout()
 {
 	const int structSize = sizeof(VertexData);
 
@@ -49,7 +49,7 @@ VertexLayout VertexLayout::GetDefaultVertexLayout()
 	return layout;
 }
 
-VertexLayout VertexLayout::GetDefaultVertexLayoutSprite()
+VertexLayout VertexLayout::GetDefaultSpriteVertexLayout()
 {
 	const int structSize = sizeof(VertexDataS);
 
@@ -62,7 +62,7 @@ VertexLayout VertexLayout::GetDefaultVertexLayoutSprite()
 	return layout;
 }
 
-VertexLayout VertexLayout::GetDefaultVertexLayoutCb()
+VertexLayout VertexLayout::GetDefaultSkyboxVertexLayout()
 {
 	const int structSize = sizeof(VertexDataCb);
 

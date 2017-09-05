@@ -1,3 +1,11 @@
+/*
+===========================================================================
+SkyboxFactory.cpp
+
+Implements the SkyboxFactory class.
+===========================================================================
+*/
+
 #include "SkyboxFactory.h"
 #include "Graphics/Renderables/Skybox.h"
 

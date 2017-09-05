@@ -47,7 +47,7 @@ Renderer2D::Renderer2D(const uint maxVertices)
 	SafeDeleteArray(elements);
 	_ebo->Bind();
 
-	_vao->SetLayout(VertexLayout::GetDefaultVertexLayoutSprite());
+	_vao->SetLayout(VertexLayout::GetDefaultSpriteVertexLayout());
 
 	_vao->Unbind();
 	_vbo->Unbind();

@@ -29,16 +29,16 @@ namespace s3dge
 
 	public:
 		static void Initialize(); // must be called upon engine startup
-		static void AddMesh(const char*const name, Mesh*const mesh, bool overwrite = false);
-		static void AddModel(const char*const name, Model*const model, bool overwrite = false);
-		static void AddSkybox(const char*const name, Skybox*const skybox, bool overwrite = false);
-		static Mesh* GetMesh(const char*const name);
-		static Model* GetModel(const char*const name);
-		static Skybox* GetSkybox(const char*const name);
+		static void AddMesh(const char*const name, Mesh*const mesh, const bool overwrite = false);
+		static void AddModel(const char*const name, Model*const model, const bool overwrite = false);
+		static void AddSkybox(const char*const name, Skybox*const skybox, const bool overwrite = false);
+		static Mesh*const GetMesh(const char*const name);
+		static Model*const GetModel(const char*const name);
+		static Skybox*const GetSkybox(const char*const name);
 		static void Dispose(); // must be called upon engine shutdown
 
-		static inline uint GetMeshCount() { return _meshes.size(); }
-		static inline uint GetModelCount() { return _models.size(); }
-		static inline uint GetSkyboxCount() { return _skyboxes.size(); }
+		static inline const uint GetMeshCount() { return _meshes.size(); }
+		static inline const uint GetModelCount() { return _models.size(); }
+		static inline const uint GetSkyboxCount() { return _skyboxes.size(); }
 	};
 }
