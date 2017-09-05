@@ -1,3 +1,11 @@
+/*
+===========================================================================
+SkyboxFactory.h
+
+Declares SkyboxFactory class that is responsible for creating Skybox instances.
+===========================================================================
+*/
+
 #pragma once
 
 namespace s3dge

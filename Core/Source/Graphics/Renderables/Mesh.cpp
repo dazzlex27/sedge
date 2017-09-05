@@ -30,7 +30,7 @@ Mesh::Mesh(VertexData*const vertices, const uint vertexCount, uint*const element
 	VBO->Bind();
 	EBO->Bind();
 
-	VAO->SetLayout(VertexLayout::GetDefaultVertexLayout());
+	VAO->SetLayout(VertexLayout::GetDefaultMeshVertexLayout());
 
 	VAO->Unbind();
 	VBO->Unbind();

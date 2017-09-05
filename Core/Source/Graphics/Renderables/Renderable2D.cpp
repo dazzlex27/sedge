@@ -2,7 +2,7 @@
 ===========================================================================
 Renderable2D.cpp
 
-Contains method implementations for Renderable2D
+Implements the Renderable2D class.
 ===========================================================================
 */
 
