@@ -33,8 +33,8 @@ namespace s3dge
 		void AddEntry(LayoutAttribute*const attribute);
 		void AddEntry(const char* name, const int index, const int size, const ElementType type, const bool normalized, const int stride, const void*const offset);
 
-		static VertexLayout GetDefaultVertexLayout();
-		static VertexLayout GetDefaultVertexLayoutSprite();
-		static VertexLayout GetDefaultVertexLayoutCb();
+		static VertexLayout GetDefaultMeshVertexLayout();
+		static VertexLayout GetDefaultSpriteVertexLayout();
+		static VertexLayout GetDefaultSkyboxVertexLayout();
 	};
 }

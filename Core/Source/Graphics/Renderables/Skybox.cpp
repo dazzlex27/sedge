@@ -106,7 +106,7 @@ Skybox::Skybox(Cubemap*const texture)
 	_vbo->Bind();
 	_ebo->Bind();
 
-	_vao->SetLayout(VertexLayout::GetDefaultVertexLayoutCb());
+	_vao->SetLayout(VertexLayout::GetDefaultSkyboxVertexLayout());
 
 	_vao->Unbind();
 	_vbo->Unbind();
@@ -121,48 +121,3 @@ void Skybox::Draw() const
 	_vao->DrawElements(_ebo->GetCount());
 	_vao->Unbind();
 }
-
-/*float vertices[] =
-{
--1.0f,  1.0f, -1.0f,
--1.0f, -1.0f, -1.0f,
-1.0f, -1.0f, -1.0f,
-1.0f, -1.0f, -1.0f,
-1.0f,  1.0f, -1.0f,
--1.0f,  1.0f, -1.0f,
-
--1.0f, -1.0f,  1.0f,
--1.0f, -1.0f, -1.0f,
--1.0f,  1.0f, -1.0f,
--1.0f,  1.0f, -1.0f,
--1.0f,  1.0f,  1.0f,
--1.0f, -1.0f,  1.0f,
-
-1.0f, -1.0f, -1.0f,
-1.0f, -1.0f,  1.0f,
-1.0f,  1.0f,  1.0f,
-1.0f,  1.0f,  1.0f,
-1.0f,  1.0f, -1.0f,
-1.0f, -1.0f, -1.0f,
-
--1.0f, -1.0f,  1.0f,
--1.0f,  1.0f,  1.0f,
-1.0f,  1.0f,  1.0f,
-1.0f,  1.0f,  1.0f,
-1.0f, -1.0f,  1.0f,
--1.0f, -1.0f,  1.0f,
-
--1.0f,  1.0f, -1.0f,
-1.0f,  1.0f, -1.0f,
-1.0f,  1.0f,  1.0f,
-1.0f,  1.0f,  1.0f,
--1.0f,  1.0f,  1.0f,
--1.0f,  1.0f, -1.0f,
-
--1.0f, -1.0f, -1.0f,
--1.0f, -1.0f,  1.0f,
-1.0f, -1.0f, -1.0f,
-1.0f, -1.0f, -1.0f,
--1.0f, -1.0f,  1.0f,
-1.0f, -1.0f,  1.0f
-};*/

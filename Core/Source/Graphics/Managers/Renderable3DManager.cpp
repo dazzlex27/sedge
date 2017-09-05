@@ -88,7 +88,7 @@ void Renderable3DManager::AddSkybox(const char*const name, Skybox*const skybox, 
 		LOG_WARNING("Renderable3D manager was not initialized before adding a skybox (", name, ")");
 }
 
-Mesh* Renderable3DManager::GetMesh(const char*const name)
+Mesh*const Renderable3DManager::GetMesh(const char*const name)
 {
 	if (_meshes.find(name) != _meshes.end())
 		return _meshes[name];
@@ -96,7 +96,7 @@ Mesh* Renderable3DManager::GetMesh(const char*const name)
 	return nullptr;
 }
 
-Model* Renderable3DManager::GetModel(const char*const name)
+Model*const Renderable3DManager::GetModel(const char*const name)
 {
 	if (_models.find(name) != _models.end())
 		return _models[name];
@@ -104,7 +104,7 @@ Model* Renderable3DManager::GetModel(const char*const name)
 	return nullptr;
 }
 
-Skybox* Renderable3DManager::GetSkybox(const char*const name)
+Skybox*const Renderable3DManager::GetSkybox(const char*const name)
 {
 	if (_skyboxes.find(name) != _skyboxes.end())
 		return _skyboxes[name];
@@ -119,6 +119,8 @@ void Renderable3DManager::Dispose()
 		for (auto item : _meshes)
 			SafeDelete(item.second);
 		for (auto item : _models)
+			SafeDelete(item.second);
+		for (auto item : _skyboxes)
 			SafeDelete(item.second);
 
 		_initialized = false;
