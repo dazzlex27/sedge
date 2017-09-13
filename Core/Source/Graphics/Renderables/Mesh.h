@@ -24,11 +24,11 @@ namespace s3dge
 		VertexArray* VAO;
 		VertexBuffer* VBO;
 		ElementBuffer* EBO;
-		id* Textures;
+		ID* Textures;
 		const uint TextureCount;
 
 	private:
-		Mesh(VertexData*const vertices, const uint vertexCount, uint*const elements, const uint elementCount, id*const texture = nullptr, const uint textureCount = 0);
+		Mesh(VertexData*const vertices, const uint vertexCount, uint*const elements, const uint elementCount, ID*const texture = nullptr, const uint textureCount = 0);
 
 	public:
 		~Mesh();

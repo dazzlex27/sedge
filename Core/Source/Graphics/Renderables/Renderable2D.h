@@ -39,7 +39,7 @@ namespace s3dge
 		inline virtual const Vector3& GetPosition() const { return Position; }
 		inline const Size2D& GetSize() const { return Size; }
 		inline const Color& GetColor() const { return Col; }
-		virtual const id GetTextureID() const;
+		virtual const ID GetTextureID() const;
 
 		virtual void SetColor(const Color& color);
 		virtual void SetPosition(const Vector2& position);
