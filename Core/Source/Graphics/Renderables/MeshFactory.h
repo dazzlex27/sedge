@@ -11,7 +11,7 @@ namespace s3dge
 	class MeshFactory
 	{
 	public:
-		static Mesh*const CreateMesh(VertexData*const vertices, const uint vertexCount, uint*const elements, const uint elementCount, id*const textures = nullptr, const uint textureCount = 0);
+		static Mesh*const CreateMesh(VertexData*const vertices, const uint vertexCount, uint*const elements, const uint elementCount, ID*const textures = nullptr, const uint textureCount = 0);
 		static Mesh*const CreateCubeOfUnitSize(Texture2D*const texture);
 	};
 }

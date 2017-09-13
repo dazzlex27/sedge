@@ -24,7 +24,7 @@ namespace s3dge
 	private:
 		static std::map<std::string, Texture2D*> _texture2Ds;
 		static std::map<std::string, Cubemap*> _cubemaps;
-		static std::map<id, std::string> _idsToNames;
+		static std::map<ID, std::string> _idsToNames;
 		static bool _initialized;
 
 	public:
@@ -33,8 +33,8 @@ namespace s3dge
 		static void AddCubemap(const char*const name, const std::vector<std::string>& paths, const TextureWrapMode wrapMode = Repeat, const TextureFilterMode filterMode = Linear, const bool overrideExisting = false);
 		static Texture2D*const GetTex2D(const char*const name);
 		static Cubemap*const GetCubemap(const char*const name);
-		static Texture2D*const GetTex2DByID(const id ID);
-		static Cubemap*const GetCubemapByID(const id ID);
+		static Texture2D*const GetTex2DByID(const ID ID);
+		static Cubemap*const GetCubemapByID(const ID ID);
 		static void Dispose();
 
 		static inline uint GetCount() { return _texture2Ds.size(); }

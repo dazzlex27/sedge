@@ -16,9 +16,9 @@ namespace s3dge
 		std::string _name;
 		std::string _vertexPath;
 		std::string _fragmentPath;
-		id _programID;
-		uint _vertexID;
-		uint _fragmentID;
+		ID _programID;
+		ID _vertexID;
+		ID _fragmentID;
 
 	private:
 		ShaderProgram(const char*const name, const char*const vertexPath, const char*const fragmentPath);
@@ -28,7 +28,7 @@ namespace s3dge
 
 	public:
 		const char*const GetName() const { return _name.c_str(); }
-		const id GetProgramID() const { return _programID; }
+		const ID GetProgramID() const { return _programID; }
 
 		void Bind() const;
 		void Unbind() const;
@@ -49,6 +49,6 @@ namespace s3dge
 
 	private:
 		const bool Load();
-		const bool Compile(const uint shader);
+		const bool Compile(const ID shaderID);
 	};
 }

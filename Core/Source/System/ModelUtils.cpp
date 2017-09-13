@@ -20,7 +20,7 @@ using namespace s3dge;
 
 static void ProcessNode(vector<Mesh*>& meshes, const aiNode*const node, const aiScene*const scene, const string& rootDir);
 static Mesh* ProcessMesh(const aiMesh*const mesh, const aiScene*const scene, const string& rootDir);
-static void LoadMaterialTextures(vector<id>& textures, aiMaterial* material, aiTextureType textureType, const string& rootDir);
+static void LoadMaterialTextures(vector<ID>& textures, aiMaterial* material, aiTextureType textureType, const string& rootDir);
 
 Model* ModelUtils::ReadFromFile(const char* filepath)
 {
@@ -62,7 +62,7 @@ static Mesh* ProcessMesh(const aiMesh*const mesh, const aiScene*const scene, con
 {
 	vector<VertexData> vertices;
 	vector<uint> elements;
-	vector<id> textures;
+	vector<ID> textures;
 
 	for (uint i = 0; i < mesh->mNumVertices; i++)
 	{
@@ -104,7 +104,7 @@ static Mesh* ProcessMesh(const aiMesh*const mesh, const aiScene*const scene, con
 	return MeshFactory::CreateMesh(vertices.data(), vertices.size(), elements.data(), elements.size(), textures.data(), textures.size());
 }
 
-static void LoadMaterialTextures(vector<id>& textures, aiMaterial* material, aiTextureType textureType, const string& rootDir)
+static void LoadMaterialTextures(vector<ID>& textures, aiMaterial* material, aiTextureType textureType, const string& rootDir)
 {
 	for (uint i = 0; i < material->GetTextureCount(textureType); i++)
 	{

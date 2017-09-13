@@ -16,7 +16,7 @@ namespace s3dge
 	class Buffer
 	{
 	protected:
-		id BufferID;
+		ID BufferID;
 		void* DataPtr;
 		uint ElementSize;
 		uint ElementCount;
@@ -30,7 +30,7 @@ namespace s3dge
 		virtual ~Buffer();
 
 	public:
-		inline const id GetBufferID() const { return BufferID; }
+		inline const ID GetBufferID() const { return BufferID; }
 		inline const void* GetDataPointer() { return DataPtr; }
 		inline const uint GetCount() const { return ElementCount; }
 		inline const uint GetElementSize() const { return ElementSize; }

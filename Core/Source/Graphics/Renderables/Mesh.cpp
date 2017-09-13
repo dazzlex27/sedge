@@ -19,7 +19,7 @@ Implemlents the Mesh class
 using namespace s3dge;
 using namespace std;
 
-Mesh::Mesh(VertexData*const vertices, const uint vertexCount, uint*const elements, const uint elementCount, id*const textures, const uint textureCount)
+Mesh::Mesh(VertexData*const vertices, const uint vertexCount, uint*const elements, const uint elementCount, ID*const textures, const uint textureCount)
 	: TextureCount(textureCount)
 {
 	VAO = new VertexArray();
@@ -38,7 +38,7 @@ Mesh::Mesh(VertexData*const vertices, const uint vertexCount, uint*const element
 
 	if (TextureCount > 0 && textures)
 	{
-		Textures = new id[TextureCount];
+		Textures = new ID[TextureCount];
 		for (uint i = 0; i < TextureCount; i++)
 			Textures[i] = textures[i];
 	}

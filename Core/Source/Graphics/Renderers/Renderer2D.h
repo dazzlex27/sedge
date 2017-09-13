@@ -50,6 +50,6 @@ namespace s3dge
 		void Flush();
 
 	private:
-		const float GetSamplerIndexByTID(const id texID);
+		const float GetSamplerIndexByTID(const ID texID);
 	};
 }

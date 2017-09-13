@@ -18,7 +18,7 @@ using namespace std;
 	
 map<string, Texture2D*> TextureManager::_texture2Ds;
 map<string, Cubemap*> TextureManager::_cubemaps;
-map<id, string> TextureManager::_idsToNames;
+map<ID, string> TextureManager::_idsToNames;
 bool TextureManager::_initialized;
 
 void TextureManager::Initialize()
@@ -132,7 +132,7 @@ Cubemap*const TextureManager::GetCubemap(const char*const name)
 	return nullptr;
 }
 
-Texture2D*const TextureManager::GetTex2DByID(const id ID)
+Texture2D*const TextureManager::GetTex2DByID(const ID ID)
 {
 	if (_idsToNames.find(ID) != _idsToNames.end())
 		return _texture2Ds[_idsToNames[ID]];
@@ -140,7 +140,7 @@ Texture2D*const TextureManager::GetTex2DByID(const id ID)
 	return nullptr;
 }
 
-Cubemap*const TextureManager::GetCubemapByID(const id ID)
+Cubemap*const TextureManager::GetCubemapByID(const ID ID)
 {
 	if (_idsToNames.find(ID) != _idsToNames.end())
 		return _cubemaps[_idsToNames[ID]];

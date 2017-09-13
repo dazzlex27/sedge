@@ -37,7 +37,7 @@ void Texture::ActivateTexture(const uint num)
 	GraphicsAPI::ActivateTexture(num);
 }
 
-void Texture::BindById(const TextureTarget target, const id texId)
+void Texture::BindById(const TextureTarget target, const ID texId)
 {
 	GraphicsAPI::BindTexture(target, texId);
 }

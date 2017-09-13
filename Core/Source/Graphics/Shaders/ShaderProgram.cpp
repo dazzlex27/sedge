@@ -2,6 +2,7 @@
 #include "System/Log.h"
 #include "System/FileUtils.h"
 #include "Graphics/GraphicsAPI.h"
+#include "System/DeleteMacros.h"
 #include "Math/Vector2.h"
 #include "Math/Vector3.h"
 #include "Math/Vector4.h"
@@ -73,18 +74,18 @@ const bool ShaderProgram::Load()
 	return true;
 }
 
-const bool ShaderProgram::Compile(const uint shader)
+const bool ShaderProgram::Compile(const ID shaderID)
 {
 	// If the shader failed to compile, display the info log and return
-	if (!GraphicsAPI::CompileShader(shader))
+	if (!GraphicsAPI::CompileShader(shaderID))
 	{
-		char* info = GraphicsAPI::GetShaderInfoLog(shader);
+		char* info = GraphicsAPI::GetShaderInfoLog(shaderID);
 
 		LOG_ERROR("shader compilation failed: ", info);
 		
-		delete[] info;
+		SafeDeleteArray(info);
 
-		GraphicsAPI::DeleteShader(shader);
+		GraphicsAPI::DeleteShader(shaderID);
 
 		return false;
 	}
