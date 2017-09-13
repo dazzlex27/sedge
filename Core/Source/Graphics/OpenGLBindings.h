@@ -28,7 +28,7 @@ using namespace s3dge;
 void APIENTRY openglCallbackFunction(
 	GLenum source,
 	GLenum type,
-	GLuint id,
+	GLuint ID,
 	GLenum severity,
 	GLsizei length,
 	const GLchar* message,
@@ -37,17 +37,17 @@ void APIENTRY openglCallbackFunction(
 
 typedef GraphicsAPIEnumConverter EnumConverter;
 
-void GraphicsAPI::GenBuffers(const uint n, uint*const buffers)
+void GraphicsAPI::GenBuffers(const uint n, ID*const buffers)
 {
 	glGenBuffers(n, buffers);
 }
 
-void GraphicsAPI::DeleteBuffers(const uint n, uint*const buffers)
+void GraphicsAPI::DeleteBuffers(const uint n, ID*const buffers)
 {
 	glDeleteBuffers(n, buffers);
 }
 
-void GraphicsAPI::BindBuffer(const BufferTarget target, const uint id)
+void GraphicsAPI::BindBuffer(const BufferTarget target, const ID id)
 {
 	glBindBuffer(EnumConverter::GetBufferTarget(target), id);
 }
@@ -67,17 +67,17 @@ void GraphicsAPI::UnmapBuffer(const BufferTarget target)
 	glUnmapBuffer(EnumConverter::GetBufferTarget(target));
 }
 
-void GraphicsAPI::GenVertexArrays(const uint n, uint* const arrays)
+void GraphicsAPI::GenVertexArrays(const uint n, ID* const arrays)
 {
 	glGenVertexArrays(n, arrays);
 }
 
-void GraphicsAPI::DeleteVertexArrays(const uint n, uint*const arrays)
+void GraphicsAPI::DeleteVertexArrays(const uint n, ID*const arrays)
 {
 	glDeleteVertexArrays(1, arrays);
 }
 
-void GraphicsAPI::BindVertexArray(const uint id)
+void GraphicsAPI::BindVertexArray(const ID id)
 {
 	glBindVertexArray(id);
 }
@@ -102,17 +102,17 @@ void GraphicsAPI::DrawElements(const PrimitiveType primitiveType, const uint cou
 	glDrawElements(EnumConverter::GetPrimitiveType(primitiveType), count, EnumConverter::GetValueType(type), elements);
 }
 
-void GraphicsAPI::GenTextures(const uint n, uint*const textures)
+void GraphicsAPI::GenTextures(const uint n, ID*const textures)
 {
 	glGenTextures(n, textures);
 }
 
-void GraphicsAPI::DeleteTextures(const uint n, uint*const textures)
+void GraphicsAPI::DeleteTextures(const uint n, ID*const textures)
 {
 	glDeleteTextures(n, textures);
 }
 
-void GraphicsAPI::BindTexture(const TextureTarget target, const uint id)
+void GraphicsAPI::BindTexture(const TextureTarget target, const ID id)
 {
 	glBindTexture(EnumConverter::GetTextureTarget(target), id);
 }
@@ -147,47 +147,73 @@ void GraphicsAPI::SetTextureFilterMode(const TextureTarget target, const Texture
 	glTexParameteri(EnumConverter::GetTextureTarget(target), EnumConverter::GetTextureFilter(filter), EnumConverter::GetTextureFilterMode(mode));
 }
 
-const uint GraphicsAPI::CreateShaderProgram()
+void GraphicsAPI::GenFramebuffers(const uint n, ID*const buffers)
+{
+	glGenFramebuffers(n, buffers);
+}
+
+void GraphicsAPI::DeleteFramebuffers(const uint n, ID*const buffers)
+{
+	glDeleteFramebuffers(n, buffers);
+}
+
+void GraphicsAPI::BindFramebuffer(const ID bufferID)
+{
+	glBindFramebuffer(GL_FRAMEBUFFER, bufferID);
+}
+
+const bool GraphicsAPI::IsFramebufferComplete(const ID bufferID)
+{
+	BindFramebuffer(bufferID);
+	return glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE;
+}
+
+void GraphicsAPI::AttachTextureToFramebuffer(const ID textureID)
+{
+
+}
+
+const ID GraphicsAPI::CreateShaderProgram()
 {
 	return glCreateProgram();
 }
 
-void GraphicsAPI::LinkShaderProgram(const uint programID)
+void GraphicsAPI::LinkShaderProgram(const ID programID)
 {
 	glLinkProgram(programID);
 }
 
-void GraphicsAPI::ValidateShaderProgram(const uint programID)
+void GraphicsAPI::ValidateShaderProgram(const ID programID)
 {
 	glValidateProgram(programID);
 }
 
-void GraphicsAPI::DeleteShaderProgram(const uint programID)
+void GraphicsAPI::DeleteShaderProgram(const ID programID)
 {
 	glDeleteProgram(programID);
 }
 
-void GraphicsAPI::DeleteShader(const uint shaderID)
+void GraphicsAPI::DeleteShader(const ID shaderID)
 {
 	glDeleteShader(shaderID);
 }
 
-const uint GraphicsAPI::CreateShader(const ShaderTarget target)
+const ID GraphicsAPI::CreateShader(const ShaderTarget target)
 {
 	return glCreateShader(EnumConverter::GetShaderTarget(target));
 }
 
-void GraphicsAPI::AttachShader(const uint programID, const uint shaderID)
+void GraphicsAPI::AttachShader(const ID programID, const ID shaderID)
 {
 	glAttachShader(programID, shaderID);
 }
 
-void GraphicsAPI::DetachShader(const uint programID, const uint shaderID)
+void GraphicsAPI::DetachShader(const ID programID, const ID shaderID)
 {
 	glDetachShader(programID, shaderID);
 }
 
-const bool GraphicsAPI::CompileShader(const uint shaderID)
+const bool GraphicsAPI::CompileShader(const ID shaderID)
 {
 	glCompileShader(shaderID);
 
@@ -197,7 +223,7 @@ const bool GraphicsAPI::CompileShader(const uint shaderID)
 	return shaderStatus == GL_TRUE;
 }
 
-char* GraphicsAPI::GetShaderInfoLog(const uint shaderID)
+char* GraphicsAPI::GetShaderInfoLog(const ID shaderID)
 {
 	GLint infoLogLength;
 	glGetShaderiv(shaderID, GL_INFO_LOG_LENGTH, &infoLogLength);
@@ -208,17 +234,17 @@ char* GraphicsAPI::GetShaderInfoLog(const uint shaderID)
 	return strInfoLog;
 }
 
-void GraphicsAPI::BindShaderProgram(const uint programID)
+void GraphicsAPI::BindShaderProgram(const ID programID)
 {
 	glUseProgram(programID);
 }
 
-void GraphicsAPI::LoadShaderSource(const uint shaderID, const char*const source)
+void GraphicsAPI::LoadShaderSource(const ID shaderID, const char*const source)
 {
 	glShaderSource(shaderID, 1, &source, NULL);
 }
 
-const int GraphicsAPI::GetUniformLocation(const uint programID, const char * const name)
+const int GraphicsAPI::GetUniformLocation(const ID programID, const char*const name)
 {
 	return glGetUniformLocation(programID, name);
 }
@@ -589,16 +615,16 @@ const int EnumConverter::GetWindingOrder(const WindingOrder order)
 void APIENTRY openglCallbackFunction(
 	GLenum source,
 	GLenum type,
-	GLuint id,
+	GLuint ID,
 	GLenum severity,
 	GLsizei length,
 	const GLchar* message,
 	const void* userParam)
 {
 	// ignore non-significant error/warning codes
-	if (id == 131169 || id == 131185 || id == 131218 || id == 131204) return;
+	if (ID == 131169 || ID == 131185 || ID == 131218 || ID == 131204) return;
 
-	(void)source; (void)type; (void)id;
+	(void)source; (void)type; (void)ID;
 	(void)severity; (void)length; (void)userParam;
 
 	GLchar* errTpText;

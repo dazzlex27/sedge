@@ -28,7 +28,7 @@ uint* Get24CubeElements()
 
 static void AssignVertexData(VertexData& vertex, const Vector3& position, const uint color, const Vector3& normal, const Vector2& uv);
 
-Mesh*const MeshFactory::CreateMesh(VertexData*const vertices, const uint vertexCount, uint*const elements, const uint elementCount, id*const textures, const uint textureCount)
+Mesh*const MeshFactory::CreateMesh(VertexData*const vertices, const uint vertexCount, uint*const elements, const uint elementCount, ID*const textures, const uint textureCount)
 {
 	return new Mesh(vertices, vertexCount, elements, elementCount, textures, textureCount);
 }

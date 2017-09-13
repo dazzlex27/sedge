@@ -20,17 +20,17 @@ namespace s3dge
 	{
 	public:
 		// Buffers
-		static void GenBuffers(const uint n, uint*const buffers);
-		static void DeleteBuffers(const uint n, uint*const buffers);
-		static void BindBuffer(const BufferTarget target, const uint id);
+		static void GenBuffers(const uint n, ID*const buffers);
+		static void DeleteBuffers(const uint n, ID*const buffers);
+		static void BindBuffer(const BufferTarget target, const ID bufferID);
 		static void SetBufferData(const BufferTarget target, const uint bufferSize, const void* bufferData, const DrawingMode mode);
 		static void* MapBufferForWriting(const BufferTarget target);
 		static void UnmapBuffer(const BufferTarget target);
 
 		// VAO
-		static void GenVertexArrays(const uint n, uint*const arrays);
-		static void DeleteVertexArrays(const uint n, uint*const arrays);
-		static void BindVertexArray(const uint id);
+		static void GenVertexArrays(const uint n, ID*const arrays);
+		static void DeleteVertexArrays(const uint n, ID*const arrays);
+		static void BindVertexArray(const ID id);
 		static void EnableVertexAttributeArray(const uint index);
 		static void VertexAttributePointer(const uint index, const int size, const int type, const int normalized, const int stride, const void*const offset);
 
@@ -39,9 +39,9 @@ namespace s3dge
 		static void DrawElements(const PrimitiveType primitiveType, const uint count, const ValueType type, const void*const elements);
 
 		// Textures
-		static void GenTextures(const uint n, uint*const textures);
-		static void DeleteTextures(const uint n, uint*const textures);
-		static void BindTexture(const TextureTarget target, const uint id);
+		static void GenTextures(const uint n, ID*const textures);
+		static void DeleteTextures(const uint n, ID*const textures);
+		static void BindTexture(const TextureTarget target, const ID textureID);
 		static void LoadTex2DImage(const int level, const ColorCode internalFormat, const int width, const int height, const int border, const ColorCode format, const ValueType valueType, const void*const pixels);
 		static void LoadCubemapImage(const uint num, const int level, const ColorCode internalFormat, const int width, const int height, const int border, const ColorCode format, const ValueType valueType, const void*const pixels);
 		static void GenerateMipmap(const TextureTarget target);
@@ -49,20 +49,27 @@ namespace s3dge
 		static void SetTextureWrapMode(const TextureTarget target, const TextureWrap wrap, const TextureWrapMode mode);
 		static void SetTextureFilterMode(const TextureTarget target, const TextureFilter filter, const TextureFilterMode mode);
 
+		// Framebuffer
+		static void GenFramebuffers(const uint n, ID*const buffers);
+		static void DeleteFramebuffers(const uint n, ID*const buffers);
+		static void BindFramebuffer(const ID bufferID);
+		static const bool IsFramebufferComplete(const ID bufferID);
+		static void AttachTextureToFramebuffer(const ID textureID);
+
 		// Shaders
-		static const uint CreateShaderProgram();
-		static void LinkShaderProgram(const uint programID);
-		static void ValidateShaderProgram(const uint programID);
-		static const uint CreateShader(const ShaderTarget target);
-		static void DeleteShaderProgram(const uint programID);
-		static void DeleteShader(const uint shaderID);
-		static void AttachShader(const uint programID, const uint shaderID);
-		static void DetachShader(const uint programID, const uint shaderID);
-		static const bool CompileShader(const uint shaderID);
-		static char* GetShaderInfoLog(const uint shaderID);
-		static void BindShaderProgram(const uint programID);
-		static void LoadShaderSource(const uint shaderID, const char*const source);
-		static const int GetUniformLocation(const uint programID, const char*const name);
+		static const ID CreateShaderProgram();
+		static void LinkShaderProgram(const ID programID);
+		static void ValidateShaderProgram(const ID programID);
+		static const ID CreateShader(const ShaderTarget target);
+		static void DeleteShaderProgram(const ID programID);
+		static void DeleteShader(const ID shaderID);
+		static void AttachShader(const ID programID, const ID shaderID);
+		static void DetachShader(const ID programID, const ID shaderID);
+		static const bool CompileShader(const ID shaderID);
+		static char* GetShaderInfoLog(const ID shaderID);
+		static void BindShaderProgram(const ID programID);
+		static void LoadShaderSource(const ID shaderID, const char*const source);
+		static const int GetUniformLocation(const ID programID, const char*const name);
 		static void SetUniformMatrix4(const int location, const int count, const bool transpose, const float*const values);
 		static void SetUniform1f(const int location, const float value);
 		static void SetUniform2f(const int location, const float value1, const float value2);

@@ -187,7 +187,7 @@ void Renderer2D::Flush()
 	_elementCount = 0;
 }
 
-const float Renderer2D::GetSamplerIndexByTID(const id texID)
+const float Renderer2D::GetSamplerIndexByTID(const ID texID)
 {
 	if (texID == 0)
 		return -1.0f;
