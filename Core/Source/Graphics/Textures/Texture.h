@@ -19,7 +19,7 @@ namespace s3dge
 	protected:
 		std::string Name;
 		std::string Path;
-		ID ID;
+		ID TextureID;
 		TextureTarget Target;
 		TextureWrapMode WrapMode;
 		TextureFilterMode FilterMode;
@@ -31,7 +31,7 @@ namespace s3dge
 	public:
 		const char* GetName() const { return Name.c_str(); }
 		const char* GetPath() const { return Path.c_str(); }
-		const ID GetID() const { return ID; }
+		const ID GetID() const { return TextureID; }
 		const TextureTarget GetTarget() const { return Target; }
 		const TextureWrapMode GetWrapMode() const { return WrapMode; }
 		const TextureFilterMode GetFilterMode() const { return FilterMode; }

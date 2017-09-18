@@ -90,6 +90,10 @@
       <AdditionalDependencies>opengl32.lib;FreeType.lib;GLEW.lib;FreeType-GL.lib;GorillaAudio.lib;libogg.lib;libvorbis.lib;openal32.lib;zlibstatic.lib;IrrXML.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)\!bin\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
+    <PreBuildEvent />
+    <PreBuildEvent>
+      <Command>xcopy "$(SolutionDIr)Externals\OpenAL\libs\Win32\OpenAL32.lib" "$(SolutionDir)!bin\$(Configuration)" /y</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -123,6 +127,10 @@
       <AdditionalDependencies>opengl32.lib;FreeType.lib;GLEW.lib;FreeType-GL.lib;GorillaAudio.lib;libogg.lib;libvorbis.lib;openal32.lib;zlibstatic.lib;IrrXML.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)\!bin\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
+    <PreBuildEvent />
+    <PreBuildEvent>
+      <Command>xcopy "$(SolutionDIr)Externals\OpenAL\libs\Win32\OpenAL32.lib" "$(SolutionDir)!bin\$(Configuration)" /y</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
