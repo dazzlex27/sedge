@@ -37,26 +37,26 @@ namespace s3dge
 		Window* MainWindow;
 
 	public:
-		voID Run();
+		void Run();
 		inline uint GetFPS() const { return _fps; }
 		inline ENGINE_STATE GetEngineState() const { return _state; }
 
 	protected:
-		voID CreateGameWindow(const char* name, uint wIDth, uint height, bool fullscreen = false, bool vsync = true);
+		void CreateGameWindow(const char* name, uint wIDth, uint height, bool fullscreen = false, bool vsync = true);
 		double GetNextRNG();
 		float GetElapsedMS();
 
-		virtual voID Initialize() = 0; // Runs upon startup.
-		virtual voID Update() = 0; // Runs 60 times a second.
-		virtual voID Render() = 0; // Runs the number of times the current frame rate.
-		virtual voID Dispose() = 0; // Runs upon closing the main window.
+		virtual void Initialize() = 0; // Runs upon startup.
+		virtual void Update() = 0; // Runs 60 times a second.
+		virtual void Render() = 0; // Runs the number of times the current frame rate.
+		virtual void Dispose() = 0; // Runs upon closing the main window.
 
 	private:
-		voID RunGameLoop(); // Starts the actual gameloop
-		voID InitializeInternalSystems();
-		voID InitializeResourceManagers();
-		voID UpdateResourceManagers();
-		voID DisposeResourceManagers();
-		voID DisposeInternalSystems();
+		void RunGameLoop(); // Starts the actual gameloop
+		void InitializeInternalSystems();
+		void InitializeResourceManagers();
+		void UpdateResourceManagers();
+		void DisposeResourceManagers();
+		void DisposeInternalSystems();
 	};
 }

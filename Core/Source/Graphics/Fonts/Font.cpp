@@ -33,7 +33,7 @@ bool Font::LoadFontFromFile()
 
 const uint Font::GetAtlasID() const 
 { 
-	return _atlas->ID; 
+	return _atlas->id; 
 }
 
 Font::~Font()
