@@ -14,17 +14,17 @@ using namespace s3dge;
 Texture::Texture(const char* name, const char* path, const TextureTarget target, const TextureWrapMode wrapMode, const TextureFilterMode filterMode)
 	: Name(name), Path(path), Target(target), WrapMode(wrapMode), FilterMode(filterMode)
 {
-	GraphicsAPI::GenTextures(1, &ID);
+	GraphicsAPI::GenTextures(1, &TextureID);
 }
 
 Texture::~Texture()
 {
-	GraphicsAPI::DeleteTextures(1, &ID);
+	GraphicsAPI::DeleteTextures(1, &TextureID);
 }
 
 void Texture::Bind() const
 {
-	GraphicsAPI::BindTexture(Target, ID);
+	GraphicsAPI::BindTexture(Target, TextureID);
 }
 
 void Texture::Unbind() const
