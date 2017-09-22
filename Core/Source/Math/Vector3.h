@@ -22,28 +22,26 @@ namespace s3dge
 		Vector3(const float value);
 		Vector3(const float x, const float y, const float z);
 		Vector3(const Vector3& other);
+		
+		const Vector3 operator+(const Vector3& vec) const;
+		const Vector3 operator-(const Vector3& vec) const;
+		const Vector3 operator*(const Vector3& vec) const;
+		const Vector3 operator/(const Vector3& vec) const;
 
-		Vector3& Add(const Vector3& vector);
-		Vector3& Subtract(const Vector3& vector);
-		Vector3& Multiply(const Vector3& vector);
-		Vector3& Multiply(float value);
-		Vector3& Divide(const Vector3& vector);
+		const Vector3 operator+(float value) const;
+		const Vector3 operator-(float value) const;
+		const Vector3 operator*(float value) const;
+		const Vector3 operator/(float value) const;
 
 		Vector3& operator+=(const Vector3& other);
 		Vector3& operator-=(const Vector3& other);
 		Vector3& operator*=(const Vector3& other);
-		Vector3& operator*=(float value);
 		Vector3& operator/=(const Vector3& other);
 
-		friend Vector3 operator+(const Vector3& v1, const Vector3& v2);
-		friend Vector3 operator-(const Vector3& v1, const Vector3& v2);
-		friend Vector3 operator*(const Vector3& v1, const Vector3& v2);
-		friend Vector3 operator/(const Vector3& v1, const Vector3& v2);
-
-		friend Vector3 operator+(const Vector3& v, float value);
-		friend Vector3 operator-(const Vector3& v, float value);
-		friend Vector3 operator*(const Vector3& v, float value);
-		friend Vector3 operator/(const Vector3& v, float value);
+		Vector3& operator+=(float value);
+		Vector3& operator-=(float value);
+		Vector3& operator*=(float value);
+		Vector3& operator/=(float value);
 
 		friend Vector3 operator+(float value, const Vector3& v);
 		friend Vector3 operator-(float value, const Vector3& v);

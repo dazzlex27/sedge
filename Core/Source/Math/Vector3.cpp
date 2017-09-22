@@ -27,39 +27,106 @@ Vector3::Vector3(const float x, const float y, const float z)
 {
 }
 
-Vector3::Vector3(const Vector3& other)
-	: x(other.x), y(other.y), z(other.z)
+Vector3::Vector3(const Vector3& vec)
+	: x(vec.x), y(vec.y), z(vec.z)
 {
 }
 
-Vector3& Vector3::Add(const Vector3& vector)
+const Vector3 Vector3::operator+(const Vector3& vec) const
 {
-	x += vector.x;
-	y += vector.y;
-	z += vector.z;
+	return Vector3(x + vec.x, y + vec.y, z + vec.z);
+}
+
+const Vector3 Vector3::operator-(const Vector3& vec) const
+{
+	return Vector3(x - vec.x, y - vec.y, z - vec.z);
+}
+
+const Vector3 Vector3::operator*(const Vector3& vec) const
+{
+	return Vector3(x * vec.x, y * vec.y, z * vec.z);
+}
+
+const Vector3 Vector3::operator/(const Vector3& vec) const
+{
+	return Vector3(x / vec.x, y / vec.y, z / vec.z);
+}
+
+const Vector3 Vector3::operator+(const float value) const
+{
+	return Vector3(x + value, y + value, z + value);
+}
+
+const Vector3 Vector3::operator-(const float value) const
+{
+	return Vector3(x - value, y - value, z - value);
+}
+
+const Vector3 Vector3::operator*(const float value) const
+{
+	return Vector3(x * value, y * value, z * value);
+}
+
+const Vector3 Vector3::operator/(const float value) const
+{
+	return Vector3(x / value, y / value, z / value);
+}
+
+Vector3& Vector3::operator+=(const Vector3& vec)
+{
+	x += vec.x;
+	y += vec.y;
+	z += vec.z;
 
 	return *this;
 }
 
-Vector3& Vector3::Subtract(const Vector3& vector)
+Vector3& Vector3::operator-=(const Vector3& vec)
 {
-	x -= vector.x;
-	y -= vector.y;
-	z -= vector.z;
+	x -= vec.x;
+	y -= vec.y;
+	z -= vec.z;
 
 	return *this;
 }
 
-Vector3& Vector3::Multiply(const Vector3& vector)
+Vector3& Vector3::operator*=(const Vector3& vec)
 {
-	x *= vector.x;
-	y *= vector.y;
-	z *= vector.z;
+	x *= vec.x;
+	y *= vec.y;
+	z *= vec.z;
 
 	return *this;
 }
 
-Vector3& Vector3::Multiply(const float value)
+Vector3& Vector3::operator/=(const Vector3& vec)
+{
+	x /= vec.x;
+	y /= vec.y;
+	z /= vec.z;
+
+	return *this;
+}
+
+Vector3& Vector3::operator+=(const float value)
+{
+	x += value;
+	y += value;
+	z += value;
+
+	return *this;
+}
+
+Vector3& Vector3::operator-=(const float value)
+{
+	x -= value;
+	y -= value;
+	z -= value;
+
+	return *this;
+}
+
+Vector3& Vector3::operator*=(const float value)
 {
 	x *= value;
 	y *= value;
@@ -68,78 +135,13 @@ Vector3& Vector3::Multiply(const float value)
 	return *this;
 }
 
-Vector3& Vector3::Divide(const Vector3& vector)
+Vector3& Vector3::operator/=(const float value)
 {
-	x /= vector.x;
-	y /= vector.y;
-	z /= vector.z;
+	x /= value;
+	y /= value;
+	z /= value;
 
 	return *this;
-}
-
-Vector3& Vector3::operator+=(const Vector3& other)
-{
-	return Add(other);
-}
-
-Vector3& Vector3::operator-=(const Vector3& other)
-{
-	return Subtract(other);
-}
-
-Vector3& Vector3::operator*=(const Vector3& other)
-{
-	return Multiply(other);
-}
-
-Vector3& Vector3::operator*=(const float value)
-{
-	return Multiply(value);
-}
-
-Vector3& Vector3::operator/=(const Vector3& other)
-{
-	return Divide(other);
-}
-
-Vector3 s3dge::operator+(const Vector3& v1, const Vector3& v2)
-{
-	return Vector3(v1.x + v2.x, v1.y + v2.y, v1.z + v2.z);
-}
-
-Vector3 s3dge::operator-(const Vector3& v1, const Vector3& v2)
-{
-	return Vector3(v1.x - v2.x, v1.y - v2.y, v1.z - v2.z);
-}
-
-Vector3 s3dge::operator*(const Vector3& v1, const Vector3& v2)
-{
-	return Vector3(v1.x * v2.x, v1.y * v2.y, v1.z * v2.z);
-}
-
-Vector3 s3dge::operator/(const Vector3& v1, const Vector3& v2)
-{
-	return Vector3(v1.x / v2.x, v1.y / v2.y, v1.z / v2.z);
-}
-
-Vector3 s3dge::operator+(const Vector3& v, float value)
-{
-	return Vector3(v.x + value, v.y + value, v.z + value);
-}
-
-Vector3 s3dge::operator-(const Vector3& v, float value)
-{
-	return Vector3(v.x - value, v.y - value, v.z - value);
-}
-
-Vector3 s3dge::operator*(const Vector3& v, float value)
-{
-	return Vector3(v.x * value, v.y * value, v.z * value);
-}
-
-Vector3 s3dge::operator/(const Vector3& v, float value)
-{
-	return Vector3(v.x / value, v.y / value, v.z / value);
 }
 
 Vector3 s3dge::operator+(float value, const Vector3& v)
@@ -190,7 +192,7 @@ const float Vector3::GetDistance(const Vector3& v) const
 
 const float Vector3::GetLength() const
 {
-	return (const float)std::sqrt(x * x + y * y + z * z);
+	return (const float)sqrt(x * x + y * y + z * z);
 }
 
 const float Vector3::GetDotProduct(const Vector3& v1, const Vector3& v2)
