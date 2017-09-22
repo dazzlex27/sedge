@@ -13,6 +13,7 @@ Implements the Matrix4 class
 #include "Quaternion.h"
 #include "System/Log.h"
 #include "Converters.h"
+#include <glm/gtc/matrix_transform.hpp>
 
 using namespace s3dge;
 using namespace std;
@@ -56,138 +57,6 @@ Matrix4& Matrix4::Multiply(const Matrix4& other)
 			data[row + column * 4] = sum;
 		}
 	}
-	return *this;
-}
-
-Matrix4& Matrix4::Invert()
-{
-	float inverted[16];
-
-	inverted[0] = data[5] * data[10] * data[15] -
-		data[5] * data[11] * data[14] -
-		data[9] * data[6] * data[15] +
-		data[9] * data[7] * data[14] +
-		data[13] * data[6] * data[11] -
-		data[13] * data[7] * data[10];
-
-	inverted[4] = -data[4] * data[10] * data[15] +
-		data[4] * data[11] * data[14] +
-		data[8] * data[6] * data[15] -
-		data[8] * data[7] * data[14] -
-		data[12] * data[6] * data[11] +
-		data[12] * data[7] * data[10];
-
-	inverted[8] = data[4] * data[9] * data[15] -
-		data[4] * data[11] * data[13] -
-		data[8] * data[5] * data[15] +
-		data[8] * data[7] * data[13] +
-		data[12] * data[5] * data[11] -
-		data[12] * data[7] * data[9];
-
-	inverted[12] = -data[4] * data[9] * data[14] +
-		data[4] * data[10] * data[13] +
-		data[8] * data[5] * data[14] -
-		data[8] * data[6] * data[13] -
-		data[12] * data[5] * data[10] +
-		data[12] * data[6] * data[9];
-
-	inverted[1] = -data[1] * data[10] * data[15] +
-		data[1] * data[11] * data[14] +
-		data[9] * data[2] * data[15] -
-		data[9] * data[3] * data[14] -
-		data[13] * data[2] * data[11] +
-		data[13] * data[3] * data[10];
-
-	inverted[5] = data[0] * data[10] * data[15] -
-		data[0] * data[11] * data[14] -
-		data[8] * data[2] * data[15] +
-		data[8] * data[3] * data[14] +
-		data[12] * data[2] * data[11] -
-		data[12] * data[3] * data[10];
-
-	inverted[9] = -data[0] * data[9] * data[15] +
-		data[0] * data[11] * data[13] +
-		data[8] * data[1] * data[15] -
-		data[8] * data[3] * data[13] -
-		data[12] * data[1] * data[11] +
-		data[12] * data[3] * data[9];
-
-	inverted[13] = data[0] * data[9] * data[14] -
-		data[0] * data[10] * data[13] -
-		data[8] * data[1] * data[14] +
-		data[8] * data[2] * data[13] +
-		data[12] * data[1] * data[10] -
-		data[12] * data[2] * data[9];
-
-	inverted[2] = data[1] * data[6] * data[15] -
-		data[1] * data[7] * data[14] -
-		data[5] * data[2] * data[15] +
-		data[5] * data[3] * data[14] +
-		data[13] * data[2] * data[7] -
-		data[13] * data[3] * data[6];
-
-	inverted[6] = -data[0] * data[6] * data[15] +
-		data[0] * data[7] * data[14] +
-		data[4] * data[2] * data[15] -
-		data[4] * data[3] * data[14] -
-		data[12] * data[2] * data[7] +
-		data[12] * data[3] * data[6];
-
-	inverted[10] = data[0] * data[5] * data[15] -
-		data[0] * data[7] * data[13] -
-		data[4] * data[1] * data[15] +
-		data[4] * data[3] * data[13] +
-		data[12] * data[1] * data[7] -
-		data[12] * data[3] * data[5];
-
-	inverted[14] = -data[0] * data[5] * data[14] +
-		data[0] * data[6] * data[13] +
-		data[4] * data[1] * data[14] -
-		data[4] * data[2] * data[13] -
-		data[12] * data[1] * data[6] +
-		data[12] * data[2] * data[5];
-
-	inverted[3] = -data[1] * data[6] * data[11] +
-		data[1] * data[7] * data[10] +
-		data[5] * data[2] * data[11] -
-		data[5] * data[3] * data[10] -
-		data[9] * data[2] * data[7] +
-		data[9] * data[3] * data[6];
-
-	inverted[7] = data[0] * data[6] * data[11] -
-		data[0] * data[7] * data[10] -
-		data[4] * data[2] * data[11] +
-		data[4] * data[3] * data[10] +
-		data[8] * data[2] * data[7] -
-		data[8] * data[3] * data[6];
-
-	inverted[11] = -data[0] * data[5] * data[11] +
-		data[0] * data[7] * data[9] +
-		data[4] * data[1] * data[11] -
-		data[4] * data[3] * data[9] -
-		data[8] * data[1] * data[7] +
-		data[8] * data[3] * data[5];
-
-	inverted[15] = data[0] * data[5] * data[10] -
-		data[0] * data[6] * data[9] -
-		data[4] * data[1] * data[10] +
-		data[4] * data[2] * data[9] +
-		data[8] * data[1] * data[6] -
-		data[8] * data[2] * data[5];
-
-	const float determinant = data[0] * inverted[0] + data[1] * inverted[4] + data[2] * inverted[8] + data[3] * inverted[12];
-
-	if (determinant == 0)
-	{
-		LOG_ERROR("Determinant was zero!");
-		abort();
-	}
-
-	const float determinantInverted = 1.0f / determinant;
-
-	for (int i = 0; i < 16; i++)
-		data[i] = inverted[i] * determinantInverted;
-
 	return *this;
 }
 
@@ -242,7 +111,9 @@ Matrix4 Matrix4::GetRotation(const Vector3& axis, const float angle)
 {
 	Matrix4 result = GetIdentity();
 
-	RotateMatrix(result, axis, angle);
+	const float angleRads = glm::radians(angle);
+
+	RotateMatrix(result, axis, angleRads);
 
 	return result;
 }
@@ -272,42 +143,30 @@ Matrix4 Matrix4::GetOrthographic(const float left, const float right, const floa
 
 Matrix4 Matrix4::GetPerspective(const float fov, const float aspect, const float near, const float far)
 {
-	Matrix4 result = Matrix4::GetIdentity();
+	Matrix4 result;
 
-	const float frustumDepth = far - near;
-	const float oneDivByDepth = 1 / frustumDepth;
-	const float fovRad = DegToRad(fov);
-
-	result.data[4 * 1 + 1] = 1 / tan(0.5f * fovRad);
-	result.data[4 * 0 + 0] = result.data[1 * 4 + 1] / aspect;
-	result.data[4 * 2 + 2] = far * oneDivByDepth;
-	result.data[4 * 3 + 2] = (-far * near) * oneDivByDepth;
-	result.data[4 * 2 + 3] = 1;
+	const float fovRads = glm::radians(fov);
+	glm::mat4 perspective = glm::perspective(fovRads, aspect, near, far);
+	memcpy(&result.data[0], &perspective[0], sizeof(float) * 16);
 
 	return result;
 }
 
 Matrix4 Matrix4::LookAt(const Vector3& eye, const Vector3& target, const Vector3& up)
 {
-	const Vector3 f(Vector3::Normalize(target - eye));
-	const Vector3 s(Vector3::Normalize(Vector3::GetCrossProduct(f, up)));
-	const Vector3 u(Vector3::Normalize(Vector3::GetCrossProduct(s, f)));
+	glm::vec3 gEye(eye.x, eye.y, eye.z);
+	glm::vec3 gTarget(target.x, target.y, target.z);
+	glm::vec3 gUp(up.x, up.y, up.z);
 
-	Matrix4 result = GetIdentity();
-	result.data[4 * 0 + 0] = s.x;
-	result.data[4 * 1 + 0] = s.y;
-	result.data[4 * 2 + 0] = s.z;
-	result.data[4 * 0 + 1] = u.x;
-	result.data[4 * 1 + 1] = u.y;
-	result.data[4 * 2 + 1] = u.z;
-	result.data[4 * 0 + 2] = f.x;
-	result.data[4 * 1 + 2] = f.y;
-	result.data[4 * 2 + 2] = f.z;
+	glm::mat4 view = glm::lookAt(gEye, gTarget, gUp);
 
-	return result * GetTranslation(Vector3(-target.x, -target.y, -target.z));
+	Matrix4 result;
+	memcpy(&result.data[0], &view[0], sizeof(float) * 16);
+
+	return result;
 }
 
-const char* Matrix4::Print()
+const char*const Matrix4::Print()
 {
 	string result;
 
@@ -326,23 +185,14 @@ void TranslateMatrix(Matrix4& matrix, const Vector3& vector)
 
 void RotateMatrix(Matrix4& matrix, const Vector3& axis, const float angle)
 {
-	const float angleRad = DegToRad(angle);
+	glm::mat4 gRot;
+	memcpy(&gRot[0], &matrix.data[0], sizeof(float) * 16);
 
-	Quaternion q;
-	q.x = axis.x * sin(angleRad / 2);
-	q.y = axis.y * sin(angleRad / 2);
-	q.z = axis.z * sin(angleRad / 2);
-	q.w = cos(angleRad / 2);
+	glm::vec3 gAxis(axis.x, axis.y, axis.z);
 
-	matrix.data[4 * 0 + 0] = 1 - 2 * pow(q.y, 2) - 2 * pow(q.z, 2);
-	matrix.data[4 * 0 + 1] = 2 * q.x * q.y + 2 * q.w * q.z;
-	matrix.data[4 * 0 + 2] = 2 * q.x * q.z - 2 * q.w * q.y;
-	matrix.data[4 * 1 + 0] = 2 * q.x * q.y - 2 * q.w * q.z;
-	matrix.data[4 * 1 + 1] = 1 - 2 * pow(q.x, 2) - 2 * pow(q.z, 2);
-	matrix.data[4 * 1 + 2] = 2 * q.y * q.z - 2 * q.w * q.x;
-	matrix.data[4 * 2 + 0] = 2 * q.x * q.z + 2 * q.w * q.y;
-	matrix.data[4 * 2 + 1] = 2 * q.y * q.z + 2 * q.w * q.x;
-	matrix.data[4 * 2 + 2] = 1 - 2 * pow(q.x, 2) - 2 * pow(q.y, 2);
+	glm::mat4 mat = glm::rotate(gRot, angle, gAxis);
+
+	memcpy(&matrix.data[0], &mat[0], sizeof(float) * 16);
 }
 
 void ScaleMatrix(Matrix4& matrix, const Vector3& vector)
