@@ -2,7 +2,7 @@
 
 using namespace s3dge;
 
-static void UpdateCamera(Camera& camera, const Vector3& position, const Vector2& displacement);
+static void UpdateCamera(Camera& camera, const Vector2& displacement);
 
 void Application::Initialize()
 {
@@ -11,15 +11,14 @@ void Application::Initialize()
 	ShaderManager::Add("scene", "Resources/Shaders/scene.vert", "Resources/Shaders/scene.frag");
 	ShaderManager::Add("hud", "Resources/Shaders/basic.vert", "Resources/Shaders/static.frag");
 	ShaderManager::Add("skybox", "Resources/Shaders/skybox.vert", "Resources/Shaders/skybox.frag");
-	
-	_camera = new FPSCamera();
 
-	ShaderManager::Get("scene")->SetProjection(_camera->GetProjection());
-	ShaderManager::Get("hud")->SetProjection(Matrix4::GetOrthographic(0.0f, 16.0f, 0.0f, 9.0f, -1.0f, 1.0f));
-	
 	FontManager::Add("font1", "Resources/Fonts/Assistant-Regular.ttf", 24);
 	TextureManager::AddTex2D("lm-test", "Resources/Textures/lm-test.png");
 	TextureManager::AddTex2D("lm-test-sp", "Resources/Textures/lm-test-sp.png");
+
+	_camera = new FPSCamera();
+	ShaderManager::Get("scene")->SetProjection(_camera->GetProjection());
+	ShaderManager::Get("hud")->SetProjection(Matrix4::GetOrthographic(0.0f, 16.0f, 0.0f, 9.0f, -1.0f, 1.0f));
 
 	std::vector<std::string> sb_paths;
 	sb_paths.push_back("Resources/Textures/sb/sb_rt.png");
@@ -81,12 +80,12 @@ void Application::Initialize()
 
 void Application::Update()
 {
-	Vector3 cameraPosition = _camera->GetPosition();
-	UpdateCamera(*_camera, cameraPosition, InputManager::GetMouseDisplacement());
+	UpdateCamera(*_camera, InputManager::GetMouseDisplacement());
+	const Vector3& cameraPosition = _camera->GetPosition();
 
-	ShaderProgram* shaderScene = ShaderManager::Get("scene");
+	ShaderProgram*const shaderScene = ShaderManager::Get("scene");
 	shaderScene->Bind(); 
-	shaderScene->SetUniform3f("spotLight.position", _camera->GetPosition());
+	shaderScene->SetUniform3f("spotLight.position", cameraPosition);
 	shaderScene->SetUniform3f("spotLight.direction", _camera->GetViewDirection());
 
 	Renderable2DManager::GetLabel("fps")->SetText(std::to_string(GetFPS()) + " fps");
@@ -114,6 +113,7 @@ void Application::Render()
 	shaderScene->SetUniform1i("material.diffuse", 0);
 	shaderScene->SetUniform1i("material.specular", 1);
 	shaderScene->SetUniform1f("material.shininess", 32.0f);
+	shaderScene->SetView(view);
 	shaderScene->SetModel(Matrix4::GetTranslation(Vector3(0, -1, -2.5f)) * Matrix4::GetScale(Vector3(0.1f, 0.1f, 0.1f)));
 	Renderable3DManager::GetModel("nano")->Draw();
 
@@ -131,12 +131,12 @@ void Application::Dispose()
 float horizontalAngle = 0;
 float verticalAngle = 0;
 
-void UpdateCamera(Camera& camera, const Vector3& position, const Vector2& displacement)
+void UpdateCamera(Camera& camera, const Vector2& displacement)
 {
 	const float speed = 0.1f;
 	const float mouseSpeed = 3.0f;
 
-	Vector3 cameraPosition(position);
+	Vector3 cameraPosition = camera.GetPosition();
 
 	horizontalAngle += mouseSpeed * displacement.x;
 	verticalAngle -= mouseSpeed * displacement.y;
@@ -173,6 +173,8 @@ void UpdateCamera(Camera& camera, const Vector3& position, const Vector2& displa
 		camera.SetFOV(camera.GetFOV() + 1);
 	if (InputManager::KeyDown(S3_KEY_MMB))
 		camera.SetFOV(45);
+	if (InputManager::KeyDown(S3_KEY_0))
+		cameraPosition = Vector3();
 
 	camera.SetPosition(cameraPosition);
 	camera.SetViewDirection(direction);
