@@ -5,7 +5,7 @@ layout (location = 0) out vec4 resultColor;
 struct Material 
 {
     sampler2D diffuse;
-    sampler2D specular;
+	sampler2D specular;
     float shininess;
 }; 
 
@@ -71,10 +71,10 @@ void main()
 	vec3 viewDir = normalize(viewPos - fragment.position);
 
 	vec3 dirLight = GetDirLight(dirLight, norm, viewDir);
-	vec3 pointLight = GetPointLight(pointLight, norm, viewDir);
-	vec3 spotLight = GetSpotLight(spotLight, norm, viewDir);
+	//vec3 pointLight = GetPointLight(pointLight, norm, viewDir);
+	//vec3 spotLight = GetSpotLight(spotLight, norm, viewDir);
 	
-	vec3 result = dirLight + pointLight + spotLight;
+	vec3 result = dirLight;// + pointLight + spotLight;
 	
 	resultColor = vec4(result, 1);
 }

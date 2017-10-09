@@ -4,6 +4,8 @@ using namespace s3dge;
 
 static void UpdateCamera(Camera& camera, const Vector2& displacement);
 
+void SetLightingParameters(ShaderProgram*const shaderScene);
+
 void Application::Initialize()
 {
 	CreateGameWindow("S3DGE Application", 1280, 720, false, false);
@@ -12,11 +14,12 @@ void Application::Initialize()
 	ShaderManager::Add("hud", "Resources/Shaders/basic.vert", "Resources/Shaders/static.frag");
 	ShaderManager::Add("skybox", "Resources/Shaders/skybox.vert", "Resources/Shaders/skybox.frag");
 
-	FontManager::Add("font1", "Resources/Fonts/Assistant-Regular.ttf", 24);
+	FontManager::Add("font1", "Resources/Fonts/Assistant-Regular.ttf", 14);
 	TextureManager::AddTex2D("lm-test", "Resources/Textures/lm-test.png");
 	TextureManager::AddTex2D("lm-test-sp", "Resources/Textures/lm-test-sp.png");
 
 	_camera = new FPSCamera();
+	_camera->SetPosition(Vector3(0, 1, 0));
 	ShaderManager::Get("scene")->SetProjection(_camera->GetProjection());
 	ShaderManager::Get("hud")->SetProjection(Matrix4::GetOrthographic(0.0f, 16.0f, 0.0f, 9.0f, -1.0f, 1.0f));
 
@@ -29,12 +32,12 @@ void Application::Initialize()
 	sb_paths.push_back("Resources/Textures/sb/sb_ft.png");
 	TextureManager::AddCubemap("skybox", sb_paths);
 
-	Renderable3DManager::AddMesh("cube", MeshFactory::CreateCubeOfUnitSize(nullptr));
 	Renderable3DManager::AddModel("nano", ModelFactory::CreateModel("Resources/Models/nanosuit/nanosuit.obj"));
+	Renderable3DManager::AddModel("sponza", ModelFactory::CreateModel("Resources/Models/sponza/sponza.obj"));
 	Renderable3DManager::AddSkybox("sky1", SkyboxFactory::CreateSkybox(TextureManager::GetCubemap("skybox")));
 
-	Label* label = LabelFactory::CreateLabel("startup...", FontManager::Get("font1"), Vector2(0.3f, 8.4f), 0, Size2D(2, 2));
-	Label* label2 = LabelFactory::CreateLabel("p:", FontManager::Get("font1"), Vector2(0.3f, 7.8f), 0, Size2D(2, 2));
+	Label* label = LabelFactory::CreateLabel("startup...", FontManager::Get("font1"), Vector2(0.1f, 8.7f), 0, Size2D(2, 2));
+	Label* label2 = LabelFactory::CreateLabel("p:", FontManager::Get("font1"), Vector2(0.1f, 8.4f), 0, Size2D(2, 2));
 	
 	Renderable2DManager::AddLabel("fps", label);
 	Renderable2DManager::AddLabel("position", label2);
@@ -54,28 +57,7 @@ void Application::Initialize()
 	ShaderProgram* shaderScene = ShaderManager::Get("scene");
 	shaderScene->Bind();
 
-	shaderScene->SetUniform3f("dirLight.direction", Vector3(-1, -0.5, 1));
-	shaderScene->SetUniform3f("dirLight.ambient", Vector3(0.5f, 0.5f, 0.5f));
-	shaderScene->SetUniform3f("dirLight.diffuse", Vector3(0.5f, 0.5f, 0.5f));
-	shaderScene->SetUniform3f("dirLight.specular", Vector3(1.0f, 1.0f, 1.0f));
-
-	shaderScene->SetUniform3f("pointLight.position", Vector3(2, 0.5, 0));
-	shaderScene->SetUniform3f("pointLight.ambient", Vector3(0.5f, 0.5f, 0.5f));
-	shaderScene->SetUniform3f("pointLight.diffuse", Vector3(0.5f, 0.5f, 0.5f));
-	shaderScene->SetUniform3f("pointLight.specular", Vector3(1.0f, 1.0f, 1.0f));
-	shaderScene->SetUniform1f("pointLight.constant", 1.0f);
-	shaderScene->SetUniform1f("pointLight.linear", 0.09f);
-	shaderScene->SetUniform1f("pointLight.quadratic", 0.032f);
-
-	shaderScene->SetUniform3f("spotLight.direction", Vector3(0, -0.5, 1));
-	shaderScene->SetUniform3f("spotLight.ambient", Vector3(0.5f, 0.5f, 0.5f));
-	shaderScene->SetUniform3f("spotLight.diffuse", Vector3(0.5f, 0.5f, 0.5f));
-	shaderScene->SetUniform3f("spotLight.specular", Vector3(1.0f, 1.0f, 1.0f));
-	shaderScene->SetUniform1f("spotLight.constant", 1.0f);
-	shaderScene->SetUniform1f("spotLight.linear", 0.09f);
-	shaderScene->SetUniform1f("spotLight.quadratic", 0.032f);
-	shaderScene->SetUniform1f("spotLight.inCutOff", (float)cos(0.226893));
-	shaderScene->SetUniform1f("spotLight.outCutOff", (float)cos(0.314159));
+	SetLightingParameters(shaderScene);
 }
 
 void Application::Update()
@@ -110,11 +92,13 @@ void Application::Render()
 
 	ShaderProgram* shaderScene = ShaderManager::Get("scene");
 	shaderScene->Bind();
+	shaderScene->SetView(view);
 	shaderScene->SetUniform1i("material.diffuse", 0);
 	shaderScene->SetUniform1i("material.specular", 1);
 	shaderScene->SetUniform1f("material.shininess", 32.0f);
-	shaderScene->SetView(view);
-	shaderScene->SetModel(Matrix4::GetTranslation(Vector3(0, -1, -2.5f)) * Matrix4::GetScale(Vector3(0.1f, 0.1f, 0.1f)));
+	shaderScene->SetModel(Matrix4::GetScale(Vector3(0.008f, 0.008f, 0.008f)));
+	Renderable3DManager::GetModel("sponza")->Draw();
+	shaderScene->SetModel(Matrix4::GetTranslation(Vector3(0, 0, -1.5f)) * Matrix4::GetScale(Vector3(0.1f, 0.1f, 0.1f)));
 	Renderable3DManager::GetModel("nano")->Draw();
 
 	GraphicsAPI::DisableDepthTesting();
@@ -179,4 +163,30 @@ void UpdateCamera(Camera& camera, const Vector2& displacement)
 	camera.SetPosition(cameraPosition);
 	camera.SetViewDirection(direction);
 	camera.SetUp(up);
+}
+
+void SetLightingParameters(ShaderProgram*const shaderScene)
+{
+	shaderScene->SetUniform3f("dirLight.direction", Vector3(-1, -0.5, 1));
+	shaderScene->SetUniform3f("dirLight.ambient", Vector3(0.5f, 0.5f, 0.5f));
+	shaderScene->SetUniform3f("dirLight.diffuse", Vector3(0.5f, 0.5f, 0.5f));
+	shaderScene->SetUniform3f("dirLight.specular", Vector3(1.0f, 1.0f, 1.0f));
+
+	shaderScene->SetUniform3f("pointLight.position", Vector3(2, 0.5, 0));
+	shaderScene->SetUniform3f("pointLight.ambient", Vector3(0.5f, 0.5f, 0.5f));
+	shaderScene->SetUniform3f("pointLight.diffuse", Vector3(0.5f, 0.5f, 0.5f));
+	shaderScene->SetUniform3f("pointLight.specular", Vector3(1.0f, 1.0f, 1.0f));
+	shaderScene->SetUniform1f("pointLight.constant", 1.0f);
+	shaderScene->SetUniform1f("pointLight.linear", 0.09f);
+	shaderScene->SetUniform1f("pointLight.quadratic", 0.032f);
+
+	shaderScene->SetUniform3f("spotLight.direction", Vector3(0, -0.5, 1));
+	shaderScene->SetUniform3f("spotLight.ambient", Vector3(0.5f, 0.5f, 0.5f));
+	shaderScene->SetUniform3f("spotLight.diffuse", Vector3(0.5f, 0.5f, 0.5f));
+	shaderScene->SetUniform3f("spotLight.specular", Vector3(1.0f, 1.0f, 1.0f));
+	shaderScene->SetUniform1f("spotLight.constant", 1.0f);
+	shaderScene->SetUniform1f("spotLight.linear", 0.09f);
+	shaderScene->SetUniform1f("spotLight.quadratic", 0.032f);
+	shaderScene->SetUniform1f("spotLight.inCutOff", (float)cos(0.226893));
+	shaderScene->SetUniform1f("spotLight.outCutOff", (float)cos(0.314159));
 }
