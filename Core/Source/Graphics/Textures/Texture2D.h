@@ -27,6 +27,7 @@ namespace s3dge
 		inline int GetWidth() const { return _width; }
 		inline int GetHeight() const { return _height; }
 		inline int GetComponentsCount() const { return _components; }
+		inline TextureType GetType() const { return _type; }
 		
 	public:
 		virtual bool Load() override;

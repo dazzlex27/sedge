@@ -11,7 +11,7 @@ namespace s3dge
 	class ModelUtils
 	{
 	public:
-		static Model* ReadFromFile(const char* filepath);
+		static Model*const ReadFromFile(const char*const filepath);
 
 	private:
 		ModelUtils(void);
