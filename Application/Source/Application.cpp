@@ -3,8 +3,7 @@
 using namespace s3dge;
 
 static void UpdateCamera(Camera& camera, const Vector2& displacement);
-
-void SetLightingParameters(ShaderProgram*const shaderScene);
+static void SetLightingParameters(ShaderProgram*const shaderScene);
 
 void Application::Initialize()
 {
@@ -32,6 +31,7 @@ void Application::Initialize()
 	sb_paths.push_back("Resources/Textures/sb/sb_ft.png");
 	TextureManager::AddCubemap("skybox", sb_paths);
 
+	//Renderable3DManager::AddModel("nimbasa", ModelFactory::CreateModel("Resources/Models/nimbasa/Nimbasa City.obj"));
 	Renderable3DManager::AddModel("nano", ModelFactory::CreateModel("Resources/Models/nanosuit/nanosuit.obj"));
 	Renderable3DManager::AddModel("sponza", ModelFactory::CreateModel("Resources/Models/sponza/sponza.obj"));
 	Renderable3DManager::AddSkybox("sky1", SkyboxFactory::CreateSkybox(TextureManager::GetCubemap("skybox")));
@@ -79,20 +79,46 @@ void Application::Update()
 
 void Application::Render()
 {
+	Matrix4 view = _camera->GetView();
+
+	DrawSkybox(view);
+	DrawScene(view);
+	DrawUI();
+}
+
+void Application::Dispose()
+{
+	SafeDelete(_mainScene);
+	SafeDelete(_hudLayer);
+	SafeDelete(_camera);
+}
+
+void Application::DrawUI()
+{
+	GraphicsAPI::DisableDepthTesting();
+	ShaderManager::Get("hud")->Bind();
+	_hudLayer->Draw();
 	GraphicsAPI::EnableDepthTesting();
+}
+
+void Application::DrawSkybox(const Matrix4& viewMatrix)
+{
 	ShaderProgram* shaderSkybox = ShaderManager::Get("skybox");
 	shaderSkybox->SetProjection(_camera->GetProjection());
-	Matrix4 view = _camera->GetView();
-	shaderSkybox->SetView(view);
+	
+	shaderSkybox->SetView(viewMatrix);
 
 	shaderSkybox->Bind();
 	GraphicsAPI::DisableDepthMask();
 	Renderable3DManager::GetSkybox("sky1")->Draw();
 	GraphicsAPI::EnableDepthMask();
+}
 
+void Application::DrawScene(const s3dge::Matrix4& viewMatrix)
+{
 	ShaderProgram* shaderScene = ShaderManager::Get("scene");
 	shaderScene->Bind();
-	shaderScene->SetView(view);
+	shaderScene->SetView(viewMatrix);
 	shaderScene->SetUniform1i("material.diffuse", 0);
 	shaderScene->SetUniform1i("material.specular", 1);
 	shaderScene->SetUniform1f("material.shininess", 32.0f);
@@ -101,15 +127,7 @@ void Application::Render()
 	shaderScene->SetModel(Matrix4::GetTranslation(Vector3(0, 0, -1.5f)) * Matrix4::GetScale(Vector3(0.1f, 0.1f, 0.1f)));
 	Renderable3DManager::GetModel("nano")->Draw();
 
-	GraphicsAPI::DisableDepthTesting();
-	_hudLayer->Draw();
-}
-
-void Application::Dispose()
-{
-	SafeDelete(_mainScene);
-	SafeDelete(_hudLayer);
-	SafeDelete(_camera);
+	//Renderable3DManager::GetModel("nimbasa")->Draw();
 }
 
 float horizontalAngle = 0;
