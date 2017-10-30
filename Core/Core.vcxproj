@@ -69,6 +69,10 @@
       <AdditionalLibraryDirectories>
       </AdditionalLibraryDirectories>
     </Lib>
+    <PostBuildEvent>
+      <Command>xcopy "$(SolutionDIr)Externals\OpenAL\libs\Win32\OpenAL32.lib" "$(SolutionDir)!bin\$(Configuration)" /y
+xcopy "$(SolutionDIr)Externals\assimp-4.0.0\libs\$(Configuration)\*" "$(SolutionDir)!bin\$(Configuration)" /y</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -95,6 +99,10 @@
       <AdditionalLibraryDirectories>
       </AdditionalLibraryDirectories>
     </Lib>
+    <PostBuildEvent>
+      <Command>xcopy "$(SolutionDIr)Externals\OpenAL\libs\Win32\OpenAL32.lib" "$(SolutionDir)!bin\$(Configuration)" /y
+xcopy "$(SolutionDIr)Externals\assimp-4.0.0\libs\$(Configuration)\*" "$(SolutionDir)!bin\$(Configuration)" /y</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\Audio\Sound.cpp" />
