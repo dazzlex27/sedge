@@ -14,4 +14,9 @@ public:
 	void Update() override;
 	void Render() override;
 	void Dispose() override;
+
+private:
+	inline void DrawUI();
+	inline void DrawSkybox(const s3dge::Matrix4& viewMatrix);
+	inline void DrawScene(const s3dge::Matrix4& viewMatrix);
 };
