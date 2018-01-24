@@ -16,6 +16,6 @@ namespace s3dge
 	class SkyboxFactory
 	{
 	public:
-		static Skybox*const CreateSkybox(Cubemap*const texture);
+		Skybox*const CreateSkybox(Cubemap*const texture);
 	};
 }

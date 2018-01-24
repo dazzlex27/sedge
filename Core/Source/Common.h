@@ -35,11 +35,11 @@ This file is included by the main header S3DGE.h
 #include "Graphics/Renderables/ModelFactory.h"
 #include "Graphics/Renderables/SkyboxFactory.h"
 
-#include "Graphics/Managers/TextureManager.h"
-#include "Graphics/Managers/FontManager.h"
-#include "Graphics/Managers/Renderable2DManager.h"
-#include "Graphics/Managers/Renderable3DManager.h"
-#include "Graphics/Managers/ShaderManager.h"
+#include "Graphics/AssetManagers/TextureManager.h"
+#include "Graphics/AssetManagers/FontManager.h"
+#include "Graphics/AssetManagers/Renderable2DManager.h"
+#include "Graphics/AssetManagers/Renderable3DManager.h"
+#include "Graphics/AssetManagers/ShaderManager.h"
 #include "Graphics/Structures/VertexData.h"
 #include "Graphics/Structures/VertexLayout.h"
 #include "Graphics/Buffers/ElementBuffer.h"
@@ -59,3 +59,6 @@ This file is included by the main header S3DGE.h
 
 #include "Audio/Sound.h"
 #include "Audio/SoundManager.h"
+
+#include "Graphics/AssetManagers/GraphicsAssetManagerFactory.h"
+#include "Graphics/Renderables/GraphicsObjectFactorySet.h"

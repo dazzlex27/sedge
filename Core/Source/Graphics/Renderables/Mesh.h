@@ -8,6 +8,8 @@ Declares the Mesh class
 
 #pragma once
 
+#include <string>
+#include <vector>
 #include "Renderable3D.h"
 
 namespace s3dge
@@ -21,23 +23,24 @@ namespace s3dge
 	class Mesh : public Renderable3D
 	{
 	protected:
+		std::string Name;
 		VertexArray* VAO;
 		VertexBuffer* VBO;
 		ElementBuffer* EBO;
-		ID* DiffTextures;
-		const uint DiffTexCount;
-		ID* SpecTextures;
-		const uint SpecTexCount;
+		std::vector<Texture2D*> DiffTextures;
+		std::vector<Texture2D*> SpecTextures;
 
 	private:
-		Mesh(
-			VertexData*const vertices, const uint vertexCount, 
-			uint*const elements, const uint elementCount, 
-			ID*const diffTextures = nullptr, const uint diffTextCount = 0,
-			ID*const specTextures = nullptr, const uint specTextCount = 0);
+		Mesh(const char*const name,
+			std::vector<VertexData> vertices,
+			std::vector<uint> elements,
+			std::vector<Texture2D*> diffTextures = std::vector<Texture2D*>(),
+			std::vector<Texture2D*> specTextures = std::vector<Texture2D*>());
 
 	public:
 		~Mesh();
+
+		const char*const GetName() const { return Name.c_str(); }
 
 		virtual void Draw() const override;
 

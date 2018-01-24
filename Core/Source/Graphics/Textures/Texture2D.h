@@ -20,6 +20,9 @@ namespace s3dge
 		int _components;
 		TextureType _type;
 
+	public:
+		Texture2D() {}
+
 	private:
 		Texture2D(const char*const name, const char*const path, const TextureType type = Diffuse, const TextureWrapMode wrapMode = Repeat, const TextureFilterMode filterMode = Linear);
 

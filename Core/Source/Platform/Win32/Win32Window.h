@@ -173,8 +173,10 @@ namespace s3dge
 		return true;
 	}
 	
-	void Window::Update()
+	void Window::UpdateState()
 	{
+		UpdateContextState();
+
 		MSG messages;
 		while (PeekMessage(&messages, NULL, 0, 0, PM_REMOVE))
 		{
@@ -273,7 +275,7 @@ namespace s3dge
 		GraphicsAPI::SetViewPort(0, 0, window->GetWidth(), window->GetHeight());
 	}
 
-	void cursor_position_callback(const Window*const window)
+	void cursor_position_callback(Window*const window)
 	{
 		if (!window)
 			return;
@@ -281,16 +283,16 @@ namespace s3dge
 		POINT mousePosition;
 		GetCursorPos(&mousePosition);
 
-		InputManager::_mousePosition.x = (float)mousePosition.x;
-		InputManager::_mousePosition.y = (float)mousePosition.y;
+		window->_inputManager->_mousePosition.x = (float)mousePosition.x;
+		window->_inputManager->_mousePosition.y = (float)mousePosition.y;
 
 		uint halfWidth = window->GetWidth() / 2;
 		uint halfHeight = window->GetHeight() / 2;
 
-		if (InputManager::_mousePosition.x != halfWidth || InputManager::_mousePosition.y != halfHeight)
+		if (window->_inputManager->_mousePosition.x != halfWidth || window->_inputManager->_mousePosition.y != halfHeight)
 		{
-			InputManager::_mouseDisplacement.x = (InputManager::_mousePosition.x - halfWidth) / (halfWidth);
-			InputManager::_mouseDisplacement.y = (InputManager::_mousePosition.y - halfHeight) / (halfHeight);
+			window->_inputManager->_mouseDisplacement.x = (window->_inputManager->_mousePosition.x - halfWidth) / (halfWidth);
+			window->_inputManager->_mouseDisplacement.y = (window->_inputManager->_mousePosition.y - halfHeight) / (halfHeight);
 			ResetCursorPosition(window);
 		}
 
@@ -306,57 +308,57 @@ namespace s3dge
 		{
 		case WM_LBUTTONDOWN:
 		{
-			InputManager::_keysDown[S3_KEY_LMB] = true;
-			InputManager::_keysClicked[S3_KEY_LMB] = true;
+			window->_inputManager->_keysDown[S3_KEY_LMB] = true;
+			window->_inputManager->_keysClicked[S3_KEY_LMB] = true;
 			return;
 		}
 		case WM_LBUTTONUP:
 		{
-			InputManager::_keysDown[S3_KEY_LMB] = false;
+			window->_inputManager->_keysDown[S3_KEY_LMB] = false;
 			return;
 		}
 		case WM_RBUTTONDOWN:
 		{
-			InputManager::_keysDown[S3_KEY_RMB] = true;
-			InputManager::_keysClicked[S3_KEY_RMB] = true;
+			window->_inputManager->_keysDown[S3_KEY_RMB] = true;
+			window->_inputManager->_keysClicked[S3_KEY_RMB] = true;
 			return;
 		}
 		case WM_RBUTTONUP:
 		{
-			InputManager::_keysDown[S3_KEY_RMB] = false;
+			window->_inputManager->_keysDown[S3_KEY_RMB] = false;
 			return;
 		}
 		case WM_MBUTTONDOWN:
 		{
-			InputManager::_keysDown[S3_KEY_MMB] = true;
-			InputManager::_keysClicked[S3_KEY_MMB] = true;
+			window->_inputManager->_keysDown[S3_KEY_MMB] = true;
+			window->_inputManager->_keysClicked[S3_KEY_MMB] = true;
 			return;
 		}
 		case WM_MBUTTONUP:
 		{
-			InputManager::_keysDown[S3_KEY_MMB] = false;
+			window->_inputManager->_keysDown[S3_KEY_MMB] = false;
 			return;
 		}
 		case WM_XBUTTONDOWN:
 		{
 			if (GET_XBUTTON_WPARAM(key) == XBUTTON1)
 			{
-				InputManager::_keysDown[S3_KEY_XBUTTON1] = true;
-				InputManager::_keysClicked[S3_KEY_XBUTTON1] = true;
+				window->_inputManager->_keysDown[S3_KEY_XBUTTON1] = true;
+				window->_inputManager->_keysClicked[S3_KEY_XBUTTON1] = true;
 			}
 			else
 			{
-				InputManager::_keysDown[S3_KEY_XBUTTON2] = true;
-				InputManager::_keysClicked[S3_KEY_XBUTTON2] = true;
+				window->_inputManager->_keysDown[S3_KEY_XBUTTON2] = true;
+				window->_inputManager->_keysClicked[S3_KEY_XBUTTON2] = true;
 			}
 			return;
 		}
 		case WM_XBUTTONUP:
 		{
 			if (GET_XBUTTON_WPARAM(key) == XBUTTON1)
-				InputManager::_keysDown[S3_KEY_XBUTTON1] = false;
+				window->_inputManager->_keysDown[S3_KEY_XBUTTON1] = false;
 			else
-				InputManager::_keysDown[S3_KEY_XBUTTON2] = false;
+				window->_inputManager->_keysDown[S3_KEY_XBUTTON2] = false;
 			return;
 		}
 		case WM_MOUSEWHEEL:
@@ -364,22 +366,22 @@ namespace s3dge
 			short zDelta = (short)GET_WHEEL_DELTA_WPARAM(key);
 			if (zDelta > 0)
 			{
-				InputManager::_keysDown[S3_KEY_MWUP] = true;
-				InputManager::_keysClicked[S3_KEY_MWUP] = true;
+				window->_inputManager->_keysDown[S3_KEY_MWUP] = true;
+				window->_inputManager->_keysClicked[S3_KEY_MWUP] = true;
 			}
 			if (zDelta < 0)
 			{
-				InputManager::_keysDown[S3_KEY_MWDOWN] = true;
-				InputManager::_keysClicked[S3_KEY_MWDOWN] = true;
+				window->_inputManager->_keysDown[S3_KEY_MWDOWN] = true;
+				window->_inputManager->_keysClicked[S3_KEY_MWDOWN] = true;
 			}
 			return;
 		}
 		case WM_KEYDOWN:
-			InputManager::_keysDown[key] = true;
-			InputManager::_keysClicked[key] = true;
+			window->_inputManager->_keysDown[key] = true;
+			window->_inputManager->_keysClicked[key] = true;
 			return;
 		case WM_KEYUP:
-			InputManager::_keysDown[key] = false;
+			window->_inputManager->_keysDown[key] = false;
 			return;
 		}
 	}

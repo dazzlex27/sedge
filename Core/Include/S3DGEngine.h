@@ -22,19 +22,23 @@ namespace s3dge
 		DISPOSED
 	};
 
+	struct InitializationToolset
+	{
+		GraphicsAssetManagerFactory GraphicsAssetMgrFactory;
+		GraphicsObjectFactorySet GraphicsObjFactorySet;
+	};
+
 	class S3DGEngine
 	{
+	protected:
+		Window* MainWindow;
+
 	private:
 		ENGINE_STATE _state;
-		Timer* _timer;
-		RNG* _rng;
 		uint _fps;
-		uint _ups;
+		Timer* _runTimer;
 
-	protected:
-		S3DGEngine();
-		virtual ~S3DGEngine();
-		Window* MainWindow;
+		InitializationToolset _initToolset;
 
 	public:
 		void Run();
@@ -42,21 +46,15 @@ namespace s3dge
 		inline ENGINE_STATE GetEngineState() const { return _state; }
 
 	protected:
-		void CreateGameWindow(const char* name, uint wIDth, uint height, bool fullscreen = false, bool vsync = true);
-		double GetNextRNG();
-		float GetElapsedMS();
+		S3DGEngine();
+		virtual ~S3DGEngine();
 
-		virtual void Initialize() = 0; // Runs upon startup.
-		virtual void Update() = 0; // Runs 60 times a second.
-		virtual void Render() = 0; // Runs the number of times the current frame rate.
+		void CreateGameWindow(const char* name, uint width, uint height, bool fullscreen = false, bool vsync = true);
+
+		virtual void Initialize(const InitializationToolset& initToolset) = 0; // Runs upon startup.
+		virtual void RunMainLoop(); // Contains main game logic.
 		virtual void Dispose() = 0; // Runs upon closing the main window.
-
-	private:
-		void RunGameLoop(); // Starts the actual gameloop
-		void InitializeInternalSystems();
-		void InitializeResourceManagers();
-		void UpdateResourceManagers();
-		void DisposeResourceManagers();
-		void DisposeInternalSystems();
+		virtual void UpdateLogic() {}
+		virtual void Render() {}
 	};
 }
