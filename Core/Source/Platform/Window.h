@@ -10,11 +10,14 @@ Contains basic high-level window management functions.
 
 #include <map>
 #include <string>
-#include "CustomTypes.h"
+#include "../CustomTypes.h"
 
 namespace s3dge
 {
 	class Timer;
+	class InputManager;
+	class SoundManager;
+	struct Vector2;
 
 	class Window
 	{
@@ -27,6 +30,8 @@ namespace s3dge
 		bool _vSync;
 		bool _hasFocus;
 		void* _handle;
+		InputManager* _inputManager;
+		SoundManager* _soundManager;
 
 		static std::map<void*, Window*> Instances;
 
@@ -35,7 +40,7 @@ namespace s3dge
 		~Window();
 
 		bool Initialize();
-		void Update();
+		void UpdateState();
 		void Clear();
 
 		inline const char* GetTitle() const { return _title.c_str(); }
@@ -45,6 +50,8 @@ namespace s3dge
 		inline bool IsVSync() const { return _vSync; }
 		inline bool HasFocus() const { return _hasFocus; }
 		inline bool IsFullScreen() const { return _fullScreen; }
+		
+		InputManager*const GetInputManager() { return _inputManager; }
 
 		static Window*const GetInstance(void*const handle);
 
@@ -58,13 +65,17 @@ namespace s3dge
 		void SetupContext();
 		void DestroyContext();
 
+		void UpdateContextState();
+
 		void* GetHandle() const;
 		void SetHandle(void*const handle);
 
-		friend void resize_callback(Window*const window, const uint width, const uint height);
-		friend void focus_callback(Window*const window, const bool hasFocus);
-
 		Window(const Window& tRef) = delete;				// Disable copy constructor.
 		Window& operator = (const Window& tRef) = delete;	// Disable assignment operator.
+
+		friend void cursor_position_callback(Window*const window);
+		friend void key_callback(const Window*const window, const int key, const int command);
+		friend void resize_callback(Window*const window, const uint width, const uint height);
+		friend void focus_callback(Window*const window, const bool hasFocus);
 	};
 }

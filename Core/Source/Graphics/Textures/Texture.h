@@ -25,6 +25,7 @@ namespace s3dge
 		TextureFilterMode FilterMode;
 
 	protected:
+		Texture() {}
 		Texture(const char* name, const char* path, const TextureTarget target, const TextureWrapMode wrapMode = Repeat, const TextureFilterMode filterMode = Linear);
 		virtual ~Texture();
 

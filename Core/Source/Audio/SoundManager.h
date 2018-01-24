@@ -23,27 +23,26 @@ namespace s3dge
 	class SoundManager
 	{
 	private:
-		static std::vector<Sound*> _sounds;
-		static bool _initialized;
+		std::vector<Sound*> _sounds;
 
-		static gau_Manager* _manager;
+		gau_Manager* _manager;
 		static ga_Mixer* _mixer;
 
 	public:
-		static void Initialize(); // must be called upon engine startup
-		static void Add(const char* name, const char* path, bool overrideExisting = false);
-		static Sound* Get(const char* name);
-		static void Update(); // must be called in the engine's main loop
-		static void Dispose(); // must be called upon engine shutdown
+		void AddSound(const char*const name, const char*const path, const bool overrideExisting = false);
+		Sound*const GetSound(const char*const name);
+		void Update(); // must be called in the engine's main loop
 
-		static inline uint GetCount() { return _sounds.size(); }
+		inline uint GetCount() { return _sounds.size(); }
+		
+		~SoundManager();
 
 	private:
 		SoundManager();
 		SoundManager(const SoundManager& tRef) = delete;
 		SoundManager& operator = (const SoundManager& tRef) = delete;
-		~SoundManager(void) {}
 
 		friend class Sound;
+		friend class Window;
 	};
 }

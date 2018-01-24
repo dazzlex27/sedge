@@ -17,32 +17,23 @@ using namespace s3dge;
 
 static const float _elapsedDoubleClickThreshold = 0.5f;
 
-Vector3 InputManager::_mousePosition;
-Vector2 InputManager::_mouseDisplacement;
-bool* InputManager::_keysDown;
-bool* InputManager::_keysClicked;
-bool* InputManager::_keysDoubleClicked;
-bool InputManager::_initialized;
-Timer* InputManager::_doubleClickTimers;
-
-void InputManager::Initialize()
+InputManager::InputManager()
 {
-	if (!_initialized)
-	{
-		_keysDown = new bool[KEYS_COUNT];
-		memset(_keysDown, 0, sizeof(bool) * KEYS_COUNT);
-		_keysClicked = new bool[KEYS_COUNT];
-		memset(_keysClicked, 0, sizeof(bool) * KEYS_COUNT);
-		_keysDoubleClicked = new bool[KEYS_COUNT];
-		memset(_keysDoubleClicked, 0, sizeof(bool) * KEYS_COUNT);
-		_doubleClickTimers = new Timer[KEYS_COUNT];
+	_keysDown = new bool[KEYS_COUNT];
+	memset(_keysDown, 0, sizeof(bool) * KEYS_COUNT);
+	_keysClicked = new bool[KEYS_COUNT];
+	memset(_keysClicked, 0, sizeof(bool) * KEYS_COUNT);
+	_keysDoubleClicked = new bool[KEYS_COUNT];
+	memset(_keysDoubleClicked, 0, sizeof(bool) * KEYS_COUNT);
+	_doubleClickTimers = new Timer[KEYS_COUNT];
+}
 
-		_initialized = true;
-	}
-	else
-	{
-		LOG_WARNING("Input manager has already been initialized");
-	}
+InputManager::~InputManager()
+{
+	SafeDeleteArray(_keysDown);
+	SafeDeleteArray(_keysClicked);
+	SafeDeleteArray(_keysDoubleClicked);
+	SafeDeleteArray(_doubleClickTimers);
 }
 
 void InputManager::Update()
@@ -74,21 +65,4 @@ void InputManager::Update()
 	}
 
 	memset(_keysClicked, 0, sizeof(bool) * KEYS_COUNT);
-}
-
-void InputManager::Dispose()
-{
-	if (_initialized)
-	{
-		SafeDeleteArray(_keysDown);
-		SafeDeleteArray(_keysClicked); 
-		SafeDeleteArray(_keysDoubleClicked);
-		SafeDeleteArray(_doubleClickTimers);
-
-		_initialized = false;
-	}
-	else
-	{
-		LOG_WARNING("Cannot dispose the input manager as it was not initialized!");
-	}
 }

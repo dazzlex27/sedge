@@ -408,7 +408,7 @@ char* GraphicsAPI::GetVersion()
 	return (char*)glGetString(GL_VERSION);
 }
 
-char* GraphicsAPI::GetRenderer()
+char* GraphicsAPI::GetRenderingDevice()
 {
 	return (char*)glGetString(GL_RENDERER);
 }
