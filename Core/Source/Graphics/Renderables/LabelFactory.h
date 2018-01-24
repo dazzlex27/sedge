@@ -22,6 +22,6 @@ namespace s3dge
 	class LabelFactory
 	{
 	public:
-		static Label*const CreateLabel(const char* text, Font*const font, const Vector2& position, float zIndex, const Size2D& size, const Color& color = Color(0xffffffff));
+		Label*const CreateLabel(const char* text, Font*const font, const Vector2& position, float zIndex, const Size2D& size, const Color& color = Color(0xffffffff));
 	};
 }

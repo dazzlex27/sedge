@@ -12,6 +12,8 @@ Contains basic high-level window management functions.
 #include "System/DeleteMacros.h"
 #include "System/Timer.h"
 #include "Graphics/GraphicsAPI.h"
+#include "System/InputManager.h"
+#include "Audio/SoundManager.h"
 
 using namespace s3dge;
 
@@ -20,11 +22,15 @@ std::map<void*, Window*> Window::Instances;
 Window::Window(const char* title, const uint width, const uint height, const bool fullscreen, const bool vsync)
 	: _title(title), _width(width), _height(height), _fullScreen(fullscreen), _vSync(vsync), _isClosed(false)
 {
+	_inputManager = new InputManager();
+	_soundManager = new SoundManager();
 }
 
 Window::~Window()
 {
 	DestroyContext();
+	SafeDelete(_inputManager);
+	SafeDelete(_soundManager);
 }
 
 bool Window::Initialize()
@@ -58,12 +64,18 @@ void Window::SetupContext()
 	GraphicsAPI::SetWindingOrder(CounterClockwise);
 
 	LOG_INFO("Version: ", GraphicsAPI::GetVersion());
-	LOG_INFO("Renderer: ", GraphicsAPI::GetRenderer());
+	LOG_INFO("Rendering device: ", GraphicsAPI::GetRenderingDevice());
 }
 
 void Window::Clear()
 {
 	GraphicsAPI::Clear();
+}
+
+void Window::UpdateContextState()
+{
+	_inputManager->Update();
+	_soundManager->Update();
 }
 
 void* Window::GetHandle() const

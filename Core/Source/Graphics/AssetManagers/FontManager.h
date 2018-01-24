@@ -19,19 +19,18 @@ namespace s3dge
 	class FontManager
 	{
 	private:
-		static std::map<std::string, Font*> _fonts;
-		static bool _initialized;
+		std::map<std::string, Font*> _fonts;
 
 	public:
-		static void Initialize();
-		static void Add(const char*const name, const char*const path, const float size, const bool overrideExisting = false);
-		static Font* Get(const char*const name);
-		static void Dispose();
+		~FontManager();
+		void AddFont(const char*const name, const char*const path, const float size, const bool overrideExisting = false);
+		Font*const GetFont(const char*const name);
 
 	private:
-		FontManager();
+		FontManager() {}
 		FontManager(const FontManager& tRef) = delete;
 		FontManager& operator = (const FontManager& tRef) = delete;
-		~FontManager(void) {}
+
+		friend class GraphicsAssetManagerFactory;
 	};
 }

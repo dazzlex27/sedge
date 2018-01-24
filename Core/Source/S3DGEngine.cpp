@@ -14,10 +14,12 @@ using namespace s3dge;
 S3DGEngine::S3DGEngine()
 {
 	_state = ENGINE_STATE::READY;
+	_runTimer = new Timer();
 }
 
 S3DGEngine::~S3DGEngine()
 {
+	SafeDelete(_runTimer);
 }
 
 void S3DGEngine::CreateGameWindow(const char* name, uint width, uint height, bool fullscreen, bool vsync)
@@ -40,29 +42,25 @@ void S3DGEngine::Run()
 
 	_state = ENGINE_STATE::INITIALIZING;
 	LOG_INFO("Initializing components...");
-	InitializeInternalSystems();
-	InitializeResourceManagers();
-	Initialize();
+	Initialize(_initToolset);
 	_state = ENGINE_STATE::RUNNING;
 	LOG_INFO("Running main loop...");
-	RunGameLoop();
+	RunMainLoop();
 	_state = ENGINE_STATE::DISPOSING;
 	LOG_INFO("Shutdown initiated...");
 	Dispose();
-	DisposeResourceManagers();
-	DisposeInternalSystems();
-
 	_state = ENGINE_STATE::DISPOSED;
+
 	LOG_INFO("Application exited...");
 }
 
-void S3DGEngine::RunGameLoop()
+void S3DGEngine::RunMainLoop()
 {
 	uint updates = 0;
 	float updateTime = 0.0f;
 	uint frames = 0;
 	float renderTime = 0.0f;
-	_timer->Start();
+	_runTimer->Start();
 
 	// The actual game loop.
 	while (MainWindow != nullptr && !MainWindow->IsClosed())
@@ -70,79 +68,26 @@ void S3DGEngine::RunGameLoop()
 		MainWindow->Clear();
 
 		// Update input and managers.
-		if (_timer->ElapsedS() - updateTime > (1.0f / 60.0f))
+		if (_runTimer->ElapsedS() - updateTime > (1.0f / 60.0f))
 		{
-			Update();
-			UpdateResourceManagers();
+			UpdateLogic();
 			++updates;
 			updateTime += 1.0f / 60.0f;
 		}
 
 		Render();
 
-		++frames;
+		frames++;
 
-		MainWindow->Update();
+		MainWindow->UpdateState();
 
 		// Update service information.
-		if (_timer->ElapsedS() - renderTime > 1.0f)
+		if (_runTimer->ElapsedS() - renderTime > 1.0f)
 		{
 			renderTime += 1.0f;
 			_fps = frames;
-			_ups = updates;
 			frames = 0;
 			updates = 0;
 		}
 	}
-}
-
-void S3DGEngine::InitializeInternalSystems()
-{
-	_timer = new Timer();
-	_rng = new RNG();
-}
-
-void S3DGEngine::InitializeResourceManagers()
-{
-	Renderable2DManager::Initialize();
-	Renderable3DManager::Initialize();
-	FontManager::Initialize();
-	ShaderManager::Initialize();
-	TextureManager::Initialize();
-	SoundManager::Initialize();
-	InputManager::Initialize();
-}
-
-void S3DGEngine::UpdateResourceManagers()
-{
-	InputManager::Update();
-	SoundManager::Update();
-}
-
-void S3DGEngine::DisposeResourceManagers()
-{
-	Renderable2DManager::Dispose();
-	Renderable3DManager::Dispose();
-	FontManager::Dispose();
-	ShaderManager::Dispose();
-	TextureManager::Dispose();
-	SoundManager::Dispose();
-	InputManager::Dispose();
-}
-
-void S3DGEngine::DisposeInternalSystems()
-{
-	SafeDelete(_rng);
-	SafeDelete(_timer);
-	SafeDelete(MainWindow);
-}
-
-double S3DGEngine::GetNextRNG()
-{
-	return _rng->Next();
-}
-
-float S3DGEngine::GetElapsedMS()
-{
-	return _timer->ElapsedMS();
 }

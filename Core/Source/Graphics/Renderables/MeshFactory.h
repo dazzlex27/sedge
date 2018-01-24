@@ -1,5 +1,6 @@
 #pragma once
 
+#include <vector>
 #include "CustomTypes.h"
 
 namespace s3dge
@@ -11,11 +12,11 @@ namespace s3dge
 	class MeshFactory
 	{
 	public:
-		static Mesh*const CreateMesh(
-			VertexData*const vertices, const uint vertexCount, 
-			uint*const elements, const uint elementCount, 
-			ID*const diffTextures = nullptr, const uint diffTexCount = 0,
-			ID*const specTextures = nullptr, const uint specTexCount = 0);
-		static Mesh*const CreateCubeOfUnitSize(Texture2D*const texture);
+		static Mesh*const CreateMesh(const char*const name,
+			std::vector<VertexData> vertices,
+			std::vector<uint> elements,
+			std::vector<Texture2D*> diffTextures = std::vector<Texture2D*>(),
+			std::vector<Texture2D*> specTextures = std::vector<Texture2D*>());
+		Mesh*const CreateCubeOfUnitSize(Texture2D*const texture);
 	};
 }

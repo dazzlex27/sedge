@@ -14,21 +14,22 @@ Implemlents the Mesh class
 #include "Graphics/Structures/VertexLayout.h"
 #include "Graphics/Structures/VertexData.h"
 #include "System/DeleteMacros.h"
-#include "Graphics/Managers/TextureManager.h"
+#include "Graphics/AssetManagers/TextureManager.h"
 #include "System/Log.h"
 
+using namespace std;
 using namespace s3dge;
 
-Mesh::Mesh(
-	VertexData*const vertices, const uint vertexCount, 
-	uint*const elements, const uint elementCount, 
-	ID*const diffTextures, const uint diffTexCount,
-	ID*const specTextures, const uint specTexCount)
-	: DiffTexCount(diffTexCount), SpecTexCount(specTexCount)
+Mesh::Mesh(const char*const name,
+	vector<VertexData> vertices,
+	vector<uint> elements,
+	vector<Texture2D*> diffTextures,
+	vector<Texture2D*> specTextures)
+	: Name(name), DiffTextures(diffTextures), SpecTextures(specTextures)
 {
 	VAO = new VertexArray();
-	VBO = new VertexBuffer(sizeof(VertexData), vertexCount, vertices);
-	EBO = new ElementBuffer(elementCount, elements);
+	VBO = new VertexBuffer(sizeof(VertexData), vertices.size(), vertices.data());
+	EBO = new ElementBuffer(elements.size(), elements.data());
 
 	VAO->Bind();
 	VBO->Bind();
@@ -39,18 +40,6 @@ Mesh::Mesh(
 	VAO->Unbind();
 	VBO->Unbind();
 	EBO->Unbind();
-
-	if (diffTextures && diffTexCount > 0)
-	{
-		DiffTextures = new ID[diffTexCount];
-		memcpy(DiffTextures, diffTextures, sizeof(ID) * diffTexCount);
-	}
-
-	if (specTextures && specTexCount > 0)
-	{
-		SpecTextures = new ID[specTexCount];
-		memcpy(SpecTextures, specTextures, sizeof(ID) * specTexCount);
-	}
 }
 
 Mesh::~Mesh()
@@ -59,49 +48,33 @@ Mesh::~Mesh()
 	SafeDelete(VBO);
 	SafeDelete(EBO);
 
-	if (DiffTexCount > 0 && DiffTextures)
-		SafeDeleteArray(DiffTextures);
+	for (auto texture : DiffTextures)
+		SafeDelete(texture);
 
-	if (SpecTexCount > 0 && SpecTextures)
-		SafeDeleteArray(SpecTextures);
+	for (auto texture : SpecTextures)
+		SafeDelete(texture);
 }
 
 void Mesh::Draw() const
 {
-	if (DiffTexCount > 1)
+	if (DiffTextures.size() > 1)
 		LOG_ERROR("Diff texture count exceeds 1!");
 
-	for (uint i = 0; i < DiffTexCount; i++)
+	for (uint i = 0; i < DiffTextures.size(); i++)
 	{
-		const Texture2D*const texture = TextureManager::GetTex2DByID(DiffTextures[i]);
-
-		if (!texture)
-		{
-			LOG_ERROR("Failed to read diff texture with ID", DiffTextures[i]);
-			continue;
-		}
-
-		auto texType = texture->GetType();
+		const auto texture = DiffTextures[i];
 
 		Texture2D::ActivateTexture(i);
 		texture->Bind();
 	}
 
-	if (SpecTexCount > 1)
+	if (SpecTextures.size() > 1)
 		LOG_ERROR("Spec texture count exceeds 1!");
 
 	const int specOffset = 1; // TODO: remove this.
-	for (uint i = 0; i < SpecTexCount; i++)
+	for (uint i = 0; i < SpecTextures.size(); i++)
 	{
-		const Texture2D*const texture = TextureManager::GetTex2DByID(SpecTextures[i]);
-
-		if (!texture)
-		{
-			LOG_ERROR("Failed to read diff texture with ID", SpecTextures[i]);
-			continue;
-		}
-
-		auto texType = texture->GetType();
+		const auto texture = SpecTextures[i];
 
 		Texture2D::ActivateTexture(i + specOffset);
 		texture->Bind();
@@ -111,9 +84,6 @@ void Mesh::Draw() const
 	VAO->DrawElements(EBO->GetCount());
 	VAO->Unbind();
 
-	for (int i = 0; i < SpecTexCount; i++)
-	{
-		const Texture2D*const texture = TextureManager::GetTex2DByID(SpecTextures[i]);
-		texture->Unbind();
-	}
+	for (uint i = 0; i < SpecTextures.size(); i++)
+		SpecTextures[i]->Unbind();
 }

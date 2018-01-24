@@ -107,7 +107,7 @@ namespace s3dge
 		static void SetWindingOrder(const WindingOrder order);
 
 		static char* GetVersion();
-		static char* GetRenderer();
+		static char* GetRenderingDevice();
 		static char* GetExtensions();
 	};
 }

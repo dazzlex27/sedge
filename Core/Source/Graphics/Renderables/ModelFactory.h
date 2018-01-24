@@ -7,6 +7,8 @@ namespace s3dge
 	class ModelFactory
 	{
 	public:
-		static Model*const CreateModel(const char*const path);
+		Model*const CreateModel(const char*const path);
+
+
 	};
 }
