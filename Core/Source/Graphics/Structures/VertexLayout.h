@@ -28,6 +28,9 @@ namespace s3dge
 		std::vector<LayoutAttribute*> _attributes;
 
 	public:
+		VertexLayout() {}
+		VertexLayout(const VertexLayout& layout);
+
 		inline const std::vector<LayoutAttribute*>& GetAttributes() const { return _attributes; }
 
 		void AddEntry(LayoutAttribute*const attribute);

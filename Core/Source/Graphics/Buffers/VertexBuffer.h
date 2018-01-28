@@ -16,7 +16,16 @@ namespace s3dge
 
 	class VertexBuffer : public Buffer
 	{
+	private:
+		VertexLayout* _layout;
+
 	public:
-		VertexBuffer(uint vertexSize, uint vertexCount, void*const dataPtr = nullptr, DrawingMode drawingMode = Static);
+		VertexBuffer(uint vertexSize, uint vertexCount, const VertexLayout& layout, void*const dataPtr = nullptr, DrawingMode drawingMode = Static);
+		virtual ~VertexBuffer();
+
+		virtual void Bind() const override;
+
+	private:
+		void BindLayout() const;
 	};
 }

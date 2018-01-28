@@ -7,7 +7,6 @@ Implements the Renderer2D class
 */
 
 #include "Renderer2D.h"
-#include "Graphics/Buffers/VertexArray.h"
 #include "Graphics/Buffers/VertexBuffer.h"
 #include "Graphics/Buffers/ElementBuffer.h"
 #include "Graphics/Structures/VertexData.h"
@@ -15,6 +14,7 @@ Implements the Renderer2D class
 #include "Graphics/Textures/Texture2D.h"
 #include "Graphics/Fonts/Font.h"
 #include "Graphics/Renderables/Renderable2D.h"
+#include "Graphics/GraphicsAPI.h"
 
 #include "System/DeleteMacros.h"
 #include "System/Log.h"
@@ -35,10 +35,7 @@ Renderer2D::Renderer2D(const uint maxVertices)
 		abort();
 	}
 
-	_vao = new VertexArray();
-	_vao->Bind();
-
-	_vbo = new VertexBuffer(sizeof(VertexDataS), _maxVertices);
+	_vbo = new VertexBuffer(sizeof(VertexDataS), _maxVertices, VertexLayout::GetDefaultSpriteVertexLayout());
 	_vbo->Bind();
 
 	const uint maxElements = (const uint)(_maxVertices * 1.5);
@@ -47,9 +44,6 @@ Renderer2D::Renderer2D(const uint maxVertices)
 	SafeDeleteArray(elements);
 	_ebo->Bind();
 
-	_vao->SetLayout(VertexLayout::GetDefaultSpriteVertexLayout());
-
-	_vao->Unbind();
 	_vbo->Unbind();
 	_ebo->Unbind();
 
@@ -58,7 +52,6 @@ Renderer2D::Renderer2D(const uint maxVertices)
 
 Renderer2D::~Renderer2D()
 {
-	SafeDelete(_vao);
 	SafeDelete(_vbo);
 	SafeDelete(_ebo);
 }
@@ -180,9 +173,9 @@ void Renderer2D::Flush()
 		Texture2D::BindById(TextureTarget::Tex2D, _textureIDs[i]);
 	}
 
-	_vao->Bind();
-	_vao->DrawElements(_elementCount);
-	_vao->Unbind();
+	_vbo->Bind();
+	_ebo->Bind();
+	GraphicsAPI::DrawTrianglesIndexes(_elementCount);
 
 	_elementCount = 0;
 }

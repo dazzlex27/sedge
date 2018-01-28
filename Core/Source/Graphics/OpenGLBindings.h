@@ -18,6 +18,8 @@ This should be the only place where GL/glew.h is included!
 
 using namespace s3dge;
 
+uint VAO;
+
 #ifdef S3_DEBUG
 #ifdef _WIN32
 #include <Windows.h>
@@ -66,22 +68,22 @@ void GraphicsAPI::UnmapBuffer(const BufferTarget target)
 {
 	glUnmapBuffer(EnumConverter::GetBufferTarget(target));
 }
-
-void GraphicsAPI::GenVertexArrays(const uint n, ID* const arrays)
-{
-	glGenVertexArrays(n, arrays);
-}
-
-void GraphicsAPI::DeleteVertexArrays(const uint n, ID*const arrays)
-{
-	glDeleteVertexArrays(1, arrays);
-}
-
-void GraphicsAPI::BindVertexArray(const ID id)
-{
-	glBindVertexArray(id);
-}
-
+//
+//void GraphicsAPI::GenVertexArrays(const uint n, ID* const arrays)
+//{
+//	glGenVertexArrays(n, arrays);
+//}
+//
+//void GraphicsAPI::DeleteVertexArrays(const uint n, ID*const arrays)
+//{
+//	glDeleteVertexArrays(1, arrays);
+//}
+//
+//void GraphicsAPI::BindVertexArray(const ID id)
+//{
+//	glBindVertexArray(id);
+//}
+//
 void GraphicsAPI::EnableVertexAttributeArray(const uint index)
 {
 	glEnableVertexAttribArray(index);
@@ -100,6 +102,11 @@ void GraphicsAPI::DrawArrays(const PrimitiveType primitiveType, const int first,
 void GraphicsAPI::DrawElements(const PrimitiveType primitiveType, const uint count, const ValueType type, const void*const elements)
 {
 	glDrawElements(EnumConverter::GetPrimitiveType(primitiveType), count, EnumConverter::GetValueType(type), elements);
+}
+
+void GraphicsAPI::DrawTrianglesIndexes(const uint elementCount)
+{
+	glDrawElements(GL_TRIANGLES, elementCount, GL_UNSIGNED_INT, 0);
 }
 
 void GraphicsAPI::GenTextures(const uint n, ID*const textures)
@@ -300,20 +307,26 @@ const bool GraphicsAPI::Initialize()
 #endif
 
 	glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
+	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+
+	// global VAO
+	glGenVertexArrays(1, &VAO);
+	glBindVertexArray(VAO);
 
 	ImageUtils::SetFlipVertically(true);
 
 	return true;
 }
 
+void GraphicsAPI::Dispose()
+{
+	glBindVertexArray(VAO);
+	glDeleteVertexArrays(1, &VAO);
+}
+
 void GraphicsAPI::Clear()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-}
-
-void GraphicsAPI::SetUnpackAlignment(const int alignment)
-{
-	glPixelStorei(GL_UNPACK_ALIGNMENT, alignment);
 }
 
 void GraphicsAPI::SetViewPort(const int x, const int y, const int width, const int height)

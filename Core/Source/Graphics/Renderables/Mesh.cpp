@@ -8,7 +8,6 @@ Implemlents the Mesh class
 
 #include "Mesh.h"
 #include "Graphics/Textures/Texture2D.h"
-#include "Graphics/Buffers/VertexArray.h"
 #include "Graphics/Buffers/VertexBuffer.h"
 #include "Graphics/Buffers/ElementBuffer.h"
 #include "Graphics/Structures/VertexLayout.h"
@@ -16,6 +15,7 @@ Implemlents the Mesh class
 #include "System/DeleteMacros.h"
 #include "Graphics/AssetManagers/TextureManager.h"
 #include "System/Log.h"
+#include "Graphics/GraphicsAPI.h"
 
 using namespace std;
 using namespace s3dge;
@@ -27,24 +27,15 @@ Mesh::Mesh(const char*const name,
 	vector<Texture2D*> specTextures)
 	: Name(name), DiffTextures(diffTextures), SpecTextures(specTextures)
 {
-	VAO = new VertexArray();
-	VBO = new VertexBuffer(sizeof(VertexData), vertices.size(), vertices.data());
+	VBO = new VertexBuffer(sizeof(VertexData), vertices.size(), VertexLayout::GetDefaultMeshVertexLayout(), vertices.data());
 	EBO = new ElementBuffer(elements.size(), elements.data());
 
-	VAO->Bind();
 	VBO->Bind();
 	EBO->Bind();
-
-	VAO->SetLayout(VertexLayout::GetDefaultMeshVertexLayout());
-
-	VAO->Unbind();
-	VBO->Unbind();
-	EBO->Unbind();
 }
 
 Mesh::~Mesh()
 {
-	SafeDelete(VAO);
 	SafeDelete(VBO);
 	SafeDelete(EBO);
 
@@ -80,9 +71,9 @@ void Mesh::Draw() const
 		texture->Bind();
 	}
 
-	VAO->Bind();
-	VAO->DrawElements(EBO->GetCount());
-	VAO->Unbind();
+	VBO->Bind();
+	EBO->Bind();
+	GraphicsAPI::DrawTrianglesIndexes(EBO->GetCount());
 
 	for (uint i = 0; i < SpecTextures.size(); i++)
 		SpecTextures[i]->Unbind();

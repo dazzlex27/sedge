@@ -141,7 +141,6 @@ xcopy "$(SolutionDIr)Externals\assimp-4.0.0\libs\$(Configuration)\*" "$(Solution
     <ClCompile Include="Source\System\MemoryManager.cpp" />
     <ClCompile Include="Source\Graphics\Buffers\VertexBuffer.cpp" />
     <ClCompile Include="Source\Graphics\Buffers\ElementBuffer.cpp" />
-    <ClCompile Include="Source\Graphics\Buffers\VertexArray.cpp" />
     <ClCompile Include="Source\Graphics\Renderables\Group.cpp" />
     <ClCompile Include="Source\Graphics\Renderables\Label.cpp" />
     <ClCompile Include="Source\Graphics\Layer2D.cpp" />
@@ -222,7 +221,6 @@ xcopy "$(SolutionDIr)Externals\assimp-4.0.0\libs\$(Configuration)\*" "$(Solution
     <ClInclude Include="Include\S3DGEngine.h" />
     <ClInclude Include="Source\Graphics\Buffers\VertexBuffer.h" />
     <ClInclude Include="Source\Graphics\Buffers\ElementBuffer.h" />
-    <ClInclude Include="Source\Graphics\Buffers\VertexArray.h" />
     <ClInclude Include="Source\Graphics\Renderables\Group.h" />
     <ClInclude Include="Source\Graphics\Renderables\Label.h" />
     <ClInclude Include="Source\Graphics\Layer2D.h" />
