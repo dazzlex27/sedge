@@ -71,15 +71,16 @@ void S3DGEngine::RunMainLoop()
 		if (_runTimer->ElapsedS() - updateTime > (1.0f / 60.0f))
 		{
 			UpdateLogic();
+			MainWindow->UpdateContextState();
+
 			++updates;
 			updateTime += 1.0f / 60.0f;
 		}
 
 		Render();
+		MainWindow->UpdateWindowState();
 
 		frames++;
-
-		MainWindow->UpdateState();
 
 		// Update service information.
 		if (_runTimer->ElapsedS() - renderTime > 1.0f)

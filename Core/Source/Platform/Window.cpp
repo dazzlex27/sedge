@@ -56,7 +56,6 @@ bool Window::Initialize()
 
 void Window::SetupContext()
 {
-	GraphicsAPI::SetUnpackAlignment(1);
 	GraphicsAPI::EnableDepthTesting();
 	GraphicsAPI::EnableBlending();
 	GraphicsAPI::EnableFaceCulling();

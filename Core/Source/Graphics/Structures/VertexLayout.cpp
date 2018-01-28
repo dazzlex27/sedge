@@ -16,9 +16,15 @@ static const int GetTypeIntFromTypeEnum(const ElementType type)
 	return 0;
 }
 
+VertexLayout::VertexLayout(const VertexLayout& layout)
+{
+	for (auto item : layout.GetAttributes())
+		_attributes.emplace_back(item);
+}
+
 void VertexLayout::AddEntry(LayoutAttribute*const attribute)
 {
-	_attributes.push_back(attribute);
+	_attributes.emplace_back(attribute);
 }
 
 void VertexLayout::AddEntry(const char* name, const int index, const int size, const ElementType type, const bool normalized, const int stride, const void*const offset)
@@ -33,7 +39,7 @@ void VertexLayout::AddEntry(const char* name, const int index, const int size, c
 	attribute->stride = stride;
 	attribute->offset = offset;
 
-	_attributes.push_back(attribute);
+	_attributes.emplace_back(attribute);
 }
 
 VertexLayout VertexLayout::GetDefaultMeshVertexLayout()

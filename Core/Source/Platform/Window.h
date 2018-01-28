@@ -40,7 +40,8 @@ namespace s3dge
 		~Window();
 
 		bool Initialize();
-		void UpdateState();
+		void UpdateContextState();
+		void UpdateWindowState();
 		void Clear();
 
 		inline const char* GetTitle() const { return _title.c_str(); }
@@ -64,8 +65,6 @@ namespace s3dge
 		bool CreateContext();
 		void SetupContext();
 		void DestroyContext();
-
-		void UpdateContextState();
 
 		void* GetHandle() const;
 		void SetHandle(void*const handle);

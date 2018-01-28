@@ -8,12 +8,12 @@ implements the Skybox class.
 
 #include "Skybox.h"
 #include "Graphics/Textures/Cubemap.h"
-#include "Graphics/Buffers/VertexArray.h"
 #include "Graphics/Buffers/VertexBuffer.h"
 #include "Graphics/Buffers/ElementBuffer.h"
 #include "Graphics/GraphicsAPI.h"
 #include "Graphics/Structures/VertexLayout.h"
 #include "Graphics/Structures/VertexData.h"
+#include "Graphics/GraphicsAPI.h"
 
 using namespace s3dge;
 
@@ -98,17 +98,12 @@ Skybox::Skybox(Cubemap*const texture)
 
 	const uint vertexSize = sizeof(VertexDataCb);
 
-	_vao = new VertexArray();
-	_vbo = new VertexBuffer(vertexSize, sizeof(vertices) / vertexSize, &vertices);
+	_vbo = new VertexBuffer(vertexSize, sizeof(vertices) / vertexSize, VertexLayout::GetDefaultSkyboxVertexLayout(), &vertices);
 	_ebo = new ElementBuffer(sizeof(elements) / sizeof(uint), (uint*)(&elements));
 
-	_vao->Bind();
 	_vbo->Bind();
 	_ebo->Bind();
 
-	_vao->SetLayout(VertexLayout::GetDefaultSkyboxVertexLayout());
-
-	_vao->Unbind();
 	_vbo->Unbind();
 	_ebo->Unbind();
 }
@@ -117,7 +112,7 @@ void Skybox::Draw() const
 {
 	_texture->Bind();
 
-	_vao->Bind();
-	_vao->DrawElements(_ebo->GetCount());
-	_vao->Unbind();
+	_vbo->Bind();
+	_ebo->Bind();
+	GraphicsAPI::DrawTrianglesIndexes(_ebo->GetCount());
 }

@@ -15,7 +15,6 @@ Declares the Mesh class
 namespace s3dge
 {
 	struct VertexData;
-	class VertexArray;
 	class VertexBuffer;
 	class ElementBuffer;
 	class Texture2D;
@@ -24,7 +23,6 @@ namespace s3dge
 	{
 	protected:
 		std::string Name;
-		VertexArray* VAO;
 		VertexBuffer* VBO;
 		ElementBuffer* EBO;
 		std::vector<Texture2D*> DiffTextures;
