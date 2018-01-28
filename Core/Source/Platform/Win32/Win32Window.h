@@ -173,10 +173,8 @@ namespace s3dge
 		return true;
 	}
 	
-	void Window::UpdateState()
+	void Window::UpdateWindowState()
 	{
-		UpdateContextState();
-
 		MSG messages;
 		while (PeekMessage(&messages, NULL, 0, 0, PM_REMOVE))
 		{
@@ -249,6 +247,8 @@ namespace s3dge
 			// delete the rendering context  
 			wglDeleteContext(renderingContext);
 		}
+
+		GraphicsAPI::Dispose();
 	}
 
 	static void ResetCursorPosition(const Window*const window)

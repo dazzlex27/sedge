@@ -14,7 +14,6 @@ TODO: make this an instanced renderer.
 
 namespace s3dge
 {
-	class VertexArray;
 	class VertexBuffer;
 	class ElementBuffer;
 	struct VertexDataS;
@@ -28,7 +27,6 @@ namespace s3dge
 	class Renderer2D
 	{
 	private:
-		VertexArray* _vao;
 		VertexBuffer* _vbo;
 		ElementBuffer* _ebo;
 
