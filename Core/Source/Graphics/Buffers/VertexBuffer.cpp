@@ -8,7 +8,7 @@ Implements the VertexBuffer class
 
 #include "VertexBuffer.h"
 #include "Graphics/Structures/VertexLayout.h"
-#include "System/DeleteMacros.h"
+#include "System/MemoryManagement.h"
 #include "Graphics/GraphicsAPI.h"
 
 using namespace s3dge;

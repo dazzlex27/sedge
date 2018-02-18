@@ -27,6 +27,7 @@ namespace s3dge
 		std::map<std::string, Group*> _groups;
 
 	public:
+		Renderable2DManager() {}
 		~Renderable2DManager();
 
 		void AddSprite(const char* name, Sprite*const sprite, const bool overwrite = false);
@@ -41,7 +42,6 @@ namespace s3dge
 		inline const uint GetGroupCount() { return _groups.size(); }
 
 	private:
-		Renderable2DManager() {}
 		Renderable2DManager(const Renderable2DManager& tRef) = delete;
 		Renderable2DManager& operator = (const Renderable2DManager& tRef) = delete;
 

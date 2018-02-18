@@ -9,12 +9,14 @@ static void SetLightingParameters(ShaderProgram*const shaderScene);
 void Application::LoadAssets()
 {
 	_shaderManager->Add("scene", "Resources/Shaders/scene.vert", "Resources/Shaders/scene.frag");
-	_shaderManager->Add("hud", "Resources/Shaders/basic.vert", "Resources/Shaders/static.frag");
+	_shaderManager->Add("hud", "Resources/Shaders/hud.vert", "Resources/Shaders/hud.frag");
 	_shaderManager->Add("skybox", "Resources/Shaders/skybox.vert", "Resources/Shaders/skybox.frag");
+	_shaderManager->Add("terrain", "Resources/Shaders/terrain.vert", "Resources/Shaders/terrain.frag");
 
 	_fontManager->AddFont("font1", "Resources/Fonts/Assistant-Regular.ttf", 14);
 	_textureManager->AddTex2D("lm-test", "Resources/Textures/lm-test.png");
 	_textureManager->AddTex2D("lm-test-sp", "Resources/Textures/lm-test-sp.png");
+	_textureManager->AddTex2D("terrain", "Resources/Textures/forrest-terrain.jpg");
 
 	vector<string> sb_paths;
 	sb_paths.push_back("Resources/Textures/sb/sb_rt.png");
@@ -31,13 +33,26 @@ void Application::LoadAssets()
 	_renderable3DManager->AddSkybox("sky1", _graphicsObjFactorySet.SkyboxFactory.CreateSkybox(_textureManager->GetCubemap("skybox")));
 }
 
+Application::Application()
+{
+	_fontManager = new FontManager();
+	_shaderManager = new ShaderManager();
+	_textureManager = new TextureManager();
+	_renderable2DManager = new Renderable2DManager();
+	_renderable3DManager = new Renderable3DManager();
+}
+
+Application::~Application()
+{
+	SafeDelete(_fontManager);
+	SafeDelete(_shaderManager);
+	SafeDelete(_textureManager);
+	SafeDelete(_renderable2DManager);
+	SafeDelete(_renderable3DManager);
+}
+
 void Application::Initialize(const InitializationToolset& initToolset)
 {
-	_fontManager = initToolset.GraphicsAssetMgrFactory.CreateFontManager();
-	_shaderManager = initToolset.GraphicsAssetMgrFactory.CreateShaderManager();
-	_textureManager = initToolset.GraphicsAssetMgrFactory.CreateTextureManager();
-	_renderable2DManager = initToolset.GraphicsAssetMgrFactory.CreateRenderable2DManager();
-	_renderable3DManager = initToolset.GraphicsAssetMgrFactory.CreateRenderable3DManager();
 	_graphicsObjFactorySet = initToolset.GraphicsObjFactorySet;
 
 	CreateGameWindow("S3DGE Application", 1280, 720, false, false);
@@ -45,6 +60,8 @@ void Application::Initialize(const InitializationToolset& initToolset)
 	_inputManager = MainWindow->GetInputManager();
 
 	LoadAssets();
+
+	_terrain = new Terrain(_textureManager->GetTex2D("terrain"));
 
 	_camera = new FPSCamera();
 	_camera->SetPosition(Vector3(0, 1, 0));
@@ -71,7 +88,6 @@ void Application::Initialize(const InitializationToolset& initToolset)
 	_hudLayer->Add(_renderable2DManager->GetLabel("position"));
 
 	ShaderProgram* shaderScene = _shaderManager->GetShader("scene");
-	shaderScene->Bind();
 
 	SetLightingParameters(shaderScene);
 }
@@ -95,10 +111,12 @@ void Application::UpdateLogic()
 
 void Application::Render()
 {
-	Matrix4 view = _camera->GetView();
+	const Matrix4& projection = _camera->GetProjection();
+	const Matrix4& view = _camera->GetView();
 
-	DrawSkybox(view);
-	DrawScene(view);
+	DrawSkybox(projection, view);
+	DrawTerrain(projection, view);
+	DrawScene(projection, view);
 	DrawUI();
 }
 
@@ -113,6 +131,8 @@ void Application::Dispose()
 	SafeDelete(_textureManager);
 	SafeDelete(_renderable2DManager);
 	SafeDelete(_renderable3DManager);
+
+	SafeDelete(_terrain);
 }
 
 void Application::DrawUI()
@@ -123,33 +143,36 @@ void Application::DrawUI()
 	GraphicsAPI::EnableDepthTesting();
 }
 
-void Application::DrawSkybox(const Matrix4& viewMatrix)
+void Application::DrawTerrain(const Matrix4& projectionMatrix, const Matrix4& viewMatrix)
+{
+	ShaderProgram* shaderTerrain = _shaderManager->GetShader("terrain");
+	shaderTerrain->SetProjection(projectionMatrix);
+	shaderTerrain->SetView(viewMatrix);
+
+	_terrain->Render();
+}
+
+void Application::DrawSkybox(const Matrix4& projectionMatrix, const Matrix4& viewMatrix)
 {
 	ShaderProgram* shaderSkybox = _shaderManager->GetShader("skybox");
-	shaderSkybox->SetProjection(_camera->GetProjection());
-	
+	shaderSkybox->SetProjection(projectionMatrix);
 	shaderSkybox->SetView(viewMatrix);
 
-	shaderSkybox->Bind();
 	GraphicsAPI::DisableDepthMask();
 	_renderable3DManager->GetSkybox("sky1")->Draw();
 	GraphicsAPI::EnableDepthMask();
 }
 
-void Application::DrawScene(const s3dge::Matrix4& viewMatrix)
+void Application::DrawScene(const Matrix4& projectionMatrix, const Matrix4& viewMatrix)
 {
 	ShaderProgram* shaderScene = _shaderManager->GetShader("scene");
-	shaderScene->Bind();
+	shaderScene->SetProjection(projectionMatrix);
 	shaderScene->SetView(viewMatrix);
-	shaderScene->SetUniform1i("material.diffuse", 0);
-	shaderScene->SetUniform1i("material.specular", 1);
-	shaderScene->SetUniform1f("material.shininess", 32.0f);
+
 	shaderScene->SetModel(Matrix4::GetScale(Vector3(0.008f, 0.008f, 0.008f)));
 	_renderable3DManager->GetModel("sponza")->Draw();
 	shaderScene->SetModel(Matrix4::GetTranslation(Vector3(0, 0, -1.5f)) * Matrix4::GetScale(Vector3(0.1f, 0.1f, 0.1f)));
 	_renderable3DManager->GetModel("nano")->Draw();
-
-	//Renderable3DManager::GetModel("nimbasa")->Draw();
 }
 
 float horizontalAngle = 0;
@@ -208,6 +231,12 @@ void UpdateCamera(Camera& camera, const InputManager& inputManager)
 
 void SetLightingParameters(ShaderProgram*const shaderScene)
 {
+	shaderScene->Bind();
+
+	shaderScene->SetUniform1i("material.diffuse", 0);
+	shaderScene->SetUniform1i("material.specular", 1);
+	shaderScene->SetUniform1f("material.shininess", 32.0f);
+
 	shaderScene->SetUniform3f("dirLight.direction", Vector3(-1, -0.5, 1));
 	shaderScene->SetUniform3f("dirLight.ambient", Vector3(0.5f, 0.5f, 0.5f));
 	shaderScene->SetUniform3f("dirLight.diffuse", Vector3(0.5f, 0.5f, 0.5f));

@@ -10,7 +10,7 @@ Implements ShaderFactory class
 #include "ShaderProgram.h"
 #include "System/Log.h"
 #include "System/FileUtils.h"
-#include "System/DeleteMacros.h"
+#include "System/MemoryManagement.h"
 
 using namespace s3dge;
 

@@ -31,9 +31,15 @@ namespace s3dge
 		float TextureID;
 	};
 
-	struct VertexDataCb
+	struct VertexDataSkybox
 	{
 		Vector3 Position;
 		Vector3 UV;
+	};
+
+	struct VertexDataTerrain
+	{
+		Vector3 Position;
+		Vector2 UV;
 	};
 }

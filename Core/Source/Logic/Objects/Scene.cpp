@@ -9,7 +9,7 @@ Implements the Scene class
 #include "Scene.h"
 #include "Entity.h"
 #include "Logic/Cameras/Camera.h"
-#include "System/DeleteMacros.h"
+#include "System/MemoryManagement.h"
 #include "Graphics/Shaders/ShaderProgram.h"
 #include "Graphics/Textures/Texture2D.h"
 

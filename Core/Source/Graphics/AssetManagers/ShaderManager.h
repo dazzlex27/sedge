@@ -22,12 +22,12 @@ namespace s3dge
 		std::map<std::string, ShaderProgram*> _programs;
 
 	public:
+		ShaderManager() {}
 		~ShaderManager();
 		void Add(const char*const name, const char*const vertexPath, const char*const fragmentPath, const bool overrideExisting = false);
 		ShaderProgram*const GetShader(const char* name);
 
 	private:
-		ShaderManager() {}
 		ShaderManager(const ShaderManager& tRef) = delete;
 		ShaderManager& operator = (const ShaderManager& tRef) = delete;
 

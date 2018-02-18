@@ -16,7 +16,7 @@ namespace s3dge
 {
 	struct VertexData;
 	class VertexBuffer;
-	class ElementBuffer;
+	class IndexBuffer;
 	class Texture2D;
 
 	class Mesh : public Renderable3D
@@ -24,7 +24,7 @@ namespace s3dge
 	protected:
 		std::string Name;
 		VertexBuffer* VBO;
-		ElementBuffer* EBO;
+		IndexBuffer* IBO;
 		std::vector<Texture2D*> DiffTextures;
 		std::vector<Texture2D*> SpecTextures;
 

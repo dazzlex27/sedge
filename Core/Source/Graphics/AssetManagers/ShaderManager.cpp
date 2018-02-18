@@ -10,7 +10,7 @@ Implements ShaderManager class
 #include "Graphics/Shaders/ShaderFactory.h"
 #include "Graphics/Shaders/ShaderProgram.h"
 #include "System/Log.h"
-#include "System/DeleteMacros.h"
+#include "System/MemoryManagement.h"
 
 using namespace s3dge;
 using namespace std;

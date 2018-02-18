@@ -8,7 +8,7 @@ Implements the Label class
 
 #include "Label.h"
 #include <freetype-gl.h>
-#include "System/DeleteMacros.h"
+#include "System/MemoryManagement.h"
 #include "Graphics/Fonts/Font.h"
 #include "Graphics/Structures/VertexData.h"
 #include "Graphics/Renderers/Renderer2D.h"
@@ -16,7 +16,7 @@ Implements the Label class
 using namespace s3dge;
 using namespace ftgl;
 
-Label::Label(const std::string& text, Font*const font, const Vector2& position, const float zIndex, const Size2D& size, const Color& color)
+Label::Label(const char*const text, Font*const font, const Vector2& position, const float zIndex, const Size2D& size, const Color& color)
 	: _text(text), _font(font), Renderable2D(Vector3(position.x, position.y, zIndex), size, color)
 {
 }

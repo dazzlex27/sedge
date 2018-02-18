@@ -27,6 +27,7 @@ namespace s3dge
 		std::map<std::string, Skybox*> _skyboxes;
 
 	public:
+		Renderable3DManager() {}
 		~Renderable3DManager();
 
 		void AddMesh(const char*const name, Mesh*const mesh, const bool overwrite = false);
@@ -41,7 +42,6 @@ namespace s3dge
 		inline const uint GetSkyboxCount() { return _skyboxes.size(); }
 
 	private:
-		Renderable3DManager() {}
 		Renderable3DManager(const Renderable3DManager& tRef) = delete;
 		Renderable3DManager& operator = (const Renderable3DManager& tRef) = delete;
 

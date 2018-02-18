@@ -11,7 +11,9 @@ A custom memory allocator. Basically isn't implemented yet, stay tuned for that.
 #include <vector>
 #include <assert.h>
 #include "CustomTypes.h"
-#include "DeleteMacros.h"
+
+#define SafeDelete(object) s3dge::MemoryManager::Deallocate(object)
+#define SafeDeleteArray(object) s3dge::MemoryManager::DeallocateArray(object)
 
 namespace s3dge
 {
@@ -24,6 +26,20 @@ namespace s3dge
 		static uint _allocations;
 
 	public:
+		template<typename T>
+		static void Deallocate(T*& a)
+		{
+			delete a;
+			a = nullptr;
+		}
+
+		template<typename T>
+		static void DeallocateArray(T*& a)
+		{
+			delete[] a;
+			a = nullptr;
+		}
+
 		static bool Initialize(size_t size);	
 		static void Allocate(size_t size);
 		static void Deallocate(void* address);

@@ -9,7 +9,7 @@ implements the Skybox class.
 #include "Skybox.h"
 #include "Graphics/Textures/Cubemap.h"
 #include "Graphics/Buffers/VertexBuffer.h"
-#include "Graphics/Buffers/ElementBuffer.h"
+#include "Graphics/Buffers/IndexBuffer.h"
 #include "Graphics/GraphicsAPI.h"
 #include "Graphics/Structures/VertexLayout.h"
 #include "Graphics/Structures/VertexData.h"
@@ -20,7 +20,7 @@ using namespace s3dge;
 Skybox::Skybox(Cubemap*const texture)
 	: _texture(texture)
 {
-	VertexDataCb vertices[24];
+	VertexDataSkybox vertices[24];
 
 	// front face
 	vertices[0].Position = Vector3(-50.0f, -50.0f, -50.0f);
@@ -96,16 +96,10 @@ Skybox::Skybox(Cubemap*const texture)
 		offset += 4;
 	}
 
-	const uint vertexSize = sizeof(VertexDataCb);
+	const uint vertexSize = sizeof(VertexDataSkybox);
 
 	_vbo = new VertexBuffer(vertexSize, sizeof(vertices) / vertexSize, VertexLayout::GetDefaultSkyboxVertexLayout(), &vertices);
-	_ebo = new ElementBuffer(sizeof(elements) / sizeof(uint), (uint*)(&elements));
-
-	_vbo->Bind();
-	_ebo->Bind();
-
-	_vbo->Unbind();
-	_ebo->Unbind();
+	_ibo = new IndexBuffer(sizeof(elements) / sizeof(uint), (uint*)(&elements));
 }
 
 void Skybox::Draw() const
@@ -113,6 +107,6 @@ void Skybox::Draw() const
 	_texture->Bind();
 
 	_vbo->Bind();
-	_ebo->Bind();
-	GraphicsAPI::DrawTrianglesIndexes(_ebo->GetCount());
+	_ibo->Bind();
+	GraphicsAPI::DrawTrianglesIndexes(_ibo->GetCount());
 }
