@@ -6,7 +6,7 @@ Custom memory manager implementation
 ===========================================================================
 */
 
-#include "MemoryManager.h"
+#include "MemoryManagement.h"
 
 namespace s3dge
 {

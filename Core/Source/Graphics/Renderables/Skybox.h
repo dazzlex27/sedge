@@ -13,14 +13,14 @@ Declares the Skybox class, made for rendering cubic skybox textures.
 namespace s3dge
 {
 	class VertexBuffer;
-	class ElementBuffer;
+	class IndexBuffer;
 	class Cubemap;
 
 	class Skybox : public Renderable3D
 	{
 	private:
 		VertexBuffer* _vbo;
-		ElementBuffer* _ebo;
+		IndexBuffer* _ibo;
 		Cubemap* _texture;
 
 	private:

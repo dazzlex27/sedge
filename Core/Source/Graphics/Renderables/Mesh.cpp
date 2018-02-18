@@ -9,10 +9,10 @@ Implemlents the Mesh class
 #include "Mesh.h"
 #include "Graphics/Textures/Texture2D.h"
 #include "Graphics/Buffers/VertexBuffer.h"
-#include "Graphics/Buffers/ElementBuffer.h"
+#include "Graphics/Buffers/IndexBuffer.h"
 #include "Graphics/Structures/VertexLayout.h"
 #include "Graphics/Structures/VertexData.h"
-#include "System/DeleteMacros.h"
+#include "System/MemoryManagement.h"
 #include "Graphics/AssetManagers/TextureManager.h"
 #include "System/Log.h"
 #include "Graphics/GraphicsAPI.h"
@@ -28,16 +28,16 @@ Mesh::Mesh(const char*const name,
 	: Name(name), DiffTextures(diffTextures), SpecTextures(specTextures)
 {
 	VBO = new VertexBuffer(sizeof(VertexData), vertices.size(), VertexLayout::GetDefaultMeshVertexLayout(), vertices.data());
-	EBO = new ElementBuffer(elements.size(), elements.data());
+	IBO = new IndexBuffer(elements.size(), elements.data());
 
 	VBO->Bind();
-	EBO->Bind();
+	IBO->Bind();
 }
 
 Mesh::~Mesh()
 {
 	SafeDelete(VBO);
-	SafeDelete(EBO);
+	SafeDelete(IBO);
 
 	for (auto texture : DiffTextures)
 		SafeDelete(texture);
@@ -72,8 +72,8 @@ void Mesh::Draw() const
 	}
 
 	VBO->Bind();
-	EBO->Bind();
-	GraphicsAPI::DrawTrianglesIndexes(EBO->GetCount());
+	IBO->Bind();
+	GraphicsAPI::DrawTrianglesIndexes(IBO->GetCount());
 
 	for (uint i = 0; i < SpecTextures.size(); i++)
 		SpecTextures[i]->Unbind();

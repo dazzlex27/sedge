@@ -70,11 +70,22 @@ VertexLayout VertexLayout::GetDefaultSpriteVertexLayout()
 
 VertexLayout VertexLayout::GetDefaultSkyboxVertexLayout()
 {
-	const int structSize = sizeof(VertexDataCb);
+	const int structSize = sizeof(VertexDataSkybox);
 
 	VertexLayout layout;
-	layout.AddEntry("position", 0, 3, Float, false, structSize, (const void*)(offsetof(VertexDataCb, Position)));
-	layout.AddEntry("uv", 1, 3, Float, false, structSize, (const void*)(offsetof(VertexDataCb, UV)));
+	layout.AddEntry("position", 0, 3, Float, false, structSize, (const void*)(offsetof(VertexDataSkybox, Position)));
+	layout.AddEntry("uv", 1, 3, Float, false, structSize, (const void*)(offsetof(VertexDataSkybox, UV)));
 	
+	return layout;
+}
+
+VertexLayout VertexLayout::GetDefaultTerrainVertexLayout()
+{
+	const int structSize = sizeof(VertexDataTerrain);
+
+	VertexLayout layout;
+	layout.AddEntry("position", 0, 3, Float, false, structSize, (const void*)(offsetof(VertexDataTerrain, Position)));
+	layout.AddEntry("uv", 1, 2, Float, false, structSize, (const void*)(offsetof(VertexDataTerrain, UV)));
+
 	return layout;
 }

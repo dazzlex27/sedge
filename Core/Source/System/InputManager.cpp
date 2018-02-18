@@ -11,7 +11,7 @@ Implements InputManager class.
 #include <string.h>
 #include "Timer.h"
 #include "Log.h"
-#include "DeleteMacros.h"
+#include "MemoryManagement.h"
 
 using namespace s3dge;
 

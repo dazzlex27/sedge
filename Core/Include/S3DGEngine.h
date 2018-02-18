@@ -24,7 +24,6 @@ namespace s3dge
 
 	struct InitializationToolset
 	{
-		GraphicsAssetManagerFactory GraphicsAssetMgrFactory;
 		GraphicsObjectFactorySet GraphicsObjFactorySet;
 	};
 

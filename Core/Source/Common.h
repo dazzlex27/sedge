@@ -34,6 +34,7 @@ This file is included by the main header S3DGE.h
 #include "Graphics/Renderables/MeshFactory.h"
 #include "Graphics/Renderables/ModelFactory.h"
 #include "Graphics/Renderables/SkyboxFactory.h"
+#include "Graphics/Terrain/Terrain.h"
 
 #include "Graphics/AssetManagers/TextureManager.h"
 #include "Graphics/AssetManagers/FontManager.h"
@@ -42,7 +43,7 @@ This file is included by the main header S3DGE.h
 #include "Graphics/AssetManagers/ShaderManager.h"
 #include "Graphics/Structures/VertexData.h"
 #include "Graphics/Structures/VertexLayout.h"
-#include "Graphics/Buffers/ElementBuffer.h"
+#include "Graphics/Buffers/IndexBuffer.h"
 #include "Graphics/Buffers/VertexBuffer.h"
 
 #include "Logic/Objects/Actor.h"
@@ -52,7 +53,7 @@ This file is included by the main header S3DGE.h
 #include "Logic/Cameras/TPSCamera.h"
 
 #include "System/InputManager.h"
-#include "System/DeleteMacros.h"
+#include "System/MemoryManagement.h"
 #include "System/Timer.h"
 #include "System/RNG.h"
 #include "System/Log.h"
@@ -60,5 +61,4 @@ This file is included by the main header S3DGE.h
 #include "Audio/Sound.h"
 #include "Audio/SoundManager.h"
 
-#include "Graphics/AssetManagers/GraphicsAssetManagerFactory.h"
 #include "Graphics/Renderables/GraphicsObjectFactorySet.h"

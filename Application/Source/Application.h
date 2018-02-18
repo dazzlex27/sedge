@@ -15,6 +15,11 @@ private:
 	s3dge::Renderable3DManager* _renderable3DManager;
 	s3dge::GraphicsObjectFactorySet _graphicsObjFactorySet;
 	s3dge::InputManager* _inputManager;
+	s3dge::Terrain* _terrain;
+
+public:
+	Application();
+	~Application();
 
 public:
 	void Initialize(const s3dge::InitializationToolset& initToolset) override;
@@ -23,8 +28,9 @@ public:
 	void Dispose() override;
 
 private:
-	inline void DrawUI();
-	inline void DrawSkybox(const s3dge::Matrix4& viewMatrix);
-	inline void DrawScene(const s3dge::Matrix4& viewMatrix);
+	void DrawUI();
+	void DrawTerrain(const s3dge::Matrix4& projectionMatrix, const s3dge::Matrix4& viewMatrix);
+	void DrawSkybox(const s3dge::Matrix4& projectionMatrix, const s3dge::Matrix4& viewMatrix);
+	void DrawScene(const s3dge::Matrix4& projectionMatrix, const s3dge::Matrix4& viewMatrix);
 	void LoadAssets();
 };

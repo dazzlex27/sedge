@@ -39,5 +39,6 @@ namespace s3dge
 		static VertexLayout GetDefaultMeshVertexLayout();
 		static VertexLayout GetDefaultSpriteVertexLayout();
 		static VertexLayout GetDefaultSkyboxVertexLayout();
+		static VertexLayout GetDefaultTerrainVertexLayout();
 	};
 }

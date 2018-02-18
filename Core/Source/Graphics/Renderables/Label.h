@@ -25,7 +25,7 @@ namespace s3dge
 		Font* _font;
 
 	public:
-		Label(const std::string& text, Font*const font, const Vector2& position, const float zIndex, const Size2D& size, const Color& color = Color(0xffffffff));
+		Label(const char*const text, Font*const font, const Vector2& position, const float zIndex, const Size2D& size, const Color& color = Color(0xffffffff));
 
 	public:
 		void SetText(const std::string& text);

@@ -22,12 +22,12 @@ namespace s3dge
 		std::map<std::string, Font*> _fonts;
 
 	public:
+		FontManager() {}
 		~FontManager();
 		void AddFont(const char*const name, const char*const path, const float size, const bool overrideExisting = false);
 		Font*const GetFont(const char*const name);
 
 	private:
-		FontManager() {}
 		FontManager(const FontManager& tRef) = delete;
 		FontManager& operator = (const FontManager& tRef) = delete;
 
