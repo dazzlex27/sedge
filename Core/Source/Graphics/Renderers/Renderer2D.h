@@ -15,7 +15,7 @@ TODO: make this an instanced renderer.
 namespace s3dge
 {
 	class VertexBuffer;
-	class ElementBuffer;
+	class IndexBuffer;
 	struct VertexDataS;
 
 	class Renderable2D;
@@ -28,10 +28,10 @@ namespace s3dge
 	{
 	private:
 		VertexBuffer* _vbo;
-		ElementBuffer* _ebo;
+		IndexBuffer* _ibo;
 
 		VertexDataS* _buffer;
-		uint _elementCount;
+		uint _indexCount;
 
 		std::vector<uint> _textureIDs;
 

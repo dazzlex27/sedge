@@ -8,7 +8,7 @@ Implements the Renderer2D class
 
 #include "Renderer2D.h"
 #include "Graphics/Buffers/VertexBuffer.h"
-#include "Graphics/Buffers/ElementBuffer.h"
+#include "Graphics/Buffers/IndexBuffer.h"
 #include "Graphics/Structures/VertexData.h"
 #include "Graphics/Structures/VertexLayout.h"
 #include "Graphics/Textures/Texture2D.h"
@@ -16,7 +16,7 @@ Implements the Renderer2D class
 #include "Graphics/Renderables/Renderable2D.h"
 #include "Graphics/GraphicsAPI.h"
 
-#include "System/DeleteMacros.h"
+#include "System/MemoryManagement.h"
 #include "System/Log.h"
 
 #include "freetype-gl.h"
@@ -24,7 +24,7 @@ Implements the Renderer2D class
 using namespace s3dge;
 using namespace ftgl;
 
-static uint* FillElementBuffer(const uint maxElement);
+static uint* FillIndexBuffer(const uint maxElement);
 
 Renderer2D::Renderer2D(const uint maxVertices)
 	: _maxVertices(maxVertices)
@@ -38,22 +38,18 @@ Renderer2D::Renderer2D(const uint maxVertices)
 	_vbo = new VertexBuffer(sizeof(VertexDataS), _maxVertices, VertexLayout::GetDefaultSpriteVertexLayout());
 	_vbo->Bind();
 
-	const uint maxElements = (const uint)(_maxVertices * 1.5);
-	uint* elements = FillElementBuffer(maxElements);
-	_ebo = new ElementBuffer(maxElements, elements);
-	SafeDeleteArray(elements);
-	_ebo->Bind();
+	const uint maxIndices = (const uint)(_maxVertices * 1.5);
+	uint* indices = FillIndexBuffer(maxIndices);
+	_ibo = new IndexBuffer(maxIndices, indices);
+	SafeDeleteArray(indices);
 
-	_vbo->Unbind();
-	_ebo->Unbind();
-
-	_elementCount = 0;
+	_indexCount = 0;
 }
 
 Renderer2D::~Renderer2D()
 {
 	SafeDelete(_vbo);
-	SafeDelete(_ebo);
+	SafeDelete(_ibo);
 }
 
 void Renderer2D::Begin()
@@ -94,7 +90,7 @@ void Renderer2D::Submit(const Renderable2D*const sprite)
 	_buffer->TextureID = samplerIndex;
 	_buffer++;
 
-	_elementCount += 6;
+	_indexCount += 6;
 }
 
 void Renderer2D::RenderText(const char* text, const Font*const font, const Vector3& position, const Color& color)
@@ -154,7 +150,7 @@ void Renderer2D::RenderText(const char* text, const Font*const font, const Vecto
 			_buffer->Color = color;
 			_buffer++;
 
-			_elementCount += 6;
+			_indexCount += 6;
 		}
 	}
 }
@@ -174,10 +170,10 @@ void Renderer2D::Flush()
 	}
 
 	_vbo->Bind();
-	_ebo->Bind();
-	GraphicsAPI::DrawTrianglesIndexes(_elementCount);
+	_ibo->Bind();
+	GraphicsAPI::DrawTrianglesIndexes(_indexCount);
 
-	_elementCount = 0;
+	_indexCount = 0;
 }
 
 const float Renderer2D::GetSamplerIndexByTID(const ID texID)
@@ -203,20 +199,20 @@ const float Renderer2D::GetSamplerIndexByTID(const ID texID)
 	return (const float)_textureIDs.size();
 }
 
-static uint* FillElementBuffer(const uint maxElements)
+static uint* FillIndexBuffer(const uint maxIndices)
 {
-	uint* elements = new uint[maxElements];
+	uint* indices = new uint[maxIndices];
 
-	for (uint i = 0, offset = 0; i < maxElements; i += 6, offset += 4)
+	for (uint i = 0, offset = 0; i < maxIndices; i += 6, offset += 4)
 	{
-		elements[i] = offset + 0;
-		elements[i + 1] = offset + 2;
-		elements[i + 2] = offset + 1;
+		indices[i] = offset + 0;
+		indices[i + 1] = offset + 2;
+		indices[i + 2] = offset + 1;
 
-		elements[i + 3] = offset + 3;
-		elements[i + 4] = offset + 2;
-		elements[i + 5] = offset + 0;
+		indices[i + 3] = offset + 3;
+		indices[i + 4] = offset + 2;
+		indices[i + 5] = offset + 0;
 	}
 
-	return elements;
+	return indices;
 }

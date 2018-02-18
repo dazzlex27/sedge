@@ -11,7 +11,7 @@ Each Layer2D requires a shader instance and a renderer instance.
 #include "Graphics/Renderables/Renderable2D.h"
 #include "Graphics/Renderers/Renderer2D.h"
 #include "Graphics/Shaders/ShaderProgram.h"
-#include "System/DeleteMacros.h"
+#include "System/MemoryManagement.h"
 #include "Graphics/Renderables/Label.h"
 
 using namespace s3dge;

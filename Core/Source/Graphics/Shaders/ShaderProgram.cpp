@@ -2,7 +2,7 @@
 #include "System/Log.h"
 #include "System/FileUtils.h"
 #include "Graphics/GraphicsAPI.h"
-#include "System/DeleteMacros.h"
+#include "System/MemoryManagement.h"
 #include "Math/Vector2.h"
 #include "Math/Vector3.h"
 #include "Math/Vector4.h"

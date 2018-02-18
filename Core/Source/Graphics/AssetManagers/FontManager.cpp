@@ -9,7 +9,7 @@ Implements the FontManager class.
 #include "FontManager.h"
 #include "Graphics/Fonts/FontFactory.h"
 #include "System/Log.h"
-#include "System/DeleteMacros.h"
+#include "System/MemoryManagement.h"
 
 using namespace s3dge;
 	

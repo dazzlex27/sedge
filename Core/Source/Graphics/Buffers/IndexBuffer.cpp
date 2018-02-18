@@ -1,16 +1,16 @@
 /*
 ===========================================================================
-ElementBuffer.cpp
+IndexBuffer.cpp
 
-Implements the ElementBuffer class
+Implements the IndexBuffer class
 ===========================================================================
 */
 
-#include "ElementBuffer.h"
+#include "IndexBuffer.h"
 
 using namespace s3dge;
 
-ElementBuffer::ElementBuffer(const uint count, uint*const data, const DrawingMode drawingMode)
+IndexBuffer::IndexBuffer(const uint count, uint*const data, const DrawingMode drawingMode)
 	: Buffer(Element, sizeof(*data), count, data, drawingMode)
 {
 }

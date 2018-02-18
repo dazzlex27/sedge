@@ -7,7 +7,7 @@ Implements the Group class
 */
 
 #include "Group.h"
-#include "System/DeleteMacros.h"
+#include "System/MemoryManagement.h"
 #include "Graphics/Renderers/Renderer2D.h"
 
 using namespace s3dge;

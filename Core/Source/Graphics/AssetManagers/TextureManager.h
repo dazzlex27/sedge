@@ -27,6 +27,7 @@ namespace s3dge
 		std::map<ID, std::string> _idsToNames;
 
 	public:
+		TextureManager() {}
 		~TextureManager();
 		void AddTex2D(const char*const name, const char*const path, const TextureType type = Diffuse, const TextureWrapMode wrapMode = Repeat, const TextureFilterMode filterModebool = Linear, const bool overrideExisting = false);
 		void AddCubemap(const char*const name, const std::vector<std::string>& paths, const TextureWrapMode wrapMode = Repeat, const TextureFilterMode filterMode = Linear, const bool overrideExisting = false);
@@ -36,7 +37,6 @@ namespace s3dge
 		inline uint GetCount() { return _texture2Ds.size(); }
 
 	private:
-		TextureManager() {}
 		TextureManager(const TextureManager& tRef) = delete;
 		TextureManager& operator = (const TextureManager& tRef) = delete;
 

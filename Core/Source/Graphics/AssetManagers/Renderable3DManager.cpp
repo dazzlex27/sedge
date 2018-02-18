@@ -8,7 +8,7 @@ Implements the Renderable3DManager class.
 
 #include "Renderable3DManager.h"
 #include "System/Log.h"
-#include "System/DeleteMacros.h"
+#include "System/MemoryManagement.h"
 
 #include "Graphics/Renderables/Mesh.h"
 #include "Graphics/Renderables/Model.h"
@@ -61,6 +61,7 @@ Mesh*const Renderable3DManager::GetMesh(const char*const name)
 	if (_meshes.find(name) != _meshes.end())
 		return _meshes[name];
 
+	LOG_ERROR("Mesh \"", name, "\" already exists and will not be overwritten");
 	return nullptr;
 }
 
@@ -69,6 +70,7 @@ Model*const Renderable3DManager::GetModel(const char*const name)
 	if (_models.find(name) != _models.end())
 		return _models[name];
 
+	LOG_ERROR("Model \"", name, "\" already exists and will not be overwritten");
 	return nullptr;
 }
 
@@ -77,15 +79,16 @@ Skybox*const Renderable3DManager::GetSkybox(const char*const name)
 	if (_skyboxes.find(name) != _skyboxes.end())
 		return _skyboxes[name];
 
+	LOG_ERROR("Skybox \"", name, "\" already exists and will not be overwritten");
 	return nullptr;
 }
 
 Renderable3DManager::~Renderable3DManager()
 {
-		for (auto item : _meshes)
-			SafeDelete(item.second);
-		for (auto item : _models)
-			SafeDelete(item.second);
-		for (auto item : _skyboxes)
-			SafeDelete(item.second);
+	for (auto item : _meshes)
+		SafeDelete(item.second);
+	for (auto item : _models)
+		SafeDelete(item.second);
+	for (auto item : _skyboxes)
+		SafeDelete(item.second);
 }

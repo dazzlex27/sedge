@@ -2,7 +2,7 @@
 #include "Mesh.h"
 #include "System/Log.h"
 #include "Graphics/Structures/VertexData.h"
-#include "System/DeleteMacros.h"
+#include "System/MemoryManagement.h"
 #include "Graphics/Textures/Texture2D.h"
 
 using namespace std;
