@@ -27,7 +27,6 @@ void Application::LoadAssets()
 	sb_paths.push_back("Resources/Textures/sb/sb_ft.png");
 	_textureManager->AddCubemap("skybox", sb_paths);
 
-	//Renderable3DManager::AddModel("nimbasa", ModelFactory::CreateModel("Resources/Models/nimbasa/Nimbasa City.obj"));
 	_renderable3DManager->AddModel("nano", _graphicsObjFactorySet.ModelFactory.CreateModel("Resources/Models/nanosuit/nanosuit.obj"));
 	_renderable3DManager->AddModel("sponza", _graphicsObjFactorySet.ModelFactory.CreateModel("Resources/Models/sponza/sponza.obj"));
 	_renderable3DManager->AddSkybox("sky1", _graphicsObjFactorySet.SkyboxFactory.CreateSkybox(_textureManager->GetCubemap("skybox")));
@@ -63,6 +62,9 @@ void Application::Initialize(const InitializationToolset& initToolset)
 
 	_terrain = new Terrain(_textureManager->GetTex2D("terrain"));
 
+	_cube1 = new Cube(0xff00ff);
+	_cube2 = new Cube(0x00ffff);
+
 	_camera = new FPSCamera();
 	_camera->SetPosition(Vector3(0, 1, 0));
 
@@ -75,11 +77,7 @@ void Application::Initialize(const InitializationToolset& initToolset)
 	_renderable2DManager->AddLabel("fps", label);
 	_renderable2DManager->AddLabel("position", label2);
 
-	Actor* cube = new Actor(_renderable3DManager->GetMesh("cube"));
-	cube->SetPosition(Vector3(-0.5f, 0.3f, 0.5f));
-
 	_mainScene = new Scene(_shaderManager->GetShader("scene"));
-	_mainScene->AddEntity(cube);
 	_mainScene->SetActiveCamera(_camera);
 
 	_hudLayer = new Layer2D(_shaderManager->GetShader("hud"));
@@ -114,9 +112,9 @@ void Application::Render()
 	const Matrix4& projection = _camera->GetProjection();
 	const Matrix4& view = _camera->GetView();
 
-	DrawSkybox(projection, view);
 	DrawTerrain(projection, view);
 	DrawScene(projection, view);
+	DrawSkybox(projection, view);
 	DrawUI();
 }
 
@@ -133,6 +131,8 @@ void Application::Dispose()
 	SafeDelete(_renderable3DManager);
 
 	SafeDelete(_terrain);
+
+	SafeDelete(_cube1);
 }
 
 void Application::DrawUI()
@@ -168,6 +168,8 @@ void Application::DrawScene(const Matrix4& projectionMatrix, const Matrix4& view
 	ShaderProgram* shaderScene = _shaderManager->GetShader("scene");
 	shaderScene->SetProjection(projectionMatrix);
 	shaderScene->SetView(viewMatrix);
+
+	_cube1->Draw();
 
 	shaderScene->SetModel(Matrix4::GetScale(Vector3(0.008f, 0.008f, 0.008f)));
 	_renderable3DManager->GetModel("sponza")->Draw();

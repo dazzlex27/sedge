@@ -18,6 +18,9 @@ namespace s3dge
 		Sprite(const Vector2& position, const float zIndex, const Size2D& size, const Color& color);
 		Sprite(const Vector2& position, const float zIndex, const Size2D& size, Texture2D*const texture);
 
+	public:
+		virtual void Draw() const override {}
+
 		friend class SpriteFactory;
 	};
 }

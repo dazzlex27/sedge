@@ -15,7 +15,7 @@ using namespace s3dge;
 using namespace std;
 
 Cubemap::Cubemap(const char*const name, const vector<std::string>& paths, const TextureWrapMode wrapMode, const TextureFilterMode filterMode)
-	:  Texture(name, paths[0].c_str(), Cube, wrapMode, filterMode), _paths(paths)
+	:  Texture(name, paths[0].c_str(), TexCube, wrapMode, filterMode), _paths(paths)
 {
 }
 

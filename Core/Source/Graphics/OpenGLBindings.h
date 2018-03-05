@@ -68,22 +68,7 @@ void GraphicsAPI::UnmapBuffer(const BufferTarget target)
 {
 	glUnmapBuffer(EnumConverter::GetBufferTarget(target));
 }
-//
-//void GraphicsAPI::GenVertexArrays(const uint n, ID* const arrays)
-//{
-//	glGenVertexArrays(n, arrays);
-//}
-//
-//void GraphicsAPI::DeleteVertexArrays(const uint n, ID*const arrays)
-//{
-//	glDeleteVertexArrays(1, arrays);
-//}
-//
-//void GraphicsAPI::BindVertexArray(const ID id)
-//{
-//	glBindVertexArray(id);
-//}
-//
+
 void GraphicsAPI::EnableVertexAttributeArray(const uint index)
 {
 	glEnableVertexAttribArray(index);
@@ -309,6 +294,8 @@ const bool GraphicsAPI::Initialize()
 	glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
+	glFrontFace(GL_CCW);
+
 	// global VAO
 	glGenVertexArrays(1, &VAO);
 	glBindVertexArray(VAO);
@@ -469,7 +456,7 @@ const int EnumConverter::GetTextureTarget(const TextureTarget target)
 	{
 	case Tex2D:
 		return GL_TEXTURE_2D;
-	case Cube:
+	case TexCube:
 		return GL_TEXTURE_CUBE_MAP;
 	default:
 		return 0;
