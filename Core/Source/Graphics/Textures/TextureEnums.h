@@ -23,7 +23,7 @@ namespace s3dge
 	enum TextureTarget
 	{
 		Tex2D,
-		Cube
+		TexCube
 	};
 
 	enum TextureFilter

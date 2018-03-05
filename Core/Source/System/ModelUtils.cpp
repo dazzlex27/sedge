@@ -10,6 +10,7 @@
 #include "Graphics/AssetManagers/TextureManager.h"
 #include "Graphics/AssetManagers/Renderable3DManager.h"
 #include "Graphics/Structures/VertexData.h"
+#include "System/Execution.h"
 
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
@@ -29,7 +30,8 @@ Model*const ModelUtils::ReadFromFile(const char*const filepath)
 {
 	if (!FileUtils::CheckFileExists(filepath))
 	{
-		LOG_ERROR("Failed to open model at \"", filepath, "\"");
+		LOG_FATAL("Failed to find model file at \"", filepath, "\"");
+		TerminateProgram("Failed to load a model");
 		return nullptr;
 	}
 	

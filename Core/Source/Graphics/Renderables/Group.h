@@ -24,5 +24,7 @@ namespace s3dge
 
 		void Add(Renderable2D*const renderable);
 		virtual void Submit(Renderer2D*const renderer) const override;
+
+		virtual void Draw() const override {}
 	};
 }

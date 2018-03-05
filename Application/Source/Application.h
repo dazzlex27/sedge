@@ -16,6 +16,8 @@ private:
 	s3dge::GraphicsObjectFactorySet _graphicsObjFactorySet;
 	s3dge::InputManager* _inputManager;
 	s3dge::Terrain* _terrain;
+	s3dge::Cube* _cube1;
+	s3dge::Cube* _cube2;
 
 public:
 	Application();

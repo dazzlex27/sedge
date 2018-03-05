@@ -2,6 +2,8 @@
 
 #include "Entity.h"
 
+#include "Graphics/Renderables/Renderable.h"
+
 namespace s3dge
 {
 	class Renderable;
