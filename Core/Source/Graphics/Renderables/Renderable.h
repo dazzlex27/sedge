@@ -21,5 +21,7 @@ namespace s3dge
 	public:
 		Renderable(const Matrix4& modelMatrix = Matrix4::GetIdentity()) 
 			: ModelMatrix(modelMatrix) { }
+
+		virtual void Draw() const = 0;
 	};
 }

@@ -118,6 +118,7 @@ xcopy "$(SolutionDIr)Externals\assimp-4.0.0\libs\$(Configuration)\*" "$(Solution
     <ClCompile Include="Source\Graphics\AssetManagers\Renderable2DManager.cpp" />
     <ClCompile Include="Source\Graphics\Lights\Light.cpp" />
     <ClCompile Include="Source\Graphics\AssetManagers\ShaderManager.cpp" />
+    <ClCompile Include="Source\Graphics\Renderables\Primitives\Cube.cpp" />
     <ClCompile Include="Source\Graphics\Renderables\LabelFactory.cpp" />
     <ClCompile Include="Source\Graphics\Renderables\Mesh.cpp" />
     <ClCompile Include="Source\Graphics\Renderables\MeshFactory.cpp" />
@@ -129,7 +130,6 @@ xcopy "$(SolutionDIr)Externals\assimp-4.0.0\libs\$(Configuration)\*" "$(Solution
     <ClCompile Include="Source\Graphics\Renderables\SkyboxFactory.cpp" />
     <ClCompile Include="Source\Graphics\Renderables\SpriteFactory.cpp" />
     <ClCompile Include="Source\Graphics\Renderers\Renderer2D.cpp" />
-    <ClCompile Include="Source\Graphics\Renderers\TerrainRenderer.cpp" />
     <ClCompile Include="Source\Graphics\Shaders\ShaderFactory.cpp" />
     <ClCompile Include="Source\Graphics\Structures\VertexLayout.cpp" />
     <ClCompile Include="Source\Graphics\Terrain\Terrain.cpp" />
@@ -138,6 +138,7 @@ xcopy "$(SolutionDIr)Externals\assimp-4.0.0\libs\$(Configuration)\*" "$(Solution
     <ClCompile Include="Source\Graphics\Textures\TextureFactory.cpp" />
     <ClCompile Include="Source\Logic\Objects\Actor.cpp" />
     <ClCompile Include="Source\Math\Quatertion.cpp" />
+    <ClCompile Include="Source\System\Execution.cpp" />
     <ClCompile Include="Source\System\InputManager.cpp" />
     <ClCompile Include="Source\System\MemoryManagement.cpp" />
     <ClCompile Include="Source\Graphics\Buffers\VertexBuffer.cpp" />
@@ -181,6 +182,7 @@ xcopy "$(SolutionDIr)Externals\assimp-4.0.0\libs\$(Configuration)\*" "$(Solution
     <ClInclude Include="Source\Graphics\GraphicsAPI.h" />
     <ClInclude Include="Source\Graphics\GraphicsAPIEnumConverter.h" />
     <ClInclude Include="Source\Graphics\Lights\Light.h" />
+    <ClInclude Include="Source\Graphics\Renderables\Primitives\Cube.h" />
     <ClInclude Include="Source\Graphics\Renderables\GraphicsObjectFactorySet.h" />
     <ClInclude Include="Source\Graphics\AssetManagers\Renderable3DManager.h" />
     <ClInclude Include="Source\Graphics\AssetManagers\ShaderManager.h" />
@@ -192,7 +194,6 @@ xcopy "$(SolutionDIr)Externals\assimp-4.0.0\libs\$(Configuration)\*" "$(Solution
     <ClInclude Include="Source\Graphics\Renderables\Skybox.h" />
     <ClInclude Include="Source\Graphics\Renderables\SkyboxFactory.h" />
     <ClInclude Include="Source\Graphics\Renderers\Renderer2D.h" />
-    <ClInclude Include="Source\Graphics\Renderers\TerrainRenderer.h" />
     <ClInclude Include="Source\Graphics\Shaders\ShaderEnums.h" />
     <ClInclude Include="Source\Graphics\Shaders\ShaderFactory.h" />
     <ClInclude Include="Source\Graphics\Terrain\Terrain.h" />
@@ -218,6 +219,7 @@ xcopy "$(SolutionDIr)Externals\assimp-4.0.0\libs\$(Configuration)\*" "$(Solution
     <ClInclude Include="Source\Math\Size2D.h" />
     <ClInclude Include="Source\Graphics\Structures\VertexLayout.h" />
     <ClInclude Include="Source\Graphics\Textures\TextureFactory.h" />
+    <ClInclude Include="Source\System\Execution.h" />
     <ClInclude Include="Source\System\InputManager.h" />
     <ClInclude Include="Source\System\MemoryManagement.h" />
     <ClInclude Include="Include\S3DGEngine.h" />

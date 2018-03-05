@@ -35,6 +35,7 @@ This file is included by the main header S3DGE.h
 #include "Graphics/Renderables/ModelFactory.h"
 #include "Graphics/Renderables/SkyboxFactory.h"
 #include "Graphics/Terrain/Terrain.h"
+#include "Graphics/Renderables/Primitives/Cube.h"
 
 #include "Graphics/AssetManagers/TextureManager.h"
 #include "Graphics/AssetManagers/FontManager.h"

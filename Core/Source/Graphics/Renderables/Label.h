@@ -33,6 +33,8 @@ namespace s3dge
 
 		virtual const ID GetTextureID() const override;
 
+		virtual void Draw() const override {}
+
 		void Submit(Renderer2D*const renderer2d) const override;
 
 		friend class LabelFactory;

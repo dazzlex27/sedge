@@ -56,11 +56,11 @@ void Renderable2DManager::AddLabel(const char* name, Label* label, bool overwrit
 void Renderable2DManager::AddGroup(const char* name, bool overwrite)
 {
 	if (GetGroup(name) == nullptr)
-		_groups[name] = new Group;
+		_groups[name] = new Group();
 	else
 	{
 		if (overwrite)
-			_groups[name] = new Group;
+			_groups[name] = new Group();
 		else
 			LOG_WARNING("Group \"", name, "\" already exists and will not be overwritten");
 	}

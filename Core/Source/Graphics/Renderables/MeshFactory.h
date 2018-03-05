@@ -17,6 +17,5 @@ namespace s3dge
 			std::vector<uint> elements,
 			std::vector<Texture2D*> diffTextures = std::vector<Texture2D*>(),
 			std::vector<Texture2D*> specTextures = std::vector<Texture2D*>());
-		Mesh*const CreateCubeOfUnitSize(Texture2D*const texture);
 	};
 }

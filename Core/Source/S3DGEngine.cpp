@@ -8,6 +8,7 @@ Implementation of the top level engine functions.
 
 #include "../Include/S3DGEngine.h"
 #include "System/Log.h"
+#include "System/Execution.h"
 
 using namespace s3dge;
 
@@ -31,7 +32,7 @@ void S3DGEngine::CreateGameWindow(const char* name, uint width, uint height, boo
 		if (!MainWindow->Initialize())
 		{
 			LOG_FATAL("Could not initialize window!");
-			abort();
+			TerminateProgram("Could not initialize window!");
 		}
 	}
 }
