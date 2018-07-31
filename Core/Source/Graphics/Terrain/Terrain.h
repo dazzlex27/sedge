@@ -19,7 +19,7 @@ namespace s3dge
 		Terrain(Texture2D*const texture);
 		~Terrain();
 
-		void Render() const;
+		void Draw() const;
 
 	private:
 		void GenerateTerrain();

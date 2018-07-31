@@ -23,12 +23,9 @@ namespace s3dge
 		IndexBuffer* _ibo;
 		Cubemap* _texture;
 
-	private:
+	public:
 		Skybox(Cubemap*const texture);
 
-	public:
 		virtual void Draw() const override;
-
-		friend class SkyboxFactory;
 	};
 }

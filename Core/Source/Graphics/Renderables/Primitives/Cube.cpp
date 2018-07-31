@@ -4,7 +4,6 @@
 #include "Graphics/Buffers/IndexBuffer.h"
 #include "Graphics/Structures/VertexData.h"
 #include "Graphics/Structures/VertexLayout.h"
-#include "Graphics/GraphicsAPI.h"
 #include "Math/Vector2.h"
 #include "Math/Vector3.h"
 
@@ -26,25 +25,18 @@ Cube::Cube(const uint color)
 
 Cube::~Cube()
 {
-	SafeDelete(_vbo);
-	SafeDelete(_ibo);
-}
-
-void Cube::Draw() const
-{
-	_vbo->Bind();
-	_ibo->Bind();
-	GraphicsAPI::DrawTrianglesIndexes(_ibo->GetCount());
+	SafeDelete(VBO);
+	SafeDelete(IBO);
 }
 
 void Cube::GenerateCube(const uint color)
 {
 	VertexData* vertices = GetCubeVertices(color);
-	_vbo = new VertexBuffer(sizeof(VertexData), 24, VertexLayout::GetDefaultMeshVertexLayout(), vertices);
+	VBO = new VertexBuffer(sizeof(VertexData), 24, VertexLayout::GetDefaultMeshVertexLayout(), vertices);
 	SafeDeleteArray(vertices);
 
 	uint* indices = GetCubeIndices();
-	_ibo = new IndexBuffer(36, indices);
+	IBO = new IndexBuffer(36, indices);
 	SafeDeleteArray(indices);
 }
 

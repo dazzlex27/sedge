@@ -37,7 +37,7 @@ namespace s3dge
 		// Drawing
 		static void DrawArrays(const PrimitiveType primitiveType, const int first, const uint count);
 		static void DrawElements(const PrimitiveType primitiveType, const uint count, const ValueType type, const void*const elements);
-		static void DrawTrianglesIndexes(const uint elementCount);
+		static void DrawTrianglesIndexed(const uint elementCount);
 
 		// Textures
 		static void GenTextures(const uint n, ID*const textures);

@@ -108,5 +108,5 @@ void Skybox::Draw() const
 
 	_vbo->Bind();
 	_ibo->Bind();
-	GraphicsAPI::DrawTrianglesIndexes(_ibo->GetCount());
+	GraphicsAPI::DrawTrianglesIndexed(_ibo->GetCount());
 }
