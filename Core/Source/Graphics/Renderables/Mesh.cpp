@@ -29,9 +29,6 @@ Mesh::Mesh(const char*const name,
 {
 	VBO = new VertexBuffer(sizeof(VertexData), vertices.size(), VertexLayout::GetDefaultMeshVertexLayout(), vertices.data());
 	IBO = new IndexBuffer(elements.size(), elements.data());
-
-	VBO->Bind();
-	IBO->Bind();
 }
 
 Mesh::~Mesh()
@@ -71,9 +68,7 @@ void Mesh::Draw() const
 		texture->Bind();
 	}
 
-	VBO->Bind();
-	IBO->Bind();
-	GraphicsAPI::DrawTrianglesIndexes(IBO->GetCount());
+	Renderable3D::Draw();
 
 	for (uint i = 0; i < SpecTextures.size(); i++)
 		SpecTextures[i]->Unbind();

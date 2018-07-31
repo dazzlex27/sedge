@@ -23,5 +23,8 @@ namespace s3dge
 			: ModelMatrix(modelMatrix) { }
 
 		virtual void Draw() const = 0;
+
+		const Matrix4& GetModelMatrix() const { return ModelMatrix; }
+		void SetModelMatrix(const Matrix4& modelMatrix) { ModelMatrix = modelMatrix; }
 	};
 }

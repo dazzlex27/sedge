@@ -25,13 +25,13 @@ Terrain::~Terrain()
 	SafeDelete(_ibo);
 }
 
-void Terrain::Render() const
+void Terrain::Draw() const
 {
 	Texture2D::ActivateTexture(0);
 	_texture->Bind();
 	_vbo->Bind();
 	_ibo->Bind();
-	GraphicsAPI::DrawTrianglesIndexes(_ibo->GetCount());
+	GraphicsAPI::DrawTrianglesIndexed(_ibo->GetCount());
 }
 
 void Terrain::GenerateTerrain()

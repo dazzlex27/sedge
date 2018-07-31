@@ -23,8 +23,6 @@ namespace s3dge
 	{
 	protected:
 		std::string Name;
-		VertexBuffer* VBO;
-		IndexBuffer* IBO;
 		std::vector<Texture2D*> DiffTextures;
 		std::vector<Texture2D*> SpecTextures;
 

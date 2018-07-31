@@ -2,8 +2,6 @@
 
 #include "Entity.h"
 
-#include "Graphics/Renderables/Renderable.h"
-
 namespace s3dge
 {
 	class Renderable;
@@ -11,12 +9,17 @@ namespace s3dge
 	class Actor : public Entity
 	{
 	private:
-		Renderable* _renderable;
+		Renderable*const _renderable;
 
 	public:
 		Actor(Renderable*const renderable);
+		virtual ~Actor();
 
-		virtual void Update() override;
+		const Renderable*const GetRenderable() const { return _renderable; }
+
 		virtual void Draw() override;
+
+	protected:
+		virtual void UpdateModelMatrix() override;
 	};
 }
