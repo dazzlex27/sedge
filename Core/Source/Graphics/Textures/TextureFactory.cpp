@@ -8,7 +8,7 @@ Implements TextureFactory class
 
 #include "TextureFactory.h"
 #include "System/FileUtils.h"
-#include "System/Log.h"
+#include "System/Logger.h"
 #include "System/MemoryManagement.h"
 #include "Texture2D.h"
 #include "Cubemap.h"

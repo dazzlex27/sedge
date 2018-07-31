@@ -55,9 +55,10 @@ This file is included by the main header S3DGE.h
 
 #include "System/InputManager.h"
 #include "System/MemoryManagement.h"
-#include "System/Timer.h"
+#include "System/Stopwatch.h"
 #include "System/RNG.h"
-#include "System/Log.h"
+#include "System/Logger.h"
+#include "System/DateTime.h"
 
 #include "Audio/Sound.h"
 #include "Audio/SoundManager.h"

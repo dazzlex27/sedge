@@ -8,7 +8,7 @@ Implements FontFactory class
 
 #include "FontFactory.h"
 #include "System/FileUtils.h"
-#include "System/Log.h"
+#include "System/Logger.h"
 
 using namespace s3dge;
 

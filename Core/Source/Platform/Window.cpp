@@ -8,9 +8,9 @@ Contains basic high-level window management functions.
 
 #include "Window.h"
 #include "KeyCodes.h"
-#include "System/Log.h"
+#include "System/Logger.h"
 #include "System/MemoryManagement.h"
-#include "System/Timer.h"
+#include "System/Stopwatch.h"
 #include "Graphics/GraphicsAPI.h"
 #include "System/InputManager.h"
 #include "Audio/SoundManager.h"

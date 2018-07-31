@@ -1,6 +1,6 @@
 #include "MeshFactory.h"
 #include "Mesh.h"
-#include "System/Log.h"
+#include "System/Logger.h"
 #include "Graphics/Structures/VertexData.h"
 #include "System/MemoryManagement.h"
 #include "Graphics/Textures/Texture2D.h"

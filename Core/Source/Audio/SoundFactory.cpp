@@ -9,7 +9,7 @@ Implements SoundFactory class
 #include "SoundFactory.h"
 #include "Sound.h"
 #include "System/FileUtils.h"
-#include "System/Log.h"
+#include "System/Logger.h"
 
 using namespace s3dge;
 

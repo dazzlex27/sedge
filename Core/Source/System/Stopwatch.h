@@ -1,11 +1,8 @@
 /*
 ===========================================================================
-Timer.h
+Stopwatch.h
 
-Defines the main engine timer class.
 Relies on C++11 <chrono> features.
-
-This file will likely be #ifdef'ed to include a more conventional timer.
 ===========================================================================
 */
 
@@ -15,7 +12,7 @@ This file will likely be #ifdef'ed to include a more conventional timer.
 
 namespace s3dge
 {
-	class Timer
+	class Stopwatch
 	{
 	private:
 		typedef std::chrono::high_resolution_clock clock;
@@ -27,7 +24,7 @@ namespace s3dge
 		bool _running;
 
 	public:
-		Timer();
+		Stopwatch();
 
 		inline bool IsRunning() const { return _running; }
 		

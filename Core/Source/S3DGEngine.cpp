@@ -7,7 +7,7 @@ Implementation of the top level engine functions.
 */
 
 #include "../Include/S3DGEngine.h"
-#include "System/Log.h"
+#include "System/Logger.h"
 #include "System/Execution.h"
 
 using namespace s3dge;
@@ -15,7 +15,7 @@ using namespace s3dge;
 S3DGEngine::S3DGEngine()
 {
 	_state = ENGINE_STATE::READY;
-	_runTimer = new Timer();
+	_runTimer = new Stopwatch();
 }
 
 S3DGEngine::~S3DGEngine()
