@@ -7,7 +7,7 @@ Contains implementations for file utilities functions
 */
 
 #include "FileUtils.h"
-#include "System/Log.h"
+#include "System/Logger.h"
 
 using namespace std;
 using namespace s3dge;

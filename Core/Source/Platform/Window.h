@@ -14,7 +14,6 @@ Contains basic high-level window management functions.
 
 namespace s3dge
 {
-	class Timer;
 	class InputManager;
 	class SoundManager;
 	struct Vector2;

@@ -10,7 +10,7 @@ Implements Sound class.
 #include <gorilla/ga.h>
 #include <gorilla/gau.h>
 #include "SoundManager.h"
-#include "System/Log.h"
+#include "System/Logger.h"
 
 using namespace s3dge;
 

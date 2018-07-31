@@ -7,7 +7,7 @@ Implements the Renderable2DManager class.
 */
 
 #include "Renderable2DManager.h"
-#include "System/Log.h"
+#include "System/Logger.h"
 #include "System/MemoryManagement.h"
 
 #include "Graphics/Renderables/Sprite.h"

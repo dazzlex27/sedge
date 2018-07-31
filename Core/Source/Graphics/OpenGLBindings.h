@@ -11,7 +11,7 @@ This should be the only place where GL/glew.h is included!
 
 #include "GraphicsAPI.h"
 #include "GraphicsAPIEnumConverter.h"
-#include "System/Log.h"
+#include "System/Logger.h"
 #include <GL/glew.h>
 #include <string>
 #include "System/ImageUtils.h"

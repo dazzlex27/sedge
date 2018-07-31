@@ -17,7 +17,7 @@ Implements the Renderer2D class
 #include "Graphics/GraphicsAPI.h"
 
 #include "System/MemoryManagement.h"
-#include "System/Log.h"
+#include "System/Logger.h"
 
 #include "freetype-gl.h"
 

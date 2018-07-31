@@ -11,7 +11,7 @@ Implements the audio manager class.
 #include "Sound.h"
 #include <gorilla/ga.h>
 #include <gorilla/gau.h>
-#include "System/Log.h"
+#include "System/Logger.h"
 #include "System/MemoryManagement.h"
 
 using namespace s3dge;

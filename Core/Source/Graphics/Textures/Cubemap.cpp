@@ -8,7 +8,7 @@ implements the Cubemap class
 
 #include "Cubemap.h"
 #include "System/ImageUtils.h"
-#include "System/Log.h"
+#include "System/Logger.h"
 #include "Graphics/GraphicsAPI.h"
 
 using namespace s3dge;

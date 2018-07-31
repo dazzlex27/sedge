@@ -35,7 +35,7 @@ namespace s3dge
 	private:
 		ENGINE_STATE _state;
 		uint _fps;
-		Timer* _runTimer;
+		Stopwatch* _runTimer;
 
 		InitializationToolset _initToolset;
 

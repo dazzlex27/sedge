@@ -18,7 +18,7 @@ Handles all user input.
 namespace s3dge
 {
 	class Window;
-	class Timer;
+	class Stopwatch;
 
 	class InputManager
 	{
@@ -28,7 +28,7 @@ namespace s3dge
 		bool* _keysDown;
 		bool* _keysClicked;
 		bool* _keysDoubleClicked;
-		Timer* _doubleClickTimers;
+		Stopwatch* _doubleClickTimers;
 
 	public:
 		void Update();

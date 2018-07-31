@@ -138,8 +138,10 @@ xcopy "$(SolutionDIr)Externals\assimp-4.0.0\libs\$(Configuration)\*" "$(Solution
     <ClCompile Include="Source\Graphics\Textures\TextureFactory.cpp" />
     <ClCompile Include="Source\Logic\Objects\Actor.cpp" />
     <ClCompile Include="Source\Math\Quatertion.cpp" />
+    <ClCompile Include="Source\System\DateTime.cpp" />
     <ClCompile Include="Source\System\Execution.cpp" />
     <ClCompile Include="Source\System\InputManager.cpp" />
+    <ClCompile Include="Source\System\Logger.cpp" />
     <ClCompile Include="Source\System\MemoryManagement.cpp" />
     <ClCompile Include="Source\Graphics\Buffers\VertexBuffer.cpp" />
     <ClCompile Include="Source\Graphics\Buffers\IndexBuffer.cpp" />
@@ -167,7 +169,7 @@ xcopy "$(SolutionDIr)Externals\assimp-4.0.0\libs\$(Configuration)\*" "$(Solution
     <ClCompile Include="Source\System\IDGenerator.cpp" />
     <ClCompile Include="Source\System\ImageUtils.cpp" />
     <ClCompile Include="Source\System\ModelUtils.cpp" />
-    <ClCompile Include="Source\System\Timer.cpp" />
+    <ClCompile Include="Source\System\Stopwatch.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Externals\FreeTypeGL\utf8-utils.h" />
@@ -221,6 +223,7 @@ xcopy "$(SolutionDIr)Externals\assimp-4.0.0\libs\$(Configuration)\*" "$(Solution
     <ClInclude Include="Source\Math\Size2D.h" />
     <ClInclude Include="Source\Graphics\Structures\VertexLayout.h" />
     <ClInclude Include="Source\Graphics\Textures\TextureFactory.h" />
+    <ClInclude Include="Source\System\DateTime.h" />
     <ClInclude Include="Source\System\Execution.h" />
     <ClInclude Include="Source\System\InputManager.h" />
     <ClInclude Include="Source\System\MemoryManagement.h" />
@@ -256,10 +259,10 @@ xcopy "$(SolutionDIr)Externals\assimp-4.0.0\libs\$(Configuration)\*" "$(Solution
     <ClInclude Include="Source\System\FileUtils.h" />
     <ClInclude Include="Source\System\IDGenerator.h" />
     <ClInclude Include="Source\System\ImageUtils.h" />
-    <ClInclude Include="Source\System\Log.h" />
+    <ClInclude Include="Source\System\Logger.h" />
     <ClInclude Include="Source\System\ModelUtils.h" />
     <ClInclude Include="Source\System\RNG.h" />
-    <ClInclude Include="Source\System\Timer.h" />
+    <ClInclude Include="Source\System\Stopwatch.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
