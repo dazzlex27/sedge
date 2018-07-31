@@ -8,11 +8,6 @@ static void SetLightingParameters(ShaderProgram*const shaderScene);
 
 void Application::LoadAssets()
 {
-	_shaderManager->Add("scene", "Resources/Shaders/scene.vert", "Resources/Shaders/scene.frag");
-	_shaderManager->Add("hud", "Resources/Shaders/hud.vert", "Resources/Shaders/hud.frag");
-	_shaderManager->Add("skybox", "Resources/Shaders/skybox.vert", "Resources/Shaders/skybox.frag");
-	_shaderManager->Add("terrain", "Resources/Shaders/terrain.vert", "Resources/Shaders/terrain.frag");
-
 	_fontManager->AddFont("font1", "Resources/Fonts/Assistant-Regular.ttf", 14);
 	_textureManager->AddTex2D("lm-test", "Resources/Textures/lm-test.png");
 	_textureManager->AddTex2D("lm-test-sp", "Resources/Textures/lm-test-sp.png");
@@ -26,28 +21,22 @@ void Application::LoadAssets()
 	sb_paths.push_back("Resources/Textures/sb/sb_bk.png");
 	sb_paths.push_back("Resources/Textures/sb/sb_ft.png");
 	_textureManager->AddCubemap("skybox", sb_paths);
-
-	_renderable3DManager->AddModel("nano", _graphicsObjFactorySet.ModelFactory.CreateModel("Resources/Models/nanosuit/nanosuit.obj"));
-	_renderable3DManager->AddModel("sponza", _graphicsObjFactorySet.ModelFactory.CreateModel("Resources/Models/sponza/sponza.obj"));
-	_renderable3DManager->AddSkybox("sky1", _graphicsObjFactorySet.SkyboxFactory.CreateSkybox(_textureManager->GetCubemap("skybox")));
 }
 
 Application::Application()
 {
 	_fontManager = new FontManager();
-	_shaderManager = new ShaderManager();
+	_shaderFactory = new ShaderFactory();
 	_textureManager = new TextureManager();
 	_renderable2DManager = new Renderable2DManager();
-	_renderable3DManager = new Renderable3DManager();
 }
 
 Application::~Application()
 {
 	SafeDelete(_fontManager);
-	SafeDelete(_shaderManager);
+	SafeDelete(_shaderFactory);
 	SafeDelete(_textureManager);
 	SafeDelete(_renderable2DManager);
-	SafeDelete(_renderable3DManager);
 }
 
 void Application::Initialize(const InitializationToolset& initToolset)
@@ -60,121 +49,77 @@ void Application::Initialize(const InitializationToolset& initToolset)
 
 	LoadAssets();
 
-	_terrain = new Terrain(_textureManager->GetTex2D("terrain"));
+	auto terrain = new Terrain(_textureManager->GetTex2D("terrain"));
+	auto terrainShader = _shaderFactory->CreateShaderProgram("terrain", "Resources/Shaders/terrain.vert", "Resources/Shaders/terrain.frag");
 
-	_cube1 = new Cube(0xff00ff);
-	_cube2 = new Cube(0x00ffff);
+	auto skybox = new Skybox(_textureManager->GetCubemap("skybox"));
+	auto shaderSkybox = _shaderFactory->CreateShaderProgram("skybox", "Resources/Shaders/skybox.vert", "Resources/Shaders/skybox.frag");
 
-	_camera = new FPSCamera();
-	_camera->SetPosition(Vector3(0, 1, 0));
+	auto camera = new FPSCamera();
+	camera->SetPosition(Vector3(0, 1, 0));
 
-	_shaderManager->GetShader("scene")->SetProjection(_camera->GetProjection());
-	_shaderManager->GetShader("hud")->SetProjection(Matrix4::GetOrthographic(0.0f, 16.0f, 0.0f, 9.0f, -1.0f, 1.0f));
+	auto sponzaModel = _graphicsObjFactorySet.ModelFactory.CreateModel("Resources/Models/sponza/sponza.obj");
+	auto sponza = new Actor(sponzaModel);
+	sponza->SetScale(Vector3(0.008f, 0.008f, 0.008f));
 
-	Label* label = _graphicsObjFactorySet.LabelFactory.CreateLabel("startup...", _fontManager->GetFont("font1"), Vector2(0.1f, 8.7f), 0, Size2D(2, 2));
-	Label* label2 = _graphicsObjFactorySet.LabelFactory.CreateLabel("p:", _fontManager->GetFont("font1"), Vector2(0.1f, 8.4f), 0, Size2D(2, 2));
-	
+	auto nanosuitModel = _graphicsObjFactorySet.ModelFactory.CreateModel("Resources/Models/nanosuit/nanosuit.obj");
+	auto nano = new Actor(nanosuitModel);
+	nano->SetPosition(Vector3(0, 0, -1.5f));
+	nano->SetScale(Vector3(0.1f, 0.1f, 0.1f));
+
+	auto cubeMesh = new Cube(0xff00ff);
+	auto cube = new Actor(cubeMesh);
+
+	auto shaderScene = _shaderFactory->CreateShaderProgram("scene", "Resources/Shaders/scene.vert", "Resources/Shaders/scene.frag");
+	_mainScene = new Scene(camera, shaderScene);
+	_mainScene->SetTerrain(terrain, terrainShader);
+	_mainScene->SetSkybox(skybox, shaderSkybox);
+	_mainScene->AddEntity(sponza);
+	_mainScene->AddEntity(nano);
+	_mainScene->AddEntity(cube);
+	SetLightingParameters(shaderScene);
+
+	auto label = _graphicsObjFactorySet.LabelFactory.CreateLabel("startup...", _fontManager->GetFont("font1"), Vector2(0.1f, 8.7f), 0, Size2D(2, 2));
+	auto label2 = _graphicsObjFactorySet.LabelFactory.CreateLabel("p:", _fontManager->GetFont("font1"), Vector2(0.1f, 8.4f), 0, Size2D(2, 2));
+
 	_renderable2DManager->AddLabel("fps", label);
 	_renderable2DManager->AddLabel("position", label2);
 
-	_mainScene = new Scene(_shaderManager->GetShader("scene"));
-	_mainScene->SetActiveCamera(_camera);
-
-	_hudLayer = new Layer2D(_shaderManager->GetShader("hud"));
-
-	_hudLayer->Add(_renderable2DManager->GetLabel("fps"));
-	_hudLayer->Add(_renderable2DManager->GetLabel("position"));
-
-	ShaderProgram* shaderScene = _shaderManager->GetShader("scene");
-
-	SetLightingParameters(shaderScene);
+	auto shaderHud = _shaderFactory->CreateShaderProgram("hud", "Resources/Shaders/hud.vert", "Resources/Shaders/hud.frag");
+	shaderHud->SetProjection(Matrix4::GetOrthographic(0.0f, 16.0f, 0.0f, 9.0f, -1.0f, 1.0f));
+	_hudLayer = new Layer2D(shaderHud);
+	_hudLayer->Add(label);
+	_hudLayer->Add(label2);
 }
 
 void Application::UpdateLogic()
 {
-	UpdateCamera(*_camera, *_inputManager);
-	const Vector3& cameraPosition = _camera->GetPosition();
-
-	ShaderProgram*const shaderScene = _shaderManager->GetShader("scene");
-	shaderScene->Bind(); 
-	shaderScene->SetUniform3f("spotLight.position", cameraPosition);
-	shaderScene->SetUniform3f("spotLight.direction", _camera->GetViewDirection());
-
-	_renderable2DManager->GetLabel("fps")->SetText(std::to_string(GetFPS()) + " fps");
-	_renderable2DManager->GetLabel("position")->SetText(std::to_string(cameraPosition.x) + " " + std::to_string(cameraPosition.y) + " " + std::to_string(cameraPosition.z));
+	Camera* camera = _mainScene->GetCamera();
+	UpdateCamera(*camera, *_inputManager);
 
 	_mainScene->Update();
-	shaderScene->SetUniform3f("viewPos", cameraPosition);
+
+	const Vector3& cameraPosition = camera->GetPosition();
+	_renderable2DManager->GetLabel("fps")->SetText(std::to_string(GetFPS()) + " fps");
+	auto posX = std::to_string(cameraPosition.x);
+	auto posY = std::to_string(cameraPosition.y);
+	auto posZ = std::to_string(cameraPosition.z);
+	_renderable2DManager->GetLabel("position")->SetText(posX + " " + posY + " " + posZ);
 }
 
 void Application::Render()
 {
-	const Matrix4& projection = _camera->GetProjection();
-	const Matrix4& view = _camera->GetView();
+	_mainScene->Draw();
 
-	DrawTerrain(projection, view);
-	DrawScene(projection, view);
-	DrawSkybox(projection, view);
-	DrawUI();
+	GraphicsAPI::DisableDepthTesting();
+	_hudLayer->Draw();
+	GraphicsAPI::EnableDepthTesting();
 }
 
 void Application::Dispose()
 {
 	SafeDelete(_mainScene);
 	SafeDelete(_hudLayer);
-	SafeDelete(_camera);
-
-	SafeDelete(_fontManager);
-	SafeDelete(_shaderManager);
-	SafeDelete(_textureManager);
-	SafeDelete(_renderable2DManager);
-	SafeDelete(_renderable3DManager);
-
-	SafeDelete(_terrain);
-
-	SafeDelete(_cube1);
-}
-
-void Application::DrawUI()
-{
-	GraphicsAPI::DisableDepthTesting();
-	_shaderManager->GetShader("hud")->Bind();
-	_hudLayer->Draw();
-	GraphicsAPI::EnableDepthTesting();
-}
-
-void Application::DrawTerrain(const Matrix4& projectionMatrix, const Matrix4& viewMatrix)
-{
-	ShaderProgram* shaderTerrain = _shaderManager->GetShader("terrain");
-	shaderTerrain->SetProjection(projectionMatrix);
-	shaderTerrain->SetView(viewMatrix);
-
-	_terrain->Render();
-}
-
-void Application::DrawSkybox(const Matrix4& projectionMatrix, const Matrix4& viewMatrix)
-{
-	ShaderProgram* shaderSkybox = _shaderManager->GetShader("skybox");
-	shaderSkybox->SetProjection(projectionMatrix);
-	shaderSkybox->SetView(viewMatrix);
-
-	GraphicsAPI::DisableDepthMask();
-	_renderable3DManager->GetSkybox("sky1")->Draw();
-	GraphicsAPI::EnableDepthMask();
-}
-
-void Application::DrawScene(const Matrix4& projectionMatrix, const Matrix4& viewMatrix)
-{
-	ShaderProgram* shaderScene = _shaderManager->GetShader("scene");
-	shaderScene->SetProjection(projectionMatrix);
-	shaderScene->SetView(viewMatrix);
-
-	_cube1->Draw();
-
-	shaderScene->SetModel(Matrix4::GetScale(Vector3(0.008f, 0.008f, 0.008f)));
-	_renderable3DManager->GetModel("sponza")->Draw();
-	shaderScene->SetModel(Matrix4::GetTranslation(Vector3(0, 0, -1.5f)) * Matrix4::GetScale(Vector3(0.1f, 0.1f, 0.1f)));
-	_renderable3DManager->GetModel("nano")->Draw();
 }
 
 float horizontalAngle = 0;

@@ -9,7 +9,7 @@ A class designed to represent a layer of objects on screen.
 #pragma once
 
 #include <vector>
-#include "../Math/Matrix4.h"
+#include "Math/Matrix4.h"
 
 namespace s3dge
 {
@@ -25,8 +25,6 @@ namespace s3dge
 		ShaderProgram* _shaderProgram; // a shader instance
 		Renderer2D* _renderer; // a renderer instance
 		Matrix4 _transformationMatrix; // transformation applied to the layer
-		bool _ownsRenderer; // flag to indicate whether the shader should be disposed by the layer upon deletion
-		bool _ownsShader; // flag to indicate whether the renderer should be disposed by the layer upon deletion
 
 	public:
 		//Layer(); // TODO: needs a default shader
@@ -44,12 +42,9 @@ namespace s3dge
 		void SetRenderer(Renderer2D* renderer);
 
 		const Matrix4& GetTransformationMatrix() const { return _transformationMatrix; }
-		void SetTransformationMatrix(Matrix4 matrix);
-
-		Layer2D& operator=(const Layer2D& other);
+		void SetTransformationMatrix(const Matrix4& matrix);
 
 	private:
-		void Dispose();
 		Layer2D(const Layer2D& tRef) = delete;
 	};
 }

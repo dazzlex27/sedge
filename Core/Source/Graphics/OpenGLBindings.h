@@ -89,7 +89,7 @@ void GraphicsAPI::DrawElements(const PrimitiveType primitiveType, const uint cou
 	glDrawElements(EnumConverter::GetPrimitiveType(primitiveType), count, EnumConverter::GetValueType(type), elements);
 }
 
-void GraphicsAPI::DrawTrianglesIndexes(const uint elementCount)
+void GraphicsAPI::DrawTrianglesIndexed(const uint elementCount)
 {
 	glDrawElements(GL_TRIANGLES, elementCount, GL_UNSIGNED_INT, 0);
 }

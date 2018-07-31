@@ -10,16 +10,10 @@ namespace s3dge
 
 	class Cube : public Renderable3D
 	{
-	private:
-		VertexBuffer* _vbo;
-		IndexBuffer* _ibo;
-
 	public:
 		Cube();
 		Cube(const uint color);
 		~Cube();
-
-		virtual void Draw() const override;
 
 	private:
 		void GenerateCube(const uint color);

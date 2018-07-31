@@ -171,7 +171,7 @@ void Renderer2D::Flush()
 
 	_vbo->Bind();
 	_ibo->Bind();
-	GraphicsAPI::DrawTrianglesIndexes(_indexCount);
+	GraphicsAPI::DrawTrianglesIndexed(_indexCount);
 
 	_indexCount = 0;
 }
