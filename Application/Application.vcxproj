@@ -87,17 +87,17 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;FreeType.lib;GLEW.lib;FreeType-GL.lib;GorillaAudio.lib;libogg.lib;libvorbis.lib;openal32.lib;zlibstatic.x86_d.lib;IrrXML.x86_d.lib;assimp-4.0.0.x86_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;FreeType_d.lib;GLEW_d.lib;FreeType-GL_d.lib;GorillaAudio_d.lib;libogg_d.lib;libvorbis_d.lib;openal32.lib;zlibstatic.x86_d.lib;IrrXML.x86_d.lib;assimp-4.0.0.x86_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)\!bin\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
     <PreBuildEvent />
     <PreBuildEvent>
-      <Command>xcopy "$(SolutionDIr)Externals\OpenAL\libs\Win32\OpenAL32.lib" "$(SolutionDir)!bin\$(Configuration)" /y</Command>
+      <Command>
+      </Command>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>RD /S /Q "$(OutputPath)Resources"
-mkdir $(OutputPath)Resources
-xcopy /E /Y "$(ProjectDir)Resources" "$(OutputPath)Resources"</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
