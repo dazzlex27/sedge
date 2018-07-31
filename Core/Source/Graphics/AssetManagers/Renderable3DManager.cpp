@@ -7,7 +7,7 @@ Implements the Renderable3DManager class.
 */
 
 #include "Renderable3DManager.h"
-#include "System/Log.h"
+#include "System/Logger.h"
 #include "System/MemoryManagement.h"
 
 #include "Graphics/Renderables/Mesh.h"

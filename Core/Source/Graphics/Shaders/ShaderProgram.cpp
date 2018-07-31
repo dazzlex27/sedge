@@ -1,5 +1,5 @@
 #include "ShaderProgram.h"
-#include "System/Log.h"
+#include "System/Logger.h"
 #include "System/FileUtils.h"
 #include "Graphics/GraphicsAPI.h"
 #include "System/MemoryManagement.h"

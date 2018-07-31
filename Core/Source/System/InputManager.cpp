@@ -9,8 +9,8 @@ Implements InputManager class.
 #include "InputManager.h"
 #include "Platform/KeyCodes.h"
 #include <string.h>
-#include "Timer.h"
-#include "Log.h"
+#include "Stopwatch.h"
+#include "Logger.h"
 #include "MemoryManagement.h"
 
 using namespace s3dge;
@@ -25,7 +25,7 @@ InputManager::InputManager()
 	memset(_keysClicked, 0, sizeof(bool) * KEYS_COUNT);
 	_keysDoubleClicked = new bool[KEYS_COUNT];
 	memset(_keysDoubleClicked, 0, sizeof(bool) * KEYS_COUNT);
-	_doubleClickTimers = new Timer[KEYS_COUNT];
+	_doubleClickTimers = new Stopwatch[KEYS_COUNT];
 }
 
 InputManager::~InputManager()

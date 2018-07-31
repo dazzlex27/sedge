@@ -9,7 +9,7 @@ implements the Texture2D class
 #include "Texture2D.h"
 #include "Graphics/GraphicsAPI.h"
 #include "System/ImageUtils.h"
-#include "System/Log.h"
+#include "System/Logger.h"
 
 using namespace s3dge;
 

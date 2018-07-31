@@ -7,7 +7,7 @@ Implements the Renderable2D class.
 */
 
 #include "Renderable2D.h"
-#include "System/Log.h"
+#include "System/Logger.h"
 #include "Graphics/Textures/Texture2D.h"
 #include "Graphics/Structures/VertexData.h"
 #include "Graphics/Renderers/Renderer2D.h"

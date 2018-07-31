@@ -11,7 +11,7 @@ Implements the Matrix4 class
 #include "Matrix4.h"
 #include "Vector3.h"
 #include "Quaternion.h"
-#include "System/Log.h"
+#include "System/Logger.h"
 #include "Converters.h"
 #include <glm/gtc/matrix_transform.hpp>
 

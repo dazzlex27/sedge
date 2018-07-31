@@ -8,7 +8,7 @@ Implements ShaderFactory class
 
 #include "ShaderFactory.h"
 #include "ShaderProgram.h"
-#include "System/Log.h"
+#include "System/Logger.h"
 #include "System/FileUtils.h"
 #include "System/MemoryManagement.h"
 

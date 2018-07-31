@@ -8,7 +8,7 @@ Implements the texture manager class.
 
 #include "TextureManager.h"
 #include "Graphics/Textures/TextureFactory.h"
-#include "System/Log.h"
+#include "System/Logger.h"
 #include "System/MemoryManagement.h"
 #include "Graphics/Textures/Texture2D.h"
 #include "Graphics/Textures/Cubemap.h"

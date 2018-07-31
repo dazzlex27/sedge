@@ -14,7 +14,7 @@ Implemlents the Mesh class
 #include "Graphics/Structures/VertexData.h"
 #include "System/MemoryManagement.h"
 #include "Graphics/AssetManagers/TextureManager.h"
-#include "System/Log.h"
+#include "System/Logger.h"
 #include "Graphics/GraphicsAPI.h"
 
 using namespace std;

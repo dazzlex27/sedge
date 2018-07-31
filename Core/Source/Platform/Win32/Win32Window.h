@@ -9,7 +9,7 @@ Main Win32 implementation file.
 #pragma once
 
 #include <Windows.h>
-#include "System/Log.h"
+#include "System/Logger.h"
 #include "Platform/Window.h"
 #include "Win32InputKeys.h"
 #include "System/InputManager.h"

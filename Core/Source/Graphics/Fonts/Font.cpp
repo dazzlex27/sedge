@@ -8,7 +8,7 @@ implements the font class
 
 #include "Font.h"
 #include <freetype-gl.h>
-#include "System/Log.h"
+#include "System/Logger.h"
 #include "System/FileUtils.h"
 
 using namespace s3dge;

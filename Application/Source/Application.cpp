@@ -58,9 +58,9 @@ void Application::Initialize(const InitializationToolset& initToolset)
 	auto camera = new FPSCamera();
 	camera->SetPosition(Vector3(0, 1, 0));
 
-	auto sponzaModel = _graphicsObjFactorySet.ModelFactory.CreateModel("Resources/Models/sponza/sponza.obj");
-	auto sponza = new Actor(sponzaModel);
-	sponza->SetScale(Vector3(0.008f, 0.008f, 0.008f));
+	//auto sponzaModel = _graphicsObjFactorySet.ModelFactory.CreateModel("Resources/Models/sponza/sponza.obj");
+	//auto sponza = new Actor(sponzaModel);
+	//sponza->SetScale(Vector3(0.008f, 0.008f, 0.008f));
 
 	auto nanosuitModel = _graphicsObjFactorySet.ModelFactory.CreateModel("Resources/Models/nanosuit/nanosuit.obj");
 	auto nano = new Actor(nanosuitModel);
@@ -74,7 +74,7 @@ void Application::Initialize(const InitializationToolset& initToolset)
 	_mainScene = new Scene(camera, shaderScene);
 	_mainScene->SetTerrain(terrain, terrainShader);
 	_mainScene->SetSkybox(skybox, shaderSkybox);
-	_mainScene->AddEntity(sponza);
+	//_mainScene->AddEntity(sponza);
 	_mainScene->AddEntity(nano);
 	_mainScene->AddEntity(cube);
 	SetLightingParameters(shaderScene);
