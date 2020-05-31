@@ -11,6 +11,7 @@ TODO: standartize all of the manager classes
 #pragma once
 
 #include <map>
+#include <string>
 
 namespace s3dge
 {
