@@ -58,12 +58,12 @@
     <ClCompile Include="Math\Vector4.cpp" />
     <ClCompile Include="Platform\Platform.cpp" />
     <ClCompile Include="Platform\Window.cpp" />
-    <ClCompile Include="S3DGEngine.cpp" />
     <ClCompile Include="System\FileUtils.cpp" />
     <ClCompile Include="System\IDGenerator.cpp" />
     <ClCompile Include="System\ImageUtils.cpp" />
     <ClCompile Include="System\ModelUtils.cpp" />
     <ClCompile Include="System\Stopwatch.cpp" />
+    <ClCompile Include="Engine.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Externals\FreeTypeGL\utf8-utils.h" />
@@ -120,7 +120,6 @@
     <ClInclude Include="System\DateTime.h" />
     <ClInclude Include="System\InputManager.h" />
     <ClInclude Include="System\MemoryManagement.h" />
-    <ClInclude Include="S3DGEngine.h" />
     <ClInclude Include="Graphics\Buffers\VertexBuffer.h" />
     <ClInclude Include="Graphics\Buffers\IndexBuffer.h" />
     <ClInclude Include="Graphics\Renderables\Group.h" />
@@ -151,5 +150,6 @@
     <ClInclude Include="System\ModelUtils.h" />
     <ClInclude Include="System\RNG.h" />
     <ClInclude Include="System\Stopwatch.h" />
+    <ClInclude Include="Engine.h" />
   </ItemGroup>
 </Project>

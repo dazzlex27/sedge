@@ -2,7 +2,7 @@
 
 #include "Graphics/Renderables/Renderable3D.h"
 
-namespace s3dge
+namespace sedge
 {
 	class Shpere : public Renderable3D
 	{

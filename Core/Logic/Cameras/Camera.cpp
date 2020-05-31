@@ -8,7 +8,7 @@ Implements the Camera class.
 
 #include "Camera.h"
 
-using namespace s3dge;
+using namespace sedge;
 
 Camera::Camera()
 	: Fov(45.0f),

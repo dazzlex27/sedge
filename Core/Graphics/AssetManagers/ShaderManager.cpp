@@ -12,7 +12,7 @@ Implements ShaderManager class
 #include "System/Logger.h"
 #include "System/MemoryManagement.h"
 
-using namespace s3dge;
+using namespace sedge;
 using namespace std;
 
 void ShaderManager::Add(const char*const name, const char*const vertexPath, const char*const fragmentPath, const bool overrideExisting)

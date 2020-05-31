@@ -12,7 +12,7 @@ Declares the Mesh class
 #include <vector>
 #include "Renderable3D.h"
 
-namespace s3dge
+namespace sedge
 {
 	struct VertexData;
 	class VertexBuffer;

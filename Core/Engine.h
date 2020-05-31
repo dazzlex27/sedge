@@ -1,9 +1,9 @@
 /*
 ===========================================================================
-S3DGE.h
+sedge.h
 
 Main header file for the engine.
-The S3DGEngine class must be inherited in order to build applications using the engine.
+The sedgengine class must be inherited in order to build applications using the engine.
 ===========================================================================
 */
 
@@ -11,14 +11,14 @@ The S3DGEngine class must be inherited in order to build applications using the 
 
 #include "Common.h"
 
-namespace s3dge
+namespace sedge
 {
 	struct InitializationToolset
 	{
 		GraphicsObjectFactorySet GraphicsObjFactorySet;
 	};
 
-	class S3DGEngine
+	class Engine
 	{
 	protected:
 		Window* MainWindow;
@@ -34,8 +34,8 @@ namespace s3dge
 		inline uint GetFPS() const { return _fps; }
 
 	protected:
-		S3DGEngine();
-		virtual ~S3DGEngine();
+		Engine();
+		virtual ~Engine();
 
 		void CreateGameWindow(const char* name, uint width, uint height, bool fullscreen = false, bool vsync = true);
 

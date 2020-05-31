@@ -10,7 +10,7 @@ Implements a 3-component vector class
 #include "Matrix4.h"
 #include <cmath>
 
-using namespace s3dge;
+using namespace sedge;
 
 Vector3::Vector3()
 	: x(0), y(0), z(0) 
@@ -144,27 +144,27 @@ Vector3& Vector3::operator/=(const float value)
 	return *this;
 }
 
-Vector3 s3dge::operator+(float value, const Vector3& v)
+Vector3 sedge::operator+(float value, const Vector3& v)
 {
 	return Vector3(v.x + value, v.y + value, v.z + value);
 }
 
-Vector3 s3dge::operator-(float value, const Vector3& v)
+Vector3 sedge::operator-(float value, const Vector3& v)
 {
 	return Vector3(v.x - value, v.y - value, v.z - value);
 }
 
-Vector3 s3dge::operator*(float value, const Vector3& v)
+Vector3 sedge::operator*(float value, const Vector3& v)
 {
 	return Vector3(v.x * value, v.y * value, v.z * value);
 }
 
-Vector3 s3dge::operator/(float value, const Vector3& v)
+Vector3 sedge::operator/(float value, const Vector3& v)
 {
 	return Vector3(v.x / value, v.y / value, v.z / value);
 }
 
-Vector3 s3dge::operator*(const Matrix4& m, const Vector3& v)
+Vector3 sedge::operator*(const Matrix4& m, const Vector3& v)
 {
 	// TODO
 	return Vector3();

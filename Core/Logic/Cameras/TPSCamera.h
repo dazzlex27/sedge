@@ -10,7 +10,7 @@ Defines a class for third-person camera.
 
 #include "Camera.h"
 
-namespace s3dge
+namespace sedge
 {
 	class TPSCamera : public Camera
 	{

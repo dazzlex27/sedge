@@ -15,7 +15,7 @@ Implements the Matrix4 class
 #include "Converters.h"
 #include <glm/gtc/matrix_transform.hpp>
 
-using namespace s3dge;
+using namespace sedge;
 using namespace std;
 
 static void TranslateMatrix(Matrix4& matrix, const Vector3& vector);
@@ -87,7 +87,7 @@ Matrix4& Matrix4::operator*=(const Matrix4& other)
 	return *this;
 }
 
-Matrix4 s3dge::operator*(const Matrix4& left, const Matrix4& right)
+Matrix4 sedge::operator*(const Matrix4& left, const Matrix4& right)
 {
 	Matrix4 result(left);
 	return result.Multiply(right);

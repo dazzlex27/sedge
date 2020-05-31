@@ -8,7 +8,7 @@
 #include "Math/Vector4.h"
 #include "Math/Matrix4.h"
 
-using namespace s3dge;
+using namespace sedge;
 
 ShaderProgram::ShaderProgram(const char*const name, const char*const vertexPath, const char*const fragmentPath)
 	: _name(name), _vertexPath(vertexPath), _fragmentPath(fragmentPath)

@@ -8,7 +8,7 @@ Implements IDGenerator
 
 #include "IDGenerator.h"
 
-using namespace s3dge;
+using namespace sedge;
 
 uint IDGenerator::currentID = 0;
 

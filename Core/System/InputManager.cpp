@@ -13,7 +13,7 @@ Implements InputManager class.
 #include "Logger.h"
 #include "MemoryManagement.h"
 
-using namespace s3dge;
+using namespace sedge;
 
 static const float _elapsedDoubleClickThreshold = 0.5f;
 

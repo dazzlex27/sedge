@@ -15,7 +15,7 @@ Handles all user input.
 #include "Math/Vector2.h"
 #include "Math/Vector3.h"
 
-namespace s3dge
+namespace sedge
 {
 	class Window;
 	class Stopwatch;

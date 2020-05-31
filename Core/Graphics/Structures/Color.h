@@ -12,7 +12,7 @@ Uses uint internally to store the actual RGB-color value.
 #include <CustomTypes.h>
 #include "Math/Vector4.h"
 
-namespace s3dge
+namespace sedge
 {
 	struct Color
 	{

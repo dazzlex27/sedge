@@ -12,7 +12,7 @@ Since dealing with time in C++ is a bit hectic, all standart time-related classe
 #include <chrono>
 #include <string>
 
-namespace s3dge
+namespace sedge
 {
 	class DateTime
 	{

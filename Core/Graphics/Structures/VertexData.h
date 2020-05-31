@@ -13,7 +13,7 @@ This file contains the necessary VertexData structures used by the Graphics name
 #include "Math/Vector3.h"
 #include "Graphics/Structures/Color.h"
 
-namespace s3dge
+namespace sedge
 {
 	struct VertexData
 	{

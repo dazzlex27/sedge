@@ -14,7 +14,7 @@ TODO: standartize all of the manager classes
 #include <string>
 #include <CustomTypes.h>
 
-namespace s3dge
+namespace sedge
 {
 	class Mesh;
 	class Model;

@@ -11,7 +11,7 @@ Implements SoundFactory class
 #include "System/FileUtils.h"
 #include "System/Logger.h"
 
-using namespace s3dge;
+using namespace sedge;
 
 Sound* SoundFactory::CreateSound(const char* name, const char* path)
 {

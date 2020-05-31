@@ -15,7 +15,7 @@ implements the Skybox class.
 #include "Graphics/Structures/VertexData.h"
 #include "Graphics/GraphicsAPI.h"
 
-using namespace s3dge;
+using namespace sedge;
 
 Skybox::Skybox(Cubemap*const texture)
 	: _texture(texture)

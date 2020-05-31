@@ -12,7 +12,7 @@ Defines a class responsible for processing cubical textures.
 #include <vector>
 #include <string>
 
-namespace s3dge
+namespace sedge
 {
 	class Cubemap : public Texture
 	{

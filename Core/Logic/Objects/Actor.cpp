@@ -2,7 +2,7 @@
 #include "Graphics/Renderables/Renderable.h"
 #include "System/MemoryManagement.h"
 
-using namespace s3dge;
+using namespace sedge;
 
 // Renderable will be deleted by the actor
 Actor::Actor(Renderable*const renderable)

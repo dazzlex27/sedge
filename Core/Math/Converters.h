@@ -11,7 +11,7 @@ Lists a few functions for mathematical conversions. Might be refactored later.
 #include <CustomTypes.h>
 #include "Math/Vector4.h"
 
-namespace s3dge
+namespace sedge
 {
 	inline const float DegToRad(const float degrees)
 	{

@@ -16,7 +16,7 @@ Implements the Scene class
 #include "Graphics/Renderables/Skybox.h"
 #include "Graphics/GraphicsAPI.h"
 
-using namespace s3dge;
+using namespace sedge;
 
 Scene::Scene(Camera*const camera, ShaderProgram*const mainShader)
 {

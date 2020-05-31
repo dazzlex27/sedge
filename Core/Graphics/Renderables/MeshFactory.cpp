@@ -6,7 +6,7 @@
 #include "Graphics/Textures/Texture2D.h"
 
 using namespace std;
-using namespace s3dge;
+using namespace sedge;
 
 Mesh*const MeshFactory::CreateMesh(const char*const name,
 	vector<VertexData> vertices,

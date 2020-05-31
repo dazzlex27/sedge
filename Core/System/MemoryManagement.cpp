@@ -8,7 +8,7 @@ Custom memory manager implementation
 
 #include "MemoryManagement.h"
 
-namespace s3dge
+namespace sedge
 {
 	bool MemoryManager::_initialized;
 	void* MemoryManager::_head;

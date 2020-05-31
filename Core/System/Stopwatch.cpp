@@ -8,7 +8,7 @@ Implements stopwatch functions. Will most likely be abstracted to incorporate a 
 
 #include "Stopwatch.h"
 
-using namespace s3dge;
+using namespace sedge;
 
 Stopwatch::Stopwatch()
 {

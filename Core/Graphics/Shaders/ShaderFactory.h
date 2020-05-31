@@ -8,7 +8,7 @@ Takes responsibility for creating ShaderProgram objects
 
 #pragma once
 
-namespace s3dge
+namespace sedge
 {
 	class ShaderProgram;
 

@@ -9,7 +9,7 @@ Implements a 4-component vector class
 #include "Vector4.h"
 #include <cmath>
 
-using namespace s3dge;
+using namespace sedge;
 
 Vector4::Vector4()
 	: x(0), y(0), z(0), w(0) {}

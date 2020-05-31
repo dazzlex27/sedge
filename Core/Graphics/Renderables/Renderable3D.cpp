@@ -11,7 +11,7 @@ Implements the Renderable3D class.
 #include "Graphics/Buffers/VertexBuffer.h"
 #include "Graphics/Buffers/IndexBuffer.h"
 
-using namespace s3dge;
+using namespace sedge;
 
 void Renderable3D::Draw() const
 {

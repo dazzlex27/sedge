@@ -12,7 +12,7 @@ Represents a class designed to store text glyphs.
 #include <CustomTypes.h>
 #include "Renderable2D.h"
 
-namespace s3dge
+namespace sedge
 {
 	class Font;
 	struct VertexData;

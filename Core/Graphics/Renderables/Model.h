@@ -13,7 +13,7 @@ TODO: implement transformation for a model (that is for all meshes in a model).
 #include <vector>
 #include "Renderable3D.h"
 
-namespace s3dge
+namespace sedge
 {
 	class Mesh;
 

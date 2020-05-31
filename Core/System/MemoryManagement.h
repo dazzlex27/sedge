@@ -12,10 +12,10 @@ A custom memory allocator. Basically isn't implemented yet, stay tuned for that.
 #include <assert.h>
 #include <CustomTypes.h>
 
-#define SafeDelete(object) s3dge::MemoryManager::Deallocate(object)
-#define SafeDeleteArray(object) s3dge::MemoryManager::DeallocateArray(object)
+#define SafeDelete(object) sedge::MemoryManager::Deallocate(object)
+#define SafeDeleteArray(object) sedge::MemoryManager::DeallocateArray(object)
 
-namespace s3dge
+namespace sedge
 {
 	class MemoryManager
 	{

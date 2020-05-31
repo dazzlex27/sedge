@@ -12,7 +12,7 @@ At the moment only includes image loading. A lot of stuff to do here.
 #include <string.h>
 #include <CustomTypes.h>
 
-namespace s3dge
+namespace sedge
 {
 	class ImageUtils
 	{

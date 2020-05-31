@@ -10,7 +10,7 @@ Declares the Skybox class, made for rendering cubic skybox textures.
 
 #include "Renderable3D.h"
 
-namespace s3dge
+namespace sedge
 {
 	class VertexBuffer;
 	class IndexBuffer;

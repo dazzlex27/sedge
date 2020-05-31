@@ -8,7 +8,7 @@ Defines a 2-component vector class
 
 #pragma once
 
-namespace s3dge
+namespace sedge
 {
 	struct Vector2
 	{

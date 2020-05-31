@@ -9,7 +9,7 @@ Implements Texture class.
 #include "Texture.h"
 #include "Graphics/GraphicsAPI.h"
 
-using namespace s3dge;
+using namespace sedge;
 
 Texture::Texture(const char* name, const char* path, const TextureTarget target, const TextureWrapMode wrapMode, const TextureFilterMode filterMode)
 	: Name(name), Path(path), Target(target), WrapMode(wrapMode), FilterMode(filterMode)

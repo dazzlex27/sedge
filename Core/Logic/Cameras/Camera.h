@@ -11,7 +11,7 @@ Defines a class for in-game cameras.
 #include "Math/Vector3.h"
 #include "Math/Matrix4.h"
 
-namespace s3dge
+namespace sedge
 {
 	struct Matrix4;
 

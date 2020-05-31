@@ -16,7 +16,7 @@ This should be the only place where GL/glew.h is included!
 #include <string>
 #include "System/ImageUtils.h"
 
-using namespace s3dge;
+using namespace sedge;
 
 uint VAO;
 
@@ -653,7 +653,7 @@ void APIENTRY openglCallbackFunction(
 	case GL_DEBUG_TYPE_OTHER:               errTpText = "other"; break;
 	}
 
-	s3dge::LOG_OPENGL_ISSUE("(source - ", srcText, ", type - ", errTpText, ")\nmessage - ", message);
+	sedge::LOG_OPENGL_ISSUE("(source - ", srcText, ", type - ", errTpText, ")\nmessage - ", message);
 	if (severity == GL_DEBUG_SEVERITY_HIGH)
 		abort();
 }

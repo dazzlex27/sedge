@@ -15,7 +15,7 @@ Contains basic high-level window management functions.
 #include "System/InputManager.h"
 #include "Audio/SoundManager.h"
 
-using namespace s3dge;
+using namespace sedge;
 
 std::map<void*, Window*> Window::Instances;
 

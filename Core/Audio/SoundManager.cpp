@@ -14,7 +14,7 @@ Implements the audio manager class.
 #include "System/Logger.h"
 #include "System/MemoryManagement.h"
 
-using namespace s3dge;
+using namespace sedge;
 
 ga_Mixer* SoundManager::_mixer;
 

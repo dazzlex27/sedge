@@ -11,7 +11,7 @@ implements the Texture2D class
 #include "System/ImageUtils.h"
 #include "System/Logger.h"
 
-using namespace s3dge;
+using namespace sedge;
 
 Texture2D::Texture2D(const char*const name, const char*const path, const TextureType type, const TextureWrapMode wrapMode, const TextureFilterMode filterMode)
 	: Texture(name, path, Tex2D, wrapMode, filterMode), _type(type)

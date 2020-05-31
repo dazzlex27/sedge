@@ -13,13 +13,13 @@ Do not use functions directly, prefer macros instead.
 #include <iostream>
 #include <CustomTypes.h>
 
-namespace s3dge
+namespace sedge
 {
-#define LOG_WARNING(...) Logger::LogEvent(s3dge::LogEventType::EVENT_WARNING, __VA_ARGS__)
-#define LOG_INFO(...) Logger::LogEvent(s3dge::LogEventType::EVENT_INFO, __VA_ARGS__)
-#define LOG_ERROR(...) Logger::LogEvent(s3dge::LogEventType::EVENT_ERROR, __VA_ARGS__)
-#define LOG_FATAL(...) Logger::LogEvent(s3dge::LogEventType::EVENT_FATAL, __VA_ARGS__)
-#define LOG_OPENGL_ISSUE(...) Logger::LogEvent(s3dge::LogEventType::EVENT_OPENGL_ERROR, __VA_ARGS__)
+#define LOG_WARNING(...) Logger::LogEvent(sedge::LogEventType::EVENT_WARNING, __VA_ARGS__)
+#define LOG_INFO(...) Logger::LogEvent(sedge::LogEventType::EVENT_INFO, __VA_ARGS__)
+#define LOG_ERROR(...) Logger::LogEvent(sedge::LogEventType::EVENT_ERROR, __VA_ARGS__)
+#define LOG_FATAL(...) Logger::LogEvent(sedge::LogEventType::EVENT_FATAL, __VA_ARGS__)
+#define LOG_OPENGL_ISSUE(...) Logger::LogEvent(sedge::LogEventType::EVENT_OPENGL_ERROR, __VA_ARGS__)
 
 	enum LogEventType
 	{

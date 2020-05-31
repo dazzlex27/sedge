@@ -11,7 +11,7 @@ Declares LabelFactory class that is responsible for creating Label instances.
 #include <CustomTypes.h>
 #include "Graphics/Structures/Color.h"
 
-namespace s3dge
+namespace sedge
 {
 	struct Vector2;
 	struct Vector3;

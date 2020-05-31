@@ -1,7 +1,7 @@
 #include "Logger.h"
 #include "DateTime.h"
 
-using namespace s3dge;
+using namespace sedge;
 
 std::string Logger::GetLocalTimeString()
 {

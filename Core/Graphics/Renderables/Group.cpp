@@ -10,7 +10,7 @@ Implements the Group class
 #include "System/MemoryManagement.h"
 #include "Graphics/Renderers/Renderer2D.h"
 
-using namespace s3dge;
+using namespace sedge;
 
 Group::Group()
 {

@@ -3,7 +3,7 @@
 #include <CustomTypes.h>
 #include <string>
 
-namespace s3dge
+namespace sedge
 {
 	struct Vector2;
 	struct Vector3;

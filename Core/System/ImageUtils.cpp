@@ -13,7 +13,7 @@ Image loading done via stb_image library by Sean T. Barrett.
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
 
-using namespace s3dge;
+using namespace sedge;
 
 void ImageUtils::SetFlipVertically(const bool flip)
 {

@@ -1,27 +1,27 @@
 /*
 ===========================================================================
-S3DGE.cpp
+sedge.cpp
 
 Implementation of the top level engine functions.
 ===========================================================================
 */
 
-#include "S3DGEngine.h"
+#include "Engine.h"
 #include "System/Logger.h"
 
-using namespace s3dge;
+using namespace sedge;
 
-S3DGEngine::S3DGEngine()
+Engine::Engine()
 {
 	_runTimer = new Stopwatch();
 }
 
-S3DGEngine::~S3DGEngine()
+Engine::~Engine()
 {
 	SafeDelete(_runTimer);
 }
 
-void S3DGEngine::CreateGameWindow(const char* name, uint width, uint height, bool fullscreen, bool vsync)
+void Engine::CreateGameWindow(const char* name, uint width, uint height, bool fullscreen, bool vsync)
 {
 	if (!MainWindow)
 	{
@@ -34,7 +34,7 @@ void S3DGEngine::CreateGameWindow(const char* name, uint width, uint height, boo
 	}
 }
 
-void S3DGEngine::Run()
+void Engine::Run()
 {
 	LOG_INFO("Application started...");
 
@@ -48,7 +48,7 @@ void S3DGEngine::Run()
 	LOG_INFO("Application exited...");
 }
 
-void S3DGEngine::RunMainLoop()
+void Engine::RunMainLoop()
 {
 	uint updates = 0;
 	float updateTime = 0.0f;

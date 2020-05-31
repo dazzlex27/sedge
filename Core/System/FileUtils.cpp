@@ -10,7 +10,7 @@ Contains implementations for file utilities functions
 #include "System/Logger.h"
 
 using namespace std;
-using namespace s3dge;
+using namespace sedge;
 
 string FileUtils::ReadFromFile(const char* filepath)
 {

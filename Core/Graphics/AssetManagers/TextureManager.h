@@ -14,7 +14,7 @@ TODO: standartize all of the manager classes
 #include <vector>
 #include "Graphics/Textures/Texture.h"
 
-namespace s3dge
+namespace sedge
 {
 	class Texture2D;
 	class Cubemap;

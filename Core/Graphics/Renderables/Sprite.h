@@ -10,7 +10,7 @@ Represents a renderable 2D object with position, size and a Z index.
 
 #include "Renderable2D.h"
 
-namespace s3dge
+namespace sedge
 {
 	class Sprite : public Renderable2D
 	{

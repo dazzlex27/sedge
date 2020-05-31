@@ -10,7 +10,7 @@ Represents a two-dimensional size.
 
 #include "Math/Vector2.h"
 
-namespace s3dge
+namespace sedge
 {
 	struct Size2D
 	{

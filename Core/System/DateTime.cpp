@@ -5,7 +5,7 @@
 
 #include "Stopwatch.h"
 
-using namespace s3dge;
+using namespace sedge;
 
 DateTime DateTime::GetCurrentTime()
 {
@@ -53,7 +53,7 @@ std::string DateTime::ToLongDateTimeString() const
 	return ss.str().c_str();
 }
 
-//TimeSpan s3dge::operator-(const DateTime& time1, const DateTime& time2)
+//TimeSpan sedge::operator-(const DateTime& time1, const DateTime& time2)
 //{
 //	return TimeSpan();
 //}

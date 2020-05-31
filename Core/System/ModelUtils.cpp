@@ -16,7 +16,7 @@
 #include <assimp/postprocess.h>
 
 using namespace std;
-using namespace s3dge;
+using namespace sedge;
 
 static void ProcessNode(vector<Mesh*>& meshes, const aiNode& node, const aiScene& scene, const string& rootDir);
 static Mesh*const ExtractMesh(const aiMesh& sceneMesh, const aiScene& scene, const string& rootDir);

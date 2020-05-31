@@ -3,7 +3,7 @@
 #include <vector>
 #include <CustomTypes.h>
 
-namespace s3dge
+namespace sedge
 {
 	enum ElementType
 	{

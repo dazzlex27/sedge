@@ -1,7 +1,7 @@
 #include "FrameBuffer.h"
 #include "Graphics/GraphicsAPI.h"
 
-using namespace s3dge;
+using namespace sedge;
 
 FrameBuffer::FrameBuffer()
 {

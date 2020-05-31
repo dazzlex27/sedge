@@ -10,7 +10,7 @@ Base class for all 3D renderable objects.
 
 #include "Renderable.h"
 
-namespace s3dge
+namespace sedge
 {
 	class Renderer3D;
 	class VertexBuffer;

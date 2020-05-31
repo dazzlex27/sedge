@@ -19,7 +19,7 @@ namespace ftgl
 	struct texture_font_t;
 }
 
-namespace s3dge
+namespace sedge
 {
 	class Font
 	{

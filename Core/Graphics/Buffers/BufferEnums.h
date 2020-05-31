@@ -1,6 +1,6 @@
 #pragma once
 
-namespace s3dge
+namespace sedge
 {
 	enum BufferTarget
 	{

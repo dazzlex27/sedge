@@ -2,7 +2,7 @@
 
 #include <vector>
 
-namespace s3dge
+namespace sedge
 {
 	class Renderer;
 	class ShaderProgram;

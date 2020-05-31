@@ -14,7 +14,7 @@ Each Layer2D requires a shader instance and a renderer instance.
 #include "System/MemoryManagement.h"
 #include "Graphics/Renderables/Label.h"
 
-using namespace s3dge;
+using namespace sedge;
 
 Layer2D::Layer2D(ShaderProgram* shaderProgram)
 {

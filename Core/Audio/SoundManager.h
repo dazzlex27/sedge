@@ -16,7 +16,7 @@ TODO: standartize all of the manager classes
 struct gau_Manager;
 struct ga_Mixer;
 
-namespace s3dge
+namespace sedge
 {
 	class Sound;
 

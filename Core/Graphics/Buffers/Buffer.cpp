@@ -9,7 +9,7 @@ Implements Buffer class.
 #include "Buffer.h"
 #include "Graphics/GraphicsAPI.h"
 
-using namespace s3dge;
+using namespace sedge;
 
 Buffer::Buffer(const BufferTarget target, const uint elementSize, const uint elementCount, void*const dataPtr, const DrawingMode drawingMode)
 	: Target(target), ElementSize(elementSize), ElementCount(elementCount), DataPtr(dataPtr), Mode(drawingMode)

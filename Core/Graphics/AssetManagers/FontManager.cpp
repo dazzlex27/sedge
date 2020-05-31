@@ -11,7 +11,7 @@ Implements the FontManager class.
 #include "System/Logger.h"
 #include "System/MemoryManagement.h"
 
-using namespace s3dge;
+using namespace sedge;
 	
 void FontManager::AddFont(const char*const name, const char*const path, const float size, const bool overrideExisting)
 {

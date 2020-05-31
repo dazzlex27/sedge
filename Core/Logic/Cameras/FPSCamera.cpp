@@ -8,7 +8,7 @@ Implements the FPSCamera class.
 
 #include "FPSCamera.h"
 
-using namespace s3dge;
+using namespace sedge;
 
 FPSCamera::FPSCamera()
 	: Camera()

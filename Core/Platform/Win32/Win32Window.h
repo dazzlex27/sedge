@@ -15,7 +15,7 @@ Main Win32 implementation file.
 #include "System/InputManager.h"
 #include "Graphics/GraphicsAPI.h"
 
-namespace s3dge
+namespace sedge
 {
 	static HCURSOR ActiveCursor;
 	static bool CtrlKeyActive;
@@ -86,7 +86,7 @@ namespace s3dge
 		WNDCLASS wc = { 0 };
 		wc.lpfnWndProc = WindowProcedure;
 		wc.hbrBackground = (HBRUSH)(COLOR_BACKGROUND);
-		wc.lpszClassName = "S3DGE_Win32WindowClass";
+		wc.lpszClassName = "sedge_Win32WindowClass";
 		if (!RegisterClass(&wc))
 			return 1;
 

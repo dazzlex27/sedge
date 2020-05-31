@@ -11,7 +11,7 @@ implements the Cubemap class
 #include "System/Logger.h"
 #include "Graphics/GraphicsAPI.h"
 
-using namespace s3dge;
+using namespace sedge;
 using namespace std;
 
 Cubemap::Cubemap(const char*const name, const vector<std::string>& paths, const TextureWrapMode wrapMode, const TextureFilterMode filterMode)

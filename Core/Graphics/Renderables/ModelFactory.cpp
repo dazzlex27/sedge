@@ -1,7 +1,7 @@
 #include "ModelFactory.h"
 #include "System/ModelUtils.h"
 
-using namespace s3dge;
+using namespace sedge;
 
 Model*const ModelFactory::CreateModel(const char*const path)
 {

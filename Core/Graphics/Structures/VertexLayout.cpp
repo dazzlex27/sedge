@@ -1,7 +1,7 @@
 #include "VertexLayout.h"
 #include "VertexData.h"
 
-using namespace s3dge;
+using namespace sedge;
 
 static const int GetTypeIntFromTypeEnum(const ElementType type)
 {

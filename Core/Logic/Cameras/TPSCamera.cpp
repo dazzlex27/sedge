@@ -8,7 +8,7 @@ Implements the TPSCamera class.
 
 #include "TPSCamera.h"
 
-using namespace s3dge;
+using namespace sedge;
 
 TPSCamera::TPSCamera()
 	: Camera()

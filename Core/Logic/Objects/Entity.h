@@ -12,7 +12,7 @@ Represents a game entity.
 #include "Math/Vector4.h"
 #include "Math/Matrix4.h"
 
-namespace s3dge
+namespace sedge
 {
 	class Renderable;
 	struct Vector3;

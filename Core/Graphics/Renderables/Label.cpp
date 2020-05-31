@@ -13,7 +13,7 @@ Implements the Label class
 #include "Graphics/Structures/VertexData.h"
 #include "Graphics/Renderers/Renderer2D.h"
 
-using namespace s3dge;
+using namespace sedge;
 using namespace ftgl;
 
 Label::Label(const char*const text, Font*const font, const Vector2& position, const float zIndex, const Size2D& size, const Color& color)

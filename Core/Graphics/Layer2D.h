@@ -11,7 +11,7 @@ A class designed to represent a layer of objects on screen.
 #include <vector>
 #include "Math/Matrix4.h"
 
-namespace s3dge
+namespace sedge
 {
 	class ShaderProgram;
 	class Mesh;

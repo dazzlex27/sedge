@@ -11,7 +11,7 @@ Implements the VertexBuffer class
 #include "System/MemoryManagement.h"
 #include "Graphics/GraphicsAPI.h"
 
-using namespace s3dge;
+using namespace sedge;
 
 VertexBuffer::VertexBuffer(uint vertexSize, uint vertexCount, const VertexLayout& layout, void*const dataPtr, DrawingMode drawingMode)
 	: Buffer(Array, vertexSize, vertexCount, dataPtr, drawingMode)

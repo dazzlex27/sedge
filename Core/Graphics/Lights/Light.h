@@ -15,7 +15,7 @@ TODO: standartize all of the manager classes
 #include "Graphics/Structures/Color.h"
 #include "Math/Size2D.h"
 
-namespace s3dge
+namespace sedge
 {
 	enum LightType
 	{

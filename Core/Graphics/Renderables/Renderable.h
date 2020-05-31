@@ -11,7 +11,7 @@ Declares the Renderable class, which is the base class for all elements that can
 #include <CustomTypes.h>
 #include "Math/Matrix4.h"
 
-namespace s3dge
+namespace sedge
 {
 	class Renderable
 	{

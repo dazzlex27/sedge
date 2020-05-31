@@ -14,7 +14,7 @@ Implements the Renderable3DManager class.
 #include "Graphics/Renderables/Model.h"
 #include "Graphics/Renderables/Skybox.h"
 
-using namespace s3dge;
+using namespace sedge;
 using namespace std;
 
 void Renderable3DManager::AddMesh(const char*const name, Mesh*const mesh, const bool overwrite)

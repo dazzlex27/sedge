@@ -11,7 +11,7 @@ implements the font class
 #include "System/Logger.h"
 #include "System/FileUtils.h"
 
-using namespace s3dge;
+using namespace sedge;
 using namespace ftgl;
 	
 Font::Font(const char* name, const char* path, const float size)

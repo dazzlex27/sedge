@@ -10,7 +10,7 @@ Relies on C++11 <chrono> features.
 
 #include <chrono>
 
-namespace s3dge
+namespace sedge
 {
 	class Stopwatch
 	{

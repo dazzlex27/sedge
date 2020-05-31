@@ -1,26 +1,26 @@
 #pragma once
 
-#include <S3DGEngine.h>
+#include <Engine.h>
 
-class Application : public s3dge::S3DGEngine
+class Application : public sedge::Engine
 {
 private:
-	s3dge::Scene* _mainScene;
-	s3dge::Layer2D* _hudLayer;
-	s3dge::FontManager* _fontManager;
-	s3dge::ShaderFactory* _shaderFactory;
-	s3dge::TextureManager* _textureManager;
-	s3dge::Renderable2DManager* _renderable2DManager;
-	s3dge::Renderable3DManager* _renderable3DManager;
-	s3dge::GraphicsObjectFactorySet _graphicsObjFactorySet;
-	s3dge::InputManager* _inputManager;
+	sedge::Scene* _mainScene;
+	sedge::Layer2D* _hudLayer;
+	sedge::FontManager* _fontManager;
+	sedge::ShaderFactory* _shaderFactory;
+	sedge::TextureManager* _textureManager;
+	sedge::Renderable2DManager* _renderable2DManager;
+	sedge::Renderable3DManager* _renderable3DManager;
+	sedge::GraphicsObjectFactorySet _graphicsObjFactorySet;
+	sedge::InputManager* _inputManager;
 
 public:
 	Application();
 	~Application();
 
 public:
-	void Initialize(const s3dge::InitializationToolset& initToolset) override;
+	void Initialize(const sedge::InitializationToolset& initToolset) override;
 	void UpdateLogic() override;
 	void Render() override;
 	void Dispose() override;

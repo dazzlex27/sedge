@@ -10,7 +10,7 @@ Takes responsibility for creating Font objects
 
 #include "Font.h"
 
-namespace s3dge
+namespace sedge
 {
 	class FontFactory
 	{

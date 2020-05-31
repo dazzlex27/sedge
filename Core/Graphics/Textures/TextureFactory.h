@@ -12,7 +12,7 @@ Takes responsibility for creating Texture objects
 #include <string>
 #include "Texture.h"
 
-namespace s3dge
+namespace sedge
 {
 	class Texture2D;
 	class Cubemap;

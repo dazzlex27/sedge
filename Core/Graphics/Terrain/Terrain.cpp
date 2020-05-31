@@ -7,7 +7,7 @@
 #include "Graphics/GraphicsAPI.h"
 #include "Graphics/Textures/Texture2D.h"
 
-using namespace s3dge;
+using namespace sedge;
 
 const int MAX_TILES = 1048576;
 

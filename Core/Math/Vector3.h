@@ -8,7 +8,7 @@ Implements a 3-component vector class
 
 #pragma once
 
-namespace s3dge
+namespace sedge
 {
 	struct Matrix4;
 

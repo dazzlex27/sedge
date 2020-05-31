@@ -25,7 +25,7 @@ Row Major:
 
 #include <CustomTypes.h>
 
-namespace s3dge
+namespace sedge
 {
 	struct Vector3;
 

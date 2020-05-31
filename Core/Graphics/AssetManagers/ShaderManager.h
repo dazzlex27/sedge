@@ -13,7 +13,7 @@ TODO: standartize all of the manager classes
 #include <map>
 #include <string>
 
-namespace s3dge
+namespace sedge
 {
 	class ShaderProgram;
 

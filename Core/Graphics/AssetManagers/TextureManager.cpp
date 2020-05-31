@@ -13,7 +13,7 @@ Implements the texture manager class.
 #include "Graphics/Textures/Texture2D.h"
 #include "Graphics/Textures/Cubemap.h"
 
-using namespace s3dge;
+using namespace sedge;
 using namespace std;
 	
 void TextureManager::AddTex2D(const char*const name, const char*const path, const TextureType type, const TextureWrapMode wrapMode, const TextureFilterMode filterMode, const bool overrideExisting)

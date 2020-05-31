@@ -9,7 +9,7 @@ Implements the SpriteFactory class
 #include "SpriteFactory.h"
 #include "Graphics/Renderables/Sprite.h"
 
-using namespace s3dge;
+using namespace sedge;
 
 Sprite*const SpriteFactory::CreateSprite(const Vector2& position, const float zIndex, const Size2D& size, Texture2D*const texture)
 {

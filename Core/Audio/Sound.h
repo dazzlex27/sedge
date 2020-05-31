@@ -15,7 +15,7 @@ At the moment uses Gorilla Audio to do the heavy lifting
 struct ga_Sound;
 struct ga_Handle;
 
-namespace s3dge
+namespace sedge
 {
 	class Sound
 	{

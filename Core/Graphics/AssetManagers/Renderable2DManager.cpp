@@ -14,7 +14,7 @@ Implements the Renderable2DManager class.
 #include "Graphics/Renderables/Label.h"
 #include "Graphics/Renderables/Group.h"
 
-using namespace s3dge;
+using namespace sedge;
 using namespace std;
 
 Renderable2DManager::~Renderable2DManager()

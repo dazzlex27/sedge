@@ -11,7 +11,7 @@ Represents a class designed to contain groups of renderables together.
 #include <vector>
 #include "Renderable2D.h"
 
-namespace s3dge
+namespace sedge
 {
 	class Group : public Renderable2D
 	{

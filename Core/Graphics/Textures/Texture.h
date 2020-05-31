@@ -12,7 +12,7 @@ Base class for texture objects.
 #include <CustomTypes.h>
 #include "TextureEnums.h"
 
-namespace s3dge
+namespace sedge
 {
 	class Texture
 	{

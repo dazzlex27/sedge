@@ -10,7 +10,7 @@ Implements FontFactory class
 #include "System/FileUtils.h"
 #include "System/Logger.h"
 
-using namespace s3dge;
+using namespace sedge;
 
 Font* FontFactory::CreateFont(const char*const name, const char*const path, const float size)
 {

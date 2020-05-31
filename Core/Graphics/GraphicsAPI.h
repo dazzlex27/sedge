@@ -14,7 +14,7 @@ Declares functions for calling API-dependent graphics code.
 #include "Shaders/ShaderEnums.h"
 #include "DrawingEnums.h"
 
-namespace s3dge
+namespace sedge
 {
 	class GraphicsAPI
 	{

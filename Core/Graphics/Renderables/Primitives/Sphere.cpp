@@ -6,7 +6,7 @@
 #include "Graphics/Structures/VertexData.h"
 #include "Graphics/Structures/VertexLayout.h"
 
-using namespace s3dge;
+using namespace sedge;
 
 static VertexData* GetSphereVertices(const uint color);
 static uint* GetSphereIndices();

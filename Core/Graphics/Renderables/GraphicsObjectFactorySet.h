@@ -4,7 +4,7 @@
 #include "Graphics/Renderables/MeshFactory.h"
 #include "Graphics/Renderables/ModelFactory.h"
 
-namespace s3dge
+namespace sedge
 {
 	struct GraphicsObjectFactorySet
 	{

@@ -12,7 +12,7 @@ Implements ShaderFactory class
 #include "System/FileUtils.h"
 #include "System/MemoryManagement.h"
 
-using namespace s3dge;
+using namespace sedge;
 
 ShaderProgram* ShaderFactory::CreateShaderProgram(const char*const name, const char*const vertexPath, const char*const fragmentPath)
 {

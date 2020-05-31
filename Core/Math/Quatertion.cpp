@@ -1,7 +1,7 @@
 #include "Quaternion.h"
 #include <cmath>
 
-using namespace s3dge;
+using namespace sedge;
 
 Quaternion::Quaternion()
 	: w(1), x(0), y(0), z(0)
@@ -36,7 +36,7 @@ float Quaternion::GetMagnitude() const
 	return sqrt(w * w + x * x + y * y + z * z);
 }
 
-Quaternion s3dge::operator*(const Quaternion & q1, const Quaternion q2)
+Quaternion sedge::operator*(const Quaternion & q1, const Quaternion q2)
 {
 	Quaternion result;
 

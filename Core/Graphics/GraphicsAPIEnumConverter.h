@@ -2,7 +2,7 @@
 ===========================================================================
 GraphicsAPIEnumParser.h
 
-Declares parsers to convert s3dge graphics enums to API-dependent ones.
+Declares parsers to convert sedge graphics enums to API-dependent ones.
 ===========================================================================
 */
 
@@ -13,7 +13,7 @@ Declares parsers to convert s3dge graphics enums to API-dependent ones.
 #include "Graphics/Shaders/ShaderEnums.h"
 #include "DrawingEnums.h"
 
-namespace s3dge
+namespace sedge
 {
 	class GraphicsAPIEnumConverter
 	{

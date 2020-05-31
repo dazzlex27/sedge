@@ -13,7 +13,7 @@ Implements TextureFactory class
 #include "Texture2D.h"
 #include "Cubemap.h"
 
-using namespace s3dge;
+using namespace sedge;
 
 Texture2D* TextureFactory::CreateDefaultTexture()
 {

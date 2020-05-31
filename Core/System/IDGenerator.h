@@ -10,7 +10,7 @@ A very primitive class for assigning IDs to objects.
 
 #include <CustomTypes.h>
 
-namespace s3dge
+namespace sedge
 {
 	class IDGenerator
 	{

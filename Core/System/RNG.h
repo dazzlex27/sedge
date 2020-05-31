@@ -11,7 +11,7 @@ Utilizes C++11 randomizing features.
 
 #include <random>
 
-namespace s3dge
+namespace sedge
 {
 	class RNG
 	{

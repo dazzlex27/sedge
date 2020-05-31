@@ -14,7 +14,7 @@ Base class for all 2D renderable objects.
 #include "Math/Size2D.h"
 #include "Graphics/Structures/Color.h"
 
-namespace s3dge
+namespace sedge
 {
 	class Renderer2D;
 	class Texture2D;

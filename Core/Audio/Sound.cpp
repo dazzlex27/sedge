@@ -12,7 +12,7 @@ Implements Sound class.
 #include "SoundManager.h"
 #include "System/Logger.h"
 
-using namespace s3dge;
+using namespace sedge;
 
 Sound::Sound(const char* name, const char* path)
 	: _name(name), _path(path), _created(false)
@@ -85,7 +85,7 @@ void Sound::Pause()
 	ga_handle_stop(_handle);
 }
 
-void s3dge::dispose_sound_callback(ga_Handle* handle, void* context)
+void sedge::dispose_sound_callback(ga_Handle* handle, void* context)
 {
 	Sound* sound = (Sound*)context;
 	sound->_count--;
@@ -94,7 +94,7 @@ void s3dge::dispose_sound_callback(ga_Handle* handle, void* context)
 }
 
 
-void s3dge::loop_sound_callback(ga_Handle* handle, void* context)
+void sedge::loop_sound_callback(ga_Handle* handle, void* context)
 {
 	Sound* sound = (Sound*)context;
 	sound->Loop();

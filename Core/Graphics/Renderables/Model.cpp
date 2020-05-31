@@ -9,7 +9,7 @@ Implements the Model class.
 #include "Model.h"
 #include "Mesh.h"
 
-using namespace s3dge;
+using namespace sedge;
 using namespace std;
 
 Model::Model(const vector<Mesh*> meshes)

@@ -10,7 +10,7 @@ Represents an entity called index buffer, designed to reduce the number of verti
 
 #include "Buffer.h"
 
-namespace s3dge
+namespace sedge
 {
 	class IndexBuffer : public Buffer
 	{

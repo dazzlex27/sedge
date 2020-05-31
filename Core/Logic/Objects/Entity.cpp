@@ -1,6 +1,6 @@
 #include "Entity.h"
 
-using namespace s3dge;
+using namespace sedge;
 
 Entity::Entity()
 {

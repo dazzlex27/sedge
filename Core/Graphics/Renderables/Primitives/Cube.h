@@ -3,7 +3,7 @@
 #include <CustomTypes.h>
 #include "Graphics/Renderables/Renderable3D.h"
 
-namespace s3dge
+namespace sedge
 {
 	class VertexBuffer;
 	class IndexBuffer;

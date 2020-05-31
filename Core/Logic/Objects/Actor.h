@@ -2,7 +2,7 @@
 
 #include "Entity.h"
 
-namespace s3dge
+namespace sedge
 {
 	class Renderable;
 

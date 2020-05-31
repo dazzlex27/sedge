@@ -1,7 +1,7 @@
 #include "Application.h"
 
 using namespace std;
-using namespace s3dge;
+using namespace sedge;
 
 static void UpdateCamera(Camera& camera, const InputManager& inputManager);
 static void SetLightingParameters(ShaderProgram*const shaderScene);
@@ -43,7 +43,7 @@ void Application::Initialize(const InitializationToolset& initToolset)
 {
 	_graphicsObjFactorySet = initToolset.GraphicsObjFactorySet;
 
-	CreateGameWindow("S3DGE Application", 1280, 720, false, false);
+	CreateGameWindow("sedge Application", 1280, 720, false, false);
 
 	_inputManager = MainWindow->GetInputManager();
 

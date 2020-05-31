@@ -12,7 +12,7 @@ Implements the Renderable2D class.
 #include "Graphics/Structures/VertexData.h"
 #include "Graphics/Renderers/Renderer2D.h"
 
-using namespace s3dge;
+using namespace sedge;
 
 Renderable2D::Renderable2D()
 	: Col(0xffffffff), Position(0, 0, 0), Size(0, 0), Texture(nullptr)

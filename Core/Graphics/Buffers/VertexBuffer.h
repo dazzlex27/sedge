@@ -10,7 +10,7 @@ A class desinged to manage an OpenGL buffer for creating vertex buffers.
 
 #include "Buffer.h"
 
-namespace s3dge
+namespace sedge
 {
 	class VertexLayout;
 

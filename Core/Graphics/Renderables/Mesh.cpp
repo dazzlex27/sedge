@@ -18,7 +18,7 @@ Implemlents the Mesh class
 #include "Graphics/GraphicsAPI.h"
 
 using namespace std;
-using namespace s3dge;
+using namespace sedge;
 
 Mesh::Mesh(const char*const name,
 	vector<VertexData> vertices,

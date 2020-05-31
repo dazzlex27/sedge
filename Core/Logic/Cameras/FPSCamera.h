@@ -10,7 +10,7 @@ Defines a class for first-person camera.
 
 #include "Camera.h"
 
-namespace s3dge
+namespace sedge
 {
 	class FPSCamera : public Camera
 	{

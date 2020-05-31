@@ -10,7 +10,7 @@ Takes responsibility for creating Sound objects
 
 #include <CustomTypes.h>
 
-namespace s3dge
+namespace sedge
 {
 	class Sound;
 

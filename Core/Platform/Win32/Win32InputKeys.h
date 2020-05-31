@@ -10,7 +10,7 @@ No support for gamepads or any other input devices just yet.
 
 #pragma once
 
-namespace s3dge
+namespace sedge
 {
 	#define S3_FREE_CURSOR_KEY S3_KEY_0 
 

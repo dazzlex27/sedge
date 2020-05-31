@@ -21,7 +21,7 @@ Implements the Renderer2D class
 
 #include "freetype-gl.h"
 
-using namespace s3dge;
+using namespace sedge;
 using namespace ftgl;
 
 static uint* FillIndexBuffer(const uint maxElement);

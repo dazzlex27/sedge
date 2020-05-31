@@ -11,7 +11,7 @@ Defines base class for object buffers.
 #include <CustomTypes.h>
 #include "BufferEnums.h"
 
-namespace s3dge
+namespace sedge
 {
 	class Buffer
 	{

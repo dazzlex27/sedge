@@ -12,7 +12,7 @@ TODO: make this an instanced renderer.
 #include <vector>
 #include <CustomTypes.h>
 
-namespace s3dge
+namespace sedge
 {
 	class VertexBuffer;
 	class IndexBuffer;

@@ -7,7 +7,7 @@
 #include "Math/Vector2.h"
 #include "Math/Vector3.h"
 
-using namespace s3dge;
+using namespace sedge;
 
 static VertexData* GetCubeVertices(const uint color);
 static uint* GetCubeIndices();

@@ -12,7 +12,7 @@ Contains basic high-level window management functions.
 #include <string>
 #include <CustomTypes.h>
 
-namespace s3dge
+namespace sedge
 {
 	class InputManager;
 	class SoundManager;
