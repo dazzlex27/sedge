@@ -1,465 +1,155 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
+    <ClCompile Include="Audio\Sound.cpp" />
+    <ClCompile Include="Audio\SoundFactory.cpp" />
+    <ClCompile Include="Audio\SoundManager.cpp" />
+    <ClCompile Include="Graphics\Buffers\Buffer.cpp" />
+    <ClCompile Include="Graphics\Buffers\FrameBuffer.cpp" />
+    <ClCompile Include="Graphics\Fonts\Font.cpp" />
+    <ClCompile Include="Graphics\Fonts\FontFactory.cpp" />
+    <ClCompile Include="Graphics\GraphicsAPIImplementation.cpp" />
+    <ClCompile Include="Graphics\AssetManagers\Renderable3DManager.cpp" />
+    <ClCompile Include="Graphics\AssetManagers\FontManager.cpp" />
+    <ClCompile Include="Graphics\AssetManagers\Renderable2DManager.cpp" />
+    <ClCompile Include="Graphics\Lights\Light.cpp" />
+    <ClCompile Include="Graphics\AssetManagers\ShaderManager.cpp" />
+    <ClCompile Include="Graphics\Renderables\Primitives\Cube.cpp" />
+    <ClCompile Include="Graphics\Renderables\LabelFactory.cpp" />
+    <ClCompile Include="Graphics\Renderables\Mesh.cpp" />
+    <ClCompile Include="Graphics\Renderables\MeshFactory.cpp" />
+    <ClCompile Include="Graphics\Renderables\Model.cpp" />
+    <ClCompile Include="Graphics\Renderables\ModelFactory.cpp" />
+    <ClCompile Include="Graphics\Renderables\Primitives\Sphere.cpp" />
+    <ClCompile Include="Graphics\Renderables\Renderable2D.cpp" />
+    <ClCompile Include="Graphics\Renderables\Renderable3D.cpp" />
+    <ClCompile Include="Graphics\Renderables\Skybox.cpp" />
+    <ClCompile Include="Graphics\Renderables\SpriteFactory.cpp" />
+    <ClCompile Include="Graphics\Renderers\Renderer2D.cpp" />
+    <ClCompile Include="Graphics\Shaders\ShaderFactory.cpp" />
+    <ClCompile Include="Graphics\Structures\VertexLayout.cpp" />
+    <ClCompile Include="Graphics\Terrain\Terrain.cpp" />
+    <ClCompile Include="Graphics\Textures\Cubemap.cpp" />
+    <ClCompile Include="Graphics\Textures\Texture.cpp" />
+    <ClCompile Include="Graphics\Textures\TextureFactory.cpp" />
+    <ClCompile Include="Logic\Objects\Actor.cpp" />
+    <ClCompile Include="Math\Quatertion.cpp" />
+    <ClCompile Include="System\DateTime.cpp" />
+    <ClCompile Include="System\InputManager.cpp" />
+    <ClCompile Include="System\Logger.cpp" />
+    <ClCompile Include="System\MemoryManagement.cpp" />
+    <ClCompile Include="Graphics\Buffers\VertexBuffer.cpp" />
+    <ClCompile Include="Graphics\Buffers\IndexBuffer.cpp" />
+    <ClCompile Include="Graphics\Renderables\Group.cpp" />
+    <ClCompile Include="Graphics\Renderables\Label.cpp" />
+    <ClCompile Include="Graphics\Layer2D.cpp" />
+    <ClCompile Include="Graphics\Renderables\Sprite.cpp" />
+    <ClCompile Include="Graphics\Shaders\ShaderProgram.cpp" />
+    <ClCompile Include="Graphics\Textures\Texture2D.cpp" />
+    <ClCompile Include="Graphics\AssetManagers\TextureManager.cpp" />
+    <ClCompile Include="Logic\Cameras\FPSCamera.cpp" />
+    <ClCompile Include="Logic\Cameras\TPSCamera.cpp" />
+    <ClCompile Include="Logic\Cameras\Camera.cpp" />
+    <ClCompile Include="Logic\Objects\Entity.cpp" />
+    <ClCompile Include="Logic\Objects\Scene.cpp" />
+    <ClCompile Include="Math\Matrix4.cpp" />
+    <ClCompile Include="Math\Vector2.cpp" />
+    <ClCompile Include="Math\Vector3.cpp" />
+    <ClCompile Include="Math\Vector4.cpp" />
+    <ClCompile Include="Platform\Platform.cpp" />
+    <ClCompile Include="Platform\Window.cpp" />
+    <ClCompile Include="S3DGEngine.cpp" />
+    <ClCompile Include="System\FileUtils.cpp" />
+    <ClCompile Include="System\IDGenerator.cpp" />
+    <ClCompile Include="System\ImageUtils.cpp" />
+    <ClCompile Include="System\ModelUtils.cpp" />
+    <ClCompile Include="System\Stopwatch.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Audio\Sound.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Audio\SoundFactory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Audio\SoundManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\AssetManagers\FontManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\AssetManagers\Renderable2DManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\AssetManagers\Renderable3DManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\AssetManagers\ShaderManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\AssetManagers\TextureManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\Buffers\Buffer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\Buffers\FrameBuffer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\Buffers\IndexBuffer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\Buffers\VertexBuffer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\Fonts\Font.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\Fonts\FontFactory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\Lights\Light.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\Renderables\Primitives\Cube.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\Renderables\Primitives\Sphere.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\Renderables\Group.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\Renderables\Label.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\Renderables\LabelFactory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\Renderables\Mesh.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\Renderables\MeshFactory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\Renderables\Model.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\Renderables\ModelFactory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\Renderables\Renderable2D.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\Renderables\Renderable3D.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\Renderables\Skybox.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\Renderables\Sprite.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\Renderables\SpriteFactory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\Renderers\Renderer2D.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\Shaders\ShaderFactory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\Shaders\ShaderProgram.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\Structures\VertexLayout.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\Terrain\Terrain.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\Textures\Cubemap.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\Textures\Texture.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\Textures\Texture2D.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\Textures\TextureFactory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\GraphicsAPIImplementation.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\Layer2D.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Logic\Cameras\Camera.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Logic\Cameras\FPSCamera.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Logic\Cameras\TPSCamera.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Logic\Objects\Actor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Logic\Objects\Entity.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Logic\Objects\Scene.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Math\Matrix4.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Math\Quatertion.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Math\Vector2.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Math\Vector3.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Math\Vector4.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Platform\Platform.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Platform\Window.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="System\DateTime.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="System\FileUtils.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="System\IDGenerator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="System\ImageUtils.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="System\InputManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="System\Logger.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="System\MemoryManagement.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="System\ModelUtils.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="System\Stopwatch.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="S3DGEngine.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Source\S3DGECommon.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Externals\FreeTypeGL\utf8-utils.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="S3DGEngine.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Audio\Sound.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Audio\SoundFactory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Audio\SoundManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\AssetManagers\FontManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\AssetManagers\Renderable2DManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\AssetManagers\Renderable3DManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\AssetManagers\ShaderManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\AssetManagers\TextureManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Buffers\Buffer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Buffers\BufferEnums.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Buffers\FrameBuffer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Buffers\IndexBuffer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Buffers\VertexBuffer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Fonts\Font.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Fonts\FontFactory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Lights\Light.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Renderables\Primitives\Circle.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Renderables\Primitives\Cube.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Renderables\Primitives\Rectangle.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Renderables\Primitives\Sphere.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Renderables\GraphicsObjectFactorySet.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Renderables\Group.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Renderables\Label.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Renderables\LabelFactory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Renderables\Mesh.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Renderables\MeshFactory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Renderables\Model.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Renderables\ModelFactory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Renderables\Renderable.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Renderables\Renderable2D.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Renderables\Renderable3D.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Renderables\Skybox.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Renderables\Sprite.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Renderables\SpriteFactory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Renderers\Renderer2D.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Shaders\ShaderEnums.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Shaders\ShaderFactory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Shaders\ShaderProgram.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Structures\Color.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Structures\VertexData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Structures\VertexLayout.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Terrain\Terrain.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Textures\Cubemap.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Textures\Texture.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Textures\Texture2D.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Textures\TextureEnums.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Textures\TextureFactory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\DrawingEnums.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\GraphicsAPI.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\GraphicsAPIEnumConverter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Layer2D.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\OpenGLBindings.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Logic\Cameras\Camera.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Logic\Cameras\FPSCamera.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Logic\Cameras\TPSCamera.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Logic\Objects\Actor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Logic\Objects\Entity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Logic\Objects\Scene.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Math\Converters.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Math\Matrix4.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Math\Quaternion.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Math\Size2D.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Math\Size3D.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Math\Vector2.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Math\Vector3.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Math\Vector4.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Platform\Win32\Win32InputKeys.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Platform\Win32\Win32Window.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Platform\KeyCodes.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Platform\Window.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="System\DateTime.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="System\FileUtils.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="System\IDGenerator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="System\ImageUtils.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="System\InputManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="System\Logger.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="System\MemoryManagement.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="System\ModelUtils.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="System\RNG.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="System\Stopwatch.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Common.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CustomTypes.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+    <ClInclude Include="Externals\FreeTypeGL\utf8-utils.h" />
+    <ClInclude Include="Audio\Sound.h" />
+    <ClInclude Include="Audio\SoundFactory.h" />
+    <ClInclude Include="Audio\SoundManager.h" />
+    <ClInclude Include="Common.h" />
+    <ClInclude Include="Graphics\Buffers\Buffer.h" />
+    <ClInclude Include="Graphics\Buffers\BufferEnums.h" />
+    <ClInclude Include="Graphics\Buffers\FrameBuffer.h" />
+    <ClInclude Include="Graphics\DrawingEnums.h" />
+    <ClInclude Include="Graphics\GraphicsAPI.h" />
+    <ClInclude Include="Graphics\GraphicsAPIEnumConverter.h" />
+    <ClInclude Include="Graphics\Lights\Light.h" />
+    <ClInclude Include="Graphics\Renderables\Primitives\Circle.h" />
+    <ClInclude Include="Graphics\Renderables\Primitives\Cube.h" />
+    <ClInclude Include="Graphics\Renderables\GraphicsObjectFactorySet.h" />
+    <ClInclude Include="Graphics\AssetManagers\Renderable3DManager.h" />
+    <ClInclude Include="Graphics\AssetManagers\ShaderManager.h" />
+    <ClInclude Include="Graphics\OpenGLBindings.h" />
+    <ClInclude Include="Graphics\Renderables\Model.h" />
+    <ClInclude Include="Graphics\Renderables\ModelFactory.h" />
+    <ClInclude Include="Graphics\Renderables\Primitives\Rectangle.h" />
+    <ClInclude Include="Graphics\Renderables\Primitives\Sphere.h" />
+    <ClInclude Include="Graphics\Renderables\Renderable.h" />
+    <ClInclude Include="Graphics\Renderables\Renderable3D.h" />
+    <ClInclude Include="Graphics\Renderables\Skybox.h" />
+    <ClInclude Include="Graphics\Renderers\Renderer2D.h" />
+    <ClInclude Include="Graphics\Shaders\ShaderEnums.h" />
+    <ClInclude Include="Graphics\Shaders\ShaderFactory.h" />
+    <ClInclude Include="Graphics\Terrain\Terrain.h" />
+    <ClInclude Include="Graphics\Textures\Cubemap.h" />
+    <ClInclude Include="Graphics\Textures\Texture.h" />
+    <ClInclude Include="Graphics\Textures\TextureEnums.h" />
+    <ClInclude Include="Logic\Cameras\FPSCamera.h" />
+    <ClInclude Include="Logic\Cameras\TPSCamera.h" />
+    <ClInclude Include="Logic\Objects\Actor.h" />
+    <ClInclude Include="Logic\Objects\Scene.h" />
+    <ClInclude Include="Math\Quaternion.h" />
+    <ClInclude Include="Math\Size3D.h" />
+    <ClInclude Include="Graphics\Renderables\Mesh.h" />
+    <ClInclude Include="Graphics\Renderables\MeshFactory.h" />
+    <ClInclude Include="Graphics\Renderables\SpriteFactory.h" />
+    <ClInclude Include="Graphics\Renderables\LabelFactory.h" />
+    <ClInclude Include="Graphics\Structures\Color.h" />
+    <ClInclude Include="Graphics\Fonts\Font.h" />
+    <ClInclude Include="Graphics\Fonts\FontFactory.h" />
+    <ClInclude Include="Graphics\AssetManagers\FontManager.h" />
+    <ClInclude Include="Graphics\AssetManagers\Renderable2DManager.h" />
+    <ClInclude Include="Graphics\Structures\VertexData.h" />
+    <ClInclude Include="Math\Size2D.h" />
+    <ClInclude Include="Graphics\Structures\VertexLayout.h" />
+    <ClInclude Include="Graphics\Textures\TextureFactory.h" />
+    <ClInclude Include="System\DateTime.h" />
+    <ClInclude Include="System\InputManager.h" />
+    <ClInclude Include="System\MemoryManagement.h" />
+    <ClInclude Include="S3DGEngine.h" />
+    <ClInclude Include="Graphics\Buffers\VertexBuffer.h" />
+    <ClInclude Include="Graphics\Buffers\IndexBuffer.h" />
+    <ClInclude Include="Graphics\Renderables\Group.h" />
+    <ClInclude Include="Graphics\Renderables\Label.h" />
+    <ClInclude Include="Graphics\Layer2D.h" />
+    <ClInclude Include="Graphics\Renderables\Renderable2D.h" />
+    <ClInclude Include="Graphics\Renderables\Sprite.h" />
+    <ClInclude Include="Graphics\Shaders\ShaderProgram.h" />
+    <ClInclude Include="Graphics\Textures\Texture2D.h" />
+    <ClInclude Include="Graphics\AssetManagers\TextureManager.h" />
+    <ClInclude Include="Logic\Cameras\Camera.h" />
+    <ClInclude Include="Logic\Objects\Entity.h" />
+    <ClInclude Include="Platform\KeyCodes.h" />
+    <ClInclude Include="Platform\Win32\Win32InputKeys.h" />
+    <ClInclude Include="Platform\Win32\Win32Window.h" />
+    <ClInclude Include="Math\Matrix4.h" />
+    <ClInclude Include="Math\Vector2.h" />
+    <ClInclude Include="Math\Vector3.h" />
+    <ClInclude Include="Math\Vector4.h" />
+    <ClInclude Include="Source\S3DGECommon.h" />
+    <ClInclude Include="Platform\Window.h" />
+    <ClInclude Include="CustomTypes.h" />
+    <ClInclude Include="Math\Converters.h" />
+    <ClInclude Include="System\FileUtils.h" />
+    <ClInclude Include="System\IDGenerator.h" />
+    <ClInclude Include="System\ImageUtils.h" />
+    <ClInclude Include="System\Logger.h" />
+    <ClInclude Include="System\ModelUtils.h" />
+    <ClInclude Include="System\RNG.h" />
+    <ClInclude Include="System\Stopwatch.h" />
   </ItemGroup>
 </Project>
