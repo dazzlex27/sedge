@@ -13,7 +13,6 @@ Contains basic high-level window management functions.
 #include "System/Stopwatch.h"
 #include "Graphics/GraphicsAPI.h"
 #include "System/InputManager.h"
-#include "Audio/SoundManager.h"
 
 using namespace sedge;
 
@@ -23,14 +22,12 @@ Window::Window(const char* title, const uint width, const uint height, const boo
 	: _title(title), _width(width), _height(height), _fullScreen(fullscreen), _vSync(vsync), _isClosed(false)
 {
 	_inputManager = new InputManager();
-	_soundManager = new SoundManager();
 }
 
 Window::~Window()
 {
 	DestroyContext();
 	SafeDelete(_inputManager);
-	SafeDelete(_soundManager);
 }
 
 bool Window::Initialize()
@@ -74,7 +71,6 @@ void Window::Clear()
 void Window::UpdateContextState()
 {
 	_inputManager->Update();
-	_soundManager->Update();
 }
 
 void* Window::GetHandle() const

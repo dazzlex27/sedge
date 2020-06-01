@@ -12,17 +12,14 @@ Implements the Renderer2D class
 #include "Graphics/Structures/VertexData.h"
 #include "Graphics/Structures/VertexLayout.h"
 #include "Graphics/Textures/Texture2D.h"
-#include "Graphics/Fonts/Font.h"
 #include "Graphics/Renderables/Renderable2D.h"
 #include "Graphics/GraphicsAPI.h"
 
 #include "System/MemoryManagement.h"
 #include "System/Logger.h"
 
-#include "freetype-gl.h"
 
 using namespace sedge;
-using namespace ftgl;
 
 static uint* FillIndexBuffer(const uint maxElement);
 
@@ -93,67 +90,67 @@ void Renderer2D::Submit(const Renderable2D*const sprite)
 	_indexCount += 6;
 }
 
-void Renderer2D::RenderText(const char* text, const Font*const font, const Vector3& position, const Color& color)
-{
-	const float samplerIndex = GetSamplerIndexByTID(font->GetAtlasID());
-
-	const float scaleX = font->GetScaleX();
-	const float scaleY = font->GetScaleY();
-	
-	float x = position.x;
-
-	for (uint i = 0; i < strlen(text); i++)
-	{
-		texture_glyph_t*const glyph = texture_font_get_glyph(font->GetFontFace(), text[i]);
-
-		if (glyph)
-		{
-			if (i > 0)
-			{
-				const float kerning = texture_glyph_get_kerning(glyph, text[i - 1]);
-				x += kerning / scaleX;
-			}
-
-			const float x0 = x + glyph->offset_x / scaleX;
-			const float y0 = position.y + glyph->offset_y / scaleY;
-			const float x1 = x0 + glyph->width / scaleX;
-			const float y1 = y0 - glyph->height / scaleY;
-
-			const float u0 = glyph->s0;
-			const float v0 = glyph->t0;
-			const float u1 = glyph->s1;
-			const float v1 = glyph->t1;
-
-			x += glyph->advance_x / scaleX;
-
-			_buffer->Position = Vector3(x0, y1, 0);
-			_buffer->UV = Vector2(u0, v1);
-			_buffer->TextureID = samplerIndex;
-			_buffer->Color = color;
-			_buffer++;
-
-			_buffer->Position = Vector3(x0, y0, 0);
-			_buffer->UV = Vector2(u0, v0);
-			_buffer->TextureID = samplerIndex;
-			_buffer->Color = color;
-			_buffer++;
-
-			_buffer->Position = Vector3(x1, y0, 0);
-			_buffer->UV = Vector2(u1, v0);
-			_buffer->TextureID = samplerIndex;
-			_buffer->Color = color;
-			_buffer++;
-
-			_buffer->Position = Vector3(x1, y1, 0);
-			_buffer->UV = Vector2(u1, v1);
-			_buffer->TextureID = samplerIndex;
-			_buffer->Color = color;
-			_buffer++;
-
-			_indexCount += 6;
-		}
-	}
-}
+//void Renderer2D::RenderText(const char* text, const Font*const font, const Vector3& position, const Color& color)
+//{
+//	const float samplerIndex = GetSamplerIndexByTID(font->GetAtlasID());
+//
+//	const float scaleX = font->GetScaleX();
+//	const float scaleY = font->GetScaleY();
+//	
+//	float x = position.x;
+//
+//	for (uint i = 0; i < strlen(text); i++)
+//	{
+//		texture_glyph_t*const glyph = texture_font_get_glyph(font->GetFontFace(), text[i]);
+//
+//		if (glyph)
+//		{
+//			if (i > 0)
+//			{
+//				const float kerning = texture_glyph_get_kerning(glyph, text[i - 1]);
+//				x += kerning / scaleX;
+//			}
+//
+//			const float x0 = x + glyph->offset_x / scaleX;
+//			const float y0 = position.y + glyph->offset_y / scaleY;
+//			const float x1 = x0 + glyph->width / scaleX;
+//			const float y1 = y0 - glyph->height / scaleY;
+//
+//			const float u0 = glyph->s0;
+//			const float v0 = glyph->t0;
+//			const float u1 = glyph->s1;
+//			const float v1 = glyph->t1;
+//
+//			x += glyph->advance_x / scaleX;
+//
+//			_buffer->Position = Vector3(x0, y1, 0);
+//			_buffer->UV = Vector2(u0, v1);
+//			_buffer->TextureID = samplerIndex;
+//			_buffer->Color = color;
+//			_buffer++;
+//
+//			_buffer->Position = Vector3(x0, y0, 0);
+//			_buffer->UV = Vector2(u0, v0);
+//			_buffer->TextureID = samplerIndex;
+//			_buffer->Color = color;
+//			_buffer++;
+//
+//			_buffer->Position = Vector3(x1, y0, 0);
+//			_buffer->UV = Vector2(u1, v0);
+//			_buffer->TextureID = samplerIndex;
+//			_buffer->Color = color;
+//			_buffer++;
+//
+//			_buffer->Position = Vector3(x1, y1, 0);
+//			_buffer->UV = Vector2(u1, v1);
+//			_buffer->TextureID = samplerIndex;
+//			_buffer->Color = color;
+//			_buffer++;
+//
+//			_indexCount += 6;
+//		}
+//	}
+//}
 
 void Renderer2D::End()
 {

@@ -8,7 +8,7 @@ static void SetLightingParameters(ShaderProgram*const shaderScene);
 
 void Application::LoadAssets()
 {
-	_fontManager->AddFont("font1", "Resources/Fonts/Assistant-Regular.ttf", 14);
+	//_fontManager->AddFont("font1", "Resources/Fonts/Assistant-Regular.ttf", 14);
 	_textureManager->AddTex2D("lm-test", "Resources/Textures/lm-test.png");
 	_textureManager->AddTex2D("lm-test-sp", "Resources/Textures/lm-test-sp.png");
 	_textureManager->AddTex2D("terrain", "Resources/Textures/forrest-terrain.jpg");
@@ -25,7 +25,6 @@ void Application::LoadAssets()
 
 Application::Application()
 {
-	_fontManager = new FontManager();
 	_shaderFactory = new ShaderFactory();
 	_textureManager = new TextureManager();
 	_renderable2DManager = new Renderable2DManager();
@@ -33,7 +32,6 @@ Application::Application()
 
 Application::~Application()
 {
-	SafeDelete(_fontManager);
 	SafeDelete(_shaderFactory);
 	SafeDelete(_textureManager);
 	SafeDelete(_renderable2DManager);
@@ -62,11 +60,6 @@ void Application::Initialize(const InitializationToolset& initToolset)
 	//auto sponza = new Actor(sponzaModel);
 	//sponza->SetScale(Vector3(0.008f, 0.008f, 0.008f));
 
-	auto nanosuitModel = _graphicsObjFactorySet.ModelFactory.CreateModel("Resources/Models/nanosuit/nanosuit.obj");
-	auto nano = new Actor(nanosuitModel);
-	nano->SetPosition(Vector3(0, 0, -1.5f));
-	nano->SetScale(Vector3(0.1f, 0.1f, 0.1f));
-
 	auto cubeMesh = new Cube(0xff00ff);
 	auto cube = new Actor(cubeMesh);
 
@@ -75,21 +68,20 @@ void Application::Initialize(const InitializationToolset& initToolset)
 	_mainScene->SetTerrain(terrain, terrainShader);
 	_mainScene->SetSkybox(skybox, shaderSkybox);
 	//_mainScene->AddEntity(sponza);
-	_mainScene->AddEntity(nano);
 	_mainScene->AddEntity(cube);
 	SetLightingParameters(shaderScene);
 
-	auto label = _graphicsObjFactorySet.LabelFactory.CreateLabel("startup...", _fontManager->GetFont("font1"), Vector2(0.1f, 8.7f), 0, Size2D(2, 2));
-	auto label2 = _graphicsObjFactorySet.LabelFactory.CreateLabel("p:", _fontManager->GetFont("font1"), Vector2(0.1f, 8.4f), 0, Size2D(2, 2));
+	//auto label = _graphicsObjFactorySet.LabelFactory.CreateLabel("startup...", _fontManager->GetFont("font1"), Vector2(0.1f, 8.7f), 0, Size2D(2, 2));
+	//auto label2 = _graphicsObjFactorySet.LabelFactory.CreateLabel("p:", _fontManager->GetFont("font1"), Vector2(0.1f, 8.4f), 0, Size2D(2, 2));
 
-	_renderable2DManager->AddLabel("fps", label);
-	_renderable2DManager->AddLabel("position", label2);
+	//_renderable2DManager->AddLabel("fps", label);
+	//_renderable2DManager->AddLabel("position", label2);
 
 	auto shaderHud = _shaderFactory->CreateShaderProgram("hud", "Resources/Shaders/hud.vert", "Resources/Shaders/hud.frag");
 	shaderHud->SetProjection(Matrix4::GetOrthographic(0.0f, 16.0f, 0.0f, 9.0f, -1.0f, 1.0f));
 	_hudLayer = new Layer2D(shaderHud);
-	_hudLayer->Add(label);
-	_hudLayer->Add(label2);
+	//_hudLayer->Add(label);
+	//_hudLayer->Add(label2);
 }
 
 void Application::UpdateLogic()
@@ -100,11 +92,11 @@ void Application::UpdateLogic()
 	_mainScene->Update();
 
 	const Vector3& cameraPosition = camera->GetPosition();
-	_renderable2DManager->GetLabel("fps")->SetText(std::to_string(GetFPS()) + " fps");
-	auto posX = std::to_string(cameraPosition.x);
-	auto posY = std::to_string(cameraPosition.y);
-	auto posZ = std::to_string(cameraPosition.z);
-	_renderable2DManager->GetLabel("position")->SetText(posX + " " + posY + " " + posZ);
+	//_renderable2DManager->GetLabel("fps")->SetText(std::to_string(GetFPS()) + " fps");
+	//auto posX = std::to_string(cameraPosition.x);
+	//auto posY = std::to_string(cameraPosition.y);
+	//auto posZ = std::to_string(cameraPosition.z);
+	//_renderable2DManager->GetLabel("position")->SetText(posX + " " + posY + " " + posZ);
 }
 
 void Application::Render()

@@ -11,7 +11,6 @@ Implements the Renderable2DManager class.
 #include "System/MemoryManagement.h"
 
 #include "Graphics/Renderables/Sprite.h"
-#include "Graphics/Renderables/Label.h"
 #include "Graphics/Renderables/Group.h"
 
 using namespace sedge;

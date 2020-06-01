@@ -7,7 +7,6 @@ class Application : public sedge::Engine
 private:
 	sedge::Scene* _mainScene;
 	sedge::Layer2D* _hudLayer;
-	sedge::FontManager* _fontManager;
 	sedge::ShaderFactory* _shaderFactory;
 	sedge::TextureManager* _textureManager;
 	sedge::Renderable2DManager* _renderable2DManager;

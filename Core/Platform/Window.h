@@ -15,7 +15,6 @@ Contains basic high-level window management functions.
 namespace sedge
 {
 	class InputManager;
-	class SoundManager;
 	struct Vector2;
 
 	class Window
@@ -30,7 +29,6 @@ namespace sedge
 		bool _hasFocus;
 		void* _handle;
 		InputManager* _inputManager;
-		SoundManager* _soundManager;
 
 		static std::map<void*, Window*> Instances;
 

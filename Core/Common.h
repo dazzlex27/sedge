@@ -26,19 +26,15 @@ This file is included by the main header sedge.h
 #include "Graphics/Shaders/ShaderProgram.h"
 #include "Graphics/Shaders/ShaderFactory.h"
 #include "Graphics/Renderables/Sprite.h"
-#include "Graphics/Renderables/Label.h"
 #include "Graphics/Renderables/Mesh.h"
 #include "Graphics/Renderables/Model.h"
 #include "Graphics/Renderables/Skybox.h"
-#include "Graphics/Renderables/LabelFactory.h"
 #include "Graphics/Renderables/SpriteFactory.h"
 #include "Graphics/Renderables/MeshFactory.h"
-#include "Graphics/Renderables/ModelFactory.h"
 #include "Graphics/Terrain/Terrain.h"
 #include "Graphics/Renderables/Primitives/Cube.h"
 
 #include "Graphics/AssetManagers/TextureManager.h"
-#include "Graphics/AssetManagers/FontManager.h"
 #include "Graphics/AssetManagers/Renderable2DManager.h"
 #include "Graphics/AssetManagers/Renderable3DManager.h"
 #include "Graphics/AssetManagers/ShaderManager.h"
@@ -59,8 +55,5 @@ This file is included by the main header sedge.h
 #include "System/RNG.h"
 #include "System/Logger.h"
 #include "System/DateTime.h"
-
-#include "Audio/Sound.h"
-#include "Audio/SoundManager.h"
 
 #include "Graphics/Renderables/GraphicsObjectFactorySet.h"
