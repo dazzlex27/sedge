@@ -14,10 +14,12 @@ using namespace sedge;
 Engine::Engine()
 {
 	_runTimer = new Stopwatch();
+	Window::InitializeLibrary();
 }
 
 Engine::~Engine()
 {
+	Window::DisposeLibrary();
 	SafeDelete(_runTimer);
 }
 

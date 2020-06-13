@@ -10,7 +10,7 @@ void Application::LoadAssets()
 {
 	//_fontManager->AddFont("font1", "Resources/Fonts/Assistant-Regular.ttf", 14);
 	_textureManager->AddTex2D("lm-test", "Resources/Textures/lm-test.png");
-	_textureManager->AddTex2D("lm-test-sp", "Resources/Textures/lm-test-sp.png");
+	 _textureManager->AddTex2D("lm-test-sp", "Resources/Textures/lm-test-sp.png");
 	_textureManager->AddTex2D("terrain", "Resources/Textures/forrest-terrain.jpg");
 
 	vector<string> sb_paths;

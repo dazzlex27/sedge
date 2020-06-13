@@ -21,8 +21,10 @@ namespace sedge
 	{
 	private:
 		std::string _title;
-		uint _width;
-		uint _height;
+		int _posX;
+		int _posY;
+		int _width;
+		int _height;
 		bool _isClosed;
 		bool _fullScreen;
 		bool _vSync;
@@ -51,27 +53,34 @@ namespace sedge
 		
 		InputManager*const GetInputManager() { return _inputManager; }
 
-		static Window*const GetInstance(void*const handle);
+		static bool InitializeLibrary();
+		static void DisposeLibrary();
 
+		static Window*const GetInstance(void*const handle);
+		static void UpdateWindowFocus(Window* const window, const bool hasFocus);
+		static void UpdateWindowCursor(Window* const window, const double xPos, const double yPos);
+		static void UpdateKeyState(Window* const window, const uint key, const bool isPressed);
+
+		void SetSize(int width, int height);
 		void SetVSync(const bool vsync);
 		void SetFullScreen(const bool fullscreen);
 		static void SetInstance(void*const handle, Window*const instance);
+		static void RemoveInstance(void* const handle);
 
 	private:
-		bool CreateMainWindow();
-		bool CreateContext();
-		void SetupContext();
-		void DestroyContext();
-
 		void* GetHandle() const;
 		void SetHandle(void*const handle);
 
 		Window(const Window& tRef) = delete;				// Disable copy constructor.
 		Window& operator = (const Window& tRef) = delete;	// Disable assignment operator.
 
-		friend void cursor_position_callback(Window*const window);
-		friend void key_callback(const Window*const window, const int key, const int command);
-		friend void resize_callback(Window*const window, const uint width, const uint height);
-		friend void focus_callback(Window*const window, const bool hasFocus);
+		static void WindowErrorCallback(int error, const char* description);
+
+		static void WindowKeyCallback(Window* const window, const bool key);
+
+
+		//friend void key_callback(const Window*const window, const int key, const int command);
+		//friend void resize_callback(Window*const window, const uint width, const uint height);
+
 	};
 }

@@ -38,6 +38,7 @@ namespace sedge
 		static void Print(double d) { printf("%.6f", d); }
 		static void Print(const char* s) { std::cout << s; }
 		static void Print(bool b) { std::cout << b ? "true" : "false"; }
+		static void Print(const std::string& s) { std::cout << s; }
 
 	public:
 		template<typename... Arguments> 

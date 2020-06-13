@@ -66,3 +66,15 @@ void InputManager::Update()
 
 	memset(_keysClicked, 0, sizeof(bool) * KEYS_COUNT);
 }
+
+void InputManager::UpdateCursorPosition(double xPos, double yPos)
+{
+	_mousePosition.x = xPos;
+	_mousePosition.y = yPos;
+}
+
+void InputManager::UpdateKeyState(uint key, bool pressed)
+{
+	_keysDown[key] = pressed;
+	_keysClicked[key] = pressed;
+}

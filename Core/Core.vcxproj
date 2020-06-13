@@ -88,7 +88,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>false</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Externals\GLEW\;$(SolutionDir)\Externals\STB\;$(SolutionDir)\Externals\GLM\;$(ProjectDir)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Externals\GLEW\;$(SolutionDir)\Externals\STB\;$(SolutionDir)\Externals\GLM\;$(ProjectDir);$(SolutionDir)\Externals\glfw-3.3.2\include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>FT2_BUILD_LIBRARY;GLEW_STATIC;S3_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
@@ -108,7 +108,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>false</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Externals\GLEW\;$(SolutionDir)\Externals\STB\;$(SolutionDir)\Externals\GLM\;$(ProjectDir)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Externals\GLEW\;$(SolutionDir)\Externals\STB\;$(SolutionDir)\Externals\GLM\;$(ProjectDir);$(SolutionDir)\Externals\glfw-3.3.2\include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>FT2_BUILD_LIBRARY;GLEW_STATIC;S3_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
@@ -130,7 +130,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>false</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Externals\GLEW\;$(SolutionDir)\Externals\STB\;$(SolutionDir)\Externals\GLM\;$(ProjectDir)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Externals\GLEW\;$(SolutionDir)\Externals\STB\;$(SolutionDir)\Externals\GLM\;$(ProjectDir);$(SolutionDir)\Externals\glfw-3.3.2\include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>FT2_BUILD_LIBRARY;GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
@@ -156,7 +156,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>false</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Externals\GLEW\;$(SolutionDir)\Externals\STB\;$(SolutionDir)\Externals\GLM\;$(ProjectDir)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Externals\GLEW\;$(SolutionDir)\Externals\STB\;$(SolutionDir)\Externals\GLM\;$(ProjectDir);$(SolutionDir)\Externals\glfw-3.3.2\include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>FT2_BUILD_LIBRARY;GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
@@ -222,7 +222,6 @@
     <ClCompile Include="Math\Vector2.cpp" />
     <ClCompile Include="Math\Vector3.cpp" />
     <ClCompile Include="Math\Vector4.cpp" />
-    <ClCompile Include="Platform\Platform.cpp" />
     <ClCompile Include="Platform\Window.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="System\FileUtils.cpp" />

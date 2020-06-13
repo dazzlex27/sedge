@@ -47,7 +47,6 @@
     <ClCompile Include="Math\Vector2.cpp" />
     <ClCompile Include="Math\Vector3.cpp" />
     <ClCompile Include="Math\Vector4.cpp" />
-    <ClCompile Include="Platform\Platform.cpp" />
     <ClCompile Include="Platform\Window.cpp" />
     <ClCompile Include="System\FileUtils.cpp" />
     <ClCompile Include="System\IDGenerator.cpp" />
